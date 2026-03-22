@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "nascar-2026-r01",
+    "seriesId": "nascar",
+    "eventName": "Cook Out Clash at Bowman Gray",
+    "round": 1,
+    "circuit": {
+      "name": "Bowman Gray Stadium",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-04T18:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-02-01T20:00:00Z"
+      }
+    ],
+    "dateStart": "2026-02-01",
+    "dateEnd": "2026-02-01"
+  },
+  {
+    "id": "nascar-2026-r02",
+    "seriesId": "nascar",
+    "eventName": "America 250 Florida Duel at DAYTONA",
+    "round": 2,
+    "circuit": {
+      "name": "Daytona International Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-12T19:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-02-12T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-02-12",
+    "dateEnd": "2026-02-12"
+  },
+  {
+    "id": "nascar-2026-r03",
+    "seriesId": "nascar",
+    "eventName": "America 250 Florida Duel at DAYTONA",
+    "round": 3,
+    "circuit": {
+      "name": "Daytona International Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-12T20:45:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-02-12T20:45:00Z"
+      }
+    ],
+    "dateStart": "2026-02-12",
+    "dateEnd": "2026-02-12"
+  },
+  {
+    "id": "nascar-2026-r04",
+    "seriesId": "nascar",
+    "eventName": "DAYTONA 500",
+    "round": 4,
+    "circuit": {
+      "name": "Daytona International Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-15T13:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-02-15T13:30:00Z"
+      }
+    ],
+    "dateStart": "2026-02-15",
+    "dateEnd": "2026-02-15"
+  },
+  {
+    "id": "nascar-2026-r05",
+    "seriesId": "nascar",
+    "eventName": "Autotrader 400",
+    "round": 5,
+    "circuit": {
+      "name": "Atlanta Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-21T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-02-22T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-02-22",
+    "dateEnd": "2026-02-22"
+  },
+  {
+    "id": "nascar-2026-r06",
+    "seriesId": "nascar",
+    "eventName": "DuraMAX Texas Grand Prix Powered by RelaDyne",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit of The Americas",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-28T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-01T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-01",
+    "dateEnd": "2026-03-01"
+  },
+  {
+    "id": "nascar-2026-r07",
+    "seriesId": "nascar",
+    "eventName": "Straight Talk Wireless 500",
+    "round": 7,
+    "circuit": {
+      "name": "Phoenix Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-08T12:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-08T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-08",
+    "dateEnd": "2026-03-08"
+  },
+  {
+    "id": "nascar-2026-r08",
+    "seriesId": "nascar",
+    "eventName": "Pennzoil 400 presented by Jiffy Lube",
+    "round": 8,
+    "circuit": {
+      "name": "Las Vegas Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-15T13:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-15T16:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-15",
+    "dateEnd": "2026-03-15"
+  },
+  {
+    "id": "nascar-2026-r09",
+    "seriesId": "nascar",
+    "eventName": "Goodyear 400",
+    "round": 9,
+    "circuit": {
+      "name": "Darlington Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-22T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-22",
+    "dateEnd": "2026-03-22"
+  },
+  {
+    "id": "nascar-2026-r10",
+    "seriesId": "nascar",
+    "eventName": "Cook Out 400",
+    "round": 10,
+    "circuit": {
+      "name": "Martinsville Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-29T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-29",
+    "dateEnd": "2026-03-29"
+  },
+  {
+    "id": "nascar-2026-r11",
+    "seriesId": "nascar",
+    "eventName": "Food City 500",
+    "round": 11,
+    "circuit": {
+      "name": "Bristol Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-12T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-12",
+    "dateEnd": "2026-04-12"
+  },
+  {
+    "id": "nascar-2026-r12",
+    "seriesId": "nascar",
+    "eventName": "AdventHealth 400",
+    "round": 12,
+    "circuit": {
+      "name": "Kansas Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-19T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-19",
+    "dateEnd": "2026-04-19"
+  },
+  {
+    "id": "nascar-2026-r13",
+    "seriesId": "nascar",
+    "eventName": "NASCAR Cup Series Race at Talladega",
+    "round": 13,
+    "circuit": {
+      "name": "Talladega Superspeedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-26T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-26",
+    "dateEnd": "2026-04-26"
+  },
+  {
+    "id": "nascar-2026-r14",
+    "seriesId": "nascar",
+    "eventName": "Würth 400 presented by LIQUI MOLY",
+    "round": 14,
+    "circuit": {
+      "name": "Texas Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-03T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-03",
+    "dateEnd": "2026-05-03"
+  },
+  {
+    "id": "nascar-2026-r15",
+    "seriesId": "nascar",
+    "eventName": "Go Bowling at The Glen",
+    "round": 15,
+    "circuit": {
+      "name": "Watkins Glen International",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-10T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-10",
+    "dateEnd": "2026-05-10"
+  },
+  {
+    "id": "nascar-2026-r16",
+    "seriesId": "nascar",
+    "eventName": "NASCAR All-Star Race",
+    "round": 16,
+    "circuit": {
+      "name": "Dover Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-17T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-17",
+    "dateEnd": "2026-05-17"
+  },
+  {
+    "id": "nascar-2026-r17",
+    "seriesId": "nascar",
+    "eventName": "Coca-Cola 600",
+    "round": 17,
+    "circuit": {
+      "name": "Charlotte Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-24T18:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-24",
+    "dateEnd": "2026-05-24"
+  },
+  {
+    "id": "nascar-2026-r18",
+    "seriesId": "nascar",
+    "eventName": "Cracker Barrel 400",
+    "round": 18,
+    "circuit": {
+      "name": "Nashville Superspeedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-31T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-31",
+    "dateEnd": "2026-05-31"
+  },
+  {
+    "id": "nascar-2026-r19",
+    "seriesId": "nascar",
+    "eventName": "FireKeepers Casino 400",
+    "round": 19,
+    "circuit": {
+      "name": "Michigan International Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-07T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-07",
+    "dateEnd": "2026-06-07"
+  },
+  {
+    "id": "nascar-2026-r20",
+    "seriesId": "nascar",
+    "eventName": "Great American Getaway 400 presented by VISITPA",
+    "round": 20,
+    "circuit": {
+      "name": "Pocono Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-14T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-14",
+    "dateEnd": "2026-06-14"
+  },
+  {
+    "id": "nascar-2026-r21",
+    "seriesId": "nascar",
+    "eventName": "Anduril 250",
+    "round": 21,
+    "circuit": {
+      "name": "San Diego Street Course",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-21T16:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-21",
+    "dateEnd": "2026-06-21"
+  },
+  {
+    "id": "nascar-2026-r22",
+    "seriesId": "nascar",
+    "eventName": "Toyota / Save Mart 350",
+    "round": 22,
+    "circuit": {
+      "name": "Sonoma Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-28T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-06-28",
+    "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "nascar-2026-r23",
+    "seriesId": "nascar",
+    "eventName": "NASCAR Cup Series Race at Chicagoland",
+    "round": 23,
+    "circuit": {
+      "name": "Chicagoland Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-05T18:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-05",
+    "dateEnd": "2026-07-05"
+  },
+  {
+    "id": "nascar-2026-r24",
+    "seriesId": "nascar",
+    "eventName": "Quaker State 400 Available at Walmart",
+    "round": 24,
+    "circuit": {
+      "name": "Atlanta Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-12",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "nascar-2026-r25",
+    "seriesId": "nascar",
+    "eventName": "Window World 450",
+    "round": 25,
+    "circuit": {
+      "name": "North Wilkesboro Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-19T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-19",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "nascar-2026-r26",
+    "seriesId": "nascar",
+    "eventName": "Brickyard 400",
+    "round": 26,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-26T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-26",
+    "dateEnd": "2026-07-26"
+  },
+  {
+    "id": "nascar-2026-r27",
+    "seriesId": "nascar",
+    "eventName": "Iowa Corn 350 Powered by Ethanol",
+    "round": 27,
+    "circuit": {
+      "name": "Iowa Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-09T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-08-09",
+    "dateEnd": "2026-08-09"
+  },
+  {
+    "id": "nascar-2026-r28",
+    "seriesId": "nascar",
+    "eventName": "Cook Out 400",
+    "round": 28,
+    "circuit": {
+      "name": "Richmond Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-15T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-15",
+    "dateEnd": "2026-08-15"
+  },
+  {
+    "id": "nascar-2026-r29",
+    "seriesId": "nascar",
+    "eventName": "NASCAR Cup Series Race at New Hampshire",
+    "round": 29,
+    "circuit": {
+      "name": "New Hampshire Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-23T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-23",
+    "dateEnd": "2026-08-23"
+  },
+  {
+    "id": "nascar-2026-r30",
+    "seriesId": "nascar",
+    "eventName": "Coke Zero Sugar 400",
+    "round": 30,
+    "circuit": {
+      "name": "Daytona International Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-29T19:30:00Z"
+      }
+    ],
+    "dateStart": "2026-08-29",
+    "dateEnd": "2026-08-29"
+  },
+  {
+    "id": "nascar-2026-r31",
+    "seriesId": "nascar",
+    "eventName": "Cook Out Southern 500",
+    "round": 31,
+    "circuit": {
+      "name": "Darlington Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-06T17:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-06",
+    "dateEnd": "2026-09-06"
+  },
+  {
+    "id": "nascar-2026-r32",
+    "seriesId": "nascar",
+    "eventName": "Enjoy Illinois 300",
+    "round": 32,
+    "circuit": {
+      "name": "World Wide Technology Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-13T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-13",
+    "dateEnd": "2026-09-13"
+  },
+  {
+    "id": "nascar-2026-r33",
+    "seriesId": "nascar",
+    "eventName": "Bass Pro Shops Night Race",
+    "round": 33,
+    "circuit": {
+      "name": "Bristol Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-19T19:30:00Z"
+      }
+    ],
+    "dateStart": "2026-09-19",
+    "dateEnd": "2026-09-19"
+  },
+  {
+    "id": "nascar-2026-r34",
+    "seriesId": "nascar",
+    "eventName": "Hollywood Casino 400 ",
+    "round": 34,
+    "circuit": {
+      "name": "Kansas Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-27T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-27",
+    "dateEnd": "2026-09-27"
+  },
+  {
+    "id": "nascar-2026-r35",
+    "seriesId": "nascar",
+    "eventName": "South Point 400",
+    "round": 35,
+    "circuit": {
+      "name": "Las Vegas Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-04T17:30:00Z"
+      }
+    ],
+    "dateStart": "2026-10-04",
+    "dateEnd": "2026-10-04"
+  },
+  {
+    "id": "nascar-2026-r36",
+    "seriesId": "nascar",
+    "eventName": "Bank of America 400",
+    "round": 36,
+    "circuit": {
+      "name": "Charlotte Motor Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-11T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-11",
+    "dateEnd": "2026-10-11"
+  },
+  {
+    "id": "nascar-2026-r37",
+    "seriesId": "nascar",
+    "eventName": "NASCAR Cup Series Race at Phoenix",
+    "round": 37,
+    "circuit": {
+      "name": "Phoenix Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-18T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-18",
+    "dateEnd": "2026-10-18"
+  },
+  {
+    "id": "nascar-2026-r38",
+    "seriesId": "nascar",
+    "eventName": "YellaWood 500",
+    "round": 38,
+    "circuit": {
+      "name": "Talladega Superspeedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-25T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-25",
+    "dateEnd": "2026-10-25"
+  },
+  {
+    "id": "nascar-2026-r39",
+    "seriesId": "nascar",
+    "eventName": "Xfinity 500",
+    "round": 39,
+    "circuit": {
+      "name": "Martinsville Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-01T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-01",
+    "dateEnd": "2026-11-01"
+  },
+  {
+    "id": "nascar-2026-r40",
+    "seriesId": "nascar",
+    "eventName": "NASCAR Championship Race",
+    "round": 40,
+    "circuit": {
+      "name": "Homestead-Miami Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "1900-01-01T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-08T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-08",
+    "dateEnd": "2026-11-08"
+  }
+]

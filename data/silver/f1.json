@@ -1,0 +1,860 @@
+[
+  {
+    "id": "f1-2026-r01",
+    "seriesId": "f1",
+    "eventName": "Australian Grand Prix",
+    "round": 1,
+    "circuit": {
+      "name": "Albert Park Grand Prix Circuit",
+      "city": "Melbourne",
+      "country": "Australia",
+      "countryCode": "AUS",
+      "lat": -37.8497,
+      "lng": 144.968
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-03-06T01:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-03-06T05:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-03-07T01:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-07T05:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-08T04:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-06",
+    "dateEnd": "2026-03-08"
+  },
+  {
+    "id": "f1-2026-r02",
+    "seriesId": "f1",
+    "eventName": "Chinese Grand Prix",
+    "round": 2,
+    "circuit": {
+      "name": "Shanghai International Circuit",
+      "city": "Shanghai",
+      "country": "China",
+      "countryCode": "CHN",
+      "lat": 31.3389,
+      "lng": 121.22
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/China%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-03-13T03:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-03-13T07:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-03-14T03:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-14T07:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-15T07:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-13",
+    "dateEnd": "2026-03-15"
+  },
+  {
+    "id": "f1-2026-r03",
+    "seriesId": "f1",
+    "eventName": "Japanese Grand Prix",
+    "round": 3,
+    "circuit": {
+      "name": "Suzuka Circuit",
+      "city": "Suzuka",
+      "country": "Japan",
+      "countryCode": "JPN",
+      "lat": 34.8431,
+      "lng": 136.541
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Japan%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-03-27T02:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-03-27T06:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-03-28T02:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-28T06:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-29T05:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-27",
+    "dateEnd": "2026-03-29"
+  },
+  {
+    "id": "f1-2026-r04",
+    "seriesId": "f1",
+    "eventName": "Miami Grand Prix",
+    "round": 4,
+    "circuit": {
+      "name": "Miami International Autodrome",
+      "city": "Miami",
+      "country": "USA",
+      "countryCode": "",
+      "lat": 25.9581,
+      "lng": -80.2389
+    },
+    "circuitImage": null,
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-05-01T16:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-05-01T20:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-05-02T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-02T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-03T20:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-01",
+    "dateEnd": "2026-05-03"
+  },
+  {
+    "id": "f1-2026-r05",
+    "seriesId": "f1",
+    "eventName": "Canadian Grand Prix",
+    "round": 5,
+    "circuit": {
+      "name": "Circuit Gilles Villeneuve",
+      "city": "Montreal",
+      "country": "Canada",
+      "countryCode": "",
+      "lat": 45.5,
+      "lng": -73.5228
+    },
+    "circuitImage": null,
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-05-22T16:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-05-22T20:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-05-23T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-23T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-24T20:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-22",
+    "dateEnd": "2026-05-24"
+  },
+  {
+    "id": "f1-2026-r06",
+    "seriesId": "f1",
+    "eventName": "Monaco Grand Prix",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit de Monaco",
+      "city": "Monte Carlo",
+      "country": "Monaco",
+      "countryCode": "MON",
+      "lat": 43.7347,
+      "lng": 7.42056
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Monaco%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-06-05T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-06-05T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-06-06T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-06T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-07T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-05",
+    "dateEnd": "2026-06-07"
+  },
+  {
+    "id": "f1-2026-r07",
+    "seriesId": "f1",
+    "eventName": "Barcelona Grand Prix",
+    "round": 7,
+    "circuit": {
+      "name": "Circuit de Barcelona-Catalunya",
+      "city": "Barcelona",
+      "country": "Spain",
+      "countryCode": "ESP",
+      "lat": 41.57,
+      "lng": 2.26111
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Barcelona-Catalunya%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-06-12T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-06-12T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-06-13T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-13T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-14T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-12",
+    "dateEnd": "2026-06-14"
+  },
+  {
+    "id": "f1-2026-r08",
+    "seriesId": "f1",
+    "eventName": "Austrian Grand Prix",
+    "round": 8,
+    "circuit": {
+      "name": "Red Bull Ring",
+      "city": "Spielberg",
+      "country": "Austria",
+      "countryCode": "AUT",
+      "lat": 47.2197,
+      "lng": 14.7647
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Austria%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-06-26T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-06-26T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-06-27T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-27T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-28T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-26",
+    "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "f1-2026-r09",
+    "seriesId": "f1",
+    "eventName": "British Grand Prix",
+    "round": 9,
+    "circuit": {
+      "name": "Silverstone Circuit",
+      "city": "Silverstone",
+      "country": "UK",
+      "countryCode": "GBR",
+      "lat": 52.0786,
+      "lng": -1.01694
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Great Britain%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-07-03T11:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-07-03T15:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-07-04T11:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-04T15:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-05T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-03",
+    "dateEnd": "2026-07-05"
+  },
+  {
+    "id": "f1-2026-r10",
+    "seriesId": "f1",
+    "eventName": "Belgian Grand Prix",
+    "round": 10,
+    "circuit": {
+      "name": "Circuit de Spa-Francorchamps",
+      "city": "Spa",
+      "country": "Belgium",
+      "countryCode": "",
+      "lat": 50.4372,
+      "lng": 5.97139
+    },
+    "circuitImage": null,
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-07-17T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-07-17T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-07-18T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-18T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-19T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "f1-2026-r11",
+    "seriesId": "f1",
+    "eventName": "Hungarian Grand Prix",
+    "round": 11,
+    "circuit": {
+      "name": "Hungaroring",
+      "city": "Budapest",
+      "country": "Hungary",
+      "countryCode": "HUN",
+      "lat": 47.5789,
+      "lng": 19.2486
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Hungary%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-07-24T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-07-24T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-07-25T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-25T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-26T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-24",
+    "dateEnd": "2026-07-26"
+  },
+  {
+    "id": "f1-2026-r12",
+    "seriesId": "f1",
+    "eventName": "Dutch Grand Prix",
+    "round": 12,
+    "circuit": {
+      "name": "Circuit Park Zandvoort",
+      "city": "Zandvoort",
+      "country": "Netherlands",
+      "countryCode": "NED",
+      "lat": 52.3888,
+      "lng": 4.54092
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Netherlands%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-08-21T10:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-08-21T14:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-08-22T10:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-22T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-23T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-21",
+    "dateEnd": "2026-08-23"
+  },
+  {
+    "id": "f1-2026-r13",
+    "seriesId": "f1",
+    "eventName": "Italian Grand Prix",
+    "round": 13,
+    "circuit": {
+      "name": "Autodromo Nazionale di Monza",
+      "city": "Monza",
+      "country": "Italy",
+      "countryCode": "ITA",
+      "lat": 45.6156,
+      "lng": 9.28111
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Italy%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-09-04T10:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-09-04T14:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-09-05T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-05T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-06T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-04",
+    "dateEnd": "2026-09-06"
+  },
+  {
+    "id": "f1-2026-r14",
+    "seriesId": "f1",
+    "eventName": "Spanish Grand Prix",
+    "round": 14,
+    "circuit": {
+      "name": "Madring",
+      "city": "Madrid",
+      "country": "Spain",
+      "countryCode": "ESP",
+      "lat": 40.46528,
+      "lng": -3.61528
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Spain%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-09-11T11:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-09-11T15:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-09-12T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-12T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-13T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-11",
+    "dateEnd": "2026-09-13"
+  },
+  {
+    "id": "f1-2026-r15",
+    "seriesId": "f1",
+    "eventName": "Azerbaijan Grand Prix",
+    "round": 15,
+    "circuit": {
+      "name": "Baku City Circuit",
+      "city": "Baku",
+      "country": "Azerbaijan",
+      "countryCode": "AZE",
+      "lat": 40.3725,
+      "lng": 49.8533
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Azerbaijan%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-09-24T08:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-09-24T12:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-09-25T08:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-25T12:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-26T11:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-24",
+    "dateEnd": "2026-09-26"
+  },
+  {
+    "id": "f1-2026-r16",
+    "seriesId": "f1",
+    "eventName": "Singapore Grand Prix",
+    "round": 16,
+    "circuit": {
+      "name": "Marina Bay Street Circuit",
+      "city": "Marina Bay",
+      "country": "Singapore",
+      "countryCode": "SGP",
+      "lat": 1.2914,
+      "lng": 103.864
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Singapore%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-10-09T08:30:00Z"
+      },
+      {
+        "type": "Sprint Qualifying",
+        "startTimeUTC": "2026-10-09T12:30:00Z"
+      },
+      {
+        "type": "Sprint",
+        "startTimeUTC": "2026-10-10T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-10T13:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-11T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-09",
+    "dateEnd": "2026-10-11"
+  },
+  {
+    "id": "f1-2026-r17",
+    "seriesId": "f1",
+    "eventName": "United States Grand Prix",
+    "round": 17,
+    "circuit": {
+      "name": "Circuit of the Americas",
+      "city": "Austin",
+      "country": "USA",
+      "countryCode": "USA",
+      "lat": 30.1328,
+      "lng": -97.6411
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/United States%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-10-23T17:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-10-23T21:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-10-24T17:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-24T21:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-25T20:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-23",
+    "dateEnd": "2026-10-25"
+  },
+  {
+    "id": "f1-2026-r18",
+    "seriesId": "f1",
+    "eventName": "Mexico City Grand Prix",
+    "round": 18,
+    "circuit": {
+      "name": "Autódromo Hermanos Rodríguez",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "countryCode": "MEX",
+      "lat": 19.4042,
+      "lng": -99.0907
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Mexico%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-10-30T18:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-10-30T22:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-10-31T17:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-31T21:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-01T20:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-30",
+    "dateEnd": "2026-11-01"
+  },
+  {
+    "id": "f1-2026-r19",
+    "seriesId": "f1",
+    "eventName": "Brazilian Grand Prix",
+    "round": 19,
+    "circuit": {
+      "name": "Autódromo José Carlos Pace",
+      "city": "São Paulo",
+      "country": "Brazil",
+      "countryCode": "BRA",
+      "lat": -23.7036,
+      "lng": -46.6997
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Brazil%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-11-06T15:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-11-06T19:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-11-07T14:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-11-07T18:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-08T17:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-06",
+    "dateEnd": "2026-11-08"
+  },
+  {
+    "id": "f1-2026-r20",
+    "seriesId": "f1",
+    "eventName": "Las Vegas Grand Prix",
+    "round": 20,
+    "circuit": {
+      "name": "Las Vegas Strip Street Circuit",
+      "city": "Las Vegas",
+      "country": "USA",
+      "countryCode": "USA",
+      "lat": 36.1147,
+      "lng": -115.173
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Las Vegas%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-11-20T00:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-11-20T04:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-11-21T00:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-11-21T04:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-22T04:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-20",
+    "dateEnd": "2026-11-22"
+  },
+  {
+    "id": "f1-2026-r21",
+    "seriesId": "f1",
+    "eventName": "Qatar Grand Prix",
+    "round": 21,
+    "circuit": {
+      "name": "Losail International Circuit",
+      "city": "Lusail",
+      "country": "Qatar",
+      "countryCode": "QAT",
+      "lat": 25.49,
+      "lng": 51.4542
+    },
+    "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Qatar%20carbon.png",
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-11-27T13:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-11-27T17:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-11-28T14:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-11-28T18:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-29T16:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-27",
+    "dateEnd": "2026-11-29"
+  },
+  {
+    "id": "f1-2026-r22",
+    "seriesId": "f1",
+    "eventName": "Abu Dhabi Grand Prix",
+    "round": 22,
+    "circuit": {
+      "name": "Yas Marina Circuit",
+      "city": "Abu Dhabi",
+      "country": "UAE",
+      "countryCode": "",
+      "lat": 24.4672,
+      "lng": 54.6031
+    },
+    "circuitImage": null,
+    "sessions": [
+      {
+        "type": "FP1",
+        "startTimeUTC": "2026-12-04T09:30:00Z"
+      },
+      {
+        "type": "FP2",
+        "startTimeUTC": "2026-12-04T13:00:00Z"
+      },
+      {
+        "type": "FP3",
+        "startTimeUTC": "2026-12-05T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-12-05T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-12-06T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-12-04",
+    "dateEnd": "2026-12-06"
+  }
+]

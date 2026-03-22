@@ -1,0 +1,308 @@
+[
+  {
+    "id": "f3-2026-r01",
+    "seriesId": "f3",
+    "eventName": "Bahrain Sprint",
+    "round": 1,
+    "circuit": {
+      "name": "Bahrain International Circuit",
+      "city": "Sakhir",
+      "country": "Bahrain",
+      "countryCode": "BH",
+      "lat": 26.0325,
+      "lng": 50.5106
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-03-06T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-06T11:30:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-03-07T09:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-03-08T09:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-06",
+    "dateEnd": "2026-03-08"
+  },
+  {
+    "id": "f3-2026-r02",
+    "seriesId": "f3",
+    "eventName": "Saudi Arabia Sprint",
+    "round": 2,
+    "circuit": {
+      "name": "Jeddah Corniche Circuit",
+      "city": "Jeddah",
+      "country": "Saudi Arabia",
+      "countryCode": "SA",
+      "lat": 21.6319,
+      "lng": 39.1044
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-03-20T10:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-20T14:30:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-03-21T12:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-03-22T12:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-20",
+    "dateEnd": "2026-03-22"
+  },
+  {
+    "id": "f3-2026-r03",
+    "seriesId": "f3",
+    "eventName": "Imola Sprint",
+    "round": 3,
+    "circuit": {
+      "name": "Autodromo Enzo e Dino Ferrari",
+      "city": "Imola",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 44.3439,
+      "lng": 11.7167
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-01T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-01T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-05-02T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-05-03T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-01",
+    "dateEnd": "2026-05-03"
+  },
+  {
+    "id": "f3-2026-r04",
+    "seriesId": "f3",
+    "eventName": "Spain Sprint",
+    "round": 4,
+    "circuit": {
+      "name": "Circuit de Barcelona-Catalunya",
+      "city": "Barcelona",
+      "country": "Spain",
+      "countryCode": "ES",
+      "lat": 41.57,
+      "lng": 2.2611
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-06-05T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-05T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-06-06T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-06-07T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-06-05",
+    "dateEnd": "2026-06-07"
+  },
+  {
+    "id": "f3-2026-r05",
+    "seriesId": "f3",
+    "eventName": "Austria Sprint",
+    "round": 5,
+    "circuit": {
+      "name": "Red Bull Ring",
+      "city": "Spielberg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "lat": 47.2197,
+      "lng": 14.7647
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-06-26T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-26T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-06-27T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-06-28T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-06-26",
+    "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "f3-2026-r06",
+    "seriesId": "f3",
+    "eventName": "Great Britain Sprint",
+    "round": 6,
+    "circuit": {
+      "name": "Silverstone Circuit",
+      "city": "Silverstone",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "lat": 52.0786,
+      "lng": -1.0169
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-03T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-03T11:30:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-07-04T09:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-07-05T09:30:00Z"
+      }
+    ],
+    "dateStart": "2026-07-03",
+    "dateEnd": "2026-07-05"
+  },
+  {
+    "id": "f3-2026-r07",
+    "seriesId": "f3",
+    "eventName": "Hungary Sprint",
+    "round": 7,
+    "circuit": {
+      "name": "Hungaroring",
+      "city": "Budapest",
+      "country": "Hungary",
+      "countryCode": "HU",
+      "lat": 47.5789,
+      "lng": 19.2486
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-17T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-17T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-07-18T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-07-19T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "f3-2026-r08",
+    "seriesId": "f3",
+    "eventName": "Netherlands Sprint",
+    "round": 8,
+    "circuit": {
+      "name": "Circuit Zandvoort",
+      "city": "Zandvoort",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "lat": 52.3888,
+      "lng": 4.5409
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-08-28T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-28T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-08-29T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-08-30T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-08-28",
+    "dateEnd": "2026-08-30"
+  },
+  {
+    "id": "f3-2026-r09",
+    "seriesId": "f3",
+    "eventName": "Monza Sprint",
+    "round": 9,
+    "circuit": {
+      "name": "Autodromo Nazionale Monza",
+      "city": "Monza",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 45.6156,
+      "lng": 9.2811
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-09-04T07:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-04T11:00:00Z"
+      },
+      {
+        "type": "Sprint Race",
+        "startTimeUTC": "2026-09-05T08:00:00Z"
+      },
+      {
+        "type": "Feature Race",
+        "startTimeUTC": "2026-09-06T08:30:00Z"
+      }
+    ],
+    "dateStart": "2026-09-04",
+    "dateEnd": "2026-09-06"
+  }
+]

@@ -1,0 +1,9 @@
+[project]
+name = "racing-event-tracker"
+version = "0.1.0"
+description = "Data pipeline for RaceTrack motorsport event tracker"
+requires-python = ">=3.14"
+dependencies = [
+    "httpx>=0.28.1",
+    "python-dateutil>=2.9.0.post0",
+]

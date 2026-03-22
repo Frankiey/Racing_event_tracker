@@ -1,0 +1,318 @@
+[
+  {
+    "id": "wec-2026-r01",
+    "seriesId": "wec",
+    "eventName": "1812 km of Qatar",
+    "round": 1,
+    "circuit": {
+      "name": "Lusail International Circuit",
+      "city": "Lusail",
+      "country": "Qatar",
+      "countryCode": "QA",
+      "lat": 25.49,
+      "lng": 51.4542
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-02-27T09:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-02-27T14:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-02-28T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-02-28T13:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-01T11:00:00Z"
+      }
+    ],
+    "dateStart": "2026-02-27",
+    "dateEnd": "2026-03-01"
+  },
+  {
+    "id": "wec-2026-r02",
+    "seriesId": "wec",
+    "eventName": "6 Hours of Imola",
+    "round": 2,
+    "circuit": {
+      "name": "Autodromo Enzo e Dino Ferrari",
+      "city": "Imola",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 44.3439,
+      "lng": 11.7167
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-04-17T09:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-04-17T14:30:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-04-18T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-04-18T12:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-19T10:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-17",
+    "dateEnd": "2026-04-19"
+  },
+  {
+    "id": "wec-2026-r03",
+    "seriesId": "wec",
+    "eventName": "6 Hours of Spa-Francorchamps",
+    "round": 3,
+    "circuit": {
+      "name": "Circuit de Spa-Francorchamps",
+      "city": "Stavelot",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "lat": 50.4372,
+      "lng": 5.9714
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-05-08T09:30:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-05-08T15:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-05-09T09:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-09T12:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-10T10:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-08",
+    "dateEnd": "2026-05-10"
+  },
+  {
+    "id": "wec-2026-r04",
+    "seriesId": "wec",
+    "eventName": "24 Hours of Le Mans",
+    "round": 4,
+    "circuit": {
+      "name": "Circuit de la Sarthe",
+      "city": "Le Mans",
+      "country": "France",
+      "countryCode": "FR",
+      "lat": 47.9562,
+      "lng": 0.2075
+    },
+    "sessions": [
+      {
+        "type": "Test Day",
+        "startTimeUTC": "2026-06-07T08:00:00Z"
+      },
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-06-10T13:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-06-10T19:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-06-11T13:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-11T19:00:00Z"
+      },
+      {
+        "type": "Hyperpole",
+        "startTimeUTC": "2026-06-12T19:00:00Z"
+      },
+      {
+        "type": "Warm Up",
+        "startTimeUTC": "2026-06-13T09:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-13T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-07",
+    "dateEnd": "2026-06-14"
+  },
+  {
+    "id": "wec-2026-r05",
+    "seriesId": "wec",
+    "eventName": "6 Hours of São Paulo",
+    "round": 5,
+    "circuit": {
+      "name": "Autodromo Jose Carlos Pace",
+      "city": "São Paulo",
+      "country": "Brazil",
+      "countryCode": "BR",
+      "lat": -23.7014,
+      "lng": -46.6969
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-10T13:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-10T18:30:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-07-11T13:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-11T16:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-10",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "wec-2026-r06",
+    "seriesId": "wec",
+    "eventName": "Lone Star Le Mans",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit of the Americas",
+      "city": "Austin",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 30.1328,
+      "lng": -97.6411
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-09-04T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-09-04T21:30:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-09-05T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-05T19:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-06T17:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-04",
+    "dateEnd": "2026-09-06"
+  },
+  {
+    "id": "wec-2026-r07",
+    "seriesId": "wec",
+    "eventName": "6 Hours of Fuji",
+    "round": 7,
+    "circuit": {
+      "name": "Fuji Speedway",
+      "city": "Oyama",
+      "country": "Japan",
+      "countryCode": "JP",
+      "lat": 35.3725,
+      "lng": 138.9275
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-09-25T01:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-09-25T06:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-09-26T01:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-26T04:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-27T02:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-25",
+    "dateEnd": "2026-09-27"
+  },
+  {
+    "id": "wec-2026-r08",
+    "seriesId": "wec",
+    "eventName": "8 Hours of Bahrain",
+    "round": 8,
+    "circuit": {
+      "name": "Bahrain International Circuit",
+      "city": "Sakhir",
+      "country": "Bahrain",
+      "countryCode": "BH",
+      "lat": 26.0325,
+      "lng": 50.5106
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-10-30T08:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-10-30T13:30:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-10-31T08:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-31T11:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-01T10:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-30",
+    "dateEnd": "2026-11-01"
+  }
+]

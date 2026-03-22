@@ -1,0 +1,568 @@
+[
+  {
+    "id": "indycar-2026-r01",
+    "seriesId": "indycar",
+    "eventName": "Firestone Grand Prix of St. Petersburg",
+    "round": 1,
+    "circuit": {
+      "name": "Streets of St. Petersburg",
+      "city": "St. Petersburg",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 27.7676,
+      "lng": -82.6316
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-03-06T15:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-03-07T15:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-07T19:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-08T16:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-06",
+    "dateEnd": "2026-03-08"
+  },
+  {
+    "id": "indycar-2026-r02",
+    "seriesId": "indycar",
+    "eventName": "Grand Prix of Long Beach",
+    "round": 2,
+    "circuit": {
+      "name": "Streets of Long Beach",
+      "city": "Long Beach",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 33.7623,
+      "lng": -118.1876
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-03-20T19:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-03-21T19:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-21T23:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-22T20:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-20",
+    "dateEnd": "2026-03-22"
+  },
+  {
+    "id": "indycar-2026-r03",
+    "seriesId": "indycar",
+    "eventName": "Honda Indy Alabama",
+    "round": 3,
+    "circuit": {
+      "name": "Barber Motorsports Park",
+      "city": "Birmingham",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 33.5394,
+      "lng": -86.6213
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-04-03T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-04-04T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-04-04T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-05T18:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-03",
+    "dateEnd": "2026-04-05"
+  },
+  {
+    "id": "indycar-2026-r04",
+    "seriesId": "indycar",
+    "eventName": "Children's of Alabama Indy Grand Prix",
+    "round": 4,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway Road Course",
+      "city": "Indianapolis",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 39.7955,
+      "lng": -86.2347
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-04-24T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-04-25T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-04-25T20:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-26T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-24",
+    "dateEnd": "2026-04-26"
+  },
+  {
+    "id": "indycar-2026-r05",
+    "seriesId": "indycar",
+    "eventName": "GMR Grand Prix",
+    "round": 5,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway Road Course",
+      "city": "Indianapolis",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 39.7955,
+      "lng": -86.2347
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-08T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-09T17:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-09T19:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-08",
+    "dateEnd": "2026-05-09"
+  },
+  {
+    "id": "indycar-2026-r06",
+    "seriesId": "indycar",
+    "eventName": "Indianapolis 500",
+    "round": 6,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway",
+      "city": "Indianapolis",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 39.7955,
+      "lng": -86.2347
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-05-12T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-05-13T16:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-05-14T16:00:00Z"
+      },
+      {
+        "type": "Qualifying Day 1",
+        "startTimeUTC": "2026-05-16T16:00:00Z"
+      },
+      {
+        "type": "Qualifying Day 2",
+        "startTimeUTC": "2026-05-17T16:00:00Z"
+      },
+      {
+        "type": "Carb Day Practice",
+        "startTimeUTC": "2026-05-22T16:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-24T16:45:00Z"
+      }
+    ],
+    "dateStart": "2026-05-12",
+    "dateEnd": "2026-05-24"
+  },
+  {
+    "id": "indycar-2026-r07",
+    "seriesId": "indycar",
+    "eventName": "Chevrolet Detroit Grand Prix",
+    "round": 7,
+    "circuit": {
+      "name": "Streets of Detroit",
+      "city": "Detroit",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 42.3293,
+      "lng": -83.0458
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-05-29T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-05-30T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-30T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-31T17:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-29",
+    "dateEnd": "2026-05-31"
+  },
+  {
+    "id": "indycar-2026-r08",
+    "seriesId": "indycar",
+    "eventName": "Road America Grand Prix",
+    "round": 8,
+    "circuit": {
+      "name": "Road America",
+      "city": "Elkhart Lake",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 43.7978,
+      "lng": -87.9893
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-06-12T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-06-13T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-13T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-14T18:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-12",
+    "dateEnd": "2026-06-14"
+  },
+  {
+    "id": "indycar-2026-r09",
+    "seriesId": "indycar",
+    "eventName": "Monterey Grand Prix",
+    "round": 9,
+    "circuit": {
+      "name": "WeatherTech Raceway Laguna Seca",
+      "city": "Monterey",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 36.5841,
+      "lng": -121.7534
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-06-19T19:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-06-20T19:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-20T23:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-21T20:30:00Z"
+      }
+    ],
+    "dateStart": "2026-06-19",
+    "dateEnd": "2026-06-21"
+  },
+  {
+    "id": "indycar-2026-r10",
+    "seriesId": "indycar",
+    "eventName": "Honda Indy 200 at Mid-Ohio",
+    "round": 10,
+    "circuit": {
+      "name": "Mid-Ohio Sports Car Course",
+      "city": "Lexington",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 40.6828,
+      "lng": -82.6368
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-03T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-04T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-04T19:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-05T17:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-03",
+    "dateEnd": "2026-07-05"
+  },
+  {
+    "id": "indycar-2026-r11",
+    "seriesId": "indycar",
+    "eventName": "Hy-Vee Homefront 250",
+    "round": 11,
+    "circuit": {
+      "name": "Iowa Speedway",
+      "city": "Newton",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 41.6778,
+      "lng": -93.0226
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-11T19:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-11T22:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T01:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-11",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "indycar-2026-r12",
+    "seriesId": "indycar",
+    "eventName": "Hy-Vee One Step 250",
+    "round": 12,
+    "circuit": {
+      "name": "Iowa Speedway",
+      "city": "Newton",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 41.6778,
+      "lng": -93.0226
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-12T19:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T23:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-12",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "indycar-2026-r13",
+    "seriesId": "indycar",
+    "eventName": "Honda Indy Toronto",
+    "round": 13,
+    "circuit": {
+      "name": "Streets of Toronto",
+      "city": "Toronto",
+      "country": "Canada",
+      "countryCode": "CA",
+      "lat": 43.6322,
+      "lng": -79.4094
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-17T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-18T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-18T20:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-19T17:30:00Z"
+      }
+    ],
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "indycar-2026-r14",
+    "seriesId": "indycar",
+    "eventName": "Gallagher Grand Prix",
+    "round": 14,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway Road Course",
+      "city": "Indianapolis",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 39.7955,
+      "lng": -86.2347
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-31T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-01T17:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-01T19:30:00Z"
+      }
+    ],
+    "dateStart": "2026-07-31",
+    "dateEnd": "2026-08-01"
+  },
+  {
+    "id": "indycar-2026-r15",
+    "seriesId": "indycar",
+    "eventName": "Bommarito Automotive Group 500",
+    "round": 15,
+    "circuit": {
+      "name": "World Wide Technology Raceway",
+      "city": "Madison",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 38.6459,
+      "lng": -90.1363
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-08-22T21:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-22T23:30:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-23T01:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-22",
+    "dateEnd": "2026-08-23"
+  },
+  {
+    "id": "indycar-2026-r16",
+    "seriesId": "indycar",
+    "eventName": "Grand Prix of Portland",
+    "round": 16,
+    "circuit": {
+      "name": "Portland International Raceway",
+      "city": "Portland",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 45.5949,
+      "lng": -122.6894
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-08-28T19:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-08-29T19:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-29T23:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-30T20:30:00Z"
+      }
+    ],
+    "dateStart": "2026-08-28",
+    "dateEnd": "2026-08-30"
+  },
+  {
+    "id": "indycar-2026-r17",
+    "seriesId": "indycar",
+    "eventName": "Firestone Grand Prix of Monterey",
+    "round": 17,
+    "circuit": {
+      "name": "WeatherTech Raceway Laguna Seca",
+      "city": "Monterey",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 36.5841,
+      "lng": -121.7534
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-09-11T19:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-09-12T19:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-12T23:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-13T20:30:00Z"
+      }
+    ],
+    "dateStart": "2026-09-11",
+    "dateEnd": "2026-09-13"
+  }
+]

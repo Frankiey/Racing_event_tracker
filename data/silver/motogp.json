@@ -1,0 +1,486 @@
+[
+  {
+    "id": "motogp-2026-r01",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF THAILAND",
+    "round": 1,
+    "circuit": {
+      "name": "Chang International Circuit",
+      "city": "Buriram",
+      "country": "THA",
+      "countryCode": "TH",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-01T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-02-27",
+    "dateEnd": "2026-03-01"
+  },
+  {
+    "id": "motogp-2026-r02",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF BRAZIL",
+    "round": 2,
+    "circuit": {
+      "name": "Autódromo Internacional de Goiânia - Ayrton Senna",
+      "city": "Goiania",
+      "country": "BRA",
+      "countryCode": "BR",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-22T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-20",
+    "dateEnd": "2026-03-22"
+  },
+  {
+    "id": "motogp-2026-r03",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF THE UNITED STATES",
+    "round": 3,
+    "circuit": {
+      "name": "Circuit Of The Americas",
+      "city": "Austin",
+      "country": "USA",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-29T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-27",
+    "dateEnd": "2026-03-29"
+  },
+  {
+    "id": "motogp-2026-r04",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF SPAIN",
+    "round": 4,
+    "circuit": {
+      "name": "Circuito de Jerez - Ángel Nieto",
+      "city": "Jerez de la Frontera",
+      "country": "SPA",
+      "countryCode": "ES",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-26T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-24",
+    "dateEnd": "2026-04-26"
+  },
+  {
+    "id": "motogp-2026-r05",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX DE FRANCE",
+    "round": 5,
+    "circuit": {
+      "name": "Le Mans",
+      "city": "Le Mans",
+      "country": "FRA",
+      "countryCode": "FR",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-10T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-08",
+    "dateEnd": "2026-05-10"
+  },
+  {
+    "id": "motogp-2026-r06",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF CATALONIA",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit de Barcelona-Catalunya",
+      "city": "Barcelona",
+      "country": "SPA",
+      "countryCode": "ES",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-17T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-15",
+    "dateEnd": "2026-05-17"
+  },
+  {
+    "id": "motogp-2026-r07",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF ITALY",
+    "round": 7,
+    "circuit": {
+      "name": "Autodromo Internazionale del Mugello",
+      "city": "Mugello",
+      "country": "ITA",
+      "countryCode": "IT",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-31T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-29",
+    "dateEnd": "2026-05-31"
+  },
+  {
+    "id": "motogp-2026-r08",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF HUNGARY",
+    "round": 8,
+    "circuit": {
+      "name": "Balaton Park Circuit",
+      "city": "\tBalatonfokajár",
+      "country": "HUN",
+      "countryCode": "HU",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-07T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-05",
+    "dateEnd": "2026-06-07"
+  },
+  {
+    "id": "motogp-2026-r09",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF CZECHIA",
+    "round": 9,
+    "circuit": {
+      "name": "Automotodrom Brno",
+      "city": "Brno",
+      "country": "CZE",
+      "countryCode": "CZ",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-21T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-19",
+    "dateEnd": "2026-06-21"
+  },
+  {
+    "id": "motogp-2026-r10",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF THE NETHERLANDS",
+    "round": 10,
+    "circuit": {
+      "name": "TT Circuit Assen",
+      "city": "Assen",
+      "country": "NED",
+      "countryCode": "NL",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-28T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-26",
+    "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "motogp-2026-r11",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF GERMANY",
+    "round": 11,
+    "circuit": {
+      "name": "Sachsenring",
+      "city": "Sachsenring",
+      "country": "GER",
+      "countryCode": "DE",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-10",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "motogp-2026-r12",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF UNITED KINGDOM",
+    "round": 12,
+    "circuit": {
+      "name": "Silverstone Circuit",
+      "city": "Silverstone",
+      "country": "GBR",
+      "countryCode": "GB",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-09T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-07",
+    "dateEnd": "2026-08-09"
+  },
+  {
+    "id": "motogp-2026-r13",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF ARAGON",
+    "round": 13,
+    "circuit": {
+      "name": "MotorLand Aragón",
+      "city": "Alcañiz",
+      "country": "SPA",
+      "countryCode": "ES",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-30T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-28",
+    "dateEnd": "2026-08-30"
+  },
+  {
+    "id": "motogp-2026-r14",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF SAN MARINO",
+    "round": 14,
+    "circuit": {
+      "name": "Misano World Circuit Marco Simoncelli",
+      "city": "Misano Adriatico",
+      "country": "ITA",
+      "countryCode": "SM",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-13T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-11",
+    "dateEnd": "2026-09-13"
+  },
+  {
+    "id": "motogp-2026-r15",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF AUSTRIA",
+    "round": 15,
+    "circuit": {
+      "name": "Red Bull Ring - Spielberg",
+      "city": "Spielberg",
+      "country": "AUT",
+      "countryCode": "AT",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-20T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-18",
+    "dateEnd": "2026-09-20"
+  },
+  {
+    "id": "motogp-2026-r16",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF JAPAN",
+    "round": 16,
+    "circuit": {
+      "name": "Mobility Resort Motegi",
+      "city": "Motegi",
+      "country": "JPN",
+      "countryCode": "JP",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-04T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-02",
+    "dateEnd": "2026-10-04"
+  },
+  {
+    "id": "motogp-2026-r17",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF INDONESIA",
+    "round": 17,
+    "circuit": {
+      "name": "Pertamina Mandalika Circuit",
+      "city": "Lombok",
+      "country": "INA",
+      "countryCode": "ID",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-11T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-09",
+    "dateEnd": "2026-10-11"
+  },
+  {
+    "id": "motogp-2026-r18",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF AUSTRALIA",
+    "round": 18,
+    "circuit": {
+      "name": "Phillip Island",
+      "city": "Phillip Island",
+      "country": "AUS",
+      "countryCode": "AU",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-25T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-23",
+    "dateEnd": "2026-10-25"
+  },
+  {
+    "id": "motogp-2026-r19",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF MALAYSIA",
+    "round": 19,
+    "circuit": {
+      "name": "Petronas Sepang International Circuit",
+      "city": "Sepang",
+      "country": "MAL",
+      "countryCode": "MY",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-01T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-30",
+    "dateEnd": "2026-11-01"
+  },
+  {
+    "id": "motogp-2026-r20",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF QATAR",
+    "round": 20,
+    "circuit": {
+      "name": "Lusail International Circuit",
+      "city": "Doha",
+      "country": "QAT",
+      "countryCode": "QA",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-08T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-06",
+    "dateEnd": "2026-11-08"
+  },
+  {
+    "id": "motogp-2026-r21",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF PORTUGAL",
+    "round": 21,
+    "circuit": {
+      "name": "Autódromo Internacional do Algarve",
+      "city": "Portimao",
+      "country": "POR",
+      "countryCode": "PT",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-22T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-20",
+    "dateEnd": "2026-11-22"
+  },
+  {
+    "id": "motogp-2026-r22",
+    "seriesId": "motogp",
+    "eventName": "GRAND PRIX OF VALENCIA",
+    "round": 22,
+    "circuit": {
+      "name": "Circuit Ricardo Tormo",
+      "city": "Cheste",
+      "country": "SPA",
+      "countryCode": "ES",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-29T00:00:00Z"
+      }
+    ],
+    "dateStart": "2026-11-27",
+    "dateEnd": "2026-11-29"
+  }
+]
