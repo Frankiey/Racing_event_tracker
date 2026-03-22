@@ -1,12 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SeriesBadge from '../components/SeriesBadge.astro';
+import Countdown from '../components/Countdown.astro';
+import { getRaceSession, isPlaceholderTime, formatDateRange } from '../lib/time';
+
+import upcomingData from '../../data/gold/upcoming.json';
+
+const events = upcomingData as any[];
+const now = new Date();
+
+// Find next 5 events with valid race times
+const nextEvents = events
+  .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
+  .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
+  .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())
+  .slice(0, 5);
+
+const nextUp = nextEvents[0];
 ---
 
-<Layout title="RaceTrack — Status">
-  <main class="flex items-center justify-center min-h-screen px-4">
-    <div class="text-center">
-      <h1 class="text-2xl font-bold mb-4">RaceTrack Status</h1>
-      <p class="text-zinc-500">Kiosk display — coming soon.</p>
+<Layout title="RaceTrack — Status" bare={true}>
+  <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+    <h1 class="text-lg font-bold text-zinc-400 mb-6 tracking-wide uppercase">RaceTrack</h1>
+
+    {nextUp && (
+      <div class="mb-8 w-full max-w-md">
+        <div class="text-center mb-4">
+          <SeriesBadge seriesId={nextUp.event.seriesId} size="md" />
+          <h2 class="text-xl font-bold mt-2">{nextUp.event.eventName}</h2>
+          <p class="text-sm text-zinc-400">{nextUp.event.circuit.name}</p>
+        </div>
+        <Countdown
+          targetUTC={nextUp.session!.startTimeUTC}
+          label="Race starts in"
+        />
+      </div>
+    )}
+
+    <div class="w-full max-w-md space-y-2">
+      {nextEvents.slice(1).map(({ event, session }) => (
+        <div class="flex items-center justify-between px-3 py-2 rounded-lg border border-zinc-800 bg-zinc-900/40">
+          <div class="flex items-center gap-2 min-w-0">
+            <SeriesBadge seriesId={event.seriesId} />
+            <span class="text-sm font-medium truncate">{event.eventName}</span>
+          </div>
+          <span class="text-xs text-zinc-500 shrink-0 ml-2">
+            {formatDateRange(event.dateStart, event.dateEnd)}
+          </span>
+        </div>
+      ))}
     </div>
+
+    {nextEvents.length === 0 && (
+      <p class="text-zinc-500">No upcoming events.</p>
+    )}
   </main>
+
+  <script>
+    // Auto-refresh status page every 5 minutes
+    setTimeout(() => location.reload(), 5 * 60 * 1000);
+  </script>
 </Layout>

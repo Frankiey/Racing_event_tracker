@@ -1,0 +1,75 @@
+---
+/**
+ * Countdown timer to next race session.
+ * Renders server-side with a placeholder, then hydrates client-side.
+ */
+interface Props {
+  targetUTC: string;
+  label: string;
+}
+
+const { targetUTC, label } = Astro.props;
+---
+
+<div class="text-center" data-countdown={targetUTC}>
+  <p class="text-xs text-zinc-500 uppercase tracking-wide mb-1">{label}</p>
+  <div class="flex items-center justify-center gap-3 text-2xl font-mono font-bold text-zinc-100">
+    <div class="flex flex-col items-center">
+      <span data-unit="days" class="tabular-nums">--</span>
+      <span class="text-[10px] text-zinc-500 font-sans font-normal">days</span>
+    </div>
+    <span class="text-zinc-600">:</span>
+    <div class="flex flex-col items-center">
+      <span data-unit="hours" class="tabular-nums">--</span>
+      <span class="text-[10px] text-zinc-500 font-sans font-normal">hrs</span>
+    </div>
+    <span class="text-zinc-600">:</span>
+    <div class="flex flex-col items-center">
+      <span data-unit="minutes" class="tabular-nums">--</span>
+      <span class="text-[10px] text-zinc-500 font-sans font-normal">min</span>
+    </div>
+    <span class="text-zinc-600">:</span>
+    <div class="flex flex-col items-center">
+      <span data-unit="seconds" class="tabular-nums">--</span>
+      <span class="text-[10px] text-zinc-500 font-sans font-normal">sec</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCountdowns() {
+    document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
+      const target = new Date(el.dataset.countdown!).getTime();
+
+      function update() {
+        const now = Date.now();
+        const diff = target - now;
+
+        if (diff <= 0) {
+          el.querySelector('[data-unit="days"]')!.textContent = '0';
+          el.querySelector('[data-unit="hours"]')!.textContent = '0';
+          el.querySelector('[data-unit="minutes"]')!.textContent = '0';
+          el.querySelector('[data-unit="seconds"]')!.textContent = '0';
+          return;
+        }
+
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        el.querySelector('[data-unit="days"]')!.textContent = String(days);
+        el.querySelector('[data-unit="hours"]')!.textContent = String(hours).padStart(2, '0');
+        el.querySelector('[data-unit="minutes"]')!.textContent = String(minutes).padStart(2, '0');
+        el.querySelector('[data-unit="seconds"]')!.textContent = String(seconds).padStart(2, '0');
+      }
+
+      update();
+      setInterval(update, 1000);
+    });
+  }
+
+  // Run on initial load and after Astro page transitions
+  initCountdowns();
+  document.addEventListener('astro:after-swap', initCountdowns);
+</script>

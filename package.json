@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fetch-data": "uv run python -m pipeline"
+    "fetch-data": "uv run python -m pipeline",
+    "test": "node tests/smoke.test.mjs"
   },
   "dependencies": {
     "astro": "^5.7.0"

@@ -1,0 +1,74 @@
+---
+/**
+ * Client-side series filter. Toggles visibility of [data-series] elements.
+ */
+import { SERIES_LIST } from '../lib/series';
+---
+
+<div class="flex flex-wrap gap-2 mb-6" id="series-filter">
+  <button
+    data-filter="all"
+    class="filter-btn active text-xs px-3 py-1.5 rounded-full border border-zinc-700 bg-zinc-800 text-zinc-100 font-medium transition-colors"
+  >
+    All
+  </button>
+  {SERIES_LIST.map(s => (
+    <button
+      data-filter={s.id}
+      class="filter-btn text-xs px-3 py-1.5 rounded-full border border-zinc-800 text-zinc-400 font-medium transition-colors hover:border-zinc-600 hover:text-zinc-200"
+    >
+      <span class="inline-block w-2 h-2 rounded-full mr-1 align-middle" style={`background-color: ${s.color}`} />
+      {s.shortLabel}
+    </button>
+  ))}
+</div>
+
+<script>
+  function initFilter() {
+    const container = document.getElementById('series-filter');
+    if (!container) return;
+
+    const buttons = container.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    let active = new Set<string>();
+
+    function updateVisibility() {
+      const showAll = active.size === 0;
+      document.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
+        const series = el.dataset.series!;
+        el.style.display = (showAll || active.has(series)) ? '' : 'none';
+      });
+
+      buttons.forEach(btn => {
+        const f = btn.dataset.filter!;
+        const isActive = (f === 'all' && showAll) || active.has(f);
+        btn.classList.toggle('active', isActive);
+        if (isActive) {
+          btn.classList.add('border-zinc-700', 'bg-zinc-800', 'text-zinc-100');
+          btn.classList.remove('border-zinc-800', 'text-zinc-400');
+        } else {
+          btn.classList.remove('border-zinc-700', 'bg-zinc-800', 'text-zinc-100');
+          btn.classList.add('border-zinc-800', 'text-zinc-400');
+        }
+      });
+    }
+
+    container.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-btn');
+      if (!btn) return;
+
+      const filter = btn.dataset.filter!;
+      if (filter === 'all') {
+        active.clear();
+      } else if (active.has(filter)) {
+        active.delete(filter);
+      } else {
+        active.add(filter);
+      }
+
+      updateVisibility();
+    });
+  }
+
+  initFilter();
+  document.addEventListener('astro:after-swap', initFilter);
+</script>
