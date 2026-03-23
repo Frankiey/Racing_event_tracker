@@ -76,19 +76,19 @@
         "menu_position": 1
       },
       "podiums": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/Podiums.pdf",
         "menu_position": 2
       },
       "pole_positions": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/PolePositions.pdf",
         "menu_position": 2
       },
       "nations_statistics": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/table2.pdf",
         "menu_position": 2
       },
       "riders_all_time": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/table4.pdf",
         "menu_position": 2
       }
     },
@@ -100,7 +100,7 @@
       "nation": "BRA"
     },
     "test": false,
-    "sponsored_name": "Estrella Galicia 0,0 Grand Prix of Brazil",
+    "sponsored_name": "ESTRELLA GALICIA 0,0 GRAND PRIX OF BRAZIL ",
     "date_end": "2026-03-22",
     "toad_api_uuid": "11588b5a-f76c-4c8e-ae06-acba82ff1303",
     "date_start": "2026-03-20",
@@ -127,7 +127,7 @@
     },
     "short_name": "BRA",
     "id": "738a8b22-f744-4c75-847b-a2565dce17de",
-    "status": "CURRENT"
+    "status": "FINISHED"
   },
   {
     "country": {
