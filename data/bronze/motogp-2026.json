@@ -100,7 +100,7 @@
       "nation": "BRA"
     },
     "test": false,
-    "sponsored_name": "ESTRELLA GALICIA 0,0 GRAND PRIX OF BRAZIL ",
+    "sponsored_name": "Estrella Galicia 0,0 Grand Prix of Brazil",
     "date_end": "2026-03-22",
     "toad_api_uuid": "11588b5a-f76c-4c8e-ae06-acba82ff1303",
     "date_start": "2026-03-20",
@@ -502,10 +502,11 @@
       "nation": "USA"
     },
     "test": false,
-    "sponsored_name": "Red Bull Grand Prix of The United States",
+    "sponsored_name": "RED BULL GRAND PRIX OF THE UNITED STATES ",
     "date_end": "2026-03-29",
+    "toad_api_uuid": "8c83648e-8ec9-40f1-9ba0-b0f19883e7d7",
     "date_start": "2026-03-27",
-    "additional_name": "",
+    "additional_name": "USA",
     "name": "GRAND PRIX OF THE UNITED STATES",
     "legacy_id": [
       {
