@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }

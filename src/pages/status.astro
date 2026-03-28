@@ -68,7 +68,7 @@ const sidebarEvents = sorted
     <!-- ══ Hero ══ -->
     <section
       id="kiosk-hero"
-      class="flex-1 flex flex-col justify-center p-6 sm:p-10 lg:p-14 xl:p-16 relative overflow-hidden"
+      class="flex-1 flex flex-col justify-center p-5 sm:p-10 lg:p-14 xl:p-16 relative overflow-hidden"
     >
       <!-- Animated radial glow bg -->
       <div
@@ -127,7 +127,7 @@ const sidebarEvents = sorted
           <div class="flex-1 min-w-0">
             <h1
               id="kiosk-event-name"
-              class="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight line-clamp-2 mb-3"
+              class="text-3xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight line-clamp-2 mb-3"
             >
               {nextEvent?.eventName ?? '—'}
             </h1>
@@ -141,7 +141,7 @@ const sidebarEvents = sorted
           <!-- Flag -->
           <div
             id="kiosk-flag"
-            class="text-6xl sm:text-7xl lg:text-8xl leading-none shrink-0 select-none mt-1"
+            class="text-5xl sm:text-7xl lg:text-8xl leading-none shrink-0 select-none mt-1"
           >
             {heroFlag}
           </div>
@@ -154,23 +154,23 @@ const sidebarEvents = sorted
       </p>
 
       <!-- Countdown — digit blocks -->
-      <div id="kiosk-countdown" class="flex items-stretch gap-2 sm:gap-3 mb-10">
+      <div id="kiosk-countdown" class="flex items-stretch gap-1 sm:gap-3 mb-10">
         {(['days','hrs','min','sec'] as const).map(unit => (
           <Fragment>
-            <div class="kiosk-digit-block flex flex-col items-center justify-center rounded-2xl px-3 py-3 sm:px-5 sm:py-4 min-w-[60px] sm:min-w-[80px]">
+            <div class="kiosk-digit-block flex flex-col items-center justify-center rounded-xl sm:rounded-2xl px-2 py-2 sm:px-5 sm:py-4 min-w-[44px] sm:min-w-[80px]">
               <span
                 id={`kiosk-cd-${unit}`}
                 class="font-mono font-black tabular-nums text-white leading-none block"
-                style="font-size: clamp(2.8rem, 8vw, 7rem);"
+                style="font-size: clamp(2rem, 10vw, 7rem);"
               >
                 --
               </span>
-              <span class="text-[9px] uppercase tracking-[0.25em] text-zinc-600 mt-2">{unit}</span>
+              <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-zinc-600 mt-1.5">{unit}</span>
             </div>
             {unit !== 'sec' && (
               <span
                 class="font-mono font-black text-zinc-800 self-center"
-                style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1; margin-top: -0.5rem;"
+                style="font-size: clamp(1.4rem, 4.5vw, 4rem); line-height: 1; margin-top: -0.5rem;"
               >
                 :
               </span>
@@ -206,6 +206,35 @@ const sidebarEvents = sorted
         <span id="kiosk-clock" class="text-sm font-mono tabular-nums text-zinc-500 tracking-wide">--:-- ---</span>
       </div>
     </section>
+
+    <!-- ══ Mobile upcoming strip (visible only on < lg) ══ -->
+    <div class="lg:hidden border-t border-zinc-800/40 bg-zinc-950/80">
+      <div class="px-5 pt-3 pb-1">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Coming Up</p>
+      </div>
+      <div class="flex gap-2.5 px-4 pb-4 overflow-x-auto" style="scrollbar-width: none; -ms-overflow-style: none;">
+        {sidebarEvents.map(event => {
+          const meta = getSeriesMeta(event.seriesId);
+          return (
+            <button
+              class="kiosk-sidebar-event flex-none w-36 text-left flex flex-col gap-1.5 p-3 rounded-xl border border-zinc-800/60 bg-zinc-900/50"
+              data-event-id={event.id}
+            >
+              <span
+                class="text-[9px] font-black px-1.5 py-0.5 rounded text-white leading-tight self-start"
+                style={`background: ${meta.color};`}
+              >
+                {meta.shortLabel}
+              </span>
+              <p class="text-xs font-semibold leading-tight text-zinc-200 line-clamp-2">{event.eventName}</p>
+              <p class="text-[10px] text-zinc-500">
+                {formatDateRange(event.dateStart, event.dateEnd)}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
 
     <!-- ══ Sidebar ══ -->
     <aside
