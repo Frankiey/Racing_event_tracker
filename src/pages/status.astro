@@ -1,63 +1,783 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SeriesBadge from '../components/SeriesBadge.astro';
-import Countdown from '../components/Countdown.astro';
-import { getRaceSession, isPlaceholderTime, formatDateRange } from '../lib/time';
+import { getSeriesMeta, SERIES_LIST } from '../lib/series';
+import { countryFlag, formatDateRange, isPlaceholderTime } from '../lib/time';
 
 import upcomingData from '../../data/gold/upcoming.json';
 
-const events = upcomingData as any[];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const allEvents = (upcomingData as any[]);
+const sorted = [...allEvents].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+
 const now = new Date();
+const nextEvent = sorted.find(e =>
+  e.sessions.some((s: any) => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC) > now)
+) ?? sorted[0];
 
-// Find next 5 events with valid race times
-const nextEvents = events
-  .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
-  .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
-  .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())
-  .slice(0, 5);
+const heroSeriesMeta = nextEvent ? getSeriesMeta(nextEvent.seriesId) : null;
+const heroColor = heroSeriesMeta?.color ?? '#71717a';
+const heroFlag = nextEvent?.circuit?.countryCode ? countryFlag(nextEvent.circuit.countryCode) : '';
+const heroSessions = nextEvent
+  ? nextEvent.sessions.filter((s: any) => !isPlaceholderTime(s.startTimeUTC))
+  : [];
+const seriesEvents = sorted.filter(e => nextEvent && e.seriesId === nextEvent.seriesId);
+const totalRounds = seriesEvents.length;
 
-const nextUp = nextEvents[0];
+const sidebarEvents = sorted
+  .filter(e => e !== nextEvent && e.sessions.some((s: any) => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC) > now))
+  .slice(0, 8);
 ---
 
-<Layout title="RaceTrack — Status" bare={true}>
-  <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8">
-    <h1 class="text-lg font-bold text-zinc-400 mb-6 tracking-wide uppercase">RaceTrack</h1>
+<Layout title="RaceTrack — Kiosk" bare={true}>
+  <script id="kiosk-data" type="application/json" set:html={JSON.stringify(sorted)} />
+  <script id="kiosk-base" type="application/json" set:html={JSON.stringify(base)} />
 
-    {nextUp && (
-      <div class="mb-8 w-full max-w-md">
-        <div class="text-center mb-4">
-          <SeriesBadge seriesId={nextUp.event.seriesId} size="md" />
-          <h2 class="text-xl font-bold mt-2">{nextUp.event.eventName}</h2>
-          <p class="text-sm text-zinc-400">{nextUp.event.circuit.name}</p>
+  <!-- Scanline overlay -->
+  <div class="kiosk-scanlines fixed inset-0 z-0 pointer-events-none" />
+
+  <!-- Back button -->
+  <a
+    href={`${base}/`}
+    id="kiosk-back"
+    class="fixed top-4 left-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-700/50 bg-zinc-900/80 backdrop-blur-md text-zinc-400 text-xs font-medium hover:text-zinc-200 hover:border-zinc-600/60 hover:bg-zinc-800/80 transition-all duration-200 group shadow-lg shadow-black/40"
+  >
+    <svg class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+    </svg>
+    Dashboard
+  </a>
+
+  <!-- Manual mode indicator -->
+  <button
+    id="kiosk-manual-badge"
+    class="hidden fixed top-4 right-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-xl border border-amber-700/50 bg-amber-950/40 backdrop-blur-md text-amber-400 text-xs font-bold uppercase tracking-widest hover:bg-amber-950/60 transition-all duration-200 shadow-lg shadow-black/40"
+    title="Click to resume auto mode"
+  >
+    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </svg>
+    Manual · Resume Auto
+  </button>
+
+  <div
+    id="kiosk-root"
+    class="relative flex flex-col lg:flex-row min-h-screen bg-zinc-950 text-zinc-100 kiosk-mode-enter z-10"
+  >
+    <!-- ══ Hero ══ -->
+    <section
+      id="kiosk-hero"
+      class="flex-1 flex flex-col justify-center p-6 sm:p-10 lg:p-14 xl:p-16 relative overflow-hidden"
+    >
+      <!-- Animated radial glow bg -->
+      <div
+        id="kiosk-hero-bg"
+        class="kiosk-bg-glow absolute inset-0 pointer-events-none"
+        style={`background: radial-gradient(ellipse 90% 70% at 35% 55%, ${heroColor}12 0%, transparent 65%);`}
+      />
+      <!-- Secondary glow for depth -->
+      <div
+        id="kiosk-hero-bg2"
+        class="absolute inset-0 pointer-events-none opacity-40"
+        style={`background: radial-gradient(ellipse 50% 40% at 70% 20%, ${heroColor}08 0%, transparent 60%);`}
+      />
+
+      <!-- Live mode header -->
+      <div id="kiosk-live-header" class="hidden mb-8 items-center gap-4">
+        <!-- Ring + dot -->
+        <div class="relative flex items-center justify-center w-5 h-5">
+          <span class="kiosk-live-ring absolute inline-flex w-5 h-5 rounded-full" style={`background: ${heroColor}40;`}></span>
+          <span class="kiosk-live-dot relative w-2.5 h-2.5 rounded-full" style={`background: ${heroColor};`}></span>
         </div>
-        <Countdown
-          targetUTC={nextUp.session!.startTimeUTC}
-          label="Race starts in"
-        />
+        <span class="text-lg font-black uppercase tracking-[0.25em]" style={`color: ${heroColor};`}>Live Now</span>
       </div>
-    )}
 
-    <div class="w-full max-w-md space-y-2">
-      {nextEvents.slice(1).map(({ event, session }) => (
-        <div class="flex items-center justify-between px-3 py-2 rounded-lg border border-zinc-800 bg-zinc-900/40">
-          <div class="flex items-center gap-2 min-w-0">
-            <SeriesBadge seriesId={event.seriesId} />
-            <span class="text-sm font-medium truncate">{event.eventName}</span>
+      <!-- Also-live chips -->
+      <div id="kiosk-also-live" class="hidden mb-5 flex-wrap gap-2"></div>
+
+      <!-- Hero card: event info -->
+      <div
+        id="kiosk-hero-card"
+        class="relative mb-8 pl-5 pr-0"
+        style={`border-left: 3px solid ${heroColor}70;`}
+      >
+        <!-- Series + round row -->
+        <div class="flex items-center gap-3 mb-4 flex-wrap">
+          <div id="kiosk-series-badge">
+            <SeriesBadge seriesId={nextEvent?.seriesId ?? 'f1'} size="lg" />
           </div>
-          <span class="text-xs text-zinc-500 shrink-0 ml-2">
-            {formatDateRange(event.dateStart, event.dateEnd)}
+          <span
+            id="kiosk-round-badge"
+            class="text-xs font-mono tabular-nums px-2 py-0.5 rounded-md bg-zinc-900/80 border border-zinc-800 text-zinc-500"
+          >
+            {nextEvent ? `Round ${nextEvent.round} / ${totalRounds}` : ''}
+          </span>
+          <span
+            id="kiosk-weekend-badge"
+            class="hidden text-[11px] font-black uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full"
+            style={`background: ${heroColor}25; color: ${heroColor}; border: 1px solid ${heroColor}50;`}
+          >
+            This Weekend
           </span>
         </div>
-      ))}
-    </div>
 
-    {nextEvents.length === 0 && (
-      <p class="text-zinc-500">No upcoming events.</p>
-    )}
-  </main>
+        <!-- Event name + flag -->
+        <div class="flex items-start gap-5">
+          <div class="flex-1 min-w-0">
+            <h1
+              id="kiosk-event-name"
+              class="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight line-clamp-2 mb-3"
+            >
+              {nextEvent?.eventName ?? '—'}
+            </h1>
+            <p id="kiosk-circuit-name" class="text-base text-zinc-400 font-medium">
+              {nextEvent?.circuit?.name}
+              {nextEvent?.circuit?.city ? ` · ${nextEvent.circuit.city}` : ''}
+            </p>
+            <!-- Live elapsed -->
+            <p id="kiosk-live-elapsed" class="hidden mt-2 text-sm font-medium" style={`color: ${heroColor};`}></p>
+          </div>
+          <!-- Flag -->
+          <div
+            id="kiosk-flag"
+            class="text-6xl sm:text-7xl lg:text-8xl leading-none shrink-0 select-none mt-1"
+          >
+            {heroFlag}
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown label -->
+      <p id="kiosk-cd-label" class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 mb-5 ml-1">
+        Race starts in
+      </p>
+
+      <!-- Countdown — digit blocks -->
+      <div id="kiosk-countdown" class="flex items-stretch gap-2 sm:gap-3 mb-10">
+        {(['days','hrs','min','sec'] as const).map(unit => (
+          <Fragment>
+            <div class="kiosk-digit-block flex flex-col items-center justify-center rounded-2xl px-3 py-3 sm:px-5 sm:py-4 min-w-[60px] sm:min-w-[80px]">
+              <span
+                id={`kiosk-cd-${unit}`}
+                class="font-mono font-black tabular-nums text-white leading-none block"
+                style="font-size: clamp(2.8rem, 8vw, 7rem);"
+              >
+                --
+              </span>
+              <span class="text-[9px] uppercase tracking-[0.25em] text-zinc-600 mt-2">{unit}</span>
+            </div>
+            {unit !== 'sec' && (
+              <span
+                class="font-mono font-black text-zinc-800 self-center"
+                style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1; margin-top: -0.5rem;"
+              >
+                :
+              </span>
+            )}
+          </Fragment>
+        ))}
+      </div>
+
+      <!-- Session strip -->
+      <div id="kiosk-session-strip-wrap" class={heroSessions.length === 0 ? 'hidden' : ''}>
+        <p class="text-[10px] uppercase tracking-[0.25em] text-zinc-700 mb-2 ml-1">Sessions</p>
+        <div id="kiosk-session-strip" class="kiosk-session-strip flex gap-2 overflow-x-auto pb-2">
+          {heroSessions.map(session => (
+            <div
+              class="kiosk-session-pill flex-none flex flex-col gap-1 px-3 py-2.5 rounded-xl border bg-zinc-900/70 border-zinc-800/80 text-zinc-500 min-w-[88px] backdrop-blur-sm"
+              data-session-start={session.startTimeUTC}
+              data-session-type={session.type}
+            >
+              <span class="text-[10px] font-black uppercase tracking-wider">{session.type}</span>
+              <time
+                data-local-time={session.startTimeUTC}
+                data-format="weekday-time"
+                class="text-xs tabular-nums font-mono"
+              >--</time>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Footer row: refreshed + clock -->
+      <div class="mt-auto pt-10 flex items-end justify-between">
+        <span id="kiosk-refreshed" class="text-[11px] font-mono text-zinc-800">Data as of --:--</span>
+        <span id="kiosk-clock" class="text-sm font-mono tabular-nums text-zinc-500 tracking-wide">--:-- ---</span>
+      </div>
+    </section>
+
+    <!-- ══ Sidebar ══ -->
+    <aside
+      id="kiosk-sidebar"
+      class="hidden lg:flex w-80 xl:w-96 shrink-0 flex-col"
+      style="border-left: 1px solid rgba(63,63,70,0.3);"
+    >
+      <!-- Sidebar header -->
+      <div class="px-6 pt-8 pb-4 border-b border-zinc-800/40">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">— Coming Up —</p>
+      </div>
+
+      <!-- Event list -->
+      <div id="kiosk-sidebar-list" class="flex-1 overflow-y-auto px-4 py-4 space-y-1.5">
+        {sidebarEvents.map(event => {
+          const meta = getSeriesMeta(event.seriesId);
+          return (
+            <button
+              class="kiosk-sidebar-event w-full text-left flex items-center gap-3 px-3 py-3 rounded-xl border border-transparent hover:border-zinc-700/40 hover:bg-zinc-900/60"
+              data-event-id={event.id}
+            >
+              <span
+                class="shrink-0 text-[10px] font-black px-1.5 py-0.5 rounded text-white leading-tight"
+                style={`background: ${meta.color};`}
+              >
+                {meta.shortLabel}
+              </span>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-semibold leading-tight truncate text-zinc-200">{event.eventName}</p>
+                <p class="text-[11px] text-zinc-500 mt-0.5 truncate">
+                  {event.circuit?.name}
+                  {event.circuit?.countryCode ? ` · ${countryFlag(event.circuit.countryCode)}` : ''}
+                </p>
+              </div>
+              <span class="shrink-0 text-[11px] text-zinc-600 font-mono">
+                {formatDateRange(event.dateStart, event.dateEnd)}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </aside>
+  </div>
 
   <script>
-    // Auto-refresh status page every 5 minutes
-    setTimeout(() => location.reload(), 5 * 60 * 1000);
+    // ── Types ────────────────────────────────────────────────────────────────
+    interface Session {
+      type: string;
+      startTimeUTC: string;
+      endTimeUTC?: string;
+    }
+    interface KioskEvent {
+      id: string;
+      seriesId: string;
+      eventName: string;
+      round: number;
+      circuit: { name: string; city: string; country: string; countryCode: string };
+      sessions: Session[];
+      dateStart: string;
+      dateEnd: string;
+    }
+
+    // ── Series metadata ──────────────────────────────────────────────────────
+    const SERIES_META: Record<string, { color: string; label: string; shortLabel: string; order: number }> = {
+      f1:           { color: '#e10600', label: 'Formula 1',     shortLabel: 'F1',      order: 1  },
+      f2:           { color: '#0090d0', label: 'Formula 2',     shortLabel: 'F2',      order: 2  },
+      f3:           { color: '#60a5fa', label: 'Formula 3',     shortLabel: 'F3',      order: 3  },
+      fe:           { color: '#14b8a6', label: 'Formula E',     shortLabel: 'FE',      order: 4  },
+      motogp:       { color: '#be123c', label: 'MotoGP',        shortLabel: 'MotoGP',  order: 5  },
+      moto2:        { color: '#f97316', label: 'Moto2',         shortLabel: 'Moto2',   order: 6  },
+      moto3:        { color: '#facc15', label: 'Moto3',         shortLabel: 'Moto3',   order: 7  },
+      indycar:      { color: '#1e40af', label: 'IndyCar',       shortLabel: 'IndyCar', order: 8  },
+      nascar:       { color: '#eab308', label: 'NASCAR',        shortLabel: 'NASCAR',  order: 9  },
+      wec:          { color: '#0ea5e9', label: 'WEC',           shortLabel: 'WEC',     order: 10 },
+      imsa:         { color: '#16a34a', label: 'IMSA',          shortLabel: 'IMSA',    order: 11 },
+      dtm:          { color: '#dc2626', label: 'DTM',           shortLabel: 'DTM',     order: 12 },
+      nls:          { color: '#65a30d', label: 'NLS',           shortLabel: 'NLS',     order: 13 },
+      wsbk:         { color: '#9333ea', label: 'World Superbike', shortLabel: 'WSBK',  order: 14 },
+      superformula: { color: '#f59e0b', label: 'Super Formula', shortLabel: 'SF',      order: 15 },
+    };
+    function getColor(id: string) { return SERIES_META[id]?.color ?? '#71717a'; }
+    function getOrder(id: string) { return SERIES_META[id]?.order ?? 99; }
+    function getShortLabel(id: string) { return SERIES_META[id]?.shortLabel ?? id; }
+    function getLabel(id: string) { return SERIES_META[id]?.label ?? id; }
+
+    function countryFlagEmoji(code: string): string {
+      if (!code || code.length !== 2) return '';
+      const upper = code.toUpperCase();
+      if (!/^[A-Z]{2}$/.test(upper)) return '';
+      const base = 0x1F1E6 - 0x41;
+      return String.fromCodePoint(upper.charCodeAt(0) + base, upper.charCodeAt(1) + base);
+    }
+
+    // ── Constants ────────────────────────────────────────────────────────────
+    const SESSION_DURATION_MS: Record<string, number> = {
+      'FP1': 60, 'FP2': 60, 'FP3': 60,
+      'Qualifying': 90, 'Sprint Qualifying': 60,
+      'Sprint': 45, 'Sprint Race': 45,
+      'Race': 120, 'Feature Race': 120,
+      'NASCAR Race': 180,
+      'MotoGP Race': 60,
+      'default': 120,
+    };
+    const GRACE_MS = 30 * 60_000;
+    const PLACEHOLDER_PREFIX = '1900-';
+    const MANUAL_TIMEOUT_MS = 60_000;
+
+    function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_PREFIX); }
+
+    function estimatedEnd(session: Session): number {
+      if (session.endTimeUTC) return new Date(session.endTimeUTC).getTime();
+      const dur = (SESSION_DURATION_MS[session.type] ?? SESSION_DURATION_MS['default']) * 60_000;
+      return new Date(session.startTimeUTC).getTime() + dur;
+    }
+
+    function isSessionLive(session: Session, now: number): boolean {
+      if (isPlaceholder(session.startTimeUTC)) return false;
+      const start = new Date(session.startTimeUTC).getTime();
+      return now >= start && now < estimatedEnd(session) + GRACE_MS;
+    }
+
+    // ── Mode detection ───────────────────────────────────────────────────────
+    type KioskMode = 'idle' | 'weekend' | 'live';
+    interface ModeResult {
+      mode: KioskMode;
+      event: KioskEvent | null;
+      session: Session | null;
+      alsoLive: { event: KioskEvent; session: Session }[];
+    }
+
+    function getNextEvent(events: KioskEvent[], now: number): KioskEvent | null {
+      return events.find(e =>
+        e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now)
+      ) ?? null;
+    }
+
+    function getKioskMode(events: KioskEvent[], now: number): ModeResult {
+      const liveHits: { event: KioskEvent; session: Session }[] = [];
+      for (const event of events) {
+        for (const session of event.sessions) {
+          if (!isPlaceholder(session.startTimeUTC) && isSessionLive(session, now)) {
+            liveHits.push({ event, session });
+          }
+        }
+      }
+      if (liveHits.length > 0) {
+        liveHits.sort((a, b) => getOrder(a.event.seriesId) - getOrder(b.event.seriesId));
+        const primary = liveHits[0];
+        return { mode: 'live', event: primary.event, session: primary.session, alsoLive: liveHits.slice(1) };
+      }
+      const next = getNextEvent(events, now);
+      if (!next) return { mode: 'idle', event: null, session: null, alsoLive: [] };
+      const daysUntil = (new Date(next.dateStart).getTime() - now) / 86_400_000;
+      if (daysUntil <= 7) return { mode: 'weekend', event: next, session: null, alsoLive: [] };
+      return { mode: 'idle', event: next, session: null, alsoLive: [] };
+    }
+
+    function getNextSession(event: KioskEvent, now: number): Session | null {
+      return event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now) ?? null;
+    }
+
+    // ── Manual event override ────────────────────────────────────────────────
+    let manualEventId: string | null = null;
+    let manualExpiresAt: number = 0;
+
+    function setManualEvent(id: string) {
+      manualEventId = id;
+      manualExpiresAt = Date.now() + MANUAL_TIMEOUT_MS;
+      const badge = document.getElementById('kiosk-manual-badge');
+      if (badge) badge.style.display = 'flex';
+    }
+
+    function clearManualEvent() {
+      manualEventId = null;
+      manualExpiresAt = 0;
+      const badge = document.getElementById('kiosk-manual-badge');
+      if (badge) badge.style.display = 'none';
+      updateKioskDisplay(allEvents);
+    }
+
+    function resolveEvent(autoResult: ModeResult, events: KioskEvent[]): { event: KioskEvent | null; isManual: boolean } {
+      if (manualEventId && Date.now() < manualExpiresAt) {
+        const found = events.find(e => e.id === manualEventId);
+        if (found) return { event: found, isManual: true };
+      }
+      manualEventId = null;
+      const badge = document.getElementById('kiosk-manual-badge');
+      if (badge) badge.style.display = 'none';
+      return { event: autoResult.event, isManual: false };
+    }
+
+    // ── Countdown ────────────────────────────────────────────────────────────
+    let cdTargetMs: number | null = null;
+
+    function pad(n: number) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+    function tickCountdown() {
+      if (cdTargetMs === null) return;
+      const diff = cdTargetMs - Date.now();
+      const totalSec = Math.max(0, Math.floor(diff / 1000));
+      setDigit('days', pad(Math.floor(totalSec / 86400)));
+      setDigit('hrs', pad(Math.floor((totalSec % 86400) / 3600)));
+      setDigit('min', pad(Math.floor((totalSec % 3600) / 60)));
+      setDigit('sec', pad(totalSec % 60));
+    }
+
+    function setDigit(unit: string, val: string) {
+      const el = document.getElementById(`kiosk-cd-${unit}`);
+      if (!el || el.textContent === val) return;
+      el.textContent = val;
+      el.classList.remove('kiosk-cd-tick');
+      void (el as HTMLElement).offsetWidth;
+      el.classList.add('kiosk-cd-tick');
+      setTimeout(() => el.classList.remove('kiosk-cd-tick'), 120);
+    }
+
+    // ── Clock ────────────────────────────────────────────────────────────────
+    function updateClock() {
+      const el = document.getElementById('kiosk-clock');
+      if (!el) return;
+      const now = new Date();
+      const time = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const date = now.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+      el.textContent = `${time}  ${date}`;
+    }
+
+    // ── LocalTime hydration ──────────────────────────────────────────────────
+    function initLocalTimes() {
+      document.querySelectorAll<HTMLTimeElement>('[data-local-time]').forEach(el => {
+        const utc = el.dataset.localTime!;
+        const fmt = el.dataset.format;
+        const d = new Date(utc);
+        if (isNaN(d.getTime())) return;
+        const opts: Intl.DateTimeFormatOptions = { hour12: false };
+        if (fmt === 'datetime' || fmt === 'date') { opts.month = 'short'; opts.day = 'numeric'; }
+        if (fmt === 'datetime' || fmt === 'time') { opts.hour = '2-digit'; opts.minute = '2-digit'; }
+        if (fmt === 'weekday-time') { opts.weekday = 'short'; opts.hour = '2-digit'; opts.minute = '2-digit'; }
+        el.textContent = d.toLocaleString(undefined, opts);
+      });
+    }
+
+    // ── Hero render ──────────────────────────────────────────────────────────
+    let currentMode: KioskMode = 'idle';
+    let currentEventId: string | null = null;
+
+    function formatElapsed(startMs: number): string {
+      const m = Math.floor((Date.now() - startMs) / 60_000);
+      if (m < 1) return 'Just started';
+      return `Started ${m} min ago`;
+    }
+
+    function renderHero(event: KioskEvent, mode: KioskMode, liveSession: Session | null, alsoLive: { event: KioskEvent; session: Session }[]) {
+      const color = getColor(event.seriesId);
+      const now = Date.now();
+
+      // Backgrounds
+      const bg1 = document.getElementById('kiosk-hero-bg');
+      const bg2 = document.getElementById('kiosk-hero-bg2');
+      if (bg1) {
+        const opacity = mode === 'live' ? '18' : mode === 'weekend' ? '12' : '0a';
+        bg1.style.background = `radial-gradient(ellipse 90% 70% at 35% 55%, ${color}${opacity} 0%, transparent 65%)`;
+      }
+      if (bg2) bg2.style.background = `radial-gradient(ellipse 50% 40% at 70% 20%, ${color}08 0%, transparent 60%)`;
+
+      // Hero card border
+      const heroCard = document.getElementById('kiosk-hero-card');
+      if (heroCard) heroCard.style.borderLeft = `3px solid ${color}${mode === 'live' ? 'cc' : mode === 'weekend' ? '90' : '60'}`;
+
+      // Live header
+      const liveHeader = document.getElementById('kiosk-live-header');
+      if (liveHeader) {
+        liveHeader.style.display = mode === 'live' ? 'flex' : 'none';
+        // Update dot + ring color
+        const dot = liveHeader.querySelector('.kiosk-live-dot') as HTMLElement | null;
+        const ring = liveHeader.querySelector('.kiosk-live-ring') as HTMLElement | null;
+        const label = liveHeader.querySelector('span:last-child') as HTMLElement | null;
+        if (dot) dot.style.background = color;
+        if (ring) ring.style.background = `${color}40`;
+        if (label) label.style.color = color;
+      }
+
+      // Also-live chips
+      const alsoLiveEl = document.getElementById('kiosk-also-live');
+      if (alsoLiveEl) {
+        if (mode === 'live' && alsoLive.length > 0) {
+          alsoLiveEl.style.display = 'flex';
+          alsoLiveEl.innerHTML = `<span class="text-xs text-zinc-600 mr-1 self-center">also live:</span>` +
+            alsoLive.map(l => {
+              const c = getColor(l.event.seriesId);
+              return `<span class="text-[11px] font-bold px-2 py-0.5 rounded-full" style="background:${c}20;color:${c};border:1px solid ${c}50;">${getShortLabel(l.event.seriesId)} · ${l.event.circuit?.city || l.event.circuit?.name}</span>`;
+            }).join('');
+        } else {
+          alsoLiveEl.style.display = 'none';
+        }
+      }
+
+      // Event name
+      const nameEl = document.getElementById('kiosk-event-name');
+      if (nameEl) nameEl.textContent = event.eventName;
+
+      // Circuit
+      const circEl = document.getElementById('kiosk-circuit-name');
+      if (circEl) {
+        const city = event.circuit?.city ? ` · ${event.circuit.city}` : '';
+        circEl.textContent = `${event.circuit?.name ?? ''}${city}`;
+      }
+
+      // Flag
+      const flagEl = document.getElementById('kiosk-flag');
+      if (flagEl) {
+        flagEl.textContent = countryFlagEmoji(event.circuit?.countryCode ?? '');
+        flagEl.style.filter = mode === 'live' ? `drop-shadow(0 0 30px ${color}99)` : '';
+      }
+
+      // Series badge (swap via inner HTML)
+      const badgeWrap = document.getElementById('kiosk-series-badge');
+      if (badgeWrap) {
+        const c = color;
+        const short = getShortLabel(event.seriesId);
+        const label = getLabel(event.seriesId);
+        badgeWrap.innerHTML = `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-black text-white" style="background:${c};">${short}</span>`;
+      }
+
+      // Round badge
+      const allEvts: KioskEvent[] = JSON.parse(document.getElementById('kiosk-data')!.textContent ?? '[]');
+      const totalR = allEvts.filter(e => e.seriesId === event.seriesId).length;
+      const roundBadge = document.getElementById('kiosk-round-badge');
+      if (roundBadge) {
+        roundBadge.textContent = `Round ${event.round} / ${totalR}`;
+        roundBadge.style.display = mode === 'weekend' ? 'none' : '';
+      }
+      const weekendBadge = document.getElementById('kiosk-weekend-badge');
+      if (weekendBadge) {
+        weekendBadge.style.display = mode === 'weekend' ? '' : 'none';
+        weekendBadge.style.background = `${color}25`;
+        weekendBadge.style.color = color;
+        weekendBadge.style.borderColor = `${color}50`;
+      }
+
+      // Countdown
+      const cdLabel = document.getElementById('kiosk-cd-label');
+      const liveElapsed = document.getElementById('kiosk-live-elapsed');
+      const cdEl = document.getElementById('kiosk-countdown');
+
+      if (mode === 'live' && liveSession) {
+        cdTargetMs = null;
+        if (cdLabel) cdLabel.textContent = '';
+        if (liveElapsed) {
+          liveElapsed.style.display = '';
+          liveElapsed.style.color = color;
+          liveElapsed.textContent = `${liveSession.type} · ${formatElapsed(new Date(liveSession.startTimeUTC).getTime())}`;
+        }
+        if (cdEl) (cdEl as HTMLElement).style.setProperty('--cd-glow', `${color}60`);
+        setDigit('days', '00'); setDigit('hrs', '00'); setDigit('min', '00'); setDigit('sec', '00');
+        // Tint digit blocks in live mode
+        document.querySelectorAll<HTMLElement>('.kiosk-digit-block').forEach(b => {
+          b.style.borderColor = `${color}30`;
+          b.style.boxShadow = `0 0 20px ${color}10, inset 0 0 20px ${color}05`;
+        });
+      } else {
+        if (liveElapsed) liveElapsed.style.display = 'none';
+        document.querySelectorAll<HTMLElement>('.kiosk-digit-block').forEach(b => {
+          b.style.borderColor = '';
+          b.style.boxShadow = '';
+        });
+
+        let targetSession: Session | null = null;
+        if (mode === 'weekend') {
+          targetSession = getNextSession(event, now);
+          if (!targetSession) {
+            targetSession = event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race')) ?? null;
+          }
+        } else {
+          targetSession = event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race'))
+            ?? event.sessions.filter(s => !isPlaceholder(s.startTimeUTC)).at(-1)
+            ?? null;
+        }
+
+        if (targetSession) {
+          cdTargetMs = new Date(targetSession.startTimeUTC).getTime();
+          if (cdLabel) {
+            cdLabel.textContent = mode === 'weekend' ? `${targetSession.type} starts in` : 'Race starts in';
+          }
+        } else {
+          cdTargetMs = null;
+        }
+      }
+
+      // Session strip
+      renderSessionStrip(event, color, now, mode);
+    }
+
+    function renderSessionStrip(event: KioskEvent, color: string, now: number, mode: KioskMode) {
+      const strip = document.getElementById('kiosk-session-strip');
+      const wrap = document.getElementById('kiosk-session-strip-wrap');
+      if (!strip) return;
+
+      const validSessions = event.sessions.filter(s => !isPlaceholder(s.startTimeUTC));
+      if (validSessions.length === 0) { if (wrap) wrap.classList.add('hidden'); return; }
+      if (wrap) wrap.classList.remove('hidden');
+
+      // Find the soonest future session index
+      const futureTimes = validSessions.map(s => new Date(s.startTimeUTC).getTime()).filter(t => t > now);
+      const nextStart = futureTimes.length > 0 ? Math.min(...futureTimes) : null;
+
+      strip.innerHTML = validSessions.map(s => {
+        const startMs = new Date(s.startTimeUTC).getTime();
+        const endMs = estimatedEnd(s);
+        const isLive = now >= startMs && now < endMs + GRACE_MS;
+        const isPast = now >= endMs + GRACE_MS;
+        const isNext = !isPast && !isLive && startMs === nextStart;
+
+        let classes = 'kiosk-session-pill flex-none flex flex-col gap-1 px-3 py-2.5 rounded-xl border min-w-[88px] backdrop-blur-sm';
+        let inlineStyle = '';
+
+        if (isPast) {
+          classes += ' bg-zinc-900/40 border-zinc-800/50 text-zinc-700';
+          inlineStyle = 'text-decoration: line-through;';
+        } else if (isLive) {
+          classes += ' bg-zinc-900/80 text-white border-transparent';
+          inlineStyle = `border-left: 3px solid ${color}; box-shadow: 0 0 12px ${color}20;`;
+        } else if (isNext) {
+          classes += ' bg-zinc-900/80 text-zinc-200 border-transparent';
+          inlineStyle = `border-left: 2px solid ${color}90;`;
+        } else {
+          classes += ' bg-zinc-900/50 border-zinc-800/60 text-zinc-400';
+        }
+
+        return `
+          <div class="${classes}" data-session-start="${s.startTimeUTC}" data-session-type="${s.type}" style="${inlineStyle}">
+            <span class="text-[10px] font-black uppercase tracking-wider">${s.type}</span>
+            <time data-local-time="${s.startTimeUTC}" data-format="weekday-time" class="text-xs tabular-nums font-mono">--</time>
+          </div>`;
+      }).join('');
+
+      initLocalTimes();
+    }
+
+    // ── Sidebar ──────────────────────────────────────────────────────────────
+    function renderSidebar(events: KioskEvent[], heroId: string | null) {
+      const listEl = document.getElementById('kiosk-sidebar-list');
+      if (!listEl) return;
+      const now = Date.now();
+      const upcoming = events
+        .filter(e => e.id !== heroId && e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
+        .slice(0, 8);
+
+      listEl.innerHTML = upcoming.map(event => {
+        const color = getColor(event.seriesId);
+        const short = getShortLabel(event.seriesId);
+        const flag = countryFlagEmoji(event.circuit?.countryCode ?? '');
+        const start = new Date(event.dateStart);
+        const end = new Date(event.dateEnd);
+        const mf = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' });
+        let dateStr = mf.format(start);
+        if (event.dateStart !== event.dateEnd) {
+          dateStr += start.getMonth() === end.getMonth() ? `–${end.getDate()}` : ` – ${mf.format(end)}`;
+        }
+        const isActive = event.id === manualEventId;
+        return `
+          <button class="kiosk-sidebar-event${isActive ? ' kiosk-sidebar-active' : ''} w-full text-left flex items-center gap-3 px-3 py-3 rounded-xl border ${isActive ? 'border-zinc-600/50 bg-zinc-900/80' : 'border-transparent hover:border-zinc-700/40 hover:bg-zinc-900/60'}" data-event-id="${event.id}">
+            <span class="shrink-0 text-[10px] font-black px-1.5 py-0.5 rounded text-white leading-tight" style="background:${color};">${short}</span>
+            <div class="min-w-0 flex-1">
+              <p class="text-sm font-semibold leading-tight truncate text-zinc-200">${event.eventName}</p>
+              <p class="text-[11px] text-zinc-500 mt-0.5 truncate">${event.circuit?.name ?? ''}${flag ? ' · ' + flag : ''}</p>
+            </div>
+            <span class="shrink-0 text-[11px] text-zinc-600 font-mono">${dateStr}</span>
+          </button>`;
+      }).join('');
+
+      // Re-attach click handlers
+      listEl.querySelectorAll<HTMLButtonElement>('.kiosk-sidebar-event').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.eventId;
+          if (!id) return;
+          if (manualEventId === id) {
+            clearManualEvent();
+          } else {
+            setManualEvent(id);
+            updateKioskDisplay(allEvents);
+          }
+        });
+      });
+    }
+
+    // ── Main display update ──────────────────────────────────────────────────
+    function updateKioskDisplay(events: KioskEvent[]) {
+      const now = Date.now();
+      const autoResult = getKioskMode(events, now);
+      const { event: resolvedEvent, isManual } = resolveEvent(autoResult, events);
+      const mode: KioskMode = isManual ? 'idle' : autoResult.mode;
+      const event = resolvedEvent;
+
+      if (!event) return;
+
+      const modeChanged = mode !== currentMode || event.id !== currentEventId;
+      currentMode = mode;
+      currentEventId = event.id;
+
+      renderHero(event, mode, autoResult.session, autoResult.alsoLive);
+
+      // Sidebar visibility
+      const sidebar = document.getElementById('kiosk-sidebar');
+      if (sidebar) sidebar.style.display = (mode === 'live' && !isManual) ? 'none' : '';
+
+      renderSidebar(events, event.id);
+
+      // Mode transition
+      if (modeChanged) {
+        const root = document.getElementById('kiosk-root');
+        if (root) {
+          root.classList.remove('kiosk-mode-enter');
+          void root.offsetWidth;
+          root.classList.add('kiosk-mode-enter');
+        }
+      }
+    }
+
+    // ── Refresh ──────────────────────────────────────────────────────────────
+    let allEvents: KioskEvent[] = JSON.parse(document.getElementById('kiosk-data')!.textContent ?? '[]');
+    let cachedFingerprint: string | null = null;
+
+    function updateLastRefreshed() {
+      const el = document.getElementById('kiosk-refreshed');
+      if (!el) return;
+      const t = new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+      el.textContent = `Updated ${t}`;
+    }
+
+    async function refreshData() {
+      try {
+        const base = JSON.parse(document.getElementById('kiosk-base')!.textContent ?? '""');
+        const res = await fetch(`${base}/data/gold/upcoming.json`, { cache: 'no-store' });
+        const data: KioskEvent[] = await res.json();
+        const sorted = [...data].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+        const fp = `${sorted.length}-${sorted[0]?.id ?? ''}`;
+        if (cachedFingerprint && fp !== cachedFingerprint) { location.reload(); return; }
+        cachedFingerprint = fp;
+        allEvents = sorted;
+        updateKioskDisplay(allEvents);
+        renderSidebar(allEvents, currentEventId);
+        updateLastRefreshed();
+      } catch { /* silently fail */ }
+    }
+
+    // ── Boot ─────────────────────────────────────────────────────────────────
+    function init() {
+      initLocalTimes();
+      updateKioskDisplay(allEvents);
+      updateLastRefreshed();
+      cachedFingerprint = `${allEvents.length}-${allEvents[0]?.id ?? ''}`;
+
+      // Manual badge click
+      document.getElementById('kiosk-manual-badge')?.addEventListener('click', clearManualEvent);
+
+      // 1-second tick
+      setInterval(() => {
+        tickCountdown();
+        updateClock();
+        if (currentMode === 'live' || manualEventId) updateKioskDisplay(allEvents);
+      }, 1000);
+
+      // Mode check every 30s
+      setInterval(() => updateKioskDisplay(allEvents), 30_000);
+
+      // Data refresh every 5 min
+      setInterval(refreshData, 5 * 60_000);
+
+      updateClock();
+    }
+
+    init();
+    document.addEventListener('astro:after-swap', init);
   </script>
 </Layout>

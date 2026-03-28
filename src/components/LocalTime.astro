@@ -5,7 +5,7 @@
  */
 interface Props {
   utc: string;
-  format?: 'datetime' | 'time' | 'date';
+  format?: 'datetime' | 'time' | 'date' | 'weekday-time';
 }
 
 const { utc, format = 'datetime' } = Astro.props;
@@ -33,6 +33,11 @@ const { utc, format = 'datetime' } = Astro.props;
         options.day = 'numeric';
       }
       if (fmt === 'datetime' || fmt === 'time') {
+        options.hour = '2-digit';
+        options.minute = '2-digit';
+      }
+      if (fmt === 'weekday-time') {
+        options.weekday = 'short';
         options.hour = '2-digit';
         options.minute = '2-digit';
       }
