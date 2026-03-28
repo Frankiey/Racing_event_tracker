@@ -4,11 +4,13 @@
  * Opens when any EventCard emits 'rt-open-event'.
  * Shows full session schedule, circuit info, and favorite toggle.
  */
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!-- Overlay -->
 <div
   id="event-modal"
+  data-base={base}
   class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
   aria-modal="true"
   role="dialog"
@@ -125,7 +127,7 @@
 
   function openModal(event: any) {
     const meta = SERIES_META[event.seriesId] ?? { label: event.seriesId, shortLabel: event.seriesId, color: '#71717a' };
-    const base = (document.querySelector('base')?.getAttribute('href') ?? '').replace(/\/$/, '');
+    const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const favs: Set<string> = new Set(JSON.parse(localStorage.getItem('rt-favs') ?? '[]'));
     const isFav = favs.has(event.id);
     const isPast = new Date(event.dateEnd + 'T23:59:59Z') < new Date();
