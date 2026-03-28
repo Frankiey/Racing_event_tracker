@@ -1,9 +1,11 @@
 # Data Source Research — DTM
 
-**Series ID (proposed):** `dtm`
-**Status:** `candidate`
-**Integration path:** TBD
-**Last reviewed:** —
+**Series ID:** `dtm`
+**Status:** `integrated`
+**Integration path:** seed
+**Last reviewed:** 2026-03-28
+
+> Integrated as seed data. See full notes at [`docs/data-sources/dtm.md`](../dtm.md).
 
 ---
 

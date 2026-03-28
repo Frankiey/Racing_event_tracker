@@ -1,9 +1,11 @@
 # Data Source Research — IMSA WeatherTech SportsCar Championship
 
-**Series ID (proposed):** `imsa`
-**Status:** `candidate`
-**Integration path:** TBD
-**Last reviewed:** —
+**Series ID:** `imsa`
+**Status:** `integrated`
+**Integration path:** seed
+**Last reviewed:** 2026-03-28
+
+> Integrated as seed data. See full notes at [`docs/data-sources/imsa.md`](../imsa.md).
 
 ---
 

@@ -42,7 +42,7 @@ External API  →  data/bronze/  →  data/silver/  →  data/gold/
 2. **Transform** (`pipeline/transforms/<series>.py`) normalizes to the common event schema and writes to `data/silver/<series>.json`
 3. **Gold build** merges all silver files into `calendar.json` and `upcoming.json`
 
-### Path B — Seed series (F2, F3, Formula E, IndyCar, WEC, Moto2, Moto3)
+### Path B — Seed series (F2, F3, Formula E, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula)
 
 ```
 data/seed/<series>.json  →  data/silver/  →  data/gold/
@@ -81,7 +81,7 @@ data/seed/<series>.json  →  data/silver/  →  data/gold/
 ### Seed Layer (`data/seed/`)
 - Manually curated JSON for series that have no usable public API
 - Files must match the silver schema exactly (they are copied straight to silver)
-- Current seed series: `f2`, `f3`, `fe`, `indycar`, `wec`, `moto2`, `moto3`
+- Current seed series: `f2`, `f3`, `fe`, `indycar`, `wec`, `moto2`, `moto3`, `imsa`, `dtm`, `nls`, `superformula`
 - Update these files manually each season or when schedules change
 
 ---
@@ -192,15 +192,20 @@ Full research notes, API endpoints, and decision rationale for each series live 
 | F1 | `pipeline/fetchers/f1.py` | Jolpica API + OpenF1 | API | [f1.md](data-sources/f1.md) |
 | MotoGP | `pipeline/fetchers/motogp.py` | Pulselive API | API | [motogp.md](data-sources/motogp.md) |
 | NASCAR | `pipeline/fetchers/nascar.py` | NASCAR CDN | API | [nascar.md](data-sources/nascar.md) |
+| WSBK | `pipeline/fetchers/wsbk.py` | WorldSBK Pulselive API (seed fallback) | API + Seed | [wsbk.md](data-sources/wsbk.md) |
 | F2 | `data/seed/f2.json` | Manual | Seed | [f2-f3.md](data-sources/f2-f3.md) |
 | F3 | `data/seed/f3.json` | Manual | Seed | [f2-f3.md](data-sources/f2-f3.md) |
-| Formula E | `data/seed/fe.json` | Manual (no free API exists) | Seed | [fe.md](data-sources/fe.md) |
-| IndyCar | `data/seed/indycar.json` | Manual (no free API exists) | Seed | [indycar.md](data-sources/indycar.md) |
-| WEC | `data/seed/wec.json` | Manual (no free API exists) | Seed | [wec.md](data-sources/wec.md) |
+| Formula E | `data/seed/fe.json` | Manual (no free API) | Seed | [fe.md](data-sources/fe.md) |
+| IndyCar | `data/seed/indycar.json` | Manual (no free API) | Seed | [indycar.md](data-sources/indycar.md) |
+| WEC | `data/seed/wec.json` | Manual (no free API) | Seed | [wec.md](data-sources/wec.md) |
 | Moto2 | `data/seed/moto2.json` | Manual (MotoGP − 2h offset) | Seed | [moto2-moto3.md](data-sources/moto2-moto3.md) |
 | Moto3 | `data/seed/moto3.json` | Manual (MotoGP − 4h offset) | Seed | [moto2-moto3.md](data-sources/moto2-moto3.md) |
+| IMSA | `data/seed/imsa.json` | Manual | Seed | [imsa.md](data-sources/imsa.md) |
+| DTM | `data/seed/dtm.json` | Manual | Seed | [dtm.md](data-sources/dtm.md) |
+| NLS | `data/seed/nls.json` | Manual (official schedule) | Seed | [nls.md](data-sources/nls.md) |
+| Super Formula | `data/seed/superformula.json` | Manual | Seed | [superformula.md](data-sources/superformula.md) |
 
-**Candidate series** (researched but not yet integrated): DTM, IMSA, BTCC, Australian Supercars — see [`docs/data-sources/candidates/`](data-sources/candidates/).
+**Candidate series** (researched but not yet integrated): BTCC, Australian Supercars — see [`docs/data-sources/candidates/`](data-sources/candidates/).
 
 ---
 

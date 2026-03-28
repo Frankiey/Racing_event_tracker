@@ -25,6 +25,11 @@ Each series has its own file. Use `_template.md` when researching a new series.
 | Moto2 | `moto2` | Seed | Manual (MotoGP offset) | [moto2-moto3.md](moto2-moto3.md) | 2026-03-22 |
 | Moto3 | `moto3` | Seed | Manual (MotoGP offset) | [moto2-moto3.md](moto2-moto3.md) | 2026-03-22 |
 | WEC | `wec` | Seed | Manual | [wec.md](wec.md) | 2026-03-22 |
+| IMSA WeatherTech | `imsa` | Seed | Manual | [imsa.md](imsa.md) | 2026-03-28 |
+| DTM | `dtm` | Seed | Manual | [dtm.md](dtm.md) | 2026-03-28 |
+| NLS | `nls` | Seed | Official schedule | [nls.md](nls.md) | 2026-03-28 |
+| World Superbike | `wsbk` | API + Seed fallback | WorldSBK Pulselive | [wsbk.md](wsbk.md) | 2026-03-28 |
+| Super Formula | `superformula` | Seed | Manual | [superformula.md](superformula.md) | 2026-03-28 |
 
 ---
 
@@ -32,8 +37,6 @@ Each series has its own file. Use `_template.md` when researching a new series.
 
 | Series | Priority | Blocker | File |
 |--------|----------|---------|------|
-| DTM | Nice to have | No free API found | [candidates/dtm.md](candidates/dtm.md) |
-| IMSA | Nice to have | No free API found | [candidates/imsa.md](candidates/imsa.md) |
 | BTCC | Low | TheSportsDB available (ID: 4372) | [candidates/btcc.md](candidates/btcc.md) |
 | Australian Supercars | Low | TheSportsDB available (ID: 4489) | [candidates/australian-supercars.md](candidates/australian-supercars.md) |
 

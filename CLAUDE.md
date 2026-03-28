@@ -89,7 +89,7 @@ public/           — Static assets (logos, flags, images)
 ## Key Conventions
 - All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
 - Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`
+- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`
 - Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
 - Prefer static generation over client-side fetching
 - Dark mode is the default theme
@@ -107,7 +107,7 @@ public/           — Static assets (logos, flags, images)
 - `uv run python -m pipeline --bronze-only` — fetch raw data without transforms
 
 ## Data Pipeline
-Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without APIs (FE, IndyCar, WEC, F2, F3) use manually curated seed files in `data/seed/`. A GitHub Action runs this nightly and commits updated data.
+Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without free public APIs (FE, IndyCar, WEC, F2, F3, IMSA, DTM, NLS, Super Formula) use manually curated seed files in `data/seed/`. A GitHub Action runs this nightly and commits updated data.
 
 ## Data Sources
 | Series | Source | Type |
@@ -115,7 +115,15 @@ Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive 
 | F1 | Jolpica API + OpenF1 | API (free, no auth) |
 | MotoGP | Pulselive API | API (free, no auth) |
 | NASCAR | NASCAR CDN | API (free, no auth) |
-| F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
+| WSBK | WorldSBK Pulselive API | API (JWT-gated, seed fallback) |
+| F2, F3, FE, IndyCar, WEC, Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
+| IMSA, DTM, NLS, Super Formula | `data/seed/*.json` | Manual seed data |
+
+## File Search Tips
+- When using Glob, always scope to a specific subdirectory (`src/`, `docs/`, `data/`, `pipeline/`) — never glob from the project root with `**` patterns, as it will match thousands of `node_modules` files
+- `pattern: "*.md", path: project_root` finds only root-level files (safe)
+- `pattern: "**/*.md", path: "docs/"` finds all docs (safe)
+- `pattern: "**/*.md", path: project_root` — avoid this
 
 ## When Making Changes
 - Check `docs/architecture.md` for system design decisions

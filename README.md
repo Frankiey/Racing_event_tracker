@@ -49,6 +49,11 @@ RaceTrack fixes that. One URL, every series, your local times, your watchlist. T
 | MotoGP + Moto2 + Moto3 | Pulselive API (live) | ✅ |
 | NASCAR | NASCAR CDN (live) | ✅ |
 | WEC / Endurance (Le Mans, Spa 24h...) | Seed data | ✅ |
+| IMSA WeatherTech (incl. Daytona 24h, Sebring 12h) | Seed data | ✅ |
+| DTM | Seed data | ✅ |
+| NLS / Nürburgring (incl. ADAC 24h Nürburgring) | Seed data | ✅ |
+| World Superbike (WSBK) | Pulselive API + seed fallback | ✅ |
+| Super Formula | Seed data | ✅ |
 
 ---
 
@@ -139,7 +144,7 @@ Contributions are welcome — bug fixes, new series data, UI improvements, pipel
 - Interactivity is vanilla `<script>` tags — no React, Vue, or Svelte
 - Dynamic colors always use `style=` — Tailwind v4 doesn't support dynamic class names
 - Times stored as UTC, converted in the browser via `data-local-time` attribute
-- Series IDs: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`
+- Series IDs: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`
 
 See [docs/architecture.md](docs/architecture.md) for the full picture.
 

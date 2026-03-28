@@ -15,16 +15,19 @@ A web app that aggregates upcoming motorsport events across all major series int
 
 ---
 
-## Series Covered (v1)
+## Series Covered
 
-- Formula 1
-- Formula 2 & Formula 3 (support series on F1 weekends)
+- Formula 1, Formula 2, Formula 3
 - Formula E
 - IndyCar
-- Nascar
+- NASCAR Cup
 - MotoGP, Moto2, Moto3
-- 24h races: Le Mans, Spa, Nürburgring (WEC / endurance calendar)
-- DTM, IMSA — nice to have for later
+- World Superbike (WSBK)
+- WEC (incl. Le Mans, Spa)
+- IMSA WeatherTech SportsCar Championship (incl. Daytona 24h, Sebring 12h, Petit Le Mans)
+- DTM
+- NLS / Nürburgring-Langstrecken-Serie (incl. ADAC 24h Nürburgring)
+- Super Formula
 
 ---
 
