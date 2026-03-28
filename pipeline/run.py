@@ -16,7 +16,7 @@ import argparse
 import sys
 
 from pipeline.config import SILVER_DIR, GOLD_DIR, SEASON_YEAR
-from pipeline.utils import write_json
+from pipeline.utils import read_json, write_json
 
 # Fetchers (bronze)
 from pipeline.fetchers import f1 as f1_fetcher
@@ -82,9 +82,22 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
             all_silver.extend(seed_events)
 
     # --- Gold layer ---
-    print("\n[GOLD] Building merged layers...")
-    calendar = build_calendar(all_silver)
-    upcoming = build_upcoming(all_silver)
+    # Always build gold from ALL silver files on disk, not just what was
+    # processed this run. This ensures a partial run (--series f1) does not
+    # silently overwrite gold with incomplete data.
+    print("\n[GOLD] Reading all silver files...")
+    all_silver_merged = []
+    for silver_file in sorted(SILVER_DIR.glob("*.json")):
+        try:
+            events = read_json(silver_file)
+            all_silver_merged.extend(events)
+            print(f"  {silver_file.stem}: {len(events)} events")
+        except Exception as e:
+            print(f"  WARNING: could not read {silver_file.name}: {e}")
+
+    print(f"\n[GOLD] Building merged layers from {len(all_silver_merged)} total events...")
+    calendar = build_calendar(all_silver_merged)
+    upcoming = build_upcoming(all_silver_merged)
 
     write_json(GOLD_DIR / "calendar.json", calendar)
     write_json(GOLD_DIR / "upcoming.json", upcoming)

@@ -15,15 +15,6 @@ bd close <id>         # Complete work
 1. File issues for remaining work (`bd create`)
 2. Run quality gates (`npm run build`)
 3. Close finished issues (`bd close <id>`)
-4. Push everything:
-   ```bash
-   git pull --rebase
-   bd dolt push
-   git push
-   ```
-
-Work is NOT complete until `git push` succeeds.
-
 ---
 
 ## Project Overview
