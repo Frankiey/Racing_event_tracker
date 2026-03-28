@@ -3,102 +3,223 @@
 ## System Overview
 
 ```
-┌─────────────┐     ┌──────────────┐     ┌──────────────┐
-│  External    │     │  Data        │     │  Static      │
-│  APIs        │────▸│  Pipeline    │────▸│  Site        │
-│  (F1, MotoGP │     │  (scripts/)  │     │  (Astro)     │
-│   WEC, etc.) │     └──────┬───────┘     └──────────────┘
-└─────────────┘            │
-                    ┌──────▼───────┐
-                    │  data/       │
-                    │  bronze/     │  Raw cached responses
-                    │  silver/     │  Normalized per-series
-                    │  gold/       │  Merged & enriched
-                    └──────────────┘
+┌──────────────────┐     ┌──────────────────┐     ┌──────────────┐
+│  External APIs   │     │  Data Pipeline   │     │  Static Site │
+│  (F1, MotoGP,   │────▸│  (pipeline/)     │────▸│  (Astro)     │
+│   NASCAR, etc.)  │     └────────┬─────────┘     └──────────────┘
+└──────────────────┘              │
+                                  │
+┌──────────────────┐              │
+│  Seed Files      │              │
+│  (data/seed/)   │──────────────┘
+│  Manual JSON for │
+│  API-less series │
+└──────────────────┘
+
+                    ┌─────────────────────┐
+                    │  data/              │
+                    │  ├── bronze/        │  Raw API responses (cached)
+                    │  ├── silver/        │  Normalized per-series
+                    │  ├── gold/          │  Merged & display-ready
+                    │  └── seed/          │  Manual data (skips bronze)
+                    └─────────────────────┘
 ```
 
-## Data Flow — Medallion Architecture
+---
+
+## Data Flow — Two Paths
+
+There are two routes data can take through the pipeline, depending on whether the series has a public API.
+
+### Path A — API-backed series (F1, MotoGP, NASCAR)
+
+```
+External API  →  data/bronze/  →  data/silver/  →  data/gold/
+               (raw cache)      (normalized)      (merged)
+```
+
+1. **Fetcher** (`pipeline/fetchers/<series>.py`) calls the API and writes raw JSON to `data/bronze/`
+2. **Transform** (`pipeline/transforms/<series>.py`) normalizes to the common event schema and writes to `data/silver/<series>.json`
+3. **Gold build** merges all silver files into `calendar.json` and `upcoming.json`
+
+### Path B — Seed series (F2, F3, Formula E, IndyCar, WEC, Moto2, Moto3)
+
+```
+data/seed/<series>.json  →  data/silver/  →  data/gold/
+  (already normalized)      (copied as-is)    (merged)
+```
+
+1. **Seed file** (`data/seed/<series>.json`) is manually curated, already in silver-layer format
+2. **Seed loader** (`pipeline/fetchers/seed.py`) reads it directly — there is no bronze step
+3. The events are written to `data/silver/<series>.json` and merged into gold like any other series
+
+**Key point:** Seed files ARE the silver layer. They must conform to the common event schema exactly.
+
+---
+
+## Medallion Layers
 
 ### Bronze Layer (`data/bronze/`)
 - Raw API responses cached as JSON
 - One file per source per fetch (e.g. `f1-2026-schedule.json`)
 - Preserves original schema — no transformation
-- Purpose: cache, audit trail, avoid re-fetching
+- Purpose: cache, audit trail, avoid hammering APIs
+- **Only exists for API-backed series** — seed series have no bronze
 
 ### Silver Layer (`data/silver/`)
-- Normalized to a common event schema
-- One file per series (e.g. `f1.json`, `motogp.json`)
-- Common fields: `seriesId`, `eventName`, `circuit`, `country`, `sessions[]`, `dates`
-- Sessions have: `type` (FP1, Qualifying, Race, etc.), `startTimeUTC`, `endTimeUTC`
+- Normalized to a common event schema (see schema below)
+- One file per series (e.g. `f1.json`, `motogp.json`, `f2.json`)
+- All series end up here regardless of path A or B
+- Common fields: `id`, `seriesId`, `eventName`, `circuit`, `sessions[]`, `dateStart`
 
 ### Gold Layer (`data/gold/`)
-- Merged cross-series calendar (`calendar.json`)
-- Enriched with broadcast info (`broadcasts.json`)
-- Pre-computed "this weekend" data (`upcoming.json`)
-- Ready for direct consumption by Astro pages
+- `calendar.json` — all events from all series, sorted chronologically
+- `upcoming.json` — future events only, sorted by next session time
+- Built by `pipeline/transforms/gold.py` from all silver files combined
+- Ready for direct consumption by Astro pages — no further processing needed
 
-## Common Event Schema (Silver/Gold)
+### Seed Layer (`data/seed/`)
+- Manually curated JSON for series that have no usable public API
+- Files must match the silver schema exactly (they are copied straight to silver)
+- Current seed series: `f2`, `f3`, `fe`, `indycar`, `wec`, `moto2`, `moto3`
+- Update these files manually each season or when schedules change
+
+---
+
+## Common Event Schema (Silver & Seed format)
 
 ```typescript
 interface RaceEvent {
-  id: string;                    // e.g. "f1-2026-r05"
-  seriesId: string;              // e.g. "f1"
-  eventName: string;             // e.g. "Monaco Grand Prix"
+  id: string;           // Unique: "<seriesId>-<year>-r<round>" e.g. "f1-2026-r05"
+  seriesId: string;     // Matches SERIES_IDS in config.py e.g. "f1", "motogp"
+  eventName: string;    // e.g. "Monaco Grand Prix"
   round: number;
+  dateStart: string;    // ISO 8601 date of first session e.g. "2026-05-21"
   circuit: {
     name: string;
     city: string;
     country: string;
-    countryCode: string;         // ISO 3166-1 alpha-2
+    countryCode: string;  // ISO 3166-1 alpha-2 ONLY (2 letters). Alpha-3 breaks flags.
     lat: number;
     lng: number;
   };
   sessions: Session[];
-  status: 'upcoming' | 'live' | 'completed';
+  status: "upcoming" | "live" | "completed";
 }
 
 interface Session {
-  type: string;                  // FP1, FP2, FP3, Qualifying, Sprint, Race
-  startTimeUTC: string;          // ISO 8601
-  endTimeUTC: string;
-  status: 'upcoming' | 'live' | 'completed';
+  type: string;           // "FP1", "FP2", "FP3", "Qualifying", "Sprint", "Race", etc.
+  startTimeUTC: string;   // ISO 8601 UTC e.g. "2026-05-21T11:30:00Z"
+  endTimeUTC?: string;    // Optional — required for endurance events
+  status: "upcoming" | "live" | "completed";
 }
 ```
+
+**Gotchas:**
+- `countryCode` must be alpha-2. `countryFlag()` in `src/lib/time.ts` silently returns `""` for alpha-3 codes.
+- `startTimeUTC` must end in `Z` (or `+00:00`). The gold layer normalizes these but silver should be clean.
+- NASCAR CDN sometimes returns `1900-01-01T00:00:00Z` for missing qualifying times — the UI filters these out via `isPlaceholderTime()`.
+
+---
+
+## Adding a New Data Source
+
+### Option 1 — New API-backed series
+
+1. Add the series ID to `SERIES_IDS` in `pipeline/config.py`
+2. Add the API base URL to `pipeline/config.py`
+3. Create `pipeline/fetchers/<series>.py` with a `fetch() -> list` function that writes to `data/bronze/` and returns raw data
+4. Create `pipeline/transforms/<series>.py` with a `transform(data) -> list[RaceEvent]` function
+5. Register both in `API_SERIES` dict in `pipeline/run.py`
+6. Add series metadata to `src/lib/series.ts` (color, label, short name)
+7. Run `uv run python -m pipeline --series <id>` to test
+
+### Option 2 — New seed series (no API)
+
+1. Add the series ID to `SERIES_IDS` in `pipeline/config.py`
+2. Add the series ID to `SEED_SERIES` list in `pipeline/run.py`
+3. Create `data/seed/<series>.json` following the silver schema above
+4. Add series metadata to `src/lib/series.ts` (color, label, short name)
+5. Run `uv run python -m pipeline --series <id>` to test
+
+### After adding any series
+- Add a route to `src/pages/series/[id].astro` (auto-handled if using dynamic route)
+- Verify the series badge renders correctly in `SeriesBadge.astro`
+- Add series to the Nav dropdown in `Nav.astro` if not auto-populated
+- Update `CLAUDE.md` and this file
+
+---
+
+## Pipeline Entry Point (`pipeline/run.py`)
+
+```
+run_pipeline()
+  ├── For each API series: fetch() → transform() → write silver
+  ├── For each seed series: load_seed() → write silver
+  └── build_calendar() + build_upcoming() → write gold
+```
+
+CLI:
+```bash
+uv run python -m pipeline                        # all series, all layers
+uv run python -m pipeline --series f1,motogp     # specific series only
+uv run python -m pipeline --bronze-only          # fetch only, skip transforms
+```
+
+---
 
 ## Page Architecture
 
 | Route | Purpose | Data Source |
 |-------|---------|-------------|
-| `/` | Dashboard — next events across all series | `gold/upcoming.json` |
-| `/calendar` | Full season calendar, filterable by series | `gold/calendar.json` |
-| `/series/[id]` | Per-series page with standings + schedule | `silver/[id].json` |
-| `/status` | Minimal kiosk/small-screen view | `gold/upcoming.json` |
-| `/where-to-watch` | Broadcast info by region | `gold/broadcasts.json` |
+| `/` | Dashboard — next events across all series, countdown hero, series stats | `gold/upcoming.json` |
+| `/calendar` | Full season calendar, grouped by month, jump-to-today | `gold/calendar.json` |
+| `/series/[id]` | Per-series page: progress bar, schedule, next race callout | `silver/[id].json` |
+| `/watchlist` | User's saved/favorited events (localStorage, no server) | `gold/upcoming.json` + localStorage |
+| `/status` | Minimal kiosk/small-screen view, auto-refresh | `gold/upcoming.json` |
 
-## Data Sources
+**Planned (not yet built):**
+- `/where-to-watch` — broadcast info by region (blocked on `gold/broadcasts.json` data)
 
-| Series | Primary Source | Fallback |
-|--------|---------------|----------|
-| F1 | Jolpica API (Ergast successor) | OpenF1 API |
-| F2, F3 | FIA calendar / manual JSON | — |
-| Formula E | Manual JSON | TheSportsDB |
-| MotoGP | MotoGP API / scrape | TheSportsDB |
-| IndyCar | Manual JSON | TheSportsDB |
-| NASCAR | Manual JSON | TheSportsDB |
-| WEC / Endurance | FIA WEC calendar / manual | — |
+---
+
+## Current Data Sources
+
+Full research notes, API endpoints, and decision rationale for each series live in [`docs/data-sources/`](data-sources/_index.md). The table below is a summary — see individual files for details.
+
+| Series | Path | Source | API / Seed | Research |
+|--------|------|--------|------------|----------|
+| F1 | `pipeline/fetchers/f1.py` | Jolpica API + OpenF1 | API | [f1.md](data-sources/f1.md) |
+| MotoGP | `pipeline/fetchers/motogp.py` | Pulselive API | API | [motogp.md](data-sources/motogp.md) |
+| NASCAR | `pipeline/fetchers/nascar.py` | NASCAR CDN | API | [nascar.md](data-sources/nascar.md) |
+| F2 | `data/seed/f2.json` | Manual | Seed | [f2-f3.md](data-sources/f2-f3.md) |
+| F3 | `data/seed/f3.json` | Manual | Seed | [f2-f3.md](data-sources/f2-f3.md) |
+| Formula E | `data/seed/fe.json` | Manual (no free API exists) | Seed | [fe.md](data-sources/fe.md) |
+| IndyCar | `data/seed/indycar.json` | Manual (no free API exists) | Seed | [indycar.md](data-sources/indycar.md) |
+| WEC | `data/seed/wec.json` | Manual (no free API exists) | Seed | [wec.md](data-sources/wec.md) |
+| Moto2 | `data/seed/moto2.json` | Manual (MotoGP − 2h offset) | Seed | [moto2-moto3.md](data-sources/moto2-moto3.md) |
+| Moto3 | `data/seed/moto3.json` | Manual (MotoGP − 4h offset) | Seed | [moto2-moto3.md](data-sources/moto2-moto3.md) |
+
+**Candidate series** (researched but not yet integrated): DTM, IMSA, BTCC, Australian Supercars — see [`docs/data-sources/candidates/`](data-sources/candidates/).
+
+---
 
 ## Deployment
 
-1. **GitHub Action (cron)** runs `npm run fetch-data` nightly
-2. Pipeline fetches APIs → writes bronze → transforms silver → merges gold
-3. Action commits updated `data/` to `main`
-4. Push triggers build action: `npm run build` → deploy to GitHub Pages
-5. Site is fully static — no runtime server
+1. **GitHub Action (cron, nightly)** runs `npm run fetch-data` (`uv run python -m pipeline`)
+2. Pipeline fetches APIs → writes bronze → transforms to silver → merges to gold
+3. Action commits updated `data/` files to `main`
+4. Push triggers the build action: `npm run build` → deploy to GitHub Pages
+5. Site is fully static — no runtime server, no database
+
+---
 
 ## Design Decisions
 
-- **Static-first**: No server, no database. All data pre-built at deploy time.
-- **Medallion data**: Separating raw/clean/enriched data makes it easy to debug, iterate on transforms, and add new series.
-- **Astro**: Minimal JS shipped to client. Islands for interactive bits (countdown timers, timezone selector).
-- **Dark mode default**: Target use case includes ambient displays and kiosk mode.
-- **UTC storage**: All times in UTC, converted client-side. No server-side timezone logic.
+- **Static-first:** No server, no database. All data pre-built at deploy time. GitHub Pages hosting.
+- **Medallion data:** Separating raw/clean/enriched makes it easy to debug transforms, add series, and re-run partial pipelines without re-fetching.
+- **Seed layer:** Avoids blocking the frontend on API availability. Enables full calendar coverage for series like WEC/IndyCar where no reliable free API exists.
+- **Astro:** Minimal JS shipped to client. Vanilla `<script>` tags for interactivity — no framework islands overhead.
+- **Dark mode default:** Primary use case is ambient displays and kiosk mode.
+- **UTC storage:** All times stored in UTC, converted client-side via `data-local-time` attribute. No server-side timezone logic.
+- **Tailwind v4:** Dynamic class names like `bg-[#hex]` do not work at runtime — always use `style=` for series colors.

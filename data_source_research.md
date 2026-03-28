@@ -1,4 +1,11 @@
-# Data Source Research for Racing Calendars
+# Data Source Research — ARCHIVED
+
+> **This file is archived.** Research has been migrated to `docs/data-sources/` with one file per series.
+> See [`docs/data-sources/_index.md`](docs/data-sources/_index.md) for the current source of truth.
+
+---
+
+# Original Research (2026-03-22)
 
 ## Research Date: 2026-03-22
 
