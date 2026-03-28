@@ -244,23 +244,10 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       });
     }
 
-    // Auto-scroll to first upcoming section (Today / Tomorrow / This week)
-    // Only on initial page load, not on every navigation
-    if (sessionStorage.getItem('rt-dashboard-scrolled')) return;
-    const firstUpcoming = document.querySelector<HTMLElement>('[data-week-section]');
-    if (firstUpcoming) {
-      // Small delay so layout is settled
-      setTimeout(() => {
-        firstUpcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        sessionStorage.setItem('rt-dashboard-scrolled', '1');
-      }, 120);
-    }
   }
 
   initDashboard();
   document.addEventListener('astro:after-swap', () => {
-    // Reset scroll flag on navigation so it works fresh each visit
-    sessionStorage.removeItem('rt-dashboard-scrolled');
     initDashboard();
   });
 </script>
