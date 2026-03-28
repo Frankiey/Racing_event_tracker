@@ -30,27 +30,22 @@ for (const e of allEvents) {
   seasonStats.set(e.seriesId, s);
 }
 
-// Sort chronologically first so the per-series cap picks the nearest events
-// (upcoming.json is grouped by series, not sorted by date)
+// Sort chronologically (upcoming.json is grouped by series, not sorted by date)
 const sortedUpcoming = [...upcoming].sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
 
-// Pick up to 20 events, cap each series at 4
-const MAX_PER_SERIES = 4;
-const MAX_TOTAL = 20;
+// Build full event list with a per-series cap (no total cap — lazy load handles paging)
+const MAX_PER_SERIES = 6;
 const seriesCounts = new Map<string, number>();
 const dashboardEvents: typeof upcoming = [];
 for (const event of sortedUpcoming) {
-  if (dashboardEvents.length >= MAX_TOTAL) break;
   const count = seriesCounts.get(event.seriesId) ?? 0;
   if (count >= MAX_PER_SERIES) continue;
   seriesCounts.set(event.seriesId, count + 1);
   dashboardEvents.push(event);
 }
-// Already chronological from sortedUpcoming, but re-sort just to be safe
 dashboardEvents.sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
 
-// Group by week label. Events where dateEnd < yesterday get label "Recent"
-// (hidden by default, revealed by a toggle button).
+// Group by week label
 const yesterday = new Date(now);
 yesterday.setDate(yesterday.getDate() - 1);
 yesterday.setHours(23, 59, 59, 999);
@@ -78,6 +73,9 @@ for (const event of dashboardEvents) {
 const recentEvents = grouped.get('__recent__') ?? [];
 const visibleGroups = [...grouped.entries()].filter(([k]) => k !== '__recent__');
 
+// First 2 groups render visible; the rest are in the DOM but hidden — revealed by lazy loader
+const INITIAL_GROUPS = 2;
+
 const nextCircuitFlag = nextRace ? countryFlag(nextRace.event.circuit.countryCode) : '';
 const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 ---
@@ -88,19 +86,15 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
     <!-- ── Hero countdown ── -->
     {nextRace && (
       <div class="relative mb-8 rounded-2xl overflow-hidden border border-zinc-700/40">
-        {/* Dark gradient bg */}
         <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950" />
-        {/* Series color glow */}
         <div
           class="absolute inset-0 opacity-[0.07]"
           style={`background: radial-gradient(ellipse 80% 60% at 80% 50%, ${nextRaceMeta?.color ?? '#e10600'}, transparent)`}
         />
-        {/* Left edge accent */}
         <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl" style={`background: ${nextRaceMeta?.color ?? '#e10600'};`} />
 
         <div class="relative px-6 py-6 sm:px-8 sm:py-7">
           <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
-            {/* Info */}
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2.5 mb-3 flex-wrap">
                 <SeriesBadge seriesId={nextRace.event.seriesId} size="md" />
@@ -127,7 +121,6 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
               </p>
             </div>
 
-            {/* Countdown */}
             <div class="sm:text-right shrink-0">
               <Countdown
                 targetUTC={nextRace.session!.startTimeUTC}
@@ -173,10 +166,10 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       </div>
     </div>
 
-    <!-- ── Filter + event list ── -->
+    <!-- ── Filter ── -->
     <SeriesFilter />
 
-    <!-- Recent (older than yesterday) — collapsed by default -->
+    <!-- Recent — collapsed by default -->
     {recentEvents.length > 0 && (
       <div id="recent-section" class="mb-6">
         <button
@@ -199,9 +192,14 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       </div>
     )}
 
-    <!-- Upcoming groups -->
-    {visibleGroups.map(([weekLabel, weekEvents]) => (
-      <section class="mb-8" data-week-section={weekLabel}>
+    <!-- ── Event groups — first INITIAL_GROUPS visible, rest lazy ── -->
+    {visibleGroups.map(([weekLabel, weekEvents], i) => (
+      <section
+        class="week-group mb-8"
+        data-week-section={weekLabel}
+        data-lazy-group={i >= INITIAL_GROUPS ? 'true' : undefined}
+        style={i >= INITIAL_GROUPS ? 'display:none' : undefined}
+      >
         <h2 class="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mb-3 flex items-center gap-3">
           {weekLabel}
           <span class="h-px flex-1 bg-zinc-800/60" />
@@ -209,7 +207,7 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
         </h2>
         <div class="grid gap-2.5">
           {weekEvents.map(event => (
-            <div data-series={event.seriesId}>
+            <div data-series={event.seriesId} class="event-card-wrapper">
               <EventCard
                 event={event}
                 highlight={nextRace?.event.id === event.id}
@@ -227,14 +225,38 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
         <p class="text-sm">Run <code class="bg-zinc-800 text-zinc-300 px-2 py-1 rounded">npm run fetch-data</code> to populate.</p>
       </div>
     )}
+
+    <!-- ── Lazy load sentinel + skeleton + end ── -->
+    <div id="lazy-sentinel" class="h-1" />
+
+    <div id="lazy-skeleton" class="hidden space-y-2.5 mb-8" aria-hidden="true">
+      {[0, 1, 2].map(i => (
+        <div
+          class="skeleton-card rounded-xl border border-zinc-800/50"
+          style={`height: 112px; animation-delay: ${i * 120}ms`}
+        />
+      ))}
+    </div>
+
+    <div id="lazy-end" class="hidden text-center py-10 text-zinc-700">
+      <div class="inline-flex items-center gap-3">
+        <span class="h-px w-12 bg-zinc-800" />
+        <span class="text-xs uppercase tracking-widest font-semibold">All caught up</span>
+        <span class="h-px w-12 bg-zinc-800" />
+      </div>
+      <p class="text-xs text-zinc-800 mt-2">
+        <a href={`${base}/calendar`} class="hover:text-zinc-600 transition-colors">View full calendar →</a>
+      </p>
+    </div>
+
   </main>
 </Layout>
 
 <script>
   function initDashboard() {
-    // Recent toggle
-    const toggle = document.getElementById('recent-toggle');
-    const panel  = document.getElementById('recent-events');
+    // ── Recent toggle ──
+    const toggle  = document.getElementById('recent-toggle');
+    const panel   = document.getElementById('recent-events');
     const chevron = document.getElementById('recent-chevron');
     if (toggle && panel && chevron) {
       toggle.addEventListener('click', () => {
@@ -244,10 +266,64 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       });
     }
 
+    // ── Lazy load ──
+    const sentinel = document.getElementById('lazy-sentinel');
+    const skeleton = document.getElementById('lazy-skeleton');
+    const endMsg   = document.getElementById('lazy-end');
+    const lazyGroups = [...document.querySelectorAll<HTMLElement>('[data-lazy-group="true"]')];
+
+    if (!sentinel) return;
+
+    if (lazyGroups.length === 0) {
+      endMsg?.classList.remove('hidden');
+      sentinel.remove();
+      return;
+    }
+
+    let loading = false;
+
+    function revealNextGroup() {
+      if (loading) return;
+
+      const group = lazyGroups.shift();
+      if (!group) {
+        skeleton?.classList.add('hidden');
+        endMsg?.classList.remove('hidden');
+        sentinel?.remove();
+        return;
+      }
+
+      loading = true;
+      skeleton?.classList.remove('hidden');
+
+      // Small delay so the skeleton is actually visible — feels smooth
+      setTimeout(() => {
+        // Show the group
+        group.style.display = '';
+        group.removeAttribute('data-lazy-group');
+
+        // Stagger card entrance animations
+        const cards = group.querySelectorAll<HTMLElement>('.event-card-wrapper');
+        cards.forEach((card, i) => {
+          card.style.animationDelay = `${i * 55}ms`;
+          card.classList.add('card-enter');
+        });
+
+        skeleton?.classList.add('hidden');
+        loading = false;
+      }, 280);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) revealNextGroup();
+      },
+      { rootMargin: '300px' } // trigger 300px before sentinel enters view
+    );
+
+    observer.observe(sentinel);
   }
 
   initDashboard();
-  document.addEventListener('astro:after-swap', () => {
-    initDashboard();
-  });
+  document.addEventListener('astro:after-swap', initDashboard);
 </script>
