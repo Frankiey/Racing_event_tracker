@@ -1,0 +1,268 @@
+[
+  {
+    "id": "dtm-2026-r01",
+    "seriesId": "dtm",
+    "eventName": "DTM Oschersleben",
+    "round": 1,
+    "circuit": {
+      "name": "Motorsport Arena Oschersleben",
+      "city": "Oschersleben",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 52.0278,
+      "lng": 11.2794
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-04-24T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-04-24T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-04-25T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-04-25T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-04-26T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-24",
+    "dateEnd": "2026-04-26"
+  },
+  {
+    "id": "dtm-2026-r02",
+    "seriesId": "dtm",
+    "eventName": "DTM Lausitzring",
+    "round": 2,
+    "circuit": {
+      "name": "Lausitzring",
+      "city": "Klettwitz",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 51.5233,
+      "lng": 13.9361
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-22T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-05-22T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-05-23T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-05-23T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-05-24T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-22",
+    "dateEnd": "2026-05-24"
+  },
+  {
+    "id": "dtm-2026-r03",
+    "seriesId": "dtm",
+    "eventName": "DTM Zandvoort",
+    "round": 3,
+    "circuit": {
+      "name": "Circuit Zandvoort",
+      "city": "Zandvoort",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "lat": 52.3888,
+      "lng": 4.5409
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-06-19T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-06-19T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-06-20T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-06-20T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-06-21T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-19",
+    "dateEnd": "2026-06-21"
+  },
+  {
+    "id": "dtm-2026-r04",
+    "seriesId": "dtm",
+    "eventName": "DTM Nürburgring",
+    "round": 4,
+    "circuit": {
+      "name": "Nürburgring",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-17T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-07-17T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-07-18T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-07-18T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-07-19T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "dtm-2026-r05",
+    "seriesId": "dtm",
+    "eventName": "DTM Red Bull Ring",
+    "round": 5,
+    "circuit": {
+      "name": "Red Bull Ring",
+      "city": "Spielberg",
+      "country": "Austria",
+      "countryCode": "AT",
+      "lat": 47.2197,
+      "lng": 14.7647
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-08-14T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-08-14T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-08-15T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-08-15T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-08-16T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-14",
+    "dateEnd": "2026-08-16"
+  },
+  {
+    "id": "dtm-2026-r06",
+    "seriesId": "dtm",
+    "eventName": "DTM Spa-Francorchamps",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit de Spa-Francorchamps",
+      "city": "Stavelot",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "lat": 50.4372,
+      "lng": 5.9714
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-09-04T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-09-04T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-09-05T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-09-05T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-09-06T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-04",
+    "dateEnd": "2026-09-06"
+  },
+  {
+    "id": "dtm-2026-r07",
+    "seriesId": "dtm",
+    "eventName": "DTM Hockenheim",
+    "round": 7,
+    "circuit": {
+      "name": "Hockenheimring",
+      "city": "Hockenheim",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 49.3278,
+      "lng": 8.5656
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-10-09T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-10-09T14:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-10-10T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-10-10T14:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-10-11T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-09",
+    "dateEnd": "2026-10-11"
+  }
+]

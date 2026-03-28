@@ -25,7 +25,12 @@ export const SERIES: Record<string, SeriesMeta> = {
   moto3:   { id: 'moto3',   label: 'Moto3',       shortLabel: 'Moto3',    color: '#facc15', textClass: 'text-yellow-400',  bgClass: 'bg-yellow-400',  order: 7,  category: '2-wheel' },
   indycar: { id: 'indycar', label: 'IndyCar',     shortLabel: 'IndyCar',  color: '#1e40af', textClass: 'text-blue-700',    bgClass: 'bg-blue-700',    order: 8,  category: '4-wheel' },
   nascar:  { id: 'nascar',  label: 'NASCAR',      shortLabel: 'NASCAR',   color: '#eab308', textClass: 'text-yellow-500',  bgClass: 'bg-yellow-500',  order: 9,  category: '4-wheel' },
-  wec:     { id: 'wec',     label: 'WEC',         shortLabel: 'WEC',      color: '#0ea5e9', textClass: 'text-sky-400',     bgClass: 'bg-sky-400',     order: 10, category: '4-wheel' },
+  wec:          { id: 'wec',          label: 'WEC',             shortLabel: 'WEC',    color: '#0ea5e9', textClass: 'text-sky-400',    bgClass: 'bg-sky-400',    order: 10, category: '4-wheel' },
+  imsa:         { id: 'imsa',         label: 'IMSA',            shortLabel: 'IMSA',   color: '#16a34a', textClass: 'text-green-600',  bgClass: 'bg-green-600',  order: 11, category: '4-wheel' },
+  dtm:          { id: 'dtm',          label: 'DTM',             shortLabel: 'DTM',    color: '#dc2626', textClass: 'text-red-600',    bgClass: 'bg-red-600',    order: 12, category: '4-wheel' },
+  nls:          { id: 'nls',          label: 'NLS',             shortLabel: 'NLS',    color: '#65a30d', textClass: 'text-lime-600',   bgClass: 'bg-lime-600',   order: 13, category: '4-wheel' },
+  wsbk:         { id: 'wsbk',         label: 'World Superbike', shortLabel: 'WSBK',   color: '#9333ea', textClass: 'text-purple-600', bgClass: 'bg-purple-600', order: 14, category: '2-wheel' },
+  superformula: { id: 'superformula', label: 'Super Formula',   shortLabel: 'SF',     color: '#f59e0b', textClass: 'text-amber-500',  bgClass: 'bg-amber-500',  order: 15, category: '4-wheel' },
 };
 
 export const SERIES_LIST = Object.values(SERIES).sort((a, b) => a.order - b.order);

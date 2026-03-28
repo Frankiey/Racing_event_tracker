@@ -22,25 +22,29 @@ from pipeline.utils import read_json, write_json
 from pipeline.fetchers import f1 as f1_fetcher
 from pipeline.fetchers import motogp as motogp_fetcher
 from pipeline.fetchers import nascar as nascar_fetcher
+from pipeline.fetchers import wsbk as wsbk_fetcher
 from pipeline.fetchers.seed import load as load_seed
 
 # Transforms (silver)
 from pipeline.transforms import f1 as f1_transform
 from pipeline.transforms import motogp as motogp_transform
 from pipeline.transforms import nascar as nascar_transform
+from pipeline.transforms import wsbk as wsbk_transform
 
 # Gold
 from pipeline.transforms.gold import build_calendar, build_upcoming
 
 # Series that have API fetchers
 API_SERIES = {
-    "f1": (f1_fetcher.fetch, f1_transform.transform),
+    "f1":    (f1_fetcher.fetch,    f1_transform.transform),
     "motogp": (motogp_fetcher.fetch, motogp_transform.transform),
     "nascar": (nascar_fetcher.fetch, nascar_transform.transform),
+    "wsbk":  (wsbk_fetcher.fetch,  wsbk_transform.transform),
 }
 
 # Series loaded from seed files (no API)
-SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3"]
+SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3",
+               "imsa", "dtm", "nls", "superformula"]
 
 
 def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = False):

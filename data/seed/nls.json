@@ -1,0 +1,189 @@
+[
+  {
+    "id": "nls-2026-r01",
+    "seriesId": "nls",
+    "eventName": "NLS 1",
+    "round": 1,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-03-14T06:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-03-14T08:00:00Z" }
+    ],
+    "dateStart": "2026-03-14",
+    "dateEnd": "2026-03-14"
+  },
+  {
+    "id": "nls-2026-r02",
+    "seriesId": "nls",
+    "eventName": "NLS 2",
+    "round": 2,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-03-21T06:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-03-21T08:00:00Z" }
+    ],
+    "dateStart": "2026-03-21",
+    "dateEnd": "2026-03-21"
+  },
+  {
+    "id": "nls-2026-r03",
+    "seriesId": "nls",
+    "eventName": "NLS 3",
+    "round": 3,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-04-11T05:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-04-11T07:00:00Z" }
+    ],
+    "dateStart": "2026-04-11",
+    "dateEnd": "2026-04-11"
+  },
+  {
+    "id": "nls-2026-r04",
+    "seriesId": "nls",
+    "eventName": "ADAC 24h Nürburgring Qualifiers",
+    "round": 4,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice",        "startTimeUTC": "2026-04-18T05:00:00Z" },
+      { "type": "Qualifying Race", "startTimeUTC": "2026-04-18T07:00:00Z" },
+      { "type": "Warm Up",         "startTimeUTC": "2026-04-19T05:00:00Z" }
+    ],
+    "dateStart": "2026-04-18",
+    "dateEnd": "2026-04-19"
+  },
+  {
+    "id": "nls-2026-24h",
+    "seriesId": "nls",
+    "eventName": "ADAC RAVENOL 24h Nürburgring",
+    "round": 5,
+    "circuit": {
+      "name": "Nürburgring Gesamtstrecke",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Qualifying 1", "startTimeUTC": "2026-05-14T11:15:00Z" },
+      { "type": "Qualifying 2", "startTimeUTC": "2026-05-14T18:00:00Z" },
+      { "type": "Top Quali 1",  "startTimeUTC": "2026-05-15T06:50:00Z" },
+      { "type": "Top Quali 2",  "startTimeUTC": "2026-05-15T07:45:00Z" },
+      { "type": "Qualifying 3", "startTimeUTC": "2026-05-15T08:35:00Z" },
+      { "type": "Top Quali 3",  "startTimeUTC": "2026-05-15T11:35:00Z" },
+      { "type": "Warm Up",      "startTimeUTC": "2026-05-16T08:00:00Z" },
+      { "type": "Race",         "startTimeUTC": "2026-05-16T13:00:00Z" }
+    ],
+    "dateStart": "2026-05-14",
+    "dateEnd": "2026-05-17"
+  },
+  {
+    "id": "nls-2026-r05",
+    "seriesId": "nls",
+    "eventName": "NLS 6",
+    "round": 6,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-06-20T05:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-06-20T07:00:00Z" }
+    ],
+    "dateStart": "2026-06-20",
+    "dateEnd": "2026-06-20"
+  },
+  {
+    "id": "nls-2026-r06",
+    "seriesId": "nls",
+    "eventName": "NLS 7",
+    "round": 7,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-08-01T05:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-08-01T07:00:00Z" }
+    ],
+    "dateStart": "2026-08-01",
+    "dateEnd": "2026-08-01"
+  },
+  {
+    "id": "nls-2026-r07",
+    "seriesId": "nls",
+    "eventName": "NLS 8+9",
+    "round": 8,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Race 1", "startTimeUTC": "2026-09-12T07:00:00Z" },
+      { "type": "Race 2", "startTimeUTC": "2026-09-13T07:00:00Z" }
+    ],
+    "dateStart": "2026-09-12",
+    "dateEnd": "2026-09-13"
+  },
+  {
+    "id": "nls-2026-r08",
+    "seriesId": "nls",
+    "eventName": "NLS 10",
+    "round": 9,
+    "circuit": {
+      "name": "Nürburgring Nordschleife",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      { "type": "Practice", "startTimeUTC": "2026-10-10T05:00:00Z" },
+      { "type": "Race",     "startTimeUTC": "2026-10-10T07:00:00Z" }
+    ],
+    "dateStart": "2026-10-10",
+    "dateEnd": "2026-10-10"
+  }
+]
