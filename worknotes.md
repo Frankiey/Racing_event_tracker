@@ -3,6 +3,18 @@
 ## Current Status
 **Frontend v1 built** (2026-03-22). Three pages rendering with real data from the gold layer. Build succeeds, all 148 events display across 8 series.
 
+## What was built (v2 frontend — 2026-03-28)
+
+### Changes
+- **Bug fix**: EventCard session times now convert to local timezone (`data-local-time` was broken, used wrong attr `data-utc`)
+- **Flags**: `countryFlag()` in `time.ts` — alpha-2 country code → emoji flag, shown in EventCard
+- **Past event dimming**: `isPastEvent()` in `time.ts`; past events shown at 50% opacity with "Done" badge
+- **Session abbrevations**: FP1/FP2/FP3, Quali, Sprint, etc. instead of full names
+- **Dashboard**: max-w-5xl, richer countdown (series badge + circuit + flag), season stats bar per series
+- **Calendar**: jump-to-today button, month anchors, current month green dot, past months dimmed
+- **Series pages**: `/series/[id]` for all 8 series — season progress bar, next race callout, monthly schedule
+- **Nav**: Series dropdown menu linking to all 8 series pages, Status link
+
 ## What was built (v1 frontend)
 
 ### Pages
@@ -37,12 +49,10 @@
 - **Week grouping on dashboard** — Events grouped as "Today", "Tomorrow", "This week", "Next week", then by month.
 
 ## Next Steps
-1. Add series-specific page (`/series/[id]`) with per-series schedule
-2. Add broadcast/where-to-watch info from `gold/broadcasts.json`
-3. Add country flags next to circuit locations
-4. Improve mobile responsive design
-5. Add past/completed event styling (greyed out)
-6. Implement kiosk auto-rotation between upcoming races on `/status`
+1. Add broadcast/where-to-watch info from `gold/broadcasts.json`
+2. Improve mobile responsive design
+3. Implement kiosk auto-rotation between upcoming races on `/status`
+4. Add standings data per series
 
 ## Open Questions
 - How to handle endurance race sessions (24h+ duration) in the session schema?

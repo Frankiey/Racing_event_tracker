@@ -1,21 +1,47 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+/* ── Multi-series racing stripe pinned to top of viewport ── */
+body::before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    #e10600 0%, #e10600 12%,
+    #be123c 12%, #be123c 25%,
+    #eab308 25%, #eab308 37%,
+    #1e40af 37%, #1e40af 50%,
+    #14b8a6 50%, #14b8a6 62%,
+    #0ea5e9 62%, #0ea5e9 75%,
+    #e10600 75%, #e10600 100%
+  );
+  z-index: 9999;
 }
 
-/* Scrollbar styling for dark mode */
-::-webkit-scrollbar {
-  width: 8px;
+/* ── Modal ── */
+#event-modal {
+  transition: opacity 150ms ease, visibility 150ms ease;
 }
-::-webkit-scrollbar-track {
-  background: theme(--color-zinc-900);
+#event-modal.open { opacity: 1; visibility: visible; }
+#event-modal:not(.open) { opacity: 0; visibility: hidden; pointer-events: none; }
+#modal-panel {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-::-webkit-scrollbar-thumb {
-  background: theme(--color-zinc-700);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: theme(--color-zinc-600);
-}
+#event-modal.open #modal-panel { transform: translateY(0) scale(1); }
+#event-modal:not(.open) #modal-panel { transform: translateY(32px) scale(0.97); }
+
+/* ── Favorite heart ── */
+.fav-btn svg, .modal-fav-btn svg { transition: fill 150ms, stroke 150ms, transform 150ms; }
+.fav-btn[data-fav="true"] svg, .modal-fav-btn[data-fav="true"] svg { fill: #f43f5e; stroke: #f43f5e; transform: scale(1.15); }
+
+/* ── Countdown digits ── */
+.cd-digit { font-variant-numeric: tabular-nums; letter-spacing: -0.05em; }

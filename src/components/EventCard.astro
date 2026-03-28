@@ -1,7 +1,7 @@
 ---
 import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
-import { formatDateRange, getRaceSession, isPlaceholderTime } from '../lib/time';
+import { formatDateRange, getRaceSession, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
 
 interface Props {
   event: {
@@ -24,57 +24,191 @@ interface Props {
 
 const { event, highlight = false } = Astro.props;
 const meta = getSeriesMeta(event.seriesId);
-const raceSession = getRaceSession(event.sessions);
 const validSessions = event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC));
+const past = isPastEvent(event.dateEnd);
+const flag = countryFlag(event.circuit.countryCode);
+const eventJson = JSON.stringify(event).replace(/'/g, '&#39;');
+
+const SESSION_ABBR: Record<string, string> = {
+  'Practice 1': 'FP1', 'Practice 2': 'FP2', 'Practice 3': 'FP3',
+  'Free Practice 1': 'FP1', 'Free Practice 2': 'FP2', 'Free Practice 3': 'FP3',
+  'Sprint Qualifying': 'SQ', 'Sprint Shootout': 'SQ', 'Sprint': 'Sprint',
+  'Qualifying': 'Quali', 'Feature Race': 'Race', 'Race': 'Race',
+  'Warm Up': 'WU',
+};
+function abbr(type: string) { return SESSION_ABBR[type] ?? type; }
+function isRace(type: string) { return type === 'Race' || type === 'Feature Race'; }
+
+// Find next session that hasn't started yet (for "next session" chip)
+const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date());
 ---
 
 <article
   class:list={[
-    'rounded-lg border p-4 transition-colors',
-    highlight
-      ? 'border-zinc-600 bg-zinc-800/80'
-      : 'border-zinc-800 bg-zinc-900/60 hover:border-zinc-700',
+    'group relative rounded-xl border transition-all duration-200 cursor-pointer select-none',
+    past
+      ? 'border-zinc-800/40 bg-zinc-900/20 opacity-40 hover:opacity-60'
+      : highlight
+        ? 'border-zinc-500/60 bg-zinc-900 shadow-lg shadow-black/40'
+        : 'border-zinc-800 bg-zinc-900/70 hover:border-zinc-700 hover:bg-zinc-900',
   ]}
+  data-event={eventJson}
+  data-event-id={event.id}
+  role="button"
+  tabindex="0"
+  aria-label={`View details for ${event.eventName}`}
 >
-  <div class="flex items-start justify-between gap-3 mb-2">
-    <div class="min-w-0">
-      <div class="flex items-center gap-2 mb-1">
-        <SeriesBadge seriesId={event.seriesId} />
-        <span class="text-xs text-zinc-500">R{event.round}</span>
-      </div>
-      <h3 class="font-semibold text-zinc-100 truncate">{event.eventName}</h3>
-    </div>
-    <div class="text-right shrink-0">
-      <div class="text-sm font-medium text-zinc-300">
-        {formatDateRange(event.dateStart, event.dateEnd)}
-      </div>
-    </div>
-  </div>
-
-  <div class="text-sm text-zinc-400 mb-3">
-    {event.circuit.name}
-    {event.circuit.city && ` · ${event.circuit.city}`}
-    {event.circuit.country && `, ${event.circuit.country}`}
-  </div>
-
-  {validSessions.length > 0 && (
-    <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-500">
-      {validSessions.map(session => (
-        <span class="flex items-center gap-1">
-          <span class:list={[
-            'w-1.5 h-1.5 rounded-full',
-            (session.type === 'Race' || session.type === 'Feature Race')
-              ? `bg-[${meta.color}]`
-              : 'bg-zinc-600'
-          ]}
-          style={(session.type === 'Race' || session.type === 'Feature Race') ? `background-color: ${meta.color}` : ''}
-          />
-          <span>{session.type}</span>
-          <time class="text-zinc-600 tabular-nums" data-utc={session.startTimeUTC}>
-            {new Date(session.startTimeUTC).toLocaleDateString('en', { weekday: 'short' })}
-          </time>
-        </span>
-      ))}
-    </div>
+  {/* Left accent bar in series color */}
+  {!past && (
+    <div
+      class="absolute left-0 top-3 bottom-3 w-0.5 rounded-full"
+      style={`background-color: ${meta.color};`}
+    />
   )}
+
+  <div class="px-5 py-4">
+    {/* Top row: badge + round + date + fav */}
+    <div class="flex items-start justify-between gap-3 mb-2">
+      <div class="flex items-center gap-2 flex-wrap min-w-0">
+        <SeriesBadge seriesId={event.seriesId} />
+        <span class="text-[11px] text-zinc-500 font-mono tracking-tight">Rd {event.round}</span>
+        {past && (
+          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-800 text-zinc-600 font-semibold uppercase tracking-widest">
+            Done
+          </span>
+        )}
+        {highlight && !past && (
+          <span
+            class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest animate-pulse"
+            style={`background-color: ${meta.color}25; color: ${meta.color};`}
+          >
+            Next up
+          </span>
+        )}
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-sm font-medium text-zinc-400 tabular-nums">
+          {formatDateRange(event.dateStart, event.dateEnd)}
+        </span>
+        {/* Favorite button */}
+        <button
+          class="fav-btn ml-1 p-1 rounded-full hover:bg-zinc-800 transition-colors"
+          data-fav="false"
+          data-fav-id={event.id}
+          aria-label="Add to favorites"
+        >
+          <svg class="w-4 h-4 stroke-zinc-600 fill-none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    {/* Event name */}
+    <h3 class:list={[
+      'font-bold leading-tight mb-2 text-base',
+      past ? 'text-zinc-500' : 'text-zinc-100',
+    ]}>
+      {event.eventName}
+    </h3>
+
+    {/* Circuit */}
+    <div class="flex items-center gap-1.5 text-sm text-zinc-500 mb-3">
+      {flag && <span class="text-base leading-none">{flag}</span>}
+      <span class="text-zinc-400">{event.circuit.name}</span>
+      {event.circuit.city && <span class="text-zinc-700">·</span>}
+      {event.circuit.city && <span>{event.circuit.city}</span>}
+    </div>
+
+    {/* Sessions row */}
+    {validSessions.length > 0 && (
+      <div class="flex flex-wrap gap-x-4 gap-y-1.5 pt-2 border-t border-zinc-800/60">
+        {validSessions.map(session => {
+          const isNext = nextSession?.startTimeUTC === session.startTimeUTC;
+          return (
+            <div class:list={['flex items-center gap-1.5 text-xs', isNext ? 'text-zinc-200' : '']}>
+              <span
+                class="w-1.5 h-1.5 rounded-full shrink-0"
+                style={isRace(session.type) ? `background-color: ${meta.color}` : isNext ? 'background-color: #a1a1aa' : 'background-color: #3f3f46'}
+              />
+              <span class:list={['font-semibold', isRace(session.type) ? 'text-zinc-100' : isNext ? 'text-zinc-300' : 'text-zinc-500']}>
+                {abbr(session.type)}
+              </span>
+              <time
+                class="tabular-nums text-zinc-600"
+                datetime={session.startTimeUTC}
+                data-local-time={session.startTimeUTC}
+                data-format="time-short"
+              >
+                {new Date(session.startTimeUTC).toLocaleTimeString('en', {
+                  hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC',
+                })}
+              </time>
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
 </article>
+
+<script>
+  function initCards() {
+    // ── Local time conversion ──
+    document.querySelectorAll<HTMLTimeElement>('[data-local-time][data-format="time-short"]').forEach(el => {
+      el.textContent = new Date(el.dataset.localTime!).toLocaleTimeString(undefined, {
+        hour: '2-digit', minute: '2-digit', hour12: false,
+      });
+    });
+
+    // ── Favorites ──
+    // Read fresh from localStorage each time — avoids stale-closure bugs.
+    // Use selector that excludes the modal button (class modal-fav-btn, not fav-btn).
+    function getFavs(): Set<string> {
+      return new Set((JSON.parse(localStorage.getItem('rt-favs') ?? '[]') as unknown[]).filter(Boolean) as string[]);
+    }
+    function saveFavs(set: Set<string>) {
+      localStorage.setItem('rt-favs', JSON.stringify([...set]));
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
+      const id = btn.dataset.favId!;
+      if (!id) return; // skip buttons without a valid id
+      btn.dataset.fav = getFavs().has(id) ? 'true' : 'false';
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const favs = getFavs();
+        if (favs.has(id)) { favs.delete(id); btn.dataset.fav = 'false'; }
+        else               { favs.add(id);    btn.dataset.fav = 'true'; }
+        saveFavs(favs);
+        window.dispatchEvent(new CustomEvent('rt-favs-changed'));
+      });
+    });
+
+    // Sync fav button states when another tab/page changes them
+    window.addEventListener('rt-favs-changed', () => {
+      const favs = getFavs();
+      document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
+        const id = btn.dataset.favId;
+        if (id) btn.dataset.fav = favs.has(id) ? 'true' : 'false';
+      });
+    });
+
+    // ── Card click → open modal ──
+    document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
+      card.addEventListener('click', () => {
+        const event = JSON.parse(card.dataset.event!);
+        window.dispatchEvent(new CustomEvent('rt-open-event', { detail: event }));
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  }
+
+  initCards();
+  document.addEventListener('astro:after-swap', initCards);
+</script>

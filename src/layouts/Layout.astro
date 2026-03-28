@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
+import EventModal from '../components/EventModal.astro';
 
 interface Props {
   title: string;
@@ -25,5 +26,6 @@ const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Ast
   <body class="bg-zinc-950 text-zinc-100 min-h-screen">
     {!bare && <Nav currentPath={currentPath} />}
     <slot />
+    <EventModal />
   </body>
 </html>

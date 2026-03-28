@@ -1,0 +1,220 @@
+---
+/**
+ * Global event detail modal.
+ * Opens when any EventCard emits 'rt-open-event'.
+ * Shows full session schedule, circuit info, and favorite toggle.
+ */
+---
+
+<!-- Overlay -->
+<div
+  id="event-modal"
+  class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4"
+  aria-modal="true"
+  role="dialog"
+  aria-labelledby="modal-title"
+>
+  <!-- Backdrop -->
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+  <!-- Panel -->
+  <div
+    id="modal-panel"
+    class="relative w-full max-w-lg rounded-2xl border border-zinc-700/60 bg-zinc-950 shadow-2xl overflow-hidden"
+  >
+    <!-- Series color bar -->
+    <div id="modal-color-bar" class="h-1 w-full" />
+
+    <!-- Header -->
+    <div class="p-6 pb-0">
+      <div class="flex items-start justify-between gap-4 mb-1">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="modal-badge" class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5" />
+          <span id="modal-round" class="text-xs text-zinc-500 font-mono" />
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Favorite -->
+          <button
+            id="modal-fav-btn"
+            class="modal-fav-btn p-2 rounded-full hover:bg-zinc-800 transition-colors"
+            data-fav="false"
+            aria-label="Add to favorites"
+          >
+            <svg class="w-5 h-5 stroke-zinc-400 fill-none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+          </button>
+          <!-- Close -->
+          <button
+            id="modal-close"
+            class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+            aria-label="Close"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <h2 id="modal-title" class="text-2xl font-black text-zinc-100 tracking-tight leading-tight mb-1" />
+      <div id="modal-circuit" class="flex items-center gap-1.5 text-sm text-zinc-400 mb-4" />
+    </div>
+
+    <!-- Sessions -->
+    <div class="px-6 pb-2">
+      <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-3">Session Schedule</h3>
+      <div id="modal-sessions" class="space-y-1.5" />
+    </div>
+
+    <!-- Footer actions -->
+    <div class="px-6 py-4 mt-2 border-t border-zinc-800/60 flex items-center justify-between gap-3">
+      <a
+        id="modal-series-link"
+        href="#"
+        class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+      >
+        View full series schedule →
+      </a>
+      <span id="modal-status-badge" class="text-xs px-2 py-1 rounded-full font-semibold" />
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Series metadata (mirrors series.ts — keep in sync) ──
+  const SERIES_META: Record<string, { label: string; shortLabel: string; color: string }> = {
+    f1:      { label: 'Formula 1',  shortLabel: 'F1',      color: '#e10600' },
+    f2:      { label: 'Formula 2',  shortLabel: 'F2',      color: '#0090d0' },
+    f3:      { label: 'Formula 3',  shortLabel: 'F3',      color: '#0090d0' },
+    fe:      { label: 'Formula E',  shortLabel: 'FE',      color: '#14b8a6' },
+    motogp:  { label: 'MotoGP',     shortLabel: 'MotoGP',  color: '#be123c' },
+    indycar: { label: 'IndyCar',    shortLabel: 'IndyCar', color: '#1e40af' },
+    nascar:  { label: 'NASCAR',     shortLabel: 'NASCAR',  color: '#eab308' },
+    wec:     { label: 'WEC',        shortLabel: 'WEC',     color: '#0ea5e9' },
+  };
+
+  const SESSION_ABBR: Record<string, string> = {
+    'Practice 1': 'FP1', 'Practice 2': 'FP2', 'Practice 3': 'FP3',
+    'Free Practice 1': 'FP1', 'Free Practice 2': 'FP2', 'Free Practice 3': 'FP3',
+    'Sprint Qualifying': 'Sprint Qualifying', 'Sprint Shootout': 'Sprint Shootout',
+    'Sprint': 'Sprint Race', 'Qualifying': 'Qualifying', 'Feature Race': 'Race',
+    'Race': 'Race', 'Warm Up': 'Warm Up',
+  };
+
+  const PLACEHOLDER_YEAR = '1900';
+
+  function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
+  function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
+
+  function localDatetime(utc: string) {
+    const d = new Date(utc);
+    const date = d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+    const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+    return `${date} · ${time}`;
+  }
+
+  function countryFlag(code: string) {
+    if (!code || code.length !== 2) return '';
+    const base = 0x1F1E6 - 0x41;
+    return String.fromCodePoint(code.toUpperCase().charCodeAt(0) + base, code.toUpperCase().charCodeAt(1) + base);
+  }
+
+  const modal = document.getElementById('event-modal')!;
+  const panel = document.getElementById('modal-panel')!;
+
+  function openModal(event: any) {
+    const meta = SERIES_META[event.seriesId] ?? { label: event.seriesId, shortLabel: event.seriesId, color: '#71717a' };
+    const base = (document.querySelector('base')?.getAttribute('href') ?? '').replace(/\/$/, '');
+    const favs: Set<string> = new Set(JSON.parse(localStorage.getItem('rt-favs') ?? '[]'));
+    const isFav = favs.has(event.id);
+    const isPast = new Date(event.dateEnd + 'T23:59:59Z') < new Date();
+
+    // Color bar
+    (document.getElementById('modal-color-bar') as HTMLElement).style.background = meta.color;
+
+    // Badge
+    const badge = document.getElementById('modal-badge') as HTMLElement;
+    badge.textContent = meta.shortLabel;
+    badge.style.backgroundColor = meta.color;
+
+    // Round
+    (document.getElementById('modal-round') as HTMLElement).textContent = `Round ${event.round}`;
+
+    // Title
+    (document.getElementById('modal-title') as HTMLElement).textContent = event.eventName;
+
+    // Circuit
+    const circuitEl = document.getElementById('modal-circuit') as HTMLElement;
+    const flag = countryFlag(event.circuit.countryCode);
+    circuitEl.innerHTML = `
+      ${flag ? `<span class="text-lg">${flag}</span>` : ''}
+      <span class="font-medium text-zinc-300">${event.circuit.name}</span>
+      ${event.circuit.city ? `<span class="text-zinc-600">·</span><span>${event.circuit.city}</span>` : ''}
+      ${event.circuit.country ? `<span class="text-zinc-600">·</span><span>${event.circuit.country}</span>` : ''}
+    `;
+
+    // Sessions
+    const sessionsEl = document.getElementById('modal-sessions') as HTMLElement;
+    const validSessions = (event.sessions as any[]).filter((s: any) => !isPlaceholder(s.startTimeUTC));
+    sessionsEl.innerHTML = validSessions.map((s: any) => {
+      const isRace = isRaceType(s.type);
+      const isPastSession = new Date(s.startTimeUTC) < new Date();
+      const isNext = !isPastSession && validSessions.filter((x: any) => new Date(x.startTimeUTC) < new Date()).length === validSessions.indexOf(s);
+      const label = SESSION_ABBR[s.type] ?? s.type;
+      const dotColor = isRace ? meta.color : isPastSession ? '#27272a' : '#52525b';
+
+      return `
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg ${isPastSession ? 'opacity-40' : isNext ? 'bg-zinc-800/80 ring-1 ring-zinc-700' : 'hover:bg-zinc-900'}">
+          <span class="w-2 h-2 rounded-full shrink-0" style="background-color:${dotColor}"></span>
+          <span class="flex-1 text-sm font-semibold ${isRace ? 'text-zinc-100' : isPastSession ? 'text-zinc-600' : 'text-zinc-300'}">${label}</span>
+          <time class="text-sm tabular-nums font-mono ${isPastSession ? 'text-zinc-700' : isRace ? 'text-zinc-200' : 'text-zinc-400'}" title="${s.startTimeUTC}">
+            ${localDatetime(s.startTimeUTC)}
+          </time>
+          ${isPastSession ? '<span class="text-[10px] text-zinc-700 font-semibold uppercase tracking-wide ml-2">Done</span>' : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Series link
+    const link = document.getElementById('modal-series-link') as HTMLAnchorElement;
+    link.href = `${base}/series/${event.seriesId}`;
+    link.textContent = `View full ${meta.label} schedule →`;
+
+    // Status badge
+    const statusBadge = document.getElementById('modal-status-badge') as HTMLElement;
+    if (isPast) {
+      statusBadge.textContent = 'Completed';
+      statusBadge.className = 'text-xs px-2 py-1 rounded-full font-semibold bg-zinc-800 text-zinc-500';
+    } else {
+      statusBadge.textContent = 'Upcoming';
+      statusBadge.className = 'text-xs px-2 py-1 rounded-full font-semibold';
+      statusBadge.style.backgroundColor = meta.color + '20';
+      statusBadge.style.color = meta.color;
+    }
+
+    // Favorite button (class modal-fav-btn — intentionally different from .fav-btn on cards)
+    const favBtn = document.getElementById('modal-fav-btn') as HTMLButtonElement;
+    favBtn.dataset.fav = isFav ? 'true' : 'false';
+    favBtn.onclick = () => {
+      const favs: Set<string> = new Set(JSON.parse(localStorage.getItem('rt-favs') ?? '[]'));
+      if (favs.has(event.id)) { favs.delete(event.id); favBtn.dataset.fav = 'false'; }
+      else                    { favs.add(event.id);    favBtn.dataset.fav = 'true'; }
+      localStorage.setItem('rt-favs', JSON.stringify([...favs]));
+      window.dispatchEvent(new CustomEvent('rt-favs-changed'));
+    };
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-close')!.addEventListener('click', closeModal);
+  document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
+  window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>

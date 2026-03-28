@@ -3,88 +3,211 @@ import Layout from '../layouts/Layout.astro';
 import EventCard from '../components/EventCard.astro';
 import SeriesFilter from '../components/SeriesFilter.astro';
 import Countdown from '../components/Countdown.astro';
-import { getRaceSession, isPlaceholderTime } from '../lib/time';
-import { SERIES } from '../lib/series';
+import SeriesBadge from '../components/SeriesBadge.astro';
+import { getRaceSession, isPlaceholderTime, countryFlag } from '../lib/time';
+import { SERIES_LIST, getSeriesMeta } from '../lib/series';
 
 import upcomingData from '../../data/gold/upcoming.json';
+import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const now = new Date();
-const events = upcomingData as any[];
+const upcoming = upcomingData as any[];
+const allEvents = calendarData as any[];
 
 // Find the next race session across all series
-const nextRace = events
+const nextRace = upcoming
   .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
   .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
   .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())[0];
 
-// Pick up to 20 events, limiting each series to avoid one series dominating.
-// Walk the sorted list and cap each series at 4 events.
+// Season stats per series: total rounds and rounds completed
+const seasonStats = new Map<string, { total: number; done: number }>();
+for (const e of allEvents) {
+  const s = seasonStats.get(e.seriesId) ?? { total: 0, done: 0 };
+  s.total++;
+  if (new Date(e.dateEnd + 'T23:59:59Z') < now) s.done++;
+  seasonStats.set(e.seriesId, s);
+}
+
+// Sort chronologically first so the per-series cap picks the nearest events
+// (upcoming.json is grouped by series, not sorted by date)
+const sortedUpcoming = [...upcoming].sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
+
+// Pick up to 20 events, cap each series at 4
 const MAX_PER_SERIES = 4;
 const MAX_TOTAL = 20;
 const seriesCounts = new Map<string, number>();
-const dashboardEvents: typeof events = [];
-for (const event of events) {
+const dashboardEvents: typeof upcoming = [];
+for (const event of sortedUpcoming) {
   if (dashboardEvents.length >= MAX_TOTAL) break;
   const count = seriesCounts.get(event.seriesId) ?? 0;
   if (count >= MAX_PER_SERIES) continue;
   seriesCounts.set(event.seriesId, count + 1);
   dashboardEvents.push(event);
 }
-// Re-sort by date so the grouping is chronological
+// Already chronological from sortedUpcoming, but re-sort just to be safe
 dashboardEvents.sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
 
-// Group by week
-function getWeekLabel(dateStr: string): string {
-  const d = new Date(dateStr);
+// Group by week label. Events where dateEnd < yesterday get label "Recent"
+// (hidden by default, revealed by a toggle button).
+const yesterday = new Date(now);
+yesterday.setDate(yesterday.getDate() - 1);
+yesterday.setHours(23, 59, 59, 999);
+
+function getWeekLabel(dateStr: string, dateEnd: string): string {
+  if (new Date(dateEnd + 'T23:59:59Z') < yesterday) return '__recent__';
+  const eventDate = new Date(dateStr + 'T00:00:00');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const eventDate = new Date(d);
-  eventDate.setHours(0, 0, 0, 0);
-
   const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
-
-  if (diffDays < 0) return 'This week';
   if (diffDays === 0) return 'Today';
-  if (diffDays <= 1) return 'Tomorrow';
+  if (diffDays === 1) return 'Tomorrow';
   if (diffDays <= 7) return 'This week';
   if (diffDays <= 14) return 'Next week';
-
-  return d.toLocaleDateString('en', { month: 'long', year: 'numeric' });
+  return eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
 }
 
 const grouped = new Map<string, typeof dashboardEvents>();
 for (const event of dashboardEvents) {
-  const label = getWeekLabel(event.dateStart);
+  const label = getWeekLabel(event.dateStart, event.dateEnd);
   if (!grouped.has(label)) grouped.set(label, []);
   grouped.get(label)!.push(event);
 }
+
+const recentEvents = grouped.get('__recent__') ?? [];
+const visibleGroups = [...grouped.entries()].filter(([k]) => k !== '__recent__');
+
+const nextCircuitFlag = nextRace ? countryFlag(nextRace.event.circuit.countryCode) : '';
+const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 ---
 
 <Layout title="RaceTrack — Motorsport Event Tracker" currentPath={`${base}/`}>
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-1">RaceTrack</h1>
-      <p class="text-zinc-400">All motorsport events. One dashboard.</p>
-    </div>
+  <main class="max-w-5xl mx-auto px-4 py-8">
 
+    <!-- ── Hero countdown ── -->
     {nextRace && (
-      <div class="mb-8 p-6 rounded-xl border border-zinc-800 bg-zinc-900/40">
-        <Countdown
-          targetUTC={nextRace.session!.startTimeUTC}
-          label={`Next up: ${nextRace.event.eventName}`}
+      <div class="relative mb-8 rounded-2xl overflow-hidden border border-zinc-700/40">
+        {/* Dark gradient bg */}
+        <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950" />
+        {/* Series color glow */}
+        <div
+          class="absolute inset-0 opacity-[0.07]"
+          style={`background: radial-gradient(ellipse 80% 60% at 80% 50%, ${nextRaceMeta?.color ?? '#e10600'}, transparent)`}
         />
+        {/* Left edge accent */}
+        <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl" style={`background: ${nextRaceMeta?.color ?? '#e10600'};`} />
+
+        <div class="relative px-6 py-6 sm:px-8 sm:py-7">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
+            {/* Info */}
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2.5 mb-3 flex-wrap">
+                <SeriesBadge seriesId={nextRace.event.seriesId} size="md" />
+                <span class="text-xs text-zinc-500 font-mono">Round {nextRace.event.round}</span>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest"
+                  style={`background-color: ${nextRaceMeta?.color ?? '#e10600'}20; color: ${nextRaceMeta?.color ?? '#e10600'}`}
+                >
+                  Next Race
+                </span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black text-zinc-100 tracking-tight leading-none mb-2">
+                {nextRace.event.eventName}
+              </h2>
+              <p class="flex items-center gap-2 text-sm text-zinc-400">
+                {nextCircuitFlag && <span class="text-xl leading-none">{nextCircuitFlag}</span>}
+                <span class="font-medium">{nextRace.event.circuit.name}</span>
+                {nextRace.event.circuit.country && (
+                  <>
+                    <span class="text-zinc-700">·</span>
+                    <span class="text-zinc-500">{nextRace.event.circuit.country}</span>
+                  </>
+                )}
+              </p>
+            </div>
+
+            {/* Countdown */}
+            <div class="sm:text-right shrink-0">
+              <Countdown
+                targetUTC={nextRace.session!.startTimeUTC}
+                label="Race starts in"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )}
 
+    <!-- ── Season stats ── -->
+    <div class="mb-6">
+      <div class="flex items-center gap-3 mb-3">
+        <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">2026 Season</h2>
+        <span class="h-px flex-1 bg-zinc-800/80" />
+        <a href={`${base}/calendar`} class="text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors uppercase tracking-widest">
+          Full calendar →
+        </a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {SERIES_LIST.filter(s => seasonStats.has(s.id)).map(s => {
+          const stats = seasonStats.get(s.id)!;
+          const pct = stats.total > 0 ? Math.round((stats.done / stats.total) * 100) : 0;
+          return (
+            <a
+              href={`${base}/series/${s.id}`}
+              class="group flex flex-col gap-2 bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 rounded-xl p-3 transition-colors"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full shrink-0" style={`background-color: ${s.color}`} />
+                  <span class="text-xs font-bold text-zinc-300">{s.shortLabel}</span>
+                </div>
+                <span class="text-[11px] font-mono text-zinc-500 tabular-nums">{stats.done}/{stats.total}</span>
+              </div>
+              <div class="h-1 rounded-full bg-zinc-800 overflow-hidden">
+                <div class="h-full rounded-full transition-all" style={`width: ${pct}%; background-color: ${s.color};`} />
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- ── Filter + event list ── -->
     <SeriesFilter />
 
-    {[...grouped.entries()].map(([weekLabel, weekEvents]) => (
-      <section class="mb-8">
-        <h2 class="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-3">
+    <!-- Recent (older than yesterday) — collapsed by default -->
+    {recentEvents.length > 0 && (
+      <div id="recent-section" class="mb-6">
+        <button
+          id="recent-toggle"
+          class="w-full flex items-center gap-3 text-[10px] font-bold text-zinc-700 uppercase tracking-widest hover:text-zinc-500 transition-colors group"
+        >
+          <svg id="recent-chevron" class="w-3 h-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+          <span>Recent ({recentEvents.length})</span>
+          <span class="h-px flex-1 bg-zinc-800/40 group-hover:bg-zinc-700/40 transition-colors" />
+        </button>
+        <div id="recent-events" class="hidden mt-3 grid gap-2.5">
+          {recentEvents.map(event => (
+            <div data-series={event.seriesId}>
+              <EventCard event={event} />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Upcoming groups -->
+    {visibleGroups.map(([weekLabel, weekEvents]) => (
+      <section class="mb-8" data-week-section={weekLabel}>
+        <h2 class="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mb-3 flex items-center gap-3">
           {weekLabel}
+          <span class="h-px flex-1 bg-zinc-800/60" />
+          <span class="text-zinc-700">{weekEvents.length}</span>
         </h2>
-        <div class="grid gap-3">
+        <div class="grid gap-2.5">
           {weekEvents.map(event => (
             <div data-series={event.seriesId}>
               <EventCard
@@ -97,10 +220,47 @@ for (const event of dashboardEvents) {
       </section>
     ))}
 
-    {dashboardEvents.length === 0 && (
-      <p class="text-zinc-500 text-center py-12">
-        No upcoming events. Run <code class="bg-zinc-800 px-2 py-1 rounded text-sm">npm run fetch-data</code> to populate.
-      </p>
+    {visibleGroups.length === 0 && recentEvents.length === 0 && (
+      <div class="text-center py-16 text-zinc-600">
+        <p class="text-4xl mb-4">🏁</p>
+        <p class="font-semibold mb-1 text-zinc-500">No upcoming events</p>
+        <p class="text-sm">Run <code class="bg-zinc-800 text-zinc-300 px-2 py-1 rounded">npm run fetch-data</code> to populate.</p>
+      </div>
     )}
   </main>
 </Layout>
+
+<script>
+  function initDashboard() {
+    // Recent toggle
+    const toggle = document.getElementById('recent-toggle');
+    const panel  = document.getElementById('recent-events');
+    const chevron = document.getElementById('recent-chevron');
+    if (toggle && panel && chevron) {
+      toggle.addEventListener('click', () => {
+        const open = !panel.classList.contains('hidden');
+        panel.classList.toggle('hidden', open);
+        chevron.style.transform = open ? '' : 'rotate(90deg)';
+      });
+    }
+
+    // Auto-scroll to first upcoming section (Today / Tomorrow / This week)
+    // Only on initial page load, not on every navigation
+    if (sessionStorage.getItem('rt-dashboard-scrolled')) return;
+    const firstUpcoming = document.querySelector<HTMLElement>('[data-week-section]');
+    if (firstUpcoming) {
+      // Small delay so layout is settled
+      setTimeout(() => {
+        firstUpcoming.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        sessionStorage.setItem('rt-dashboard-scrolled', '1');
+      }, 120);
+    }
+  }
+
+  initDashboard();
+  document.addEventListener('astro:after-swap', () => {
+    // Reset scroll flag on navigation so it works fresh each visit
+    sessionStorage.removeItem('rt-dashboard-scrolled');
+    initDashboard();
+  });
+</script>

@@ -5,6 +5,25 @@
 
 const PLACEHOLDER_YEAR = 1900;
 
+/**
+ * Convert an ISO 3166-1 alpha-2 country code to a flag emoji.
+ * Returns empty string for alpha-3 or unrecognized codes.
+ */
+export function countryFlag(code: string): string {
+  if (!code || code.length !== 2) return '';
+  const upper = code.toUpperCase();
+  if (!/^[A-Z]{2}$/.test(upper)) return '';
+  const base = 0x1F1E6 - 0x41;
+  return String.fromCodePoint(upper.charCodeAt(0) + base, upper.charCodeAt(1) + base);
+}
+
+/**
+ * Returns true if the event has already ended (dateEnd is in the past).
+ */
+export function isPastEvent(dateEnd: string): boolean {
+  return new Date(dateEnd + 'T23:59:59Z') < new Date();
+}
+
 export function isPlaceholderTime(utc: string): boolean {
   return utc.startsWith(`${PLACEHOLDER_YEAR}-`);
 }

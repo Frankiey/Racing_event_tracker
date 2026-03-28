@@ -1,5 +1,3 @@
-Use 'bd' for task tracking
-
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker
 

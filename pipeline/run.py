@@ -40,7 +40,7 @@ API_SERIES = {
 }
 
 # Series loaded from seed files (no API)
-SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec"]
+SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3"]
 
 
 def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = False):
