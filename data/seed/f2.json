@@ -2,21 +2,21 @@
   {
     "id": "f2-2026-r01",
     "seriesId": "f2",
-    "eventName": "Bahrain Feature",
+    "eventName": "Australia Feature",
     "round": 1,
     "circuit": {
-      "name": "Bahrain International Circuit",
-      "city": "Sakhir",
-      "country": "Bahrain",
-      "countryCode": "BH",
-      "lat": 26.0325,
-      "lng": 50.5106
+      "name": "Albert Park Circuit",
+      "city": "Melbourne",
+      "country": "Australia",
+      "countryCode": "AU",
+      "lat": -37.8497,
+      "lng": 144.9680
     },
     "sessions": [
-      { "type": "Practice", "startTimeUTC": "2026-03-06T09:00:00Z" },
-      { "type": "Qualifying", "startTimeUTC": "2026-03-06T13:00:00Z" },
-      { "type": "Sprint Race", "startTimeUTC": "2026-03-07T10:30:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-03-08T11:00:00Z" }
+      { "type": "Practice", "startTimeUTC": "2026-03-06T01:30:00Z" },
+      { "type": "Qualifying", "startTimeUTC": "2026-03-06T05:30:00Z" },
+      { "type": "Sprint Race", "startTimeUTC": "2026-03-07T03:00:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-03-08T04:00:00Z" }
     ],
     "dateStart": "2026-03-06",
     "dateEnd": "2026-03-08"
@@ -46,30 +46,8 @@
   {
     "id": "f2-2026-r03",
     "seriesId": "f2",
-    "eventName": "Australia Feature",
-    "round": 3,
-    "circuit": {
-      "name": "Albert Park Circuit",
-      "city": "Melbourne",
-      "country": "Australia",
-      "countryCode": "AU",
-      "lat": -37.8497,
-      "lng": 144.9680
-    },
-    "sessions": [
-      { "type": "Practice", "startTimeUTC": "2026-04-03T01:00:00Z" },
-      { "type": "Qualifying", "startTimeUTC": "2026-04-03T05:00:00Z" },
-      { "type": "Sprint Race", "startTimeUTC": "2026-04-04T02:30:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-04-05T03:00:00Z" }
-    ],
-    "dateStart": "2026-04-03",
-    "dateEnd": "2026-04-05"
-  },
-  {
-    "id": "f2-2026-r04",
-    "seriesId": "f2",
     "eventName": "Imola Feature",
-    "round": 4,
+    "round": 3,
     "circuit": {
       "name": "Autodromo Enzo e Dino Ferrari",
       "city": "Imola",
@@ -88,10 +66,10 @@
     "dateEnd": "2026-05-03"
   },
   {
-    "id": "f2-2026-r05",
+    "id": "f2-2026-r04",
     "seriesId": "f2",
     "eventName": "Monaco Feature",
-    "round": 5,
+    "round": 4,
     "circuit": {
       "name": "Circuit de Monaco",
       "city": "Monte Carlo",
@@ -110,10 +88,10 @@
     "dateEnd": "2026-05-23"
   },
   {
-    "id": "f2-2026-r06",
+    "id": "f2-2026-r05",
     "seriesId": "f2",
     "eventName": "Spain Feature",
-    "round": 6,
+    "round": 5,
     "circuit": {
       "name": "Circuit de Barcelona-Catalunya",
       "city": "Barcelona",
@@ -132,10 +110,10 @@
     "dateEnd": "2026-06-07"
   },
   {
-    "id": "f2-2026-r07",
+    "id": "f2-2026-r06",
     "seriesId": "f2",
     "eventName": "Austria Feature",
-    "round": 7,
+    "round": 6,
     "circuit": {
       "name": "Red Bull Ring",
       "city": "Spielberg",
@@ -154,10 +132,10 @@
     "dateEnd": "2026-06-28"
   },
   {
-    "id": "f2-2026-r08",
+    "id": "f2-2026-r07",
     "seriesId": "f2",
     "eventName": "Great Britain Feature",
-    "round": 8,
+    "round": 7,
     "circuit": {
       "name": "Silverstone Circuit",
       "city": "Silverstone",
@@ -176,10 +154,10 @@
     "dateEnd": "2026-07-05"
   },
   {
-    "id": "f2-2026-r09",
+    "id": "f2-2026-r08",
     "seriesId": "f2",
     "eventName": "Hungary Feature",
-    "round": 9,
+    "round": 8,
     "circuit": {
       "name": "Hungaroring",
       "city": "Budapest",
@@ -198,10 +176,10 @@
     "dateEnd": "2026-07-19"
   },
   {
-    "id": "f2-2026-r10",
+    "id": "f2-2026-r09",
     "seriesId": "f2",
     "eventName": "Belgium Feature",
-    "round": 10,
+    "round": 9,
     "circuit": {
       "name": "Circuit de Spa-Francorchamps",
       "city": "Stavelot",
@@ -220,10 +198,10 @@
     "dateEnd": "2026-08-02"
   },
   {
-    "id": "f2-2026-r11",
+    "id": "f2-2026-r10",
     "seriesId": "f2",
     "eventName": "Netherlands Feature",
-    "round": 11,
+    "round": 10,
     "circuit": {
       "name": "Circuit Zandvoort",
       "city": "Zandvoort",
@@ -242,10 +220,10 @@
     "dateEnd": "2026-08-30"
   },
   {
-    "id": "f2-2026-r12",
+    "id": "f2-2026-r11",
     "seriesId": "f2",
     "eventName": "Italy Feature",
-    "round": 12,
+    "round": 11,
     "circuit": {
       "name": "Autodromo Nazionale Monza",
       "city": "Monza",
@@ -264,10 +242,10 @@
     "dateEnd": "2026-09-06"
   },
   {
-    "id": "f2-2026-r13",
+    "id": "f2-2026-r12",
     "seriesId": "f2",
     "eventName": "Abu Dhabi Feature",
-    "round": 13,
+    "round": 12,
     "circuit": {
       "name": "Yas Marina Circuit",
       "city": "Abu Dhabi",
@@ -286,10 +264,10 @@
     "dateEnd": "2026-11-29"
   },
   {
-    "id": "f2-2026-r14",
+    "id": "f2-2026-r13",
     "seriesId": "f2",
     "eventName": "Qatar Feature",
-    "round": 14,
+    "round": 13,
     "circuit": {
       "name": "Lusail International Circuit",
       "city": "Lusail",
