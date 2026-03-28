@@ -137,7 +137,7 @@
     },
     "event_files": {
       "circuit_information": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/USA/CircuitInformation.pdf",
         "menu_position": 1
       },
       "podiums": {
