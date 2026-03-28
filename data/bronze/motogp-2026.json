@@ -76,19 +76,19 @@
         "menu_position": 1
       },
       "podiums": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/Podiums.pdf",
         "menu_position": 2
       },
       "pole_positions": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/PolePositions.pdf",
         "menu_position": 2
       },
       "nations_statistics": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/table2.pdf",
         "menu_position": 2
       },
       "riders_all_time": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/BRA/table4.pdf",
         "menu_position": 2
       }
     },
@@ -127,6 +127,71 @@
     },
     "short_name": "BRA",
     "id": "738a8b22-f744-4c75-847b-a2565dce17de",
+    "status": "FINISHED"
+  },
+  {
+    "country": {
+      "iso": "US",
+      "name": "United States of America",
+      "region_iso": ""
+    },
+    "event_files": {
+      "circuit_information": {
+        "url": "https://resources.motogp.com/files/results/2026/USA/CircuitInformation.pdf",
+        "menu_position": 1
+      },
+      "podiums": {
+        "url": "",
+        "menu_position": 2
+      },
+      "pole_positions": {
+        "url": "",
+        "menu_position": 2
+      },
+      "nations_statistics": {
+        "url": "",
+        "menu_position": 2
+      },
+      "riders_all_time": {
+        "url": "",
+        "menu_position": 2
+      }
+    },
+    "circuit": {
+      "id": "5b97d826-e527-43e9-b696-09f61cf4559c",
+      "name": "Circuit Of The Americas",
+      "legacy_id": 101,
+      "place": "Austin",
+      "nation": "USA"
+    },
+    "test": false,
+    "sponsored_name": "Red Bull Grand Prix of The United States",
+    "date_end": "2026-03-29",
+    "toad_api_uuid": "8c83648e-8ec9-40f1-9ba0-b0f19883e7d7",
+    "date_start": "2026-03-27",
+    "additional_name": "USA",
+    "name": "GRAND PRIX OF THE UNITED STATES",
+    "legacy_id": [
+      {
+        "categoryId": 3,
+        "eventId": 3
+      },
+      {
+        "categoryId": 2,
+        "eventId": 3
+      },
+      {
+        "categoryId": 1,
+        "eventId": 3
+      }
+    ],
+    "season": {
+      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
+      "year": 2026,
+      "current": true
+    },
+    "short_name": "USA",
+    "id": "782c929d-faaf-44e2-9d6f-0fde033855be",
     "status": "CURRENT"
   },
   {
@@ -465,70 +530,6 @@
     "short_name": "TH1",
     "id": "3e2bc6ab-e7d8-48a6-93d2-ce8356e55fdf",
     "status": "FINISHED"
-  },
-  {
-    "country": {
-      "iso": "US",
-      "name": "United States of America",
-      "region_iso": ""
-    },
-    "event_files": {
-      "circuit_information": {
-        "url": "",
-        "menu_position": 1
-      },
-      "podiums": {
-        "url": "",
-        "menu_position": 2
-      },
-      "pole_positions": {
-        "url": "",
-        "menu_position": 2
-      },
-      "nations_statistics": {
-        "url": "",
-        "menu_position": 2
-      },
-      "riders_all_time": {
-        "url": "",
-        "menu_position": 2
-      }
-    },
-    "circuit": {
-      "id": "5b97d826-e527-43e9-b696-09f61cf4559c",
-      "name": "Circuit Of The Americas",
-      "legacy_id": 101,
-      "place": "Austin",
-      "nation": "USA"
-    },
-    "test": false,
-    "sponsored_name": "Red Bull Grand Prix of The United States",
-    "date_end": "2026-03-29",
-    "date_start": "2026-03-27",
-    "additional_name": "",
-    "name": "GRAND PRIX OF THE UNITED STATES",
-    "legacy_id": [
-      {
-        "categoryId": 3,
-        "eventId": 3
-      },
-      {
-        "categoryId": 2,
-        "eventId": 3
-      },
-      {
-        "categoryId": 1,
-        "eventId": 3
-      }
-    ],
-    "season": {
-      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
-      "year": 2026,
-      "current": true
-    },
-    "short_name": "USA",
-    "id": "782c929d-faaf-44e2-9d6f-0fde033855be",
-    "status": "NOT-STARTED"
   },
   {
     "country": {

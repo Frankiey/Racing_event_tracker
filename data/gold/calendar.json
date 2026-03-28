@@ -1,31 +1,5 @@
 [
   {
-    "id": "nascar-2026-r09",
-    "seriesId": "nascar",
-    "eventName": "Goodyear 400",
-    "round": 9,
-    "circuit": {
-      "name": "Darlington Raceway",
-      "city": "",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": null,
-      "lng": null
-    },
-    "sessions": [
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "1900-01-01T00:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-03-22T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-03-22",
-    "dateEnd": "2026-03-22"
-  },
-  {
     "id": "nascar-2026-r10",
     "seriesId": "nascar",
     "eventName": "Cook Out 400",
@@ -1651,6 +1625,32 @@
       }
     ],
     "dateStart": "2026-03-20",
+    "dateEnd": "2026-03-22"
+  },
+  {
+    "id": "nascar-2026-r09",
+    "seriesId": "nascar",
+    "eventName": "Goodyear 400",
+    "round": 9,
+    "circuit": {
+      "name": "Darlington Raceway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-22T15:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-22T15:00:00Z"
+      }
+    ],
+    "dateStart": "2026-03-22",
     "dateEnd": "2026-03-22"
   },
   {
