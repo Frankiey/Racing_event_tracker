@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "Racing_event_tracker",
+  "project_id": "40e6481b-87a6-446f-a046-c3a1a35d291c"
+}
