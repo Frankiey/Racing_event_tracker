@@ -24,8 +24,13 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
       </button>
     </div>
 
-    <!-- Series filter pills -->
-    <div id="cal-filter" class="flex flex-wrap gap-1.5 mb-5"></div>
+    <!-- Category quick-select + series filter pills -->
+    <div class="mb-5 space-y-2">
+      <div id="cal-cat-filter" class="flex flex-wrap gap-1.5 items-center">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mr-1">View</span>
+      </div>
+      <div id="cal-filter" class="flex flex-wrap gap-1.5"></div>
+    </div>
 
     <!-- Month navigation -->
     <div class="flex items-center gap-3 mb-3">
@@ -75,18 +80,20 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
   // ── Data & series meta ────────────────────────────────────────────────────
   const allEvents: any[] = JSON.parse(document.getElementById('all-events-data')!.textContent!);
 
+  const FILTER_KEY = 'rt-filters';
+
   const SERIES_ORDER = ['f1','f2','f3','fe','motogp','moto2','moto3','indycar','nascar','wec'];
-  const SERIES_META: Record<string, { label: string; shortLabel: string; color: string }> = {
-    f1:      { label: 'Formula 1',  shortLabel: 'F1',      color: '#e10600' },
-    f2:      { label: 'Formula 2',  shortLabel: 'F2',      color: '#0090d0' },
-    f3:      { label: 'Formula 3',  shortLabel: 'F3',      color: '#60a5fa' },
-    fe:      { label: 'Formula E',  shortLabel: 'FE',      color: '#14b8a6' },
-    motogp:  { label: 'MotoGP',     shortLabel: 'MotoGP',  color: '#be123c' },
-    moto2:   { label: 'Moto2',      shortLabel: 'Moto2',   color: '#f97316' },
-    moto3:   { label: 'Moto3',      shortLabel: 'Moto3',   color: '#facc15' },
-    indycar: { label: 'IndyCar',    shortLabel: 'IndyCar', color: '#1e40af' },
-    nascar:  { label: 'NASCAR',     shortLabel: 'NASCAR',  color: '#eab308' },
-    wec:     { label: 'WEC',        shortLabel: 'WEC',     color: '#0ea5e9' },
+  const SERIES_META: Record<string, { label: string; shortLabel: string; color: string; category: '4-wheel' | '2-wheel' }> = {
+    f1:      { label: 'Formula 1',  shortLabel: 'F1',      color: '#e10600', category: '4-wheel' },
+    f2:      { label: 'Formula 2',  shortLabel: 'F2',      color: '#0090d0', category: '4-wheel' },
+    f3:      { label: 'Formula 3',  shortLabel: 'F3',      color: '#60a5fa', category: '4-wheel' },
+    fe:      { label: 'Formula E',  shortLabel: 'FE',      color: '#14b8a6', category: '4-wheel' },
+    motogp:  { label: 'MotoGP',     shortLabel: 'MotoGP',  color: '#be123c', category: '2-wheel' },
+    moto2:   { label: 'Moto2',      shortLabel: 'Moto2',   color: '#f97316', category: '2-wheel' },
+    moto3:   { label: 'Moto3',      shortLabel: 'Moto3',   color: '#facc15', category: '2-wheel' },
+    indycar: { label: 'IndyCar',    shortLabel: 'IndyCar', color: '#1e40af', category: '4-wheel' },
+    nascar:  { label: 'NASCAR',     shortLabel: 'NASCAR',  color: '#eab308', category: '4-wheel' },
+    wec:     { label: 'WEC',        shortLabel: 'WEC',     color: '#0ea5e9', category: '4-wheel' },
   };
 
   // ── State ─────────────────────────────────────────────────────────────────
@@ -97,7 +104,33 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
   let selectedDate: string | null = null;
 
   const allSeriesIds = [...new Set<string>(allEvents.map(e => e.seriesId))];
-  const activeFilters = new Set<string>(allSeriesIds);
+
+  // empty set = all visible (same convention as dashboard filter)
+  const activeFilters = new Set<string>();
+
+  function loadFiltersFromStorage() {
+    try {
+      const raw = localStorage.getItem(FILTER_KEY);
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length > 0) {
+          activeFilters.clear();
+          arr.forEach((id: string) => { if (allSeriesIds.includes(id)) activeFilters.add(id); });
+          return;
+        }
+      }
+    } catch {}
+    activeFilters.clear(); // empty = all
+  }
+
+  function saveFiltersToStorage() {
+    if (activeFilters.size === 0) {
+      localStorage.removeItem(FILTER_KEY);
+    } else {
+      localStorage.setItem(FILTER_KEY, JSON.stringify([...activeFilters]));
+    }
+    window.dispatchEvent(new CustomEvent('rt-filters-changed', { detail: { active: [...activeFilters] } }));
+  }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
   function toDateStr(d: Date): string {
@@ -113,8 +146,9 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
   }
 
   function eventsOnDate(dateStr: string): any[] {
+    const showAll = activeFilters.size === 0;
     return allEvents.filter(e =>
-      activeFilters.has(e.seriesId) &&
+      (showAll || activeFilters.has(e.seriesId)) &&
       e.dateStart <= dateStr &&
       e.dateEnd   >= dateStr
     );
@@ -142,29 +176,109 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     'Qualifying': 'Quali', 'Feature Race': 'Race', 'Race': 'Race', 'Warm Up': 'WU',
   };
 
-  // ── Filter pills ──────────────────────────────────────────────────────────
+  // ── Filter UI ─────────────────────────────────────────────────────────────
   function renderFilter() {
-    const container = document.getElementById('cal-filter')!;
+    const showAll = activeFilters.size === 0;
     const seriesInData = SERIES_ORDER.filter(id => allSeriesIds.includes(id));
+    const fourWheelIds = seriesInData.filter(id => SERIES_META[id]?.category === '4-wheel');
+    const twoWheelIds  = seriesInData.filter(id => SERIES_META[id]?.category === '2-wheel');
 
-    container.innerHTML = seriesInData.map(id => {
-      const m = SERIES_META[id] ?? { shortLabel: id, color: '#71717a' };
-      const on = activeFilters.has(id);
+    // ── Category buttons ──
+    const catContainer = document.getElementById('cal-cat-filter')!;
+    const catDefs = [
+      { key: 'all',     label: 'All',        ids: seriesInData },
+      { key: '4-wheel', label: '🚗 4-Wheel', ids: fourWheelIds },
+      { key: '2-wheel', label: '🏍 2-Wheel', ids: twoWheelIds  },
+    ];
+
+    // Keep the label span, re-render only buttons
+    const existingBtns = catContainer.querySelectorAll('.cal-cat-btn');
+    if (existingBtns.length === 0) {
+      catContainer.insertAdjacentHTML('beforeend', catDefs.map(({ key, label }) =>
+        `<button class="cal-cat-btn text-xs px-3 py-1 rounded-full border font-semibold transition-all duration-150 select-none" data-cat="${key}">${label}</button>`
+      ).join(''));
+
+      catContainer.querySelectorAll<HTMLButtonElement>('.cal-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cat = btn.dataset.cat!;
+          if (cat === 'all') {
+            activeFilters.clear();
+          } else {
+            const ids = cat === '4-wheel' ? fourWheelIds : twoWheelIds;
+            const allSelected = ids.every(id => activeFilters.has(id));
+            const isExclusive = allSelected && [...activeFilters].every(id => ids.includes(id));
+            if (isExclusive) {
+              activeFilters.clear();
+            } else {
+              activeFilters.clear();
+              ids.forEach(id => activeFilters.add(id));
+            }
+          }
+          selectedDate = null;
+          saveFiltersToStorage();
+          renderFilter();
+          renderMonth();
+          renderDayDetail();
+        });
+      });
+    }
+
+    // Style category buttons
+    catContainer.querySelectorAll<HTMLButtonElement>('.cal-cat-btn').forEach(btn => {
+      const cat = btn.dataset.cat!;
+      let state: 'active' | 'partial' | 'inactive';
+      if (cat === 'all') {
+        state = showAll ? 'active' : 'inactive';
+      } else {
+        const ids = cat === '4-wheel' ? fourWheelIds : twoWheelIds;
+        if (showAll || ids.every(id => activeFilters.has(id))) {
+          const isExclusive = !showAll && [...activeFilters].every(id => ids.includes(id));
+          state = isExclusive ? 'active' : 'partial';
+        } else {
+          state = ids.some(id => activeFilters.has(id)) ? 'partial' : 'inactive';
+        }
+      }
+      if (state === 'active') {
+        btn.style.cssText = 'background-color:#27272a;border-color:#71717a;color:#f4f4f5';
+      } else if (state === 'partial') {
+        btn.style.cssText = 'background-color:#1c1c1e;border-color:#52525b;color:#a1a1aa';
+      } else {
+        btn.style.cssText = 'background-color:transparent;border-color:#3f3f46;color:#52525b';
+      }
+    });
+
+    // ── Individual series chips ──
+    const container = document.getElementById('cal-filter')!;
+    container.innerHTML = seriesInData.map((id, i) => {
+      const m = SERIES_META[id] ?? { shortLabel: id, color: '#71717a', category: '4-wheel' };
+      const on = showAll || activeFilters.has(id);
       const style = on
         ? `background-color:${m.color}20;border-color:${m.color}60;color:${m.color}`
         : 'background-color:transparent;border-color:#3f3f46;color:#52525b';
-      return `<button class="cal-filter-btn text-xs font-bold px-2.5 py-1 rounded-full border transition-all duration-150 select-none" data-series="${id}" style="${style}">${m.shortLabel}</button>`;
+      // Add visual divider before first 2-wheel series
+      const divider = (i > 0 && m.category === '2-wheel' && SERIES_META[seriesInData[i - 1]]?.category === '4-wheel')
+        ? '<span class="h-4 w-px bg-zinc-700/60 self-center mx-0.5" aria-hidden="true"></span>'
+        : '';
+      return `${divider}<button class="cal-filter-btn text-xs font-bold px-2.5 py-1 rounded-full border transition-all duration-150 select-none" data-series="${id}" style="${style}">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background-color:${m.color};margin-right:3px;vertical-align:middle"></span>${m.shortLabel}
+      </button>`;
     }).join('');
 
     container.querySelectorAll<HTMLButtonElement>('.cal-filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.series!;
         if (activeFilters.has(id)) {
-          if (activeFilters.size > 1) activeFilters.delete(id);
+          activeFilters.delete(id);
         } else {
-          activeFilters.add(id);
+          // If currently showing all, switch to "all except this one" when deselecting
+          if (showAll) {
+            allSeriesIds.forEach(s => { if (s !== id) activeFilters.add(s); });
+          } else {
+            activeFilters.add(id);
+          }
         }
         selectedDate = null;
+        saveFiltersToStorage();
         renderFilter();
         renderMonth();
         renderDayDetail();
@@ -403,10 +517,22 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
 
   // ── Bootstrap ─────────────────────────────────────────────────────────────
   function init() {
+    loadFiltersFromStorage();
     renderFilter();
     renderMonth();
     renderDayDetail();
   }
+
+  // Sync when filter changes on another page (e.g. dashboard)
+  window.addEventListener('rt-filters-changed', (e: any) => {
+    const ids: string[] = e.detail.active ?? [];
+    activeFilters.clear();
+    ids.forEach((id: string) => { if (allSeriesIds.includes(id)) activeFilters.add(id); });
+    selectedDate = null;
+    renderFilter();
+    renderMonth();
+    renderDayDetail();
+  });
 
   init();
   document.addEventListener('astro:after-swap', init);

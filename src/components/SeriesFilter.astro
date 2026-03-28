@@ -1,71 +1,235 @@
 ---
 /**
- * Client-side series filter. Toggles visibility of [data-series] elements.
+ * Two-tier series filter: category quick-select + individual series chips.
+ * State persists in localStorage['rt-filters'] as a JSON array of active series IDs.
+ * Empty array / missing key = show all.
+ * Dispatches window event 'rt-filters-changed' on every change.
  */
 import { SERIES_LIST } from '../lib/series';
+
+const fourWheel = SERIES_LIST.filter(s => s.category === '4-wheel');
+const twoWheel  = SERIES_LIST.filter(s => s.category === '2-wheel');
 ---
 
-<div class="flex flex-wrap gap-2 mb-6" id="series-filter">
-  <button
-    data-filter="all"
-    class="filter-btn active text-xs px-3 py-1.5 rounded-full border border-zinc-700 bg-zinc-800 text-zinc-100 font-medium transition-colors"
-  >
-    All
-  </button>
-  {SERIES_LIST.map(s => (
+<div id="series-filter" class="mb-6 space-y-2">
+
+  <!-- Category quick-select row -->
+  <div class="flex flex-wrap gap-1.5 items-center">
+    <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mr-1">View</span>
     <button
-      data-filter={s.id}
-      class="filter-btn text-xs px-3 py-1.5 rounded-full border border-zinc-800 text-zinc-400 font-medium transition-colors hover:border-zinc-600 hover:text-zinc-200"
+      data-cat="all"
+      class="cat-btn text-xs px-3 py-1 rounded-full border font-semibold transition-all duration-150"
     >
-      <span class="inline-block w-2 h-2 rounded-full mr-1 align-middle" style={`background-color: ${s.color}`} />
-      {s.shortLabel}
+      All
     </button>
-  ))}
+    <button
+      data-cat="4-wheel"
+      class="cat-btn text-xs px-3 py-1 rounded-full border font-semibold transition-all duration-150"
+    >
+      🚗 4-Wheel
+    </button>
+    <button
+      data-cat="2-wheel"
+      class="cat-btn text-xs px-3 py-1 rounded-full border font-semibold transition-all duration-150"
+    >
+      🏍 2-Wheel
+    </button>
+  </div>
+
+  <!-- Individual series chips, grouped by category with a divider -->
+  <div class="flex flex-wrap gap-1.5 items-center" id="series-chips">
+    {fourWheel.map(s => (
+      <button
+        data-filter={s.id}
+        data-color={s.color}
+        class="filter-btn text-xs px-2.5 py-1 rounded-full border font-medium transition-all duration-150"
+      >
+        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1 align-middle" style={`background-color: ${s.color}`} />
+        {s.shortLabel}
+      </button>
+    ))}
+
+    <!-- Visual divider between 4-wheel and 2-wheel -->
+    <span class="h-4 w-px bg-zinc-700/60 mx-0.5" aria-hidden="true" />
+
+    {twoWheel.map(s => (
+      <button
+        data-filter={s.id}
+        data-color={s.color}
+        class="filter-btn text-xs px-2.5 py-1 rounded-full border font-medium transition-all duration-150"
+      >
+        <span class="inline-block w-1.5 h-1.5 rounded-full mr-1 align-middle" style={`background-color: ${s.color}`} />
+        {s.shortLabel}
+      </button>
+    ))}
+  </div>
+
 </div>
 
 <script>
+  const STORAGE_KEY = 'rt-filters';
+
+  // IDs split by category — read from DOM to stay in sync with server render
+  function getCategoryIds(cat: '4-wheel' | '2-wheel'): string[] {
+    return [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')]
+      .filter(btn => {
+        // category membership is determined by which group the button is in.
+        // We encode this via a data attribute set during initFilter.
+        return btn.dataset.category === cat;
+      })
+      .map(btn => btn.dataset.filter!);
+  }
+
+  function loadFilters(): Set<string> {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length > 0) return new Set(arr);
+      }
+    } catch {}
+    return new Set();
+  }
+
+  function saveFilters(active: Set<string>) {
+    if (active.size === 0) {
+      localStorage.removeItem(STORAGE_KEY);
+    } else {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...active]));
+    }
+    window.dispatchEvent(new CustomEvent('rt-filters-changed', { detail: { active: [...active] } }));
+  }
+
+  function applyVisibility(active: Set<string>) {
+    const showAll = active.size === 0;
+    document.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
+      el.style.display = (showAll || active.has(el.dataset.series!)) ? '' : 'none';
+    });
+    // After filtering, show/hide empty week groups
+    document.querySelectorAll<HTMLElement>('.week-group').forEach(section => {
+      const anyVisible = [...section.querySelectorAll<HTMLElement>('[data-series]')]
+        .some(el => el.style.display !== 'none');
+      section.style.display = anyVisible ? '' : 'none';
+    });
+  }
+
+  function styleFilterBtn(btn: HTMLButtonElement, isActive: boolean, color: string) {
+    if (isActive) {
+      btn.style.cssText = `background-color:${color}20;border-color:${color}60;color:${color}`;
+    } else {
+      btn.style.cssText = 'background-color:transparent;border-color:#3f3f46;color:#71717a';
+    }
+  }
+
+  function styleCatBtn(btn: HTMLButtonElement, state: 'active' | 'partial' | 'inactive') {
+    if (state === 'active') {
+      btn.style.cssText = 'background-color:#27272a;border-color:#71717a;color:#f4f4f5';
+    } else if (state === 'partial') {
+      btn.style.cssText = 'background-color:#1c1c1e;border-color:#52525b;color:#a1a1aa';
+    } else {
+      btn.style.cssText = 'background-color:transparent;border-color:#3f3f46;color:#52525b';
+    }
+  }
+
+  function updateButtons(active: Set<string>) {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const showAll = active.size === 0;
+
+    filterBtns.forEach(btn => {
+      const id = btn.dataset.filter!;
+      const color = btn.dataset.color!;
+      styleFilterBtn(btn, showAll || active.has(id), color);
+    });
+
+    const fourWheelIds = [...filterBtns]
+      .filter(b => b.dataset.category === '4-wheel')
+      .map(b => b.dataset.filter!);
+    const twoWheelIds = [...filterBtns]
+      .filter(b => b.dataset.category === '2-wheel')
+      .map(b => b.dataset.filter!);
+
+    const catBtns = document.querySelectorAll<HTMLButtonElement>('[data-cat]');
+    catBtns.forEach(btn => {
+      const cat = btn.dataset.cat!;
+      if (cat === 'all') {
+        styleCatBtn(btn, showAll ? 'active' : 'inactive');
+        return;
+      }
+      const ids = cat === '4-wheel' ? fourWheelIds : twoWheelIds;
+      if (showAll || ids.every(id => active.has(id))) {
+        const isExclusive = showAll
+          ? false
+          : [...active].every(id => ids.includes(id));
+        styleCatBtn(btn, isExclusive ? 'active' : 'partial');
+      } else {
+        const anyActive = ids.some(id => active.has(id));
+        styleCatBtn(btn, anyActive ? 'partial' : 'inactive');
+      }
+    });
+  }
+
   function initFilter() {
     const container = document.getElementById('series-filter');
     if (!container) return;
 
-    const buttons = container.querySelectorAll<HTMLButtonElement>('.filter-btn');
-    let active = new Set<string>();
-
-    function updateVisibility() {
-      const showAll = active.size === 0;
-      document.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
-        const series = el.dataset.series!;
-        el.style.display = (showAll || active.has(series)) ? '' : 'none';
-      });
-
-      buttons.forEach(btn => {
-        const f = btn.dataset.filter!;
-        const isActive = (f === 'all' && showAll) || active.has(f);
-        btn.classList.toggle('active', isActive);
-        if (isActive) {
-          btn.classList.add('border-zinc-700', 'bg-zinc-800', 'text-zinc-100');
-          btn.classList.remove('border-zinc-800', 'text-zinc-400');
-        } else {
-          btn.classList.remove('border-zinc-700', 'bg-zinc-800', 'text-zinc-100');
-          btn.classList.add('border-zinc-800', 'text-zinc-400');
+    // Tag filter buttons with their category (derived from DOM order / separator)
+    const chips = document.getElementById('series-chips');
+    if (chips) {
+      let currentCat = '4-wheel';
+      chips.childNodes.forEach(node => {
+        if (node instanceof HTMLElement) {
+          if (node.tagName === 'SPAN') { currentCat = '2-wheel'; return; } // divider
+          if (node.dataset.filter) node.dataset.category = currentCat;
         }
       });
     }
 
-    container.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-btn');
+    const active = loadFilters();
+
+    applyVisibility(active);
+    updateButtons(active);
+
+    // Individual series chip clicks
+    document.getElementById('series-chips')?.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
       if (!btn) return;
-
-      const filter = btn.dataset.filter!;
-      if (filter === 'all') {
-        active.clear();
-      } else if (active.has(filter)) {
-        active.delete(filter);
+      const id = btn.dataset.filter!;
+      if (active.has(id)) {
+        active.delete(id);
       } else {
-        active.add(filter);
+        active.add(id);
       }
+      saveFilters(active);
+      applyVisibility(active);
+      updateButtons(active);
+    });
 
-      updateVisibility();
+    // Category button clicks
+    container.querySelector('[data-cat="all"]')?.addEventListener('click', () => {
+      active.clear();
+      saveFilters(active);
+      applyVisibility(active);
+      updateButtons(active);
+    });
+
+    ['4-wheel', '2-wheel'].forEach(cat => {
+      container.querySelector(`[data-cat="${cat}"]`)?.addEventListener('click', () => {
+        const ids = [...document.querySelectorAll<HTMLButtonElement>(`[data-category="${cat}"]`)]
+          .map(b => b.dataset.filter!);
+        const allSelected = ids.every(id => active.has(id));
+        const isExclusive = allSelected && [...active].every(id => ids.includes(id));
+        if (isExclusive) {
+          // Toggle off — go back to all
+          active.clear();
+        } else {
+          // Select only this category
+          active.clear();
+          ids.forEach(id => active.add(id));
+        }
+        saveFilters(active);
+        applyVisibility(active);
+        updateButtons(active);
+      });
     });
   }
 
