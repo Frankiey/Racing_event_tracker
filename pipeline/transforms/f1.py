@@ -3,6 +3,32 @@
 from pipeline.config import SEASON_YEAR
 
 
+# OpenF1 uses non-standard / alpha-3-like codes; map to ISO 3166-1 alpha-2
+_ALPHA3_TO_ALPHA2: dict[str, str] = {
+    "AUS": "AU",
+    "AUT": "AT",
+    "AZE": "AZ",
+    "BEL": "BE",
+    "BRA": "BR",
+    "BRN": "BH",
+    "CAN": "CA",
+    "CHN": "CN",
+    "ESP": "ES",
+    "GBR": "GB",
+    "HUN": "HU",
+    "ITA": "IT",
+    "JPN": "JP",
+    "KSA": "SA",
+    "MEX": "MX",
+    "MON": "MC",
+    "NED": "NL",
+    "QAT": "QA",
+    "SGP": "SG",
+    "UAE": "AE",
+    "USA": "US",
+}
+
+
 SESSION_MAP = [
     ("FirstPractice", "FP1"),
     ("SecondPractice", "FP2"),
@@ -59,7 +85,7 @@ def transform(bronze: dict) -> list[dict]:
                 "name": race.get("Circuit", {}).get("circuitName", ""),
                 "city": loc.get("locality", ""),
                 "country": loc.get("country", ""),
-                "countryCode": of1.get("country_code", ""),
+                "countryCode": _ALPHA3_TO_ALPHA2.get(of1.get("country_code", ""), of1.get("country_code", "")),
                 "lat": _float(loc.get("lat")),
                 "lng": _float(loc.get("long")),
             },
