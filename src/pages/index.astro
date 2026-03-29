@@ -46,13 +46,16 @@ for (const event of sortedUpcoming) {
 dashboardEvents.sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
 
 // Group by week label
-const yesterday = new Date(now);
-yesterday.setDate(yesterday.getDate() - 1);
-yesterday.setHours(23, 59, 59, 999);
+function getWeekLabel(event: any): string {
+  // Use the race session start time for past-detection if available;
+  // fall back to dateEnd for events with placeholder/missing race times.
+  const raceSession = getRaceSession(event.sessions);
+  const isPast = (raceSession && !isPlaceholderTime(raceSession.startTimeUTC))
+    ? new Date(raceSession.startTimeUTC) < now
+    : new Date(event.dateEnd + 'T23:59:59Z') < now;
+  if (isPast) return '__recent__';
 
-function getWeekLabel(dateStr: string, dateEnd: string): string {
-  if (new Date(dateEnd + 'T23:59:59Z') < yesterday) return '__recent__';
-  const eventDate = new Date(dateStr + 'T00:00:00');
+  const eventDate = new Date(event.dateStart + 'T00:00:00');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
@@ -63,10 +66,15 @@ function getWeekLabel(dateStr: string, dateEnd: string): string {
   return eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
 }
 
+// Track the first event's dateStart per section so client-side JS can recompute labels
 const grouped = new Map<string, typeof dashboardEvents>();
+const groupFirstDate = new Map<string, string>();
 for (const event of dashboardEvents) {
-  const label = getWeekLabel(event.dateStart, event.dateEnd);
-  if (!grouped.has(label)) grouped.set(label, []);
+  const label = getWeekLabel(event);
+  if (!grouped.has(label)) {
+    grouped.set(label, []);
+    groupFirstDate.set(label, event.dateStart);
+  }
   grouped.get(label)!.push(event);
 }
 
@@ -197,6 +205,7 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       <section
         class="week-group mb-8"
         data-week-section={weekLabel}
+        data-week-date={groupFirstDate.get(weekLabel) ?? ''}
         data-lazy-group={i >= INITIAL_GROUPS ? 'true' : undefined}
         style={i >= INITIAL_GROUPS ? 'display:none' : undefined}
       >
@@ -207,7 +216,11 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
         </h2>
         <div class="grid gap-2.5">
           {weekEvents.map(event => (
-            <div data-series={event.seriesId} class="event-card-wrapper">
+            <div
+              data-series={event.seriesId}
+              class="event-card-wrapper"
+              data-race-utc={getRaceSession(event.sessions)?.startTimeUTC ?? ''}
+            >
               <EventCard
                 event={event}
                 highlight={nextRace?.event.id === event.id}
@@ -253,6 +266,77 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 </Layout>
 
 <script>
+  // ── Client-side staleness fix ──
+  // Labels (Today/Tomorrow) are baked at build time; race sessions may have
+  // passed since the last deploy. This runs on page load and tab-focus to
+  // move finished events to Recent and correct stale headings.
+  function refreshDashboard() {
+    const now = new Date();
+
+    // 1. Move events whose race session has started to the Recent grid
+    const recentGrid   = document.getElementById('recent-events');
+    const recentSection = document.getElementById('recent-section');
+    const mainWrappers = document.querySelectorAll<HTMLElement>(
+      '.week-group .event-card-wrapper[data-race-utc]'
+    );
+    let moved = 0;
+    mainWrappers.forEach(wrapper => {
+      const raceUtc = wrapper.getAttribute('data-race-utc') ?? '';
+      if (!raceUtc || raceUtc.startsWith('1900-')) return;
+      if (new Date(raceUtc) < now) {
+        recentGrid?.appendChild(wrapper);
+        moved++;
+      }
+    });
+
+    // 2. Remove week sections that became empty after moving events
+    document.querySelectorAll<HTMLElement>('.week-group').forEach(section => {
+      if (section.getAttribute('data-lazy-group') === 'true') return; // lazy sections keep their shape
+      if (section.querySelectorAll('.event-card-wrapper').length === 0) {
+        section.remove();
+      }
+    });
+
+    // 3. Show Recent section and update its count if we moved anything
+    if (moved > 0 && recentSection && recentGrid) {
+      recentSection.style.display = '';
+      const count = recentGrid.querySelectorAll('[data-series]').length;
+      const countSpan = document.querySelector<HTMLElement>('#recent-toggle span:last-of-type');
+      if (countSpan) countSpan.textContent = `Recent (${count})`;
+    }
+
+    // 4. Update stale Today/Tomorrow headings — sections store data-week-date
+    document.querySelectorAll<HTMLElement>('[data-week-date]').forEach(section => {
+      const dateStr = section.getAttribute('data-week-date');
+      if (!dateStr) return;
+      const heading = section.querySelector('h2');
+      if (!heading) return;
+
+      const eventDate = new Date(dateStr + 'T00:00:00');
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
+
+      let label: string;
+      if (diffDays < 0) return;        // fully past — leave it (or it'll be empty and removed)
+      else if (diffDays === 0) label = 'Today';
+      else if (diffDays === 1) label = 'Tomorrow';
+      else if (diffDays <= 7)  label = 'This week';
+      else if (diffDays <= 14) label = 'Next week';
+      else label = eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
+
+      // Only touch the heading if the label actually changed
+      const current = section.getAttribute('data-week-section');
+      if (current === label) return;
+
+      section.setAttribute('data-week-section', label);
+      // Replace the first text node in h2 (the label text)
+      const textNode = [...heading.childNodes].find(
+        n => n.nodeType === Node.TEXT_NODE && (n.textContent ?? '').trim().length > 0
+      );
+      if (textNode) textNode.textContent = label;
+    });
+  }
+
   function initDashboard() {
     // ── Recent toggle ──
     const toggle  = document.getElementById('recent-toggle');
@@ -325,5 +409,8 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
   }
 
   initDashboard();
-  document.addEventListener('astro:after-swap', initDashboard);
+  refreshDashboard();
+  document.addEventListener('astro:after-swap', () => { initDashboard(); refreshDashboard(); });
+  // Re-check when the user comes back to the tab (e.g. phone sleep or alt-tab)
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshDashboard(); });
 </script>
