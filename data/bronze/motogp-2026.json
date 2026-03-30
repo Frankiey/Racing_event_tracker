@@ -141,7 +141,7 @@
         "menu_position": 1
       },
       "podiums": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/USA/Podiums.pdf",
         "menu_position": 2
       },
       "pole_positions": {
@@ -149,11 +149,11 @@
         "menu_position": 2
       },
       "nations_statistics": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/USA/table2.pdf",
         "menu_position": 2
       },
       "riders_all_time": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/USA/table4.pdf",
         "menu_position": 2
       }
     },
@@ -192,7 +192,7 @@
     },
     "short_name": "USA",
     "id": "782c929d-faaf-44e2-9d6f-0fde033855be",
-    "status": "CURRENT"
+    "status": "FINISHED"
   },
   {
     "country": {
