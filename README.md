@@ -23,6 +23,8 @@ RaceTrack fixes that. One URL, every series, your local times, your watchlist. T
 
 ---
 
+![RaceTrack dashboard screenshot](docs/screenshot.png)
+
 ## Features
 
 | | |
