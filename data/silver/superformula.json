@@ -1,46 +1,50 @@
 [
   {
-    "id": "superformula-2026-r01",
+    "id": "superformula-2026-e01",
     "seriesId": "superformula",
-    "eventName": "Super Formula Round 1 – Suzuka",
+    "eventName": "Super Formula Rounds 1–2 – Motegi",
     "round": 1,
     "circuit": {
-      "name": "Suzuka International Racing Course",
-      "city": "Suzuka",
+      "name": "Mobility Resort Motegi",
+      "city": "Motegi",
       "country": "Japan",
       "countryCode": "JP",
-      "lat": 34.8431,
-      "lng": 136.5407
+      "lat": 36.5403,
+      "lng": 140.1947
     },
     "sessions": [
       {
         "type": "Practice",
-        "startTimeUTC": "2026-04-04T01:00:00Z"
+        "startTimeUTC": "2026-04-03T01:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-04-04T05:00:00Z"
+        "startTimeUTC": "2026-04-03T05:00:00Z"
       },
       {
-        "type": "Race",
-        "startTimeUTC": "2026-04-05T04:30:00Z"
+        "type": "Race 1",
+        "startTimeUTC": "2026-04-04T04:00:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-04-05T04:00:00Z"
       }
     ],
-    "dateStart": "2026-04-04",
+    "dateStart": "2026-04-03",
     "dateEnd": "2026-04-05"
   },
   {
-    "id": "superformula-2026-r02",
+    "id": "superformula-2026-e02",
     "seriesId": "superformula",
-    "eventName": "Super Formula Round 2 – Okayama",
+    "eventName": "Super Formula Round 3 – Autopolis",
     "round": 2,
     "circuit": {
-      "name": "Okayama International Circuit",
-      "city": "Aida",
+      "name": "Autopolis",
+      "city": "Kamitsue",
       "country": "Japan",
       "countryCode": "JP",
-      "lat": 34.9153,
-      "lng": 134.2106
+      "lat": 33.0633,
+      "lng": 131.0747
     },
     "sessions": [
       {
@@ -60,10 +64,44 @@
     "dateEnd": "2026-04-26"
   },
   {
-    "id": "superformula-2026-r03",
+    "id": "superformula-2026-e03",
     "seriesId": "superformula",
-    "eventName": "Super Formula Round 3 – Fuji",
+    "eventName": "Super Formula Rounds 4–5 – Suzuka",
     "round": 3,
+    "circuit": {
+      "name": "Suzuka International Racing Course",
+      "city": "Suzuka",
+      "country": "Japan",
+      "countryCode": "JP",
+      "lat": 34.8431,
+      "lng": 136.5407
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-22T01:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-22T05:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-05-23T04:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-05-24T04:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-22",
+    "dateEnd": "2026-05-24"
+  },
+  {
+    "id": "superformula-2026-e04",
+    "seriesId": "superformula",
+    "eventName": "Super Formula Rounds 6–7 – Fuji",
+    "round": 4,
     "circuit": {
       "name": "Fuji Speedway",
       "city": "Oyama",
@@ -75,85 +113,29 @@
     "sessions": [
       {
         "type": "Practice",
-        "startTimeUTC": "2026-05-30T01:00:00Z"
+        "startTimeUTC": "2026-07-17T01:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-05-30T05:00:00Z"
+        "startTimeUTC": "2026-07-17T05:00:00Z"
       },
       {
-        "type": "Race",
-        "startTimeUTC": "2026-05-31T04:30:00Z"
+        "type": "Race 1",
+        "startTimeUTC": "2026-07-18T04:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-07-19T04:30:00Z"
       }
     ],
-    "dateStart": "2026-05-30",
-    "dateEnd": "2026-05-31"
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
   },
   {
-    "id": "superformula-2026-r04",
+    "id": "superformula-2026-e05",
     "seriesId": "superformula",
-    "eventName": "Super Formula Round 4 – Autopolis",
-    "round": 4,
-    "circuit": {
-      "name": "Autopolis",
-      "city": "Kamitsue",
-      "country": "Japan",
-      "countryCode": "JP",
-      "lat": 33.0633,
-      "lng": 131.0747
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-07-04T01:30:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-07-04T05:30:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-07-05T04:30:00Z"
-      }
-    ],
-    "dateStart": "2026-07-04",
-    "dateEnd": "2026-07-05"
-  },
-  {
-    "id": "superformula-2026-r05",
-    "seriesId": "superformula",
-    "eventName": "Super Formula Round 5 – Motegi",
+    "eventName": "Super Formula Round 8 – SUGO",
     "round": 5,
-    "circuit": {
-      "name": "Twin Ring Motegi",
-      "city": "Motegi",
-      "country": "Japan",
-      "countryCode": "JP",
-      "lat": 36.5403,
-      "lng": 140.1947
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-08-01T01:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-08-01T05:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-08-02T04:30:00Z"
-      }
-    ],
-    "dateStart": "2026-08-01",
-    "dateEnd": "2026-08-02"
-  },
-  {
-    "id": "superformula-2026-r06",
-    "seriesId": "superformula",
-    "eventName": "Super Formula Round 6 – Sugo",
-    "round": 6,
     "circuit": {
       "name": "Sports Land Sugo",
       "city": "Murata",
@@ -165,24 +147,58 @@
     "sessions": [
       {
         "type": "Practice",
-        "startTimeUTC": "2026-09-05T01:30:00Z"
+        "startTimeUTC": "2026-08-08T01:30:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-09-05T05:30:00Z"
+        "startTimeUTC": "2026-08-08T05:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-09-06T04:30:00Z"
+        "startTimeUTC": "2026-08-09T04:30:00Z"
       }
     ],
-    "dateStart": "2026-09-05",
-    "dateEnd": "2026-09-06"
+    "dateStart": "2026-08-08",
+    "dateEnd": "2026-08-09"
   },
   {
-    "id": "superformula-2026-r07",
+    "id": "superformula-2026-e06",
     "seriesId": "superformula",
-    "eventName": "Super Formula Round 7 – Suzuka (Final)",
+    "eventName": "Super Formula Rounds 9–10 – Fuji",
+    "round": 6,
+    "circuit": {
+      "name": "Fuji Speedway",
+      "city": "Oyama",
+      "country": "Japan",
+      "countryCode": "JP",
+      "lat": 35.3717,
+      "lng": 138.9258
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-10-09T01:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-09T05:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-10-10T04:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-10-11T04:30:00Z"
+      }
+    ],
+    "dateStart": "2026-10-09",
+    "dateEnd": "2026-10-11"
+  },
+  {
+    "id": "superformula-2026-e07",
+    "seriesId": "superformula",
+    "eventName": "Super Formula Rounds 11–12 – Suzuka",
     "round": 7,
     "circuit": {
       "name": "Suzuka International Racing Course",
@@ -195,18 +211,22 @@
     "sessions": [
       {
         "type": "Practice",
-        "startTimeUTC": "2026-10-10T01:00:00Z"
+        "startTimeUTC": "2026-11-20T01:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-10-10T05:00:00Z"
+        "startTimeUTC": "2026-11-20T05:00:00Z"
       },
       {
-        "type": "Race",
-        "startTimeUTC": "2026-10-11T04:30:00Z"
+        "type": "Race 1",
+        "startTimeUTC": "2026-11-21T04:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-11-22T04:30:00Z"
       }
     ],
-    "dateStart": "2026-10-10",
-    "dateEnd": "2026-10-11"
+    "dateStart": "2026-11-20",
+    "dateEnd": "2026-11-22"
   }
 ]

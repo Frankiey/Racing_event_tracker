@@ -2,46 +2,8 @@
   {
     "id": "wec-2026-r01",
     "seriesId": "wec",
-    "eventName": "1812 km of Qatar",
-    "round": 1,
-    "circuit": {
-      "name": "Lusail International Circuit",
-      "city": "Lusail",
-      "country": "Qatar",
-      "countryCode": "QA",
-      "lat": 25.49,
-      "lng": 51.4542
-    },
-    "sessions": [
-      {
-        "type": "Practice 1",
-        "startTimeUTC": "2026-02-27T09:00:00Z"
-      },
-      {
-        "type": "Practice 2",
-        "startTimeUTC": "2026-02-27T14:00:00Z"
-      },
-      {
-        "type": "Practice 3",
-        "startTimeUTC": "2026-02-28T09:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-02-28T13:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-03-01T11:00:00Z"
-      }
-    ],
-    "dateStart": "2026-02-27",
-    "dateEnd": "2026-03-01"
-  },
-  {
-    "id": "wec-2026-r02",
-    "seriesId": "wec",
     "eventName": "6 Hours of Imola",
-    "round": 2,
+    "round": 1,
     "circuit": {
       "name": "Autodromo Enzo e Dino Ferrari",
       "city": "Imola",
@@ -76,10 +38,10 @@
     "dateEnd": "2026-04-19"
   },
   {
-    "id": "wec-2026-r03",
+    "id": "wec-2026-r02",
     "seriesId": "wec",
     "eventName": "6 Hours of Spa-Francorchamps",
-    "round": 3,
+    "round": 2,
     "circuit": {
       "name": "Circuit de Spa-Francorchamps",
       "city": "Stavelot",
@@ -114,10 +76,10 @@
     "dateEnd": "2026-05-10"
   },
   {
-    "id": "wec-2026-r04",
+    "id": "wec-2026-r03",
     "seriesId": "wec",
     "eventName": "24 Hours of Le Mans",
-    "round": 4,
+    "round": 3,
     "circuit": {
       "name": "Circuit de la Sarthe",
       "city": "Le Mans",
@@ -164,10 +126,10 @@
     "dateEnd": "2026-06-14"
   },
   {
-    "id": "wec-2026-r05",
+    "id": "wec-2026-r04",
     "seriesId": "wec",
     "eventName": "6 Hours of São Paulo",
-    "round": 5,
+    "round": 4,
     "circuit": {
       "name": "Autodromo Jose Carlos Pace",
       "city": "São Paulo",
@@ -202,10 +164,10 @@
     "dateEnd": "2026-07-12"
   },
   {
-    "id": "wec-2026-r06",
+    "id": "wec-2026-r05",
     "seriesId": "wec",
     "eventName": "Lone Star Le Mans",
-    "round": 6,
+    "round": 5,
     "circuit": {
       "name": "Circuit of the Americas",
       "city": "Austin",
@@ -240,10 +202,10 @@
     "dateEnd": "2026-09-06"
   },
   {
-    "id": "wec-2026-r07",
+    "id": "wec-2026-r06",
     "seriesId": "wec",
     "eventName": "6 Hours of Fuji",
-    "round": 7,
+    "round": 6,
     "circuit": {
       "name": "Fuji Speedway",
       "city": "Oyama",
@@ -278,6 +240,44 @@
     "dateEnd": "2026-09-27"
   },
   {
+    "id": "wec-2026-r07",
+    "seriesId": "wec",
+    "eventName": "1812 km of Qatar",
+    "round": 7,
+    "circuit": {
+      "name": "Lusail International Circuit",
+      "city": "Lusail",
+      "country": "Qatar",
+      "countryCode": "QA",
+      "lat": 25.49,
+      "lng": 51.4542
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-10-22T09:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-10-22T14:00:00Z"
+      },
+      {
+        "type": "Practice 3",
+        "startTimeUTC": "2026-10-23T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-23T13:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-24T11:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-22",
+    "dateEnd": "2026-10-24"
+  },
+  {
     "id": "wec-2026-r08",
     "seriesId": "wec",
     "eventName": "8 Hours of Bahrain",
@@ -293,26 +293,26 @@
     "sessions": [
       {
         "type": "Practice 1",
-        "startTimeUTC": "2026-10-30T08:00:00Z"
+        "startTimeUTC": "2026-11-05T08:00:00Z"
       },
       {
         "type": "Practice 2",
-        "startTimeUTC": "2026-10-30T13:30:00Z"
+        "startTimeUTC": "2026-11-05T13:30:00Z"
       },
       {
         "type": "Practice 3",
-        "startTimeUTC": "2026-10-31T08:00:00Z"
+        "startTimeUTC": "2026-11-06T08:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-10-31T11:00:00Z"
+        "startTimeUTC": "2026-11-06T11:00:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-11-01T10:00:00Z"
+        "startTimeUTC": "2026-11-07T10:00:00Z"
       }
     ],
-    "dateStart": "2026-10-30",
-    "dateEnd": "2026-11-01"
+    "dateStart": "2026-11-05",
+    "dateEnd": "2026-11-07"
   }
 ]

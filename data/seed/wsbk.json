@@ -27,27 +27,27 @@
   {
     "id": "wsbk-2026-r02",
     "seriesId": "wsbk",
-    "eventName": "WorldSBK Aragón",
+    "eventName": "WorldSBK Portimão",
     "round": 2,
     "circuit": {
-      "name": "MotorLand Aragón",
-      "city": "Alcañiz",
-      "country": "Spain",
-      "countryCode": "ES",
-      "lat": 41.1274,
-      "lng": -0.2519
+      "name": "Autodromo Internacional do Algarve",
+      "city": "Portimão",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "lat": 37.2314,
+      "lng": -8.5003
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-03-20T09:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-03-20T13:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-03-21T11:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-03-21T13:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-03-22T09:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-03-22T11:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-03-22T13:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-03-27T09:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-03-27T13:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-03-28T11:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-03-28T13:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-03-29T09:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-03-29T11:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-03-29T13:00:00Z" }
     ],
-    "dateStart": "2026-03-20",
-    "dateEnd": "2026-03-22"
+    "dateStart": "2026-03-27",
+    "dateEnd": "2026-03-29"
   },
   {
     "id": "wsbk-2026-r03",
@@ -63,47 +63,97 @@
       "lng": 6.5244
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-04-24T08:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-04-24T12:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-04-25T10:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-04-25T12:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-04-26T08:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-04-26T10:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-04-26T12:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-04-17T08:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-04-17T12:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-04-18T10:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-04-18T12:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-04-19T08:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-04-19T10:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-04-19T12:00:00Z" }
     ],
-    "dateStart": "2026-04-24",
-    "dateEnd": "2026-04-26"
+    "dateStart": "2026-04-17",
+    "dateEnd": "2026-04-19"
   },
   {
     "id": "wsbk-2026-r04",
     "seriesId": "wsbk",
-    "eventName": "WorldSBK Estoril",
+    "eventName": "WorldSBK Balaton Park",
     "round": 4,
     "circuit": {
-      "name": "Circuito do Estoril",
-      "city": "Estoril",
-      "country": "Portugal",
-      "countryCode": "PT",
-      "lat": 38.7506,
-      "lng": -9.3937
+      "name": "Balaton Park Circuit",
+      "city": "Balatonfüred",
+      "country": "Hungary",
+      "countryCode": "HU",
+      "lat": 47.0394,
+      "lng": 17.8831
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-05-22T09:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-05-22T13:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-05-23T11:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-05-23T13:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-05-24T09:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-05-24T11:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-05-24T13:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-05-01T08:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-05-01T12:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-05-02T10:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-05-02T12:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-05-03T08:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-05-03T10:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-05-03T12:00:00Z" }
     ],
-    "dateStart": "2026-05-22",
-    "dateEnd": "2026-05-24"
+    "dateStart": "2026-05-01",
+    "dateEnd": "2026-05-03"
   },
   {
     "id": "wsbk-2026-r05",
     "seriesId": "wsbk",
-    "eventName": "WorldSBK Misano",
+    "eventName": "WorldSBK Brno",
     "round": 5,
+    "circuit": {
+      "name": "Automotodrom Brno",
+      "city": "Brno",
+      "country": "Czech Republic",
+      "countryCode": "CZ",
+      "lat": 49.2010,
+      "lng": 16.7928
+    },
+    "sessions": [
+      { "type": "Practice 1",     "startTimeUTC": "2026-05-15T08:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-05-15T12:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-05-16T10:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-05-16T12:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-05-17T08:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-05-17T10:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-05-17T12:00:00Z" }
+    ],
+    "dateStart": "2026-05-15",
+    "dateEnd": "2026-05-17"
+  },
+  {
+    "id": "wsbk-2026-r06",
+    "seriesId": "wsbk",
+    "eventName": "WorldSBK Aragón",
+    "round": 6,
+    "circuit": {
+      "name": "MotorLand Aragón",
+      "city": "Alcañiz",
+      "country": "Spain",
+      "countryCode": "ES",
+      "lat": 41.1274,
+      "lng": -0.2519
+    },
+    "sessions": [
+      { "type": "Practice 1",     "startTimeUTC": "2026-05-29T09:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-05-29T13:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-05-30T11:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-05-30T13:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-05-31T09:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-05-31T11:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-05-31T13:00:00Z" }
+    ],
+    "dateStart": "2026-05-29",
+    "dateEnd": "2026-05-31"
+  },
+  {
+    "id": "wsbk-2026-r07",
+    "seriesId": "wsbk",
+    "eventName": "WorldSBK Misano",
+    "round": 7,
     "circuit": {
       "name": "Misano World Circuit Marco Simoncelli",
       "city": "Misano Adriatico",
@@ -125,10 +175,10 @@
     "dateEnd": "2026-06-14"
   },
   {
-    "id": "wsbk-2026-r06",
+    "id": "wsbk-2026-r08",
     "seriesId": "wsbk",
     "eventName": "WorldSBK Donington Park",
-    "round": 6,
+    "round": 8,
     "circuit": {
       "name": "Donington Park",
       "city": "Castle Donington",
@@ -150,35 +200,10 @@
     "dateEnd": "2026-07-12"
   },
   {
-    "id": "wsbk-2026-r07",
-    "seriesId": "wsbk",
-    "eventName": "WorldSBK Most",
-    "round": 7,
-    "circuit": {
-      "name": "Autodrom Most",
-      "city": "Most",
-      "country": "Czech Republic",
-      "countryCode": "CZ",
-      "lat": 50.5232,
-      "lng": 13.6333
-    },
-    "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-07-31T09:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-07-31T13:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-08-01T11:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-08-01T13:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-08-02T09:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-08-02T11:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-08-02T13:00:00Z" }
-    ],
-    "dateStart": "2026-07-31",
-    "dateEnd": "2026-08-02"
-  },
-  {
-    "id": "wsbk-2026-r08",
+    "id": "wsbk-2026-r09",
     "seriesId": "wsbk",
     "eventName": "WorldSBK Magny-Cours",
-    "round": 8,
+    "round": 9,
     "circuit": {
       "name": "Circuit de Nevers Magny-Cours",
       "city": "Magny-Cours",
@@ -188,72 +213,72 @@
       "lng": 3.1636
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-09-11T09:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-09-11T13:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-09-12T11:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-09-12T13:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-09-13T09:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-09-13T11:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-09-13T13:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-09-04T09:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-09-04T13:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-09-05T11:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-09-05T13:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-09-06T09:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-09-06T11:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-09-06T13:00:00Z" }
     ],
-    "dateStart": "2026-09-11",
-    "dateEnd": "2026-09-13"
-  },
-  {
-    "id": "wsbk-2026-r09",
-    "seriesId": "wsbk",
-    "eventName": "WorldSBK Barcelona",
-    "round": 9,
-    "circuit": {
-      "name": "Circuit de Barcelona-Catalunya",
-      "city": "Barcelona",
-      "country": "Spain",
-      "countryCode": "ES",
-      "lat": 41.5700,
-      "lng": 2.2611
-    },
-    "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-10-02T09:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-10-02T13:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-10-03T11:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-10-03T13:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-10-04T09:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-10-04T11:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-10-04T13:00:00Z" }
-    ],
-    "dateStart": "2026-10-02",
-    "dateEnd": "2026-10-04"
+    "dateStart": "2026-09-04",
+    "dateEnd": "2026-09-06"
   },
   {
     "id": "wsbk-2026-r10",
     "seriesId": "wsbk",
-    "eventName": "WorldSBK Indonesia",
+    "eventName": "WorldSBK Cremona",
     "round": 10,
     "circuit": {
-      "name": "Pertamina Mandalika International Street Circuit",
-      "city": "Lombok",
-      "country": "Indonesia",
-      "countryCode": "ID",
-      "lat": -8.8978,
-      "lng": 116.2941
+      "name": "Cremona Circuit",
+      "city": "Cremona",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 45.1333,
+      "lng": 10.0261
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-10-30T03:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-10-30T07:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-10-31T05:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-10-31T07:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-11-01T03:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-11-01T05:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-11-01T07:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-09-25T09:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-09-25T13:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-09-26T11:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-09-26T13:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-09-27T09:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-09-27T11:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-09-27T13:00:00Z" }
     ],
-    "dateStart": "2026-10-30",
-    "dateEnd": "2026-11-01"
+    "dateStart": "2026-09-25",
+    "dateEnd": "2026-09-27"
   },
   {
     "id": "wsbk-2026-r11",
     "seriesId": "wsbk",
-    "eventName": "WorldSBK Jerez",
+    "eventName": "WorldSBK Estoril",
     "round": 11,
+    "circuit": {
+      "name": "Circuito do Estoril",
+      "city": "Estoril",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "lat": 38.7506,
+      "lng": -9.3937
+    },
+    "sessions": [
+      { "type": "Practice 1",     "startTimeUTC": "2026-10-09T09:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-10-09T13:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-10-10T11:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-10-10T13:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-10-11T09:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-10-11T11:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-10-11T13:00:00Z" }
+    ],
+    "dateStart": "2026-10-09",
+    "dateEnd": "2026-10-11"
+  },
+  {
+    "id": "wsbk-2026-r12",
+    "seriesId": "wsbk",
+    "eventName": "WorldSBK Jerez",
+    "round": 12,
     "circuit": {
       "name": "Circuito de Jerez – Ángel Nieto",
       "city": "Jerez de la Frontera",
@@ -263,15 +288,15 @@
       "lng": -6.0317
     },
     "sessions": [
-      { "type": "Practice 1",     "startTimeUTC": "2026-11-20T10:30:00Z" },
-      { "type": "Practice 2",     "startTimeUTC": "2026-11-20T14:00:00Z" },
-      { "type": "Superpole",      "startTimeUTC": "2026-11-21T12:00:00Z" },
-      { "type": "Race 1",         "startTimeUTC": "2026-11-21T14:00:00Z" },
-      { "type": "Warm Up",        "startTimeUTC": "2026-11-22T10:15:00Z" },
-      { "type": "Superpole Race", "startTimeUTC": "2026-11-22T12:00:00Z" },
-      { "type": "Race 2",         "startTimeUTC": "2026-11-22T14:00:00Z" }
+      { "type": "Practice 1",     "startTimeUTC": "2026-10-16T10:30:00Z" },
+      { "type": "Practice 2",     "startTimeUTC": "2026-10-16T14:00:00Z" },
+      { "type": "Superpole",      "startTimeUTC": "2026-10-17T12:00:00Z" },
+      { "type": "Race 1",         "startTimeUTC": "2026-10-17T14:00:00Z" },
+      { "type": "Warm Up",        "startTimeUTC": "2026-10-18T10:15:00Z" },
+      { "type": "Superpole Race", "startTimeUTC": "2026-10-18T12:00:00Z" },
+      { "type": "Race 2",         "startTimeUTC": "2026-10-18T14:00:00Z" }
     ],
-    "dateStart": "2026-11-20",
-    "dateEnd": "2026-11-22"
+    "dateStart": "2026-10-16",
+    "dateEnd": "2026-10-18"
   }
 ]
