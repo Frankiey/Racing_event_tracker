@@ -2,7 +2,8 @@
 
 **All of motorsport. One dashboard.**
 
-[![GitHub Pages](https://img.shields.io/badge/Live_Site-GitHub_Pages-222?style=flat-square&logo=github)](https://frankiey.github.io/Racing_event_tracker)
+## [🏎 frankiey.github.io/Racing_event_tracker](https://frankiey.github.io/Racing_event_tracker)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Built with Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
