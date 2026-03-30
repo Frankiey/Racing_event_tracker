@@ -844,62 +844,6 @@
     "dateEnd": "2026-04-05"
   },
   {
-    "id": "fe-2026-r06",
-    "seriesId": "fe",
-    "eventName": "Misano E-Prix",
-    "round": 6,
-    "circuit": {
-      "name": "Misano World Circuit",
-      "city": "Misano Adriatico",
-      "country": "Italy",
-      "countryCode": "IT",
-      "lat": 43.9633,
-      "lng": 12.6847
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-04-04T09:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-04-04T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-04-04T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-04-04",
-    "dateEnd": "2026-04-04"
-  },
-  {
-    "id": "fe-2026-r07",
-    "seriesId": "fe",
-    "eventName": "Misano E-Prix II",
-    "round": 7,
-    "circuit": {
-      "name": "Misano World Circuit",
-      "city": "Misano Adriatico",
-      "country": "Italy",
-      "countryCode": "IT",
-      "lat": 43.9633,
-      "lng": 12.6847
-    },
-    "sessions": [
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-04-05T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-04-05T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-04-05",
-    "dateEnd": "2026-04-05"
-  },
-  {
     "id": "nls-2026-r03",
     "seriesId": "nls",
     "eventName": "NLS 3",
@@ -1224,36 +1168,6 @@
     "dateEnd": "2026-04-26"
   },
   {
-    "id": "fe-2026-r08",
-    "seriesId": "fe",
-    "eventName": "Monaco E-Prix",
-    "round": 8,
-    "circuit": {
-      "name": "Circuit de Monaco",
-      "city": "Monte Carlo",
-      "country": "Monaco",
-      "countryCode": "MC",
-      "lat": 43.7347,
-      "lng": 7.4206
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-04-25T08:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-04-25T11:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-04-25T14:00:00Z"
-      }
-    ],
-    "dateStart": "2026-04-25",
-    "dateEnd": "2026-04-25"
-  },
-  {
     "id": "motogp-2026-r04",
     "seriesId": "motogp",
     "eventName": "GRAND PRIX OF SPAIN",
@@ -1344,6 +1258,40 @@
     "dateEnd": "2026-05-03"
   },
   {
+    "id": "fe-2026-r07",
+    "seriesId": "fe",
+    "eventName": "Berlin E-Prix",
+    "round": 7,
+    "circuit": {
+      "name": "Tempelhof Airport Street Circuit",
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 52.4727,
+      "lng": 13.4039
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-05-01T14:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-05-02T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-02T09:40:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-02T14:05:00Z"
+      }
+    ],
+    "dateStart": "2026-05-01",
+    "dateEnd": "2026-05-02"
+  },
+  {
     "id": "f1-2026-r04",
     "seriesId": "f1",
     "eventName": "Miami Grand Prix",
@@ -1410,6 +1358,36 @@
       }
     ],
     "dateStart": "2026-05-01",
+    "dateEnd": "2026-05-03"
+  },
+  {
+    "id": "fe-2026-r08",
+    "seriesId": "fe",
+    "eventName": "Berlin E-Prix II",
+    "round": 8,
+    "circuit": {
+      "name": "Tempelhof Airport Street Circuit",
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 52.4727,
+      "lng": 13.4039
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-03T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-03T09:40:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-03T14:05:00Z"
+      }
+    ],
+    "dateStart": "2026-05-03",
     "dateEnd": "2026-05-03"
   },
   {
@@ -1533,36 +1511,6 @@
     "dateEnd": "2026-05-10"
   },
   {
-    "id": "fe-2026-r09",
-    "seriesId": "fe",
-    "eventName": "Berlin E-Prix",
-    "round": 9,
-    "circuit": {
-      "name": "Tempelhof Airport Street Circuit",
-      "city": "Berlin",
-      "country": "Germany",
-      "countryCode": "DE",
-      "lat": 52.4727,
-      "lng": 13.4039
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-05-09T09:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-05-09T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-05-09T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-05-09",
-    "dateEnd": "2026-05-09"
-  },
-  {
     "id": "motogp-2026-r05",
     "seriesId": "motogp",
     "eventName": "GRAND PRIX DE FRANCE",
@@ -1582,32 +1530,6 @@
       }
     ],
     "dateStart": "2026-05-08",
-    "dateEnd": "2026-05-10"
-  },
-  {
-    "id": "fe-2026-r10",
-    "seriesId": "fe",
-    "eventName": "Berlin E-Prix II",
-    "round": 10,
-    "circuit": {
-      "name": "Tempelhof Airport Street Circuit",
-      "city": "Berlin",
-      "country": "Germany",
-      "countryCode": "DE",
-      "lat": 52.4727,
-      "lng": 13.4039
-    },
-    "sessions": [
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-05-10T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-05-10T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-05-10",
     "dateEnd": "2026-05-10"
   },
   {
@@ -1707,6 +1629,40 @@
     "dateEnd": "2026-05-17"
   },
   {
+    "id": "fe-2026-r09",
+    "seriesId": "fe",
+    "eventName": "Monaco E-Prix",
+    "round": 9,
+    "circuit": {
+      "name": "Circuit de Monaco",
+      "city": "Monte Carlo",
+      "country": "Monaco",
+      "countryCode": "MC",
+      "lat": 43.7347,
+      "lng": 7.4206
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-05-15T14:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-05-16T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-16T09:40:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-16T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-15",
+    "dateEnd": "2026-05-16"
+  },
+  {
     "id": "moto3-2026-r06",
     "seriesId": "moto3",
     "eventName": "Moto3 Grand Prix Of Catalonia",
@@ -1778,6 +1734,36 @@
       }
     ],
     "dateStart": "2026-05-15",
+    "dateEnd": "2026-05-17"
+  },
+  {
+    "id": "fe-2026-r10",
+    "seriesId": "fe",
+    "eventName": "Monaco E-Prix II",
+    "round": 10,
+    "circuit": {
+      "name": "Circuit de Monaco",
+      "city": "Monte Carlo",
+      "country": "Monaco",
+      "countryCode": "MC",
+      "lat": 43.7347,
+      "lng": 7.4206
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-05-17T07:30:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-17T09:40:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-17T12:00:00Z"
+      }
+    ],
+    "dateStart": "2026-05-17",
     "dateEnd": "2026-05-17"
   },
   {
@@ -2082,36 +2068,6 @@
     ],
     "dateStart": "2026-05-30",
     "dateEnd": "2026-05-31"
-  },
-  {
-    "id": "fe-2026-r11",
-    "seriesId": "fe",
-    "eventName": "Shanghai E-Prix",
-    "round": 11,
-    "circuit": {
-      "name": "Shanghai Street Circuit",
-      "city": "Shanghai",
-      "country": "China",
-      "countryCode": "CN",
-      "lat": 31.3389,
-      "lng": 121.2198
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-05-30T04:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-05-30T07:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-05-30T10:00:00Z"
-      }
-    ],
-    "dateStart": "2026-05-30",
-    "dateEnd": "2026-05-30"
   },
   {
     "id": "motogp-2026-r07",
@@ -2486,36 +2442,6 @@
     "dateEnd": "2026-06-14"
   },
   {
-    "id": "fe-2026-r12",
-    "seriesId": "fe",
-    "eventName": "Jakarta E-Prix",
-    "round": 12,
-    "circuit": {
-      "name": "Jakarta International E-Prix Circuit",
-      "city": "Jakarta",
-      "country": "Indonesia",
-      "countryCode": "ID",
-      "lat": -6.1507,
-      "lng": 106.8885
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-06-13T04:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-06-13T07:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-06-13T10:00:00Z"
-      }
-    ],
-    "dateStart": "2026-06-13",
-    "dateEnd": "2026-06-13"
-  },
-  {
     "id": "dtm-2026-r03",
     "seriesId": "dtm",
     "eventName": "DTM Zandvoort",
@@ -2638,6 +2564,36 @@
     ],
     "dateStart": "2026-06-19",
     "dateEnd": "2026-06-21"
+  },
+  {
+    "id": "fe-2026-r11",
+    "seriesId": "fe",
+    "eventName": "Sanya E-Prix",
+    "round": 11,
+    "circuit": {
+      "name": "Sanya Street Circuit",
+      "city": "Sanya",
+      "country": "China",
+      "countryCode": "CN",
+      "lat": 18.2528,
+      "lng": 109.5119
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-06-20T05:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-20T07:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-20T09:00:00Z"
+      }
+    ],
+    "dateStart": "2026-06-20",
+    "dateEnd": "2026-06-20"
   },
   {
     "id": "nls-2026-r05",
@@ -2881,36 +2837,6 @@
     "dateEnd": "2026-06-28"
   },
   {
-    "id": "fe-2026-r13",
-    "seriesId": "fe",
-    "eventName": "Portland E-Prix",
-    "round": 13,
-    "circuit": {
-      "name": "Portland International Raceway",
-      "city": "Portland",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": 45.5949,
-      "lng": -122.6894
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-06-27T18:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-06-27T21:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-06-28T00:00:00Z"
-      }
-    ],
-    "dateStart": "2026-06-27",
-    "dateEnd": "2026-06-28"
-  },
-  {
     "id": "motogp-2026-r10",
     "seriesId": "motogp",
     "eventName": "GRAND PRIX OF THE NETHERLANDS",
@@ -2931,6 +2857,40 @@
     ],
     "dateStart": "2026-06-26",
     "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "fe-2026-r12",
+    "seriesId": "fe",
+    "eventName": "Shanghai E-Prix",
+    "round": 12,
+    "circuit": {
+      "name": "Shanghai Street Circuit",
+      "city": "Shanghai",
+      "country": "China",
+      "countryCode": "CN",
+      "lat": 31.2304,
+      "lng": 121.4737
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-03T05:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-04T05:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-04T07:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-04T09:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-03",
+    "dateEnd": "2026-07-04"
   },
   {
     "id": "f3-2026-r06",
@@ -3134,6 +3094,36 @@
     "dateEnd": "2026-07-05"
   },
   {
+    "id": "fe-2026-r13",
+    "seriesId": "fe",
+    "eventName": "Shanghai E-Prix II",
+    "round": 13,
+    "circuit": {
+      "name": "Shanghai Street Circuit",
+      "city": "Shanghai",
+      "country": "China",
+      "countryCode": "CN",
+      "lat": 31.2304,
+      "lng": 121.4737
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-05T05:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-05T07:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-05T09:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-05",
+    "dateEnd": "2026-07-05"
+  },
+  {
     "id": "wsbk-2026-r06",
     "seriesId": "wsbk",
     "eventName": "WorldSBK Donington Park",
@@ -3270,36 +3260,6 @@
     "dateEnd": "2026-07-12"
   },
   {
-    "id": "fe-2026-r14",
-    "seriesId": "fe",
-    "eventName": "London E-Prix",
-    "round": 14,
-    "circuit": {
-      "name": "ExCeL London Circuit",
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "lat": 51.5087,
-      "lng": 0.0317
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-07-11T09:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-07-11T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-07-11T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-07-11",
-    "dateEnd": "2026-07-11"
-  },
-  {
     "id": "indycar-2026-r11",
     "seriesId": "indycar",
     "eventName": "Hy-Vee Homefront 250",
@@ -3349,32 +3309,6 @@
       }
     ],
     "dateStart": "2026-07-10",
-    "dateEnd": "2026-07-12"
-  },
-  {
-    "id": "fe-2026-r15",
-    "seriesId": "fe",
-    "eventName": "London E-Prix II",
-    "round": 15,
-    "circuit": {
-      "name": "ExCeL London Circuit",
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "lat": 51.5087,
-      "lng": 0.0317
-    },
-    "sessions": [
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-07-12T12:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-07-12T15:00:00Z"
-      }
-    ],
-    "dateStart": "2026-07-12",
     "dateEnd": "2026-07-12"
   },
   {
@@ -3613,6 +3547,40 @@
     "dateEnd": "2026-07-18"
   },
   {
+    "id": "fe-2026-r14",
+    "seriesId": "fe",
+    "eventName": "Tokyo E-Prix",
+    "round": 14,
+    "circuit": {
+      "name": "Tokyo Street Circuit",
+      "city": "Tokyo",
+      "country": "Japan",
+      "countryCode": "JP",
+      "lat": 35.6762,
+      "lng": 139.6503
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-24T05:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-25T04:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-25T06:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-25T08:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-24",
+    "dateEnd": "2026-07-25"
+  },
+  {
     "id": "f1-2026-r11",
     "seriesId": "f1",
     "eventName": "Hungarian Grand Prix",
@@ -3652,34 +3620,34 @@
     "dateEnd": "2026-07-26"
   },
   {
-    "id": "fe-2026-r16",
+    "id": "fe-2026-r15",
     "seriesId": "fe",
-    "eventName": "Seoul E-Prix",
-    "round": 16,
+    "eventName": "Tokyo E-Prix II",
+    "round": 15,
     "circuit": {
-      "name": "Seoul Street Circuit",
-      "city": "Seoul",
-      "country": "South Korea",
-      "countryCode": "KR",
-      "lat": 37.512,
-      "lng": 127.0586
+      "name": "Tokyo Street Circuit",
+      "city": "Tokyo",
+      "country": "Japan",
+      "countryCode": "JP",
+      "lat": 35.6762,
+      "lng": 139.6503
     },
     "sessions": [
       {
         "type": "Practice",
-        "startTimeUTC": "2026-07-25T03:00:00Z"
+        "startTimeUTC": "2026-07-26T04:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-07-25T06:00:00Z"
+        "startTimeUTC": "2026-07-26T06:00:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-07-25T09:00:00Z"
+        "startTimeUTC": "2026-07-26T08:00:00Z"
       }
     ],
-    "dateStart": "2026-07-25",
-    "dateEnd": "2026-07-25"
+    "dateStart": "2026-07-26",
+    "dateEnd": "2026-07-26"
   },
   {
     "id": "f2-2026-r09",
@@ -3957,6 +3925,70 @@
       }
     ],
     "dateStart": "2026-08-14",
+    "dateEnd": "2026-08-16"
+  },
+  {
+    "id": "fe-2026-r16",
+    "seriesId": "fe",
+    "eventName": "London E-Prix",
+    "round": 16,
+    "circuit": {
+      "name": "ExCeL London Circuit",
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "lat": 51.5087,
+      "lng": 0.0317
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-08-14T11:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-08-15T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-15T11:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-15T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-14",
+    "dateEnd": "2026-08-15"
+  },
+  {
+    "id": "fe-2026-r17",
+    "seriesId": "fe",
+    "eventName": "London E-Prix II",
+    "round": 17,
+    "circuit": {
+      "name": "ExCeL London Circuit",
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "lat": 51.5087,
+      "lng": 0.0317
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-08-16T09:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-16T11:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-16T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-16",
     "dateEnd": "2026-08-16"
   },
   {
