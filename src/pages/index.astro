@@ -6,14 +6,16 @@ import Countdown from '../components/Countdown.astro';
 import SeriesBadge from '../components/SeriesBadge.astro';
 import { getRaceSession, isPlaceholderTime, countryFlag } from '../lib/time';
 import { SERIES_LIST, getSeriesMeta } from '../lib/series';
+import type { RaceEvent } from '../lib/types';
 
 import upcomingData from '../../data/gold/upcoming.json';
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const now = new Date();
-const upcoming = upcomingData as any[];
-const allEvents = calendarData as any[];
+const SEASON_YEAR = now.getFullYear();
+const upcoming = (upcomingData as any).events as RaceEvent[];
+const allEvents = (calendarData as any).events as RaceEvent[];
 
 // Find the next race session across all series
 const nextRace = upcoming
@@ -55,7 +57,7 @@ function getWeekLabel(event: any): string {
     : new Date(event.dateEnd + 'T23:59:59Z') < now;
   if (isPast) return '__recent__';
 
-  const eventDate = new Date(event.dateStart + 'T00:00:00');
+  const eventDate = new Date(event.dateStart + 'T12:00:00Z');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
@@ -143,7 +145,7 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
     <!-- ── Season stats ── -->
     <div class="mb-6">
       <div class="flex items-center gap-3 mb-3">
-        <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">2026 Season</h2>
+        <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">{SEASON_YEAR} Season</h2>
         <span class="h-px flex-1 bg-zinc-800/80" />
         <a href={`${base}/calendar`} class="text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors uppercase tracking-widest">
           Full calendar →
@@ -266,6 +268,8 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 </Layout>
 
 <script>
+  import { isPlaceholderTime } from '../lib/time';
+
   // ── Client-side staleness fix ──
   // Labels (Today/Tomorrow) are baked at build time; race sessions may have
   // passed since the last deploy. This runs on page load and tab-focus to
@@ -282,7 +286,7 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
     let moved = 0;
     mainWrappers.forEach(wrapper => {
       const raceUtc = wrapper.getAttribute('data-race-utc') ?? '';
-      if (!raceUtc || raceUtc.startsWith('1900-')) return;
+      if (!raceUtc || isPlaceholderTime(raceUtc)) return;
       if (new Date(raceUtc) < now) {
         recentGrid?.appendChild(wrapper);
         moved++;
@@ -312,7 +316,7 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       const heading = section.querySelector('h2');
       if (!heading) return;
 
-      const eventDate = new Date(dateStr + 'T00:00:00');
+      const eventDate = new Date(dateStr + 'T12:00:00Z');
       const today = new Date(); today.setHours(0, 0, 0, 0);
       const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
 

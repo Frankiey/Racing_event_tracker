@@ -100,8 +100,9 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
             print(f"  WARNING: could not read {silver_file.name}: {e}")
 
     print(f"\n[GOLD] Building merged layers from {len(all_silver_merged)} total events...")
-    calendar = build_calendar(all_silver_merged)
-    upcoming = build_upcoming(all_silver_merged)
+    sources = [f.stem for f in sorted(SILVER_DIR.glob("*.json"))]
+    calendar = build_calendar(all_silver_merged, sources=sources)
+    upcoming = build_upcoming(all_silver_merged, sources=sources)
 
     write_json(GOLD_DIR / "calendar.json", calendar)
     write_json(GOLD_DIR / "upcoming.json", upcoming)

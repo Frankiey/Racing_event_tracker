@@ -84,25 +84,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </div>
 
 <script>
-  // ── Series metadata (mirrors series.ts — keep in sync) ──
-  const SERIES_META: Record<string, { label: string; shortLabel: string; color: string }> = {
-    f1:      { label: 'Formula 1',  shortLabel: 'F1',      color: '#e10600' },
-    f2:      { label: 'Formula 2',  shortLabel: 'F2',      color: '#0090d0' },
-    f3:      { label: 'Formula 3',  shortLabel: 'F3',      color: '#0090d0' },
-    fe:      { label: 'Formula E',  shortLabel: 'FE',      color: '#14b8a6' },
-    motogp:  { label: 'MotoGP',     shortLabel: 'MotoGP',  color: '#be123c' },
-    indycar: { label: 'IndyCar',    shortLabel: 'IndyCar', color: '#1e40af' },
-    nascar:  { label: 'NASCAR',     shortLabel: 'NASCAR',  color: '#eab308' },
-    wec:     { label: 'WEC',        shortLabel: 'WEC',     color: '#0ea5e9' },
-  };
+  import { SESSION_LABELS } from '../lib/sessions';
+  import { SERIES_META } from '../lib/series-client';
 
-  const SESSION_ABBR: Record<string, string> = {
-    'Practice 1': 'FP1', 'Practice 2': 'FP2', 'Practice 3': 'FP3',
-    'Free Practice 1': 'FP1', 'Free Practice 2': 'FP2', 'Free Practice 3': 'FP3',
-    'Sprint Qualifying': 'Sprint Qualifying', 'Sprint Shootout': 'Sprint Shootout',
-    'Sprint': 'Sprint Race', 'Qualifying': 'Qualifying', 'Feature Race': 'Race',
-    'Race': 'Race', 'Warm Up': 'Warm Up',
-  };
+  // ── Series metadata (imported from series-client.ts) ──
 
   const PLACEHOLDER_YEAR = '1900';
 
@@ -158,12 +143,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Sessions
     const sessionsEl = document.getElementById('modal-sessions') as HTMLElement;
-    const validSessions = (event.sessions as any[]).filter((s: any) => !isPlaceholder(s.startTimeUTC));
+    const validSessions = (event.sessions as { type: string; startTimeUTC: string }[]).filter((s) => !isPlaceholder(s.startTimeUTC));
     sessionsEl.innerHTML = validSessions.map((s: any) => {
       const isRace = isRaceType(s.type);
       const isPastSession = new Date(s.startTimeUTC) < new Date();
       const isNext = !isPastSession && validSessions.filter((x: any) => new Date(x.startTimeUTC) < new Date()).length === validSessions.indexOf(s);
-      const label = SESSION_ABBR[s.type] ?? s.type;
+      const label = SESSION_LABELS[s.type] ?? s.type;
       const dotColor = isRace ? meta.color : isPastSession ? '#27272a' : '#52525b';
 
       return `
@@ -219,4 +204,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
   window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('astro:before-swap', () => { document.body.style.overflow = ''; });
 </script>

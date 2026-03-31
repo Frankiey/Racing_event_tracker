@@ -130,6 +130,6 @@ Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive 
 - Check `worknotes.md` for current status and open questions
 - Run `bd ready` to find tracked open issues before starting new work
 - Keep the `/status` route minimal — it targets small screens and kiosk displays
-- `upcoming.json` is sorted by series, NOT by date — always sort by `dateStart` before applying per-series caps
+- `upcoming.json` is sorted chronologically by `dateStart`
 - `data/gold/broadcasts.json` does not exist yet — it's a planned feature (see bd issue Racing_event_tracker-com)
 - When adding a new page, also add it to `Nav.astro` and update this CLAUDE.md structure section

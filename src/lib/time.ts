@@ -30,8 +30,8 @@ export function isPlaceholderTime(utc: string): boolean {
 
 /** Format a date range like "Mar 6–8" or "Mar 6" for single-day events. */
 export function formatDateRange(dateStart: string, dateEnd: string): string {
-  const start = new Date(dateStart + 'T00:00:00');
-  const end = new Date(dateEnd + 'T00:00:00');
+  const start = new Date(dateStart + 'T12:00:00Z');
+  const end = new Date(dateEnd + 'T12:00:00Z');
   const monthDay = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' });
 
   if (dateStart === dateEnd) {
@@ -50,6 +50,7 @@ export function formatDateRange(dateStart: string, dateEnd: string): string {
 
 /** Get the main race session from an event's sessions array. */
 export function getRaceSession(sessions: { type: string; startTimeUTC: string }[]): { type: string; startTimeUTC: string } | undefined {
-  return sessions.find(s => s.type === 'Race' || s.type === 'Feature Race')
+  const raceTypes = ['Race', 'Feature Race', 'Race 2', 'Race 1', 'Sprint Race', 'Superpole Race', 'Sprint'];
+  return sessions.find(s => raceTypes.includes(s.type))
     ?? sessions[sessions.length - 1];
 }

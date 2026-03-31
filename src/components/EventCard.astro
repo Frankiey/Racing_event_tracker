@@ -2,6 +2,7 @@
 import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { formatDateRange, getRaceSession, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
+import { SESSION_ABBR } from '../lib/sessions';
 
 interface Props {
   event: {
@@ -29,13 +30,6 @@ const past = isPastEvent(event.dateEnd);
 const flag = countryFlag(event.circuit.countryCode);
 const eventJson = JSON.stringify(event).replace(/'/g, '&#39;');
 
-const SESSION_ABBR: Record<string, string> = {
-  'Practice 1': 'FP1', 'Practice 2': 'FP2', 'Practice 3': 'FP3',
-  'Free Practice 1': 'FP1', 'Free Practice 2': 'FP2', 'Free Practice 3': 'FP3',
-  'Sprint Qualifying': 'SQ', 'Sprint Shootout': 'SQ', 'Sprint': 'Sprint',
-  'Qualifying': 'Quali', 'Feature Race': 'Race', 'Race': 'Race',
-  'Warm Up': 'WU',
-};
 function abbr(type: string) { return SESSION_ABBR[type] ?? type; }
 function isRace(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
@@ -186,13 +180,16 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
     });
 
     // Sync fav button states when another tab/page changes them
-    window.addEventListener('rt-favs-changed', () => {
+    function onFavsChanged() {
       const favs = getFavs();
       document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
         const id = btn.dataset.favId;
         if (id) btn.dataset.fav = favs.has(id) ? 'true' : 'false';
       });
-    });
+    }
+    window.removeEventListener('rt-favs-changed', (window as any)._rtFavsHandler);
+    (window as any)._rtFavsHandler = onFavsChanged;
+    window.addEventListener('rt-favs-changed', onFavsChanged);
 
     // ── Card click → open modal ──
     document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {

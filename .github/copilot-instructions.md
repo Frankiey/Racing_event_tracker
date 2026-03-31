@@ -80,7 +80,7 @@ public/           — Static assets (logos, flags, images)
 - **Country flags**: `countryFlag()` only handles alpha-2 codes (2 letters). Alpha-3 silently returns empty string
 - **Favorites**: stored in `localStorage['rt-favs']` as a JSON array of event IDs; use `rt-favs-changed` CustomEvent to sync UI across components
 - **Cross-component events**: `rt-open-event` (detail: event object) opens the modal; `rt-favs-changed` triggers fav UI sync
-- `upcoming.json` is sorted by series, NOT by date — always sort by `dateStart` before applying per-series caps
+- `upcoming.json` is sorted chronologically by `dateStart`
 
 ## Commands
 

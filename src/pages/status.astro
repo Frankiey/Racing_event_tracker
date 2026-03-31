@@ -4,11 +4,12 @@ import SeriesBadge from '../components/SeriesBadge.astro';
 import { getSeriesMeta, SERIES_LIST } from '../lib/series';
 import { countryFlag, formatDateRange, isPlaceholderTime } from '../lib/time';
 
+import type { RaceEvent } from '../lib/types';
 import upcomingData from '../../data/gold/upcoming.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const allEvents = (upcomingData as any[]);
+const allEvents = ((upcomingData as any).events as RaceEvent[]);
 const sorted = [...allEvents].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
 
 const now = new Date();
@@ -283,6 +284,9 @@ const sidebarEvents = sorted
   </div>
 
   <script>
+    import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
+    import { isPlaceholderTime } from '../lib/time';
+
     // ── Types ────────────────────────────────────────────────────────────────
     interface Session {
       type: string;
@@ -300,26 +304,9 @@ const sidebarEvents = sorted
       dateEnd: string;
     }
 
-    // ── Series metadata ──────────────────────────────────────────────────────
-    const SERIES_META: Record<string, { color: string; label: string; shortLabel: string; order: number }> = {
-      f1:           { color: '#e10600', label: 'Formula 1',     shortLabel: 'F1',      order: 1  },
-      f2:           { color: '#0090d0', label: 'Formula 2',     shortLabel: 'F2',      order: 2  },
-      f3:           { color: '#60a5fa', label: 'Formula 3',     shortLabel: 'F3',      order: 3  },
-      fe:           { color: '#14b8a6', label: 'Formula E',     shortLabel: 'FE',      order: 4  },
-      motogp:       { color: '#be123c', label: 'MotoGP',        shortLabel: 'MotoGP',  order: 5  },
-      moto2:        { color: '#f97316', label: 'Moto2',         shortLabel: 'Moto2',   order: 6  },
-      moto3:        { color: '#facc15', label: 'Moto3',         shortLabel: 'Moto3',   order: 7  },
-      indycar:      { color: '#1e40af', label: 'IndyCar',       shortLabel: 'IndyCar', order: 8  },
-      nascar:       { color: '#eab308', label: 'NASCAR',        shortLabel: 'NASCAR',  order: 9  },
-      wec:          { color: '#0ea5e9', label: 'WEC',           shortLabel: 'WEC',     order: 10 },
-      imsa:         { color: '#16a34a', label: 'IMSA',          shortLabel: 'IMSA',    order: 11 },
-      dtm:          { color: '#dc2626', label: 'DTM',           shortLabel: 'DTM',     order: 12 },
-      nls:          { color: '#65a30d', label: 'NLS',           shortLabel: 'NLS',     order: 13 },
-      wsbk:         { color: '#9333ea', label: 'World Superbike', shortLabel: 'WSBK',  order: 14 },
-      superformula: { color: '#f59e0b', label: 'Super Formula', shortLabel: 'SF',      order: 15 },
-    };
+    // ── Series metadata (imported from series-client.ts) ──
     function getColor(id: string) { return SERIES_META[id]?.color ?? '#71717a'; }
-    function getOrder(id: string) { return SERIES_META[id]?.order ?? 99; }
+    function getOrder(id: string) { const idx = SERIES_ORDER.indexOf(id); return idx >= 0 ? idx : 99; }
     function getShortLabel(id: string) { return SERIES_META[id]?.shortLabel ?? id; }
     function getLabel(id: string) { return SERIES_META[id]?.label ?? id; }
 
@@ -332,7 +319,7 @@ const sidebarEvents = sorted
     }
 
     // ── Constants ────────────────────────────────────────────────────────────
-    const SESSION_DURATION_MS: Record<string, number> = {
+    const SESSION_DURATION_MIN: Record<string, number> = {
       'FP1': 60, 'FP2': 60, 'FP3': 60,
       'Qualifying': 90, 'Sprint Qualifying': 60,
       'Sprint': 45, 'Sprint Race': 45,
@@ -342,19 +329,16 @@ const sidebarEvents = sorted
       'default': 120,
     };
     const GRACE_MS = 30 * 60_000;
-    const PLACEHOLDER_PREFIX = '1900-';
     const MANUAL_TIMEOUT_MS = 60_000;
-
-    function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_PREFIX); }
 
     function estimatedEnd(session: Session): number {
       if (session.endTimeUTC) return new Date(session.endTimeUTC).getTime();
-      const dur = (SESSION_DURATION_MS[session.type] ?? SESSION_DURATION_MS['default']) * 60_000;
+      const dur = (SESSION_DURATION_MIN[session.type] ?? SESSION_DURATION_MIN['default']) * 60_000;
       return new Date(session.startTimeUTC).getTime() + dur;
     }
 
     function isSessionLive(session: Session, now: number): boolean {
-      if (isPlaceholder(session.startTimeUTC)) return false;
+      if (isPlaceholderTime(session.startTimeUTC)) return false;
       const start = new Date(session.startTimeUTC).getTime();
       return now >= start && now < estimatedEnd(session) + GRACE_MS;
     }
@@ -370,7 +354,7 @@ const sidebarEvents = sorted
 
     function getNextEvent(events: KioskEvent[], now: number): KioskEvent | null {
       return events.find(e =>
-        e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now)
+        e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now)
       ) ?? null;
     }
 
@@ -378,7 +362,7 @@ const sidebarEvents = sorted
       const liveHits: { event: KioskEvent; session: Session }[] = [];
       for (const event of events) {
         for (const session of event.sessions) {
-          if (!isPlaceholder(session.startTimeUTC) && isSessionLive(session, now)) {
+          if (!isPlaceholderTime(session.startTimeUTC) && isSessionLive(session, now)) {
             liveHits.push({ event, session });
           }
         }
@@ -396,7 +380,7 @@ const sidebarEvents = sorted
     }
 
     function getNextSession(event: KioskEvent, now: number): Session | null {
-      return event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now) ?? null;
+      return event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now) ?? null;
     }
 
     // ── Auto-rotation ────────────────────────────────────────────────────────
@@ -406,7 +390,7 @@ const sidebarEvents = sorted
 
     function updateRotationEvents(events: KioskEvent[], now: number) {
       const upcoming = events
-        .filter(e => e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
+        .filter(e => e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
         .slice(0, 5);
       // Reset index only when the pool changes identity
       if (upcoming[0]?.id !== rotationEvents[0]?.id || upcoming.length !== rotationEvents.length) {
@@ -645,11 +629,11 @@ const sidebarEvents = sorted
         if (mode === 'weekend') {
           targetSession = getNextSession(event, now);
           if (!targetSession) {
-            targetSession = event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race')) ?? null;
+            targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race')) ?? null;
           }
         } else {
-          targetSession = event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race'))
-            ?? event.sessions.filter(s => !isPlaceholder(s.startTimeUTC)).at(-1)
+          targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race'))
+            ?? event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC)).at(-1)
             ?? null;
         }
 
@@ -675,7 +659,7 @@ const sidebarEvents = sorted
       const wrap = document.getElementById('kiosk-session-strip-wrap');
       if (!strip) return;
 
-      const validSessions = event.sessions.filter(s => !isPlaceholder(s.startTimeUTC));
+      const validSessions = event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC));
       if (validSessions.length === 0) { if (wrap) wrap.classList.add('hidden'); return; }
       if (wrap) wrap.classList.remove('hidden');
 
@@ -722,7 +706,7 @@ const sidebarEvents = sorted
       if (!listEl) return;
       const now = Date.now();
       const upcoming = events
-        .filter(e => e.id !== heroId && e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
+        .filter(e => e.id !== heroId && e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
         .slice(0, 8);
 
       listEl.innerHTML = upcoming.map(event => {
@@ -815,7 +799,8 @@ const sidebarEvents = sorted
       try {
         const base = JSON.parse(document.getElementById('kiosk-base')!.textContent ?? '""');
         const res = await fetch(`${base}/data/gold/upcoming.json`, { cache: 'no-store' });
-        const data: KioskEvent[] = await res.json();
+        const envelope = await res.json();
+        const data: KioskEvent[] = envelope.events ?? envelope;
         const sorted = [...data].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
         const fp = `${sorted.length}-${sorted[0]?.id ?? ''}`;
         if (cachedFingerprint && fp !== cachedFingerprint) { location.reload(); return; }

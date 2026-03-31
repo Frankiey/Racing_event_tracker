@@ -1,6 +1,7 @@
 """Shared utilities for the data pipeline."""
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 import httpx
@@ -33,3 +34,21 @@ def write_json(path: Path, data) -> None:
 def read_json(path: Path):
     """Read a JSON file."""
     return json.loads(path.read_text())
+
+
+def to_iso(dt_str: str) -> str:
+    """Parse various date formats to ISO 8601 UTC string."""
+    try:
+        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
+        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    except (ValueError, AttributeError):
+        return dt_str
+
+
+def to_date(dt_str: str) -> str:
+    """Extract date portion from a datetime string."""
+    try:
+        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
+        return dt.strftime("%Y-%m-%d")
+    except (ValueError, AttributeError):
+        return dt_str

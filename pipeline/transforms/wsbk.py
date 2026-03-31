@@ -5,8 +5,8 @@ Handles two input shapes:
   2. Seed format (already silver) — pass-through when falling back to seed data
 """
 
-from datetime import datetime
 from pipeline.config import SEASON_YEAR
+from pipeline.utils import to_iso as _to_iso, to_date as _to_date
 
 
 _SILVER_KEYS = {"id", "seriesId", "eventName", "round", "circuit", "sessions", "dateStart", "dateEnd"}
@@ -103,17 +103,3 @@ def _normalize_country_code(code: str) -> str:
     return ""
 
 
-def _to_iso(dt_str: str) -> str:
-    try:
-        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-    except (ValueError, AttributeError):
-        return dt_str
-
-
-def _to_date(dt_str: str) -> str:
-    try:
-        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        return dt.strftime("%Y-%m-%d")
-    except (ValueError, AttributeError):
-        return dt_str

@@ -8,14 +8,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "fetch-data": "uv run python -m pipeline",
-    "test": "node tests/smoke.test.mjs"
+    "typecheck": "astro check",
+    "test": "astro check && node tests/smoke.test.mjs",
+    "test:smoke": "node tests/smoke.test.mjs"
   },
   "dependencies": {
-    "astro": "^5.7.0"
+    "@astrojs/check": "^0.9.8",
+    "astro": "^5.7.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
-    "tailwindcss": "^4.0.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "tailwindcss": "^4.0.0"
   }
 }

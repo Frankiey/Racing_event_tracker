@@ -2,14 +2,17 @@
 
 from datetime import datetime, timezone
 
-
-def build_calendar(all_events: list[dict]) -> list[dict]:
-    """Merge all silver events into a single sorted calendar."""
-    return sorted(all_events, key=_sort_key)
+from pipeline.config import SEASON_YEAR
 
 
-def build_upcoming(all_events: list[dict], limit: int = 30) -> list[dict]:
-    """Filter to upcoming events only, sorted by next session."""
+def build_calendar(all_events: list[dict], sources: list[str] | None = None) -> dict:
+    """Merge all silver events into a single sorted calendar with metadata envelope."""
+    events = sorted(all_events, key=_sort_key)
+    return _envelope(events, sources)
+
+
+def build_upcoming(all_events: list[dict], limit: int = 30, sources: list[str] | None = None) -> dict:
+    """Filter to upcoming events only, sorted by next session, with metadata envelope."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     upcoming = []
@@ -24,7 +27,18 @@ def build_upcoming(all_events: list[dict], limit: int = 30) -> list[dict]:
             upcoming.append(event)
 
     upcoming.sort(key=_sort_key)
-    return upcoming
+    return _envelope(upcoming[:limit], sources)
+
+
+def _envelope(events: list[dict], sources: list[str] | None = None) -> dict:
+    """Wrap events list in a metadata envelope."""
+    return {
+        "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "season": SEASON_YEAR,
+        "eventCount": len(events),
+        "sources": sorted(sources) if sources else [],
+        "events": events,
+    }
 
 
 def _normalize_time(t: str) -> str:

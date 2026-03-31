@@ -1,7 +1,17 @@
 """MotoGP bronze → silver transform."""
 
-from datetime import datetime
 from pipeline.config import SEASON_YEAR
+from pipeline.utils import to_iso as _to_iso, to_date as _to_date
+
+# Map Pulselive session type codes to display names
+_SESSION_TYPES = {
+    "FP": "FP",
+    "PR": "Practice",
+    "Q": "Q",
+    "SPR": "Sprint",
+    "RAC": "Race",
+    "WUP": "Warm Up",
+}
 
 
 def transform(bronze_events: list) -> list[dict]:
@@ -13,15 +23,19 @@ def transform(bronze_events: list) -> list[dict]:
     race_events = [e for e in (bronze_events or []) if not e.get("test")]
 
     for idx, event in enumerate(race_events, start=1):
-        sessions = []
-
-        # Use date_end as race day (Sunday), date_start as weekend start (Friday)
-        race_time = event.get("date_end") or event.get("date_start")
-        if race_time:
-            sessions.append({
-                "type": "Race",
-                "startTimeUTC": _to_iso(race_time),
-            })
+        # Use real session data if available (from _sessions key added by fetcher)
+        raw_sessions = event.get("_sessions", [])
+        if raw_sessions:
+            sessions = _build_sessions(raw_sessions)
+        else:
+            # Fallback: single Race session from event dates
+            race_time = event.get("date_end") or event.get("date_start")
+            sessions = []
+            if race_time:
+                sessions.append({
+                    "type": "Race",
+                    "startTimeUTC": _to_iso(race_time),
+                })
 
         circuit = event.get("circuit") or {}
         country = event.get("country") or {}
@@ -47,19 +61,36 @@ def transform(bronze_events: list) -> list[dict]:
     return events
 
 
-def _to_iso(dt_str: str) -> str:
-    """Parse various date formats to ISO 8601 UTC."""
-    try:
-        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-    except (ValueError, AttributeError):
-        return dt_str
+def _build_sessions(raw_sessions: list) -> list[dict]:
+    """Convert Pulselive session objects to silver session format."""
+    sessions = []
+    # Count occurrences per type to decide whether to add numbers
+    type_counts: dict[str, int] = {}
+    for s in raw_sessions:
+        stype = s.get("type", "")
+        label = _SESSION_TYPES.get(stype, stype)
+        type_counts[label] = type_counts.get(label, 0) + 1
+
+    type_counters: dict[str, int] = {}
+    for s in raw_sessions:
+        stype = s.get("type", "")
+        label = _SESSION_TYPES.get(stype, stype)
+        date_str = s.get("date", "")
+
+        if not date_str:
+            continue
+
+        # Number sessions that appear multiple times (FP1/FP2, Q1/Q2)
+        if type_counts.get(label, 0) > 1:
+            num = type_counters.get(label, 0) + 1
+            type_counters[label] = num
+            label = f"{label}{num}"
+
+        sessions.append({
+            "type": label,
+            "startTimeUTC": _to_iso(date_str),
+        })
+
+    return sessions
 
 
-def _to_date(dt_str: str) -> str:
-    """Extract date portion from a datetime string."""
-    try:
-        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-        return dt.strftime("%Y-%m-%d")
-    except (ValueError, AttributeError):
-        return dt_str

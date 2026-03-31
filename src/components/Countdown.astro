@@ -37,8 +37,13 @@ const { targetUTC, label } = Astro.props;
 </div>
 
 <script>
+  const _countdownIntervals: number[] = [];
+
   function initCountdowns() {
     document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
+      if (el.dataset.countdownInit) return; // guard against double-init
+      el.dataset.countdownInit = '1';
+
       const target = new Date(el.dataset.countdown!).getTime();
 
       function update() {
@@ -65,11 +70,19 @@ const { targetUTC, label } = Astro.props;
       }
 
       update();
-      setInterval(update, 1000);
+      _countdownIntervals.push(setInterval(update, 1000));
+    });
+  }
+
+  function cleanupCountdowns() {
+    _countdownIntervals.splice(0).forEach(clearInterval);
+    document.querySelectorAll<HTMLElement>('[data-countdown-init]').forEach(el => {
+      delete el.dataset.countdownInit;
     });
   }
 
   // Run on initial load and after Astro page transitions
   initCountdowns();
+  document.addEventListener('astro:before-swap', cleanupCountdowns);
   document.addEventListener('astro:after-swap', initCountdowns);
 </script>

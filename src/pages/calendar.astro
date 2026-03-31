@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import type { RaceEvent } from '../lib/types';
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const events = calendarData as any[];
+const events = (calendarData as any).events as RaceEvent[];
 const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
 ---
 
@@ -77,24 +78,16 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
 </Layout>
 
 <script>
+  import { SESSION_ABBR } from '../lib/sessions';
+  import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
+  import type { RaceEvent, RaceSession } from '../lib/types';
+
   // ── Data & series meta ────────────────────────────────────────────────────
-  const allEvents: any[] = JSON.parse(document.getElementById('all-events-data')!.textContent!);
+  const allEvents: RaceEvent[] = JSON.parse(document.getElementById('all-events-data')!.textContent!);
 
   const FILTER_KEY = 'rt-filters';
 
-  const SERIES_ORDER = ['f1','f2','f3','fe','motogp','moto2','moto3','indycar','nascar','wec'];
-  const SERIES_META: Record<string, { label: string; shortLabel: string; color: string; category: '4-wheel' | '2-wheel' }> = {
-    f1:      { label: 'Formula 1',  shortLabel: 'F1',      color: '#e10600', category: '4-wheel' },
-    f2:      { label: 'Formula 2',  shortLabel: 'F2',      color: '#0090d0', category: '4-wheel' },
-    f3:      { label: 'Formula 3',  shortLabel: 'F3',      color: '#60a5fa', category: '4-wheel' },
-    fe:      { label: 'Formula E',  shortLabel: 'FE',      color: '#14b8a6', category: '4-wheel' },
-    motogp:  { label: 'MotoGP',     shortLabel: 'MotoGP',  color: '#be123c', category: '2-wheel' },
-    moto2:   { label: 'Moto2',      shortLabel: 'Moto2',   color: '#f97316', category: '2-wheel' },
-    moto3:   { label: 'Moto3',      shortLabel: 'Moto3',   color: '#facc15', category: '2-wheel' },
-    indycar: { label: 'IndyCar',    shortLabel: 'IndyCar', color: '#1e40af', category: '4-wheel' },
-    nascar:  { label: 'NASCAR',     shortLabel: 'NASCAR',  color: '#eab308', category: '4-wheel' },
-    wec:     { label: 'WEC',        shortLabel: 'WEC',     color: '#0ea5e9', category: '4-wheel' },
-  };
+  const allSeriesIds = [...new Set<string>(allEvents.map(e => e.seriesId))];
 
   // ── State ─────────────────────────────────────────────────────────────────
   const todayDate = new Date();
@@ -102,8 +95,6 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
   let displayYear  = todayDate.getFullYear();
   let displayMonth = todayDate.getMonth(); // 0-based
   let selectedDate: string | null = null;
-
-  const allSeriesIds = [...new Set<string>(allEvents.map(e => e.seriesId))];
 
   // empty set = all visible (same convention as dashboard filter)
   const activeFilters = new Set<string>();
@@ -129,6 +120,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     } else {
       localStorage.setItem(FILTER_KEY, JSON.stringify([...activeFilters]));
     }
+    rebuildDateIndex();
     window.dispatchEvent(new CustomEvent('rt-filters-changed', { detail: { active: [...activeFilters] } }));
   }
 
@@ -145,13 +137,28 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     return (d.getDay() + 6) % 7;
   }
 
-  function eventsOnDate(dateStr: string): any[] {
+  function eventsOnDate(dateStr: string): RaceEvent[] {
+    return dateIndex.get(dateStr) ?? [];
+  }
+
+  // Build a Map<dateStr, Event[]> index for O(1) lookup per calendar cell
+  let dateIndex = new Map<string, RaceEvent[]>();
+
+  function rebuildDateIndex() {
+    dateIndex = new Map();
     const showAll = activeFilters.size === 0;
-    return allEvents.filter(e =>
-      (showAll || activeFilters.has(e.seriesId)) &&
-      e.dateStart <= dateStr &&
-      e.dateEnd   >= dateStr
-    );
+    for (const e of allEvents) {
+      if (!showAll && !activeFilters.has(e.seriesId)) continue;
+      // Walk from dateStart to dateEnd
+      const start = new Date(e.dateStart + 'T12:00:00Z');
+      const end = new Date(e.dateEnd + 'T12:00:00Z');
+      for (let d = new Date(start); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
+        const key = d.toISOString().slice(0, 10);
+        const arr = dateIndex.get(key);
+        if (arr) arr.push(e);
+        else dateIndex.set(key, [e]);
+      }
+    }
   }
 
   function flag(code: string): string {
@@ -169,12 +176,9 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     });
   }
 
-  const SESSION_ABBR: Record<string, string> = {
-    'Practice 1': 'FP1',   'Practice 2': 'FP2',   'Practice 3': 'FP3',
-    'Free Practice 1': 'FP1', 'Free Practice 2': 'FP2', 'Free Practice 3': 'FP3',
-    'Sprint Qualifying': 'SQ', 'Sprint Shootout': 'SQ', 'Sprint': 'Sprint',
-    'Qualifying': 'Quali', 'Feature Race': 'Race', 'Race': 'Race', 'Warm Up': 'WU',
-  };
+  function esc(str: string): string {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
 
   // ── Filter UI ─────────────────────────────────────────────────────────────
   function renderFilter() {
@@ -332,7 +336,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
         return `<span
           class="shrink-0 text-[9px] font-bold leading-none rounded px-1 py-0.5 whitespace-nowrap block"
           style="background-color:${bg};color:${text}"
-          title="${e.eventName}"
+          title="${esc(e.eventName)}"
         >${m.shortLabel}</span>`;
       }).join('');
 
@@ -396,8 +400,8 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
       weekday: 'long', month: 'long', day: 'numeric',
     });
 
-    function sessionsOnDay(ev: any, dateStr: string): any[] {
-      return (ev.sessions ?? []).filter((s: any) => {
+    function sessionsOnDay(ev: RaceEvent, dateStr: string): RaceSession[] {
+      return (ev.sessions ?? []).filter((s) => {
         if (s.startTimeUTC.startsWith('1900')) return false;
         // Session falls on this date in UTC — good enough for display
         return s.startTimeUTC.slice(0, 10) === dateStr ||
@@ -436,7 +440,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
 
       return `<article
         class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${isPast ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
-        data-event='${JSON.stringify(ev).replace(/'/g, '&#39;')}'
+        data-event='${esc(JSON.stringify(ev))}'
         role="button" tabindex="0"
       >
         <div class="w-0.5 self-stretch rounded-full shrink-0" style="background-color:${m.color}"></div>
@@ -446,9 +450,9 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
             <span class="text-[11px] text-zinc-500 font-mono">Rd ${ev.round}</span>
             ${spanLabel}
           </div>
-          <h3 class="font-bold text-sm ${isPast ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${ev.eventName}</h3>
+          <h3 class="font-bold text-sm ${isPast ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${esc(ev.eventName)}</h3>
           <div class="flex items-center gap-1.5 text-xs text-zinc-500 ${sessions.length > 0 ? 'mb-2' : ''}">
-            ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${ev.circuit?.name ?? ''}</span>
+            ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${esc(ev.circuit?.name ?? '')}</span>
           </div>
           ${sessions.length > 0 ? `<div class="flex flex-wrap gap-x-3 gap-y-1">${sessHtml}</div>` : ''}
         </div>
@@ -518,6 +522,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
   // ── Bootstrap ─────────────────────────────────────────────────────────────
   function init() {
     loadFiltersFromStorage();
+    rebuildDateIndex();
     renderFilter();
     renderMonth();
     renderDayDetail();
@@ -528,6 +533,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     const ids: string[] = e.detail.active ?? [];
     activeFilters.clear();
     ids.forEach((id: string) => { if (allSeriesIds.includes(id)) activeFilters.add(id); });
+    rebuildDateIndex();
     selectedDate = null;
     renderFilter();
     renderMonth();

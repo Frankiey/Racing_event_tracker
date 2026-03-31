@@ -32,6 +32,7 @@ __pycache__/
 # Cache
 .cache/
 .turbo/
+data/bronze/
 
 # Beads / Dolt files (added by bd init)
 .dolt/

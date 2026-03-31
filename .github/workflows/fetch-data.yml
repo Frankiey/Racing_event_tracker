@@ -5,6 +5,10 @@ on:
     - cron: '0 4 * * *'  # Daily at 04:00 UTC
   workflow_dispatch:
 
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -15,12 +19,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
         with:
-          version: "latest"
+          version: "0.11.x"
       - run: uv run python -m pipeline
+      - name: Validate data
+        run: uv run python -m pipeline.validate
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/silver/ data/gold/
           git diff --staged --quiet || git commit -m "chore: update race data [automated]"
           git push

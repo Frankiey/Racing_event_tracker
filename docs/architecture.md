@@ -95,23 +95,21 @@ interface RaceEvent {
   eventName: string;    // e.g. "Monaco Grand Prix"
   round: number;
   dateStart: string;    // ISO 8601 date of first session e.g. "2026-05-21"
+  dateEnd: string;      // ISO 8601 date of last session e.g. "2026-05-25"
   circuit: {
     name: string;
     city: string;
     country: string;
     countryCode: string;  // ISO 3166-1 alpha-2 ONLY (2 letters). Alpha-3 breaks flags.
-    lat: number;
-    lng: number;
+    lat: number | null;
+    lng: number | null;
   };
   sessions: Session[];
-  status: "upcoming" | "live" | "completed";
 }
 
 interface Session {
   type: string;           // "FP1", "FP2", "FP3", "Qualifying", "Sprint", "Race", etc.
   startTimeUTC: string;   // ISO 8601 UTC e.g. "2026-05-21T11:30:00Z"
-  endTimeUTC?: string;    // Optional — required for endurance events
-  status: "upcoming" | "live" | "completed";
 }
 ```
 

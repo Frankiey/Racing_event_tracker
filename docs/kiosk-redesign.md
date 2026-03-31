@@ -1,6 +1,6 @@
 # Kiosk Redesign — `/status`
 
-> **Status:** Design draft — not yet implemented
+> **Status:** Implemented — all phases shipped in `src/pages/status.astro`
 > **Goal:** Turn the current placeholder into a purpose-built ambient display fit for TVs, bar screens, and waiting rooms.
 
 ---
@@ -480,29 +480,29 @@ Footer: `<span id="kiosk-refreshed" class="text-xs text-zinc-700">Data as of --:
 All changes confined to `src/pages/status.astro`, `src/components/LocalTime.astro`, and `src/styles/global.css`. No new pages. No new components (session strip is inline in status.astro — not worth extracting until it's needed elsewhere).
 
 ### Phase 1 — Layout & Static Visuals
-- [ ] Remove `max-w-md`, implement two-column flex layout
-- [ ] Enlarge countdown to `clamp(4rem, 12vw, 9rem)` via style
-- [ ] Add country flag, circuit name, round number to hero
-- [ ] Apply series color tint to hero (inline `style=`, radial gradient)
-- [ ] Add series color left-border on hero card
-- [ ] Add live clock (JS, updates every second)
-- [ ] Sidebar: 8 upcoming events, sorted by dateStart
+- [x] Remove `max-w-md`, implement two-column flex layout
+- [x] Enlarge countdown to `clamp(4rem, 12vw, 9rem)` via style
+- [x] Add country flag, circuit name, round number to hero
+- [x] Apply series color tint to hero (inline `style=`, radial gradient)
+- [x] Add series color left-border on hero card
+- [x] Add live clock (JS, updates every second)
+- [x] Sidebar: 8 upcoming events, sorted by dateStart
 
 ### Phase 2 — Session Strip
-- [ ] Extend `LocalTime.astro` with `weekday-time` format
-- [ ] Render session strip below countdown (filter placeholder sessions server-side)
-- [ ] Client JS: mark past sessions muted, highlight next session with series color border
+- [x] Extend `LocalTime.astro` with `weekday-time` format
+- [x] Render session strip below countdown (filter placeholder sessions server-side)
+- [x] Client JS: mark past sessions muted, highlight next session with series color border
 
 ### Phase 3 — Mode Logic
-- [ ] Implement `getKioskMode()` client-side
-- [ ] Weekend mode: switch countdown target to next session, activate color tint
-- [ ] Live mode: hide sidebar, full-screen layout, pulse dot, series glow
-- [ ] Multi-live: priority by series order, "also live" chips
-- [ ] CSS mode transitions (`kiosk-mode-enter` class)
+- [x] Implement `getKioskMode()` client-side
+- [x] Weekend mode: switch countdown target to next session, activate color tint
+- [x] Live mode: hide sidebar, full-screen layout, pulse dot, series glow
+- [x] Multi-live: priority by series order, "also live" chips
+- [x] CSS mode transitions (`kiosk-mode-enter` class)
 
 ### Phase 4 — Smart Refresh
-- [ ] Replace `setTimeout(reload)` with fetch-based soft refresh
-- [ ] Add last-refreshed footer label
+- [x] Replace `setTimeout(reload)` with fetch-based soft refresh
+- [x] Add last-refreshed footer label
 - [ ] Test midnight boundary (data rolls over to next day's events)
 
 ---
