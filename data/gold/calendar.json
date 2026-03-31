@@ -1881,6 +1881,32 @@
     "dateEnd": "2026-03-29"
   },
   {
+    "id": "nascar-2026-r10",
+    "seriesId": "nascar",
+    "eventName": "Cook Out 400",
+    "round": 10,
+    "circuit": {
+      "name": "Martinsville Speedway",
+      "city": "",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": null,
+      "lng": null
+    },
+    "sessions": [
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-28T00:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-29T15:30:00Z"
+      }
+    ],
+    "dateStart": "2026-03-29",
+    "dateEnd": "2026-03-29"
+  },
+  {
     "id": "indycar-2026-r04",
     "seriesId": "indycar",
     "eventName": "Children's of Alabama Indy Grand Prix",
@@ -1934,32 +1960,6 @@
       }
     ],
     "dateStart": "2026-03-27",
-    "dateEnd": "2026-03-29"
-  },
-  {
-    "id": "nascar-2026-r10",
-    "seriesId": "nascar",
-    "eventName": "Cook Out 400",
-    "round": 10,
-    "circuit": {
-      "name": "Martinsville Speedway",
-      "city": "",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": null,
-      "lng": null
-    },
-    "sessions": [
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-03-29T15:30:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-03-29T15:30:00Z"
-      }
-    ],
-    "dateStart": "2026-03-29",
     "dateEnd": "2026-03-29"
   },
   {
