@@ -168,14 +168,12 @@ for (const s of SERIES_LIST) {
   </main>
 </Layout>
 
-<script define:vars={{ allGlobeEvents, seriesMeta, flightableSeriesIds: flightableSeries.map(s => s.id), allCalendarEvents: allEvents }}>
-  // Expose data to the D3 script below and for deeplink resolution
-  window.__globeEvents = allGlobeEvents;
-  window.__seriesMeta = seriesMeta;
-  window.__flightableSeriesIds = flightableSeriesIds;
-  // Full events with sessions — used by EventModal for deeplink support
-  window.__passportFullEvents = allCalendarEvents;
-</script>
+<script type="application/json" id="globe-data" set:html={JSON.stringify({
+  events: allGlobeEvents,
+  seriesMeta,
+  flightableSeriesIds: flightableSeries.map(s => s.id),
+  fullEvents: allEvents,
+})} />
 
 <script>
   // ═══ Season Passport — D3 Orthographic Globe ═══
@@ -196,9 +194,12 @@ for (const s of SERIES_LIST) {
   // ── World geometry from topojson ──
   const land = feature(worldData as any, (worldData as any).objects.land);
 
+  // ── Parse embedded data ──
+  const __data = JSON.parse(document.getElementById('globe-data')!.textContent!);
+
   // ── State ──
-  const events: any[] = (window as any).__globeEvents;
-  const meta: any = (window as any).__seriesMeta;
+  const events: any[] = __data.events;
+  const meta: any = __data.seriesMeta;
   let activeFilter = 'all';
   let hoveredEvent: any = null;
   let selectedEvent: any = null;
@@ -215,7 +216,7 @@ for (const s of SERIES_LIST) {
   let followPlane = true;
   const FLIGHT_SPEED = 0.004; // progress per frame
   // Default to first flightable series (or 'f1')
-  const flightableIds: string[] = (window as any).__flightableSeriesIds ?? ['f1'];
+  const flightableIds: string[] = __data.flightableSeriesIds ?? ['f1'];
   let flightSeries: string = flightableIds[0] ?? 'f1';
   let lastFlightSegIndex = -1; // for destination-arrival detection
 
@@ -973,7 +974,7 @@ for (const s of SERIES_LIST) {
     const btn = panel.querySelector('.globe-open-modal');
     if (btn) {
       btn.addEventListener('click', () => {
-        const fullEvent = (window as any).__passportFullEvents?.find((ev: any) => ev.id === e.id);
+        const fullEvent = __data.fullEvents?.find((ev: any) => ev.id === e.id);
         if (fullEvent) {
           window.dispatchEvent(new CustomEvent('rt-open-event', { detail: fullEvent }));
         }

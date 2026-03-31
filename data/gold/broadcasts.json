@@ -1,0 +1,84 @@
+{
+  "regions": {
+    "NL": { "label": "Netherlands", "flag": "🇳🇱" },
+    "US": { "label": "United States", "flag": "🇺🇸" },
+    "UK": { "label": "United Kingdom", "flag": "🇬🇧" }
+  },
+  "series": {
+    "f1": {
+      "NL": [{ "channel": "Viaplay", "type": "streaming" }],
+      "US": [{ "channel": "ESPN", "type": "tv" }, { "channel": "ESPN+", "type": "streaming" }],
+      "UK": [{ "channel": "Sky Sports F1", "type": "tv" }, { "channel": "Channel 4", "type": "tv", "note": "Highlights" }]
+    },
+    "f2": {
+      "NL": [{ "channel": "Viaplay", "type": "streaming" }],
+      "US": [{ "channel": "ESPN+", "type": "streaming" }],
+      "UK": [{ "channel": "Sky Sports F1", "type": "tv" }]
+    },
+    "f3": {
+      "NL": [{ "channel": "Viaplay", "type": "streaming" }],
+      "US": [{ "channel": "ESPN+", "type": "streaming" }],
+      "UK": [{ "channel": "Sky Sports F1", "type": "tv" }]
+    },
+    "fe": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }],
+      "US": [{ "channel": "CBS Sports", "type": "tv" }],
+      "UK": [{ "channel": "Channel 4", "type": "tv" }]
+    },
+    "indycar": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }],
+      "US": [{ "channel": "NBC", "type": "tv" }, { "channel": "Peacock", "type": "streaming" }],
+      "UK": [{ "channel": "Sky Sports F1", "type": "tv" }]
+    },
+    "nascar": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }],
+      "US": [{ "channel": "FOX", "type": "tv" }, { "channel": "NBC", "type": "tv" }, { "channel": "USA Network", "type": "tv" }],
+      "UK": [{ "channel": "Viaplay", "type": "streaming" }]
+    },
+    "motogp": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }, { "channel": "MotoGP VideoPass", "type": "streaming" }],
+      "US": [{ "channel": "MotoGP VideoPass", "type": "streaming" }],
+      "UK": [{ "channel": "TNT Sports", "type": "tv" }, { "channel": "MotoGP VideoPass", "type": "streaming" }]
+    },
+    "moto2": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }],
+      "US": [{ "channel": "MotoGP VideoPass", "type": "streaming" }],
+      "UK": [{ "channel": "TNT Sports", "type": "tv" }]
+    },
+    "moto3": {
+      "NL": [{ "channel": "Ziggo Sport", "type": "tv" }],
+      "US": [{ "channel": "MotoGP VideoPass", "type": "streaming" }],
+      "UK": [{ "channel": "TNT Sports", "type": "tv" }]
+    },
+    "wec": {
+      "NL": [{ "channel": "Eurosport", "type": "tv" }, { "channel": "Discovery+", "type": "streaming" }],
+      "US": [{ "channel": "MotorTrend+", "type": "streaming" }],
+      "UK": [{ "channel": "Eurosport", "type": "tv" }, { "channel": "Discovery+", "type": "streaming" }]
+    },
+    "wsbk": {
+      "NL": [{ "channel": "Eurosport", "type": "tv" }],
+      "US": [{ "channel": "Peacock", "type": "streaming" }],
+      "UK": [{ "channel": "Eurosport", "type": "tv" }, { "channel": "Discovery+", "type": "streaming" }]
+    },
+    "imsa": {
+      "NL": [{ "channel": "IMSA.tv", "type": "streaming" }],
+      "US": [{ "channel": "NBC", "type": "tv" }, { "channel": "Peacock", "type": "streaming" }],
+      "UK": [{ "channel": "IMSA.tv", "type": "streaming" }]
+    },
+    "dtm": {
+      "NL": [{ "channel": "Motorsport.tv", "type": "streaming" }],
+      "US": [{ "channel": "Motorsport.tv", "type": "streaming" }],
+      "UK": [{ "channel": "Motorsport.tv", "type": "streaming" }]
+    },
+    "nls": {
+      "NL": [{ "channel": "YouTube (VLN)", "type": "streaming", "note": "Free" }],
+      "US": [{ "channel": "YouTube (VLN)", "type": "streaming", "note": "Free" }],
+      "UK": [{ "channel": "YouTube (VLN)", "type": "streaming", "note": "Free" }]
+    },
+    "superformula": {
+      "NL": [{ "channel": "Motorsport.tv", "type": "streaming" }],
+      "US": [{ "channel": "Motorsport.tv", "type": "streaming" }],
+      "UK": [{ "channel": "Motorsport.tv", "type": "streaming" }]
+    }
+  }
+}

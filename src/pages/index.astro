@@ -32,6 +32,57 @@ for (const e of allEvents) {
   seasonStats.set(e.seriesId, s);
 }
 
+// Aggregate season stats
+const totalEvents = allEvents.length;
+const totalDone = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') < now).length;
+const totalUpcoming = totalEvents - totalDone;
+const totalSeries = seasonStats.size;
+const allCountries = new Set(allEvents.map(e => e.circuit.countryCode).filter(Boolean));
+
+// Busiest month
+const monthCounts = new Map<string, number>();
+for (const e of allEvents) {
+  const m = new Date(e.dateStart + 'T12:00:00Z').toLocaleDateString('en', { month: 'long' });
+  monthCounts.set(m, (monthCounts.get(m) ?? 0) + 1);
+}
+const busiestMonth = [...monthCounts.entries()].sort((a, b) => b[1] - a[1])[0];
+
+// Busiest weekend (Fri-Sun window)
+const weekendCounts = new Map<string, { count: number; series: Set<string> }>();
+for (const e of allEvents) {
+  const d = new Date(e.dateStart + 'T12:00:00Z');
+  // Snap to the Friday of the week
+  const dow = d.getUTCDay();
+  const fri = new Date(d);
+  fri.setUTCDate(fri.getUTCDate() - ((dow + 2) % 7)); // 0=Sun -> back 2, 5=Fri -> 0
+  const key = fri.toISOString().slice(0, 10);
+  const entry = weekendCounts.get(key) ?? { count: 0, series: new Set() };
+  entry.count++;
+  entry.series.add(e.seriesId);
+  weekendCounts.set(key, entry);
+}
+const busiestWeekend = [...weekendCounts.entries()].sort((a, b) => b[1].count - a[1].count)[0];
+const busiestWeekendLabel = busiestWeekend
+  ? (() => { const d = new Date(busiestWeekend[0] + 'T12:00:00Z'); return d.toLocaleDateString('en', { month: 'short', day: 'numeric' }); })()
+  : '';
+
+// Clash detector: find weekends with 3+ series
+const clashWeekends: { dateLabel: string; dateStart: string; series: string[]; events: RaceEvent[] }[] = [];
+for (const [key, val] of weekendCounts.entries()) {
+  if (val.series.size >= 3) {
+    const d = new Date(key + 'T12:00:00Z');
+    const sun = new Date(d); sun.setUTCDate(sun.getUTCDate() + 2);
+    const label = `${d.toLocaleDateString('en', { month: 'short', day: 'numeric' })}–${sun.getUTCDate()}`;
+    const evts = allEvents.filter(e => {
+      const eStart = new Date(e.dateStart + 'T12:00:00Z');
+      return eStart >= d && eStart <= sun;
+    });
+    clashWeekends.push({ dateLabel: label, dateStart: key, series: [...val.series], events: evts });
+  }
+}
+clashWeekends.sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+const upcomingClashes = clashWeekends.filter(c => c.dateStart >= now.toISOString().slice(0, 10));
+
 // Sort chronologically (upcoming.json is grouped by series, not sorted by date)
 const sortedUpcoming = [...upcoming].sort((a: any, b: any) => a.dateStart.localeCompare(b.dateStart));
 
@@ -138,6 +189,69 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
               />
             </div>
           </div>
+        </div>
+      </div>
+    )}
+
+    <!-- ── Season overview stats ── -->
+    <div class="mb-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+        <p class="text-2xl font-black text-zinc-100 tabular-nums">{totalEvents}</p>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Events</p>
+      </div>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+        <p class="text-2xl font-black text-zinc-100 tabular-nums">{totalSeries}</p>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Series</p>
+      </div>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+        <p class="text-2xl font-black text-emerald-400 tabular-nums">{totalDone}</p>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Done</p>
+      </div>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+        <p class="text-2xl font-black text-zinc-100 tabular-nums">{totalUpcoming}</p>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Upcoming</p>
+      </div>
+      <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+        <p class="text-2xl font-black text-zinc-100 tabular-nums">{allCountries.size}</p>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Countries</p>
+      </div>
+      {busiestMonth && (
+        <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-3 text-center">
+          <p class="text-lg font-black text-zinc-100">{busiestMonth[0]}</p>
+          <p class="text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">Busiest ({busiestMonth[1]})</p>
+        </div>
+      )}
+    </div>
+
+    <!-- ── Upcoming clashes ── -->
+    {upcomingClashes.length > 0 && (
+      <div class="mb-6">
+        <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-3 flex items-center gap-3">
+          ⚡ Upcoming Clashes
+          <span class="h-px flex-1 bg-zinc-800/60" />
+        </h2>
+        <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {upcomingClashes.slice(0, 6).map(clash => (
+            <div class="bg-zinc-900/60 border border-amber-900/30 rounded-xl p-3">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold text-zinc-200">{clash.dateLabel}</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 font-bold uppercase tracking-widest">
+                  {clash.series.length} series
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-1">
+                {clash.series.map(sid => {
+                  const m = getSeriesMeta(sid);
+                  return (
+                    <span
+                      class="text-[10px] font-bold px-1.5 py-0.5 rounded text-white"
+                      style={`background-color: ${m.color};`}
+                    >{m.shortLabel}</span>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     )}

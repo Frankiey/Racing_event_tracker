@@ -3,6 +3,9 @@ import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { formatDateRange, getRaceSession, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
 import { SESSION_ABBR } from '../lib/sessions';
+import broadcastData from '../../data/gold/broadcasts.json';
+
+const hasBroadcast = (seriesId: string) => !!(broadcastData as any).series?.[seriesId];
 
 interface Props {
   event: {
@@ -112,6 +115,11 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       <span class="text-zinc-400">{event.circuit.name}</span>
       {event.circuit.city && <span class="text-zinc-700">·</span>}
       {event.circuit.city && <span>{event.circuit.city}</span>}
+      {hasBroadcast(event.seriesId) && (
+        <svg class="w-3.5 h-3.5 text-zinc-600 ml-auto shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-label="Broadcast info available">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" />
+        </svg>
+      )}
     </div>
 
     {/* Sessions row */}
@@ -147,12 +155,31 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
 </article>
 
 <script>
+  import { getLiveSession } from '../lib/client-utils';
+
   function initCards() {
     // ── Local time conversion ──
     document.querySelectorAll<HTMLTimeElement>('[data-local-time][data-format="time-short"]').forEach(el => {
       el.textContent = new Date(el.dataset.localTime!).toLocaleTimeString(undefined, {
         hour: '2-digit', minute: '2-digit', hour12: false,
       });
+    });
+
+    // ── Live session indicators ──
+    document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
+      try {
+        const ev = JSON.parse(card.dataset.event ?? '{}');
+        const live = getLiveSession(ev.sessions ?? []);
+        const existing = card.querySelector('.live-badge');
+        if (existing) existing.remove();
+        if (live) {
+          const badge = document.createElement('span');
+          badge.className = 'live-badge live-pulse inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest bg-emerald-500/20 text-emerald-400';
+          badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>Live';
+          const wrap = card.querySelector('.flex.items-center.gap-2.flex-wrap');
+          if (wrap) wrap.appendChild(badge);
+        }
+      } catch {}
     });
 
     // ── Favorites ──

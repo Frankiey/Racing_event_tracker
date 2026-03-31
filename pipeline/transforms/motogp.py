@@ -58,7 +58,7 @@ def transform(bronze_events: list) -> list[dict]:
             "round": idx,
             "circuit": {
                 "name": circuit.get("name", ""),
-                "city": circuit.get("place", ""),
+                "city": (circuit.get("place") or "").strip(),
                 "country": circuit.get("nation", ""),
                 "countryCode": country.get("iso", ""),
                 "lat": circuit.get("lat"),

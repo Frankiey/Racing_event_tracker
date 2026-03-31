@@ -84,6 +84,40 @@ export function readFavorites(): string[] {
   }
 }
 
+/** Estimated session duration in minutes by type. */
+export const SESSION_DURATION_MIN: Record<string, number> = {
+  'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
+  'Free Practice 1': 60, 'Free Practice 2': 60, 'Free Practice 3': 60,
+  'Qualifying': 90, 'Sprint Qualifying': 60, 'Sprint Shootout': 60,
+  'Sprint': 45, 'Sprint Race': 45,
+  'Race': 120, 'Feature Race': 120,
+  'Warm Up': 30,
+};
+const DEFAULT_DURATION = 120;
+
+/** Check if a session is currently live. */
+export function isSessionLive(session: { type: string; startTimeUTC: string }): boolean {
+  if (isPlaceholderTime(session.startTimeUTC)) return false;
+  const now = Date.now();
+  const start = new Date(session.startTimeUTC).getTime();
+  const dur = (SESSION_DURATION_MIN[session.type] ?? DEFAULT_DURATION) * 60_000;
+  return now >= start && now < start + dur;
+}
+
+/** Check if any session in an event is currently live. Returns the live session or null. */
+export function getLiveSession(sessions: { type: string; startTimeUTC: string }[]): { type: string; startTimeUTC: string } | null {
+  return sessions.find(s => isSessionLive(s)) ?? null;
+}
+
+/** Sleep verdict for a session start time based on local hour. */
+export function sleepVerdict(utc: string): { emoji: string; label: string; cssClass: string } {
+  const hour = new Date(utc).getHours() + new Date(utc).getMinutes() / 60;
+  if (hour >= 6 && hour < 22) return { emoji: '✅', label: 'Prime time', cssClass: 'text-emerald-400' };
+  if (hour >= 22 || hour < 0.5) return { emoji: '⚠️', label: 'Late night', cssClass: 'text-amber-400' };
+  if (hour >= 0.5 && hour < 5.5) return { emoji: '😴', label: 'Rough one', cssClass: 'text-rose-400' };
+  return { emoji: '🌅', label: 'Early bird', cssClass: 'text-amber-300' };
+}
+
 /** Toggle a favorite and persist. Dispatches 'rt-favs-changed'. */
 export function toggleFavorite(eventId: string): boolean {
   const favs = new Set(readFavorites());

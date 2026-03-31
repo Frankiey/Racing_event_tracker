@@ -51,10 +51,22 @@ const { targetUTC, label } = Astro.props;
         const diff = target - now;
 
         if (diff <= 0) {
+          // Session has started — show "IN PROGRESS" with elapsed time
+          const elapsed = now - target;
+          const elMin = Math.floor(elapsed / 60000);
+          const elHrs = Math.floor(elMin / 60);
+          const labelEl = el.querySelector('p');
+          if (labelEl && !labelEl.dataset.liveSet) {
+            labelEl.dataset.liveSet = '1';
+            labelEl.innerHTML = '<span class="live-pulse inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span><span class="text-emerald-400">In Progress</span></span>';
+          }
           el.querySelector('[data-unit="days"]')!.textContent = '0';
-          el.querySelector('[data-unit="hours"]')!.textContent = '0';
-          el.querySelector('[data-unit="minutes"]')!.textContent = '0';
-          el.querySelector('[data-unit="seconds"]')!.textContent = '0';
+          el.querySelector('[data-unit="hours"]')!.textContent = String(elHrs).padStart(2, '0');
+          el.querySelector('[data-unit="minutes"]')!.textContent = String(elMin % 60).padStart(2, '0');
+          el.querySelector('[data-unit="seconds"]')!.textContent = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
+          // Change label of first unit to elapsed context
+          const daysLabel = el.querySelector('[data-unit="days"]')?.nextElementSibling;
+          if (daysLabel && daysLabel.textContent !== 'elapsed') daysLabel.textContent = 'elapsed';
           return;
         }
 

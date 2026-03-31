@@ -6,6 +6,55 @@ import calendarData from '../../data/gold/calendar.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const events = (calendarData as any).events as RaceEvent[];
 const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
+
+// Build heatmap data: session count per day for the entire year
+const heatmapYear = 2026;
+const heatmapStart = new Date(heatmapYear, 0, 1); // Jan 1
+const heatmapEnd = new Date(heatmapYear, 11, 31); // Dec 31
+
+// Count sessions per day
+const daySessions = new Map<string, { count: number; labels: string[] }>();
+for (const event of events) {
+  for (const session of event.sessions) {
+    if (session.startTimeUTC.startsWith('1900-')) continue;
+    const dayKey = session.startTimeUTC.slice(0, 10); // YYYY-MM-DD
+    if (!daySessions.has(dayKey)) daySessions.set(dayKey, { count: 0, labels: [] });
+    const entry = daySessions.get(dayKey)!;
+    entry.count++;
+    if (entry.labels.length < 5) entry.labels.push(`${event.seriesId.toUpperCase()} ${session.type}`);
+  }
+}
+
+// Build day array from Jan 1 to Dec 31
+interface HeatDay { date: string; count: number; labels: string[]; month: number; }
+const heatDays: HeatDay[] = [];
+const cursor = new Date(heatmapStart);
+while (cursor <= heatmapEnd) {
+  const key = cursor.toISOString().slice(0, 10);
+  const entry = daySessions.get(key) ?? { count: 0, labels: [] };
+  heatDays.push({ date: key, count: entry.count, labels: entry.labels, month: cursor.getMonth() });
+  cursor.setDate(cursor.getDate() + 1);
+}
+
+// Pad start to align with Monday
+const firstDow = (new Date(heatmapStart).getDay() + 6) % 7; // 0=Mon
+const paddedDays: (HeatDay | null)[] = [...Array(firstDow).fill(null), ...heatDays];
+const maxCount = Math.max(1, ...heatDays.map(d => d.count));
+
+// Month labels (first day of each month's column)
+const monthLabels: { label: string; col: number }[] = [];
+let prevMonth = -1;
+for (let i = 0; i < paddedDays.length; i++) {
+  const d = paddedDays[i];
+  if (d && d.month !== prevMonth) {
+    const col = Math.floor(i / 7);
+    monthLabels.push({ label: new Date(d.date + 'T12:00:00Z').toLocaleDateString('en', { month: 'short' }), col });
+    prevMonth = d.month;
+  }
+}
+
+const totalWeeks = Math.ceil(paddedDays.length / 7);
+const todayKey = new Date().toISOString().slice(0, 10);
 ---
 
 <Layout title="RaceTrack — Calendar" currentPath={`${base}/calendar`}>
@@ -31,6 +80,52 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
         <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mr-1">View</span>
       </div>
       <div id="cal-filter" class="flex flex-wrap gap-1.5"></div>
+    </div>
+
+    <!-- Season Heatmap -->
+    <div class="mb-6">
+      <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-2">Season Activity</h3>
+      <div class="overflow-x-auto pb-2">
+        <div class="inline-grid gap-[2px]" style={`grid-template-columns: repeat(${totalWeeks}, 1fr); grid-template-rows: repeat(7, 1fr);`}>
+          {(() => {
+            const cells: any[] = [];
+            for (let week = 0; week < totalWeeks; week++) {
+              for (let dow = 0; dow < 7; dow++) {
+                const idx = week * 7 + dow;
+                const day = paddedDays[idx] ?? null;
+                if (!day) {
+                  cells.push(<div class="w-[11px] h-[11px]" />);
+                } else {
+                  const intensity = day.count === 0 ? 0 : Math.min(1, day.count / maxCount);
+                  const opacity = day.count === 0 ? 0.06 : 0.15 + intensity * 0.85;
+                  const isToday = day.date === todayKey;
+                  const title = day.count === 0
+                    ? day.date
+                    : `${day.count} session${day.count !== 1 ? 's' : ''} on ${day.date}: ${day.labels.join(', ')}`;
+                  cells.push(
+                    <div
+                      class={`w-[11px] h-[11px] rounded-[2px] ${isToday ? 'ring-1 ring-zinc-400' : ''}`}
+                      style={`background-color: rgba(99, 102, 241, ${opacity});`}
+                      title={title}
+                    />
+                  );
+                }
+              }
+            }
+            return cells;
+          })()}
+        </div>
+        <div class="flex gap-0 mt-1" style={`width: ${totalWeeks * 13}px;`}>
+          {monthLabels.map(m => (
+            <span
+              class="text-[8px] text-zinc-600 absolute"
+              style={`position: relative; left: ${m.col * 13}px;`}
+            >
+              {m.label}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
 
     <!-- Month navigation -->
@@ -326,6 +421,11 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
         ? `<span class="text-[9px] text-zinc-600 font-medium leading-none">+${overflow}</span>`
         : '';
 
+      // Clash badge — 3+ unique series on same day
+      const clashHtml = seenSeries.size >= 3
+        ? `<span class="text-[9px] font-bold text-amber-400 leading-none" title="${seenSeries.size} series racing">⚡</span>`
+        : '';
+
       const dayNumClass = isToday
         ? 'w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center bg-emerald-500 text-zinc-950 font-black text-[10px] sm:text-xs leading-none'
         : isPast
@@ -342,7 +442,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
           <span class="${dayNumClass}">${day}</span>
         </div>
         <div class="flex flex-wrap gap-0.5 sm:gap-1">
-          ${badgesHtml}${overflowHtml}
+          ${badgesHtml}${overflowHtml}${clashHtml}
         </div>
       </div>`);
     }

@@ -17,6 +17,15 @@ const allEvents = (calendarData as any).events as RaceEvent[];
         <p class="text-zinc-400 text-sm">Events you've saved. Click the ♥ on any event to add it.</p>
       </div>
       <button
+        id="export-ics"
+        class="text-xs text-zinc-500 hover:text-zinc-300 transition-colors border border-zinc-800 hover:border-zinc-600 rounded-lg px-3 py-1.5 flex items-center gap-1.5"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+        </svg>
+        Export .ics
+      </button>
+      <button
         id="clear-favs"
         class="text-xs text-zinc-600 hover:text-rose-400 transition-colors border border-zinc-800 hover:border-rose-800 rounded-lg px-3 py-1.5"
       >
@@ -43,6 +52,7 @@ const allEvents = (calendarData as any).events as RaceEvent[];
   import { SESSION_ABBR } from '../lib/sessions';
   import { SERIES_META } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, formatDateRange, isPastEvent, isPlaceholderTime, readFavorites, toggleFavorite, safeJsonParse } from '../lib/client-utils';
+  import { exportEventsIcs } from '../lib/ics';
   import type { RaceEvent } from '../lib/types';
 
   const allEvents: RaceEvent[] = safeJsonParse(
@@ -143,5 +153,12 @@ const allEvents = (calendarData as any).events as RaceEvent[];
       localStorage.removeItem('rt-favs');
       window.dispatchEvent(new CustomEvent('rt-favs-changed'));
     }
+  });
+
+  document.getElementById('export-ics')!.addEventListener('click', () => {
+    const favs = readFavorites();
+    const favEvents = allEvents.filter(e => favs.includes(e.id));
+    if (favEvents.length === 0) return;
+    exportEventsIcs('RaceTrack Watchlist', favEvents);
   });
 </script>

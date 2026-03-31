@@ -170,14 +170,14 @@ uv run python -m pipeline --bronze-only          # fetch only, skip transforms
 
 | Route | Purpose | Data Source |
 |-------|---------|-------------|
-| `/` | Dashboard — next events across all series, countdown hero, series stats | `gold/upcoming.json` |
-| `/calendar` | Full season calendar, grouped by month, jump-to-today | `gold/calendar.json` |
-| `/series/[id]` | Per-series page: progress bar, schedule, next race callout | `silver/[id].json` |
-| `/watchlist` | User's saved/favorited events (localStorage, no server) | `gold/upcoming.json` + localStorage |
+| `/` | Dashboard — next events across all series, countdown hero, season stats, clash detector | `gold/upcoming.json` + `gold/calendar.json` |
+| `/calendar` | Full season calendar, grouped by month, jump-to-today, series heatmap | `gold/calendar.json` |
+| `/series/[id]` | Per-series page: progress bar, schedule, next race callout, ICS export | `gold/calendar.json` |
+| `/watchlist` | User's saved/favorited events (localStorage, no server), ICS export | `gold/calendar.json` + localStorage |
 | `/status` | Minimal kiosk/small-screen view, auto-refresh | `gold/upcoming.json` |
-
-**Planned (not yet built):**
-- `/where-to-watch` — broadcast info by region (blocked on `gold/broadcasts.json` data)
+| `/recap` | "What Did I Miss?" — past 7 days events with spoiler-free toggle | `gold/calendar.json` |
+| `/widget/[series]` | Embeddable countdown widget per series, minimalist design | `gold/calendar.json` |
+| `/passport` | Circuit passport / collector view | `gold/calendar.json` |
 
 ---
 

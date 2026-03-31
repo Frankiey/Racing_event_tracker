@@ -2,22 +2,6 @@
 
 > Brainstormed 2026-03-31. Every idea is grounded in a persona need and respects the project constraints: static site, no backend, no auth, vanilla JS, localStorage only.
 
----
-
-## 1. Clash Radar — Weekend Conflict Map
-
-**Persona:** Sofía (Multi-Series Tracker)
-**Pain:** "Clash detection is entirely manual — she keeps a paper calendar"
-
-Show weekends where multiple series overlap, so Sofía can plan screen time and recordings weeks in advance.
-
-**What it looks like:**
-- On the calendar page, weekends with 2+ active series get a stacked badge showing which series collide (e.g. `F1 + WEC + Moto2`)
-- A dedicated "Busy Weekends" section at the top of the calendar — a compact list of upcoming clash weekends with the series dots and date range
-- Clicking a clash weekend scrolls to that weekend and highlights all overlapping events
-- Filterable: only show clashes for *her* active series filter, not all 15
-
-**Scope:** Frontend only. All data is already in `calendar.json` — just group by `dateStart`/`dateEnd` overlap.
 
 ---
 
@@ -35,94 +19,7 @@ Let users export events (or their entire watchlist) as `.ics` files they can imp
 
 **Scope:** Pure client-side. Generate `.ics` blobs in the browser from event data already on the page. No server needed.
 
----
 
-## 3. Race-Only Mode — "Just Tell Me When the Race Is"
-
-**Persona:** James (Casual Viewer)
-**Pain:** "Too much detail (all sessions listed) makes it hard to find the race"
-
-A toggle that collapses everything except the main race session on event cards. FP1/FP2/FP3/Quali disappear. Just the flag, event name, race day, and race time.
-
-**What it looks like:**
-- A small toggle/icon in the dashboard header: "All sessions" ↔ "Race only"
-- When active, EventCards show only the Race session row — cleaner, faster to scan
-- Preference saved to `localStorage` so it persists
-- Inactive by default (power users like Marco want all sessions)
-
-**Scope:** CSS visibility toggle on session rows, similar to the existing series filter. One `localStorage` key.
-
----
-
-## 4. This Weekend — Zero-Scroll Answer
-
-**Persona:** James + Priya (Casual Viewer + Mobile Glancer)
-**Pain:** "Is there a race this weekend?"
-
-A prominent, always-visible block at the top of the dashboard that directly answers: "Yes, here's what's on" or "No races this weekend. Next up: [event] in [X days]."
-
-**What it looks like:**
-- When races are happening this weekend: a full-width card showing all series racing this weekend with their race times in local time
-- When it's a quiet weekend: a calm "No races this weekend" message with a mini-countdown to the next event
-- Designed to be the entire answer for James in under 3 seconds
-
-**Scope:** Already have all the data in `upcoming.json`. Just a new component that filters on the current week.
-
----
-
-## 5. Race Weekend Timeline — Visual Session Strip
-
-**Persona:** Marco (Dedicated Fan)
-**Pain:** Session list is scannable but not spatial — hard to feel the rhythm of a weekend
-
-Replace the plain session list in the EventModal with a visual horizontal timeline showing all sessions laid out across Friday → Saturday → Sunday.
-
-**What it looks like:**
-- Horizontal bar split into 3 days (or 2 for short weekends)
-- Color-coded blocks placed at their actual time positions (proportional spacing)
-- Session labels inside blocks: `FP1`, `Q`, `Race`
-- Current time marker (thin red line) so you can see where you are in the weekend
-- Works for endurance events too — WEC 24h block would visually span the full bar
-
-**Scope:** Client-side component in the modal. Data already has `startTimeUTC` for each session.
-
----
-
-## 6. Series Passport — Season Journey Visualization
-
-**Persona:** Marco + Sofía
-**Pain:** Season progress bar exists but doesn't tell a story
-
-A world map dot visualization on each series page showing the season route — circuits connected by lines, visited ones filled, upcoming ones hollow. A visual "passport" of the season journey.
-
-**What it looks like:**
-- Compact SVG world map with dots at each circuit's `lat`/`lng` coordinates
-- Dots colored in the series color, with a subtle connecting line following the calendar order
-- Past rounds: filled dots. Next race: pulsing dot. Future: hollow dots
-- Hovering a dot shows the event name and date
-- Totally static at build time — no map tile APIs needed
-
-**Scope:** All circuit coordinates are already in the event schema (`lat`/`lng`). Generate an SVG at build time with Astro.
-
----
-
-## 7. My Racing Week — Personalized Weekly Digest
-
-**Persona:** Sofía + Priya
-**Pain:** Calendar shows everything; watchlist is a flat list
-
-A dynamic "My Week" view that shows only the events you care about, laid out as a 7-day strip. Like a personal race agenda.
-
-**What it looks like:**
-- Horizontal or vertical day strip: Mon → Sun
-- Shows only events from series the user has filtered to, or events in their watchlist
-- Each day cell shows session pills with local times: `FP1 10:30`, `Race 15:00`
-- Empty days show nothing (no noise)
-- Swipeable on mobile (next week / prev week)
-
-**Scope:** Client-side. Combines watchlist (from `localStorage`) with series filter preference. Data already available.
-
----
 
 ## 8. Where to Watch — Broadcast Guide
 
@@ -156,23 +53,6 @@ Turn RaceTrack into a Progressive Web App so Priya can add it to her home screen
 - Works offline with stale data + a "Data may be outdated" banner
 
 **Scope:** Astro generates static files — the service worker just caches them. No backend. Offline = stale-but-usable.
-
----
-
-## 10. Share Event — Quick Social Sharing
-
-**Persona:** Priya + Marco
-**Pain:** Telling friends "the race is at 3pm local"
-
-One-tap share button using the Web Share API (native on mobile) or clipboard fallback on desktop. Shares a formatted text snippet.
-
-**What it looks like:**
-- Share button on EventModal and EventCard
-- Uses `navigator.share()` on mobile for native share sheet
-- Fallback: copies a text snippet to clipboard on desktop
-- Snippet: `🏁 Monaco Grand Prix — Race: Sun May 24, 3:00 PM (your time) — racetrack.app/calendar`
-
-**Scope:** A few lines of JS. Web Share API is well-supported on mobile.
 
 ---
 
@@ -211,22 +91,6 @@ Optional browser notification reminders before sessions start. Set per-event or 
 
 ---
 
-## 13. Timezone Buddy — "What Time Is It There?"
-
-**Persona:** Marco + Sofía
-**Pain:** Timezone confusion across global circuits
-
-Show both the user's local time AND the circuit's local time for each session. Useful to understand the atmosphere — "it's a night race" vs. "it's afternoon there."
-
-**What it looks like:**
-- In EventModal, each session row shows: `Your time: 3:00 PM` / `Track time: 9:00 PM (SGT)`
-- Small sun/moon icon indicating day/night at the circuit
-- Uses the circuit's `lat`/`lng` to estimate the timezone (or add a `timezone` field to the schema)
-
-**Scope:** Need to add timezone data to circuits. Can calculate from coordinates using a small timezone lookup library client-side, or just add `timezone: "Asia/Singapore"` to the seed/schema.
-
----
-
 ## 14. Season Stats Dashboard — Year in Numbers
 
 **Persona:** Marco + Sofía
@@ -244,50 +108,167 @@ A small section on the dashboard or a dedicated panel showing season-level stats
 
 **Scope:** All computed at build time from `calendar.json`. No runtime cost.
 
+
 ---
 
-## 15. Dark/Light Theme Toggle
+---
 
-**Persona:** Priya + James
-**Pain:** Dark mode is great in the evening, but Priya checks during her morning commute in bright sunlight
+## 15. Clash Detector — "The Weekend From Hell"
 
-Add a theme toggle that respects `prefers-color-scheme` by default but lets users override.
+**Persona:** Sofía (Multi-series tracker)
+**Pain:** Three series race the same weekend and she misses sessions she cared about
+
+Surface weekends where multiple series overlap so fans can plan ahead (or brace for chaos).
 
 **What it looks like:**
-- Small sun/moon toggle in the Nav
-- Default: follow system preference
-- Override saved to `localStorage`
-- Light theme: white backgrounds, darker text, adjusted series colors for contrast
+- A "Clash" badge on the calendar whenever 3+ series share a weekend
+- Dedicated "Clashes" section on the dashboard: _"6 series racing Jun 13–15"_ with a mini grid
+- Hovering a clash shows which series are racing and what sessions overlap
+- Optional: "Clash score" — a 1-5 chili pepper rating based on how many big sessions land in the same 3-hour window
 
-**Scope:** Tailwind v4 dark mode utilities + a CSS class toggle on `<html>`. Series colors may need lighter variants.
+**Scope:** Pure build-time computation from `calendar.json`. Zero runtime cost, no API, just smart date overlap logic.
 
 ---
 
-## Priority Matrix
+## 16. Circuit Passport — "Been There, Raced That"
 
-| # | Feature | Effort | Impact | Persona(s) |
-|---|---------|--------|--------|-------------|
-| 4 | This Weekend | S | High | James, Priya |
-| 3 | Race-Only Mode | S | High | James |
-| 11 | Live Indicator | S | High | All |
-| 10 | Share Event | S | Medium | Priya, Marco |
-| 1 | Clash Radar | M | High | Sofía |
-| 2 | ICS Export | M | High | Sofía, Marco |
-| 14 | Season Stats | S | Medium | Marco, Sofía |
-| 8 | Where to Watch | M | High | All |
-| 13 | Timezone Buddy | S | Medium | Marco, Sofía |
-| 5 | Weekend Timeline | M | Medium | Marco |
-| 9 | PWA Install | M | High | Priya |
-| 12 | Session Alerts | M | Medium | Marco |
-| 7 | My Racing Week | M | Medium | Sofía, Priya |
-| 15 | Light Theme | M | Low | Priya, James |
-| 6 | Series Passport | L | Medium | Marco, Sofía |
+**Persona:** Marco (Dedicated Fan)
+**Pain:** No way to explore the venues; every event is just text
 
-> **S** = a few hours, **M** = 1-2 sessions, **L** = multi-session project
+An interactive circuit map where fans can browse the world map and click circuits to see all upcoming races there.
+
+**What it looks like:**
+- World SVG map (or lightweight Leaflet.js) on `/circuits` page — dot per circuit, colored by series
+- Click a dot → popover showing circuit name, flag, upcoming events, lap record holder
+- "I've been there" toggle — mark circuits you've attended in person (saved to localStorage)
+- Circuits with races in the next 30 days pulsing to draw the eye
+
+**Scope:** Static SVG world map + circuit lat/lng already in the data. Leaflet.js is ~42kb. No backend.
+
+---
+
+## 17. Countdown Sticker — Embeddable Widget
+
+**Persona:** Everyone
+**Pain:** "I want to show my friends when the next F1 race is"
+
+A minimal embeddable countdown card for any series — shareable as a link that shows a live countdown.
+
+**What it looks like:**
+- `/widget/f1` renders a stripped-down page: series color, event name, countdown timer, nothing else
+- Designed to be screenshot-able and share-worthy
+- URL params: `?series=motogp&bg=dark` — lightweight customisation
+- Zero JS if countdown already expired (just shows "Race weekend!" static text)
+
+**Scope:** New Astro static route, reuses existing event data. Basically a mini status page per series.
+
+---
+
+## 18. "What Did I Miss?" Recap Roll
+
+**Persona:** Priya (Casual Viewer)
+**Pain:** Looks at the app on Monday morning after a busy weekend, has no idea what ran
+
+A weekly digest view showing events from the past 7 days: what series ran, what the session results looked like at a glance (no spoilers until you tap).
+
+**What it looks like:**
+- `/recap` page or collapsible "Last week" section on the dashboard
+- Cards showing completed events with a **spoiler-free toggle** — blurs session names/results until tapped
+- "🏁 4 series raced this weekend" summary header
+- Optional: share button that generates a plain-text recap (no images, just emoji + text)
+
+**Scope:** Client-side date math on completed events. Spoiler toggle is just a CSS blur + click handler. No data beyond what's already there.
+
+---
+
+## 19. Sleep Calculator — "Can I Even Watch This?"
+
+**Persona:** Priya + Marco
+**Pain:** A race starts at 3am local time — is it worth setting an alarm, or just watching the replay?
+
+Show the user their local start time with a human-readable sleep verdict.
+
+**What it looks like:**
+- On every session row in the modal: a tiny badge that says _"3:14 AM · 😴 Rough one"_ or _"18:00 · ✅ Prime time"_ or _"23:45 · ⚠️ Late night"_
+- Thresholds: 06:00–22:00 = prime, 22:00–00:30 = late, 00:30–05:30 = rough, 05:30–06:00 = early bird
+- Color-coded: green / amber / red
+- Toggle off in settings if you hate fun
+
+**Scope:** Pure client-side local time math. Already hydrating session times — add one comparison step.
+
+---
+
+## 20. Series Heatmap — "When Is It Busy?"
+
+**Persona:** Sofía
+**Pain:** "I just need to know which months are insane and which are dead"
+
+A GitHub-style contribution heatmap for the full season — one square per day, colored by race density.
+
+**What it looks like:**
+- `/calendar` gets a heatmap strip above the monthly calendar grid
+- Each day = 1 square, color intensity = number of sessions that day (0 = dark, 5+ = bright series color)
+- Hover shows "3 sessions on Apr 12: F1 Quali, MotoGP Race, IndyCar Race"
+- Months labeled below; today highlighted
+
+**Scope:** Build-time data is already a day-indexed map (dateIndex in calendar.astro). Render the heatmap with inline SVG or a simple grid div layout. No new data needed.
+
+---
+
+## 21. Fan Mood Board — Hype Meter
+
+**Persona:** Everyone (engagement / fun)
+**Pain:** The app is purely functional, no emotional hook
+
+Before each race weekend, show a "hype meter" — a community-free, personal version where *you* rate your own excitement level.
+
+**What it looks like:**
+- On the EventModal: five emoji reaction buttons (😴 → 🤩) below the session list
+- Your reaction saved to localStorage per event ID
+- Dashboard shows your most-hyped upcoming event with a highlight ring
+- `/watchlist` shows your mood for each saved event
+- After the event: button flips to a "Was it worth it?" 👎👍 — rate the race from memory
+
+**Scope:** All localStorage. No votes sent anywhere, no social component — purely personal. Zero backend.
+
+---
+
+## 22. Series Rivalry Tracker
+
+**Persona:** Marco
+**Pain:** "F1 and MotoGP always seem to clash — is it intentional?"
+
+Track head-to-head scheduling conflicts between specific pairs of series over the full season.
+
+**What it looks like:**
+- On each series page `/series/f1`: a "Clashes with" row showing how many weekends overlap with each other series and which ones
+- A rivalry card: _"F1 vs MotoGP — 6 weekends clash this season. Biggest clash: Sep 19–21 (Italian GP + Misano)"_
+- Simple bar: out of 24 F1 weekends, 6 clash = 25% blocked for MotoGP fans
+
+**Scope:** Build-time computation. Two nested date-range overlap loops. Results baked into the series page at build time.
+
+---
+
+## 23. Time Zone Buddy — "Watch Together"
+
+**Persona:** Sofía + friends in different countries
+**Pain:** Coordinating with friends across time zones ("What time is it for you?")
+
+A shareable event link that shows session times in multiple time zones simultaneously.
+
+**What it looks like:**
+- EventModal gets a "Time zones" section: user's local time + 2 pinned zones of their choice (e.g. NL + JP)
+- Pin zones saved to localStorage
+- Shareable URL: `/?event=f1-2026-r05&tz=Europe/Amsterdam,Asia/Tokyo` — the recipient sees the same multi-zone view
+- Zones searched via a simple text input (filters a bundled IANA timezone list)
+
+**Scope:** `Intl.DateTimeFormat` handles all the conversion — no library needed. IANA timezone list is ~2kb compressed.
 
 ---
 
 ## What's Deliberately Not Here
+
+
 
 - **User accounts / login** — breaks the no-backend constraint
 - **Real-time race results** — would need a live data source and server-side processing

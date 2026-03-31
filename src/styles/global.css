@@ -44,6 +44,13 @@ body::before {
 .fav-btn svg, .modal-fav-btn svg { transition: fill 150ms, stroke 150ms, transform 150ms; }
 .fav-btn[data-fav="true"] svg, .modal-fav-btn[data-fav="true"] svg { fill: #f43f5e; stroke: #f43f5e; transform: scale(1.15); }
 
+/* ── Live session indicator ── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.live-pulse { animation: live-pulse 1.5s ease-in-out infinite; }
+
 /* ── Countdown digits ── */
 .cd-digit { font-variant-numeric: tabular-nums; letter-spacing: -0.05em; }
 

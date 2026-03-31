@@ -33,11 +33,13 @@ RaceTrack is a static motorsport event tracker. It aggregates race calendars, se
 ```
 src/
   pages/
-    index.astro         — Dashboard: next 20 events, countdown hero, series stats
-    calendar.astro      — Full 2026 calendar, grouped by month, jump-to-today
-    watchlist.astro     — User's saved/favorited events (localStorage)
+    index.astro         — Dashboard: next 20 events, countdown hero, series stats, clash detector
+    calendar.astro      — Full 2026 calendar, grouped by month, jump-to-today, series heatmap
+    watchlist.astro     — User's saved/favorited events (localStorage), ICS export
     status.astro        — Kiosk view (bare, auto-refresh)
-    series/[id].astro   — Per-series page: progress bar, schedule, next race
+    recap.astro         — Past 7 days recap with spoiler-free toggle
+    series/[id].astro   — Per-series page: progress bar, schedule, next race, ICS export
+    widget/[series].astro — Embeddable countdown widget per series
   components/
     EventCard.astro     — Card with flag, sessions, fav button, opens modal on click
     EventModal.astro    — Global detail modal (rt-open-event CustomEvent)
@@ -53,7 +55,9 @@ src/
     series-client.ts    — Browser-safe series metadata (derived from series.ts)
     client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
                           formatLocalTime, formatDateRange, isPastEvent,
-                          readFavorites, toggleFavorite, safeJsonParse
+                          readFavorites, toggleFavorite, safeJsonParse,
+                          isSessionLive, getLiveSession, sleepVerdict
+    ics.ts              — ICS calendar file generation (client-side .ics export)
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
   styles/
@@ -67,7 +71,7 @@ pipeline/
 data/
   bronze/         — Raw API responses (cached)
   silver/         — Cleaned/normalized per-series JSON
-  gold/           — calendar.json, upcoming.json
+  gold/           — calendar.json, upcoming.json, broadcasts.json
   seed/           — Manual JSON for series without APIs (FE, IndyCar, WEC, F2, F3)
 public/           — Static assets (logos, flags, images)
 ```

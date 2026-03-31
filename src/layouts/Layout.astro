@@ -20,7 +20,10 @@ const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Ast
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Motorsport event tracker — F1, MotoGP, IndyCar, WEC and more in one dashboard" />
+    <meta name="theme-color" content="#18181b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href={`${base}/manifest.json`} />
+    <link rel="apple-touch-icon" href={`${base}/icon-192.png`} />
     <title>{title}</title>
   </head>
   <body class="bg-zinc-950 text-zinc-100 min-h-screen overflow-x-hidden">
@@ -30,6 +33,14 @@ const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Ast
 
     {!bare && (
       <>
+        <!-- Offline banner -->
+        <div
+          id="offline-banner"
+          class="fixed top-0 left-0 right-0 z-[400] bg-amber-900/90 text-amber-100 text-xs text-center py-1.5 font-semibold hidden"
+        >
+          You're offline — data may be outdated
+        </div>
+
         <button
           id="back-to-top"
           aria-label="Back to top"
@@ -60,5 +71,21 @@ const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Ast
         </script>
       </>
     )}
+
+    <script define:vars={{ base }}>
+      // Service worker registration
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(base + '/sw.js').catch(() => {});
+      }
+
+      // Offline detection
+      function updateOnlineStatus() {
+        const banner = document.getElementById('offline-banner');
+        if (banner) banner.classList.toggle('hidden', navigator.onLine);
+      }
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+    </script>
   </body>
 </html>

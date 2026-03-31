@@ -1,0 +1,28 @@
+{
+  "name": "RaceTrack",
+  "short_name": "RaceTrack",
+  "description": "Motorsport event tracker — F1, MotoGP, IndyCar, WEC and more in one dashboard",
+  "start_url": "/Racing_event_tracker/",
+  "scope": "/Racing_event_tracker/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#18181b",
+  "icons": [
+    {
+      "src": "/Racing_event_tracker/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Racing_event_tracker/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Racing_event_tracker/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

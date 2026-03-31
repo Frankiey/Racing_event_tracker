@@ -1,0 +1,171 @@
+---
+import { SERIES_LIST, getSeriesMeta } from '../../lib/series';
+import { getRaceSession, isPlaceholderTime, countryFlag } from '../../lib/time';
+import type { RaceEvent } from '../../lib/types';
+import calendarData from '../../../data/gold/calendar.json';
+
+export function getStaticPaths() {
+  return SERIES_LIST.map(s => ({ params: { series: s.id } }));
+}
+
+const { series } = Astro.params;
+const meta = getSeriesMeta(series);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const now = new Date();
+const allEvents = ((calendarData as any).events as RaceEvent[]).filter(e => e.seriesId === series);
+const upcoming = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') >= now);
+const nextEvent = upcoming
+  .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
+  .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC))
+  .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())[0];
+
+const raceTime = nextEvent?.session?.startTimeUTC ?? null;
+const eventName = nextEvent?.event.eventName ?? 'No upcoming races';
+const circuitName = nextEvent?.event.circuit.name ?? '';
+const flag = nextEvent ? countryFlag(nextEvent.event.circuit.countryCode) : '';
+const isPast = raceTime ? new Date(raceTime) < now : true;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RaceTrack — {meta.label} Countdown</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background-color: #09090b;
+        color: #fafafa;
+        font-family: system-ui, -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+      .card {
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+      .series-label {
+        display: inline-block;
+        font-size: 0.625rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #fff;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.375rem;
+        margin-bottom: 1.5rem;
+      }
+      .event-name {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.25rem;
+      }
+      .circuit {
+        font-size: 0.875rem;
+        color: #a1a1aa;
+        margin-bottom: 2rem;
+      }
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .unit {
+        text-align: center;
+      }
+      .unit-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+      }
+      .unit-label {
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #71717a;
+      }
+      .sep {
+        font-size: 2rem;
+        color: #3f3f46;
+        line-height: 2.5rem;
+      }
+      .race-weekend {
+        font-size: 1.25rem;
+        font-weight: 700;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+      .branding {
+        font-size: 0.625rem;
+        color: #3f3f46;
+        text-decoration: none;
+      }
+      .branding:hover { color: #71717a; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="series-label" style={`background-color: ${meta.color};`}>{meta.label}</div>
+      <div class="event-name">{flag} {eventName}</div>
+      <div class="circuit">{circuitName}</div>
+
+      {isPast ? (
+        <div class="race-weekend" style={`color: ${meta.color};`}>
+          {raceTime ? 'Race weekend!' : 'Season complete'}
+        </div>
+      ) : (
+        <div id="countdown" class="countdown" data-target={raceTime}>
+          <div class="unit"><div class="unit-value" id="c-d">--</div><div class="unit-label">Days</div></div>
+          <div class="sep">:</div>
+          <div class="unit"><div class="unit-value" id="c-h">--</div><div class="unit-label">Hours</div></div>
+          <div class="sep">:</div>
+          <div class="unit"><div class="unit-value" id="c-m">--</div><div class="unit-label">Min</div></div>
+          <div class="sep">:</div>
+          <div class="unit"><div class="unit-value" id="c-s">--</div><div class="unit-label">Sec</div></div>
+        </div>
+      )}
+
+      <a class="branding" href={`${base}/series/${series}`}>RaceTrack</a>
+    </div>
+
+    {!isPast && (
+      <script>
+        const el = document.getElementById('countdown');
+        const target = new Date(el?.dataset.target ?? '').getTime();
+        const d = document.getElementById('c-d')!;
+        const h = document.getElementById('c-h')!;
+        const m = document.getElementById('c-m')!;
+        const s = document.getElementById('c-s')!;
+
+        function tick() {
+          const diff = Math.max(0, target - Date.now());
+          if (diff === 0) {
+            el!.innerHTML = '<div class="race-weekend" style="color: inherit;">Race weekend!</div>';
+            return;
+          }
+          const sec = Math.floor(diff / 1000);
+          d.textContent = String(Math.floor(sec / 86400));
+          h.textContent = String(Math.floor((sec % 86400) / 3600)).padStart(2, '0');
+          m.textContent = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+          s.textContent = String(sec % 60).padStart(2, '0');
+          requestAnimationFrame(tick);
+        }
+        tick();
+      </script>
+    )}
+  </body>
+</html>
