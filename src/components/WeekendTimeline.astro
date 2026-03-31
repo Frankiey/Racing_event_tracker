@@ -1,0 +1,207 @@
+---
+/**
+ * WeekendTimeline — Visual session strip for the EventModal.
+ * Renders a horizontal timeline with sessions as color-coded blocks
+ * across the days of a race weekend. Populated client-side via
+ * the rt-open-event CustomEvent.
+ */
+---
+
+<div id="weekend-timeline" class="hidden">
+  <div id="tl-days" class="flex flex-col gap-3"></div>
+  <!-- Now marker legend -->
+  <div id="tl-now-legend" class="hidden flex items-center gap-1.5 mt-3 text-[10px] text-red-400 font-mono">
+    <span class="w-0.5 h-3 bg-red-500 rounded-full"></span> Now
+  </div>
+</div>
+
+<script>
+  import { SESSION_ABBR } from '../lib/sessions';
+  import { SERIES_META } from '../lib/series-client';
+
+  interface TlSession {
+    type: string;
+    startTimeUTC: string;
+  }
+
+  const PLACEHOLDER_YEAR = '1900';
+  const HOUR_PX = 40; // px per hour — controls how wide a day bar is
+
+  // Estimated session durations in minutes
+  const DURATION: Record<string, number> = {
+    'FP1': 60, 'FP2': 60, 'FP3': 60,
+    'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
+    'Free Practice 1': 60, 'Free Practice 2': 60, 'Free Practice 3': 60,
+    'Practice': 60,
+    'Qualifying': 60, 'Sprint Qualifying': 45, 'Sprint Shootout': 30,
+    'Sprint': 60, 'Warm Up': 20,
+    'Race': 120, 'Feature Race': 120,
+  };
+
+  function getDuration(type: string): number {
+    return DURATION[type] ?? 60;
+  }
+
+  function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
+  function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
+
+  /**
+   * Group sessions by calendar day (in local timezone).
+   * Returns a Map<string, TlSession[]> keyed by "YYYY-MM-DD" in local time.
+   */
+  function groupByDay(sessions: TlSession[]): Map<string, TlSession[]> {
+    const map = new Map<string, TlSession[]>();
+    for (const s of sessions) {
+      const d = new Date(s.startTimeUTC);
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(s);
+    }
+    return map;
+  }
+
+  function dayLabel(dateStr: string): string {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    return dt.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function timeLabel(utc: string): string {
+    return new Date(utc).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+  }
+
+  /**
+   * Render timeline for a given event. Called from EventModal's openModal.
+   */
+  function renderTimeline(event: any) {
+    const container = document.getElementById('weekend-timeline')!;
+    const daysEl = document.getElementById('tl-days')!;
+    const nowLegend = document.getElementById('tl-now-legend')!;
+    const meta = SERIES_META[event.seriesId] ?? { color: '#71717a' };
+
+    const sessions: TlSession[] = (event.sessions as TlSession[]).filter(s => !isPlaceholder(s.startTimeUTC));
+    if (sessions.length === 0) {
+      daysEl.innerHTML = '<p class="text-xs text-zinc-600 italic">No session times available</p>';
+      nowLegend.classList.add('hidden');
+      return;
+    }
+
+    const days = groupByDay(sessions);
+    const now = Date.now();
+    let showNow = false;
+
+    daysEl.innerHTML = '';
+
+    for (const [dateKey, daySessions] of days) {
+      // Compute time range for this day
+      const starts = daySessions.map(s => new Date(s.startTimeUTC).getTime());
+      const ends = daySessions.map(s => new Date(s.startTimeUTC).getTime() + getDuration(s.type) * 60_000);
+      const dayMin = Math.min(...starts);
+      const dayMax = Math.max(...ends);
+      const daySpanMs = dayMax - dayMin;
+      const daySpanHrs = daySpanMs / 3_600_000;
+      // Min width: 4 hours to avoid too-compressed bars
+      const renderHrs = Math.max(daySpanHrs, 4);
+      const barWidthPx = renderHrs * HOUR_PX;
+
+      // Day row
+      const dayRow = document.createElement('div');
+
+      // Day label
+      const label = document.createElement('div');
+      label.className = 'text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-1';
+      label.textContent = dayLabel(dateKey);
+      dayRow.appendChild(label);
+
+      // Bar container
+      const bar = document.createElement('div');
+      bar.className = 'relative rounded-lg bg-zinc-900 border border-zinc-800/60 overflow-visible';
+      bar.style.height = '38px';
+      bar.style.width = '100%';
+
+      // Inner relative container for positioning
+      const inner = document.createElement('div');
+      inner.className = 'relative h-full';
+      inner.style.width = `${barWidthPx}px`;
+      inner.style.minWidth = '100%';
+
+      // Render session blocks
+      for (const s of daySessions) {
+        const sStart = new Date(s.startTimeUTC).getTime();
+        const sDurMs = getDuration(s.type) * 60_000;
+        const sEnd = sStart + sDurMs;
+        const leftPct = ((sStart - dayMin) / (renderHrs * 3_600_000)) * 100;
+        const widthPct = (sDurMs / (renderHrs * 3_600_000)) * 100;
+
+        const isPast = sEnd < now;
+        const isLive = sStart <= now && now < sEnd;
+        const race = isRaceType(s.type);
+        const abbr = SESSION_ABBR[s.type] ?? s.type;
+
+        const block = document.createElement('div');
+        block.className = 'absolute top-1 bottom-1 rounded flex items-center justify-center cursor-default transition-opacity';
+        block.style.left = `${leftPct}%`;
+        block.style.width = `${Math.max(widthPct, 3)}%`; // min width so tiny blocks are visible
+        block.style.minWidth = '28px';
+
+        if (race) {
+          block.style.backgroundColor = meta.color;
+          block.style.opacity = isPast ? '0.35' : '1';
+        } else {
+          block.style.backgroundColor = isPast ? '#27272a' : '#3f3f46';
+          block.style.opacity = isPast ? '0.5' : '1';
+        }
+
+        if (isLive) {
+          block.style.outline = '2px solid #ef4444';
+          block.style.outlineOffset = '-1px';
+          block.style.zIndex = '10';
+        }
+
+        // Label + time inside block
+        const lbl = document.createElement('span');
+        lbl.className = `text-[10px] font-bold uppercase tracking-wide whitespace-nowrap px-1 ${race ? 'text-white' : isPast ? 'text-zinc-600' : 'text-zinc-200'}`;
+        lbl.textContent = abbr;
+        block.appendChild(lbl);
+
+        // Time label below each block
+        const timeLbl = document.createElement('span');
+        timeLbl.className = `absolute top-full mt-0.5 left-1/2 -translate-x-1/2 text-[9px] font-mono whitespace-nowrap ${isPast ? 'text-zinc-700' : 'text-zinc-500'}`;
+        timeLbl.textContent = timeLabel(s.startTimeUTC);
+        block.appendChild(timeLbl);
+
+        // Tooltip (time)
+        block.title = `${abbr}: ${timeLabel(s.startTimeUTC)}`;
+
+        inner.appendChild(block);
+      }
+
+      // Now marker
+      if (now >= dayMin && now <= dayMax + 3_600_000) {
+        const nowPct = ((now - dayMin) / (renderHrs * 3_600_000)) * 100;
+        if (nowPct >= 0 && nowPct <= 100) {
+          const marker = document.createElement('div');
+          marker.className = 'absolute top-0 bottom-0 w-0.5 bg-red-500 z-20';
+          marker.style.left = `${nowPct}%`;
+          inner.appendChild(marker);
+          showNow = true;
+        }
+      }
+
+      bar.appendChild(inner);
+      dayRow.appendChild(bar);
+
+      // Spacer for time labels below blocks
+      const spacer = document.createElement('div');
+      spacer.style.height = '16px';
+      dayRow.appendChild(spacer);
+
+      daysEl.appendChild(dayRow);
+    }
+
+    nowLegend.classList.toggle('hidden', !showNow);
+  }
+
+  // Expose for EventModal to call
+  (window as any).__renderTimeline = renderTimeline;
+</script>

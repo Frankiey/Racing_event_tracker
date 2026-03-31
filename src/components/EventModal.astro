@@ -4,6 +4,7 @@
  * Opens when any EventCard emits 'rt-open-event'.
  * Shows full session schedule, circuit info, and favorite toggle.
  */
+import WeekendTimeline from './WeekendTimeline.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -65,8 +66,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <!-- Sessions -->
     <div class="px-6 pb-2">
-      <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-3">Session Schedule</h3>
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Session Schedule</h3>
+        <div class="flex rounded-md overflow-hidden border border-zinc-700/60">
+          <button id="view-list-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-zinc-700 text-zinc-200" aria-pressed="true">
+            List
+          </button>
+          <button id="view-timeline-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-300" aria-pressed="false">
+            Timeline
+          </button>
+        </div>
+      </div>
       <div id="modal-sessions" class="space-y-1.5" />
+      <WeekendTimeline />
     </div>
 
     <!-- Footer actions -->
@@ -191,6 +203,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       window.dispatchEvent(new CustomEvent('rt-favs-changed'));
     };
 
+    // Reset to list view when opening modal
+    showListView();
+
+    // Render timeline (lazy — only when switched to)
+    currentEvent = event;
+
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -199,6 +217,41 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     modal.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  // ── View toggle ──
+  let currentEvent: any = null;
+  const sessionsEl = document.getElementById('modal-sessions')!;
+  const timelineEl = document.getElementById('weekend-timeline')!;
+  const listBtn = document.getElementById('view-list-btn')!;
+  const tlBtn = document.getElementById('view-timeline-btn')!;
+
+  function showListView() {
+    sessionsEl.classList.remove('hidden');
+    timelineEl.classList.add('hidden');
+    listBtn.classList.add('bg-zinc-700', 'text-zinc-200');
+    listBtn.classList.remove('text-zinc-500');
+    listBtn.setAttribute('aria-pressed', 'true');
+    tlBtn.classList.remove('bg-zinc-700', 'text-zinc-200');
+    tlBtn.classList.add('text-zinc-500');
+    tlBtn.setAttribute('aria-pressed', 'false');
+  }
+
+  function showTimelineView() {
+    sessionsEl.classList.add('hidden');
+    timelineEl.classList.remove('hidden');
+    tlBtn.classList.add('bg-zinc-700', 'text-zinc-200');
+    tlBtn.classList.remove('text-zinc-500');
+    tlBtn.setAttribute('aria-pressed', 'true');
+    listBtn.classList.remove('bg-zinc-700', 'text-zinc-200');
+    listBtn.classList.add('text-zinc-500');
+    listBtn.setAttribute('aria-pressed', 'false');
+    if (currentEvent && (window as any).__renderTimeline) {
+      (window as any).__renderTimeline(currentEvent);
+    }
+  }
+
+  listBtn.addEventListener('click', showListView);
+  tlBtn.addEventListener('click', showTimelineView);
 
   document.getElementById('modal-close')!.addEventListener('click', closeModal);
   document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);

@@ -23,6 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       {[
         { href: `${base}/`, label: 'Dashboard' },
         { href: `${base}/calendar`, label: 'Calendar' },
+        { href: `${base}/passport`, label: 'Passport' },
       ].map(link => (
         <a
           href={link.href}
@@ -145,6 +146,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         {[
           { href: `${base}/`, label: 'Dashboard' },
           { href: `${base}/calendar`, label: 'Calendar' },
+          { href: `${base}/passport`, label: 'Passport' },
           { href: `${base}/watchlist`, label: 'Watchlist' },
         ].map(link => (
           <a
