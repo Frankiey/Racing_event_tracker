@@ -17,6 +17,7 @@ import sys
 
 from pipeline.config import SILVER_DIR, GOLD_DIR, SEASON_YEAR
 from pipeline.utils import read_json, write_json
+from pipeline.circuits import enrich_circuit
 
 # Fetchers (bronze)
 from pipeline.fetchers import f1 as f1_fetcher
@@ -64,6 +65,8 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
                 continue
 
             silver_events = transform_fn(bronze_data)
+            for ev in silver_events:
+                enrich_circuit(ev.get("circuit", {}))
             write_json(SILVER_DIR / f"{series_id}.json", silver_events)
             all_silver.extend(silver_events)
             print(f"  [{series_id.upper()}] {len(silver_events)} events\n")
@@ -82,6 +85,8 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
 
         seed_events = load_seed(series_id)
         if seed_events:
+            for ev in seed_events:
+                enrich_circuit(ev.get("circuit", {}))
             write_json(SILVER_DIR / f"{series_id}.json", seed_events)
             all_silver.extend(seed_events)
 

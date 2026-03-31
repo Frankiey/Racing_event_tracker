@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-31T10:21:05Z",
+  "generated": "2026-03-31T13:31:42Z",
   "season": 2026,
   "eventCount": 199,
   "sources": [
@@ -64,8 +64,8 @@
         "city": "Doha",
         "country": "QAT",
         "countryCode": "QA",
-        "lat": null,
-        "lng": null
+        "lat": 25.49,
+        "lng": 51.4542
       },
       "sessions": [
         {
@@ -137,11 +137,11 @@
       "round": 11,
       "circuit": {
         "name": "Bristol Motor Speedway",
-        "city": "",
+        "city": "Bristol",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.5158,
+        "lng": -82.2569
       },
       "sessions": [
         {
@@ -341,11 +341,11 @@
       "round": 12,
       "circuit": {
         "name": "Kansas Speedway",
-        "city": "",
+        "city": "Kansas City",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 39.1156,
+        "lng": -94.8311
       },
       "sessions": [
         {
@@ -370,8 +370,8 @@
         "city": "Jerez de la Frontera",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 36.7083,
+        "lng": -6.034
       },
       "sessions": [
         {
@@ -462,8 +462,8 @@
         "city": "Jerez de la Frontera",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 36.7083,
+        "lng": -6.034
       },
       "sessions": [
         {
@@ -488,8 +488,8 @@
         "city": "Jerez de la Frontera",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 36.7083,
+        "lng": -6.034
       },
       "sessions": [
         {
@@ -541,11 +541,11 @@
       "round": 13,
       "circuit": {
         "name": "Talladega Superspeedway",
-        "city": "",
+        "city": "Lincoln",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 33.5669,
+        "lng": -86.0642
       },
       "sessions": [
         {
@@ -746,11 +746,11 @@
       "round": 14,
       "circuit": {
         "name": "Texas Motor Speedway",
-        "city": "",
+        "city": "Fort Worth",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 33.0372,
+        "lng": -97.2822
       },
       "sessions": [
         {
@@ -813,8 +813,8 @@
         "city": "Le Mans",
         "country": "FRA",
         "countryCode": "FR",
-        "lat": null,
-        "lng": null
+        "lat": 47.956,
+        "lng": 0.2075
       },
       "sessions": [
         {
@@ -893,8 +893,8 @@
         "city": "Le Mans",
         "country": "FRA",
         "countryCode": "FR",
-        "lat": null,
-        "lng": null
+        "lat": 47.956,
+        "lng": 0.2075
       },
       "sessions": [
         {
@@ -919,8 +919,8 @@
         "city": "Le Mans",
         "country": "FRA",
         "countryCode": "FR",
-        "lat": null,
-        "lng": null
+        "lat": 47.956,
+        "lng": 0.2075
       },
       "sessions": [
         {
@@ -942,11 +942,11 @@
       "round": 15,
       "circuit": {
         "name": "Watkins Glen International",
-        "city": "",
+        "city": "Watkins Glen",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 42.3369,
+        "lng": -76.9275
       },
       "sessions": [
         {
@@ -1113,8 +1113,8 @@
         "city": "Barcelona",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 41.57,
+        "lng": 2.2611
       },
       "sessions": [
         {
@@ -1197,8 +1197,8 @@
         "city": "Barcelona",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 41.57,
+        "lng": 2.2611
       },
       "sessions": [
         {
@@ -1223,8 +1223,8 @@
         "city": "Barcelona",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 41.57,
+        "lng": 2.2611
       },
       "sessions": [
         {
@@ -1276,11 +1276,11 @@
       "round": 16,
       "circuit": {
         "name": "Dover Motor Speedway",
-        "city": "",
+        "city": "Dover",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 39.19,
+        "lng": -75.5303
       },
       "sessions": [
         {
@@ -1417,11 +1417,11 @@
       "round": 17,
       "circuit": {
         "name": "Charlotte Motor Speedway",
-        "city": "",
+        "city": "Concord",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 35.3522,
+        "lng": -80.6831
       },
       "sessions": [
         {
@@ -1492,8 +1492,8 @@
         "city": "Mugello",
         "country": "ITA",
         "countryCode": "IT",
-        "lat": null,
-        "lng": null
+        "lat": 43.9975,
+        "lng": 11.3719
       },
       "sessions": [
         {
@@ -1606,8 +1606,8 @@
         "city": "Mugello",
         "country": "ITA",
         "countryCode": "IT",
-        "lat": null,
-        "lng": null
+        "lat": 43.9975,
+        "lng": 11.3719
       },
       "sessions": [
         {
@@ -1632,8 +1632,8 @@
         "city": "Mugello",
         "country": "ITA",
         "countryCode": "IT",
-        "lat": null,
-        "lng": null
+        "lat": 43.9975,
+        "lng": 11.3719
       },
       "sessions": [
         {
@@ -1655,11 +1655,11 @@
       "round": 18,
       "circuit": {
         "name": "Nashville Superspeedway",
-        "city": "",
+        "city": "Lebanon",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.0467,
+        "lng": -86.3861
       },
       "sessions": [
         {
@@ -1752,8 +1752,8 @@
         "city": "\tBalatonfokajár",
         "country": "HUN",
         "countryCode": "HU",
-        "lat": null,
-        "lng": null
+        "lat": 46.9192,
+        "lng": 17.8853
       },
       "sessions": [
         {
@@ -1841,8 +1841,8 @@
         "city": "\tBalatonfokajár",
         "country": "HUN",
         "countryCode": "HU",
-        "lat": null,
-        "lng": null
+        "lat": 46.9192,
+        "lng": 17.8853
       },
       "sessions": [
         {
@@ -1867,8 +1867,8 @@
         "city": "\tBalatonfokajár",
         "country": "HUN",
         "countryCode": "HU",
-        "lat": null,
-        "lng": null
+        "lat": 46.9192,
+        "lng": 17.8853
       },
       "sessions": [
         {
@@ -1940,11 +1940,11 @@
       "round": 19,
       "circuit": {
         "name": "Michigan International Speedway",
-        "city": "",
+        "city": "Brooklyn",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 42.0689,
+        "lng": -84.2403
       },
       "sessions": [
         {
@@ -2149,11 +2149,11 @@
       "round": 20,
       "circuit": {
         "name": "Pocono Raceway",
-        "city": "",
+        "city": "Long Pond",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 41.0556,
+        "lng": -75.5097
       },
       "sessions": [
         {
@@ -2178,8 +2178,8 @@
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": null,
-        "lng": null
+        "lat": 49.2036,
+        "lng": 16.4317
       },
       "sessions": [
         {
@@ -2304,8 +2304,8 @@
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": null,
-        "lng": null
+        "lat": 49.2036,
+        "lng": 16.4317
       },
       "sessions": [
         {
@@ -2330,8 +2330,8 @@
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": null,
-        "lng": null
+        "lat": 49.2036,
+        "lng": 16.4317
       },
       "sessions": [
         {
@@ -2409,11 +2409,11 @@
       "round": 21,
       "circuit": {
         "name": "San Diego Street Course",
-        "city": "",
+        "city": "San Diego",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 32.7069,
+        "lng": -117.1628
       },
       "sessions": [
         {
@@ -2540,8 +2540,8 @@
         "city": "Assen",
         "country": "NED",
         "countryCode": "NL",
-        "lat": null,
-        "lng": null
+        "lat": 52.9614,
+        "lng": 6.5228
       },
       "sessions": [
         {
@@ -2629,8 +2629,8 @@
         "city": "Assen",
         "country": "NED",
         "countryCode": "NL",
-        "lat": null,
-        "lng": null
+        "lat": 52.9614,
+        "lng": 6.5228
       },
       "sessions": [
         {
@@ -2655,8 +2655,8 @@
         "city": "Assen",
         "country": "NED",
         "countryCode": "NL",
-        "lat": null,
-        "lng": null
+        "lat": 52.9614,
+        "lng": 6.5228
       },
       "sessions": [
         {
@@ -2678,11 +2678,11 @@
       "round": 22,
       "circuit": {
         "name": "Sonoma Raceway",
-        "city": "",
+        "city": "Sonoma",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 38.1611,
+        "lng": -122.4553
       },
       "sessions": [
         {
@@ -2951,11 +2951,11 @@
       "round": 23,
       "circuit": {
         "name": "Chicagoland Speedway",
-        "city": "",
+        "city": "Joliet",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 41.475,
+        "lng": -88.0581
       },
       "sessions": [
         {
@@ -3026,8 +3026,8 @@
         "city": "Sachsenring",
         "country": "GER",
         "countryCode": "DE",
-        "lat": null,
-        "lng": null
+        "lat": 50.7911,
+        "lng": 12.6886
       },
       "sessions": [
         {
@@ -3144,8 +3144,8 @@
         "city": "Sachsenring",
         "country": "GER",
         "countryCode": "DE",
-        "lat": null,
-        "lng": null
+        "lat": 50.7911,
+        "lng": 12.6886
       },
       "sessions": [
         {
@@ -3170,8 +3170,8 @@
         "city": "Sachsenring",
         "country": "GER",
         "countryCode": "DE",
-        "lat": null,
-        "lng": null
+        "lat": 50.7911,
+        "lng": 12.6886
       },
       "sessions": [
         {
@@ -3193,11 +3193,11 @@
       "round": 24,
       "circuit": {
         "name": "Atlanta Motor Speedway",
-        "city": "",
+        "city": "Hampton",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 33.3847,
+        "lng": -84.3131
       },
       "sessions": [
         {
@@ -3390,11 +3390,11 @@
       "round": 25,
       "circuit": {
         "name": "North Wilkesboro Speedway",
-        "city": "",
+        "city": "North Wilkesboro",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.1611,
+        "lng": -81.1022
       },
       "sessions": [
         {
@@ -3629,11 +3629,11 @@
       "round": 26,
       "circuit": {
         "name": "Indianapolis Motor Speedway",
-        "city": "",
+        "city": "Indianapolis",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 39.795,
+        "lng": -86.2353
       },
       "sessions": [
         {
@@ -3718,8 +3718,8 @@
         "city": "Silverstone",
         "country": "GBR",
         "countryCode": "GB",
-        "lat": null,
-        "lng": null
+        "lat": 52.0713,
+        "lng": -1.0147
       },
       "sessions": [
         {
@@ -3802,8 +3802,8 @@
         "city": "Silverstone",
         "country": "GBR",
         "countryCode": "GB",
-        "lat": null,
-        "lng": null
+        "lat": 52.0713,
+        "lng": -1.0147
       },
       "sessions": [
         {
@@ -3828,8 +3828,8 @@
         "city": "Silverstone",
         "country": "GBR",
         "countryCode": "GB",
-        "lat": null,
-        "lng": null
+        "lat": 52.0713,
+        "lng": -1.0147
       },
       "sessions": [
         {
@@ -3881,11 +3881,11 @@
       "round": 27,
       "circuit": {
         "name": "Iowa Speedway",
-        "city": "",
+        "city": "Newton",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 41.6781,
+        "lng": -93.0128
       },
       "sessions": [
         {
@@ -4017,11 +4017,11 @@
       "round": 28,
       "circuit": {
         "name": "Richmond Raceway",
-        "city": "",
+        "city": "Richmond",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 37.5928,
+        "lng": -77.4197
       },
       "sessions": [
         {
@@ -4176,11 +4176,11 @@
       "round": 29,
       "circuit": {
         "name": "New Hampshire Motor Speedway",
-        "city": "",
+        "city": "Loudon",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 43.3628,
+        "lng": -71.4606
       },
       "sessions": [
         {
@@ -4205,8 +4205,8 @@
         "city": "Alcañiz",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 40.9417,
+        "lng": -0.1688
       },
       "sessions": [
         {
@@ -4255,8 +4255,8 @@
         "city": "Alcañiz",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 40.9417,
+        "lng": -0.1688
       },
       "sessions": [
         {
@@ -4281,8 +4281,8 @@
         "city": "Alcañiz",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 40.9417,
+        "lng": -0.1688
       },
       "sessions": [
         {
@@ -4334,11 +4334,11 @@
       "round": 30,
       "circuit": {
         "name": "Daytona International Speedway",
-        "city": "",
+        "city": "Daytona Beach",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 29.1872,
+        "lng": -81.0711
       },
       "sessions": [
         {
@@ -4611,11 +4611,11 @@
       "round": 31,
       "circuit": {
         "name": "Darlington Raceway",
-        "city": "",
+        "city": "Darlington",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 34.2953,
+        "lng": -79.9056
       },
       "sessions": [
         {
@@ -4708,8 +4708,8 @@
         "city": "Misano Adriatico",
         "country": "ITA",
         "countryCode": "SM",
-        "lat": null,
-        "lng": null
+        "lat": 43.9628,
+        "lng": 12.6836
       },
       "sessions": [
         {
@@ -4839,8 +4839,8 @@
         "city": "Misano Adriatico",
         "country": "ITA",
         "countryCode": "SM",
-        "lat": null,
-        "lng": null
+        "lat": 43.9628,
+        "lng": 12.6836
       },
       "sessions": [
         {
@@ -4865,8 +4865,8 @@
         "city": "Misano Adriatico",
         "country": "ITA",
         "countryCode": "SM",
-        "lat": null,
-        "lng": null
+        "lat": 43.9628,
+        "lng": 12.6836
       },
       "sessions": [
         {
@@ -4914,11 +4914,11 @@
       "round": 32,
       "circuit": {
         "name": "World Wide Technology Raceway",
-        "city": "",
+        "city": "Madison",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 38.6258,
+        "lng": -90.1306
       },
       "sessions": [
         {
@@ -4943,8 +4943,8 @@
         "city": "Spielberg",
         "country": "AUT",
         "countryCode": "AT",
-        "lat": null,
-        "lng": null
+        "lat": 47.2197,
+        "lng": 14.7647
       },
       "sessions": [
         {
@@ -5023,8 +5023,8 @@
         "city": "Spielberg",
         "country": "AUT",
         "countryCode": "AT",
-        "lat": null,
-        "lng": null
+        "lat": 47.2197,
+        "lng": 14.7647
       },
       "sessions": [
         {
@@ -5049,8 +5049,8 @@
         "city": "Spielberg",
         "country": "AUT",
         "countryCode": "AT",
-        "lat": null,
-        "lng": null
+        "lat": 47.2197,
+        "lng": 14.7647
       },
       "sessions": [
         {
@@ -5072,11 +5072,11 @@
       "round": 33,
       "circuit": {
         "name": "Bristol Motor Speedway",
-        "city": "",
+        "city": "Bristol",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.5158,
+        "lng": -82.2569
       },
       "sessions": [
         {
@@ -5255,11 +5255,11 @@
       "round": 34,
       "circuit": {
         "name": "Kansas Speedway",
-        "city": "",
+        "city": "Kansas City",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 39.1156,
+        "lng": -94.8311
       },
       "sessions": [
         {
@@ -5318,8 +5318,8 @@
         "city": "Motegi",
         "country": "JPN",
         "countryCode": "JP",
-        "lat": null,
-        "lng": null
+        "lat": 36.5322,
+        "lng": 140.2281
       },
       "sessions": [
         {
@@ -5368,8 +5368,8 @@
         "city": "Motegi",
         "country": "JPN",
         "countryCode": "JP",
-        "lat": null,
-        "lng": null
+        "lat": 36.5322,
+        "lng": 140.2281
       },
       "sessions": [
         {
@@ -5394,8 +5394,8 @@
         "city": "Motegi",
         "country": "JPN",
         "countryCode": "JP",
-        "lat": null,
-        "lng": null
+        "lat": 36.5322,
+        "lng": 140.2281
       },
       "sessions": [
         {
@@ -5459,11 +5459,11 @@
       "round": 35,
       "circuit": {
         "name": "Las Vegas Motor Speedway",
-        "city": "",
+        "city": "Las Vegas",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.2719,
+        "lng": -115.0103
       },
       "sessions": [
         {
@@ -5607,8 +5607,8 @@
         "city": "Lombok",
         "country": "INA",
         "countryCode": "ID",
-        "lat": null,
-        "lng": null
+        "lat": -8.895,
+        "lng": 116.2975
       },
       "sessions": [
         {
@@ -5657,8 +5657,8 @@
         "city": "Lombok",
         "country": "INA",
         "countryCode": "ID",
-        "lat": null,
-        "lng": null
+        "lat": -8.895,
+        "lng": 116.2975
       },
       "sessions": [
         {
@@ -5683,8 +5683,8 @@
         "city": "Lombok",
         "country": "INA",
         "countryCode": "ID",
-        "lat": null,
-        "lng": null
+        "lat": -8.895,
+        "lng": 116.2975
       },
       "sessions": [
         {
@@ -5732,11 +5732,11 @@
       "round": 36,
       "circuit": {
         "name": "Charlotte Motor Speedway",
-        "city": "",
+        "city": "Concord",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 35.3522,
+        "lng": -80.6831
       },
       "sessions": [
         {
@@ -5804,11 +5804,11 @@
       "round": 37,
       "circuit": {
         "name": "Phoenix Raceway",
-        "city": "",
+        "city": "Avondale",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 33.3753,
+        "lng": -112.3108
       },
       "sessions": [
         {
@@ -5871,8 +5871,8 @@
         "city": "Phillip Island",
         "country": "AUS",
         "countryCode": "AU",
-        "lat": null,
-        "lng": null
+        "lat": -38.5006,
+        "lng": 145.2319
       },
       "sessions": [
         {
@@ -5960,8 +5960,8 @@
         "city": "Phillip Island",
         "country": "AUS",
         "countryCode": "AU",
-        "lat": null,
-        "lng": null
+        "lat": -38.5006,
+        "lng": 145.2319
       },
       "sessions": [
         {
@@ -5986,8 +5986,8 @@
         "city": "Phillip Island",
         "country": "AUS",
         "countryCode": "AU",
-        "lat": null,
-        "lng": null
+        "lat": -38.5006,
+        "lng": 145.2319
       },
       "sessions": [
         {
@@ -6009,11 +6009,11 @@
       "round": 38,
       "circuit": {
         "name": "Talladega Superspeedway",
-        "city": "",
+        "city": "Lincoln",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 33.5669,
+        "lng": -86.0642
       },
       "sessions": [
         {
@@ -6038,8 +6038,8 @@
         "city": "Sepang",
         "country": "MAL",
         "countryCode": "MY",
-        "lat": null,
-        "lng": null
+        "lat": 2.7606,
+        "lng": 101.7381
       },
       "sessions": [
         {
@@ -6127,8 +6127,8 @@
         "city": "Sepang",
         "country": "MAL",
         "countryCode": "MY",
-        "lat": null,
-        "lng": null
+        "lat": 2.7606,
+        "lng": 101.7381
       },
       "sessions": [
         {
@@ -6153,8 +6153,8 @@
         "city": "Sepang",
         "country": "MAL",
         "countryCode": "MY",
-        "lat": null,
-        "lng": null
+        "lat": 2.7606,
+        "lng": 101.7381
       },
       "sessions": [
         {
@@ -6176,11 +6176,11 @@
       "round": 39,
       "circuit": {
         "name": "Martinsville Speedway",
-        "city": "",
+        "city": "Ridgeway",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 36.6342,
+        "lng": -79.8517
       },
       "sessions": [
         {
@@ -6282,8 +6282,8 @@
         "city": "Doha",
         "country": "QAT",
         "countryCode": "QA",
-        "lat": null,
-        "lng": null
+        "lat": 25.49,
+        "lng": 51.4542
       },
       "sessions": [
         {
@@ -6308,8 +6308,8 @@
         "city": "Doha",
         "country": "QAT",
         "countryCode": "QA",
-        "lat": null,
-        "lng": null
+        "lat": 25.49,
+        "lng": 51.4542
       },
       "sessions": [
         {
@@ -6331,11 +6331,11 @@
       "round": 40,
       "circuit": {
         "name": "Homestead-Miami Speedway",
-        "city": "",
+        "city": "Homestead",
         "country": "United States",
         "countryCode": "US",
-        "lat": null,
-        "lng": null
+        "lat": 25.4517,
+        "lng": -80.4083
       },
       "sessions": [
         {
@@ -6360,8 +6360,8 @@
         "city": "Portimao",
         "country": "POR",
         "countryCode": "PT",
-        "lat": null,
-        "lng": null
+        "lat": 37.2294,
+        "lng": -8.6267
       },
       "sessions": [
         {
@@ -6483,8 +6483,8 @@
         "city": "Cheste",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 39.4886,
+        "lng": -0.6268
       },
       "sessions": [
         {
@@ -6533,8 +6533,8 @@
         "city": "Portimao",
         "country": "POR",
         "countryCode": "PT",
-        "lat": null,
-        "lng": null
+        "lat": 37.2294,
+        "lng": -8.6267
       },
       "sessions": [
         {
@@ -6559,8 +6559,8 @@
         "city": "Portimao",
         "country": "POR",
         "countryCode": "PT",
-        "lat": null,
-        "lng": null
+        "lat": 37.2294,
+        "lng": -8.6267
       },
       "sessions": [
         {
@@ -6658,8 +6658,8 @@
         "city": "Cheste",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 39.4886,
+        "lng": -0.6268
       },
       "sessions": [
         {
@@ -6684,8 +6684,8 @@
         "city": "Cheste",
         "country": "SPA",
         "countryCode": "ES",
-        "lat": null,
-        "lng": null
+        "lat": 39.4886,
+        "lng": -0.6268
       },
       "sessions": [
         {

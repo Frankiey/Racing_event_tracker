@@ -6,11 +6,11 @@
     "round": 1,
     "circuit": {
       "name": "Bowman Gray Stadium",
-      "city": "",
+      "city": "Winston-Salem",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.092,
+      "lng": -80.268
     },
     "sessions": [
       {
@@ -32,11 +32,11 @@
     "round": 2,
     "circuit": {
       "name": "Daytona International Speedway",
-      "city": "",
+      "city": "Daytona Beach",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 29.1872,
+      "lng": -81.0711
     },
     "sessions": [
       {
@@ -58,11 +58,11 @@
     "round": 3,
     "circuit": {
       "name": "Daytona International Speedway",
-      "city": "",
+      "city": "Daytona Beach",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 29.1872,
+      "lng": -81.0711
     },
     "sessions": [
       {
@@ -84,11 +84,11 @@
     "round": 4,
     "circuit": {
       "name": "Daytona International Speedway",
-      "city": "",
+      "city": "Daytona Beach",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 29.1872,
+      "lng": -81.0711
     },
     "sessions": [
       {
@@ -110,11 +110,11 @@
     "round": 5,
     "circuit": {
       "name": "Atlanta Motor Speedway",
-      "city": "",
+      "city": "Hampton",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.3847,
+      "lng": -84.3131
     },
     "sessions": [
       {
@@ -136,11 +136,11 @@
     "round": 6,
     "circuit": {
       "name": "Circuit of The Americas",
-      "city": "",
+      "city": "Austin",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 30.1328,
+      "lng": -97.6411
     },
     "sessions": [
       {
@@ -162,11 +162,11 @@
     "round": 7,
     "circuit": {
       "name": "Phoenix Raceway",
-      "city": "",
+      "city": "Avondale",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.3753,
+      "lng": -112.3108
     },
     "sessions": [
       {
@@ -188,11 +188,11 @@
     "round": 8,
     "circuit": {
       "name": "Las Vegas Motor Speedway",
-      "city": "",
+      "city": "Las Vegas",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.2719,
+      "lng": -115.0103
     },
     "sessions": [
       {
@@ -214,11 +214,11 @@
     "round": 9,
     "circuit": {
       "name": "Darlington Raceway",
-      "city": "",
+      "city": "Darlington",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 34.2953,
+      "lng": -79.9056
     },
     "sessions": [
       {
@@ -240,11 +240,11 @@
     "round": 10,
     "circuit": {
       "name": "Martinsville Speedway",
-      "city": "",
+      "city": "Ridgeway",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.6342,
+      "lng": -79.8517
     },
     "sessions": [
       {
@@ -266,11 +266,11 @@
     "round": 11,
     "circuit": {
       "name": "Bristol Motor Speedway",
-      "city": "",
+      "city": "Bristol",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.5158,
+      "lng": -82.2569
     },
     "sessions": [
       {
@@ -292,11 +292,11 @@
     "round": 12,
     "circuit": {
       "name": "Kansas Speedway",
-      "city": "",
+      "city": "Kansas City",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 39.1156,
+      "lng": -94.8311
     },
     "sessions": [
       {
@@ -318,11 +318,11 @@
     "round": 13,
     "circuit": {
       "name": "Talladega Superspeedway",
-      "city": "",
+      "city": "Lincoln",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.5669,
+      "lng": -86.0642
     },
     "sessions": [
       {
@@ -344,11 +344,11 @@
     "round": 14,
     "circuit": {
       "name": "Texas Motor Speedway",
-      "city": "",
+      "city": "Fort Worth",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.0372,
+      "lng": -97.2822
     },
     "sessions": [
       {
@@ -370,11 +370,11 @@
     "round": 15,
     "circuit": {
       "name": "Watkins Glen International",
-      "city": "",
+      "city": "Watkins Glen",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 42.3369,
+      "lng": -76.9275
     },
     "sessions": [
       {
@@ -396,11 +396,11 @@
     "round": 16,
     "circuit": {
       "name": "Dover Motor Speedway",
-      "city": "",
+      "city": "Dover",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 39.19,
+      "lng": -75.5303
     },
     "sessions": [
       {
@@ -422,11 +422,11 @@
     "round": 17,
     "circuit": {
       "name": "Charlotte Motor Speedway",
-      "city": "",
+      "city": "Concord",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 35.3522,
+      "lng": -80.6831
     },
     "sessions": [
       {
@@ -448,11 +448,11 @@
     "round": 18,
     "circuit": {
       "name": "Nashville Superspeedway",
-      "city": "",
+      "city": "Lebanon",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.0467,
+      "lng": -86.3861
     },
     "sessions": [
       {
@@ -474,11 +474,11 @@
     "round": 19,
     "circuit": {
       "name": "Michigan International Speedway",
-      "city": "",
+      "city": "Brooklyn",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 42.0689,
+      "lng": -84.2403
     },
     "sessions": [
       {
@@ -500,11 +500,11 @@
     "round": 20,
     "circuit": {
       "name": "Pocono Raceway",
-      "city": "",
+      "city": "Long Pond",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 41.0556,
+      "lng": -75.5097
     },
     "sessions": [
       {
@@ -526,11 +526,11 @@
     "round": 21,
     "circuit": {
       "name": "San Diego Street Course",
-      "city": "",
+      "city": "San Diego",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 32.7069,
+      "lng": -117.1628
     },
     "sessions": [
       {
@@ -552,11 +552,11 @@
     "round": 22,
     "circuit": {
       "name": "Sonoma Raceway",
-      "city": "",
+      "city": "Sonoma",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 38.1611,
+      "lng": -122.4553
     },
     "sessions": [
       {
@@ -578,11 +578,11 @@
     "round": 23,
     "circuit": {
       "name": "Chicagoland Speedway",
-      "city": "",
+      "city": "Joliet",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 41.475,
+      "lng": -88.0581
     },
     "sessions": [
       {
@@ -604,11 +604,11 @@
     "round": 24,
     "circuit": {
       "name": "Atlanta Motor Speedway",
-      "city": "",
+      "city": "Hampton",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.3847,
+      "lng": -84.3131
     },
     "sessions": [
       {
@@ -630,11 +630,11 @@
     "round": 25,
     "circuit": {
       "name": "North Wilkesboro Speedway",
-      "city": "",
+      "city": "North Wilkesboro",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.1611,
+      "lng": -81.1022
     },
     "sessions": [
       {
@@ -656,11 +656,11 @@
     "round": 26,
     "circuit": {
       "name": "Indianapolis Motor Speedway",
-      "city": "",
+      "city": "Indianapolis",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 39.795,
+      "lng": -86.2353
     },
     "sessions": [
       {
@@ -682,11 +682,11 @@
     "round": 27,
     "circuit": {
       "name": "Iowa Speedway",
-      "city": "",
+      "city": "Newton",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 41.6781,
+      "lng": -93.0128
     },
     "sessions": [
       {
@@ -708,11 +708,11 @@
     "round": 28,
     "circuit": {
       "name": "Richmond Raceway",
-      "city": "",
+      "city": "Richmond",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 37.5928,
+      "lng": -77.4197
     },
     "sessions": [
       {
@@ -734,11 +734,11 @@
     "round": 29,
     "circuit": {
       "name": "New Hampshire Motor Speedway",
-      "city": "",
+      "city": "Loudon",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 43.3628,
+      "lng": -71.4606
     },
     "sessions": [
       {
@@ -760,11 +760,11 @@
     "round": 30,
     "circuit": {
       "name": "Daytona International Speedway",
-      "city": "",
+      "city": "Daytona Beach",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 29.1872,
+      "lng": -81.0711
     },
     "sessions": [
       {
@@ -786,11 +786,11 @@
     "round": 31,
     "circuit": {
       "name": "Darlington Raceway",
-      "city": "",
+      "city": "Darlington",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 34.2953,
+      "lng": -79.9056
     },
     "sessions": [
       {
@@ -812,11 +812,11 @@
     "round": 32,
     "circuit": {
       "name": "World Wide Technology Raceway",
-      "city": "",
+      "city": "Madison",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 38.6258,
+      "lng": -90.1306
     },
     "sessions": [
       {
@@ -838,11 +838,11 @@
     "round": 33,
     "circuit": {
       "name": "Bristol Motor Speedway",
-      "city": "",
+      "city": "Bristol",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.5158,
+      "lng": -82.2569
     },
     "sessions": [
       {
@@ -864,11 +864,11 @@
     "round": 34,
     "circuit": {
       "name": "Kansas Speedway",
-      "city": "",
+      "city": "Kansas City",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 39.1156,
+      "lng": -94.8311
     },
     "sessions": [
       {
@@ -890,11 +890,11 @@
     "round": 35,
     "circuit": {
       "name": "Las Vegas Motor Speedway",
-      "city": "",
+      "city": "Las Vegas",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.2719,
+      "lng": -115.0103
     },
     "sessions": [
       {
@@ -916,11 +916,11 @@
     "round": 36,
     "circuit": {
       "name": "Charlotte Motor Speedway",
-      "city": "",
+      "city": "Concord",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 35.3522,
+      "lng": -80.6831
     },
     "sessions": [
       {
@@ -942,11 +942,11 @@
     "round": 37,
     "circuit": {
       "name": "Phoenix Raceway",
-      "city": "",
+      "city": "Avondale",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.3753,
+      "lng": -112.3108
     },
     "sessions": [
       {
@@ -968,11 +968,11 @@
     "round": 38,
     "circuit": {
       "name": "Talladega Superspeedway",
-      "city": "",
+      "city": "Lincoln",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 33.5669,
+      "lng": -86.0642
     },
     "sessions": [
       {
@@ -994,11 +994,11 @@
     "round": 39,
     "circuit": {
       "name": "Martinsville Speedway",
-      "city": "",
+      "city": "Ridgeway",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 36.6342,
+      "lng": -79.8517
     },
     "sessions": [
       {
@@ -1020,11 +1020,11 @@
     "round": 40,
     "circuit": {
       "name": "Homestead-Miami Speedway",
-      "city": "",
+      "city": "Homestead",
       "country": "United States",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 25.4517,
+      "lng": -80.4083
     },
     "sessions": [
       {

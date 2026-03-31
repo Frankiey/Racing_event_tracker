@@ -9,8 +9,8 @@
       "city": "Buriram",
       "country": "THA",
       "countryCode": "TH",
-      "lat": null,
-      "lng": null
+      "lat": 14.9618,
+      "lng": 103.0851
     },
     "sessions": [
       {
@@ -35,8 +35,8 @@
       "city": "Goiania",
       "country": "BRA",
       "countryCode": "BR",
-      "lat": null,
-      "lng": null
+      "lat": -16.7186,
+      "lng": -49.2456
     },
     "sessions": [
       {
@@ -61,8 +61,8 @@
       "city": "Austin",
       "country": "USA",
       "countryCode": "US",
-      "lat": null,
-      "lng": null
+      "lat": 30.1328,
+      "lng": -97.6411
     },
     "sessions": [
       {
@@ -87,8 +87,8 @@
       "city": "Jerez de la Frontera",
       "country": "SPA",
       "countryCode": "ES",
-      "lat": null,
-      "lng": null
+      "lat": 36.7083,
+      "lng": -6.034
     },
     "sessions": [
       {
@@ -113,8 +113,8 @@
       "city": "Le Mans",
       "country": "FRA",
       "countryCode": "FR",
-      "lat": null,
-      "lng": null
+      "lat": 47.956,
+      "lng": 0.2075
     },
     "sessions": [
       {
@@ -139,8 +139,8 @@
       "city": "Barcelona",
       "country": "SPA",
       "countryCode": "ES",
-      "lat": null,
-      "lng": null
+      "lat": 41.57,
+      "lng": 2.2611
     },
     "sessions": [
       {
@@ -165,8 +165,8 @@
       "city": "Mugello",
       "country": "ITA",
       "countryCode": "IT",
-      "lat": null,
-      "lng": null
+      "lat": 43.9975,
+      "lng": 11.3719
     },
     "sessions": [
       {
@@ -191,8 +191,8 @@
       "city": "\tBalatonfokajár",
       "country": "HUN",
       "countryCode": "HU",
-      "lat": null,
-      "lng": null
+      "lat": 46.9192,
+      "lng": 17.8853
     },
     "sessions": [
       {
@@ -217,8 +217,8 @@
       "city": "Brno",
       "country": "CZE",
       "countryCode": "CZ",
-      "lat": null,
-      "lng": null
+      "lat": 49.2036,
+      "lng": 16.4317
     },
     "sessions": [
       {
@@ -243,8 +243,8 @@
       "city": "Assen",
       "country": "NED",
       "countryCode": "NL",
-      "lat": null,
-      "lng": null
+      "lat": 52.9614,
+      "lng": 6.5228
     },
     "sessions": [
       {
@@ -269,8 +269,8 @@
       "city": "Sachsenring",
       "country": "GER",
       "countryCode": "DE",
-      "lat": null,
-      "lng": null
+      "lat": 50.7911,
+      "lng": 12.6886
     },
     "sessions": [
       {
@@ -295,8 +295,8 @@
       "city": "Silverstone",
       "country": "GBR",
       "countryCode": "GB",
-      "lat": null,
-      "lng": null
+      "lat": 52.0713,
+      "lng": -1.0147
     },
     "sessions": [
       {
@@ -321,8 +321,8 @@
       "city": "Alcañiz",
       "country": "SPA",
       "countryCode": "ES",
-      "lat": null,
-      "lng": null
+      "lat": 40.9417,
+      "lng": -0.1688
     },
     "sessions": [
       {
@@ -347,8 +347,8 @@
       "city": "Misano Adriatico",
       "country": "ITA",
       "countryCode": "SM",
-      "lat": null,
-      "lng": null
+      "lat": 43.9628,
+      "lng": 12.6836
     },
     "sessions": [
       {
@@ -373,8 +373,8 @@
       "city": "Spielberg",
       "country": "AUT",
       "countryCode": "AT",
-      "lat": null,
-      "lng": null
+      "lat": 47.2197,
+      "lng": 14.7647
     },
     "sessions": [
       {
@@ -399,8 +399,8 @@
       "city": "Motegi",
       "country": "JPN",
       "countryCode": "JP",
-      "lat": null,
-      "lng": null
+      "lat": 36.5322,
+      "lng": 140.2281
     },
     "sessions": [
       {
@@ -425,8 +425,8 @@
       "city": "Lombok",
       "country": "INA",
       "countryCode": "ID",
-      "lat": null,
-      "lng": null
+      "lat": -8.895,
+      "lng": 116.2975
     },
     "sessions": [
       {
@@ -451,8 +451,8 @@
       "city": "Phillip Island",
       "country": "AUS",
       "countryCode": "AU",
-      "lat": null,
-      "lng": null
+      "lat": -38.5006,
+      "lng": 145.2319
     },
     "sessions": [
       {
@@ -477,8 +477,8 @@
       "city": "Sepang",
       "country": "MAL",
       "countryCode": "MY",
-      "lat": null,
-      "lng": null
+      "lat": 2.7606,
+      "lng": 101.7381
     },
     "sessions": [
       {
@@ -503,8 +503,8 @@
       "city": "Doha",
       "country": "QAT",
       "countryCode": "QA",
-      "lat": null,
-      "lng": null
+      "lat": 25.49,
+      "lng": 51.4542
     },
     "sessions": [
       {
@@ -529,8 +529,8 @@
       "city": "Portimao",
       "country": "POR",
       "countryCode": "PT",
-      "lat": null,
-      "lng": null
+      "lat": 37.2294,
+      "lng": -8.6267
     },
     "sessions": [
       {
@@ -555,8 +555,8 @@
       "city": "Cheste",
       "country": "SPA",
       "countryCode": "ES",
-      "lat": null,
-      "lng": null
+      "lat": 39.4886,
+      "lng": -0.6268
     },
     "sessions": [
       {
