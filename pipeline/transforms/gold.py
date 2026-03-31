@@ -11,7 +11,7 @@ def build_calendar(all_events: list[dict], sources: list[str] | None = None) -> 
     return _envelope(events, sources)
 
 
-def build_upcoming(all_events: list[dict], limit: int = 30, sources: list[str] | None = None) -> dict:
+def build_upcoming(all_events: list[dict], limit: int = 200, sources: list[str] | None = None) -> dict:
     """Filter to upcoming events only, sorted by next session, with metadata envelope."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -51,9 +51,18 @@ def _normalize_time(t: str) -> str:
     return t
 
 
+_PLACEHOLDER_PREFIX = "1900-"
+
+
 def _sort_key(event: dict) -> str:
-    """Sort key: earliest session time, falling back to dateStart."""
+    """Sort key: earliest real (non-placeholder) session time, falling back to dateStart."""
     sessions = event.get("sessions", [])
     if sessions:
-        return min(_normalize_time(s.get("startTimeUTC", "")) for s in sessions)
+        real_times = [
+            _normalize_time(s.get("startTimeUTC", ""))
+            for s in sessions
+            if not s.get("startTimeUTC", "").startswith(_PLACEHOLDER_PREFIX)
+        ]
+        if real_times:
+            return min(real_times)
     return event.get("dateStart", "9999")

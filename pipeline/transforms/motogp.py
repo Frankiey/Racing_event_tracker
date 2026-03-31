@@ -40,6 +40,17 @@ def transform(bronze_events: list) -> list[dict]:
         circuit = event.get("circuit") or {}
         country = event.get("country") or {}
 
+        # Derive dateStart/dateEnd from session times — the Pulselive API's event-level
+        # date_start/date_end can be unreliable (e.g., sessions returned for the wrong
+        # calendar slot). Session timestamps are always more accurate.
+        session_dates = [
+            s["startTimeUTC"][:10]
+            for s in sessions
+            if s.get("startTimeUTC") and not s["startTimeUTC"].startswith("1900-")
+        ]
+        date_start = min(session_dates) if session_dates else _to_date(event.get("date_start", ""))
+        date_end = max(session_dates) if session_dates else _to_date(event.get("date_end", ""))
+
         events.append({
             "id": f"motogp-{year}-r{idx:02d}",
             "seriesId": "motogp",
@@ -54,8 +65,8 @@ def transform(bronze_events: list) -> list[dict]:
                 "lng": circuit.get("lng"),
             },
             "sessions": sessions,
-            "dateStart": _to_date(event.get("date_start", "")),
-            "dateEnd": _to_date(event.get("date_end", "")),
+            "dateStart": date_start,
+            "dateEnd": date_end,
         })
 
     return events
