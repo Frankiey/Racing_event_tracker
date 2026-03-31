@@ -36,6 +36,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <span id="modal-round" class="text-xs text-zinc-500 font-mono" />
         </div>
         <div class="flex items-center gap-2 shrink-0">
+          <!-- Share -->
+          <button
+            id="modal-share-btn"
+            class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+            aria-label="Share event"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+            </svg>
+          </button>
           <!-- Favorite -->
           <button
             id="modal-fav-btn"
@@ -93,6 +103,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <span id="modal-status-badge" class="text-xs px-2 py-1 rounded-full font-semibold" />
     </div>
   </div>
+</div>
+
+<!-- Share toast — fixed, above the modal -->
+<div
+  id="modal-share-toast"
+  class="fixed top-4 left-1/2 -translate-x-1/2 hidden bg-zinc-800 border border-zinc-700 text-zinc-100 text-xs font-semibold px-4 py-2 rounded-full shadow-xl z-[300] pointer-events-none"
+>
+  Link copied!
 </div>
 
 <script>
@@ -209,6 +227,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     // Render timeline (lazy — only when switched to)
     currentEvent = event;
 
+    // Deeplink: reflect this event in URL
+    const dlUrl = new URL(window.location.href);
+    dlUrl.searchParams.set('event', event.id);
+    history.replaceState(null, '', dlUrl.toString());
+
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -216,6 +239,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+    // Remove event from URL
+    const dlUrl = new URL(window.location.href);
+    dlUrl.searchParams.delete('event');
+    history.replaceState(null, '', dlUrl.toString());
   }
 
   // ── View toggle ──
@@ -258,4 +285,48 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   document.addEventListener('astro:before-swap', () => { document.body.style.overflow = ''; });
+
+  // ── Share button ──
+  const shareBtn = document.getElementById('modal-share-btn')!;
+  const shareToast = document.getElementById('modal-share-toast')!;
+  let shareToastTimer: ReturnType<typeof setTimeout> | null = null;
+
+  shareBtn.addEventListener('click', async () => {
+    if (!currentEvent) return;
+    const shareUrl = new URL(window.location.href);
+    shareUrl.searchParams.set('event', currentEvent.id);
+    const url = shareUrl.toString();
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({ title: currentEvent.eventName, url });
+        return;
+      } catch (err) {
+        if ((err as Error).name === 'AbortError') return;
+      }
+    }
+    try { await navigator.clipboard.writeText(url); } catch {}
+    shareToast.classList.remove('hidden');
+    if (shareToastTimer) clearTimeout(shareToastTimer);
+    shareToastTimer = setTimeout(() => shareToast.classList.add('hidden'), 2000);
+  });
+
+  // ── Deeplink: open event from ?event= param on page load ──
+  (function resolveDeeplink() {
+    const eventId = new URLSearchParams(window.location.search).get('event');
+    if (!eventId) return;
+    // 1. Try EventCard DOM elements (index/calendar pages)
+    const el = document.querySelector(`[data-event-id="${CSS.escape(eventId)}"]`);
+    if (el) {
+      try {
+        const ev = JSON.parse((el as HTMLElement).getAttribute('data-event') ?? '');
+        if (ev?.id) { openModal(ev); return; }
+      } catch {}
+    }
+    // 2. Try page-registered event list (__rtAllEvents or __passportFullEvents)
+    const all: any[] | undefined = (window as any).__rtAllEvents ?? (window as any).__passportFullEvents;
+    if (all) {
+      const ev = all.find((e: any) => e.id === eventId);
+      if (ev) openModal(ev);
+    }
+  })();
 </script>

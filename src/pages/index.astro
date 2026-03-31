@@ -418,3 +418,8 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
   // Re-check when the user comes back to the tab (e.g. phone sleep or alt-tab)
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshDashboard(); });
 </script>
+
+<script define:vars={{ rtAllEvents: allEvents }}>
+  // Expose all calendar events so EventModal can resolve deeplinks by ID
+  (window as any).__rtAllEvents = rtAllEvents;
+</script>
