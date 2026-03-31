@@ -1,6 +1,7 @@
 """Shared utilities for the data pipeline."""
 
 import json
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -10,7 +11,7 @@ CLIENT = httpx.Client(timeout=30, follow_redirects=True)
 
 
 def fetch_json(url: str, retries: int = 2) -> dict | list:
-    """Fetch JSON from a URL with retries."""
+    """Fetch JSON from a URL with retries and exponential backoff."""
     last_err = None
     for attempt in range(retries + 1):
         try:
@@ -20,7 +21,9 @@ def fetch_json(url: str, retries: int = 2) -> dict | list:
         except (httpx.HTTPError, json.JSONDecodeError) as e:
             last_err = e
             if attempt < retries:
-                print(f"  Retry {attempt + 1} for {url}: {e}")
+                delay = 2 ** attempt
+                print(f"  Retry {attempt + 1} for {url} (in {delay}s): {e}")
+                time.sleep(delay)
     raise last_err
 
 

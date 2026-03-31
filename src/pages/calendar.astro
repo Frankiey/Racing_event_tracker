@@ -80,10 +80,11 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
 <script>
   import { SESSION_ABBR } from '../lib/sessions';
   import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
+  import { countryFlag, escapeHtml, formatLocalTime, isPlaceholderTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
   import type { RaceEvent, RaceSession } from '../lib/types';
 
   // ── Data & series meta ────────────────────────────────────────────────────
-  const allEvents: RaceEvent[] = JSON.parse(document.getElementById('all-events-data')!.textContent!);
+  const allEvents: RaceEvent[] = safeJsonParse(document.getElementById('all-events-data')!.textContent!, []);
 
   const FILTER_KEY = 'rt-filters';
 
@@ -159,25 +160,6 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
         else dateIndex.set(key, [e]);
       }
     }
-  }
-
-  function flag(code: string): string {
-    if (!code || code.length !== 2) return '';
-    const base = 0x1F1E6 - 0x41;
-    return String.fromCodePoint(
-      code.toUpperCase().charCodeAt(0) + base,
-      code.toUpperCase().charCodeAt(1) + base
-    );
-  }
-
-  function fmtTime(utc: string): string {
-    return new Date(utc).toLocaleTimeString(undefined, {
-      hour: '2-digit', minute: '2-digit', hour12: false,
-    });
-  }
-
-  function esc(str: string): string {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   // ── Filter UI ─────────────────────────────────────────────────────────────
@@ -336,7 +318,7 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
         return `<span
           class="shrink-0 text-[9px] font-bold leading-none rounded px-1 py-0.5 whitespace-nowrap block"
           style="background-color:${bg};color:${text}"
-          title="${esc(e.eventName)}"
+          title="${escapeHtml(e.eventName)}"
         >${m.shortLabel}</span>`;
       }).join('');
 
@@ -413,15 +395,15 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
     const cardsHtml = dayEvs.map(ev => {
       const m = SERIES_META[ev.seriesId] ?? { shortLabel: ev.seriesId, color: '#71717a', label: ev.seriesId };
       const sessions = sessionsOnDay(ev, selectedDate!);
-      const f = flag(ev.circuit?.countryCode ?? '');
+      const f = countryFlag(ev.circuit?.countryCode ?? '');
       const isRaceDay = ev.dateEnd === selectedDate;
-      const isPast = new Date(ev.dateEnd + 'T23:59:59Z') < new Date();
+      const past = isPastEvent(ev.dateEnd);
       const isFirstDay = ev.dateStart === selectedDate;
 
       const sessHtml = sessions.map((s: any) => {
         const lbl = SESSION_ABBR[s.type] ?? s.type;
         const isRace = s.type === 'Race' || s.type === 'Feature Race';
-        const t = fmtTime(s.startTimeUTC);
+        const t = formatLocalTime(s.startTimeUTC);
         return `<div class="flex items-center gap-1.5 text-xs">
           <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? m.color : '#3f3f46'}"></span>
           <span class="font-semibold ${isRace ? 'text-zinc-100' : 'text-zinc-400'}">${lbl}</span>
@@ -439,8 +421,8 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
             : `<span class="text-[10px] text-zinc-600">Race weekend</span>`;
 
       return `<article
-        class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${isPast ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
-        data-event='${esc(JSON.stringify(ev))}'
+        class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${past ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
+        data-event='${escapeHtml(JSON.stringify(ev))}'
         role="button" tabindex="0"
       >
         <div class="w-0.5 self-stretch rounded-full shrink-0" style="background-color:${m.color}"></div>
@@ -450,9 +432,9 @@ const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
             <span class="text-[11px] text-zinc-500 font-mono">Rd ${ev.round}</span>
             ${spanLabel}
           </div>
-          <h3 class="font-bold text-sm ${isPast ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${esc(ev.eventName)}</h3>
+          <h3 class="font-bold text-sm ${past ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${escapeHtml(ev.eventName)}</h3>
           <div class="flex items-center gap-1.5 text-xs text-zinc-500 ${sessions.length > 0 ? 'mb-2' : ''}">
-            ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${esc(ev.circuit?.name ?? '')}</span>
+            ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${escapeHtml(ev.circuit?.name ?? '')}</span>
           </div>
           ${sessions.length > 0 ? `<div class="flex flex-wrap gap-x-3 gap-y-1">${sessHtml}</div>` : ''}
         </div>

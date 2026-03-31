@@ -51,6 +51,7 @@ SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3",
 def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = False):
     year = SEASON_YEAR
     all_silver: list[dict] = []
+    failed_series: list[str] = []
 
     print(f"=== RaceTrack Pipeline — {year} season ===\n")
 
@@ -73,6 +74,7 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
 
         except Exception as e:
             print(f"  [{series_id.upper()}] ERROR: {e}\n")
+            failed_series.append(series_id)
 
     if bronze_only:
         print("Bronze-only mode — stopping before silver/gold.")
@@ -114,6 +116,11 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
 
     print(f"\nDone! {len(calendar)} total events, {len(upcoming)} upcoming.")
 
+    if failed_series:
+        print(f"\nWARNING: {len(failed_series)} series failed: {', '.join(failed_series)}")
+        return False
+    return True
+
 
 def main():
     parser = argparse.ArgumentParser(description="RaceTrack data pipeline")
@@ -130,7 +137,9 @@ def main():
     args = parser.parse_args()
 
     series_filter = args.series.split(",") if args.series else None
-    run_pipeline(series_filter=series_filter, bronze_only=args.bronze_only)
+    success = run_pipeline(series_filter=series_filter, bronze_only=args.bronze_only)
+    if not success:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

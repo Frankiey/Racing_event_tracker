@@ -116,26 +116,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <script>
   import { SESSION_LABELS } from '../lib/sessions';
   import { SERIES_META } from '../lib/series-client';
+  import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite } from '../lib/client-utils';
 
   // ── Series metadata (imported from series-client.ts) ──
 
-  const PLACEHOLDER_YEAR = '1900';
-
-  function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
   function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
-
-  function localDatetime(utc: string) {
-    const d = new Date(utc);
-    const date = d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-    const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-    return `${date} · ${time}`;
-  }
-
-  function countryFlag(code: string) {
-    if (!code || code.length !== 2) return '';
-    const base = 0x1F1E6 - 0x41;
-    return String.fromCodePoint(code.toUpperCase().charCodeAt(0) + base, code.toUpperCase().charCodeAt(1) + base);
-  }
 
   const modal = document.getElementById('event-modal')!;
   const panel = document.getElementById('modal-panel')!;
@@ -143,9 +128,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   function openModal(event: any) {
     const meta = SERIES_META[event.seriesId] ?? { label: event.seriesId, shortLabel: event.seriesId, color: '#71717a' };
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
-    const favs: Set<string> = new Set(JSON.parse(localStorage.getItem('rt-favs') ?? '[]'));
-    const isFav = favs.has(event.id);
-    const isPast = new Date(event.dateEnd + 'T23:59:59Z') < new Date();
+    const isFav = readFavorites().includes(event.id);
+    const isPast = isPastEvent(event.dateEnd);
 
     // Color bar
     (document.getElementById('modal-color-bar') as HTMLElement).style.background = meta.color;
@@ -173,7 +157,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Sessions
     const sessionsEl = document.getElementById('modal-sessions') as HTMLElement;
-    const validSessions = (event.sessions as { type: string; startTimeUTC: string }[]).filter((s) => !isPlaceholder(s.startTimeUTC));
+    const validSessions = (event.sessions as { type: string; startTimeUTC: string }[]).filter((s) => !isPlaceholderTime(s.startTimeUTC));
     sessionsEl.innerHTML = validSessions.map((s: any) => {
       const isRace = isRaceType(s.type);
       const isPastSession = new Date(s.startTimeUTC) < new Date();
@@ -186,7 +170,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <span class="w-2 h-2 rounded-full shrink-0" style="background-color:${dotColor}"></span>
           <span class="flex-1 text-sm font-semibold ${isRace ? 'text-zinc-100' : isPastSession ? 'text-zinc-600' : 'text-zinc-300'}">${label}</span>
           <time class="text-sm tabular-nums font-mono ${isPastSession ? 'text-zinc-700' : isRace ? 'text-zinc-200' : 'text-zinc-400'}" title="${s.startTimeUTC}">
-            ${localDatetime(s.startTimeUTC)}
+            ${formatLocalDatetime(s.startTimeUTC)}
           </time>
           ${isPastSession ? '<span class="text-[10px] text-zinc-700 font-semibold uppercase tracking-wide ml-2">Done</span>' : ''}
         </div>
@@ -214,11 +198,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const favBtn = document.getElementById('modal-fav-btn') as HTMLButtonElement;
     favBtn.dataset.fav = isFav ? 'true' : 'false';
     favBtn.onclick = () => {
-      const favs: Set<string> = new Set(JSON.parse(localStorage.getItem('rt-favs') ?? '[]'));
-      if (favs.has(event.id)) { favs.delete(event.id); favBtn.dataset.fav = 'false'; }
-      else                    { favs.add(event.id);    favBtn.dataset.fav = 'true'; }
-      localStorage.setItem('rt-favs', JSON.stringify([...favs]));
-      window.dispatchEvent(new CustomEvent('rt-favs-changed'));
+      const nowFav = toggleFavorite(event.id);
+      favBtn.dataset.fav = nowFav ? 'true' : 'false';
     };
 
     // Reset to list view when opening modal

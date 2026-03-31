@@ -68,8 +68,12 @@ src/
     Layout.astro        — HTML shell + Nav + EventModal
   lib/
     series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
-    time.ts             — formatDateRange, getRaceSession, isPlaceholderTime,
-                          countryFlag (alpha-2→emoji), isPastEvent
+    series-client.ts    — Browser-safe series metadata (derived from series.ts)
+    client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
+                          formatLocalTime, formatDateRange, isPastEvent,
+                          readFavorites, toggleFavorite, safeJsonParse
+    time.ts             — Server-side helpers: formatDateRange, getRaceSession,
+                          isPlaceholderTime, countryFlag, isPastEvent
   styles/
     global.css          — Tailwind v4 import + racing stripe, modal, fav animations
 pipeline/

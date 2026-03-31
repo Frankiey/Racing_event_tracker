@@ -26,9 +26,10 @@ const heroSessions = nextEvent
 const seriesEvents = sorted.filter(e => nextEvent && e.seriesId === nextEvent.seriesId);
 const totalRounds = seriesEvents.length;
 
+const SIDEBAR_EVENT_COUNT = 8;
 const sidebarEvents = sorted
   .filter(e => e !== nextEvent && e.sessions.some((s: any) => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC) > now))
-  .slice(0, 8);
+  .slice(0, SIDEBAR_EVENT_COUNT);
 ---
 
 <Layout title="RaceTrack — Kiosk" bare={true}>
@@ -286,6 +287,7 @@ const sidebarEvents = sorted
   <script>
     import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
     import { isPlaceholderTime } from '../lib/time';
+    import { countryFlag } from '../lib/client-utils';
 
     // ── Types ────────────────────────────────────────────────────────────────
     interface Session {
@@ -309,14 +311,6 @@ const sidebarEvents = sorted
     function getOrder(id: string) { const idx = SERIES_ORDER.indexOf(id); return idx >= 0 ? idx : 99; }
     function getShortLabel(id: string) { return SERIES_META[id]?.shortLabel ?? id; }
     function getLabel(id: string) { return SERIES_META[id]?.label ?? id; }
-
-    function countryFlagEmoji(code: string): string {
-      if (!code || code.length !== 2) return '';
-      const upper = code.toUpperCase();
-      if (!/^[A-Z]{2}$/.test(upper)) return '';
-      const base = 0x1F1E6 - 0x41;
-      return String.fromCodePoint(upper.charCodeAt(0) + base, upper.charCodeAt(1) + base);
-    }
 
     // ── Constants ────────────────────────────────────────────────────────────
     const SESSION_DURATION_MIN: Record<string, number> = {
@@ -387,11 +381,13 @@ const sidebarEvents = sorted
     let rotationEvents: KioskEvent[] = [];
     let rotationIndex = 0;
     const ROTATION_INTERVAL_MS = 20_000;
+    const ROTATION_POOL_SIZE = 5;
+    const SIDEBAR_EVENT_COUNT = 8;
 
     function updateRotationEvents(events: KioskEvent[], now: number) {
       const upcoming = events
         .filter(e => e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
-        .slice(0, 5);
+        .slice(0, ROTATION_POOL_SIZE);
       // Reset index only when the pool changes identity
       if (upcoming[0]?.id !== rotationEvents[0]?.id || upcoming.length !== rotationEvents.length) {
         rotationEvents = upcoming;
@@ -569,7 +565,7 @@ const sidebarEvents = sorted
       // Flag
       const flagEl = document.getElementById('kiosk-flag');
       if (flagEl) {
-        flagEl.textContent = countryFlagEmoji(event.circuit?.countryCode ?? '');
+        flagEl.textContent = countryFlag(event.circuit?.countryCode ?? '');
         flagEl.style.filter = mode === 'live' ? `drop-shadow(0 0 30px ${color}99)` : '';
       }
 
@@ -707,12 +703,12 @@ const sidebarEvents = sorted
       const now = Date.now();
       const upcoming = events
         .filter(e => e.id !== heroId && e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
-        .slice(0, 8);
+        .slice(0, SIDEBAR_EVENT_COUNT);
 
       listEl.innerHTML = upcoming.map(event => {
         const color = getColor(event.seriesId);
         const short = getShortLabel(event.seriesId);
-        const flag = countryFlagEmoji(event.circuit?.countryCode ?? '');
+        const flag = countryFlag(event.circuit?.countryCode ?? '');
         const start = new Date(event.dateStart);
         const end = new Date(event.dateEnd);
         const mf = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' });
