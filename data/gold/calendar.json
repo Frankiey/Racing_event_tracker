@@ -855,22 +855,22 @@
     "sessions": [
       {
         "type": "Practice 1",
-        "startTimeUTC": "2026-01-22T14:00:00Z"
+        "startTimeUTC": "2026-01-21T14:00:00Z"
       },
       {
         "type": "Practice 2",
-        "startTimeUTC": "2026-01-23T16:00:00Z"
+        "startTimeUTC": "2026-01-22T16:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-01-24T17:00:00Z"
+        "startTimeUTC": "2026-01-23T17:00:00Z"
       },
       {
         "type": "Race",
         "startTimeUTC": "2026-01-24T22:40:00Z"
       }
     ],
-    "dateStart": "2026-01-22",
+    "dateStart": "2026-01-21",
     "dateEnd": "2026-01-25"
   },
   {
@@ -1433,40 +1433,6 @@
     "dateEnd": "2026-03-08"
   },
   {
-    "id": "imsa-2026-r02",
-    "seriesId": "imsa",
-    "eventName": "Mobil 1 Twelve Hours of Sebring",
-    "round": 2,
-    "circuit": {
-      "name": "Sebring International Raceway",
-      "city": "Sebring",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": 27.4542,
-      "lng": -81.349
-    },
-    "sessions": [
-      {
-        "type": "Practice 1",
-        "startTimeUTC": "2026-03-12T16:00:00Z"
-      },
-      {
-        "type": "Practice 2",
-        "startTimeUTC": "2026-03-13T15:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-03-14T13:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-03-14T16:00:00Z"
-      }
-    ],
-    "dateStart": "2026-03-12",
-    "dateEnd": "2026-03-14"
-  },
-  {
     "id": "f1-2026-r02",
     "seriesId": "f1",
     "eventName": "Chinese Grand Prix",
@@ -1586,6 +1552,40 @@
     ],
     "dateStart": "2026-03-15",
     "dateEnd": "2026-03-15"
+  },
+  {
+    "id": "imsa-2026-r02",
+    "seriesId": "imsa",
+    "eventName": "Mobil 1 Twelve Hours of Sebring",
+    "round": 2,
+    "circuit": {
+      "name": "Sebring International Raceway",
+      "city": "Sebring",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 27.4542,
+      "lng": -81.349
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-03-18T16:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-03-19T15:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-20T15:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-03-21T14:10:00Z"
+      }
+    ],
+    "dateStart": "2026-03-18",
+    "dateEnd": "2026-03-21"
   },
   {
     "id": "moto3-2026-r02",
@@ -2130,11 +2130,11 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-04-19T21:05:00Z"
+        "startTimeUTC": "2026-04-18T21:05:00Z"
       }
     ],
     "dateStart": "2026-04-17",
-    "dateEnd": "2026-04-19"
+    "dateEnd": "2026-04-18"
   },
   {
     "id": "indycar-2026-r05",
@@ -2468,15 +2468,15 @@
   {
     "id": "imsa-2026-r04",
     "seriesId": "imsa",
-    "eventName": "IMSA SportsCar Championship at Mid-Ohio",
+    "eventName": "Motul Course de Monterey",
     "round": 4,
     "circuit": {
-      "name": "Mid-Ohio Sports Car Course",
-      "city": "Lexington",
+      "name": "WeatherTech Raceway Laguna Seca",
+      "city": "Salinas",
       "country": "United States",
       "countryCode": "US",
-      "lat": 40.6893,
-      "lng": -82.6347
+      "lat": 36.5841,
+      "lng": -121.7544
     },
     "sessions": [
       {
@@ -2485,11 +2485,11 @@
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-05-02T16:00:00Z"
+        "startTimeUTC": "2026-05-02T17:00:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-05-03T19:00:00Z"
+        "startTimeUTC": "2026-05-03T17:30:00Z"
       }
     ],
     "dateStart": "2026-05-01",
@@ -3111,7 +3111,7 @@
   {
     "id": "imsa-2026-r05",
     "seriesId": "imsa",
-    "eventName": "Chevrolet Detroit Grand Prix",
+    "eventName": "Chevrolet Detroit Sports Car Classic",
     "round": 5,
     "circuit": {
       "name": "Detroit Grand Prix Street Circuit",
@@ -3132,11 +3132,11 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-05-31T18:30:00Z"
+        "startTimeUTC": "2026-05-30T18:30:00Z"
       }
     ],
     "dateStart": "2026-05-29",
-    "dateEnd": "2026-05-31"
+    "dateEnd": "2026-05-30"
   },
   {
     "id": "indycar-2026-r08",
@@ -3894,11 +3894,11 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-06-27T18:00:00Z"
+        "startTimeUTC": "2026-06-28T15:00:00Z"
       }
     ],
     "dateStart": "2026-06-25",
-    "dateEnd": "2026-06-27"
+    "dateEnd": "2026-06-28"
   },
   {
     "id": "f3-2026-r04",
@@ -4265,36 +4265,6 @@
     "dateEnd": "2026-07-05"
   },
   {
-    "id": "imsa-2026-r07",
-    "seriesId": "imsa",
-    "eventName": "IMSA SportsCar Championship at Road America",
-    "round": 7,
-    "circuit": {
-      "name": "Road America",
-      "city": "Elkhart Lake",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": 43.7975,
-      "lng": -87.99
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-07-03T17:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-07-04T16:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-07-05T18:30:00Z"
-      }
-    ],
-    "dateStart": "2026-07-03",
-    "dateEnd": "2026-07-05"
-  },
-  {
     "id": "indycar-2026-r11",
     "seriesId": "indycar",
     "eventName": "Honda Indy 200 at Mid-Ohio",
@@ -4437,6 +4407,36 @@
       {
         "type": "Race",
         "startTimeUTC": "2026-07-12T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-10",
+    "dateEnd": "2026-07-12"
+  },
+  {
+    "id": "imsa-2026-r07",
+    "seriesId": "imsa",
+    "eventName": "Chevrolet Grand Prix",
+    "round": 7,
+    "circuit": {
+      "name": "Canadian Tire Motorsport Park",
+      "city": "Bowmanville",
+      "country": "Canada",
+      "countryCode": "CA",
+      "lat": 43.9444,
+      "lng": -78.6733
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-07-10T17:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-11T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-07-12T17:00:00Z"
       }
     ],
     "dateStart": "2026-07-10",
@@ -4656,36 +4656,6 @@
     ],
     "dateStart": "2026-07-17",
     "dateEnd": "2026-07-19"
-  },
-  {
-    "id": "imsa-2026-r08",
-    "seriesId": "imsa",
-    "eventName": "Northeast Grand Prix at Lime Rock Park",
-    "round": 8,
-    "circuit": {
-      "name": "Lime Rock Park",
-      "city": "Lakeville",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": 41.9295,
-      "lng": -73.3824
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-07-17T17:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-07-18T14:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-07-18T19:00:00Z"
-      }
-    ],
-    "dateStart": "2026-07-17",
-    "dateEnd": "2026-07-18"
   },
   {
     "id": "indycar-2026-r12",
@@ -4929,6 +4899,40 @@
     ],
     "dateStart": "2026-07-26",
     "dateEnd": "2026-07-26"
+  },
+  {
+    "id": "imsa-2026-r08",
+    "seriesId": "imsa",
+    "eventName": "Motul SportsCar Endurance Grand Prix",
+    "round": 8,
+    "circuit": {
+      "name": "Road America",
+      "city": "Elkhart Lake",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 43.7975,
+      "lng": -87.99
+    },
+    "sessions": [
+      {
+        "type": "Practice 1",
+        "startTimeUTC": "2026-07-30T17:00:00Z"
+      },
+      {
+        "type": "Practice 2",
+        "startTimeUTC": "2026-07-31T16:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-01T15:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-02T17:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-30",
+    "dateEnd": "2026-08-02"
   },
   {
     "id": "nls-2026-r06",
@@ -5276,7 +5280,7 @@
   {
     "id": "imsa-2026-r09",
     "seriesId": "imsa",
-    "eventName": "IMSA SportsCar Championship at Virginia",
+    "eventName": "Michelin GT Challenge at VIR",
     "round": 9,
     "circuit": {
       "name": "Virginia International Raceway",
@@ -5842,36 +5846,6 @@
     "dateEnd": "2026-09-13"
   },
   {
-    "id": "imsa-2026-r10",
-    "seriesId": "imsa",
-    "eventName": "Monterey SportsCar Championship",
-    "round": 10,
-    "circuit": {
-      "name": "WeatherTech Raceway Laguna Seca",
-      "city": "Salinas",
-      "country": "United States",
-      "countryCode": "US",
-      "lat": 36.5841,
-      "lng": -121.7544
-    },
-    "sessions": [
-      {
-        "type": "Practice",
-        "startTimeUTC": "2026-09-11T19:00:00Z"
-      },
-      {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-09-12T18:00:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-09-13T21:00:00Z"
-      }
-    ],
-    "dateStart": "2026-09-11",
-    "dateEnd": "2026-09-13"
-  },
-  {
     "id": "moto3-2026-r14",
     "seriesId": "moto3",
     "eventName": "Moto3 Grand Prix Of San Marino",
@@ -5970,6 +5944,36 @@
     ],
     "dateStart": "2026-09-11",
     "dateEnd": "2026-09-13"
+  },
+  {
+    "id": "imsa-2026-r10",
+    "seriesId": "imsa",
+    "eventName": "TireRack.com Battle On The Bricks",
+    "round": 10,
+    "circuit": {
+      "name": "Indianapolis Motor Speedway",
+      "city": "Indianapolis",
+      "country": "United States",
+      "countryCode": "US",
+      "lat": 39.795,
+      "lng": -86.2352
+    },
+    "sessions": [
+      {
+        "type": "Practice",
+        "startTimeUTC": "2026-09-18T15:00:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-19T14:00:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-09-20T16:00:00Z"
+      }
+    ],
+    "dateStart": "2026-09-18",
+    "dateEnd": "2026-09-20"
   },
   {
     "id": "moto3-2026-r15",
@@ -6218,22 +6222,22 @@
     "sessions": [
       {
         "type": "Practice 1",
-        "startTimeUTC": "2026-10-01T18:00:00Z"
+        "startTimeUTC": "2026-09-30T18:00:00Z"
       },
       {
         "type": "Practice 2",
-        "startTimeUTC": "2026-10-02T17:00:00Z"
+        "startTimeUTC": "2026-10-01T17:00:00Z"
       },
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-10-03T14:00:00Z"
+        "startTimeUTC": "2026-10-02T14:00:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-10-03T17:00:00Z"
+        "startTimeUTC": "2026-10-03T15:00:00Z"
       }
     ],
-    "dateStart": "2026-10-01",
+    "dateStart": "2026-09-30",
     "dateEnd": "2026-10-03"
   },
   {

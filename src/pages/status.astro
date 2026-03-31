@@ -179,6 +179,9 @@ const sidebarEvents = sorted
         ))}
       </div>
 
+      <!-- Rotation indicator -->
+      <div id="kiosk-rotation-dots" class="hidden items-center gap-1.5 mb-5 ml-1"></div>
+
       <!-- Session strip -->
       <div id="kiosk-session-strip-wrap" class={heroSessions.length === 0 ? 'hidden' : ''}>
         <p class="text-[10px] uppercase tracking-[0.25em] text-zinc-700 mb-2 ml-1">Sessions</p>
@@ -396,6 +399,25 @@ const sidebarEvents = sorted
       return event.sessions.find(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now) ?? null;
     }
 
+    // ── Auto-rotation ────────────────────────────────────────────────────────
+    let rotationEvents: KioskEvent[] = [];
+    let rotationIndex = 0;
+    const ROTATION_INTERVAL_MS = 20_000;
+
+    function updateRotationEvents(events: KioskEvent[], now: number) {
+      const upcoming = events
+        .filter(e => e.sessions.some(s => !isPlaceholder(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
+        .slice(0, 5);
+      // Reset index only when the pool changes identity
+      if (upcoming[0]?.id !== rotationEvents[0]?.id || upcoming.length !== rotationEvents.length) {
+        rotationEvents = upcoming;
+        rotationIndex = 0;
+      } else {
+        rotationEvents = upcoming;
+        if (rotationIndex >= rotationEvents.length) rotationIndex = 0;
+      }
+    }
+
     // ── Manual event override ────────────────────────────────────────────────
     let manualEventId: string | null = null;
     let manualExpiresAt: number = 0;
@@ -423,6 +445,10 @@ const sidebarEvents = sorted
       manualEventId = null;
       const badge = document.getElementById('kiosk-manual-badge');
       if (badge) badge.style.display = 'none';
+      // Live mode: always show auto-detected live event
+      if (autoResult.mode === 'live') return { event: autoResult.event, isManual: false };
+      // Idle/weekend: use rotation index
+      if (rotationEvents.length > 0) return { event: rotationEvents[rotationIndex], isManual: false };
       return { event: autoResult.event, isManual: false };
     }
 
@@ -474,6 +500,20 @@ const sidebarEvents = sorted
         if (fmt === 'weekday-time') { opts.weekday = 'short'; opts.hour = '2-digit'; opts.minute = '2-digit'; }
         el.textContent = d.toLocaleString(undefined, opts);
       });
+    }
+
+    // ── Rotation dots ────────────────────────────────────────────────────────
+    function renderRotationDots(color: string, mode: KioskMode) {
+      const el = document.getElementById('kiosk-rotation-dots');
+      if (!el) return;
+      if (mode === 'live' || rotationEvents.length <= 1) {
+        el.style.display = 'none';
+        return;
+      }
+      el.style.display = 'flex';
+      el.innerHTML = rotationEvents.map((_, i) =>
+        `<span style="width:${i === rotationIndex ? '16px' : '6px'};height:6px;border-radius:9999px;background:${i === rotationIndex ? color : '#3f3f46'};transition:all 0.3s;"></span>`
+      ).join('');
     }
 
     // ── Hero render ──────────────────────────────────────────────────────────
@@ -623,6 +663,9 @@ const sidebarEvents = sorted
         }
       }
 
+      // Rotation dots
+      renderRotationDots(color, mode);
+
       // Session strip
       renderSessionStrip(event, color, now, mode);
     }
@@ -724,6 +767,10 @@ const sidebarEvents = sorted
     function updateKioskDisplay(events: KioskEvent[]) {
       const now = Date.now();
       const autoResult = getKioskMode(events, now);
+      // Refresh rotation pool when not in live or manual mode
+      if (autoResult.mode !== 'live' && !(manualEventId && now < manualExpiresAt)) {
+        updateRotationEvents(events, now);
+      }
       const { event: resolvedEvent, isManual } = resolveEvent(autoResult, events);
       const mode: KioskMode = isManual ? 'idle' : autoResult.mode;
       const event = resolvedEvent;
@@ -799,6 +846,17 @@ const sidebarEvents = sorted
 
       // Mode check every 30s
       setInterval(() => updateKioskDisplay(allEvents), 30_000);
+
+      // Auto-rotation through next 5 events every 20s (paused in live/manual)
+      setInterval(() => {
+        if (manualEventId && Date.now() < manualExpiresAt) return;
+        const autoResult = getKioskMode(allEvents, Date.now());
+        if (autoResult.mode === 'live') return;
+        if (rotationEvents.length > 1) {
+          rotationIndex = (rotationIndex + 1) % rotationEvents.length;
+          updateKioskDisplay(allEvents);
+        }
+      }, ROTATION_INTERVAL_MS);
 
       // Data refresh every 5 min
       setInterval(refreshData, 5 * 60_000);
