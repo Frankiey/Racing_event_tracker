@@ -38,6 +38,9 @@ for (const event of allEvents) {
 // Series with at least one event that has coords
 const availableSeries = SERIES_LIST.filter(s => seriesEvents[s.id]?.length > 0);
 
+// Series with enough events to fly a route (≥2)
+const flightableSeries = SERIES_LIST.filter(s => (seriesEvents[s.id]?.length ?? 0) >= 2);
+
 // Flatten all events into a JSON blob for the client
 const allGlobeEvents = Object.values(seriesEvents).flat();
 
@@ -98,6 +101,13 @@ for (const s of SERIES_LIST) {
           <button id="globe-reset" class="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700/40 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700/80 transition-colors text-[10px] font-bold" aria-label="Reset view">
             ↻
           </button>
+          <button id="globe-pause" class="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700/40 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700/80 transition-colors" aria-label="Pause/play flight" title="Pause/play flight animation">
+            <svg id="pause-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5"/></svg>
+            <svg id="play-icon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"/></svg>
+          </button>
+          <button id="globe-follow" class="p-2 rounded-lg bg-zinc-800/80 border border-zinc-700/40 text-emerald-400 hover:text-emerald-300 hover:bg-zinc-700/80 transition-colors" aria-label="Toggle follow plane" title="Follow plane">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z"/></svg>
+          </button>
         </div>
         <!-- Stats overlay -->
         <div class="absolute top-4 right-4 text-right">
@@ -114,8 +124,31 @@ for (const s of SERIES_LIST) {
       </div>
     </div>
 
+    <!-- Flight route selector -->
+    <div class="mt-5">
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 whitespace-nowrap">✈ Flying route</span>
+        <div class="flex flex-wrap gap-1.5" id="flight-series-btns">
+          {flightableSeries.map((s, i) => (
+            <button
+              data-flight-series={s.id}
+              class:list={[
+                'flight-series-btn px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide border transition-all flex items-center gap-1',
+                i === 0
+                  ? 'border-zinc-600 bg-zinc-800 text-zinc-200'
+                  : 'border-zinc-800 text-zinc-600 hover:text-zinc-300 hover:border-zinc-700'
+              ]}
+            >
+              <span class="w-1.5 h-1.5 rounded-full shrink-0" style={`background-color: ${s.color}`} />
+              {s.shortLabel}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
     <!-- Route list (compact legend below globe) -->
-    <div class="mt-6">
+    <div class="mt-4">
       <div class="flex items-center gap-3 mb-3">
         <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Legend</h3>
         <span class="h-px flex-1 bg-zinc-800/60" />
@@ -135,10 +168,11 @@ for (const s of SERIES_LIST) {
   </main>
 </Layout>
 
-<script define:vars={{ allGlobeEvents, seriesMeta }}>
+<script define:vars={{ allGlobeEvents, seriesMeta, flightableSeriesIds: flightableSeries.map(s => s.id) }}>
   // Expose data to the D3 script below
   window.__globeEvents = allGlobeEvents;
   window.__seriesMeta = seriesMeta;
+  window.__flightableSeriesIds = flightableSeriesIds;
 </script>
 
 <script>
@@ -179,7 +213,13 @@ for (const s of SERIES_LIST) {
   // ── Flight animation state ──
   let flightProgress = 0;    // 0 → totalSegments
   let flightActive = false;
+  let flightPaused = false;
+  let followPlane = true;
   const FLIGHT_SPEED = 0.004; // progress per frame
+  // Default to first flightable series (or 'f1')
+  const flightableIds: string[] = (window as any).__flightableSeriesIds ?? ['f1'];
+  let flightSeries: string = flightableIds[0] ?? 'f1';
+  let lastFlightSegIndex = -1; // for destination-arrival detection
 
   function filteredEvents() {
     if (activeFilter === 'all') return events;
@@ -472,19 +512,18 @@ for (const s of SERIES_LIST) {
   }
 
   // ══════════════════════════════════════════════
-  //  F1 FLIGHT ANIMATION
+  //  FLIGHT ANIMATION (multi-series)
   // ══════════════════════════════════════════════
 
-  function getF1Route() {
-    const f1Events = events
-      .filter((e: any) => e.seriesId === 'f1')
+  function getFlightRoute() {
+    return events
+      .filter((e: any) => e.seriesId === flightSeries)
       .sort((a: any, b: any) => a.round - b.round);
-    return f1Events;
   }
 
   function drawFlightAnimation() {
     if (!flightActive) return;
-    const route = getF1Route();
+    const route = getFlightRoute();
     if (route.length < 2) return;
 
     const segCount = route.length - 1;
@@ -522,18 +561,19 @@ for (const s of SERIES_LIST) {
 
       // Past segments dimmer, current segment bright
       const alpha = isCurrent ? 'cc' : '55';
+      const flightColor = meta[flightSeries]?.color ?? '#e10600';
       ctx.beginPath();
       pathGen(line);
-      ctx.strokeStyle = (meta.f1?.color ?? '#e10600') + alpha;
+      ctx.strokeStyle = flightColor + alpha;
       ctx.lineWidth = isCurrent ? 2.5 : 1.5;
-      ctx.shadowColor = meta.f1?.color ?? '#e10600';
+      ctx.shadowColor = flightColor;
       ctx.shadowBlur = isCurrent ? 10 : 3;
       ctx.stroke();
       ctx.shadowColor = 'transparent';
       ctx.shadowBlur = 0;
     }
 
-    // Draw the "plane" icon at the current position
+    // Draw the "plane" at the current position
     if (segIndex < segCount) {
       const from = route[segIndex];
       const to = route[segIndex + 1];
@@ -542,6 +582,16 @@ for (const s of SERIES_LIST) {
         const planeCoord = interp(segT);
         const pos = projection(planeCoord as [number, number]);
         const d = geoDistance(planeCoord as [number, number], [-currentRotation[0], -currentRotation[1]]);
+
+        // Auto-follow: smoothly rotate globe to keep plane centered
+        if (followPlane && !isDragging && !flightPaused) {
+          const targetLon = -(planeCoord as [number, number])[0];
+          const targetLat = -(planeCoord as [number, number])[1];
+          const followSpeed = 0.08;
+          currentRotation[0] += (targetLon - currentRotation[0]) * followSpeed;
+          currentRotation[1] += (targetLat - currentRotation[1]) * followSpeed;
+          autoRotate = false;
+        }
 
         if (pos && d < Math.PI / 2) {
           // Direction for rotation (look-ahead)
@@ -552,43 +602,137 @@ for (const s of SERIES_LIST) {
           ctx.translate(pos[0], pos[1]);
 
           // Rotate plane icon to face direction of travel
+          let angle = 0;
           if (aheadPos) {
-            const angle = Math.atan2(aheadPos[1] - pos[1], aheadPos[0] - pos[0]);
+            angle = Math.atan2(aheadPos[1] - pos[1], aheadPos[0] - pos[0]);
             ctx.rotate(angle);
           }
 
           // Glow
-          ctx.shadowColor = meta.f1?.color ?? '#e10600';
-          ctx.shadowBlur = 12;
+          const flightColor = meta[flightSeries]?.color ?? '#e10600';
+          ctx.shadowColor = flightColor;
+          ctx.shadowBlur = 16;
 
-          // Plane shape (simple chevron)
+          // 3D plane shape — fuselage + wings + tail
+          const planeColor = '#ffffff';
+          const planeAccent = flightColor;
+
+          // Main fuselage
           ctx.beginPath();
-          ctx.moveTo(8, 0);
-          ctx.lineTo(-5, -4);
-          ctx.lineTo(-3, 0);
-          ctx.lineTo(-5, 4);
+          ctx.moveTo(10, 0);       // nose
+          ctx.lineTo(4, -1.5);     // upper fuselage
+          ctx.lineTo(-8, -1.2);    // rear upper
+          ctx.lineTo(-10, 0);      // tail
+          ctx.lineTo(-8, 1.2);     // rear lower
+          ctx.lineTo(4, 1.5);      // lower fuselage
           ctx.closePath();
-          ctx.fillStyle = '#ffffff';
+          ctx.fillStyle = planeColor;
           ctx.fill();
 
+          // Wings (swept back)
+          ctx.beginPath();
+          ctx.moveTo(2, -1.5);     // wing root leading edge
+          ctx.lineTo(-2, -9);      // left wingtip
+          ctx.lineTo(-5, -8);      // left wingtip trailing
+          ctx.lineTo(-3, -1.3);    // wing root trailing edge
+          ctx.closePath();
+          ctx.fillStyle = planeAccent;
+          ctx.globalAlpha = 0.85;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(2, 1.5);      // wing root leading edge
+          ctx.lineTo(-2, 9);       // right wingtip
+          ctx.lineTo(-5, 8);       // right wingtip trailing
+          ctx.lineTo(-3, 1.3);     // wing root trailing edge
+          ctx.closePath();
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          // Tail fin (vertical stabilizer — drawn as perspective)
+          ctx.beginPath();
+          ctx.moveTo(-7, -1.2);    // base
+          ctx.lineTo(-10, -5);     // tip
+          ctx.lineTo(-10, -1);     // trailing edge
+          ctx.closePath();
+          ctx.fillStyle = planeAccent;
+          ctx.globalAlpha = 0.7;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          // Cockpit window
+          ctx.beginPath();
+          ctx.arc(6, 0, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = '#60a5fa';
+          ctx.fill();
+
+          // Engine glow trail
           ctx.shadowColor = 'transparent';
           ctx.shadowBlur = 0;
+          const trailGrad = ctx.createLinearGradient(-10, 0, -22, 0);
+          trailGrad.addColorStop(0, 'rgba(255, 160, 50, 0.6)');
+          trailGrad.addColorStop(0.4, 'rgba(255, 100, 30, 0.3)');
+          trailGrad.addColorStop(1, 'rgba(255, 80, 20, 0)');
+          ctx.beginPath();
+          ctx.moveTo(-10, -1);
+          ctx.lineTo(-22, -0.5);
+          ctx.lineTo(-22, 0.5);
+          ctx.lineTo(-10, 1);
+          ctx.closePath();
+          ctx.fillStyle = trailGrad;
+          ctx.fill();
+
           ctx.restore();
         }
       }
     }
 
-    // Advance animation
-    flightProgress += FLIGHT_SPEED;
-    if (flightProgress >= segCount) {
-      flightProgress = 0; // loop
+    // Advance animation and detect destination arrival
+    if (!flightPaused) {
+      flightProgress += FLIGHT_SPEED;
+      if (flightProgress >= segCount) {
+        flightProgress = 0; // loop
+        lastFlightSegIndex = -1;
+      } else {
+        const newSegIdx = Math.min(Math.floor(flightProgress), segCount - 1);
+        if (newSegIdx !== lastFlightSegIndex) {
+          lastFlightSegIndex = newSegIdx;
+          // Plane just arrived at route[newSegIdx] (start of new segment = end of previous)
+          if (route[newSegIdx]) {
+            const arrived = route[newSegIdx];
+            selectedEvent = arrived;
+            showEventPanel(arrived);
+          }
+        }
+      }
     }
   }
 
-  // Start flight animation when F1 is filtered, or "all" is selected
+  // Start flight animation — always active while a flightable series is chosen
   function updateFlightState() {
-    flightActive = activeFilter === 'f1' || activeFilter === 'all';
-    if (!flightActive) flightProgress = 0;
+    const route = getFlightRoute();
+    flightActive = route.length >= 2;
+    if (!flightActive) { flightProgress = 0; lastFlightSegIndex = -1; }
+  }
+
+  function setFlightSeries(sid: string) {
+    if (sid === flightSeries) return;
+    flightSeries = sid;
+    flightProgress = 0;
+    lastFlightSegIndex = -1;
+    updateFlightState();
+    updateFlightSeriesUI();
+  }
+
+  function updateFlightSeriesUI() {
+    document.querySelectorAll<HTMLElement>('.flight-series-btn').forEach(btn => {
+      const isActive = btn.dataset.flightSeries === flightSeries;
+      btn.classList.toggle('bg-zinc-800', isActive);
+      btn.classList.toggle('text-zinc-200', isActive);
+      btn.classList.toggle('border-zinc-600', isActive);
+      btn.classList.toggle('text-zinc-600', !isActive);
+      btn.classList.toggle('border-zinc-800', !isActive);
+    });
   }
 
   // ══════════════════════════════════════════════
@@ -747,6 +891,10 @@ for (const s of SERIES_LIST) {
     velocityX = 0;
     selectedEvent = null;
     flightProgress = 0;
+    flightPaused = false;
+    // Reset pause button UI
+    document.getElementById('pause-icon')?.classList.remove('hidden');
+    document.getElementById('play-icon')?.classList.add('hidden');
     panel.innerHTML = '<p class="text-sm text-zinc-600 text-center">Click a dot on the globe to see event details</p>';
   });
 
@@ -857,8 +1005,20 @@ for (const s of SERIES_LIST) {
         }
       });
 
+      // When filtering to a specific series that is flightable, auto-switch the flight route
+      if (filter !== 'all' && flightableIds.includes(filter)) {
+        setFlightSeries(filter);
+      }
       updateFlightState();
       updateStats();
+    });
+  });
+
+  // Flight series selector buttons
+  document.querySelectorAll<HTMLElement>('.flight-series-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sid = btn.dataset.flightSeries!;
+      setFlightSeries(sid);
     });
   });
 
@@ -879,5 +1039,35 @@ for (const s of SERIES_LIST) {
   // ── Init ──
   updateStats();
   updateFlightState();
+  updateFlightSeriesUI();
+
+  // Pause/play button
+  document.getElementById('globe-pause')!.addEventListener('click', () => {
+    flightPaused = !flightPaused;
+    const pauseIcon = document.getElementById('pause-icon')!;
+    const playIcon = document.getElementById('play-icon')!;
+    if (flightPaused) {
+      pauseIcon.classList.add('hidden');
+      playIcon.classList.remove('hidden');
+    } else {
+      pauseIcon.classList.remove('hidden');
+      playIcon.classList.add('hidden');
+    }
+  });
+
+  // Follow plane toggle
+  const followBtn = document.getElementById('globe-follow')!;
+  followBtn.addEventListener('click', () => {
+    followPlane = !followPlane;
+    if (followPlane) {
+      followBtn.classList.remove('text-zinc-400');
+      followBtn.classList.add('text-emerald-400');
+      autoRotate = false;
+    } else {
+      followBtn.classList.remove('text-emerald-400');
+      followBtn.classList.add('text-zinc-400');
+    }
+  });
+
   timer(() => render());
 </script>
