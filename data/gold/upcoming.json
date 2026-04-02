@@ -1,7 +1,7 @@
 {
-  "generated": "2026-03-31T13:31:42Z",
+  "generated": "2026-04-02T16:00:37Z",
   "season": 2026,
-  "eventCount": 199,
+  "eventCount": 200,
   "sources": [
     "dtm",
     "f1",
@@ -10,6 +10,7 @@
     "fe",
     "imsa",
     "indycar",
+    "iomtt",
     "moto2",
     "moto3",
     "motogp",
@@ -1435,6 +1436,88 @@
       ],
       "dateStart": "2026-05-24",
       "dateEnd": "2026-05-24"
+    },
+    {
+      "id": "iomtt-2026",
+      "seriesId": "iomtt",
+      "eventName": "Isle of Man TT 2026",
+      "round": 1,
+      "circuit": {
+        "name": "Snaefell Mountain Course",
+        "city": "Douglas",
+        "country": "Isle of Man",
+        "countryCode": "IM",
+        "lat": 54.1857,
+        "lng": -4.5305
+      },
+      "sessions": [
+        {
+          "type": "Qualifying 1",
+          "startTimeUTC": "2026-05-25T13:15:00Z"
+        },
+        {
+          "type": "Qualifying 2",
+          "startTimeUTC": "2026-05-26T17:30:00Z"
+        },
+        {
+          "type": "Qualifying 3",
+          "startTimeUTC": "2026-05-27T12:00:00Z"
+        },
+        {
+          "type": "Qualifying 4",
+          "startTimeUTC": "2026-05-27T17:30:00Z"
+        },
+        {
+          "type": "Qualifying 5",
+          "startTimeUTC": "2026-05-29T09:30:00Z"
+        },
+        {
+          "type": "Qualifying 6",
+          "startTimeUTC": "2026-05-29T12:15:00Z"
+        },
+        {
+          "type": "Superstock TT Race 1",
+          "startTimeUTC": "2026-05-30T09:45:00Z"
+        },
+        {
+          "type": "Sidecar TT Race 1",
+          "startTimeUTC": "2026-05-30T12:30:00Z"
+        },
+        {
+          "type": "Superbike TT",
+          "startTimeUTC": "2026-05-31T12:30:00Z"
+        },
+        {
+          "type": "Supersport TT Race 1",
+          "startTimeUTC": "2026-06-02T09:45:00Z"
+        },
+        {
+          "type": "Sportbike TT Race 1",
+          "startTimeUTC": "2026-06-02T13:15:00Z"
+        },
+        {
+          "type": "Sidecar TT Race 2",
+          "startTimeUTC": "2026-06-03T09:45:00Z"
+        },
+        {
+          "type": "Superstock TT Race 2",
+          "startTimeUTC": "2026-06-03T12:30:00Z"
+        },
+        {
+          "type": "Supersport TT Race 2",
+          "startTimeUTC": "2026-06-05T09:45:00Z"
+        },
+        {
+          "type": "Sportbike TT Race 2",
+          "startTimeUTC": "2026-06-05T13:00:00Z"
+        },
+        {
+          "type": "Senior TT",
+          "startTimeUTC": "2026-06-06T10:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-25",
+      "dateEnd": "2026-06-06"
     },
     {
       "id": "wsbk-2026-r06",

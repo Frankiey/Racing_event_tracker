@@ -29,6 +29,7 @@ export const SERIES: Record<string, SeriesMeta> = {
   nls:          { id: 'nls',          label: 'NLS',             shortLabel: 'NLS',    color: '#65a30d', order: 13, category: '4-wheel' },
   wsbk:         { id: 'wsbk',         label: 'World Superbike', shortLabel: 'WSBK',   color: '#9333ea', order: 14, category: '2-wheel' },
   superformula: { id: 'superformula', label: 'Super Formula',   shortLabel: 'SF',     color: '#f59e0b', order: 15, category: '4-wheel' },
+  iomtt:        { id: 'iomtt',        label: 'Isle of Man TT',  shortLabel: 'IOM TT', color: '#92400e', order: 16, category: '2-wheel' },
 };
 
 export const SERIES_LIST = Object.values(SERIES).sort((a, b) => a.order - b.order);
