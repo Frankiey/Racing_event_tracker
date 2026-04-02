@@ -1,25 +1,8 @@
 {
-  "generated": "2026-04-02T16:00:37Z",
+  "generated": "2026-04-02T16:46:21Z",
   "season": 2026,
   "eventCount": 240,
-  "sources": [
-    "dtm",
-    "f1",
-    "f2",
-    "f3",
-    "fe",
-    "imsa",
-    "indycar",
-    "iomtt",
-    "moto2",
-    "moto3",
-    "motogp",
-    "nascar",
-    "nls",
-    "superformula",
-    "wec",
-    "wsbk"
-  ],
+  "sources": [],
   "events": [
     {
       "id": "fe-2026-r01",
@@ -548,7 +531,7 @@
         "name": "Albert Park Grand Prix Circuit",
         "city": "Melbourne",
         "country": "Australia",
-        "countryCode": "AUS",
+        "countryCode": "AU",
         "lat": -37.8497,
         "lng": 144.968
       },
@@ -711,7 +694,7 @@
         "name": "Shanghai International Circuit",
         "city": "Shanghai",
         "country": "China",
-        "countryCode": "CHN",
+        "countryCode": "CN",
         "lat": 31.3389,
         "lng": 121.22
       },
@@ -1050,7 +1033,7 @@
         "name": "Suzuka Circuit",
         "city": "Suzuka",
         "country": "Japan",
-        "countryCode": "JPN",
+        "countryCode": "JP",
         "lat": 34.8431,
         "lng": 136.541
       },
@@ -1917,7 +1900,7 @@
         "name": "Miami International Autodrome",
         "city": "Miami",
         "country": "USA",
-        "countryCode": "",
+        "countryCode": "US",
         "lat": 25.9581,
         "lng": -80.2389
       },
@@ -2648,7 +2631,7 @@
         "name": "Circuit Gilles Villeneuve",
         "city": "Montreal",
         "country": "Canada",
-        "countryCode": "",
+        "countryCode": "CA",
         "lat": 45.5,
         "lng": -73.5228
       },
@@ -3151,7 +3134,7 @@
         "name": "Circuit de Monaco",
         "city": "Monte Carlo",
         "country": "Monaco",
-        "countryCode": "MON",
+        "countryCode": "MC",
         "lat": 43.7347,
         "lng": 7.42056
       },
@@ -3462,7 +3445,7 @@
         "name": "Circuit de Barcelona-Catalunya",
         "city": "Barcelona",
         "country": "Spain",
-        "countryCode": "ESP",
+        "countryCode": "ES",
         "lat": 41.57,
         "lng": 2.26111
       },
@@ -3939,7 +3922,7 @@
         "name": "Red Bull Ring",
         "city": "Spielberg",
         "country": "Austria",
-        "countryCode": "AUT",
+        "countryCode": "AT",
         "lat": 47.2197,
         "lng": 14.7647
       },
@@ -4200,7 +4183,7 @@
         "name": "Silverstone Circuit",
         "city": "Silverstone",
         "country": "UK",
-        "countryCode": "GBR",
+        "countryCode": "GB",
         "lat": 52.0786,
         "lng": -1.01694
       },
@@ -4673,7 +4656,7 @@
         "name": "Circuit de Spa-Francorchamps",
         "city": "Spa",
         "country": "Belgium",
-        "countryCode": "",
+        "countryCode": "BE",
         "lat": 50.4372,
         "lng": 5.97139
       },
@@ -4912,7 +4895,7 @@
         "name": "Hungaroring",
         "city": "Budapest",
         "country": "Hungary",
-        "countryCode": "HUN",
+        "countryCode": "HU",
         "lat": 47.5789,
         "lng": 19.2486
       },
@@ -5425,7 +5408,7 @@
         "name": "Circuit Park Zandvoort",
         "city": "Zandvoort",
         "country": "Netherlands",
-        "countryCode": "NED",
+        "countryCode": "NL",
         "lat": 52.3888,
         "lng": 4.54092
       },
@@ -5852,7 +5835,7 @@
         "name": "Autodromo Nazionale di Monza",
         "city": "Monza",
         "country": "Italy",
-        "countryCode": "ITA",
+        "countryCode": "IT",
         "lat": 45.6156,
         "lng": 9.28111
       },
@@ -6149,7 +6132,7 @@
         "name": "Madring",
         "city": "Madrid",
         "country": "Spain",
-        "countryCode": "ESP",
+        "countryCode": "ES",
         "lat": 40.46528,
         "lng": -3.61528
       },
@@ -6450,7 +6433,7 @@
         "name": "Baku City Circuit",
         "city": "Baku",
         "country": "Azerbaijan",
-        "countryCode": "AZE",
+        "countryCode": "AZ",
         "lat": 40.3725,
         "lng": 49.8533
       },
@@ -6871,7 +6854,7 @@
         "name": "Marina Bay Street Circuit",
         "city": "Marina Bay",
         "country": "Singapore",
-        "countryCode": "SGP",
+        "countryCode": "SG",
         "lat": 1.2914,
         "lng": 103.864
       },
@@ -7270,7 +7253,7 @@
         "name": "Circuit of the Americas",
         "city": "Austin",
         "country": "USA",
-        "countryCode": "USA",
+        "countryCode": "US",
         "lat": 30.1328,
         "lng": -97.6411
       },
@@ -7437,7 +7420,7 @@
         "name": "Autódromo Hermanos Rodríguez",
         "city": "Mexico City",
         "country": "Mexico",
-        "countryCode": "MEX",
+        "countryCode": "MX",
         "lat": 19.4042,
         "lng": -99.0907
       },
@@ -7592,7 +7575,7 @@
         "name": "Autódromo José Carlos Pace",
         "city": "São Paulo",
         "country": "Brazil",
-        "countryCode": "BRA",
+        "countryCode": "BR",
         "lat": -23.7036,
         "lng": -46.6997
       },
@@ -7759,7 +7742,7 @@
         "name": "Las Vegas Strip Street Circuit",
         "city": "Las Vegas",
         "country": "USA",
-        "countryCode": "USA",
+        "countryCode": "US",
         "lat": 36.1147,
         "lng": -115.173
       },
@@ -7968,7 +7951,7 @@
         "name": "Losail International Circuit",
         "city": "Lusail",
         "country": "Qatar",
-        "countryCode": "QAT",
+        "countryCode": "QA",
         "lat": 25.49,
         "lng": 51.4542
       },
@@ -8093,7 +8076,7 @@
         "name": "Yas Marina Circuit",
         "city": "Abu Dhabi",
         "country": "UAE",
-        "countryCode": "",
+        "countryCode": "AE",
         "lat": 24.4672,
         "lng": 54.6031
       },

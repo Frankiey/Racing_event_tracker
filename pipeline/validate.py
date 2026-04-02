@@ -113,7 +113,8 @@ def run_validation() -> int:
     for label, dirpath in dirs:
         if not dirpath.exists():
             continue
-        files = sorted(dirpath.glob("*.json"))
+        # broadcasts.json is a channel config, not an event list — skip it
+        files = sorted(f for f in dirpath.glob("*.json") if f.name != "broadcasts.json")
         if not files:
             continue
         print(f"\n  [{label.upper()}] Validating {len(files)} files...")

@@ -3,6 +3,26 @@
 from pipeline.config import SEASON_YEAR
 
 
+# OpenF1 returns ISO 3166-1 alpha-3 codes; convert to alpha-2
+ALPHA3_TO_ALPHA2: dict[str, str] = {
+    "AUS": "AU", "CHN": "CN", "JPN": "JP", "BHR": "BH", "SAU": "SA",
+    "MON": "MC", "ESP": "ES", "AUT": "AT", "GBR": "GB", "HUN": "HU",
+    "NED": "NL", "ITA": "IT", "AZE": "AZ", "SGP": "SG", "USA": "US",
+    "MEX": "MX", "BRA": "BR", "QAT": "QA", "ARE": "AE", "CAN": "CA",
+    "BEL": "BE",
+}
+
+# Fallback: Jolpica country name → alpha-2 (for events with no OpenF1 match)
+COUNTRY_NAME_TO_ALPHA2: dict[str, str] = {
+    "Australia": "AU", "China": "CN", "Japan": "JP", "Bahrain": "BH",
+    "Saudi Arabia": "SA", "Monaco": "MC", "Spain": "ES", "Austria": "AT",
+    "UK": "GB", "Hungary": "HU", "Netherlands": "NL", "Belgium": "BE",
+    "Italy": "IT", "Azerbaijan": "AZ", "Singapore": "SG", "USA": "US",
+    "Mexico": "MX", "Brazil": "BR", "Qatar": "QA", "UAE": "AE",
+    "Canada": "CA",
+}
+
+
 SESSION_MAP = [
     ("FirstPractice", "FP1"),
     ("SecondPractice", "FP2"),
@@ -50,6 +70,12 @@ def transform(bronze: dict) -> list[dict]:
         of1 = meeting_by_location.get(locality, {})
 
         loc = race.get("Circuit", {}).get("Location", {})
+        country_name = loc.get("country", "")
+        raw_cc = of1.get("country_code", "")
+        country_code = (
+            ALPHA3_TO_ALPHA2.get(raw_cc, raw_cc)
+            or COUNTRY_NAME_TO_ALPHA2.get(country_name, "")
+        )
         events.append({
             "id": f"f1-{year}-r{int(race['round']):02d}",
             "seriesId": "f1",
@@ -58,8 +84,8 @@ def transform(bronze: dict) -> list[dict]:
             "circuit": {
                 "name": race.get("Circuit", {}).get("circuitName", ""),
                 "city": loc.get("locality", ""),
-                "country": loc.get("country", ""),
-                "countryCode": of1.get("country_code", ""),
+                "country": country_name,
+                "countryCode": country_code,
                 "lat": _float(loc.get("lat")),
                 "lng": _float(loc.get("long")),
             },
