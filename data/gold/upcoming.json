@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-04T04:40:10Z",
+  "generated": "2026-04-05T04:55:27Z",
   "season": 2026,
-  "eventCount": 200,
+  "eventCount": 199,
   "sources": [
     "dtm",
     "f1",
@@ -21,40 +21,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "superformula-2026-e01",
-      "seriesId": "superformula",
-      "eventName": "Super Formula Rounds 1–2 – Motegi",
-      "round": 1,
-      "circuit": {
-        "name": "Mobility Resort Motegi",
-        "city": "Motegi",
-        "country": "Japan",
-        "countryCode": "JP",
-        "lat": 36.5403,
-        "lng": 140.1947
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-03T01:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-04-03T05:00:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-04-04T04:00:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-04-05T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-03",
-      "dateEnd": "2026-04-05"
-    },
     {
       "id": "motogp-2026-r20",
       "seriesId": "motogp",
