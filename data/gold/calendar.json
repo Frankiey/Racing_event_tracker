@@ -1,8 +1,25 @@
 {
-  "generated": "2026-04-02T16:46:21Z",
+  "generated": "2026-04-06T05:02:05Z",
   "season": 2026,
   "eventCount": 240,
-  "sources": [],
+  "sources": [
+    "dtm",
+    "f1",
+    "f2",
+    "f3",
+    "fe",
+    "imsa",
+    "indycar",
+    "iomtt",
+    "moto2",
+    "moto3",
+    "motogp",
+    "nascar",
+    "nls",
+    "superformula",
+    "wec",
+    "wsbk"
+  ],
   "events": [
     {
       "id": "fe-2026-r01",
