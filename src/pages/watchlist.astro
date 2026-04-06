@@ -49,7 +49,7 @@ const allEvents = (calendarData as EventFeed).events;
 
 <script>
   import { bindEventOpeners, registerEvents } from '../lib/event-client';
-  import { SESSION_ABBR } from '../lib/sessions';
+  import { SESSION_ABBR, isRaceType } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, formatDateRange, isPastEvent, isPlaceholderTime, readFavorites, toggleFavorite, safeJsonParse } from '../lib/client-utils';
   import { exportEventsIcs } from '../lib/ics';
@@ -86,7 +86,7 @@ const allEvents = (calendarData as EventFeed).events;
       const validSessions = (ev.sessions ?? []).filter((s: RaceSession) => !isPlaceholderTime(s.startTimeUTC));
 
       const sessionsHtml = validSessions.map((s: RaceSession) => {
-        const isRace = s.type === 'Race' || s.type === 'Feature Race';
+        const isRace = isRaceType(s.type);
         const t = formatLocalTime(s.startTimeUTC);
         return `<div class="flex items-center gap-1.5 text-xs">
           <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? meta.color : '#3f3f46'}"></span>

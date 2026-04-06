@@ -3,8 +3,8 @@
  * These are the SINGLE source of truth — import from here instead of
  * re-implementing in each <script> block.
  *
- * Note: time.ts re-exports the pure helpers from this file for Astro
- * frontmatter, while browser-only helpers stay here.
+ * Pure time helpers live in time.ts (re-exported here for convenience).
+ * Browser-only helpers (localStorage, DOM events) stay here.
  */
 
 import { getSessionDurationMinutes } from './sessions';
@@ -16,7 +16,7 @@ import {
   formatLocalValue,
   isPastEvent,
   isPlaceholderTime,
-} from './time-format';
+} from './time';
 
 export {
   countryFlag,

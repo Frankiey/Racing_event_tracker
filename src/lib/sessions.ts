@@ -1,3 +1,14 @@
+/** Canonical set of session types considered "race" (main event). */
+export const RACE_TYPES = new Set([
+  'Race', 'Feature Race', 'Race 1', 'Race 2',
+  'Sprint Race', 'Superpole Race', 'Sprint',
+]);
+
+/** Check if a session type is a race (the main event of a weekend). */
+export function isRaceType(type: string): boolean {
+  return RACE_TYPES.has(type);
+}
+
 /** Canonical session type → abbreviated display label. */
 export const SESSION_ABBR: Record<string, string> = {
   'Practice 1': 'FP1', 'Practice 2': 'FP2', 'Practice 3': 'FP3',

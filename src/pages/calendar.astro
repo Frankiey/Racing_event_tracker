@@ -174,17 +174,16 @@ const todayKey = new Date().toISOString().slice(0, 10);
 
 <script>
   import { openEventById, registerEvents } from '../lib/event-client';
-  import { SESSION_ABBR } from '../lib/sessions';
+  import { SESSION_ABBR, isRaceType } from '../lib/sessions';
   import { SERIES_META, SERIES_ORDER, getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
   import { downloadShareCardForDates } from '../lib/share-card';
+  import { loadFilters, saveFilters } from '../lib/filters';
   import type { RaceEvent, RaceSession } from '../lib/types';
 
   // ── Data & series meta ────────────────────────────────────────────────────
   const allEvents: RaceEvent[] = safeJsonParse(document.getElementById('all-events-data')!.textContent!, []);
   registerEvents(allEvents);
-
-  const FILTER_KEY = 'rt-filters';
 
   const allSeriesIds = [...new Set<string>(allEvents.map(e => e.seriesId))];
 
@@ -200,28 +199,16 @@ const todayKey = new Date().toISOString().slice(0, 10);
   const activeFilters = new Set<string>();
 
   function loadFiltersFromStorage() {
-    try {
-      const raw = localStorage.getItem(FILTER_KEY);
-      if (raw) {
-        const arr = JSON.parse(raw);
-        if (Array.isArray(arr) && arr.length > 0) {
-          activeFilters.clear();
-          arr.forEach((id: string) => { if (allSeriesIds.includes(id)) activeFilters.add(id); });
-          return;
-        }
-      }
-    } catch {}
-    activeFilters.clear(); // empty = all
+    const loaded = loadFilters();
+    activeFilters.clear();
+    for (const id of loaded) {
+      if (allSeriesIds.includes(id)) activeFilters.add(id);
+    }
   }
 
   function saveFiltersToStorage() {
-    if (activeFilters.size === 0) {
-      localStorage.removeItem(FILTER_KEY);
-    } else {
-      localStorage.setItem(FILTER_KEY, JSON.stringify([...activeFilters]));
-    }
+    saveFilters(activeFilters);
     rebuildDateIndex();
-    window.dispatchEvent(new CustomEvent('rt-filters-changed', { detail: { active: [...activeFilters] } }));
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -560,7 +547,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
 
         const sessHtml = sessions.map((s: any) => {
           const lbl = SESSION_ABBR[s.type] ?? s.type;
-          const isRace = s.type === 'Race' || s.type === 'Feature Race';
+          const isRace = isRaceType(s.type);
           const t = formatLocalTime(s.startTimeUTC);
           return `<div class="flex items-center gap-1.5 text-xs">
             <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? m.color : '#3f3f46'}"></span>

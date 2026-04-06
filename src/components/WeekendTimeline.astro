@@ -16,19 +16,16 @@
 </div>
 
 <script>
-  import { getSessionDurationMinutes, SESSION_ABBR } from '../lib/sessions';
+  import { getSessionDurationMinutes, SESSION_ABBR, isRaceType } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
+  import { isPlaceholderTime } from '../lib/time';
 
   interface TlSession {
     type: string;
     startTimeUTC: string;
   }
 
-  const PLACEHOLDER_YEAR = '1900';
   const HOUR_PX = 40; // px per hour — controls how wide a day bar is
-
-  function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
-  function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
   // ── Tooltip singleton ────────────────────────────────────────────────────
   let tlTip: HTMLElement | null = null;
@@ -138,7 +135,7 @@
     const nowLegend = document.getElementById('tl-now-legend')!;
     const meta = getClientSeriesMeta(event.seriesId);
 
-    const sessions: TlSession[] = (event.sessions as TlSession[]).filter(s => !isPlaceholder(s.startTimeUTC));
+    const sessions: TlSession[] = (event.sessions as TlSession[]).filter(s => !isPlaceholderTime(s.startTimeUTC));
     if (sessions.length === 0) {
       daysEl.innerHTML = '<p class="text-xs text-zinc-600 italic">No session times available</p>';
       nowLegend.classList.add('hidden');
@@ -295,6 +292,7 @@
     nowLegend.classList.toggle('hidden', !showNow);
   }
 
-  // Expose for EventModal to call
-  (window as any).__renderTimeline = renderTimeline;
+  // Expose for EventModal to call via unified namespace
+  if (!window.__rt) window.__rt = {};
+  window.__rt.renderTimeline = renderTimeline;
 </script>

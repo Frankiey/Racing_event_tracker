@@ -2,18 +2,27 @@ import type { RaceEvent } from './types';
 
 export const RT_EVENTS_REGISTERED = 'rt-events-registered';
 
+/** Unified RaceTrack namespace on window — avoids polluting global scope. */
 declare global {
   interface Window {
-    __passportFullEvents?: RaceEvent[];
-    __rtAllEvents?: RaceEvent[];
-    __rtEventRegistry?: Map<string, RaceEvent>;
+    __rt?: {
+      allEvents?: RaceEvent[];
+      eventRegistry?: Map<string, RaceEvent>;
+      renderTimeline?: (event: RaceEvent) => void;
+      favsHandler?: EventListener;
+    };
   }
+}
+
+function rt(): NonNullable<Window['__rt']> {
+  if (!window.__rt) window.__rt = {};
+  return window.__rt;
 }
 
 export function registerEvents(events: RaceEvent[]): void {
   const registry = getEventRegistry();
   for (const event of events) registry.set(event.id, event);
-  window.__rtAllEvents = events;
+  rt().allEvents = events;
   window.dispatchEvent(new CustomEvent(RT_EVENTS_REGISTERED));
 }
 
@@ -22,9 +31,7 @@ export function getRegisteredEvent(eventId: string): RaceEvent | undefined {
   const cached = registry.get(eventId);
   if (cached) return cached;
 
-  const fallback = window.__rtAllEvents?.find(event => event.id === eventId)
-    ?? window.__passportFullEvents?.find(event => event.id === eventId);
-
+  const fallback = rt().allEvents?.find(event => event.id === eventId);
   if (fallback) registry.set(eventId, fallback);
   return fallback;
 }
@@ -57,6 +64,7 @@ export function bindEventOpeners(root: ParentNode = document): void {
 }
 
 function getEventRegistry(): Map<string, RaceEvent> {
-  if (!window.__rtEventRegistry) window.__rtEventRegistry = new Map();
-  return window.__rtEventRegistry;
+  const ns = rt();
+  if (!ns.eventRegistry) ns.eventRegistry = new Map();
+  return ns.eventRegistry;
 }

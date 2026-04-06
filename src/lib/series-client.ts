@@ -1,31 +1,20 @@
 /**
- * Client-side series metadata — derived from the canonical series.ts definitions.
- * This eliminates duplication: series.ts is the single source of truth.
+ * Client-side series metadata — re-exports from the canonical series.ts.
+ * Kept as a separate module for backwards compatibility; new code should
+ * import directly from './series'.
  */
-import { SERIES, SERIES_LIST } from './series';
-import type { SeriesCategory } from './series';
+import { SERIES, SERIES_LIST, getSeriesMeta } from './series';
+import type { SeriesMeta } from './series';
+export type { SeriesCategory } from './series';
 
-export interface ClientSeriesMeta {
-  label: string;
-  shortLabel: string;
-  color: string;
-  category: SeriesCategory;
-}
+/** @deprecated Use `SeriesMeta` from './series' */
+export type ClientSeriesMeta = SeriesMeta;
 
-export const SERIES_META: Record<string, ClientSeriesMeta> = Object.fromEntries(
-  Object.entries(SERIES).map(([id, meta]) => [
-    id,
-    { label: meta.label, shortLabel: meta.shortLabel, color: meta.color, category: meta.category },
-  ])
-);
+/** Direct alias — clients can look up any series by id. */
+export const SERIES_META = SERIES;
 
+/** Series ids sorted by display order. */
 export const SERIES_ORDER: string[] = SERIES_LIST.map(s => s.id);
 
-export function getClientSeriesMeta(seriesId: string): ClientSeriesMeta {
-  return SERIES_META[seriesId] ?? {
-    label: seriesId.toUpperCase(),
-    shortLabel: seriesId.toUpperCase(),
-    color: '#71717a',
-    category: '4-wheel',
-  };
-}
+/** @deprecated Use `getSeriesMeta` from './series' */
+export const getClientSeriesMeta = getSeriesMeta;

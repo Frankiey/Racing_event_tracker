@@ -2,7 +2,7 @@
 
 from pipeline.config import SEASON_YEAR
 
-from .common import build_circuit, build_event
+from .common import build_circuit, build_event, derive_event_dates
 
 
 # OpenF1 returns ISO 3166-1 alpha-3 codes; convert to alpha-2
@@ -78,6 +78,13 @@ def transform(bronze: dict) -> list[dict]:
             ALPHA3_TO_ALPHA2.get(raw_cc, raw_cc)
             or COUNTRY_NAME_TO_ALPHA2.get(country_name, "")
         )
+
+        date_start, date_end = derive_event_dates(
+            sessions,
+            race.get("date", ""),
+            race.get("date", ""),
+        )
+
         events.append(
             build_event(
                 series_id="f1",
@@ -94,8 +101,8 @@ def transform(bronze: dict) -> list[dict]:
                 ),
                 circuitImage=of1.get("circuit_image"),
                 sessions=sessions,
-                date_start=sessions[0]["startTimeUTC"].split("T")[0] if sessions else race.get("date", ""),
-                date_end=race.get("date", ""),
+                date_start=date_start,
+                date_end=date_end,
             )
         )
 

@@ -3,6 +3,7 @@
 from pipeline.config import SEASON_YEAR
 
 from .common import build_circuit, build_event, build_single_session, derive_event_dates
+from pipeline.utils import to_iso
 
 
 def transform(bronze_data: dict | list) -> list[dict]:
@@ -31,7 +32,7 @@ def transform(bronze_data: dict | list) -> list[dict]:
         if qualifying_date:
             sessions.append({
                 "type": "Qualifying",
-                "startTimeUTC": build_single_session(qualifying_date, "Qualifying")[0]["startTimeUTC"],
+                "startTimeUTC": to_iso(qualifying_date),
             })
         sessions.extend(build_single_session(race_date))
 

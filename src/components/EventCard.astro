@@ -2,7 +2,7 @@
 import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { formatDateRange, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
-import { SESSION_ABBR } from '../lib/sessions';
+import { SESSION_ABBR, isRaceType } from '../lib/sessions';
 import broadcastData from '../../data/gold/broadcasts.json';
 
 const hasBroadcast = (seriesId: string) => !!(broadcastData as any).series?.[seriesId];
@@ -33,7 +33,6 @@ const past = isPastEvent(event.dateEnd);
 const flag = countryFlag(event.circuit.countryCode);
 
 function abbr(type: string) { return SESSION_ABBR[type] ?? type; }
-function isRace(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
 // Find next session that hasn't started yet (for "next session" chip)
 const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date());
@@ -129,9 +128,9 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
             <div class:list={['flex items-center gap-1.5 text-xs', isNext ? 'text-zinc-200' : '']}>
               <span
                 class="w-1.5 h-1.5 rounded-full shrink-0"
-                style={isRace(session.type) ? `background-color: ${meta.color}` : isNext ? 'background-color: #a1a1aa' : 'background-color: #3f3f46'}
+                style={isRaceType(session.type) ? `background-color: ${meta.color}` : isNext ? 'background-color: #a1a1aa' : 'background-color: #3f3f46'}
               />
-              <span class:list={['font-semibold', isRace(session.type) ? 'text-zinc-100' : isNext ? 'text-zinc-300' : 'text-zinc-500']}>
+              <span class:list={['font-semibold', isRaceType(session.type) ? 'text-zinc-100' : isNext ? 'text-zinc-300' : 'text-zinc-500']}>
                 {abbr(session.type)}
               </span>
               <time
@@ -201,8 +200,9 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
         if (id) btn.dataset.fav = favs.has(id) ? 'true' : 'false';
       });
     }
-    window.removeEventListener('rt-favs-changed', (window as any)._rtFavsHandler);
-    (window as any)._rtFavsHandler = onFavsChanged;
+    if (!window.__rt) window.__rt = {};
+    if (window.__rt.favsHandler) window.removeEventListener('rt-favs-changed', window.__rt.favsHandler);
+    window.__rt.favsHandler = onFavsChanged;
     window.addEventListener('rt-favs-changed', onFavsChanged);
 
     bindEventOpeners();

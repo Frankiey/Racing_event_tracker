@@ -288,7 +288,7 @@ const sidebarEvents = sorted
     import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
     import { isPlaceholderTime } from '../lib/time';
     import { countryFlag } from '../lib/client-utils';
-    import { getSessionDurationMinutes } from '../lib/sessions';
+    import { getSessionDurationMinutes, isRaceType } from '../lib/sessions';
 
     // ── Types ────────────────────────────────────────────────────────────────
     interface Session {
@@ -615,10 +615,10 @@ const sidebarEvents = sorted
         if (mode === 'weekend') {
           targetSession = getNextSession(event, now);
           if (!targetSession) {
-            targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race')) ?? null;
+            targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && isRaceType(s.type)) ?? null;
           }
         } else {
-          targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && (s.type === 'Race' || s.type === 'Feature Race'))
+          targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && isRaceType(s.type))
             ?? event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC)).at(-1)
             ?? null;
         }

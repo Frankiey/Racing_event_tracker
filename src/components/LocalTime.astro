@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { utc, format = 'datetime' } = Astro.props;
-import { formatUtcValue } from '../lib/time-format';
+import { formatUtcValue } from '../lib/time';
 ---
 
 <time data-local-time={utc} data-format={format} datetime={utc} class="tabular-nums">
@@ -17,7 +17,7 @@ import { formatUtcValue } from '../lib/time-format';
 </time>
 
 <script>
-  import { formatLocalValue } from '../lib/time-format';
+  import { formatLocalValue } from '../lib/time';
 
   function initLocalTimes() {
     document.querySelectorAll<HTMLTimeElement>('[data-local-time]').forEach(el => {

@@ -67,44 +67,17 @@ const twoWheel  = SERIES_LIST.filter(s => s.category === '2-wheel');
 </div>
 
 <script>
-  const STORAGE_KEY = 'rt-filters';
+  import { loadFilters, saveFilters, applySeriesVisibility } from '../lib/filters';
 
   // IDs split by category — read from DOM to stay in sync with server render
   function getCategoryIds(cat: '4-wheel' | '2-wheel'): string[] {
     return [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')]
-      .filter(btn => {
-        // category membership is determined by which group the button is in.
-        // We encode this via a data attribute set during initFilter.
-        return btn.dataset.category === cat;
-      })
+      .filter(btn => btn.dataset.category === cat)
       .map(btn => btn.dataset.filter!);
   }
 
-  function loadFilters(): Set<string> {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const arr = JSON.parse(raw);
-        if (Array.isArray(arr) && arr.length > 0) return new Set(arr);
-      }
-    } catch {}
-    return new Set();
-  }
-
-  function saveFilters(active: Set<string>) {
-    if (active.size === 0) {
-      localStorage.removeItem(STORAGE_KEY);
-    } else {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...active]));
-    }
-    window.dispatchEvent(new CustomEvent('rt-filters-changed', { detail: { active: [...active] } }));
-  }
-
   function applyVisibility(active: Set<string>) {
-    const showAll = active.size === 0;
-    document.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
-      el.style.display = (showAll || active.has(el.dataset.series!)) ? '' : 'none';
-    });
+    applySeriesVisibility(active);
     // After filtering, show/hide empty week groups
     document.querySelectorAll<HTMLElement>('.week-group').forEach(section => {
       const anyVisible = [...section.querySelectorAll<HTMLElement>('[data-series]')]

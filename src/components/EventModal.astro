@@ -162,7 +162,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <script>
   import { getRegisteredEvent } from '../lib/event-client';
-  import { SESSION_LABELS } from '../lib/sessions';
+  import { SESSION_LABELS, isRaceType } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
   import { exportEventIcs } from '../lib/ics';
@@ -217,8 +217,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   // ── Series metadata (imported from series-client.ts) ──
-
-  function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
   const modal = document.getElementById('event-modal')!;
 
@@ -360,8 +358,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     listBtn.classList.remove('bg-zinc-700', 'text-zinc-200');
     listBtn.classList.add('text-zinc-500');
     listBtn.setAttribute('aria-pressed', 'false');
-    if (currentEvent && (window as any).__renderTimeline) {
-      (window as any).__renderTimeline(currentEvent);
+    if (currentEvent && window.__rt?.renderTimeline) {
+      window.__rt.renderTimeline(currentEvent);
     }
   }
 
@@ -404,7 +402,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     if (!currentEvent) { alertSection.classList.add('hidden'); return; }
     const eventId = currentEvent.id;
     // Find race session
-    const race = currentEvent.sessions?.find((s) => s.type === 'Race' || s.type === 'Feature Race');
+    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
     if (!race || new Date(race.startTimeUTC) < new Date()) {
       alertSection.classList.add('hidden');
       return;
@@ -443,7 +441,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       alertStatus.classList.remove('hidden');
       return;
     }
-    const race = currentEvent.sessions?.find((s) => s.type === 'Race' || s.type === 'Feature Race');
+    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
     if (!race) return;
     const offset = parseInt(alertOffsetSelect.value);
     const fireAt = new Date(new Date(race.startTimeUTC).getTime() - offset * 60000).toISOString();
