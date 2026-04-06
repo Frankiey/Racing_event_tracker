@@ -2,8 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import EventCard from '../components/EventCard.astro';
 import SeriesFilter from '../components/SeriesFilter.astro';
-import Countdown from '../components/Countdown.astro';
-import SeriesBadge from '../components/SeriesBadge.astro';
 import { getRaceSession, isPlaceholderTime, countryFlag } from '../lib/time';
 import { SERIES_LIST, getSeriesMeta } from '../lib/series';
 import type { RaceEvent } from '../lib/types';
@@ -22,6 +20,11 @@ const nextRace = upcoming
   .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
   .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
   .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())[0];
+
+const fallbackHero = nextRace
+  ?? upcoming
+    .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
+    .find(x => x.session && !isPlaceholderTime(x.session.startTimeUTC));
 
 // Season stats per series: total rounds and rounds completed
 const seasonStats = new Map<string, { total: number; done: number }>();
@@ -137,60 +140,302 @@ const visibleGroups = [...grouped.entries()].filter(([k]) => k !== '__recent__')
 // First 2 groups render visible; the rest are in the DOM but hidden — revealed by lazy loader
 const INITIAL_GROUPS = 2;
 
-const nextCircuitFlag = nextRace ? countryFlag(nextRace.event.circuit.countryCode) : '';
-const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
+const heroEventsJson = JSON.stringify(upcoming).replace(/</g, '\\u003c');
+const nextCircuitFlag = fallbackHero ? countryFlag(fallbackHero.event.circuit.countryCode) : '';
+const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) : null;
 ---
 
 <Layout title="RaceTrack — Motorsport Event Tracker" currentPath={`${base}/`}>
   <main class="max-w-5xl mx-auto px-4 py-8">
 
     <!-- ── Hero countdown ── -->
-    {nextRace && (
-      <div class="relative mb-8 rounded-2xl overflow-hidden border border-zinc-700/40">
+    {fallbackHero && (
+      <>
+      <div class="relative mb-8 rounded-2xl overflow-hidden border border-zinc-700/40" data-hero-card>
         <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950" />
         <div
+          data-hero-glow
           class="absolute inset-0 opacity-[0.07]"
           style={`background: radial-gradient(ellipse 80% 60% at 80% 50%, ${nextRaceMeta?.color ?? '#e10600'}, transparent)`}
         />
-        <div class="absolute left-0 inset-y-0 w-1 rounded-l-2xl" style={`background: ${nextRaceMeta?.color ?? '#e10600'};`} />
+        <div data-hero-accent class="absolute left-0 inset-y-0 w-1 rounded-l-2xl" style={`background: ${nextRaceMeta?.color ?? '#e10600'};`} />
 
         <div class="relative px-6 py-6 sm:px-8 sm:py-7">
           <div class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2.5 mb-3 flex-wrap">
-                <SeriesBadge seriesId={nextRace.event.seriesId} size="md" />
-                <span class="text-xs text-zinc-500 font-mono">Round {nextRace.event.round}</span>
                 <span
+                  data-hero-series-badge
+                  class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5"
+                  style={`background-color: ${nextRaceMeta?.color ?? '#e10600'};`}
+                >
+                  {nextRaceMeta?.shortLabel ?? fallbackHero.event.seriesId}
+                </span>
+                <span data-hero-round class="text-xs text-zinc-500 font-mono">Round {fallbackHero.event.round}</span>
+                <span
+                  data-hero-status
                   class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest"
                   style={`background-color: ${nextRaceMeta?.color ?? '#e10600'}20; color: ${nextRaceMeta?.color ?? '#e10600'}`}
                 >
                   Next Race
                 </span>
               </div>
-              <h2 class="text-2xl sm:text-3xl font-black text-zinc-100 tracking-tight leading-none mb-2">
-                {nextRace.event.eventName}
+              <h2 data-hero-title class="text-2xl sm:text-3xl font-black text-zinc-100 tracking-tight leading-none mb-2">
+                {fallbackHero.event.eventName}
               </h2>
               <p class="flex items-center gap-2 text-sm text-zinc-400">
-                {nextCircuitFlag && <span class="text-xl leading-none">{nextCircuitFlag}</span>}
-                <span class="font-medium">{nextRace.event.circuit.name}</span>
-                {nextRace.event.circuit.country && (
-                  <>
-                    <span class="text-zinc-700">·</span>
-                    <span class="text-zinc-500">{nextRace.event.circuit.country}</span>
-                  </>
-                )}
+                <span data-hero-flag class:list={['text-xl leading-none', !nextCircuitFlag && 'hidden']}>{nextCircuitFlag}</span>
+                <span data-hero-circuit class="font-medium">{fallbackHero.event.circuit.name}</span>
+                <span data-hero-country-wrap class:list={[!fallbackHero.event.circuit.country && 'hidden']}>
+                  <span class="text-zinc-700">·</span>
+                  <span data-hero-country class="text-zinc-500">{fallbackHero.event.circuit.country}</span>
+                </span>
               </p>
             </div>
 
             <div class="sm:text-right shrink-0">
-              <Countdown
-                targetUTC={nextRace.session!.startTimeUTC}
-                label="Race starts in"
-              />
+              <div class="text-center" data-hero-countdown data-countdown={fallbackHero.session!.startTimeUTC}>
+                <p data-hero-countdown-label class="text-xs text-zinc-500 uppercase tracking-wide mb-1">Race starts in</p>
+                <div class="flex items-center justify-center gap-3 text-2xl font-mono font-bold text-zinc-100">
+                  <div class="flex flex-col items-center">
+                    <span data-unit="days" class="tabular-nums">--</span>
+                    <span data-hero-days-label class="text-[10px] text-zinc-500 font-sans font-normal">days</span>
+                  </div>
+                  <span class="text-zinc-600">:</span>
+                  <div class="flex flex-col items-center">
+                    <span data-unit="hours" class="tabular-nums">--</span>
+                    <span class="text-[10px] text-zinc-500 font-sans font-normal">hrs</span>
+                  </div>
+                  <span class="text-zinc-600">:</span>
+                  <div class="flex flex-col items-center">
+                    <span data-unit="minutes" class="tabular-nums">--</span>
+                    <span class="text-[10px] text-zinc-500 font-sans font-normal">min</span>
+                  </div>
+                  <span class="text-zinc-600">:</span>
+                  <div class="flex flex-col items-center">
+                    <span data-unit="seconds" class="tabular-nums">--</span>
+                    <span class="text-[10px] text-zinc-500 font-sans font-normal">sec</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <script id="rt-hero-events" type="application/json" set:html={heroEventsJson}></script>
+      <script>
+        import { countryFlag } from '../lib/client-utils';
+        import { SERIES_META } from '../lib/series-client';
+
+        type HeroSession = { type: string; startTimeUTC: string; endTimeUTC?: string };
+        type HeroEvent = {
+          id: string;
+          seriesId: string;
+          eventName: string;
+          round: number;
+          circuit: { name: string; country: string; countryCode: string };
+          sessions: HeroSession[];
+        };
+
+        type HeroCandidate = {
+          event: HeroEvent;
+          session: HeroSession;
+          mode: 'live' | 'next';
+        };
+
+        const HERO_RACE_TYPES = new Set(['Race', 'Feature Race', 'Race 1', 'Race 2', 'Sprint Race', 'Superpole Race', 'Sprint']);
+        const HERO_SESSION_DURATION_MIN: Record<string, number> = {
+          'Practice': 60,
+          'Practice 1': 60,
+          'Practice 2': 60,
+          'Practice 3': 60,
+          'Free Practice 1': 60,
+          'Free Practice 2': 60,
+          'Free Practice 3': 60,
+          'FP1': 45,
+          'FP2': 45,
+          'FP3': 45,
+          'Q1': 20,
+          'Q2': 20,
+          'Qualifying': 90,
+          'Sprint Qualifying': 60,
+          'Sprint Shootout': 60,
+          'Sprint': 45,
+          'Sprint Race': 45,
+          'Race': 120,
+          'Race 1': 120,
+          'Race 2': 120,
+          'Feature Race': 120,
+          'Superpole Race': 45,
+          'NASCAR Race': 180,
+          'MotoGP Race': 60,
+          'Warm Up': 30,
+          default: 120,
+        };
+
+        let heroInterval: number | undefined;
+
+        function isPlaceholderTime(utc: string): boolean {
+          return !utc || utc.startsWith('1900-');
+        }
+
+        function getRaceSession(sessions: HeroSession[]): HeroSession | null {
+          return sessions.find(session => HERO_RACE_TYPES.has(session.type)) ?? sessions.at(-1) ?? null;
+        }
+
+        function getSessionEnd(session: HeroSession): number {
+          if (session.endTimeUTC) {
+            const explicitEnd = new Date(session.endTimeUTC).getTime();
+            if (!Number.isNaN(explicitEnd)) return explicitEnd;
+          }
+
+          const durationMin = HERO_SESSION_DURATION_MIN[session.type] ?? HERO_SESSION_DURATION_MIN.default;
+          return new Date(session.startTimeUTC).getTime() + durationMin * 60_000;
+        }
+
+        function getHeroCandidate(events: HeroEvent[], now: number): HeroCandidate | null {
+          const raceEntries = events
+            .map(event => ({ event, session: getRaceSession(event.sessions ?? []) }))
+            .filter((entry): entry is { event: HeroEvent; session: HeroSession } => !!entry.session && !isPlaceholderTime(entry.session.startTimeUTC))
+            .sort((a, b) => new Date(a.session.startTimeUTC).getTime() - new Date(b.session.startTimeUTC).getTime());
+
+          const live = raceEntries.find(({ session }) => {
+            const start = new Date(session.startTimeUTC).getTime();
+            return now >= start && now < getSessionEnd(session);
+          });
+          if (live) return { ...live, mode: 'live' };
+
+          const next = raceEntries.find(({ session }) => new Date(session.startTimeUTC).getTime() > now);
+          return next ? { ...next, mode: 'next' } : null;
+        }
+
+        function setUnit(root: HTMLElement, unit: string, value: string) {
+          const node = root.querySelector<HTMLElement>(`[data-unit="${unit}"]`);
+          if (node) node.textContent = value;
+        }
+
+        function updateCountdown(root: HTMLElement, candidate: HeroCandidate, now: number) {
+          const start = new Date(candidate.session.startTimeUTC).getTime();
+          const end = getSessionEnd(candidate.session);
+          const label = root.querySelector<HTMLElement>('[data-hero-countdown-label]');
+          const daysLabel = root.querySelector<HTMLElement>('[data-hero-days-label]');
+
+          if (candidate.mode === 'live' && now < end) {
+            const elapsed = now - start;
+            const elapsedMinutes = Math.floor(elapsed / 60_000);
+            const elapsedHours = Math.floor(elapsedMinutes / 60);
+
+            if (label) {
+              label.innerHTML = '<span class="live-pulse inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span><span class="text-emerald-400">In Progress</span></span>';
+            }
+            if (daysLabel) daysLabel.textContent = 'elapsed';
+
+            setUnit(root, 'days', '0');
+            setUnit(root, 'hours', String(elapsedHours).padStart(2, '0'));
+            setUnit(root, 'minutes', String(elapsedMinutes % 60).padStart(2, '0'));
+            setUnit(root, 'seconds', String(Math.floor((elapsed % 60_000) / 1000)).padStart(2, '0'));
+            return;
+          }
+
+          const diff = Math.max(0, start - now);
+          const days = Math.floor(diff / 86_400_000);
+          const hours = Math.floor((diff % 86_400_000) / 3_600_000);
+          const minutes = Math.floor((diff % 3_600_000) / 60_000);
+          const seconds = Math.floor((diff % 60_000) / 1000);
+
+          if (label) label.textContent = 'Race starts in';
+          if (daysLabel) daysLabel.textContent = 'days';
+
+          setUnit(root, 'days', String(days));
+          setUnit(root, 'hours', String(hours).padStart(2, '0'));
+          setUnit(root, 'minutes', String(minutes).padStart(2, '0'));
+          setUnit(root, 'seconds', String(seconds).padStart(2, '0'));
+        }
+
+        function renderHero(card: HTMLElement, candidate: HeroCandidate) {
+          const meta = SERIES_META[candidate.event.seriesId] ?? {
+            shortLabel: candidate.event.seriesId.toUpperCase(),
+            color: '#71717a',
+          };
+          const color = meta.color;
+          const flag = countryFlag(candidate.event.circuit.countryCode);
+
+          const glow = card.querySelector<HTMLElement>('[data-hero-glow]');
+          const accent = card.querySelector<HTMLElement>('[data-hero-accent]');
+          const badge = card.querySelector<HTMLElement>('[data-hero-series-badge]');
+          const round = card.querySelector<HTMLElement>('[data-hero-round]');
+          const status = card.querySelector<HTMLElement>('[data-hero-status]');
+          const title = card.querySelector<HTMLElement>('[data-hero-title]');
+          const flagEl = card.querySelector<HTMLElement>('[data-hero-flag]');
+          const circuit = card.querySelector<HTMLElement>('[data-hero-circuit]');
+          const country = card.querySelector<HTMLElement>('[data-hero-country]');
+          const countryWrap = card.querySelector<HTMLElement>('[data-hero-country-wrap]');
+
+          if (glow) glow.style.background = `radial-gradient(ellipse 80% 60% at 80% 50%, ${color}, transparent)`;
+          if (accent) accent.style.background = color;
+          if (badge) {
+            badge.textContent = meta.shortLabel;
+            badge.style.backgroundColor = color;
+          }
+          if (round) round.textContent = `Round ${candidate.event.round}`;
+          if (status) {
+            status.textContent = candidate.mode === 'live' ? 'Live Now' : 'Next Race';
+            status.style.backgroundColor = `${color}20`;
+            status.style.color = color;
+          }
+          if (title) title.textContent = candidate.event.eventName;
+          if (flagEl) {
+            flagEl.textContent = flag;
+            flagEl.classList.toggle('hidden', !flag);
+          }
+          if (circuit) circuit.textContent = candidate.event.circuit.name;
+          if (country) country.textContent = candidate.event.circuit.country;
+          if (countryWrap) countryWrap.classList.toggle('hidden', !candidate.event.circuit.country);
+        }
+
+        function initHeroCard() {
+          const card = document.querySelector<HTMLElement>('[data-hero-card]');
+          const countdown = card?.querySelector<HTMLElement>('[data-hero-countdown]');
+          const dataEl = document.getElementById('rt-hero-events');
+          if (!card || !countdown || !dataEl) return;
+
+          const events = JSON.parse(dataEl.textContent ?? '[]') as HeroEvent[];
+          let currentKey = '';
+
+          function tick() {
+            const now = Date.now();
+            const candidate = getHeroCandidate(events, now);
+            if (!candidate) {
+              card.hidden = true;
+              return;
+            }
+
+            card.hidden = false;
+            const candidateKey = `${candidate.event.id}:${candidate.session.startTimeUTC}:${candidate.mode}`;
+            if (candidateKey !== currentKey) {
+              renderHero(card, candidate);
+              currentKey = candidateKey;
+            }
+            updateCountdown(countdown, candidate, now);
+          }
+
+          if (heroInterval) window.clearInterval(heroInterval);
+          tick();
+          heroInterval = window.setInterval(tick, 1000);
+        }
+
+        function cleanupHeroCard() {
+          if (heroInterval) {
+            window.clearInterval(heroInterval);
+            heroInterval = undefined;
+          }
+        }
+
+        initHeroCard();
+        document.addEventListener('astro:before-swap', cleanupHeroCard);
+        document.addEventListener('astro:after-swap', initHeroCard);
+      </script>
+      </>
     )}
 
     <!-- ── Season overview stats ── -->
@@ -258,9 +503,22 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 
     <!-- ── Season stats ── -->
     <div class="mb-6">
-      <div class="flex items-center gap-3 mb-3">
+      <div class="flex items-center gap-3 mb-3 flex-wrap">
         <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">{SEASON_YEAR} Season</h2>
         <span class="h-px flex-1 bg-zinc-800/80" />
+        <div id="weekend-share-slot" class="flex items-center gap-2 min-w-0">
+          <span id="weekend-share-summary" class="hidden sm:block text-[10px] uppercase tracking-widest text-zinc-600 whitespace-nowrap" />
+          <button
+            id="weekend-share-btn"
+            class="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+            type="button"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V4.5m0 12 4.5-4.5M12 16.5l-4.5-4.5M4.5 19.5h15" />
+            </svg>
+            <span id="weekend-share-btn-label">Weekend Card</span>
+          </button>
+        </div>
         <a href={`${base}/calendar`} class="text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors uppercase tracking-widest">
           Full calendar →
         </a>
@@ -378,11 +636,44 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
       </p>
     </div>
 
+    <script id="dashboard-events-data" type="application/json" set:html={JSON.stringify(allEvents)} />
+
   </main>
 </Layout>
 
 <script>
   import { isPlaceholderTime } from '../lib/time';
+  import { downloadWeekendShareCard, getWeekendShareCardData } from '../lib/share-card';
+  import { safeJsonParse } from '../lib/client-utils';
+
+  const allEvents = safeJsonParse(
+    document.getElementById('dashboard-events-data')?.textContent ?? '[]',
+    []
+  );
+
+  (window as any).__rtAllEvents = allEvents;
+
+  function renderWeekendShare() {
+    const summary = document.getElementById('weekend-share-summary');
+    const button = document.getElementById('weekend-share-btn') as HTMLButtonElement | null;
+    const buttonLabel = document.getElementById('weekend-share-btn-label');
+    const slot = document.getElementById('weekend-share-slot');
+    if (!summary || !button || !buttonLabel || !slot) return;
+
+    const data = getWeekendShareCardData(allEvents);
+    if (!data) {
+      slot.classList.add('hidden');
+      return;
+    }
+
+    slot.classList.remove('hidden');
+    summary.textContent = `${data.rangeLabel} • ${data.eventCount} events • ${data.sessionCount} sessions`;
+
+    button.disabled = false;
+    if (button.dataset.loading !== 'true') {
+      buttonLabel.textContent = 'Weekend Card';
+    }
+  }
 
   // ── Client-side staleness fix ──
   // Labels (Today/Tomorrow) are baked at build time; race sessions may have
@@ -455,7 +746,40 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
     });
   }
 
+  function initWeekendShare() {
+    const button = document.getElementById('weekend-share-btn') as HTMLButtonElement | null;
+    const buttonLabel = document.getElementById('weekend-share-btn-label');
+    if (!button || !buttonLabel) return;
+
+    renderWeekendShare();
+
+    if (button.dataset.bound === 'true') return;
+    button.dataset.bound = 'true';
+
+    button.addEventListener('click', () => {
+      if (button.disabled || button.dataset.loading === 'true') return;
+
+      button.dataset.loading = 'true';
+      button.disabled = true;
+      buttonLabel.textContent = 'Preparing';
+
+      try {
+        const downloaded = downloadWeekendShareCard(allEvents);
+        buttonLabel.textContent = downloaded ? 'Saved' : 'Unavailable';
+      } catch {
+        buttonLabel.textContent = 'Try again';
+      } finally {
+        window.setTimeout(() => {
+          delete button.dataset.loading;
+          renderWeekendShare();
+        }, 900);
+      }
+    });
+  }
+
   function initDashboard() {
+    initWeekendShare();
+
     // ── Recent toggle ──
     const toggle  = document.getElementById('recent-toggle');
     const panel   = document.getElementById('recent-events');
@@ -528,12 +852,13 @@ const nextRaceMeta = nextRace ? getSeriesMeta(nextRace.event.seriesId) : null;
 
   initDashboard();
   refreshDashboard();
-  document.addEventListener('astro:after-swap', () => { initDashboard(); refreshDashboard(); });
+  renderWeekendShare();
+  document.addEventListener('astro:after-swap', () => { initDashboard(); refreshDashboard(); renderWeekendShare(); });
   // Re-check when the user comes back to the tab (e.g. phone sleep or alt-tab)
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshDashboard(); });
-</script>
-
-<script define:vars={{ rtAllEvents: allEvents }}>
-  // Expose all calendar events so EventModal can resolve deeplinks by ID
-  (window as any).__rtAllEvents = rtAllEvents;
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      refreshDashboard();
+      renderWeekendShare();
+    }
+  });
 </script>

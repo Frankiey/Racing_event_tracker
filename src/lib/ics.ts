@@ -3,18 +3,44 @@
  * Generates RFC 5545 compliant .ics files from event data.
  */
 
-interface IcsSession {
-  type: string;
-  startTimeUTC: string;
-}
+import broadcasts from '../../data/gold/broadcasts.json';
+import { SERIES_META } from './series-client';
+import type { RaceEvent, RaceSession } from './types';
 
-interface IcsEvent {
-  id: string;
-  seriesId: string;
-  eventName: string;
-  circuit: { name: string; city?: string; country?: string };
-  sessions: IcsSession[];
-}
+type IcsSession = RaceSession;
+type IcsEvent = Pick<RaceEvent, 'id' | 'seriesId' | 'eventName' | 'circuit' | 'sessions'>;
+
+type BroadcastEntry = {
+  channel: string;
+  type: string;
+  note?: string;
+};
+
+type BroadcastRegionMap = Record<string, BroadcastEntry[]>;
+
+const BROADCASTS = broadcasts as {
+  regions?: Record<string, { label: string; flag?: string }>;
+  series?: Record<string, BroadcastRegionMap>;
+};
+
+const SERIES_EMOJI: Record<string, string> = {
+  f1: '🔴',
+  f2: '🔺',
+  f3: '🔻',
+  fe: '🔵',
+  indycar: '🟡',
+  nascar: '🟦',
+  motogp: '🟠',
+  moto2: '🟧',
+  moto3: '🟨',
+  wec: '🟢',
+  wsbk: '⚫',
+  imsa: '🟩',
+  dtm: '🟣',
+  nls: '🟤',
+  superformula: '⚪',
+  iomtt: '🏍️',
+};
 
 const SESSION_DURATION_MIN: Record<string, number> = {
   'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
@@ -39,6 +65,49 @@ function escapeIcs(str: string): string {
   return str.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
 }
 
+function getSeriesSummaryPrefix(seriesId: string): string {
+  const meta = SERIES_META[seriesId] ?? {
+    shortLabel: seriesId.toUpperCase(),
+  };
+
+  return `${SERIES_EMOJI[seriesId] ?? '🏁'} ${meta.shortLabel}`;
+}
+
+function formatBroadcastLine(regionId: string, entries: BroadcastEntry[]): string {
+  const region = BROADCASTS.regions?.[regionId];
+  const prefix = region?.flag ? `${region.flag} ${regionId}` : regionId;
+  const channels = entries.map(entry => {
+    const suffix = entry.note ? `, ${entry.note}` : '';
+    return `${entry.channel} (${entry.type}${suffix})`;
+  }).join(', ');
+
+  return `${prefix}: ${channels}`;
+}
+
+function getDescription(event: IcsEvent, session: IcsSession): string {
+  const meta = SERIES_META[event.seriesId] ?? {
+    label: event.seriesId.toUpperCase(),
+  };
+  const lines = [
+    `${meta.label}`,
+    `Session: ${session.type}`,
+    `Circuit: ${event.circuit.name}`,
+  ];
+
+  const location = [event.circuit.city, event.circuit.country].filter(Boolean).join(', ');
+  if (location) lines.push(`Location: ${location}`);
+
+  const regionEntries = Object.entries(BROADCASTS.series?.[event.seriesId] ?? {})
+    .filter(([, entries]) => entries.length > 0)
+    .map(([regionId, entries]) => formatBroadcastLine(regionId, entries));
+
+  if (regionEntries.length > 0) {
+    lines.push('', 'Broadcasts:', ...regionEntries);
+  }
+
+  return lines.join('\n');
+}
+
 function makeVEvent(event: IcsEvent, session: IcsSession): string {
   const dur = SESSION_DURATION_MIN[session.type] ?? 120;
   const location = [event.circuit.name, event.circuit.city, event.circuit.country].filter(Boolean).join(', ');
@@ -49,9 +118,9 @@ function makeVEvent(event: IcsEvent, session: IcsSession): string {
     `UID:${uid}`,
     `DTSTART:${toIcsDate(session.startTimeUTC)}`,
     `DTEND:${toIcsDate(addMinutes(session.startTimeUTC, dur))}`,
-    `SUMMARY:${escapeIcs(event.eventName)} — ${escapeIcs(session.type)}`,
+    `SUMMARY:${escapeIcs(`${getSeriesSummaryPrefix(event.seriesId)} ${event.eventName} - ${session.type} @ ${event.circuit.name}`)}`,
     `LOCATION:${escapeIcs(location)}`,
-    `DESCRIPTION:${escapeIcs(event.seriesId.toUpperCase())} ${escapeIcs(session.type)} at ${escapeIcs(event.circuit.name)}`,
+    `DESCRIPTION:${escapeIcs(getDescription(event, session))}`,
     'END:VEVENT',
   ].join('\r\n');
 }

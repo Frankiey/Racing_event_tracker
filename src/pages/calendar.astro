@@ -176,6 +176,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
   import { SESSION_ABBR } from '../lib/sessions';
   import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, isPlaceholderTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
+  import { downloadShareCardForDates } from '../lib/share-card';
   import type { RaceEvent, RaceSession } from '../lib/types';
 
   // ── Data & series meta ────────────────────────────────────────────────────
@@ -190,7 +191,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
   todayDate.setHours(0, 0, 0, 0);
   let displayYear  = todayDate.getFullYear();
   let displayMonth = todayDate.getMonth(); // 0-based
-  let selectedDate: string | null = null;
+  const selectedDates = new Set<string>();
+  let lastSelectedDate: string | null = null;
 
   // empty set = all visible (same convention as dashboard filter)
   const activeFilters = new Set<string>();
@@ -235,6 +237,67 @@ const todayKey = new Date().toISOString().slice(0, 10);
 
   function eventsOnDate(dateStr: string): RaceEvent[] {
     return dateIndex.get(dateStr) ?? [];
+  }
+
+  function getSelectedDates(): string[] {
+    return [...selectedDates].sort();
+  }
+
+  function formatSelectionLabel(dateStrings: string[]): string {
+    if (dateStrings.length === 0) return '';
+    if (dateStrings.length === 1) {
+      return new Date(dateStrings[0] + 'T12:00:00').toLocaleDateString('en', {
+        weekday: 'long', month: 'long', day: 'numeric',
+      });
+    }
+    const first = new Date(dateStrings[0] + 'T12:00:00');
+    const last = new Date(dateStrings[dateStrings.length - 1] + 'T12:00:00');
+    return `${dateStrings.length} days · ${first.toLocaleDateString('en', { month: 'short', day: 'numeric' })}–${last.toLocaleDateString('en', { month: 'short', day: 'numeric' })}`;
+  }
+
+  function getDatesBetween(startStr: string, endStr: string): string[] {
+    const start = new Date(startStr + 'T12:00:00');
+    const end = new Date(endStr + 'T12:00:00');
+    const from = start <= end ? start : end;
+    const to = start <= end ? end : start;
+    const dates: string[] = [];
+    for (const cursor = new Date(from); cursor <= to; cursor.setDate(cursor.getDate() + 1)) {
+      dates.push(toDateStr(cursor));
+    }
+    return dates;
+  }
+
+  function updateSelection(dateStr: string, event?: MouseEvent) {
+    if (event?.shiftKey && lastSelectedDate) {
+      selectedDates.clear();
+      getDatesBetween(lastSelectedDate, dateStr).forEach(date => selectedDates.add(date));
+      lastSelectedDate = dateStr;
+      return;
+    }
+
+    if (event?.metaKey || event?.ctrlKey) {
+      if (selectedDates.has(dateStr)) selectedDates.delete(dateStr);
+      else selectedDates.add(dateStr);
+      lastSelectedDate = selectedDates.size > 0 ? dateStr : null;
+      return;
+    }
+
+    if (selectedDates.size === 1 && selectedDates.has(dateStr)) {
+      selectedDates.clear();
+      lastSelectedDate = null;
+      return;
+    }
+
+    selectedDates.clear();
+    selectedDates.add(dateStr);
+    lastSelectedDate = dateStr;
+  }
+
+  function sessionsOnDay(ev: RaceEvent, dateStr: string): RaceSession[] {
+    return (ev.sessions ?? []).filter((s) => {
+      if (s.startTimeUTC.startsWith('1900')) return false;
+      return s.startTimeUTC.slice(0, 10) === dateStr || new Date(s.startTimeUTC).toLocaleDateString('en-CA') === dateStr;
+    });
   }
 
   // Build a Map<dateStr, Event[]> index for O(1) lookup per calendar cell
@@ -295,7 +358,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
               ids.forEach(id => activeFilters.add(id));
             }
           }
-          selectedDate = null;
+          selectedDates.clear();
+          lastSelectedDate = null;
           saveFiltersToStorage();
           renderFilter();
           renderMonth();
@@ -358,7 +422,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
             activeFilters.add(id);
           }
         }
-        selectedDate = null;
+        selectedDates.clear();
+        lastSelectedDate = null;
         saveFiltersToStorage();
         renderFilter();
         renderMonth();
@@ -390,7 +455,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       const dateStr  = `${displayYear}-${String(displayMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const isToday  = dateStr === todayStr;
       const isPast   = dateStr < todayStr;
-      const isSel    = dateStr === selectedDate;
+      const isSel    = selectedDates.has(dateStr);
       const evs      = eventsOnDate(dateStr);
 
       // Deduplicate: one badge per series per day
@@ -457,9 +522,9 @@ const todayKey = new Date().toISOString().slice(0, 10);
     grid.innerHTML = cells.join('');
 
     grid.querySelectorAll<HTMLElement>('.cal-day').forEach(cell => {
-      cell.addEventListener('click', () => {
+      cell.addEventListener('click', (event) => {
         const d = cell.dataset.date!;
-        selectedDate = selectedDate === d ? null : d;
+        updateSelection(d, event as MouseEvent);
         renderMonth();
         renderDayDetail();
       });
@@ -472,95 +537,125 @@ const todayKey = new Date().toISOString().slice(0, 10);
   // ── Day detail panel ──────────────────────────────────────────────────────
   function renderDayDetail() {
     const panel = document.getElementById('cal-day-detail')!;
+    const dateStrings = getSelectedDates();
 
-    if (!selectedDate) { panel.innerHTML = ''; return; }
+    if (dateStrings.length === 0) { panel.innerHTML = ''; return; }
 
-    const dayEvs = eventsOnDate(selectedDate);
-    if (dayEvs.length === 0) { panel.innerHTML = ''; return; }
-
-    const dateLabel = new Date(selectedDate + 'T12:00:00').toLocaleDateString('en', {
-      weekday: 'long', month: 'long', day: 'numeric',
-    });
-
-    function sessionsOnDay(ev: RaceEvent, dateStr: string): RaceSession[] {
-      return (ev.sessions ?? []).filter((s) => {
-        if (s.startTimeUTC.startsWith('1900')) return false;
-        // Session falls on this date in UTC — good enough for display
-        return s.startTimeUTC.slice(0, 10) === dateStr ||
-               // Edge case: session might be late and cross midnight, check ±1 day
-               new Date(s.startTimeUTC).toLocaleDateString('en-CA') === dateStr;
+    const daySections = dateStrings.map(dateStr => {
+      const dayEvs = eventsOnDate(dateStr);
+      if (dayEvs.length === 0) return '';
+      const dateLabel = new Date(dateStr + 'T12:00:00').toLocaleDateString('en', {
+        weekday: 'long', month: 'long', day: 'numeric',
       });
-    }
 
-    const cardsHtml = dayEvs.map(ev => {
-      const m = SERIES_META[ev.seriesId] ?? { shortLabel: ev.seriesId, color: '#71717a', label: ev.seriesId };
-      const sessions = sessionsOnDay(ev, selectedDate!);
-      const f = countryFlag(ev.circuit?.countryCode ?? '');
-      const isRaceDay = ev.dateEnd === selectedDate;
-      const past = isPastEvent(ev.dateEnd);
-      const isFirstDay = ev.dateStart === selectedDate;
+      const cardsHtml = dayEvs.map(ev => {
+        const m = SERIES_META[ev.seriesId] ?? { shortLabel: ev.seriesId, color: '#71717a', label: ev.seriesId };
+        const sessions = sessionsOnDay(ev, dateStr);
+        const f = countryFlag(ev.circuit?.countryCode ?? '');
+        const isRaceDay = ev.dateEnd === dateStr;
+        const past = isPastEvent(ev.dateEnd);
+        const isFirstDay = ev.dateStart === dateStr;
 
-      const sessHtml = sessions.map((s: any) => {
-        const lbl = SESSION_ABBR[s.type] ?? s.type;
-        const isRace = s.type === 'Race' || s.type === 'Feature Race';
-        const t = formatLocalTime(s.startTimeUTC);
-        return `<div class="flex items-center gap-1.5 text-xs">
-          <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? m.color : '#3f3f46'}"></span>
-          <span class="font-semibold ${isRace ? 'text-zinc-100' : 'text-zinc-400'}">${lbl}</span>
-          <span class="tabular-nums text-zinc-600">${t}</span>
-        </div>`;
+        const sessHtml = sessions.map((s: any) => {
+          const lbl = SESSION_ABBR[s.type] ?? s.type;
+          const isRace = s.type === 'Race' || s.type === 'Feature Race';
+          const t = formatLocalTime(s.startTimeUTC);
+          return `<div class="flex items-center gap-1.5 text-xs">
+            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? m.color : '#3f3f46'}"></span>
+            <span class="font-semibold ${isRace ? 'text-zinc-100' : 'text-zinc-400'}">${lbl}</span>
+            <span class="tabular-nums text-zinc-600">${t}</span>
+          </div>`;
+        }).join('');
+
+        const spanLabel = ev.dateStart === ev.dateEnd
+          ? ''
+          : isFirstDay
+            ? `<span class="text-[10px] text-zinc-600">Weekend starts</span>`
+            : isRaceDay
+              ? `<span class="text-[10px] font-bold uppercase tracking-wider" style="color:${m.color}">Race day</span>`
+              : `<span class="text-[10px] text-zinc-600">Race weekend</span>`;
+
+        return `<article
+          class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${past ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
+          data-event='${escapeHtml(JSON.stringify(ev))}'
+          role="button" tabindex="0"
+        >
+          <div class="w-0.5 self-stretch rounded-full shrink-0" style="background-color:${m.color}"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="text-xs font-bold px-2 py-0.5 rounded text-white uppercase tracking-wide" style="background-color:${m.color}">${m.shortLabel}</span>
+              <span class="text-[11px] text-zinc-500 font-mono">Rd ${ev.round}</span>
+              ${spanLabel}
+            </div>
+            <h3 class="font-bold text-sm ${past ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${escapeHtml(ev.eventName)}</h3>
+            <div class="flex items-center gap-1.5 text-xs text-zinc-500 ${sessions.length > 0 ? 'mb-2' : ''}">
+              ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${escapeHtml(ev.circuit?.name ?? '')}</span>
+            </div>
+            ${sessions.length > 0 ? `<div class="flex flex-wrap gap-x-3 gap-y-1">${sessHtml}</div>` : ''}
+          </div>
+        </article>`;
       }).join('');
 
-      // Weekend span label
-      const spanLabel = ev.dateStart === ev.dateEnd
-        ? ''
-        : isFirstDay
-          ? `<span class="text-[10px] text-zinc-600">Weekend starts</span>`
-          : isRaceDay
-            ? `<span class="text-[10px] font-bold uppercase tracking-wider" style="color:${m.color}">Race day</span>`
-            : `<span class="text-[10px] text-zinc-600">Race weekend</span>`;
+      return `
+        <section class="grid gap-2">
+          ${dateStrings.length > 1 ? `<div class="px-1 text-[11px] font-semibold uppercase tracking-widest text-zinc-600">${dateLabel}</div>` : ''}
+          <div class="grid gap-2 sm:grid-cols-2">${cardsHtml}</div>
+        </section>
+      `;
+    }).filter(Boolean).join('');
 
-      return `<article
-        class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${past ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
-        data-event='${escapeHtml(JSON.stringify(ev))}'
-        role="button" tabindex="0"
-      >
-        <div class="w-0.5 self-stretch rounded-full shrink-0" style="background-color:${m.color}"></div>
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2 mb-1 flex-wrap">
-            <span class="text-xs font-bold px-2 py-0.5 rounded text-white uppercase tracking-wide" style="background-color:${m.color}">${m.shortLabel}</span>
-            <span class="text-[11px] text-zinc-500 font-mono">Rd ${ev.round}</span>
-            ${spanLabel}
-          </div>
-          <h3 class="font-bold text-sm ${past ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${escapeHtml(ev.eventName)}</h3>
-          <div class="flex items-center gap-1.5 text-xs text-zinc-500 ${sessions.length > 0 ? 'mb-2' : ''}">
-            ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${escapeHtml(ev.circuit?.name ?? '')}</span>
-          </div>
-          ${sessions.length > 0 ? `<div class="flex flex-wrap gap-x-3 gap-y-1">${sessHtml}</div>` : ''}
-        </div>
-      </article>`;
-    }).join('');
+    if (!daySections) { panel.innerHTML = ''; return; }
 
     panel.innerHTML = `
       <div class="mt-3 border border-zinc-800 rounded-xl overflow-hidden">
         <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/40">
-          <span class="font-semibold text-sm text-zinc-200">${dateLabel}</span>
-          <button id="cal-detail-close" class="text-zinc-600 hover:text-zinc-300 transition-colors p-1" aria-label="Close">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
+          <div class="min-w-0">
+            <span class="font-semibold text-sm text-zinc-200">${formatSelectionLabel(dateStrings)}</span>
+            <p class="text-[10px] uppercase tracking-widest text-zinc-600 mt-1">Click a day to replace. Cmd/Ctrl-click to add. Shift-click for a range.</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button id="cal-share-btn" class="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-200" type="button">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V4.5m0 12 4.5-4.5M12 16.5l-4.5-4.5M4.5 19.5h15" />
+              </svg>
+              <span id="cal-share-btn-label">Share PNG</span>
+            </button>
+            <button id="cal-detail-close" class="text-zinc-600 hover:text-zinc-300 transition-colors p-1" aria-label="Close">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="p-3 grid gap-2 sm:grid-cols-2">
-          ${cardsHtml}
+        <div class="p-3 grid gap-3">
+          ${daySections}
         </div>
       </div>
     `;
 
     document.getElementById('cal-detail-close')!.addEventListener('click', () => {
-      selectedDate = null;
+      selectedDates.clear();
+      lastSelectedDate = null;
       renderMonth();
       renderDayDetail();
+    });
+
+    document.getElementById('cal-share-btn')!.addEventListener('click', () => {
+      const btn = document.getElementById('cal-share-btn') as HTMLButtonElement;
+      const label = document.getElementById('cal-share-btn-label') as HTMLElement;
+      btn.disabled = true;
+      label.textContent = 'Preparing';
+      try {
+        const downloaded = downloadShareCardForDates(allEvents, dateStrings);
+        label.textContent = downloaded ? 'Saved' : 'Unavailable';
+      } catch {
+        label.textContent = 'Try again';
+      } finally {
+        window.setTimeout(() => {
+          btn.disabled = false;
+          label.textContent = 'Share PNG';
+        }, 900);
+      }
     });
 
     panel.querySelectorAll<HTMLElement>('.cal-detail-card').forEach(card => {
@@ -581,14 +676,16 @@ const todayKey = new Date().toISOString().slice(0, 10);
   // ── Month navigation ──────────────────────────────────────────────────────
   document.getElementById('cal-prev')!.addEventListener('click', () => {
     if (--displayMonth < 0) { displayMonth = 11; displayYear--; }
-    selectedDate = null;
+    selectedDates.clear();
+    lastSelectedDate = null;
     renderMonth();
     renderDayDetail();
   });
 
   document.getElementById('cal-next')!.addEventListener('click', () => {
     if (++displayMonth > 11) { displayMonth = 0; displayYear++; }
-    selectedDate = null;
+    selectedDates.clear();
+    lastSelectedDate = null;
     renderMonth();
     renderDayDetail();
   });
@@ -596,7 +693,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
   document.getElementById('cal-today-btn')!.addEventListener('click', () => {
     displayYear  = todayDate.getFullYear();
     displayMonth = todayDate.getMonth();
-    selectedDate = null;
+    selectedDates.clear();
+    lastSelectedDate = null;
     renderMonth();
     renderDayDetail();
   });
@@ -616,7 +714,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
     activeFilters.clear();
     ids.forEach((id: string) => { if (allSeriesIds.includes(id)) activeFilters.add(id); });
     rebuildDateIndex();
-    selectedDate = null;
+    selectedDates.clear();
+    lastSelectedDate = null;
     renderFilter();
     renderMonth();
     renderDayDetail();
