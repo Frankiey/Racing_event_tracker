@@ -5,44 +5,25 @@
  */
 interface Props {
   utc: string;
-  format?: 'datetime' | 'time' | 'date' | 'weekday-time';
+  format?: 'datetime' | 'time' | 'time-short' | 'date' | 'weekday-time';
 }
 
 const { utc, format = 'datetime' } = Astro.props;
+import { formatUtcValue } from '../lib/time-format';
 ---
 
 <time data-local-time={utc} data-format={format} datetime={utc} class="tabular-nums">
-  {new Date(utc).toLocaleString('en', {
-    month: 'short', day: 'numeric',
-    hour: '2-digit', minute: '2-digit',
-    hour12: false, timeZone: 'UTC'
-  })} UTC
+  {formatUtcValue(utc, format)}
 </time>
 
 <script>
+  import { formatLocalValue } from '../lib/time-format';
+
   function initLocalTimes() {
     document.querySelectorAll<HTMLTimeElement>('[data-local-time]').forEach(el => {
       const utc = el.dataset.localTime!;
-      const fmt = el.dataset.format as 'datetime' | 'time' | 'date' | 'weekday-time';
-      const d = new Date(utc);
-
-      const options: Intl.DateTimeFormatOptions = { hour12: false };
-
-      if (fmt === 'datetime' || fmt === 'date') {
-        options.month = 'short';
-        options.day = 'numeric';
-      }
-      if (fmt === 'datetime' || fmt === 'time') {
-        options.hour = '2-digit';
-        options.minute = '2-digit';
-      }
-      if (fmt === 'weekday-time') {
-        options.weekday = 'short';
-        options.hour = '2-digit';
-        options.minute = '2-digit';
-      }
-
-      el.textContent = d.toLocaleString(undefined, options);
+      const fmt = el.dataset.format as 'datetime' | 'time' | 'time-short' | 'date' | 'weekday-time';
+      el.textContent = formatLocalValue(utc, fmt);
     });
   }
 

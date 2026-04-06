@@ -48,6 +48,7 @@ const allEvents = (calendarData as EventFeed).events;
 </Layout>
 
 <script>
+  import { bindEventOpeners, registerEvents } from '../lib/event-client';
   import { SESSION_ABBR } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, formatDateRange, isPastEvent, isPlaceholderTime, readFavorites, toggleFavorite, safeJsonParse } from '../lib/client-utils';
@@ -57,6 +58,8 @@ const allEvents = (calendarData as EventFeed).events;
   const allEvents: RaceEvent[] = safeJsonParse(
     document.getElementById('all-events-data')!.textContent!, []
   );
+
+  registerEvents(allEvents);
 
   function render() {
     const favs = readFavorites();
@@ -95,7 +98,6 @@ const allEvents = (calendarData as EventFeed).events;
       return `
         <article
           class="group relative rounded-xl border transition-all duration-200 cursor-pointer ${past ? 'border-zinc-800/40 bg-zinc-900/20 opacity-40' : 'border-zinc-800 bg-zinc-900/70 hover:border-zinc-700 hover:bg-zinc-900'}"
-          data-event='${escapeHtml(JSON.stringify(ev))}'
           data-event-id="${escapeHtml(ev.id)}"
           role="button" tabindex="0"
         >
@@ -128,14 +130,7 @@ const allEvents = (calendarData as EventFeed).events;
       `;
     }).join('');
 
-    // Wire up events on rendered cards
-    grid.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
-      card.addEventListener('click', () => {
-        try {
-          window.dispatchEvent(new CustomEvent('rt-open-event', { detail: JSON.parse(card.dataset.event!) }));
-        } catch { /* invalid JSON in data attr — ignore */ }
-      });
-    });
+    bindEventOpeners(grid);
     grid.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();

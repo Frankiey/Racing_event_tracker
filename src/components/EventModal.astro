@@ -161,6 +161,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </div>
 
 <script>
+  import { getRegisteredEvent } from '../lib/event-client';
   import { SESSION_LABELS } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
@@ -495,19 +496,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   (function resolveDeeplink() {
     const eventId = new URLSearchParams(window.location.search).get('event');
     if (!eventId) return;
-    // 1. Try EventCard DOM elements (index/calendar pages)
-    const el = document.querySelector(`[data-event-id="${CSS.escape(eventId)}"]`);
-    if (el) {
-      try {
-        const ev = JSON.parse((el as HTMLElement).getAttribute('data-event') ?? '');
-        if (ev?.id) { openModal(ev); return; }
-      } catch {}
-    }
-    // 2. Try page-registered event list (__rtAllEvents or __passportFullEvents)
-    const all: RaceEvent[] | undefined = (window as any).__rtAllEvents ?? (window as any).__passportFullEvents;
-    if (all) {
-      const ev = all.find((e) => e.id === eventId);
-      if (ev) openModal(ev);
-    }
+    const event = getRegisteredEvent(eventId);
+    if (event) openModal(event);
   })();
 </script>

@@ -144,15 +144,19 @@ const progressPct = allEvents.length > 0 ? Math.round((doneEvents.length / allEv
 </Layout>
 
 <script>
+  import { registerEvents } from '../../lib/event-client';
   import { exportEventsIcs } from '../../lib/ics';
   import { safeJsonParse } from '../../lib/client-utils';
+
+  const events = safeJsonParse(
+    document.getElementById('series-events-data')!.textContent!, []
+  );
+
+  registerEvents(events);
 
   const btn = document.getElementById('export-series-ics');
   if (btn) {
     btn.addEventListener('click', () => {
-      const events = safeJsonParse(
-        document.getElementById('series-events-data')!.textContent!, []
-      );
       const label = btn.dataset.seriesLabel ?? 'Series';
       exportEventsIcs(`RaceTrack ${label} 2026`, events);
     });

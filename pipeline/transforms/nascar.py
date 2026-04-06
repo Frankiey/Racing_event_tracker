@@ -1,7 +1,8 @@
 """NASCAR bronze → silver transform."""
 
 from pipeline.config import SEASON_YEAR
-from pipeline.utils import to_iso as _to_iso, to_date as _to_date
+
+from .common import build_circuit, build_event, build_single_session, derive_event_dates
 
 
 def transform(bronze_data: dict | list) -> list[dict]:
@@ -30,31 +31,28 @@ def transform(bronze_data: dict | list) -> list[dict]:
         if qualifying_date:
             sessions.append({
                 "type": "Qualifying",
-                "startTimeUTC": _to_iso(qualifying_date),
+                "startTimeUTC": build_single_session(qualifying_date, "Qualifying")[0]["startTimeUTC"],
             })
-        if race_date:
-            sessions.append({
-                "type": "Race",
-                "startTimeUTC": _to_iso(race_date),
-            })
+        sessions.extend(build_single_session(race_date))
 
-        events.append({
-            "id": f"nascar-{year}-r{idx:02d}",
-            "seriesId": "nascar",
-            "eventName": race.get("race_name", f"Race {idx}"),
-            "round": idx,
-            "circuit": {
-                "name": race.get("track_name", ""),
-                "city": "",
-                "country": "United States",
-                "countryCode": "US",
-                "lat": None,
-                "lng": None,
-            },
-            "sessions": sessions,
-            "dateStart": _to_date(race_date) if race_date else "",
-            "dateEnd": _to_date(race_date) if race_date else "",
-        })
+        date_start, date_end = derive_event_dates(sessions, race_date or "", race_date or "")
+
+        events.append(
+            build_event(
+                series_id="nascar",
+                year=year,
+                round_number=idx,
+                event_name=race.get("race_name", f"Race {idx}"),
+                circuit=build_circuit(
+                    name=race.get("track_name", ""),
+                    country="United States",
+                    country_code="US",
+                ),
+                sessions=sessions,
+                date_start=date_start,
+                date_end=date_end,
+            )
+        )
 
     return events
 

@@ -2,6 +2,8 @@
 
 from pipeline.config import SEASON_YEAR
 
+from .common import build_circuit, build_event
+
 
 # OpenF1 returns ISO 3166-1 alpha-3 codes; convert to alpha-2
 ALPHA3_TO_ALPHA2: dict[str, str] = {
@@ -76,30 +78,25 @@ def transform(bronze: dict) -> list[dict]:
             ALPHA3_TO_ALPHA2.get(raw_cc, raw_cc)
             or COUNTRY_NAME_TO_ALPHA2.get(country_name, "")
         )
-        events.append({
-            "id": f"f1-{year}-r{int(race['round']):02d}",
-            "seriesId": "f1",
-            "eventName": race.get("raceName", ""),
-            "round": int(race["round"]),
-            "circuit": {
-                "name": race.get("Circuit", {}).get("circuitName", ""),
-                "city": loc.get("locality", ""),
-                "country": country_name,
-                "countryCode": country_code,
-                "lat": _float(loc.get("lat")),
-                "lng": _float(loc.get("long")),
-            },
-            "circuitImage": of1.get("circuit_image"),
-            "sessions": sessions,
-            "dateStart": sessions[0]["startTimeUTC"].split("T")[0] if sessions else race.get("date", ""),
-            "dateEnd": race.get("date", ""),
-        })
+        events.append(
+            build_event(
+                series_id="f1",
+                year=year,
+                round_number=int(race["round"]),
+                event_name=race.get("raceName", ""),
+                circuit=build_circuit(
+                    name=race.get("Circuit", {}).get("circuitName", ""),
+                    city=loc.get("locality", ""),
+                    country=country_name,
+                    country_code=country_code,
+                    lat=loc.get("lat"),
+                    lng=loc.get("long"),
+                ),
+                circuitImage=of1.get("circuit_image"),
+                sessions=sessions,
+                date_start=sessions[0]["startTimeUTC"].split("T")[0] if sessions else race.get("date", ""),
+                date_end=race.get("date", ""),
+            )
+        )
 
     return events
-
-
-def _float(val) -> float | None:
-    try:
-        return float(val)
-    except (TypeError, ValueError):
-        return None

@@ -611,6 +611,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
 </Layout>
 
 <script>
+  import { registerEvents } from '../lib/event-client';
   import { isPlaceholderTime } from '../lib/time';
   import { downloadWeekendShareCard, getWeekendShareCardData } from '../lib/share-card';
   import { safeJsonParse } from '../lib/client-utils';
@@ -620,7 +621,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
     []
   );
 
-  (window as any).__rtAllEvents = allEvents;
+  registerEvents(allEvents);
 
   function renderWeekendShare() {
     const summary = document.getElementById('weekend-share-summary');

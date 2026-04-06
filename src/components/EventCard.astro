@@ -31,7 +31,6 @@ const meta = getSeriesMeta(event.seriesId);
 const validSessions = event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC));
 const past = isPastEvent(event.dateEnd);
 const flag = countryFlag(event.circuit.countryCode);
-const eventJson = JSON.stringify(event).replace(/'/g, '&#39;');
 
 function abbr(type: string) { return SESSION_ABBR[type] ?? type; }
 function isRace(type: string) { return type === 'Race' || type === 'Feature Race'; }
@@ -49,7 +48,6 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
         ? 'border-zinc-500/60 bg-zinc-900 shadow-lg shadow-black/40'
         : 'border-zinc-800 bg-zinc-900/70 hover:border-zinc-700 hover:bg-zinc-900',
   ]}
-  data-event={eventJson}
   data-event-id={event.id}
   role="button"
   tabindex="0"
@@ -155,60 +153,49 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
 </article>
 
 <script>
-  import { getLiveSession } from '../lib/client-utils';
+  import { formatLocalValue, getLiveSession, readFavorites, toggleFavorite } from '../lib/client-utils';
+  import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
 
   function initCards() {
     // ── Local time conversion ──
     document.querySelectorAll<HTMLTimeElement>('[data-local-time][data-format="time-short"]').forEach(el => {
-      el.textContent = new Date(el.dataset.localTime!).toLocaleTimeString(undefined, {
-        hour: '2-digit', minute: '2-digit', hour12: false,
-      });
+      el.textContent = formatLocalValue(el.dataset.localTime!, 'time-short');
     });
 
     // ── Live session indicators ──
     document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
-      try {
-        const ev = JSON.parse(card.dataset.event ?? '{}');
-        const live = getLiveSession(ev.sessions ?? []);
-        const existing = card.querySelector('.live-badge');
-        if (existing) existing.remove();
-        if (live) {
-          const badge = document.createElement('span');
-          badge.className = 'live-badge live-pulse inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest bg-emerald-500/20 text-emerald-400';
-          badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>Live';
-          const wrap = card.querySelector('.flex.items-center.gap-2.flex-wrap');
-          if (wrap) wrap.appendChild(badge);
-        }
-      } catch {}
+      const eventId = card.dataset.eventId;
+      if (!eventId) return;
+
+      const ev = getRegisteredEvent(eventId);
+      const live = ev ? getLiveSession(ev.sessions ?? []) : null;
+      const existing = card.querySelector('.live-badge');
+      if (existing) existing.remove();
+      if (live) {
+        const badge = document.createElement('span');
+        badge.className = 'live-badge live-pulse inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest bg-emerald-500/20 text-emerald-400';
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>Live';
+        const wrap = card.querySelector('.flex.items-center.gap-2.flex-wrap');
+        if (wrap) wrap.appendChild(badge);
+      }
     });
 
     // ── Favorites ──
-    // Read fresh from localStorage each time — avoids stale-closure bugs.
-    // Use selector that excludes the modal button (class modal-fav-btn, not fav-btn).
-    function getFavs(): Set<string> {
-      return new Set((JSON.parse(localStorage.getItem('rt-favs') ?? '[]') as unknown[]).filter(Boolean) as string[]);
-    }
-    function saveFavs(set: Set<string>) {
-      localStorage.setItem('rt-favs', JSON.stringify([...set]));
-    }
-
     document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
       const id = btn.dataset.favId!;
       if (!id) return; // skip buttons without a valid id
-      btn.dataset.fav = getFavs().has(id) ? 'true' : 'false';
+      btn.dataset.fav = readFavorites().includes(id) ? 'true' : 'false';
+      if (btn.dataset.favBound === 'true') return;
+      btn.dataset.favBound = 'true';
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const favs = getFavs();
-        if (favs.has(id)) { favs.delete(id); btn.dataset.fav = 'false'; }
-        else               { favs.add(id);    btn.dataset.fav = 'true'; }
-        saveFavs(favs);
-        window.dispatchEvent(new CustomEvent('rt-favs-changed'));
+        btn.dataset.fav = toggleFavorite(id) ? 'true' : 'false';
       });
     });
 
     // Sync fav button states when another tab/page changes them
     function onFavsChanged() {
-      const favs = getFavs();
+      const favs = new Set(readFavorites());
       document.querySelectorAll<HTMLButtonElement>('.fav-btn').forEach(btn => {
         const id = btn.dataset.favId;
         if (id) btn.dataset.fav = favs.has(id) ? 'true' : 'false';
@@ -218,21 +205,10 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
     (window as any)._rtFavsHandler = onFavsChanged;
     window.addEventListener('rt-favs-changed', onFavsChanged);
 
-    // ── Card click → open modal ──
-    document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
-      card.addEventListener('click', () => {
-        const event = JSON.parse(card.dataset.event!);
-        window.dispatchEvent(new CustomEvent('rt-open-event', { detail: event }));
-      });
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
+    bindEventOpeners();
   }
 
   initCards();
   document.addEventListener('astro:after-swap', initCards);
+  window.addEventListener(RT_EVENTS_REGISTERED, initCards);
 </script>

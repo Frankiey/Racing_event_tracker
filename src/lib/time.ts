@@ -2,7 +2,7 @@
  * Time formatting helpers. All inputs are UTC ISO strings.
  * Actual local-time conversion happens in the browser.
  */
-export { countryFlag, formatDateRange, isPastEvent, isPlaceholderTime } from './client-utils';
+export { countryFlag, formatDateRange, isPastEvent, isPlaceholderTime } from './time-format';
 
 /** Get the main race session from an event's sessions array. */
 export function getRaceSession(sessions: { type: string; startTimeUTC: string }[]): { type: string; startTimeUTC: string } | undefined {

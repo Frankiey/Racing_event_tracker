@@ -6,7 +6,15 @@ Handles two input shapes:
 """
 
 from pipeline.config import SEASON_YEAR
-from pipeline.utils import to_iso as _to_iso, to_date as _to_date
+
+from .common import (
+    build_circuit,
+    build_event,
+    build_mapped_sessions,
+    build_single_session,
+    derive_event_dates,
+    normalize_alpha2_country_code,
+)
 
 
 _SILVER_KEYS = {"id", "seriesId", "eventName", "round", "circuit", "sessions", "dateStart", "dateEnd"}
@@ -40,32 +48,37 @@ def _transform_api(bronze_events: list) -> list[dict]:
 
         circuit = event.get("circuit") or {}
         country = event.get("country") or {}
+        date_start, date_end = derive_event_dates(
+            sessions,
+            event.get("date_start", ""),
+            event.get("date_end", ""),
+        )
 
-        events.append({
-            "id": f"wsbk-{year}-r{idx:02d}",
-            "seriesId": "wsbk",
-            "eventName": event.get("name") or event.get("short_name") or f"Round {idx}",
-            "round": idx,
-            "circuit": {
-                "name": circuit.get("name", ""),
-                "city": circuit.get("place", ""),
-                "country": circuit.get("nation", ""),
-                "countryCode": _normalize_country_code(country.get("iso", "")),
-                "lat": circuit.get("lat"),
-                "lng": circuit.get("lng"),
-            },
-            "sessions": sessions,
-            "dateStart": _to_date(event.get("date_start", "")),
-            "dateEnd": _to_date(event.get("date_end", "")),
-        })
+        events.append(
+            build_event(
+                series_id="wsbk",
+                year=year,
+                round_number=idx,
+                event_name=event.get("name") or event.get("short_name") or f"Round {idx}",
+                circuit=build_circuit(
+                    name=circuit.get("name", ""),
+                    city=circuit.get("place", ""),
+                    country=circuit.get("nation", ""),
+                    country_code=normalize_alpha2_country_code(country.get("iso", "")),
+                    lat=circuit.get("lat"),
+                    lng=circuit.get("lng"),
+                ),
+                sessions=sessions,
+                date_start=date_start,
+                date_end=date_end,
+            )
+        )
 
     return events
 
 
 def _extract_sessions(event: dict) -> list[dict]:
     """Extract session list from a Pulselive event object."""
-    sessions = []
-
     # Pulselive stores full session schedule in event.sessions[] or
     # falls back to just Race on date_end
     raw_sessions = event.get("sessions") or []
@@ -73,33 +86,15 @@ def _extract_sessions(event: dict) -> list[dict]:
         type_map = {
             "RAC1": "Race 1",
             "RAC2": "Race 2",
-            "SPR":  "Superpole Race",
-            "SUP":  "Superpole",
-            "FP1":  "Practice 1",
-            "FP2":  "Practice 2",
-            "FP3":  "Practice 3",
-            "WUP":  "Warm Up",
+            "SPR": "Superpole Race",
+            "SUP": "Superpole",
+            "FP1": "Practice 1",
+            "FP2": "Practice 2",
+            "FP3": "Practice 3",
+            "WUP": "Warm Up",
         }
-        for s in raw_sessions:
-            s_type = s.get("type", "")
-            label = type_map.get(s_type, s_type)
-            start = s.get("date") or s.get("dateStart") or s.get("date_start", "")
-            if start:
-                sessions.append({"type": label, "startTimeUTC": _to_iso(start)})
-    else:
-        # Minimal fallback: just the race day
-        race_time = event.get("date_end") or event.get("date_start")
-        if race_time:
-            sessions.append({"type": "Race 1", "startTimeUTC": _to_iso(race_time)})
+        return build_mapped_sessions(raw_sessions, type_map)
 
-    return sessions
-
-
-def _normalize_country_code(code: str) -> str:
-    """Ensure we return alpha-2 codes; strip alpha-3 if needed."""
-    if len(code) == 2:
-        return code.upper()
-    # Alpha-3 fallback — return empty so countryFlag() doesn't silently fail
-    return ""
+    return build_single_session(event.get("date_end") or event.get("date_start"), "Race 1")
 
 
