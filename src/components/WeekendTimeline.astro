@@ -30,6 +30,81 @@
   function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
   function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
+  // ── Tooltip singleton ────────────────────────────────────────────────────
+  let tlTip: HTMLElement | null = null;
+  let tlTipVisible = false;
+  let tlActiveBlock: Element | null = null;
+
+  function getTooltip(): HTMLElement {
+    if (tlTip) return tlTip;
+    tlTip = document.createElement('div');
+    tlTip.id = 'tl-tip';
+    tlTip.style.cssText = 'position:fixed;z-index:9999;pointer-events:none;display:none;max-width:200px';
+    tlTip.innerHTML = `
+      <div class="bg-zinc-800 border border-zinc-700 rounded-lg px-2.5 py-1.5 shadow-xl">
+        <div id="tl-tip-name" class="text-[11px] font-bold text-white leading-tight"></div>
+        <div id="tl-tip-time" class="text-[10px] font-mono text-zinc-400 mt-0.5"></div>
+      </div>
+      <div id="tl-tip-arrow" style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #3f3f46;margin:0 auto"></div>
+    `;
+    document.body.appendChild(tlTip);
+
+    // Dismiss on click/touch outside
+    document.addEventListener('click', (e) => {
+      if (tlActiveBlock && !tlActiveBlock.contains(e.target as Node)) hideTooltip();
+    }, { capture: true });
+
+    return tlTip;
+  }
+
+  function showTooltip(anchor: HTMLElement, name: string, time: string) {
+    const tip = getTooltip();
+    (tip.querySelector('#tl-tip-name') as HTMLElement).textContent = name;
+    (tip.querySelector('#tl-tip-time') as HTMLElement).textContent = time;
+    tip.style.display = 'block';
+
+    // Position above the anchor, centered
+    const r = anchor.getBoundingClientRect();
+    const tw = tip.offsetWidth || 120;
+    const th = tip.offsetHeight || 48;
+    let left = r.left + r.width / 2 - tw / 2;
+    let top = r.top - th - 6;
+
+    // Clamp to viewport
+    left = Math.max(8, Math.min(left, window.innerWidth - tw - 8));
+    if (top < 8) top = r.bottom + 6; // flip below if no room above
+
+    tip.style.left = `${left}px`;
+    tip.style.top = `${top}px`;
+    tlTipVisible = true;
+  }
+
+  function hideTooltip() {
+    if (tlTip) tlTip.style.display = 'none';
+    tlTipVisible = false;
+    tlActiveBlock = null;
+  }
+
+  function attachTooltip(block: HTMLElement, name: string, time: string) {
+    // Desktop hover
+    block.addEventListener('mouseenter', () => {
+      tlActiveBlock = block;
+      showTooltip(block, name, time);
+    });
+    block.addEventListener('mouseleave', () => hideTooltip());
+
+    // Touch: tap to toggle
+    block.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      if (tlActiveBlock === block && tlTipVisible) {
+        hideTooltip();
+      } else {
+        tlActiveBlock = block;
+        showTooltip(block, name, time);
+      }
+    }, { passive: true });
+  }
+
   /**
    * Group sessions by calendar day (in local timezone).
    * Returns a Map<string, TlSession[]> keyed by "YYYY-MM-DD" in local time.
@@ -88,6 +163,9 @@
       const renderHrs = Math.max(daySpanHrs, 4);
       const barWidthPx = renderHrs * HOUR_PX;
 
+      // Ruler origin: round down to nearest hour for clean tick alignment
+      const rulerOriginMs = Math.floor(dayMin / 3_600_000) * 3_600_000;
+
       // Day row
       const dayRow = document.createElement('div');
 
@@ -97,10 +175,10 @@
       label.textContent = dayLabel(dateKey);
       dayRow.appendChild(label);
 
-      // Bar container
+      // Bar container — blocks + ruler
       const bar = document.createElement('div');
       bar.className = 'relative rounded-lg bg-zinc-900 border border-zinc-800/60 overflow-x-auto overscroll-contain touch-pan-x';
-      bar.style.height = '38px';
+      bar.style.height = '58px';
       bar.style.width = '100%';
 
       // Inner relative container for positioning
@@ -109,7 +187,44 @@
       inner.style.width = `${barWidthPx}px`;
       inner.style.minWidth = '100%';
 
-      // Render session blocks
+      // ── Hour ruler ────────────────────────────────────────────────────────
+      const rulerY = 40; // px from top where ruler tick marks sit
+      const rulerEndMs = rulerOriginMs + renderHrs * 3_600_000;
+      for (let t = rulerOriginMs; t <= rulerEndMs; t += 3_600_000) {
+        const tickPct = ((t - dayMin) / (renderHrs * 3_600_000)) * 100;
+        if (tickPct < -1 || tickPct > 101) continue;
+
+        // Tick line
+        const tick = document.createElement('div');
+        tick.className = 'absolute bg-zinc-700';
+        tick.style.left = `${tickPct}%`;
+        tick.style.top = `${rulerY - 4}px`;
+        tick.style.width = '1px';
+        tick.style.height = '6px';
+        inner.appendChild(tick);
+
+        // Hour label
+        const hourLbl = document.createElement('span');
+        hourLbl.className = 'absolute text-[8px] font-mono text-zinc-600 -translate-x-1/2 select-none';
+        hourLbl.style.left = `${tickPct}%`;
+        hourLbl.style.top = `${rulerY + 4}px`;
+        hourLbl.textContent = new Date(t).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+        inner.appendChild(hourLbl);
+      }
+
+      // Ruler baseline
+      const rulerLine = document.createElement('div');
+      rulerLine.className = 'absolute left-0 right-0 bg-zinc-800';
+      rulerLine.style.top = `${rulerY - 1}px`;
+      rulerLine.style.height = '1px';
+      inner.appendChild(rulerLine);
+
+      // ── Session blocks ─────────────────────────────────────────────────────
+      // Block zone: top 4px → 34px (30px tall), ruler sits below
+      const BLOCK_TOP = 4;
+      const BLOCK_BOTTOM = 34;
+      const BLOCK_HEIGHT = BLOCK_BOTTOM - BLOCK_TOP;
+
       for (const s of daySessions) {
         const sStart = new Date(s.startTimeUTC).getTime();
         const sDurMs = getSessionDurationMinutes(s.type) * 60_000;
@@ -123,10 +238,12 @@
         const abbr = SESSION_ABBR[s.type] ?? s.type;
 
         const block = document.createElement('div');
-        block.className = 'absolute top-1 bottom-1 rounded flex items-center justify-center cursor-default transition-opacity';
+        block.className = 'absolute rounded flex items-center justify-center cursor-default transition-opacity';
         block.style.left = `${leftPct}%`;
-        block.style.width = `${Math.max(widthPct, 3)}%`; // min width so tiny blocks are visible
+        block.style.width = `${Math.max(widthPct, 3)}%`;
         block.style.minWidth = '28px';
+        block.style.top = `${BLOCK_TOP}px`;
+        block.style.height = `${BLOCK_HEIGHT}px`;
 
         if (race) {
           block.style.backgroundColor = meta.color;
@@ -142,30 +259,28 @@
           block.style.zIndex = '10';
         }
 
-        // Label + time inside block
+        // Session abbreviation label inside block
         const lbl = document.createElement('span');
         lbl.className = `text-[10px] font-bold uppercase tracking-wide whitespace-nowrap px-1 ${race ? 'text-white' : isPast ? 'text-zinc-600' : 'text-zinc-200'}`;
         lbl.textContent = abbr;
         block.appendChild(lbl);
 
-        // Time label below each block
-        const timeLbl = document.createElement('span');
-        timeLbl.className = `absolute top-full mt-0.5 left-1/2 -translate-x-1/2 text-[9px] font-mono whitespace-nowrap ${isPast ? 'text-zinc-700' : 'text-zinc-500'}`;
-        timeLbl.textContent = timeLabel(s.startTimeUTC);
-        block.appendChild(timeLbl);
-
-        // Tooltip (time)
-        block.title = `${abbr}: ${timeLabel(s.startTimeUTC)}`;
+        block.style.cursor = 'pointer';
+        const fullName = s.type;
+        const timeRange = `${timeLabel(s.startTimeUTC)} – ${timeLabel(new Date(sEnd).toISOString())}`;
+        attachTooltip(block, fullName, timeRange);
 
         inner.appendChild(block);
       }
 
-      // Now marker
+      // ── Now marker ─────────────────────────────────────────────────────────
       if (now >= dayMin && now <= dayMax + 3_600_000) {
         const nowPct = ((now - dayMin) / (renderHrs * 3_600_000)) * 100;
         if (nowPct >= 0 && nowPct <= 100) {
           const marker = document.createElement('div');
-          marker.className = 'absolute top-0 bottom-0 w-0.5 bg-red-500 z-20';
+          marker.className = 'absolute top-0 w-0.5 bg-red-500 z-20';
+          marker.style.top = `${BLOCK_TOP}px`;
+          marker.style.height = `${rulerY - BLOCK_TOP}px`;
           marker.style.left = `${nowPct}%`;
           inner.appendChild(marker);
           showNow = true;
@@ -174,12 +289,6 @@
 
       bar.appendChild(inner);
       dayRow.appendChild(bar);
-
-      // Spacer for time labels below blocks
-      const spacer = document.createElement('div');
-      spacer.style.height = '16px';
-      dayRow.appendChild(spacer);
-
       daysEl.appendChild(dayRow);
     }
 
