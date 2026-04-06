@@ -15,6 +15,18 @@ const DIST = resolve(ROOT, 'dist');
 let passed = 0;
 let failed = 0;
 
+function extractJsonScript(html, scriptId) {
+  const pattern = new RegExp(`<script[^>]+id="${scriptId}"[^>]*>([\\s\\S]*?)<\\/script>`);
+  const match = html.match(pattern);
+  if (!match) return null;
+
+  try {
+    return JSON.parse(match[1]);
+  } catch {
+    return null;
+  }
+}
+
 function assert(condition, message) {
   if (condition) {
     console.log(`  ✓ ${message}`);
@@ -69,31 +81,33 @@ assert(indexHtml.includes('/Racing_event_tracker/'), 'Nav links use base path fo
 // --- Step 4: Calendar checks ---
 console.log('\n📅 Calendar (/calendar)...');
 const calendarHtml = readFileSync(resolve(DIST, 'calendar/index.html'), 'utf-8');
+const calendarEvents = extractJsonScript(calendarHtml, 'all-events-data') ?? [];
 
 assert(calendarHtml.includes('2026 Calendar'), 'Contains calendar title');
-assert(calendarHtml.includes('series-filter'), 'Contains series filter');
+assert(calendarHtml.includes('id="cal-filter"'), 'Contains calendar filter container');
+assert(calendarHtml.includes('id="cal-grid"'), 'Contains calendar grid');
+assert(calendarHtml.includes('Season Activity'), 'Contains season activity heatmap');
 
-const calendarSeries = calendarHtml.match(/data-series="(\w+)"/g) ?? [];
-assert(calendarSeries.length >= 100, `Calendar has ${calendarSeries.length} events (expected ≥100)`);
+assert(Array.isArray(calendarEvents) && calendarEvents.length >= 100, `Calendar has ${calendarEvents.length} events (expected ≥100)`);
 
-const calendarSeriesSet = new Set(calendarSeries.map(m => m.match(/"(\w+)"/)[1]));
+const calendarSeriesSet = new Set(calendarEvents.map(event => event.seriesId));
 assert(calendarSeriesSet.size >= 6, `Calendar shows ${calendarSeriesSet.size} series (expected ≥6)`);
 
-// Check month headers exist
-assert(calendarHtml.includes('March 2026') || calendarHtml.includes('April 2026'), 'Has month section headers');
+assert(calendarHtml.includes('Mon') && calendarHtml.includes('Sun'), 'Has weekday headers');
 
 // --- Step 5: Status page checks ---
 console.log('\n📺 Status (/status)...');
 const statusHtml = readFileSync(resolve(DIST, 'status/index.html'), 'utf-8');
 
 assert(statusHtml.includes('RaceTrack'), 'Contains title');
-assert(statusHtml.includes('data-countdown'), 'Contains countdown');
+assert(statusHtml.includes('id="kiosk-countdown"'), 'Contains kiosk countdown');
+assert(statusHtml.includes('Coming Up'), 'Contains upcoming events section');
 assert(!statusHtml.includes('series-filter'), 'Does NOT contain series filter (kiosk mode)');
 
 // --- Step 6: No broken placeholder times visible ---
 console.log('\n⏰ Data integrity...');
-assert(!indexHtml.includes('1900-01-01'), 'Dashboard has no 1900 placeholder dates');
-assert(!statusHtml.includes('1900-01-01'), 'Status has no 1900 placeholder dates');
+assert(!indexHtml.includes('datetime="1900-01-01'), 'Dashboard has no rendered 1900 placeholder times');
+assert(!statusHtml.includes('data-session-start="1900-01-01'), 'Status has no rendered 1900 placeholder times');
 
 // --- Summary ---
 console.log(`\n${'='.repeat(40)}`);

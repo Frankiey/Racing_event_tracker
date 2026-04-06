@@ -395,9 +395,14 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
 
         function initHeroCard() {
           const card = document.querySelector<HTMLElement>('[data-hero-card]');
-          const countdown = card?.querySelector<HTMLElement>('[data-hero-countdown]');
+          if (!(card instanceof HTMLElement)) return;
+
+          const countdown = card.querySelector<HTMLElement>('[data-hero-countdown]');
           const dataEl = document.getElementById('rt-hero-events');
-          if (!card || !countdown || !dataEl) return;
+          if (!(countdown instanceof HTMLElement) || !dataEl) return;
+
+          const cardEl: HTMLElement = card;
+          const countdownEl: HTMLElement = countdown;
 
           const events = JSON.parse(dataEl.textContent ?? '[]') as HeroEvent[];
           let currentKey = '';
@@ -406,17 +411,17 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
             const now = Date.now();
             const candidate = getHeroCandidate(events, now);
             if (!candidate) {
-              card.hidden = true;
+              cardEl.hidden = true;
               return;
             }
 
-            card.hidden = false;
+            cardEl.hidden = false;
             const candidateKey = `${candidate.event.id}:${candidate.session.startTimeUTC}:${candidate.mode}`;
             if (candidateKey !== currentKey) {
-              renderHero(card, candidate);
+              renderHero(cardEl, candidate);
               currentKey = candidateKey;
             }
-            updateCountdown(countdown, candidate, now);
+            updateCountdown(countdownEl, candidate, now);
           }
 
           if (heroInterval) window.clearInterval(heroInterval);

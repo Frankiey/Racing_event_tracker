@@ -37,7 +37,7 @@ const { targetUTC, label } = Astro.props;
 </div>
 
 <script>
-  const _countdownIntervals: number[] = [];
+  const _countdownIntervals: ReturnType<typeof window.setInterval>[] = [];
 
   function initCountdowns() {
     document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {

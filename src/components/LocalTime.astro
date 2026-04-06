@@ -23,7 +23,7 @@ const { utc, format = 'datetime' } = Astro.props;
   function initLocalTimes() {
     document.querySelectorAll<HTMLTimeElement>('[data-local-time]').forEach(el => {
       const utc = el.dataset.localTime!;
-      const fmt = el.dataset.format as 'datetime' | 'time' | 'date';
+      const fmt = el.dataset.format as 'datetime' | 'time' | 'date' | 'weekday-time';
       const d = new Date(utc);
 
       const options: Intl.DateTimeFormatOptions = { hour12: false };
