@@ -4,7 +4,8 @@
  */
 
 import broadcasts from '../../data/gold/broadcasts.json';
-import { SERIES_META } from './series-client';
+import { getClientSeriesMeta } from './series-client';
+import { getSessionDurationMinutes } from './sessions';
 import type { RaceEvent, RaceSession } from './types';
 
 type IcsSession = RaceSession;
@@ -42,15 +43,6 @@ const SERIES_EMOJI: Record<string, string> = {
   iomtt: '🏍️',
 };
 
-const SESSION_DURATION_MIN: Record<string, number> = {
-  'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
-  'Free Practice 1': 60, 'Free Practice 2': 60, 'Free Practice 3': 60,
-  'Qualifying': 90, 'Sprint Qualifying': 60, 'Sprint Shootout': 60,
-  'Sprint': 45, 'Sprint Race': 45,
-  'Race': 120, 'Feature Race': 120,
-  'Warm Up': 30,
-};
-
 function toIcsDate(utc: string): string {
   return utc.replace(/[-:]/g, '').replace(/\.\d+/, '').replace('T', 'T').slice(0, 15) + 'Z';
 }
@@ -66,9 +58,7 @@ function escapeIcs(str: string): string {
 }
 
 function getSeriesSummaryPrefix(seriesId: string): string {
-  const meta = SERIES_META[seriesId] ?? {
-    shortLabel: seriesId.toUpperCase(),
-  };
+  const meta = getClientSeriesMeta(seriesId);
 
   return `${SERIES_EMOJI[seriesId] ?? '🏁'} ${meta.shortLabel}`;
 }
@@ -85,9 +75,7 @@ function formatBroadcastLine(regionId: string, entries: BroadcastEntry[]): strin
 }
 
 function getDescription(event: IcsEvent, session: IcsSession): string {
-  const meta = SERIES_META[event.seriesId] ?? {
-    label: event.seriesId.toUpperCase(),
-  };
+  const meta = getClientSeriesMeta(event.seriesId);
   const lines = [
     `${meta.label}`,
     `Session: ${session.type}`,
@@ -109,7 +97,7 @@ function getDescription(event: IcsEvent, session: IcsSession): string {
 }
 
 function makeVEvent(event: IcsEvent, session: IcsSession): string {
-  const dur = SESSION_DURATION_MIN[session.type] ?? 120;
+  const dur = getSessionDurationMinutes(session.type);
   const location = [event.circuit.name, event.circuit.city, event.circuit.country].filter(Boolean).join(', ');
   const uid = `${event.id}-${session.type.replace(/\s+/g, '')}@racetrack`;
 

@@ -15,9 +15,10 @@ Usage:
 import argparse
 import sys
 
-from pipeline.config import SILVER_DIR, GOLD_DIR, SEASON_YEAR
+from pipeline.config import SILVER_DIR, GOLD_DIR, SEASON_YEAR, SERIES_IDS
 from pipeline.utils import read_json, write_json
 from pipeline.circuits import enrich_circuit
+from pipeline.validate import run_validation
 
 # Fetchers (bronze)
 from pipeline.fetchers import f1 as f1_fetcher
@@ -48,7 +49,23 @@ SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3",
                "imsa", "dtm", "nls", "superformula", "iomtt"]
 
 
+def validate_series_configuration() -> None:
+    configured = set(API_SERIES) | set(SEED_SERIES)
+    expected = set(SERIES_IDS)
+    if configured != expected:
+        missing = sorted(expected - configured)
+        extra = sorted(configured - expected)
+        details: list[str] = []
+        if missing:
+            details.append(f"missing: {', '.join(missing)}")
+        if extra:
+            details.append(f"extra: {', '.join(extra)}")
+        raise ValueError(f"Series configuration mismatch ({'; '.join(details)})")
+
+
 def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = False):
+    validate_series_configuration()
+
     year = SEASON_YEAR
     all_silver: list[dict] = []
     failed_series: list[str] = []
@@ -78,7 +95,7 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
 
     if bronze_only:
         print("Bronze-only mode — stopping before silver/gold.")
-        return
+        return True
 
     # --- Seed series (already silver format) ---
     for series_id in SEED_SERIES:
@@ -115,6 +132,11 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
     write_json(GOLD_DIR / "upcoming.json", upcoming)
 
     print(f"\nDone! {len(calendar)} total events, {len(upcoming)} upcoming.")
+
+    print("\n[VALIDATE] Checking seed, silver, and gold data...")
+    validation_exit_code = run_validation()
+    if validation_exit_code != 0:
+        return False
 
     if failed_series:
         print(f"\nWARNING: {len(failed_series)} series failed: {', '.join(failed_series)}")

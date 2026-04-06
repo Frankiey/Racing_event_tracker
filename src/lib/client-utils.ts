@@ -3,9 +3,11 @@
  * These are the SINGLE source of truth — import from here instead of
  * re-implementing in each <script> block.
  *
- * Note: time.ts exports server-side helpers (used in .astro frontmatter).
- * This file exports browser-safe equivalents for <script> tags.
+ * Note: time.ts re-exports the pure helpers from this file for Astro
+ * frontmatter, while browser-only helpers stay here.
  */
+
+import { getSessionDurationMinutes } from './sessions';
 
 /** Convert an ISO 3166-1 alpha-2 country code to a flag emoji. */
 export function countryFlag(code: string): string {
@@ -84,23 +86,12 @@ export function readFavorites(): string[] {
   }
 }
 
-/** Estimated session duration in minutes by type. */
-export const SESSION_DURATION_MIN: Record<string, number> = {
-  'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
-  'Free Practice 1': 60, 'Free Practice 2': 60, 'Free Practice 3': 60,
-  'Qualifying': 90, 'Sprint Qualifying': 60, 'Sprint Shootout': 60,
-  'Sprint': 45, 'Sprint Race': 45,
-  'Race': 120, 'Feature Race': 120,
-  'Warm Up': 30,
-};
-const DEFAULT_DURATION = 120;
-
 /** Check if a session is currently live. */
 export function isSessionLive(session: { type: string; startTimeUTC: string }): boolean {
   if (isPlaceholderTime(session.startTimeUTC)) return false;
   const now = Date.now();
   const start = new Date(session.startTimeUTC).getTime();
-  const dur = (SESSION_DURATION_MIN[session.type] ?? DEFAULT_DURATION) * 60_000;
+  const dur = getSessionDurationMinutes(session.type) * 60_000;
   return now >= start && now < start + dur;
 }
 

@@ -20,3 +20,12 @@ export const SERIES_META: Record<string, ClientSeriesMeta> = Object.fromEntries(
 );
 
 export const SERIES_ORDER: string[] = SERIES_LIST.map(s => s.id);
+
+export function getClientSeriesMeta(seriesId: string): ClientSeriesMeta {
+  return SERIES_META[seriesId] ?? {
+    label: seriesId.toUpperCase(),
+    shortLabel: seriesId.toUpperCase(),
+    color: '#71717a',
+    category: '4-wheel',
+  };
+}

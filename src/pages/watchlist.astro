@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import EventCard from '../components/EventCard.astro';
-import type { RaceEvent } from '../lib/types';
+import type { EventFeed } from '../lib/types';
 
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const allEvents = (calendarData as any).events as RaceEvent[];
+const allEvents = (calendarData as EventFeed).events;
 ---
 
 <Layout title="RaceTrack — My Watchlist" currentPath={`${base}/watchlist`}>
@@ -50,10 +49,10 @@ const allEvents = (calendarData as any).events as RaceEvent[];
 
 <script>
   import { SESSION_ABBR } from '../lib/sessions';
-  import { SERIES_META } from '../lib/series-client';
+  import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, escapeHtml, formatLocalTime, formatDateRange, isPastEvent, isPlaceholderTime, readFavorites, toggleFavorite, safeJsonParse } from '../lib/client-utils';
   import { exportEventsIcs } from '../lib/ics';
-  import type { RaceEvent } from '../lib/types';
+  import type { RaceEvent, RaceSession } from '../lib/types';
 
   const allEvents: RaceEvent[] = safeJsonParse(
     document.getElementById('all-events-data')!.textContent!, []
@@ -78,12 +77,12 @@ const allEvents = (calendarData as any).events as RaceEvent[];
     grid.classList.remove('hidden');
 
     grid.innerHTML = favEvents.map(ev => {
-      const meta = SERIES_META[ev.seriesId] ?? { label: ev.seriesId, shortLabel: ev.seriesId, color: '#71717a' };
+      const meta = getClientSeriesMeta(ev.seriesId);
       const past = isPastEvent(ev.dateEnd);
       const f = countryFlag(ev.circuit?.countryCode ?? '');
-      const validSessions = (ev.sessions ?? []).filter((s: any) => !isPlaceholderTime(s.startTimeUTC));
+      const validSessions = (ev.sessions ?? []).filter((s: RaceSession) => !isPlaceholderTime(s.startTimeUTC));
 
-      const sessionsHtml = validSessions.map((s: any) => {
+      const sessionsHtml = validSessions.map((s: RaceSession) => {
         const isRace = s.type === 'Race' || s.type === 'Feature Race';
         const t = formatLocalTime(s.startTimeUTC);
         return `<div class="flex items-center gap-1.5 text-xs">

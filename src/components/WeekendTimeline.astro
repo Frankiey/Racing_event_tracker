@@ -16,8 +16,8 @@
 </div>
 
 <script>
-  import { SESSION_ABBR } from '../lib/sessions';
-  import { SERIES_META } from '../lib/series-client';
+  import { getSessionDurationMinutes, SESSION_ABBR } from '../lib/sessions';
+  import { getClientSeriesMeta } from '../lib/series-client';
 
   interface TlSession {
     type: string;
@@ -26,21 +26,6 @@
 
   const PLACEHOLDER_YEAR = '1900';
   const HOUR_PX = 40; // px per hour — controls how wide a day bar is
-
-  // Estimated session durations in minutes
-  const DURATION: Record<string, number> = {
-    'FP1': 60, 'FP2': 60, 'FP3': 60,
-    'Practice 1': 60, 'Practice 2': 60, 'Practice 3': 60,
-    'Free Practice 1': 60, 'Free Practice 2': 60, 'Free Practice 3': 60,
-    'Practice': 60,
-    'Qualifying': 60, 'Sprint Qualifying': 45, 'Sprint Shootout': 30,
-    'Sprint': 60, 'Warm Up': 20,
-    'Race': 120, 'Feature Race': 120,
-  };
-
-  function getDuration(type: string): number {
-    return DURATION[type] ?? 60;
-  }
 
   function isPlaceholder(utc: string) { return utc.startsWith(PLACEHOLDER_YEAR); }
   function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
@@ -74,10 +59,9 @@
    * Render timeline for a given event. Called from EventModal's openModal.
    */
   function renderTimeline(event: any) {
-    const container = document.getElementById('weekend-timeline')!;
     const daysEl = document.getElementById('tl-days')!;
     const nowLegend = document.getElementById('tl-now-legend')!;
-    const meta = SERIES_META[event.seriesId] ?? { color: '#71717a' };
+    const meta = getClientSeriesMeta(event.seriesId);
 
     const sessions: TlSession[] = (event.sessions as TlSession[]).filter(s => !isPlaceholder(s.startTimeUTC));
     if (sessions.length === 0) {
@@ -95,7 +79,7 @@
     for (const [dateKey, daySessions] of days) {
       // Compute time range for this day
       const starts = daySessions.map(s => new Date(s.startTimeUTC).getTime());
-      const ends = daySessions.map(s => new Date(s.startTimeUTC).getTime() + getDuration(s.type) * 60_000);
+      const ends = daySessions.map(s => new Date(s.startTimeUTC).getTime() + getSessionDurationMinutes(s.type) * 60_000);
       const dayMin = Math.min(...starts);
       const dayMax = Math.max(...ends);
       const daySpanMs = dayMax - dayMin;
@@ -128,7 +112,7 @@
       // Render session blocks
       for (const s of daySessions) {
         const sStart = new Date(s.startTimeUTC).getTime();
-        const sDurMs = getDuration(s.type) * 60_000;
+        const sDurMs = getSessionDurationMinutes(s.type) * 60_000;
         const sEnd = sStart + sDurMs;
         const leftPct = ((sStart - dayMin) / (renderHrs * 3_600_000)) * 100;
         const widthPct = (sDurMs / (renderHrs * 3_600_000)) * 100;

@@ -5,7 +5,7 @@ import SeriesBadge from '../../components/SeriesBadge.astro';
 import { SERIES_LIST, getSeriesMeta } from '../../lib/series';
 import { getRaceSession, isPlaceholderTime } from '../../lib/time';
 
-import type { RaceEvent } from '../../lib/types';
+import type { EventFeed } from '../../lib/types';
 import calendarData from '../../../data/gold/calendar.json';
 
 export function getStaticPaths() {
@@ -16,7 +16,7 @@ const { id } = Astro.params;
 const meta = getSeriesMeta(id);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const allEvents = ((calendarData as any).events as RaceEvent[]).filter(e => e.seriesId === id);
+const allEvents = (calendarData as EventFeed).events.filter(e => e.seriesId === id);
 const now = new Date();
 
 const doneEvents = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') < now);

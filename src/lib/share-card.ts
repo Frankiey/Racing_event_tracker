@@ -1,5 +1,5 @@
 import { isPlaceholderTime } from './client-utils';
-import { SERIES_META } from './series-client';
+import { getClientSeriesMeta } from './series-client';
 import { SESSION_LABELS } from './sessions';
 import type { RaceEvent } from './types';
 
@@ -130,12 +130,7 @@ function buildShareCardData(options: ShareCardBuildOptions, now = new Date()): W
 
       if (matchingSessions.length === 0) return null;
 
-      const meta = SERIES_META[event.seriesId] ?? {
-        label: event.seriesId.toUpperCase(),
-        shortLabel: event.seriesId.toUpperCase(),
-        color: '#71717a',
-        category: 'open-wheel' as const,
-      };
+      const meta = getClientSeriesMeta(event.seriesId);
 
       return {
         id: event.id,

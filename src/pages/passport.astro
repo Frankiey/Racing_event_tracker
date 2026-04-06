@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import SeriesBadge from '../components/SeriesBadge.astro';
-import { SERIES_LIST, getSeriesMeta } from '../lib/series';
-import { countryFlag } from '../lib/time';
-import type { RaceEvent } from '../lib/types';
+import { SERIES_LIST } from '../lib/series';
+import type { EventFeed } from '../lib/types';
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const allEvents = (calendarData as any).events as RaceEvent[];
+const allEvents = (calendarData as EventFeed).events;
 const now = new Date();
 
 // Build per-series event data with coordinates for the globe
@@ -177,7 +175,8 @@ for (const s of SERIES_LIST) {
 
 <script>
   // ═══ Season Passport — D3 Orthographic Globe ═══
-  import { geoOrthographic, geoPath, geoGraticule, geoCircle, geoInterpolate, geoDistance } from 'd3-geo';
+  import { formatDateRange } from '../lib/client-utils';
+  import { geoOrthographic, geoPath, geoGraticule, geoInterpolate, geoDistance } from 'd3-geo';
   import { drag } from 'd3-drag';
   import { select } from 'd3-selection';
   import { timer } from 'd3-timer';
@@ -850,9 +849,8 @@ for (const s of SERIES_LIST) {
     }
   }, { passive: true });
 
-  canvas.addEventListener('touchend', (e) => {
+  canvas.addEventListener('touchend', () => {
     if (touchStart && Date.now() - touchStart.t < 300) {
-      const rect = canvas.getBoundingClientRect();
       const mx = touchStart.x, my = touchStart.y;
       let best: any = null;
       let bestDist = 25;
@@ -980,17 +978,6 @@ for (const s of SERIES_LIST) {
         }
       });
     }
-  }
-
-  function formatDateRange(start: string, end: string) {
-    const s = new Date(start + 'T12:00:00Z');
-    const e = new Date(end + 'T12:00:00Z');
-    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
-    if (start === end) return s.toLocaleDateString(undefined, opts);
-    if (s.getMonth() === e.getMonth()) {
-      return `${s.toLocaleDateString(undefined, opts)} – ${e.getDate()}`;
-    }
-    return `${s.toLocaleDateString(undefined, opts)} – ${e.toLocaleDateString(undefined, opts)}`;
   }
 
   // ══════════════════════════════════════════════

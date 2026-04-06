@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import type { RaceEvent } from '../lib/types';
+import type { EventFeed } from '../lib/types';
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const events = (calendarData as any).events as RaceEvent[];
-const totalSeries = new Set(events.map((e: any) => e.seriesId)).size;
+const events = (calendarData as EventFeed).events;
+const totalSeries = new Set(events.map((e) => e.seriesId)).size;
 
 // Build heatmap data: session count per day for the entire year
 const heatmapYear = 2026;
@@ -174,8 +174,8 @@ const todayKey = new Date().toISOString().slice(0, 10);
 
 <script>
   import { SESSION_ABBR } from '../lib/sessions';
-  import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
-  import { countryFlag, escapeHtml, formatLocalTime, isPlaceholderTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
+  import { SERIES_META, SERIES_ORDER, getClientSeriesMeta } from '../lib/series-client';
+  import { countryFlag, escapeHtml, formatLocalTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
   import { downloadShareCardForDates } from '../lib/share-card';
   import type { RaceEvent, RaceSession } from '../lib/types';
 
@@ -395,13 +395,13 @@ const todayKey = new Date().toISOString().slice(0, 10);
     // ── Individual series chips ──
     const container = document.getElementById('cal-filter')!;
     container.innerHTML = seriesInData.map((id, i) => {
-      const m = SERIES_META[id] ?? { shortLabel: id, color: '#71717a', category: '4-wheel' };
+      const m = getClientSeriesMeta(id);
       const on = showAll || activeFilters.has(id);
       const style = on
         ? `background-color:${m.color}20;border-color:${m.color}60;color:${m.color}`
         : 'background-color:transparent;border-color:#3f3f46;color:#52525b';
       // Add visual divider before first 2-wheel series
-      const divider = (i > 0 && m.category === '2-wheel' && SERIES_META[seriesInData[i - 1]]?.category === '4-wheel')
+      const divider = (i > 0 && m.category === '2-wheel' && getClientSeriesMeta(seriesInData[i - 1]).category === '4-wheel')
         ? '<span class="h-4 w-px bg-zinc-700/60 self-center mx-0.5" aria-hidden="true"></span>'
         : '';
       return `${divider}<button class="cal-filter-btn text-xs font-bold px-2.5 py-1 rounded-full border transition-all duration-150 select-none" data-series="${id}" style="${style}">
@@ -471,7 +471,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       const overflow = uniqueEvs.length - MAX_BADGES;
 
       const badgesHtml = visible.map(e => {
-        const m = SERIES_META[e.seriesId] ?? { shortLabel: e.seriesId, color: '#71717a' };
+        const m = getClientSeriesMeta(e.seriesId);
         const isRaceDay = e.dateEnd === dateStr;
         const bg   = isRaceDay ? m.color + 'ee' : m.color + '28';
         const text = isRaceDay ? '#ffffff' : m.color;
@@ -549,7 +549,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       });
 
       const cardsHtml = dayEvs.map(ev => {
-        const m = SERIES_META[ev.seriesId] ?? { shortLabel: ev.seriesId, color: '#71717a', label: ev.seriesId };
+        const m = getClientSeriesMeta(ev.seriesId);
         const sessions = sessionsOnDay(ev, dateStr);
         const f = countryFlag(ev.circuit?.countryCode ?? '');
         const isRaceDay = ev.dateEnd === dateStr;

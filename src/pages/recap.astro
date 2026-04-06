@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import SeriesBadge from '../components/SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
-import { formatDateRange, countryFlag, isPastEvent } from '../lib/time';
-import type { RaceEvent } from '../lib/types';
+import { formatDateRange, countryFlag } from '../lib/time';
+import type { EventFeed } from '../lib/types';
 import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const allEvents = (calendarData as any).events as RaceEvent[];
+const allEvents = (calendarData as EventFeed).events;
 const now = new Date();
 
 // Events that ended in the past 7 days

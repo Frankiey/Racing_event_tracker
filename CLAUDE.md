@@ -38,7 +38,7 @@ bd close <id>         # Complete work
 # RaceTrack — Claude Instructions
 
 ## Project Overview
-RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, WEC/endurance, and more into a single dashboard.
+RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
 
 ## Tech Stack
 - **Frontend:** Astro (static-first, island architecture) + Tailwind CSS v4
@@ -56,6 +56,7 @@ src/
     watchlist.astro     — User's saved/favorited events (localStorage), ICS export
     status.astro        — Kiosk view (bare, auto-refresh)
     recap.astro         — Past 7 days recap with spoiler-free toggle
+    passport.astro      — Globe-based circuit passport / season travel view
     series/[id].astro   — Per-series page: progress bar, schedule, next race, ICS export
     widget/[series].astro — Embeddable countdown widget per series
   components/
@@ -66,6 +67,7 @@ src/
     SeriesFilter.astro  — Toggle filter buttons by series
     Nav.astro           — Sticky nav with Series dropdown + Watchlist heart
     LocalTime.astro     — UTC → local time hydration (use data-local-time attr)
+    WeekendTimeline.astro — Timeline view for session scheduling in EventModal
   layouts/
     Layout.astro        — HTML shell + Nav + EventModal
   lib/
@@ -76,8 +78,12 @@ src/
                           readFavorites, toggleFavorite, safeJsonParse,
                           isSessionLive, getLiveSession, sleepVerdict
     ics.ts              — ICS calendar file generation (client-side .ics export)
+    sessions.ts         — Session abbreviations, labels, and duration helpers
+    share-card.ts       — Canvas-based share image generation for calendar/date picks
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
+    types.ts            — Shared frontend event/session TypeScript types
+    world-data.ts       — World map support for the passport globe view
   styles/
     global.css          — Tailwind v4 import + racing stripe, modal, fav animations
 pipeline/
@@ -97,7 +103,7 @@ public/           — Static assets (logos, flags, images)
 ## Key Conventions
 - All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
 - Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`
+- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`, `iomtt`
 - Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
 - Prefer static generation over client-side fetching
 - Dark mode is the default theme
@@ -115,7 +121,7 @@ public/           — Static assets (logos, flags, images)
 - `uv run python -m pipeline --bronze-only` — fetch raw data without transforms
 
 ## Data Pipeline
-Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without free public APIs (FE, IndyCar, WEC, F2, F3, IMSA, DTM, NLS, Super Formula) use manually curated seed files in `data/seed/`. A GitHub Action runs this nightly and commits updated data.
+Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without stable free public APIs (FE, IndyCar, WEC, F2, F3, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT) use manually curated seed files in `data/seed/`, while WSBK keeps a seed fallback. A GitHub Action runs this nightly and commits updated data.
 
 ## Data Sources
 | Series | Source | Type |
@@ -124,8 +130,14 @@ Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive 
 | MotoGP | Pulselive API | API (free, no auth) |
 | NASCAR | NASCAR CDN | API (free, no auth) |
 | WSBK | WorldSBK Pulselive API | API (JWT-gated, seed fallback) |
-| F2, F3, FE, IndyCar, WEC, Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
-| IMSA, DTM, NLS, Super Formula | `data/seed/*.json` | Manual seed data |
+| F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
+| Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
+| IMSA, DTM, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
+
+## Slash Commands
+- `.claude/commands/add-series.md` — guide for adding a new series end to end
+- `.claude/commands/pipeline-debug.md` — pipeline debugging workflow
+- `.claude/commands/new-component.md` — scaffold a new Astro component following repo conventions
 
 ## File Search Tips
 - When using Glob, always scope to a specific subdirectory (`src/`, `docs/`, `data/`, `pipeline/`) — never glob from the project root with `**` patterns, as it will match thousands of `node_modules` files

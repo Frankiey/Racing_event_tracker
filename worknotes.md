@@ -1,7 +1,7 @@
 # Work Notes — RaceTrack
 
 ## Current Status
-**Frontend v1 built** (2026-03-22). Three pages rendering with real data from the gold layer. Build succeeds, all 148 events display across 8 series.
+**Frontend and data coverage expanded** (updated 2026-04-06). Build succeeds, core pages render from the gold layer, and the site now covers 16 tracked series/routes including passport, recap, watchlist, widgets, and kiosk mode.
 
 ## What was built (v2 frontend — 2026-03-28)
 
@@ -54,12 +54,6 @@
 3. Implement kiosk auto-rotation between upcoming races on `/status`
 4. Add standings data per series
 
-## Open Questions
-- How to handle endurance race sessions (24h+ duration) in the session schema?
-- Broadcast data: start with which regions? NL + US + UK as minimum?
-- F2/F3 schedule — is it always co-located with F1 weekends or are there exceptions?
-- Should the calendar page have a "jump to current month" feature?
-
 ## Decisions Made
 - Astro over plain HTML — gives us components, routing, and static build for free
 - Medallion architecture for data — bronze/silver/gold layers
@@ -71,6 +65,5 @@
 ## Known Limitations
 - No real-time updates — data refreshes on cron schedule (nightly)
 - Broadcast info must be manually curated per season
-- Some series (DTM, IMSA) deferred to later phases
 - NASCAR qualifying times are placeholders (1900 date) — hidden in UI
 - Country codes are inconsistent across series (alpha-2 vs alpha-3)

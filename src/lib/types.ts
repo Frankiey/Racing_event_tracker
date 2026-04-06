@@ -22,3 +22,7 @@ export interface RaceEvent {
   dateStart: string;
   dateEnd: string;
 }
+
+export interface EventFeed<T = RaceEvent> {
+  events: T[];
+}

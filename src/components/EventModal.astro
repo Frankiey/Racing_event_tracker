@@ -162,9 +162,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <script>
   import { SESSION_LABELS } from '../lib/sessions';
-  import { SERIES_META } from '../lib/series-client';
+  import { getClientSeriesMeta } from '../lib/series-client';
   import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
   import { exportEventIcs } from '../lib/ics';
+  import type { RaceEvent } from '../lib/types';
+
+  interface BroadcastChannel {
+    channel: string;
+    type: string;
+    note?: string;
+  }
 
   // ── Broadcast data ──
   const _bdRaw = document.getElementById('broadcast-data')?.textContent ?? '{}';
@@ -189,13 +196,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       return;
     }
     const region = regionSelect.value;
-    const channels = broadcastDb.series[seriesId][region] ?? [];
+    const channels: BroadcastChannel[] = broadcastDb.series[seriesId][region] ?? [];
     if (channels.length === 0) {
       broadcastSection.classList.add('hidden');
       return;
     }
     broadcastSection.classList.remove('hidden');
-    broadcastList.innerHTML = channels.map((ch: any) => {
+    broadcastList.innerHTML = channels.map((ch) => {
       const icon = ch.type === 'streaming'
         ? '<svg class="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" /></svg>'
         : '<svg class="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" /></svg>';
@@ -213,10 +220,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   function isRaceType(type: string) { return type === 'Race' || type === 'Feature Race'; }
 
   const modal = document.getElementById('event-modal')!;
-  const panel = document.getElementById('modal-panel')!;
 
-  function openModal(event: any) {
-    const meta = SERIES_META[event.seriesId] ?? { label: event.seriesId, shortLabel: event.seriesId, color: '#71717a' };
+  function openModal(event: RaceEvent) {
+    const meta = getClientSeriesMeta(event.seriesId);
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const isFav = readFavorites().includes(event.id);
     const isPast = isPastEvent(event.dateEnd);
@@ -247,12 +253,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Sessions
     const sessionsEl = document.getElementById('modal-sessions') as HTMLElement;
-    const validSessions = (event.sessions as { type: string; startTimeUTC: string }[]).filter((s) => !isPlaceholderTime(s.startTimeUTC));
-    sessionsEl.innerHTML = validSessions.map((s: any) => {
+    const validSessions = event.sessions.filter((session) => !isPlaceholderTime(session.startTimeUTC));
+    sessionsEl.innerHTML = validSessions.map((s) => {
       const isRace = isRaceType(s.type);
       const isPastSession = new Date(s.startTimeUTC) < new Date();
       const isLive = isSessionLive(s);
-      const isNext = !isPastSession && !isLive && validSessions.filter((x: any) => new Date(x.startTimeUTC) < new Date()).length === validSessions.indexOf(s);
+      const isNext = !isPastSession && !isLive && validSessions.filter((x) => new Date(x.startTimeUTC) < new Date()).length === validSessions.indexOf(s);
       const label = SESSION_LABELS[s.type] ?? s.type;
       const dotColor = isLive ? '#10b981' : isRace ? meta.color : isPastSession ? '#27272a' : '#52525b';
       const sleep = !isPastSession && !isLive ? sleepVerdict(s.startTimeUTC) : null;
@@ -327,7 +333,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   // ── View toggle ──
-  let currentEvent: any = null;
+  let currentEvent: RaceEvent | null = null;
   const sessionsEl = document.getElementById('modal-sessions')!;
   const timelineEl = document.getElementById('weekend-timeline')!;
   const listBtn = document.getElementById('view-list-btn')!;
@@ -395,8 +401,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   function updateAlertUI() {
     if (!currentEvent) { alertSection.classList.add('hidden'); return; }
+    const eventId = currentEvent.id;
     // Find race session
-    const race = currentEvent.sessions?.find((s: any) => s.type === 'Race' || s.type === 'Feature Race');
+    const race = currentEvent.sessions?.find((s) => s.type === 'Race' || s.type === 'Feature Race');
     if (!race || new Date(race.startTimeUTC) < new Date()) {
       alertSection.classList.add('hidden');
       return;
@@ -404,7 +411,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     alertSection.classList.remove('hidden');
     // Check if alert already set
     const alerts = getAlerts();
-    const existing = alerts.find((a: StoredAlert) => a.eventId === currentEvent.id);
+    const existing = alerts.find((a: StoredAlert) => a.eventId === eventId);
     if (existing) {
       alertStatus.textContent = `Reminder set: ${existing.offset} min before race`;
       alertStatus.classList.remove('hidden');
@@ -417,8 +424,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   alertSetBtn.addEventListener('click', async () => {
     if (!currentEvent) return;
+    const eventId = currentEvent.id;
     const alerts = getAlerts();
-    const existing = alerts.findIndex((a: StoredAlert) => a.eventId === currentEvent.id);
+    const existing = alerts.findIndex((a: StoredAlert) => a.eventId === eventId);
     if (existing >= 0) {
       alerts.splice(existing, 1);
       saveAlerts(alerts);
@@ -434,11 +442,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       alertStatus.classList.remove('hidden');
       return;
     }
-    const race = currentEvent.sessions?.find((s: any) => s.type === 'Race' || s.type === 'Feature Race');
+    const race = currentEvent.sessions?.find((s) => s.type === 'Race' || s.type === 'Feature Race');
     if (!race) return;
     const offset = parseInt(alertOffsetSelect.value);
     const fireAt = new Date(new Date(race.startTimeUTC).getTime() - offset * 60000).toISOString();
-    alerts.push({ eventId: currentEvent.id, eventName: currentEvent.eventName, sessionType: race.type, fireAt, offset });
+    alerts.push({ eventId, eventName: currentEvent.eventName, sessionType: race.type, fireAt, offset });
     saveAlerts(alerts);
     updateAlertUI();
   });
@@ -496,9 +504,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       } catch {}
     }
     // 2. Try page-registered event list (__rtAllEvents or __passportFullEvents)
-    const all: any[] | undefined = (window as any).__rtAllEvents ?? (window as any).__passportFullEvents;
+    const all: RaceEvent[] | undefined = (window as any).__rtAllEvents ?? (window as any).__passportFullEvents;
     if (all) {
-      const ev = all.find((e: any) => e.id === eventId);
+      const ev = all.find((e) => e.id === eventId);
       if (ev) openModal(ev);
     }
   })();

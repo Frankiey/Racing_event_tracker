@@ -38,6 +38,7 @@ src/
     watchlist.astro     — User's saved/favorited events (localStorage), ICS export
     status.astro        — Kiosk view (bare, auto-refresh)
     recap.astro         — Past 7 days recap with spoiler-free toggle
+    passport.astro      — Globe-based circuit passport / season travel view
     series/[id].astro   — Per-series page: progress bar, schedule, next race, ICS export
     widget/[series].astro — Embeddable countdown widget per series
   components/
@@ -48,6 +49,7 @@ src/
     SeriesFilter.astro  — Toggle filter buttons by series
     Nav.astro           — Sticky nav with Series dropdown + Watchlist heart
     LocalTime.astro     — UTC → local time hydration (use data-local-time attr)
+    WeekendTimeline.astro — Session timeline used inside the event modal
   layouts/
     Layout.astro        — HTML shell + Nav + EventModal
   lib/
@@ -58,8 +60,12 @@ src/
                           readFavorites, toggleFavorite, safeJsonParse,
                           isSessionLive, getLiveSession, sleepVerdict
     ics.ts              — ICS calendar file generation (client-side .ics export)
+    sessions.ts         — Canonical session labels, abbreviations, and durations
+    share-card.ts       — Social/share image generation for calendar selections
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
+    types.ts            — Shared frontend event/session TypeScript types
+    world-data.ts       — World map helpers for the passport page
   styles/
     global.css          — Tailwind v4 import + racing stripe, modal, fav animations
 pipeline/
@@ -72,7 +78,7 @@ data/
   bronze/         — Raw API responses (cached)
   silver/         — Cleaned/normalized per-series JSON
   gold/           — calendar.json, upcoming.json, broadcasts.json
-  seed/           — Manual JSON for series without APIs (FE, IndyCar, WEC, F2, F3)
+  seed/           — Manual JSON for series without APIs or stable free feeds (F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT; WSBK fallback)
 public/           — Static assets (logos, flags, images)
 ```
 
@@ -80,7 +86,7 @@ public/           — Static assets (logos, flags, images)
 
 - All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
 - Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `wec`
+- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`, `iomtt`
 - Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
 - Prefer static generation over client-side fetching
 - Dark mode is the default theme
@@ -108,7 +114,8 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 | F1 | Jolpica API + OpenF1 | API (free, no auth) |
 | MotoGP | Pulselive API | API (free, no auth) |
 | NASCAR | NASCAR CDN | API (free, no auth) |
-| F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
+| WSBK | WorldSBK Pulselive API (seed fallback) | API + seed fallback |
+| F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
 
 ## Don't
 
