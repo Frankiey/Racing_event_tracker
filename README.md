@@ -8,7 +8,8 @@
 [![Built with Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![Data refresh](https://img.shields.io/badge/Data-nightly_refresh-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Frankiey/Racing_event_tracker/actions)
+[![Build & Deploy](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/deploy.yml/badge.svg?style=flat-square)](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/deploy.yml)
+[![Data Pipeline](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/fetch-data.yml/badge.svg?style=flat-square)](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/fetch-data.yml)
 [![Built with Claude](https://img.shields.io/badge/Built_with-Claude_Code-5A2DB8?style=flat-square&logo=anthropic&logoColor=white)](https://claude.ai/code)
 
 > No more bouncing between five websites to find out when the next race is, what channel it's on, or whether F1 and MotoGP clash this weekend. RaceTrack puts it all in one place — fast, clean, and always up to date.
