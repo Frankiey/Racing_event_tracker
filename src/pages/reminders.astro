@@ -6,6 +6,7 @@ import calendarData from '../../data/gold/calendar.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const allEvents = (calendarData as EventFeed).events;
+const allEventsJson = JSON.stringify(allEvents).replace(/</g, '\\u003c');
 ---
 
 <Layout title="RaceTrack — My Reminders" currentPath={`${base}/reminders`}>
@@ -25,7 +26,7 @@ const allEvents = (calendarData as EventFeed).events;
 
     <div id="reminders-list" class="space-y-3 hidden" />
 
-    <script id="all-events-data" type="application/json" set:text={JSON.stringify(allEvents)} />
+    <script id="all-events-data" type="application/json" set:text={allEventsJson} />
   </main>
 </Layout>
 
