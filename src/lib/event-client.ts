@@ -2,6 +2,11 @@ import type { RaceEvent } from './types';
 
 export const RT_EVENTS_REGISTERED = 'rt-events-registered';
 
+export interface OpenEventDetail {
+  event: RaceEvent;
+  focusReminders?: boolean;
+}
+
 /** Unified RaceTrack namespace on window — avoids polluting global scope. */
 declare global {
   interface Window {
@@ -10,6 +15,7 @@ declare global {
       eventRegistry?: Map<string, RaceEvent>;
       renderTimeline?: (event: RaceEvent) => void;
       favsHandler?: EventListener;
+      remindersHandler?: EventListener;
     };
   }
 }
@@ -39,7 +45,14 @@ export function getRegisteredEvent(eventId: string): RaceEvent | undefined {
 export function openEventById(eventId: string): boolean {
   const event = getRegisteredEvent(eventId);
   if (!event) return false;
-  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: event }));
+  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: { event } satisfies OpenEventDetail }));
+  return true;
+}
+
+export function openEventWithOptions(eventId: string, options: Omit<OpenEventDetail, 'event'> = {}): boolean {
+  const event = getRegisteredEvent(eventId);
+  if (!event) return false;
+  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: { event, ...options } satisfies OpenEventDetail }));
   return true;
 }
 
@@ -67,4 +80,9 @@ function getEventRegistry(): Map<string, RaceEvent> {
   const ns = rt();
   if (!ns.eventRegistry) ns.eventRegistry = new Map();
   return ns.eventRegistry;
+}
+
+export function normalizeOpenEventDetail(detail: RaceEvent | OpenEventDetail): OpenEventDetail {
+  if ('event' in detail) return detail;
+  return { event: detail };
 }

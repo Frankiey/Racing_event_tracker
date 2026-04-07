@@ -92,3 +92,56 @@ export function toggleFavorite(eventId: string): boolean {
   window.dispatchEvent(new CustomEvent('rt-favs-changed'));
   return !isFav;
 }
+
+export const RT_REMINDERS_KEY = 'rt-reminders';
+
+export interface StoredReminder {
+  id: string;
+  eventId: string;
+  eventName: string;
+  seriesId: string;
+  sessionType: string;
+  sessionStartUTC: string;
+  fireAt: string;
+  offset: number;
+}
+
+export function buildReminderId(eventId: string, sessionType: string, sessionStartUTC: string): string {
+  return `${eventId}__${sessionType}__${sessionStartUTC}`;
+}
+
+export function readReminders(): StoredReminder[] {
+  try {
+    const raw = localStorage.getItem(RT_REMINDERS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed)
+      ? parsed.filter((item): item is StoredReminder =>
+        !!item
+        && typeof item.id === 'string'
+        && typeof item.eventId === 'string'
+        && typeof item.eventName === 'string'
+        && typeof item.seriesId === 'string'
+        && typeof item.sessionType === 'string'
+        && typeof item.sessionStartUTC === 'string'
+        && typeof item.fireAt === 'string'
+        && typeof item.offset === 'number')
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveReminders(reminders: StoredReminder[]): void {
+  const deduped = new Map(reminders.map(reminder => [reminder.id, reminder]));
+  localStorage.setItem(RT_REMINDERS_KEY, JSON.stringify([...deduped.values()]));
+  window.dispatchEvent(new CustomEvent('rt-reminders-changed'));
+}
+
+export function removeReminder(reminderId: string): void {
+  saveReminders(readReminders().filter(reminder => reminder.id !== reminderId));
+}
+
+export function setReminder(reminder: StoredReminder): void {
+  saveReminders([...readReminders().filter(item => item.id !== reminder.id), reminder]);
+}

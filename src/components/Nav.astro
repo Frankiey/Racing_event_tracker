@@ -69,7 +69,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </div>
 
-    <!-- Desktop: Watchlist + Kiosk -->
+    <!-- Desktop: Watchlist + Reminders + Kiosk -->
     <div class="hidden md:flex items-center gap-1">
       <a
         href={`${base}/watchlist`}
@@ -85,6 +85,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </svg>
         <span>Watchlist</span>
         <span id="nav-fav-count" class="hidden text-[10px] font-bold bg-rose-500/20 text-rose-400 px-1.5 rounded-full" />
+      </a>
+
+      <a
+        href={`${base}/reminders`}
+        class:list={[
+          'flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors text-sm font-medium shrink-0',
+          currentPath === `${base}/reminders`
+            ? 'bg-zinc-800 text-amber-400'
+            : 'text-zinc-500 hover:text-zinc-200 hover:bg-zinc-900'
+        ]}
+        aria-label="Manage reminders"
+      >
+        <svg class="w-4 h-4" fill={currentPath === `${base}/reminders` ? 'rgba(245, 158, 11, 0.15)' : 'none'} viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+        </svg>
+        <span>Reminders</span>
+        <span id="nav-reminder-count" class="hidden text-[10px] font-bold bg-amber-500/20 text-amber-400 px-1.5 rounded-full" />
       </a>
 
       <a
@@ -104,7 +121,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </a>
     </div>
 
-    <!-- Mobile right: watchlist icon + hamburger -->
+    <!-- Mobile right: watchlist icon + reminders icon + hamburger -->
     <div class="flex md:hidden items-center gap-1 ml-auto">
       <a
         href={`${base}/watchlist`}
@@ -118,6 +135,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
         <span id="nav-fav-count-mobile" class="hidden text-[10px] font-bold bg-rose-500/20 text-rose-400 px-1 rounded-full" />
+      </a>
+
+      <a
+        href={`${base}/reminders`}
+        class:list={[
+          'flex items-center gap-1 p-2 rounded-lg transition-colors',
+          currentPath === `${base}/reminders` ? 'text-amber-400' : 'text-zinc-500 hover:text-zinc-200'
+        ]}
+        aria-label="Manage reminders"
+      >
+        <svg class="w-5 h-5" fill={currentPath === `${base}/reminders` ? 'rgba(245, 158, 11, 0.15)' : 'none'} viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+        </svg>
+        <span id="nav-reminder-count-mobile" class="hidden text-[10px] font-bold bg-amber-500/20 text-amber-400 px-1 rounded-full" />
       </a>
 
       <button
@@ -146,11 +177,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="space-y-0.5 mb-3">
         {[
           { href: `${base}/`, label: 'Dashboard' },
-          { href: `${base}/calendar`, label: 'Calendar' },
-          { href: `${base}/recap`, label: 'Recap' },
-          { href: `${base}/passport`, label: '🌍 Passport' },
-          { href: `${base}/watchlist`, label: 'Watchlist' },
-        ].map(link => (
+           { href: `${base}/calendar`, label: 'Calendar' },
+           { href: `${base}/recap`, label: 'Recap' },
+           { href: `${base}/passport`, label: '🌍 Passport' },
+           { href: `${base}/watchlist`, label: 'Watchlist' },
+           { href: `${base}/reminders`, label: 'Reminders' },
+         ].map(link => (
           <a
             href={link.href}
             class:list={[
@@ -205,8 +237,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </nav>
 
 <script>
+  import { readFavorites, readReminders } from '../lib/client-utils';
+
   function updateNavFavCount() {
-    const favs: string[] = (JSON.parse(localStorage.getItem('rt-favs') ?? '[]') as unknown[]).filter(Boolean) as string[];
+    const favs = readFavorites();
 
     // Desktop badge
     const badge = document.getElementById('nav-fav-count');
@@ -224,6 +258,30 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     if (mobileBadge) {
       if (favs.length > 0) {
         mobileBadge.textContent = String(favs.length);
+        mobileBadge.classList.remove('hidden');
+      } else {
+        mobileBadge.classList.add('hidden');
+      }
+    }
+  }
+
+  function updateNavReminderCount() {
+    const reminders = readReminders();
+
+    const badge = document.getElementById('nav-reminder-count');
+    if (badge) {
+      if (reminders.length > 0) {
+        badge.textContent = String(reminders.length);
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    const mobileBadge = document.getElementById('nav-reminder-count-mobile');
+    if (mobileBadge) {
+      if (reminders.length > 0) {
+        mobileBadge.textContent = String(reminders.length);
         mobileBadge.classList.remove('hidden');
       } else {
         mobileBadge.classList.add('hidden');
@@ -273,11 +331,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   updateNavFavCount();
+  updateNavReminderCount();
   initMobileNav();
 
   window.addEventListener('rt-favs-changed', updateNavFavCount);
+  window.addEventListener('rt-reminders-changed', updateNavReminderCount);
   document.addEventListener('astro:after-swap', () => {
     updateNavFavCount();
+    updateNavReminderCount();
     initMobileNav();
   });
 </script>

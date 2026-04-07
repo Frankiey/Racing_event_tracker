@@ -84,6 +84,16 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
         <span class="text-sm font-medium text-zinc-400 tabular-nums">
           {formatDateRange(event.dateStart, event.dateEnd)}
         </span>
+        <button
+          class="reminder-btn p-1 rounded-full hover:bg-zinc-800 transition-colors text-zinc-500 hover:text-zinc-200"
+          data-reminder="false"
+          data-reminder-event-id={event.id}
+          aria-label="Set reminders"
+        >
+          <svg class="w-4 h-4 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+          </svg>
+        </button>
         {/* Favorite button */}
         <button
           class="fav-btn ml-1 p-1 rounded-full hover:bg-zinc-800 transition-colors"
@@ -152,8 +162,8 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
 </article>
 
 <script>
-  import { formatLocalValue, getLiveSession, readFavorites, toggleFavorite } from '../lib/client-utils';
-  import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
+  import { formatLocalValue, getLiveSession, readFavorites, readReminders, toggleFavorite } from '../lib/client-utils';
+  import { bindEventOpeners, getRegisteredEvent, openEventWithOptions, RT_EVENTS_REGISTERED } from '../lib/event-client';
 
   function initCards() {
     // ── Local time conversion ──
@@ -204,6 +214,31 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
     if (window.__rt.favsHandler) window.removeEventListener('rt-favs-changed', window.__rt.favsHandler);
     window.__rt.favsHandler = onFavsChanged;
     window.addEventListener('rt-favs-changed', onFavsChanged);
+
+    // ── Reminders ──
+    function syncReminderButtons() {
+      const reminders = new Set(readReminders().map(reminder => reminder.eventId));
+      document.querySelectorAll<HTMLButtonElement>('.reminder-btn').forEach(btn => {
+        const id = btn.dataset.reminderEventId;
+        if (id) btn.dataset.reminder = reminders.has(id) ? 'true' : 'false';
+      });
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.reminder-btn').forEach(btn => {
+      const id = btn.dataset.reminderEventId;
+      if (!id) return;
+      if (btn.dataset.reminderBound === 'true') return;
+      btn.dataset.reminderBound = 'true';
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openEventWithOptions(id, { focusReminders: true });
+      });
+    });
+
+    syncReminderButtons();
+    if (window.__rt.remindersHandler) window.removeEventListener('rt-reminders-changed', window.__rt.remindersHandler);
+    window.__rt.remindersHandler = syncReminderButtons;
+    window.addEventListener('rt-reminders-changed', syncReminderButtons);
 
     bindEventOpeners();
   }
