@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-06T05:02:05Z",
+  "generated": "2026-04-07T04:53:33Z",
   "season": 2026,
   "eventCount": 240,
   "sources": [
@@ -169,7 +169,7 @@
         }
       ],
       "dateStart": "2026-02-01",
-      "dateEnd": "2026-02-01"
+      "dateEnd": "2026-02-04"
     },
     {
       "id": "nascar-2026-r02",
@@ -378,7 +378,7 @@
           "startTimeUTC": "2026-02-22T15:00:00Z"
         }
       ],
-      "dateStart": "2026-02-22",
+      "dateStart": "2026-02-21",
       "dateEnd": "2026-02-22"
     },
     {
@@ -506,7 +506,7 @@
           "startTimeUTC": "2026-03-01T15:30:00Z"
         }
       ],
-      "dateStart": "2026-03-01",
+      "dateStart": "2026-02-28",
       "dateEnd": "2026-03-01"
     },
     {
@@ -552,7 +552,6 @@
         "lat": -37.8497,
         "lng": 144.968
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -576,7 +575,8 @@
         }
       ],
       "dateStart": "2026-03-06",
-      "dateEnd": "2026-03-08"
+      "dateEnd": "2026-03-08",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png"
     },
     {
       "id": "f3-2026-r01",
@@ -715,7 +715,6 @@
         "lat": 31.3389,
         "lng": 121.22
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/China%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -739,7 +738,8 @@
         }
       ],
       "dateStart": "2026-03-13",
-      "dateEnd": "2026-03-15"
+      "dateEnd": "2026-03-15",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/China%20carbon.png"
     },
     {
       "id": "nls-2026-r01",
@@ -1054,7 +1054,6 @@
         "lat": 34.8431,
         "lng": 136.541
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Japan%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -1078,7 +1077,8 @@
         }
       ],
       "dateStart": "2026-03-27",
-      "dateEnd": "2026-03-29"
+      "dateEnd": "2026-03-29",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Japan%20carbon.png"
     },
     {
       "id": "wsbk-2026-r02",
@@ -1251,7 +1251,7 @@
           "startTimeUTC": "2026-03-29T15:30:00Z"
         }
       ],
-      "dateStart": "2026-03-29",
+      "dateStart": "2026-03-28",
       "dateEnd": "2026-03-29"
     },
     {
@@ -1921,7 +1921,6 @@
         "lat": 25.9581,
         "lng": -80.2389
       },
-      "circuitImage": null,
       "sessions": [
         {
           "type": "FP1",
@@ -1945,7 +1944,8 @@
         }
       ],
       "dateStart": "2026-05-01",
-      "dateEnd": "2026-05-03"
+      "dateEnd": "2026-05-03",
+      "circuitImage": null
     },
     {
       "id": "imsa-2026-r04",
@@ -2652,7 +2652,6 @@
         "lat": 45.5,
         "lng": -73.5228
       },
-      "circuitImage": null,
       "sessions": [
         {
           "type": "FP1",
@@ -2676,7 +2675,8 @@
         }
       ],
       "dateStart": "2026-05-22",
-      "dateEnd": "2026-05-24"
+      "dateEnd": "2026-05-24",
+      "circuitImage": null
     },
     {
       "id": "nascar-2026-r17",
@@ -3155,7 +3155,6 @@
         "lat": 43.7347,
         "lng": 7.42056
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Monaco%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -3179,7 +3178,8 @@
         }
       ],
       "dateStart": "2026-06-05",
-      "dateEnd": "2026-06-07"
+      "dateEnd": "2026-06-07",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Monaco%20carbon.png"
     },
     {
       "id": "moto3-2026-r08",
@@ -3466,7 +3466,6 @@
         "lat": 41.57,
         "lng": 2.26111
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Barcelona-Catalunya%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -3490,7 +3489,8 @@
         }
       ],
       "dateStart": "2026-06-12",
-      "dateEnd": "2026-06-14"
+      "dateEnd": "2026-06-14",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Barcelona-Catalunya%20carbon.png"
     },
     {
       "id": "nascar-2026-r20",
@@ -3943,7 +3943,6 @@
         "lat": 47.2197,
         "lng": 14.7647
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Austria%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -3967,7 +3966,8 @@
         }
       ],
       "dateStart": "2026-06-26",
-      "dateEnd": "2026-06-28"
+      "dateEnd": "2026-06-28",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Austria%20carbon.png"
     },
     {
       "id": "moto3-2026-r10",
@@ -4204,7 +4204,6 @@
         "lat": 52.0786,
         "lng": -1.01694
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Great Britain%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -4228,7 +4227,8 @@
         }
       ],
       "dateStart": "2026-07-03",
-      "dateEnd": "2026-07-05"
+      "dateEnd": "2026-07-05",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Great Britain%20carbon.png"
     },
     {
       "id": "indycar-2026-r11",
@@ -4677,7 +4677,6 @@
         "lat": 50.4372,
         "lng": 5.97139
       },
-      "circuitImage": null,
       "sessions": [
         {
           "type": "FP1",
@@ -4701,7 +4700,8 @@
         }
       ],
       "dateStart": "2026-07-17",
-      "dateEnd": "2026-07-19"
+      "dateEnd": "2026-07-19",
+      "circuitImage": null
     },
     {
       "id": "indycar-2026-r12",
@@ -4916,7 +4916,6 @@
         "lat": 47.5789,
         "lng": 19.2486
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Hungary%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -4940,7 +4939,8 @@
         }
       ],
       "dateStart": "2026-07-24",
-      "dateEnd": "2026-07-26"
+      "dateEnd": "2026-07-26",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Hungary%20carbon.png"
     },
     {
       "id": "fe-2026-r15",
@@ -5429,7 +5429,6 @@
         "lat": 52.3888,
         "lng": 4.54092
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Netherlands%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -5453,7 +5452,8 @@
         }
       ],
       "dateStart": "2026-08-21",
-      "dateEnd": "2026-08-23"
+      "dateEnd": "2026-08-23",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Netherlands%20carbon.png"
     },
     {
       "id": "imsa-2026-r09",
@@ -5856,7 +5856,6 @@
         "lat": 45.6156,
         "lng": 9.28111
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Italy%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -5880,7 +5879,8 @@
         }
       ],
       "dateStart": "2026-09-04",
-      "dateEnd": "2026-09-06"
+      "dateEnd": "2026-09-06",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Italy%20carbon.png"
     },
     {
       "id": "wec-2026-r05",
@@ -6153,7 +6153,6 @@
         "lat": 40.46528,
         "lng": -3.61528
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Spain%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -6177,7 +6176,8 @@
         }
       ],
       "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
+      "dateEnd": "2026-09-13",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Spain%20carbon.png"
     },
     {
       "id": "moto3-2026-r14",
@@ -6454,7 +6454,6 @@
         "lat": 40.3725,
         "lng": 49.8533
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Azerbaijan%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -6478,7 +6477,8 @@
         }
       ],
       "dateStart": "2026-09-24",
-      "dateEnd": "2026-09-26"
+      "dateEnd": "2026-09-26",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Azerbaijan%20carbon.png"
     },
     {
       "id": "wec-2026-r06",
@@ -6875,7 +6875,6 @@
         "lat": 1.2914,
         "lng": 103.864
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Singapore%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -6899,7 +6898,8 @@
         }
       ],
       "dateStart": "2026-10-09",
-      "dateEnd": "2026-10-11"
+      "dateEnd": "2026-10-11",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Singapore%20carbon.png"
     },
     {
       "id": "wsbk-2026-r11",
@@ -7274,7 +7274,6 @@
         "lat": 30.1328,
         "lng": -97.6411
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/United States%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -7298,7 +7297,8 @@
         }
       ],
       "dateStart": "2026-10-23",
-      "dateEnd": "2026-10-25"
+      "dateEnd": "2026-10-25",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/United States%20carbon.png"
     },
     {
       "id": "moto3-2026-r18",
@@ -7441,7 +7441,6 @@
         "lat": 19.4042,
         "lng": -99.0907
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Mexico%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -7465,7 +7464,8 @@
         }
       ],
       "dateStart": "2026-10-30",
-      "dateEnd": "2026-11-01"
+      "dateEnd": "2026-11-01",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Mexico%20carbon.png"
     },
     {
       "id": "moto3-2026-r19",
@@ -7596,7 +7596,6 @@
         "lat": -23.7036,
         "lng": -46.6997
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Brazil%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -7620,7 +7619,8 @@
         }
       ],
       "dateStart": "2026-11-06",
-      "dateEnd": "2026-11-08"
+      "dateEnd": "2026-11-08",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Brazil%20carbon.png"
     },
     {
       "id": "moto3-2026-r20",
@@ -7763,7 +7763,6 @@
         "lat": 36.1147,
         "lng": -115.173
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Las Vegas%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -7787,7 +7786,8 @@
         }
       ],
       "dateStart": "2026-11-20",
-      "dateEnd": "2026-11-22"
+      "dateEnd": "2026-11-22",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Las Vegas%20carbon.png"
     },
     {
       "id": "superformula-2026-e07",
@@ -7972,7 +7972,6 @@
         "lat": 25.49,
         "lng": 51.4542
       },
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Qatar%20carbon.png",
       "sessions": [
         {
           "type": "FP1",
@@ -7996,7 +7995,8 @@
         }
       ],
       "dateStart": "2026-11-27",
-      "dateEnd": "2026-11-29"
+      "dateEnd": "2026-11-29",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Qatar%20carbon.png"
     },
     {
       "id": "moto3-2026-r22",
@@ -8097,7 +8097,6 @@
         "lat": 24.4672,
         "lng": 54.6031
       },
-      "circuitImage": null,
       "sessions": [
         {
           "type": "FP1",
@@ -8121,7 +8120,8 @@
         }
       ],
       "dateStart": "2026-12-04",
-      "dateEnd": "2026-12-06"
+      "dateEnd": "2026-12-06",
+      "circuitImage": null
     }
   ]
 }
