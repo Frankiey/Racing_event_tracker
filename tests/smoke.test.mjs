@@ -103,7 +103,7 @@ const remindersHtml = readFileSync(resolve(DIST, 'reminders/index.html'), 'utf-8
 
 assert(remindersHtml.includes('My Reminders'), 'Contains reminders page title');
 assert(remindersHtml.includes('id="reminders-empty"'), 'Contains reminders empty state');
-assert(remindersHtml.includes('bell next to any heart icon'), 'Explains how to find reminder controls');
+assert(remindersHtml.includes('bell icon next to favorites'), 'Explains how to find reminder controls');
 
 // --- Step 6: Status page checks ---
 console.log('\n📺 Status (/status)...');
