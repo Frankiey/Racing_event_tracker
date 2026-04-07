@@ -45,7 +45,7 @@ export function getRegisteredEvent(eventId: string): RaceEvent | undefined {
 export function openEventById(eventId: string): boolean {
   const event = getRegisteredEvent(eventId);
   if (!event) return false;
-  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: { event } satisfies OpenEventDetail }));
+  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: event }));
   return true;
 }
 
