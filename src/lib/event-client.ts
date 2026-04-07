@@ -82,6 +82,7 @@ function getEventRegistry(): Map<string, RaceEvent> {
   return ns.eventRegistry;
 }
 
+/** Accept both the legacy RaceEvent detail and the newer detail object with modal options. */
 export function normalizeOpenEventDetail(detail: RaceEvent | OpenEventDetail): OpenEventDetail {
   if ('event' in detail) return detail;
   return { event: detail };
