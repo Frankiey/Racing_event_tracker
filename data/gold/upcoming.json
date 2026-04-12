@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-11T04:43:55Z",
+  "generated": "2026-04-12T05:02:28Z",
   "season": 2026,
-  "eventCount": 199,
+  "eventCount": 198,
   "sources": [
     "dtm",
     "f1",
@@ -70,32 +70,6 @@
       ],
       "dateStart": "2026-04-10",
       "dateEnd": "2026-04-12"
-    },
-    {
-      "id": "nls-2026-r03",
-      "seriesId": "nls",
-      "eventName": "NLS 3",
-      "round": 3,
-      "circuit": {
-        "name": "Nürburgring Nordschleife",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-11T05:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-11T07:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-11",
-      "dateEnd": "2026-04-11"
     },
     {
       "id": "nascar-2026-r11",
