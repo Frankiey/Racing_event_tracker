@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-12T05:02:28Z",
+  "generated": "2026-04-13T05:09:12Z",
   "season": 2026,
-  "eventCount": 198,
+  "eventCount": 196,
   "sources": [
     "dtm",
     "f1",
@@ -21,82 +21,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "motogp-2026-r20",
-      "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF QATAR",
-      "round": 20,
-      "circuit": {
-        "name": "Lusail International Circuit",
-        "city": "Doha",
-        "country": "QAT",
-        "countryCode": "QA",
-        "lat": 25.49,
-        "lng": 51.4542
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-04-10T15:45:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-10T20:00:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-04-11T15:00:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-04-11T15:40:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-04-11T16:05:00Z"
-        },
-        {
-          "type": "Sprint",
-          "startTimeUTC": "2026-04-11T20:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-04-12T15:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-12T20:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-10",
-      "dateEnd": "2026-04-12"
-    },
-    {
-      "id": "nascar-2026-r11",
-      "seriesId": "nascar",
-      "eventName": "Food City 500",
-      "round": 11,
-      "circuit": {
-        "name": "Bristol Motor Speedway",
-        "city": "Bristol",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.5158,
-        "lng": -82.2569
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "1900-01-01T00:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-12T15:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-12",
-      "dateEnd": "2026-04-12"
-    },
     {
       "id": "wsbk-2026-r03",
       "seriesId": "wsbk",
