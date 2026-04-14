@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { EventFeed } from '../lib/types';
+
+import calendarData from '../../data/gold/calendar.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const allEvents = (calendarData as EventFeed).events;
+const allEventsJson = JSON.stringify(allEvents).replace(/</g, '\\u003c');
+---
+
+<Layout title="RaceTrack — My Reminders" currentPath={`${base}/reminders`}>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-black tracking-tight mb-1">My Reminders</h1>
+        <p class="text-zinc-400 text-sm">Manage saved browser notifications for specific sessions.</p>
+      </div>
+    </div>
+
+    <div id="reminders-empty" class="text-center py-20 text-zinc-600">
+      <div class="text-5xl mb-4">🔔</div>
+      <p class="font-semibold mb-1 text-zinc-500">No reminders yet</p>
+      <p class="text-sm">Use the bell icon next to favorites to open session reminders.</p>
+    </div>
+
+    <div id="reminders-list" class="space-y-3 hidden" />
+
+    <script id="all-events-data" type="application/json" set:text={allEventsJson} />
+  </main>
+</Layout>
+
+<script>
+  import { openEventWithOptions, registerEvents } from '../lib/event-client';
+  import { SESSION_LABELS } from '../lib/sessions';
+  import { getClientSeriesMeta } from '../lib/series-client';
+  import { formatLocalDatetime, readReminders, removeReminder, safeJsonParse } from '../lib/client-utils';
+  import type { RaceEvent } from '../lib/types';
+
+  const allEvents: RaceEvent[] = safeJsonParse(
+    document.getElementById('all-events-data')!.textContent!, []
+  );
+
+  registerEvents(allEvents);
+
+  function render() {
+    const reminders = readReminders().sort((a, b) => a.sessionStartUTC.localeCompare(b.sessionStartUTC));
+    const list = document.getElementById('reminders-list')!;
+    const empty = document.getElementById('reminders-empty')!;
+
+    if (reminders.length === 0) {
+      list.classList.add('hidden');
+      empty.classList.remove('hidden');
+      return;
+    }
+
+    empty.classList.add('hidden');
+    list.classList.remove('hidden');
+
+    list.innerHTML = reminders.map((reminder) => {
+      const event = allEvents.find((item) => item.id === reminder.eventId);
+      const meta = getClientSeriesMeta(reminder.seriesId);
+      const label = SESSION_LABELS[reminder.sessionType] ?? reminder.sessionType;
+      return `
+        <article class="rounded-xl border border-zinc-800 bg-zinc-900/70 p-4">
+          <div class="flex items-start justify-between gap-4">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap mb-2">
+                <span class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5" style="background-color:${meta.color}">${meta.shortLabel}</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400">${reminder.offset} min reminder</span>
+              </div>
+              <h2 class="text-base font-bold text-zinc-100">${reminder.eventName}</h2>
+              <p class="text-sm text-zinc-400 mt-1">${label} · ${formatLocalDatetime(reminder.sessionStartUTC)}</p>
+              <p class="text-xs text-zinc-500 mt-1">Notification at ${formatLocalDatetime(reminder.fireAt)}</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                class="open-reminder text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-md border border-zinc-700 text-zinc-300 hover:border-zinc-500 transition-colors"
+                data-event-id="${reminder.eventId}"
+              >
+                Open
+              </button>
+              <button
+                class="remove-reminder text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-md border border-amber-500/30 text-amber-300 hover:border-amber-400 transition-colors"
+                data-reminder-id="${reminder.id}"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+          ${event?.circuit?.name ? `<p class="text-xs text-zinc-600 mt-3">${event.circuit.name}</p>` : ''}
+        </article>
+      `;
+    }).join('');
+
+    list.querySelectorAll<HTMLButtonElement>('.remove-reminder').forEach((button) => {
+      button.addEventListener('click', () => {
+        removeReminder(button.dataset.reminderId!);
+      });
+    });
+
+    list.querySelectorAll<HTMLButtonElement>('.open-reminder').forEach((button) => {
+      button.addEventListener('click', () => {
+        openEventWithOptions(button.dataset.eventId!, { focusReminders: true });
+      });
+    });
+  }
+
+  render();
+  window.addEventListener('rt-reminders-changed', render);
+</script>

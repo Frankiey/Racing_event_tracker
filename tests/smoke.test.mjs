@@ -53,6 +53,7 @@ console.log('\n📁 Checking output files...');
 const expectedFiles = [
   'index.html',
   'calendar/index.html',
+  'reminders/index.html',
   'status/index.html',
 ];
 
@@ -69,6 +70,7 @@ assert(indexHtml.includes('RaceTrack'), 'Contains site title');
 assert(indexHtml.includes('data-countdown'), 'Contains countdown timer');
 assert(indexHtml.includes('series-filter'), 'Contains series filter');
 assert(indexHtml.includes('data-series='), 'Contains event cards with data-series');
+assert(indexHtml.includes('aria-label="Set reminders"'), 'Contains reminder bell buttons on event cards');
 
 // Check multiple series are represented (not just one)
 const dashboardSeries = new Set(indexHtml.match(/data-series="(\w+)"/g)?.map(m => m.match(/"(\w+)"/)[1]) ?? []);
@@ -95,7 +97,15 @@ assert(calendarSeriesSet.size >= 6, `Calendar shows ${calendarSeriesSet.size} se
 
 assert(calendarHtml.includes('Mon') && calendarHtml.includes('Sun'), 'Has weekday headers');
 
-// --- Step 5: Status page checks ---
+// --- Step 5: Reminders checks ---
+console.log('\n🔔 Reminders (/reminders)...');
+const remindersHtml = readFileSync(resolve(DIST, 'reminders/index.html'), 'utf-8');
+
+assert(remindersHtml.includes('My Reminders'), 'Contains reminders page title');
+assert(remindersHtml.includes('id="reminders-empty"'), 'Contains reminders empty state');
+assert(remindersHtml.includes('bell icon next to favorites'), 'Explains how to find reminder controls');
+
+// --- Step 6: Status page checks ---
 console.log('\n📺 Status (/status)...');
 const statusHtml = readFileSync(resolve(DIST, 'status/index.html'), 'utf-8');
 
@@ -104,7 +114,7 @@ assert(statusHtml.includes('id="kiosk-countdown"'), 'Contains kiosk countdown');
 assert(statusHtml.includes('Coming Up'), 'Contains upcoming events section');
 assert(!statusHtml.includes('series-filter'), 'Does NOT contain series filter (kiosk mode)');
 
-// --- Step 6: No broken placeholder times visible ---
+// --- Step 7: No broken placeholder times visible ---
 console.log('\n⏰ Data integrity...');
 assert(!indexHtml.includes('datetime="1900-01-01'), 'Dashboard has no rendered 1900 placeholder times');
 assert(!statusHtml.includes('data-session-start="1900-01-01'), 'Status has no rendered 1900 placeholder times');

@@ -60,6 +60,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
           </button>
+          <button
+            id="modal-reminder-btn"
+            class="modal-reminder-btn p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+            data-reminder="false"
+            aria-label="Manage reminders"
+          >
+            <svg class="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          </button>
           <!-- Close -->
           <button
             id="modal-close"
@@ -109,20 +119,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <!-- Session alert -->
     <div id="modal-alert" class="px-6 pb-2 hidden">
-      <div class="flex items-center gap-2 p-3 rounded-lg bg-zinc-900/80 border border-zinc-800/60">
-        <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-        </svg>
-        <span class="text-xs text-zinc-400 flex-1">Remind me before the race</span>
-        <select id="alert-offset" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-0.5 text-zinc-300 cursor-pointer">
-          <option value="15">15 min</option>
-          <option value="30" selected>30 min</option>
-          <option value="60">1 hour</option>
-        </select>
-        <button id="alert-set-btn" class="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded bg-zinc-700 hover:bg-zinc-600 text-zinc-200 transition-colors">
-          Set
-        </button>
+      <div class="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Session reminders</h3>
+          <p class="text-xs text-zinc-500 mt-1">Pick any upcoming session and receive browser notifications.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <select id="alert-offset" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-1 text-zinc-300 cursor-pointer">
+            <option value="5">5 min</option>
+            <option value="15">15 min</option>
+            <option value="30" selected>30 min</option>
+            <option value="60">1 hour</option>
+          </select>
+          <a href={`${base}/reminders`} class="text-[10px] font-bold uppercase tracking-wide text-amber-400 hover:text-amber-300 transition-colors">
+            Manage all
+          </a>
+        </div>
       </div>
+      <div id="alert-list" class="space-y-1.5" />
       <div id="alert-status" class="text-[10px] text-zinc-600 mt-1 px-1 hidden" />
     </div>
 
@@ -161,12 +175,27 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </div>
 
 <script>
-  import { getRegisteredEvent } from '../lib/event-client';
+  import { getRegisteredEvent, normalizeOpenEventDetail } from '../lib/event-client';
   import { SESSION_LABELS, isRaceType } from '../lib/sessions';
   import { getClientSeriesMeta } from '../lib/series-client';
-  import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
+  import {
+    buildReminderId,
+    countryFlag,
+    escapeHtml,
+    formatLocalDatetime,
+    isPlaceholderTime,
+    isPastEvent,
+    readFavorites,
+    readReminders,
+    removeReminder,
+    saveReminders,
+    setReminder,
+    sleepVerdict,
+    toggleFavorite,
+    isSessionLive,
+  } from '../lib/client-utils';
   import { exportEventIcs } from '../lib/ics';
-  import type { RaceEvent } from '../lib/types';
+  import type { RaceEvent, RaceSession } from '../lib/types';
 
   interface BroadcastChannel {
     channel: string;
@@ -220,10 +249,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   const modal = document.getElementById('event-modal')!;
 
-  function openModal(event: RaceEvent) {
+  function openModal(event: RaceEvent, focusReminders = false) {
     const meta = getClientSeriesMeta(event.seriesId);
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const isFav = readFavorites().includes(event.id);
+    const hasReminders = readReminders().some((reminder) => reminder.eventId === event.id);
     const isPast = isPastEvent(event.dateEnd);
 
     // Color bar
@@ -301,17 +331,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       favBtn.dataset.fav = nowFav ? 'true' : 'false';
     };
 
+    const reminderBtn = document.getElementById('modal-reminder-btn') as HTMLButtonElement;
+    reminderBtn.dataset.reminder = hasReminders ? 'true' : 'false';
+    reminderBtn.onclick = () => {
+      document.getElementById('modal-alert')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
     // Reset to list view when opening modal
     showListView();
 
     // Render broadcast info
     renderBroadcast(event.seriesId);
 
+    currentEvent = event;
+
     // Update alert UI
     updateAlertUI();
-
-    // Render timeline (lazy — only when switched to)
-    currentEvent = event;
 
     // Deeplink: reflect this event in URL
     const dlUrl = new URL(window.location.href);
@@ -320,6 +355,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    if (focusReminders) {
+      requestAnimationFrame(() => {
+        document.getElementById('modal-alert')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   }
 
   function closeModal() {
@@ -368,7 +408,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   document.getElementById('modal-close')!.addEventListener('click', closeModal);
   document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
-  window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
+  window.addEventListener('rt-open-event', (e: Event) => {
+    const detail = normalizeOpenEventDetail((e as CustomEvent).detail);
+    openModal(detail.event, detail.focusReminders);
+  });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   document.addEventListener('astro:before-swap', () => { document.body.style.overflow = ''; });
 
@@ -384,92 +427,141 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   // ── Session alerts ──
   const alertSection = document.getElementById('modal-alert')!;
+  const alertList = document.getElementById('alert-list')!;
   const alertOffsetSelect = document.getElementById('alert-offset') as HTMLSelectElement;
-  const alertSetBtn = document.getElementById('alert-set-btn')!;
   const alertStatus = document.getElementById('alert-status')!;
-  const RT_ALERTS_KEY = 'rt-alerts';
+  const reminderBtn = document.getElementById('modal-reminder-btn') as HTMLButtonElement;
 
-  interface StoredAlert { eventId: string; eventName: string; sessionType: string; fireAt: string; offset: number; }
-
-  function getAlerts(): StoredAlert[] {
-    try { return JSON.parse(localStorage.getItem(RT_ALERTS_KEY) ?? '[]'); } catch { return []; }
+  function syncModalReminderState() {
+    if (!currentEvent) {
+      reminderBtn.dataset.reminder = 'false';
+      return;
+    }
+    reminderBtn.dataset.reminder = readReminders().some((reminder) => reminder.eventId === currentEvent?.id) ? 'true' : 'false';
   }
-  function saveAlerts(alerts: StoredAlert[]) {
-    localStorage.setItem(RT_ALERTS_KEY, JSON.stringify(alerts));
+
+  function getUpcomingSessions(event: RaceEvent): RaceSession[] {
+    return event.sessions.filter((session) => (
+      !isPlaceholderTime(session.startTimeUTC)
+      && new Date(session.startTimeUTC) > new Date()
+    ));
+  }
+
+  async function ensureNotificationPermission(): Promise<boolean> {
+    if (!('Notification' in window)) {
+      alertStatus.textContent = 'Notifications are not supported in this browser';
+      alertStatus.classList.remove('hidden');
+      return false;
+    }
+    if (Notification.permission === 'default') {
+      await Notification.requestPermission();
+    }
+    if (Notification.permission !== 'granted') {
+      alertStatus.textContent = 'Notifications blocked — enable them in browser settings';
+      alertStatus.classList.remove('hidden');
+      return false;
+    }
+    return true;
+  }
+
+  async function toggleSessionReminder(sessionType: string, sessionStartUTC: string) {
+    if (!currentEvent) return;
+    const reminderId = buildReminderId(currentEvent.id, sessionType, sessionStartUTC);
+    const existing = readReminders().find((reminder) => reminder.id === reminderId);
+    if (existing) {
+      removeReminder(reminderId);
+      alertStatus.classList.add('hidden');
+      updateAlertUI();
+      return;
+    }
+    if (!await ensureNotificationPermission()) return;
+    const offset = parseInt(alertOffsetSelect.value, 10);
+    const fireAt = new Date(new Date(sessionStartUTC).getTime() - offset * 60000).toISOString();
+    setReminder({
+      id: reminderId,
+      eventId: currentEvent.id,
+      eventName: currentEvent.eventName,
+      seriesId: currentEvent.seriesId,
+      sessionType,
+      sessionStartUTC,
+      fireAt,
+      offset,
+    });
+    alertStatus.textContent = `${SESSION_LABELS[sessionType] ?? sessionType} reminder saved`;
+    alertStatus.classList.remove('hidden');
+    updateAlertUI();
   }
 
   function updateAlertUI() {
     if (!currentEvent) { alertSection.classList.add('hidden'); return; }
-    const eventId = currentEvent.id;
-    // Find race session
-    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
-    if (!race || new Date(race.startTimeUTC) < new Date()) {
+    alertStatus.classList.add('hidden');
+    const upcomingSessions = getUpcomingSessions(currentEvent);
+    if (upcomingSessions.length === 0) {
       alertSection.classList.add('hidden');
+      syncModalReminderState();
       return;
     }
     alertSection.classList.remove('hidden');
-    // Check if alert already set
-    const alerts = getAlerts();
-    const existing = alerts.find((a: StoredAlert) => a.eventId === eventId);
-    if (existing) {
-      alertStatus.textContent = `Reminder set: ${existing.offset} min before race`;
-      alertStatus.classList.remove('hidden');
-      alertSetBtn.textContent = 'Remove';
-    } else {
-      alertStatus.classList.add('hidden');
-      alertSetBtn.textContent = 'Set';
-    }
+    const reminders = readReminders();
+    alertList.innerHTML = upcomingSessions.map((session) => {
+      const reminderId = buildReminderId(currentEvent!.id, session.type, session.startTimeUTC);
+      const existing = reminders.find((reminder) => reminder.id === reminderId);
+      const label = SESSION_LABELS[session.type] ?? session.type;
+      const safeLabel = escapeHtml(label);
+      const safeSessionType = escapeHtml(session.type);
+      const safeSessionStart = escapeHtml(session.startTimeUTC);
+      const variant = isRaceType(session.type) ? 'text-zinc-100' : 'text-zinc-300';
+      return `
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-zinc-800/60 bg-zinc-900/60">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-semibold ${variant}">${safeLabel}</div>
+            <div class="text-xs text-zinc-500">${escapeHtml(formatLocalDatetime(session.startTimeUTC))}</div>
+          </div>
+          ${existing ? `<span class="text-[10px] font-bold uppercase tracking-wide text-amber-400">${existing.offset} min</span>` : ''}
+          <button
+            class="session-reminder-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border ${existing ? 'border-amber-500/40 text-amber-300 bg-amber-500/10' : 'border-zinc-700 text-zinc-300 hover:border-zinc-500'} transition-colors"
+            data-reminder="${existing ? 'true' : 'false'}"
+            data-session-type="${safeSessionType}"
+            data-session-start="${safeSessionStart}"
+            aria-label="${existing ? 'Remove' : 'Set'} reminder for ${safeLabel}"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            <span class="text-[10px] font-bold uppercase tracking-wide">${existing ? 'Remove' : 'Set'}</span>
+          </button>
+        </div>
+      `;
+    }).join('');
+    alertList.querySelectorAll<HTMLButtonElement>('.session-reminder-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleSessionReminder(button.dataset.sessionType!, button.dataset.sessionStart!);
+      });
+    });
+    syncModalReminderState();
   }
-
-  alertSetBtn.addEventListener('click', async () => {
-    if (!currentEvent) return;
-    const eventId = currentEvent.id;
-    const alerts = getAlerts();
-    const existing = alerts.findIndex((a: StoredAlert) => a.eventId === eventId);
-    if (existing >= 0) {
-      alerts.splice(existing, 1);
-      saveAlerts(alerts);
-      updateAlertUI();
-      return;
-    }
-    // Request notification permission
-    if ('Notification' in window && Notification.permission === 'default') {
-      await Notification.requestPermission();
-    }
-    if ('Notification' in window && Notification.permission !== 'granted') {
-      alertStatus.textContent = 'Notifications blocked — enable in browser settings';
-      alertStatus.classList.remove('hidden');
-      return;
-    }
-    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
-    if (!race) return;
-    const offset = parseInt(alertOffsetSelect.value);
-    const fireAt = new Date(new Date(race.startTimeUTC).getTime() - offset * 60000).toISOString();
-    alerts.push({ eventId, eventName: currentEvent.eventName, sessionType: race.type, fireAt, offset });
-    saveAlerts(alerts);
-    updateAlertUI();
-  });
 
   // Check and fire pending alerts every 30s
   function checkAlerts() {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
-    const alerts = getAlerts();
+    const alerts = readReminders();
     const now = Date.now();
-    const remaining: StoredAlert[] = [];
+    const remaining = [];
     for (const alert of alerts) {
       if (new Date(alert.fireAt).getTime() <= now) {
         new Notification(`🏁 ${alert.eventName}`, {
-          body: `${alert.sessionType} starts in ${alert.offset} minutes!`,
+          body: `${SESSION_LABELS[alert.sessionType] ?? alert.sessionType} starts in ${alert.offset} minutes!`,
           icon: (document.getElementById('event-modal')?.dataset.base ?? '') + '/icon-192.png',
         });
       } else {
         remaining.push(alert);
       }
     }
-    if (remaining.length !== alerts.length) saveAlerts(remaining);
+    if (remaining.length !== alerts.length) saveReminders(remaining);
   }
   setInterval(checkAlerts, 30000);
   checkAlerts();
+  window.addEventListener('rt-reminders-changed', updateAlertUI);
 
   shareBtn.addEventListener('click', async () => {
     if (!currentEvent) return;

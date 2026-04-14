@@ -50,6 +50,18 @@ body::before {
 .fav-btn svg, .modal-fav-btn svg { transition: fill 150ms, stroke 150ms, transform 150ms; }
 .fav-btn[data-fav="true"] svg, .modal-fav-btn[data-fav="true"] svg { fill: #f43f5e; stroke: #f43f5e; transform: scale(1.15); }
 
+/* ── Reminder bell ── */
+.reminder-btn svg, .modal-reminder-btn svg, .session-reminder-btn svg {
+  transition: stroke 150ms, fill 150ms, transform 150ms;
+}
+.reminder-btn[data-reminder="true"] svg,
+.modal-reminder-btn[data-reminder="true"] svg,
+.session-reminder-btn[data-reminder="true"] svg {
+  stroke: #f59e0b;
+  fill: rgba(245, 158, 11, 0.15);
+  transform: scale(1.1);
+}
+
 /* ── Live session indicator ── */
 @keyframes live-pulse {
   0%, 100% { opacity: 1; }

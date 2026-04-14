@@ -2,6 +2,11 @@ import type { RaceEvent } from './types';
 
 export const RT_EVENTS_REGISTERED = 'rt-events-registered';
 
+export interface OpenEventDetail {
+  event: RaceEvent;
+  focusReminders?: boolean;
+}
+
 /** Unified RaceTrack namespace on window — avoids polluting global scope. */
 declare global {
   interface Window {
@@ -10,6 +15,7 @@ declare global {
       eventRegistry?: Map<string, RaceEvent>;
       renderTimeline?: (event: RaceEvent) => void;
       favsHandler?: EventListener;
+      remindersHandler?: EventListener;
     };
   }
 }
@@ -43,6 +49,13 @@ export function openEventById(eventId: string): boolean {
   return true;
 }
 
+export function openEventWithOptions(eventId: string, options: Omit<OpenEventDetail, 'event'> = {}): boolean {
+  const event = getRegisteredEvent(eventId);
+  if (!event) return false;
+  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: { event, ...options } satisfies OpenEventDetail }));
+  return true;
+}
+
 export function bindEventOpeners(root: ParentNode = document): void {
   root.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
     if (card.dataset.eventBound === 'true') return;
@@ -67,4 +80,10 @@ function getEventRegistry(): Map<string, RaceEvent> {
   const ns = rt();
   if (!ns.eventRegistry) ns.eventRegistry = new Map();
   return ns.eventRegistry;
+}
+
+/** Accept both the legacy RaceEvent detail and the newer detail object with modal options. */
+export function normalizeOpenEventDetail(detail: RaceEvent | OpenEventDetail): OpenEventDetail {
+  if ('event' in detail) return detail;
+  return { event: detail };
 }
