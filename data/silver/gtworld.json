@@ -1,0 +1,498 @@
+[
+  {
+    "id": "gtworld-2026-r01",
+    "seriesId": "gtworld",
+    "eventName": "GT World Circuit Paul Ricard",
+    "round": 1,
+    "circuit": {
+      "name": "Circuit Paul Ricard",
+      "city": "Le Castellet",
+      "country": "France",
+      "countryCode": "FR",
+      "lat": 43.2506,
+      "lng": 5.7917
+    },
+    "sessions": [
+      {
+        "type": "Bronze Test",
+        "startTimeUTC": "2026-04-10T07:00:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-04-10T12:25:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-04-10T17:25:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-04-11T10:05:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-04-11T10:30:00Z"
+      },
+      {
+        "type": "Qualifying 3",
+        "startTimeUTC": "2026-04-11T10:55:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-04-11T16:00:00Z"
+      }
+    ],
+    "dateStart": "2026-04-10",
+    "dateEnd": "2026-04-12"
+  },
+  {
+    "id": "gtworld-2026-r02",
+    "seriesId": "gtworld",
+    "eventName": "GT World Brands Hatch",
+    "round": 2,
+    "circuit": {
+      "name": "Brands Hatch",
+      "city": "West Kingsdown",
+      "country": "Great Britain",
+      "countryCode": "GB",
+      "lat": 51.3569,
+      "lng": 0.2631
+    },
+    "sessions": [
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-05-02T08:35:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-05-02T11:00:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-05-02T15:40:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-05-02T16:05:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-05-03T10:15:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-05-03T14:45:00Z"
+      }
+    ],
+    "dateStart": "2026-05-02",
+    "dateEnd": "2026-05-03"
+  },
+  {
+    "id": "gtworld-2026-r03",
+    "seriesId": "gtworld",
+    "eventName": "GT World Monza",
+    "round": 3,
+    "circuit": {
+      "name": "Autodromo Nazionale Monza",
+      "city": "Monza",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 45.6156,
+      "lng": 9.2811
+    },
+    "sessions": [
+      {
+        "type": "Bronze Test",
+        "startTimeUTC": "2026-05-28T13:45:00Z"
+      },
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-05-29T14:50:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-05-30T07:00:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-05-30T12:25:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-05-31T07:50:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-05-31T13:30:00Z"
+      }
+    ],
+    "dateStart": "2026-05-29",
+    "dateEnd": "2026-05-31"
+  },
+  {
+    "id": "gtworld-2026-r04",
+    "seriesId": "gtworld",
+    "eventName": "GT World 24 Hours of Spa",
+    "round": 4,
+    "circuit": {
+      "name": "Circuit de Spa-Francorchamps",
+      "city": "Stavelot",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "lat": 50.4372,
+      "lng": 5.9714
+    },
+    "sessions": [
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-06-23T12:40:00Z"
+      },
+      {
+        "type": "Bronze Test",
+        "startTimeUTC": "2026-06-23T14:55:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-06-25T08:10:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-06-25T14:10:00Z"
+      },
+      {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-06-25T17:45:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-06-25T18:07:00Z"
+      },
+      {
+        "type": "Qualifying 3",
+        "startTimeUTC": "2026-06-25T18:29:00Z"
+      },
+      {
+        "type": "Qualifying 4",
+        "startTimeUTC": "2026-06-25T18:51:00Z"
+      },
+      {
+        "type": "Combined Qualifying",
+        "startTimeUTC": "2026-06-25T19:06:00Z"
+      },
+      {
+        "type": "Night Practice",
+        "startTimeUTC": "2026-06-25T19:35:00Z"
+      },
+      {
+        "type": "Superpole",
+        "startTimeUTC": "2026-06-26T13:25:00Z"
+      },
+      {
+        "type": "Warm Up",
+        "startTimeUTC": "2026-06-26T17:20:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-06-27T14:30:00Z"
+      }
+    ],
+    "dateStart": "2026-06-24",
+    "dateEnd": "2026-06-28"
+  },
+  {
+    "id": "gtworld-2026-r05",
+    "seriesId": "gtworld",
+    "eventName": "GT World Misano",
+    "round": 5,
+    "circuit": {
+      "name": "Misano World Circuit Marco Simoncelli",
+      "city": "Misano Adriatico",
+      "country": "Italy",
+      "countryCode": "IT",
+      "lat": 43.9628,
+      "lng": 12.6836
+    },
+    "sessions": [
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-07-16T08:45:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-07-17T11:40:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-07-17T18:00:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group A",
+        "startTimeUTC": "2026-07-18T09:40:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group B",
+        "startTimeUTC": "2026-07-18T09:55:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-07-18T16:55:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group A",
+        "startTimeUTC": "2026-07-19T08:20:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group B",
+        "startTimeUTC": "2026-07-19T08:35:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-07-19T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-07-17",
+    "dateEnd": "2026-07-19"
+  },
+  {
+    "id": "gtworld-2026-r06",
+    "seriesId": "gtworld",
+    "eventName": "GT World Magny-Cours",
+    "round": 6,
+    "circuit": {
+      "name": "Circuit de Nevers Magny-Cours",
+      "city": "Magny-Cours",
+      "country": "France",
+      "countryCode": "FR",
+      "lat": 46.8642,
+      "lng": 3.1636
+    },
+    "sessions": [
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-07-30T11:45:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-07-31T11:30:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-07-31T18:40:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group A",
+        "startTimeUTC": "2026-08-01T12:55:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group B",
+        "startTimeUTC": "2026-08-01T13:10:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-08-01T19:15:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group A",
+        "startTimeUTC": "2026-08-02T08:55:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group B",
+        "startTimeUTC": "2026-08-02T09:05:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-08-02T13:30:00Z"
+      }
+    ],
+    "dateStart": "2026-07-31",
+    "dateEnd": "2026-08-02"
+  },
+  {
+    "id": "gtworld-2026-r07",
+    "seriesId": "gtworld",
+    "eventName": "GT World Nürburgring",
+    "round": 7,
+    "circuit": {
+      "name": "Nürburgring GP-Strecke",
+      "city": "Nürburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "lat": 50.3356,
+      "lng": 6.9475
+    },
+    "sessions": [
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-08-28T09:45:00Z"
+      },
+      {
+        "type": "Bronze Test",
+        "startTimeUTC": "2026-08-28T15:40:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-08-29T09:20:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-08-29T14:45:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-30T08:20:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-08-30T13:00:00Z"
+      }
+    ],
+    "dateStart": "2026-08-28",
+    "dateEnd": "2026-08-30"
+  },
+  {
+    "id": "gtworld-2026-r08",
+    "seriesId": "gtworld",
+    "eventName": "GT World Zandvoort",
+    "round": 8,
+    "circuit": {
+      "name": "Circuit Zandvoort",
+      "city": "Zandvoort",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "lat": 52.3888,
+      "lng": 4.5409
+    },
+    "sessions": [
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-09-18T07:00:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-09-18T11:50:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group A",
+        "startTimeUTC": "2026-09-19T07:50:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group B",
+        "startTimeUTC": "2026-09-19T08:05:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-09-19T12:45:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group A",
+        "startTimeUTC": "2026-09-20T08:35:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group B",
+        "startTimeUTC": "2026-09-20T08:50:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-09-20T12:15:00Z"
+      }
+    ],
+    "dateStart": "2026-09-18",
+    "dateEnd": "2026-09-20"
+  },
+  {
+    "id": "gtworld-2026-r09",
+    "seriesId": "gtworld",
+    "eventName": "GT World Barcelona",
+    "round": 9,
+    "circuit": {
+      "name": "Circuit de Barcelona-Catalunya",
+      "city": "Montmeló",
+      "country": "Spain",
+      "countryCode": "ES",
+      "lat": 41.57,
+      "lng": 2.2611
+    },
+    "sessions": [
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-10-01T11:30:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-10-02T07:00:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-10-02T11:55:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group A",
+        "startTimeUTC": "2026-10-03T07:45:00Z"
+      },
+      {
+        "type": "Qualifying 1 - Group B",
+        "startTimeUTC": "2026-10-03T08:00:00Z"
+      },
+      {
+        "type": "Race 1",
+        "startTimeUTC": "2026-10-03T12:00:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group A",
+        "startTimeUTC": "2026-10-04T09:10:00Z"
+      },
+      {
+        "type": "Qualifying 2 - Group B",
+        "startTimeUTC": "2026-10-04T09:25:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-10-04T14:00:00Z"
+      }
+    ],
+    "dateStart": "2026-10-02",
+    "dateEnd": "2026-10-04"
+  },
+  {
+    "id": "gtworld-2026-r10",
+    "seriesId": "gtworld",
+    "eventName": "GT World Portimão",
+    "round": 10,
+    "circuit": {
+      "name": "Autódromo Internacional do Algarve",
+      "city": "Portimão",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "lat": 37.2294,
+      "lng": -8.6267
+    },
+    "sessions": [
+      {
+        "type": "Bronze Test",
+        "startTimeUTC": "2026-10-15T14:50:00Z"
+      },
+      {
+        "type": "Official Paid Test Sessions 1",
+        "startTimeUTC": "2026-10-16T15:00:00Z"
+      },
+      {
+        "type": "Free Practice 1",
+        "startTimeUTC": "2026-10-17T07:30:00Z"
+      },
+      {
+        "type": "Free Practice 2",
+        "startTimeUTC": "2026-10-17T11:40:00Z"
+      },
+      {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-18T09:40:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-10-18T14:15:00Z"
+      }
+    ],
+    "dateStart": "2026-10-16",
+    "dateEnd": "2026-10-18"
+  }
+]

@@ -46,7 +46,7 @@ API_SERIES = {
 
 # Series loaded from seed files (no API)
 SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3",
-               "imsa", "dtm", "nls", "superformula", "iomtt"]
+               "imsa", "dtm", "gtworld", "nls", "superformula", "iomtt"]
 
 
 def validate_series_configuration() -> None:

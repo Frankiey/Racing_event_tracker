@@ -3,7 +3,7 @@
 **Series ID:** `nls`
 **Status:** `integrated`
 **Integration path:** seed
-**Last reviewed:** 2026-03-28
+**Last reviewed:** 2026-04-12
 
 ---
 
@@ -40,8 +40,9 @@ The Nürburgring-Langstrecken-Serie (formerly VLN) — an endurance racing serie
 
 **Trade-offs accepted:**
 - Manual update each season
-- Session times for regular NLS rounds are approximate (races start ~09:00–10:00 CEST)
+- Standard NLS round timings are approximated from the published 2026 weekend pattern used by broadcasters and event coverage: qualifying at 08:30 local and race start at 12:00 local
 - The 24h race has precise session times from the official event timetable
+- The 24h Qualifiers weekend currently mirrors the same 08:30 / 12:00 local timing pattern until the official 2026 qualifiers timetable is published
 
 ---
 
@@ -51,7 +52,7 @@ The Nürburgring-Langstrecken-Serie (formerly VLN) — an endurance racing serie
 |-------|-------|
 | `countryCode` | Always `DE` |
 | `circuit.name` | `"Nürburgring Nordschleife"` for regular rounds; `"Nürburgring Gesamtstrecke"` for the 24h |
-| `sessions` | Regular rounds: Practice + Race. 24h: Qualifying 1/2/3, Top Quali 1/2/3, Warm Up, Race. |
+| `sessions` | Regular rounds: Qualifying + Race. 24h Qualifiers: Qualifying 1/2 + Race 1/2. 24h: Qualifying 1/2/3, Top Quali 1/2/3, Warm Up, Race. |
 
 ---
 

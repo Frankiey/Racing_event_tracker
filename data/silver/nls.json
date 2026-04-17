@@ -14,12 +14,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-03-14T06:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-14T07:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-03-14T08:00:00Z"
+        "startTimeUTC": "2026-03-14T11:00:00Z"
       }
     ],
     "dateStart": "2026-03-14",
@@ -40,12 +40,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-03-21T06:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-03-21T07:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-03-21T08:00:00Z"
+        "startTimeUTC": "2026-03-21T11:00:00Z"
       }
     ],
     "dateStart": "2026-03-21",
@@ -66,12 +66,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-04-11T05:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-04-11T06:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-04-11T07:00:00Z"
+        "startTimeUTC": "2026-04-11T10:00:00Z"
       }
     ],
     "dateStart": "2026-04-11",
@@ -92,16 +92,20 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-04-18T05:00:00Z"
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-04-18T06:30:00Z"
       },
       {
-        "type": "Qualifying Race",
-        "startTimeUTC": "2026-04-18T07:00:00Z"
+        "type": "Race 1",
+        "startTimeUTC": "2026-04-18T10:00:00Z"
       },
       {
-        "type": "Warm Up",
-        "startTimeUTC": "2026-04-19T05:00:00Z"
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-04-19T06:30:00Z"
+      },
+      {
+        "type": "Race 2",
+        "startTimeUTC": "2026-04-19T10:00:00Z"
       }
     ],
     "dateStart": "2026-04-18",
@@ -172,12 +176,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-06-20T05:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-20T06:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-06-20T07:00:00Z"
+        "startTimeUTC": "2026-06-20T10:00:00Z"
       }
     ],
     "dateStart": "2026-06-20",
@@ -198,12 +202,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-08-01T05:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-08-01T06:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-08-01T07:00:00Z"
+        "startTimeUTC": "2026-08-01T10:00:00Z"
       }
     ],
     "dateStart": "2026-08-01",
@@ -224,12 +228,20 @@
     },
     "sessions": [
       {
+        "type": "Qualifying 1",
+        "startTimeUTC": "2026-09-12T06:30:00Z"
+      },
+      {
         "type": "Race 1",
-        "startTimeUTC": "2026-09-12T07:00:00Z"
+        "startTimeUTC": "2026-09-12T10:00:00Z"
+      },
+      {
+        "type": "Qualifying 2",
+        "startTimeUTC": "2026-09-13T06:30:00Z"
       },
       {
         "type": "Race 2",
-        "startTimeUTC": "2026-09-13T07:00:00Z"
+        "startTimeUTC": "2026-09-13T10:00:00Z"
       }
     ],
     "dateStart": "2026-09-12",
@@ -250,12 +262,12 @@
     },
     "sessions": [
       {
-        "type": "Practice",
-        "startTimeUTC": "2026-10-10T05:00:00Z"
+        "type": "Qualifying",
+        "startTimeUTC": "2026-10-10T06:30:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-10-10T07:00:00Z"
+        "startTimeUTC": "2026-10-10T10:00:00Z"
       }
     ],
     "dateStart": "2026-10-10",

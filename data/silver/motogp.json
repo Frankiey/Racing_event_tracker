@@ -965,39 +965,39 @@
     "sessions": [
       {
         "type": "FP1",
-        "startTimeUTC": "2026-04-10T15:45:00Z"
+        "startTimeUTC": "2026-11-06T15:45:00Z"
       },
       {
         "type": "Practice",
-        "startTimeUTC": "2026-04-10T20:00:00Z"
+        "startTimeUTC": "2026-11-06T20:00:00Z"
       },
       {
         "type": "FP2",
-        "startTimeUTC": "2026-04-11T15:00:00Z"
+        "startTimeUTC": "2026-11-07T15:00:00Z"
       },
       {
         "type": "Q1",
-        "startTimeUTC": "2026-04-11T15:40:00Z"
+        "startTimeUTC": "2026-11-07T15:40:00Z"
       },
       {
         "type": "Q2",
-        "startTimeUTC": "2026-04-11T16:05:00Z"
+        "startTimeUTC": "2026-11-07T16:05:00Z"
       },
       {
         "type": "Sprint",
-        "startTimeUTC": "2026-04-11T20:00:00Z"
+        "startTimeUTC": "2026-11-07T20:00:00Z"
       },
       {
         "type": "Warm Up",
-        "startTimeUTC": "2026-04-12T15:40:00Z"
+        "startTimeUTC": "2026-11-08T15:40:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-04-12T20:00:00Z"
+        "startTimeUTC": "2026-11-08T20:00:00Z"
       }
     ],
-    "dateStart": "2026-04-10",
-    "dateEnd": "2026-04-12"
+    "dateStart": "2026-11-06",
+    "dateEnd": "2026-11-08"
   },
   {
     "id": "motogp-2026-r21",

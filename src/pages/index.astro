@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import EventCard from '../components/EventCard.astro';
 import SeriesFilter from '../components/SeriesFilter.astro';
-import { getRaceSession, isPlaceholderTime, countryFlag } from '../lib/time';
+import { getRaceSession, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
 import { SERIES_LIST, getSeriesMeta } from '../lib/series';
 import type { EventFeed, RaceEvent } from '../lib/types';
 
@@ -31,13 +31,13 @@ const seasonStats = new Map<string, { total: number; done: number }>();
 for (const e of allEvents) {
   const s = seasonStats.get(e.seriesId) ?? { total: 0, done: 0 };
   s.total++;
-  if (new Date(e.dateEnd + 'T23:59:59Z') < now) s.done++;
+  if (isPastEvent(e.dateEnd, e.sessions)) s.done++;
   seasonStats.set(e.seriesId, s);
 }
 
 // Aggregate season stats
 const totalEvents = allEvents.length;
-const totalDone = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') < now).length;
+const totalDone = allEvents.filter(e => isPastEvent(e.dateEnd, e.sessions)).length;
 const totalUpcoming = totalEvents - totalDone;
 const totalSeries = seasonStats.size;
 const allCountries = new Set(allEvents.map(e => e.circuit.countryCode).filter(Boolean));
@@ -103,7 +103,7 @@ function getWeekLabel(event: RaceEvent): string {
   const raceSession = getRaceSession(event.sessions);
   const isPast = (raceSession && !isPlaceholderTime(raceSession.startTimeUTC))
     ? new Date(raceSession.startTimeUTC) < now
-    : new Date(event.dateEnd + 'T23:59:59Z') < now;
+    : isPastEvent(event.dateEnd, event.sessions);
   if (isPast) return '__recent__';
 
   const eventDate = new Date(event.dateStart + 'T12:00:00Z');

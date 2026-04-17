@@ -74,8 +74,27 @@ export function formatDateRange(dateStart: string, dateEnd: string): string {
 
 // ── Date predicates ─────────────────────────────────────────────────────────
 
-/** True if the event's end date is in the past. */
-export function isPastEvent(dateEnd: string): boolean {
+export interface SessionLike {
+  type: string;
+  startTimeUTC: string;
+}
+
+/** Latest real session start time for an event, if one exists. */
+export function getEventLastSessionTime(sessions: SessionLike[] = []): Date | null {
+  const validTimes = sessions
+    .map(session => session.startTimeUTC)
+    .filter(utc => !isPlaceholderTime(utc))
+    .map(utc => new Date(utc))
+    .filter(date => !Number.isNaN(date.getTime()));
+
+  if (validTimes.length === 0) return null;
+  return new Date(Math.max(...validTimes.map(date => date.getTime())));
+}
+
+/** True if an event has no remaining real sessions. */
+export function isPastEvent(dateEnd: string, sessions: SessionLike[] = []): boolean {
+  const lastSession = getEventLastSessionTime(sessions);
+  if (lastSession) return lastSession < new Date();
   return new Date(dateEnd + 'T23:59:59Z') < new Date();
 }
 

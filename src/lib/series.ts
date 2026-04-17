@@ -26,10 +26,11 @@ export const SERIES: Record<string, SeriesMeta> = {
   wec:          { id: 'wec',          label: 'WEC',             shortLabel: 'WEC',    color: '#0ea5e9', order: 10, category: '4-wheel' },
   imsa:         { id: 'imsa',         label: 'IMSA',            shortLabel: 'IMSA',   color: '#16a34a', order: 11, category: '4-wheel' },
   dtm:          { id: 'dtm',          label: 'DTM',             shortLabel: 'DTM',    color: '#dc2626', order: 12, category: '4-wheel' },
-  nls:          { id: 'nls',          label: 'NLS',             shortLabel: 'NLS',    color: '#65a30d', order: 13, category: '4-wheel' },
-  wsbk:         { id: 'wsbk',         label: 'World Superbike', shortLabel: 'WSBK',   color: '#9333ea', order: 14, category: '2-wheel' },
-  superformula: { id: 'superformula', label: 'Super Formula',   shortLabel: 'SF',     color: '#f59e0b', order: 15, category: '4-wheel' },
-  iomtt:        { id: 'iomtt',        label: 'Isle of Man TT',  shortLabel: 'IOM TT', color: '#92400e', order: 16, category: '2-wheel' },
+  gtworld:      { id: 'gtworld',      label: 'GT World Europe', shortLabel: 'GT World', color: '#ff6b00', order: 13, category: '4-wheel' },
+  nls:          { id: 'nls',          label: 'NLS',             shortLabel: 'NLS',    color: '#65a30d', order: 14, category: '4-wheel' },
+  wsbk:         { id: 'wsbk',         label: 'World Superbike', shortLabel: 'WSBK',   color: '#9333ea', order: 15, category: '2-wheel' },
+  superformula: { id: 'superformula', label: 'Super Formula',   shortLabel: 'SF',     color: '#f59e0b', order: 16, category: '4-wheel' },
+  iomtt:        { id: 'iomtt',        label: 'Isle of Man TT',  shortLabel: 'IOM TT', color: '#92400e', order: 17, category: '2-wheel' },
 };
 
 export const SERIES_LIST = Object.values(SERIES).sort((a, b) => a.order - b.order);

@@ -224,7 +224,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const meta = getClientSeriesMeta(event.seriesId);
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const isFav = readFavorites().includes(event.id);
-    const isPast = isPastEvent(event.dateEnd);
+    const isPast = isPastEvent(event.dateEnd, event.sessions);
 
     // Color bar
     (document.getElementById('modal-color-bar') as HTMLElement).style.background = meta.color;

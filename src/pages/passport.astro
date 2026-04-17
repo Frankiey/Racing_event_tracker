@@ -4,6 +4,8 @@ import { SERIES_LIST } from '../lib/series';
 import type { EventFeed } from '../lib/types';
 import calendarData from '../../data/gold/calendar.json';
 
+import { isPastEvent } from '../lib/time';
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const allEvents = (calendarData as EventFeed).events;
 const now = new Date();
@@ -15,7 +17,7 @@ for (const event of allEvents) {
   const c = event.circuit;
   if (c.lat == null || c.lng == null) continue;
   if (!seriesEvents[event.seriesId]) seriesEvents[event.seriesId] = [];
-  const isPast = new Date(event.dateEnd + 'T23:59:59Z') < now;
+  const isPast = isPastEvent(event.dateEnd, event.sessions);
   seriesEvents[event.seriesId].push({
     id: event.id,
     name: event.eventName,

@@ -29,7 +29,7 @@ interface Props {
 const { event, highlight = false } = Astro.props;
 const meta = getSeriesMeta(event.seriesId);
 const validSessions = event.sessions.filter(s => !isPlaceholderTime(s.startTimeUTC));
-const past = isPastEvent(event.dateEnd);
+const past = isPastEvent(event.dateEnd, event.sessions);
 const flag = countryFlag(event.circuit.countryCode);
 
 function abbr(type: string) { return SESSION_ABBR[type] ?? type; }

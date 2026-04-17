@@ -542,7 +542,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
         const sessions = sessionsOnDay(ev, dateStr);
         const f = countryFlag(ev.circuit?.countryCode ?? '');
         const isRaceDay = ev.dateEnd === dateStr;
-        const past = isPastEvent(ev.dateEnd);
+        const past = isPastEvent(ev.dateEnd, ev.sessions ?? []);
         const isFirstDay = ev.dateStart === dateStr;
 
         const sessHtml = sessions.map((s: any) => {

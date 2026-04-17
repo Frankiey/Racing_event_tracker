@@ -43,7 +43,7 @@ External API  →  data/bronze/  →  data/silver/  →  data/gold/
 3. **Gold build** merges all silver files into `calendar.json` and `upcoming.json`
 4. **Validation** checks seed, silver, and gold JSON during normal pipeline runs
 
-### Path B — Seed series (F2, F3, Formula E, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT)
+### Path B — Seed series (F2, F3, Formula E, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, GT World Europe, NLS, Super Formula, IOMTT)
 
 ```
 data/seed/<series>.json  →  data/silver/  →  data/gold/
@@ -82,7 +82,7 @@ data/seed/<series>.json  →  data/silver/  →  data/gold/
 ### Seed Layer (`data/seed/`)
 - Manually curated JSON for series that have no usable public API
 - Files must match the silver schema exactly (they are copied straight to silver)
-- Current seed series: `f2`, `f3`, `fe`, `indycar`, `wec`, `moto2`, `moto3`, `imsa`, `dtm`, `nls`, `superformula`, `iomtt`
+- Current seed series: `f2`, `f3`, `fe`, `indycar`, `wec`, `moto2`, `moto3`, `imsa`, `dtm`, `gtworld`, `nls`, `superformula`, `iomtt`
 - Update these files manually each season or when schedules change
 
 ---
@@ -201,6 +201,7 @@ Full research notes, API endpoints, and decision rationale for each series live 
 | Moto3 | `data/seed/moto3.json` | Manual (MotoGP − 4h offset) | Seed | [moto2-moto3.md](data-sources/moto2-moto3.md) |
 | IMSA | `data/seed/imsa.json` | Manual | Seed | [imsa.md](data-sources/imsa.md) |
 | DTM | `data/seed/dtm.json` | Manual | Seed | [dtm.md](data-sources/dtm.md) |
+| GT World Europe | `data/seed/gtworld.json` | Official site + manual normalization | Seed | [gtworld.md](data-sources/gtworld.md) |
 | NLS | `data/seed/nls.json` | Manual (official schedule) | Seed | [nls.md](data-sources/nls.md) |
 | Super Formula | `data/seed/superformula.json` | Manual | Seed | [superformula.md](data-sources/superformula.md) |
 | IOMTT | `data/seed/iomtt.json` | Manual | Seed | n/a |

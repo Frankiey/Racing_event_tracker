@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import EventCard from '../../components/EventCard.astro';
 import SeriesBadge from '../../components/SeriesBadge.astro';
 import { SERIES_LIST, getSeriesMeta } from '../../lib/series';
-import { getRaceSession, isPlaceholderTime } from '../../lib/time';
+import { getRaceSession, isPlaceholderTime, isPastEvent } from '../../lib/time';
 
 import type { EventFeed } from '../../lib/types';
 import calendarData from '../../../data/gold/calendar.json';
@@ -19,8 +19,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const allEvents = (calendarData as EventFeed).events.filter(e => e.seriesId === id);
 const now = new Date();
 
-const doneEvents = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') < now);
-const upcomingEvents = allEvents.filter(e => new Date(e.dateEnd + 'T23:59:59Z') >= now);
+const doneEvents = allEvents.filter(e => isPastEvent(e.dateEnd, e.sessions));
+const upcomingEvents = allEvents.filter(e => !isPastEvent(e.dateEnd, e.sessions));
 
 // Next race for this series
 const nextRace = upcomingEvents
@@ -115,7 +115,7 @@ const progressPct = allEvents.length > 0 ? Math.round((doneEvents.length / allEv
 
     <!-- Event list grouped by month -->
     {[...grouped.entries()].map(([month, monthEvents]) => {
-      const allPast = monthEvents.every(e => new Date(e.dateEnd + 'T23:59:59Z') < now);
+      const allPast = monthEvents.every(e => isPastEvent(e.dateEnd, e.sessions));
       return (
         <section class="mb-8">
           <h2 class:list={[

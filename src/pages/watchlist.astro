@@ -81,7 +81,7 @@ const allEvents = (calendarData as EventFeed).events;
 
     grid.innerHTML = favEvents.map(ev => {
       const meta = getClientSeriesMeta(ev.seriesId);
-      const past = isPastEvent(ev.dateEnd);
+      const past = isPastEvent(ev.dateEnd, ev.sessions ?? []);
       const f = countryFlag(ev.circuit?.countryCode ?? '');
       const validSessions = (ev.sessions ?? []).filter((s: RaceSession) => !isPlaceholderTime(s.startTimeUTC));
 

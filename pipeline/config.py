@@ -19,7 +19,7 @@ SEASON_YEAR = int(os.environ.get("SEASON_YEAR", datetime.now().year))
 SERIES_IDS = [
     "f1", "f2", "f3", "fe", "indycar", "nascar",
     "motogp", "moto2", "moto3", "wec",
-    "imsa", "dtm", "nls", "wsbk", "superformula", "iomtt",
+    "imsa", "dtm", "gtworld", "nls", "wsbk", "superformula", "iomtt",
 ]
 
 # API endpoints
