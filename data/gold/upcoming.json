@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-16T05:06:30Z",
+  "generated": "2026-04-17T05:05:31Z",
   "season": 2026,
   "eventCount": 196,
   "sources": [
@@ -402,7 +402,7 @@
     {
       "id": "nascar-2026-r13",
       "seriesId": "nascar",
-      "eventName": "NASCAR Cup Series Race at Talladega",
+      "eventName": "Jack Link's 500",
       "round": 13,
       "circuit": {
         "name": "Talladega Superspeedway",
