@@ -89,7 +89,7 @@ const seriesSet = new Set(recentEvents.map(e => e.seriesId));
             );
           })}
         </div>
-        <script id="recap-events-data" type="application/json" set:html={JSON.stringify(recentEvents)} />
+        <script id="recap-events-data" type="application/json" set:html={JSON.stringify(recentEvents)} is:inline />
       </>
     ) : (
       <div class="text-center py-20 text-zinc-600">

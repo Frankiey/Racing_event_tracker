@@ -33,8 +33,8 @@ const sidebarEvents = sorted
 ---
 
 <Layout title="RaceTrack — Kiosk" bare={true}>
-  <script id="kiosk-data" type="application/json" set:html={JSON.stringify(sorted)} />
-  <script id="kiosk-base" type="application/json" set:html={JSON.stringify(base)} />
+  <script id="kiosk-data" type="application/json" set:html={JSON.stringify(sorted)} is:inline />
+  <script id="kiosk-base" type="application/json" set:html={JSON.stringify(base)} is:inline />
 
   <!-- Scanline overlay -->
   <div class="kiosk-scanlines fixed inset-0 z-0 pointer-events-none" />

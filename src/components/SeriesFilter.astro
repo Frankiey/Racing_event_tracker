@@ -69,13 +69,6 @@ const twoWheel  = SERIES_LIST.filter(s => s.category === '2-wheel');
 <script>
   import { loadFilters, saveFilters, applySeriesVisibility } from '../lib/filters';
 
-  // IDs split by category — read from DOM to stay in sync with server render
-  function getCategoryIds(cat: '4-wheel' | '2-wheel'): string[] {
-    return [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')]
-      .filter(btn => btn.dataset.category === cat)
-      .map(btn => btn.dataset.filter!);
-  }
-
   function applyVisibility(active: Set<string>) {
     applySeriesVisibility(active);
     // After filtering, show/hide empty week groups

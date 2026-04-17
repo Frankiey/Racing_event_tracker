@@ -43,14 +43,14 @@ const allEvents = (calendarData as EventFeed).events;
     <div id="watchlist-grid" class="grid gap-3 hidden" />
 
     <!-- All events data for client-side rendering -->
-    <script id="all-events-data" type="application/json" set:html={JSON.stringify(allEvents)} />
+    <script id="all-events-data" type="application/json" set:html={JSON.stringify(allEvents)} is:inline />
   </main>
 </Layout>
 
 <script>
   import { bindEventOpeners, registerEvents } from '../lib/event-client';
   import { SESSION_ABBR, isRaceType } from '../lib/sessions';
-  import { getClientSeriesMeta } from '../lib/series-client';
+  import { getSeriesMeta } from '../lib/series';
   import { countryFlag, escapeHtml, formatLocalTime, formatDateRange, isPastEvent, isPlaceholderTime, readFavorites, toggleFavorite, safeJsonParse } from '../lib/client-utils';
   import { exportEventsIcs } from '../lib/ics';
   import type { RaceEvent, RaceSession } from '../lib/types';
@@ -80,7 +80,7 @@ const allEvents = (calendarData as EventFeed).events;
     grid.classList.remove('hidden');
 
     grid.innerHTML = favEvents.map(ev => {
-      const meta = getClientSeriesMeta(ev.seriesId);
+      const meta = getSeriesMeta(ev.seriesId);
       const past = isPastEvent(ev.dateEnd, ev.sessions ?? []);
       const f = countryFlag(ev.circuit?.countryCode ?? '');
       const validSessions = (ev.sessions ?? []).filter((s: RaceSession) => !isPlaceholderTime(s.startTimeUTC));

@@ -168,14 +168,15 @@ const todayKey = new Date().toISOString().slice(0, 10);
     <div id="cal-day-detail"></div>
 
     <!-- All event data for client-side rendering -->
-    <script id="all-events-data" type="application/json" set:html={JSON.stringify(events)} />
+    <script id="all-events-data" type="application/json" set:html={JSON.stringify(events)} is:inline />
   </main>
 </Layout>
 
 <script>
   import { openEventById, registerEvents } from '../lib/event-client';
   import { SESSION_ABBR, isRaceType } from '../lib/sessions';
-  import { SERIES_META, SERIES_ORDER, getClientSeriesMeta } from '../lib/series-client';
+  import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
+  import { getSeriesMeta } from '../lib/series';
   import { countryFlag, escapeHtml, formatLocalTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
   import { downloadShareCardForDates } from '../lib/share-card';
   import { loadFilters, saveFilters } from '../lib/filters';
@@ -384,13 +385,13 @@ const todayKey = new Date().toISOString().slice(0, 10);
     // ── Individual series chips ──
     const container = document.getElementById('cal-filter')!;
     container.innerHTML = seriesInData.map((id, i) => {
-      const m = getClientSeriesMeta(id);
+      const m = getSeriesMeta(id);
       const on = showAll || activeFilters.has(id);
       const style = on
         ? `background-color:${m.color}20;border-color:${m.color}60;color:${m.color}`
         : 'background-color:transparent;border-color:#3f3f46;color:#52525b';
       // Add visual divider before first 2-wheel series
-      const divider = (i > 0 && m.category === '2-wheel' && getClientSeriesMeta(seriesInData[i - 1]).category === '4-wheel')
+      const divider = (i > 0 && m.category === '2-wheel' && getSeriesMeta(seriesInData[i - 1]).category === '4-wheel')
         ? '<span class="h-4 w-px bg-zinc-700/60 self-center mx-0.5" aria-hidden="true"></span>'
         : '';
       return `${divider}<button class="cal-filter-btn text-xs font-bold px-2.5 py-1 rounded-full border transition-all duration-150 select-none" data-series="${id}" style="${style}">
@@ -460,7 +461,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       const overflow = uniqueEvs.length - MAX_BADGES;
 
       const badgesHtml = visible.map(e => {
-        const m = getClientSeriesMeta(e.seriesId);
+        const m = getSeriesMeta(e.seriesId);
         const isRaceDay = e.dateEnd === dateStr;
         const bg   = isRaceDay ? m.color + 'ee' : m.color + '28';
         const text = isRaceDay ? '#ffffff' : m.color;
@@ -538,7 +539,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       });
 
       const cardsHtml = dayEvs.map(ev => {
-        const m = getClientSeriesMeta(ev.seriesId);
+        const m = getSeriesMeta(ev.seriesId);
         const sessions = sessionsOnDay(ev, dateStr);
         const f = countryFlag(ev.circuit?.countryCode ?? '');
         const isRaceDay = ev.dateEnd === dateStr;

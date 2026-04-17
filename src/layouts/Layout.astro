@@ -6,12 +6,11 @@ import EventModal from '../components/EventModal.astro';
 interface Props {
   title: string;
   currentPath?: string;
-  fullWidth?: boolean;
   bare?: boolean;
 }
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Astro.props;
+const { title, currentPath = `${base}/`, bare = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -72,7 +71,7 @@ const { title, currentPath = `${base}/`, fullWidth = false, bare = false } = Ast
       </>
     )}
 
-    <script define:vars={{ base }}>
+    <script define:vars={{ base }} is:inline>
       // Service worker registration
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register(base + '/sw.js').catch(() => {});

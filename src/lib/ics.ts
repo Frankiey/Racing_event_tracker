@@ -4,7 +4,7 @@
  */
 
 import broadcasts from '../../data/gold/broadcasts.json';
-import { getClientSeriesMeta } from './series-client';
+import { getSeriesMeta } from './series';
 import { getSessionDurationMinutes } from './sessions';
 import type { RaceEvent, RaceSession } from './types';
 
@@ -58,7 +58,7 @@ function escapeIcs(str: string): string {
 }
 
 function getSeriesSummaryPrefix(seriesId: string): string {
-  const meta = getClientSeriesMeta(seriesId);
+  const meta = getSeriesMeta(seriesId);
 
   return `${SERIES_EMOJI[seriesId] ?? '🏁'} ${meta.shortLabel}`;
 }
@@ -75,7 +75,7 @@ function formatBroadcastLine(regionId: string, entries: BroadcastEntry[]): strin
 }
 
 function getDescription(event: IcsEvent, session: IcsSession): string {
-  const meta = getClientSeriesMeta(event.seriesId);
+  const meta = getSeriesMeta(event.seriesId);
   const lines = [
     `${meta.label}`,
     `Session: ${session.type}`,

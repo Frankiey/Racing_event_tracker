@@ -26,7 +26,7 @@ bd close <id>         # Complete work
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
+2. **Run quality gates** (if code changed) - `npm test`, `npm run validate:data`, `npm run build`
 3. **Update issue status** - Close finished work, update in-progress items
 
 4. **Verify** - All changes staged and verified
@@ -116,6 +116,9 @@ public/           — Static assets (logos, flags, images)
 - `npm run dev` — local Astro dev server with hot reload
 - `npm run build` — production build
 - `npm run preview` — preview production build locally
+- `npm test` — Astro check, frontend smoke tests, and Python pipeline unit tests
+- `npm run test:pipeline` — Python pipeline unit tests only
+- `npm run validate:data` — validate seed, silver, and gold JSON files
 - `npm run fetch-data` — run Python data pipeline (`uv run python -m pipeline`)
 - `uv run python -m pipeline --series f1,motogp` — fetch specific series only
 - `uv run python -m pipeline --bronze-only` — fetch raw data without transforms

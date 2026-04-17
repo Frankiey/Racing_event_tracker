@@ -77,6 +77,7 @@ data/seed/<series>.json  →  data/silver/  →  data/gold/
 - `calendar.json` — all events from all series, sorted chronologically
 - `upcoming.json` — future events only, sorted by next session time
 - Built by `pipeline/transforms/gold.py` from all silver files combined
+- Wrapped in a metadata envelope with `generated`, `season`, `eventCount`, `sources`, and `events`
 - Ready for direct consumption by Astro pages — no further processing needed
 
 ### Seed Layer (`data/seed/`)
@@ -163,7 +164,16 @@ CLI:
 uv run python -m pipeline                        # all series, all layers
 uv run python -m pipeline --series f1,motogp     # specific series only
 uv run python -m pipeline --bronze-only          # fetch only, skip transforms
+uv run python -m pipeline.validate               # validate seed/silver/gold JSON files
+uv run python -m unittest discover -s tests -p 'test_*.py'  # Python pipeline unit tests
 ```
+
+## Validation And Tests
+
+- `pipeline/validate.py` validates seed, silver, and gold JSON files, including gold-envelope `eventCount` consistency.
+- `tests/test_pipeline_quality.py` covers gold transform sorting/filtering behavior and validation edge cases.
+- `npm test` runs `astro check`, frontend smoke tests, and the Python pipeline unit suite.
+- `npm run validate:data` is the explicit data-quality gate for JSON files already committed in `data/`.
 
 ---
 

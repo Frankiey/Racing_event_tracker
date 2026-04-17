@@ -89,6 +89,11 @@ def validate_file(filepath: Path) -> list[str]:
         events = data["events"]
         if not isinstance(events, list):
             return [f"ERROR {name}: 'events' is not a list"]
+        event_count = data.get("eventCount")
+        if event_count is not None and event_count != len(events):
+            errors.append(
+                f"ERROR {name}: eventCount '{event_count}' does not match actual event total '{len(events)}'"
+            )
     elif isinstance(data, list):
         events = data
     else:

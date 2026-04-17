@@ -217,10 +217,10 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
           </div>
         </div>
       </div>
-      <script id="rt-hero-events" type="application/json" set:html={heroEventsJson}></script>
+      <script id="rt-hero-events" type="application/json" set:html={heroEventsJson} is:inline></script>
       <script>
         import { countryFlag, isPlaceholderTime } from '../lib/client-utils';
-        import { getClientSeriesMeta } from '../lib/series-client';
+        import { getSeriesMeta } from '../lib/series';
         import { getSessionDurationMinutes, RACE_TYPES } from '../lib/sessions';
 
         type HeroSession = { type: string; startTimeUTC: string; endTimeUTC?: string };
@@ -315,7 +315,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
         }
 
         function renderHero(card: HTMLElement, candidate: HeroCandidate) {
-          const meta = getClientSeriesMeta(candidate.event.seriesId);
+          const meta = getSeriesMeta(candidate.event.seriesId);
           const color = meta.color;
           const flag = countryFlag(candidate.event.circuit.countryCode);
 
@@ -600,7 +600,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
       </p>
     </div>
 
-    <script id="dashboard-events-data" type="application/json" set:html={JSON.stringify(allEvents)} />
+    <script id="dashboard-events-data" type="application/json" set:html={JSON.stringify(allEvents)} is:inline />
 
   </main>
 </Layout>
@@ -645,8 +645,6 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
   // passed since the last deploy. This runs on page load and tab-focus to
   // move finished events to Recent and correct stale headings.
   function refreshDashboard() {
-    const now = new Date();
-
     // 1. Move events whose race session has started to the Recent grid
     const recentGrid   = document.getElementById('recent-events');
     const recentSection = document.getElementById('recent-section');
@@ -657,7 +655,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
     mainWrappers.forEach(wrapper => {
       const raceUtc = wrapper.getAttribute('data-race-utc') ?? '';
       if (!raceUtc || isPlaceholderTime(raceUtc)) return;
-      if (new Date(raceUtc) < now) {
+      if (new Date(raceUtc) < new Date()) {
         recentGrid?.appendChild(wrapper);
         moved++;
       }

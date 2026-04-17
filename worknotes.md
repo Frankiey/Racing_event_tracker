@@ -1,7 +1,16 @@
 # Work Notes — RaceTrack
 
+## Quality Refresh (2026-04-17)
+- Refreshed the frontend/tooling stack to Astro 6.1.7 and `@types/node` 25.6.0.
+- Removed the unused `clean` dependency.
+- Cleared Astro check hints by removing deprecated client-series helper usage, dead locals, and implicit inline JSON script islands.
+- Added Python unit coverage for gold transforms and validation logic in `tests/test_pipeline_quality.py`.
+- Added `npm run test:pipeline` and `npm run validate:data` so frontend and data checks are runnable as first-class quality gates.
+- Tightened `pipeline.validate` to catch mismatched gold `eventCount` metadata and fixed the pipeline summary output to print real event totals.
+- Patched the Astro check YAML advisory chain with npm overrides so `npm audit` is clean without changing direct app behavior.
+
 ## Current Status
-**Frontend and data coverage expanded** (updated 2026-04-06). Build succeeds, core pages render from the gold layer, and the site now covers 16 tracked series/routes including passport, recap, watchlist, widgets, and kiosk mode.
+**Frontend, pipeline, and validation refreshed** (updated 2026-04-17). `npm test`, `npm run validate:data`, and `npm run build` all pass, and the site now covers 16 tracked series/routes including passport, recap, watchlist, widgets, and kiosk mode.
 
 ## What was built (v2 frontend — 2026-03-28)
 
@@ -53,6 +62,7 @@
 2. Improve mobile responsive design
 3. Implement kiosk auto-rotation between upcoming races on `/status`
 4. Add standings data per series
+5. Revisit TypeScript 6 / Vite 8 once the Astro check stack supports them cleanly
 
 ## Decisions Made
 - Astro over plain HTML — gives us components, routing, and static build for free

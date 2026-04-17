@@ -13,7 +13,7 @@ bd close <id>         # Complete work
 
 **Session close protocol** — before finishing a session:
 1. File issues for remaining work (`bd create`)
-2. Run quality gates (`npm run build`)
+2. Run quality gates (`npm test`, `npm run validate:data`, `npm run build`)
 3. Close finished issues (`bd close <id>`)
 ---
 

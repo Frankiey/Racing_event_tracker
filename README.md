@@ -5,7 +5,7 @@
 ## [🏎 frankiey.github.io/Racing_event_tracker](https://frankiey.github.io/Racing_event_tracker)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
-[![Built with Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Built with Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Data refresh](https://img.shields.io/badge/Data-nightly_refresh-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Frankiey/Racing_event_tracker/actions)
@@ -108,6 +108,27 @@ uv run python -m pipeline --series f1,motogp
 uv run python -m pipeline --bronze-only
 ```
 
+Quality and validation commands:
+
+```bash
+# Frontend typecheck + smoke tests + Python pipeline unit tests
+npm test
+
+# Python pipeline unit tests only
+npm run test:pipeline
+
+# Validate seed/silver/gold JSON envelopes and event schema
+npm run validate:data
+
+# Production build
+npm run build
+```
+
+Current toolchain note:
+- Astro and `@types/node` are updated to the latest compatible releases used in this repo.
+- The transitive `yaml-language-server` / `yaml` advisory in the Astro check chain is patched via npm overrides, and `npm audit` is currently clean.
+- TypeScript 6 and Vite 8 are intentionally not adopted yet because the current `@astrojs/check` stack still peers against TypeScript `^5.0.0`.
+
 ---
 
 ## Project Structure
@@ -137,7 +158,7 @@ Full architecture: [docs/architecture.md](docs/architecture.md)
 
 Contributions are welcome — bug fixes, new series data, UI improvements, pipeline improvements. If you follow motorsport, you probably already know what's missing.
 
-**Before you start:** open an issue so we can align. For small fixes, just send a PR.
+**Before you start:** if you're working inside the repo, track work with `bd`; for external drive-by fixes, a PR is still fine.
 
 **Good first contributions:**
 - Fix or update seed data for a series you follow closely

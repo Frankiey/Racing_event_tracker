@@ -9,7 +9,7 @@ import broadcastData from '../../data/gold/broadcasts.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<script id="broadcast-data" type="application/json" set:html={JSON.stringify(broadcastData)} />
+<script id="broadcast-data" type="application/json" set:html={JSON.stringify(broadcastData)} is:inline />
 
 <!-- Overlay -->
 <div
@@ -163,7 +163,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <script>
   import { getRegisteredEvent } from '../lib/event-client';
   import { SESSION_LABELS, isRaceType } from '../lib/sessions';
-  import { getClientSeriesMeta } from '../lib/series-client';
+  import { getSeriesMeta } from '../lib/series';
   import { countryFlag, formatLocalDatetime, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
   import { exportEventIcs } from '../lib/ics';
   import type { RaceEvent } from '../lib/types';
@@ -221,7 +221,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const modal = document.getElementById('event-modal')!;
 
   function openModal(event: RaceEvent) {
-    const meta = getClientSeriesMeta(event.seriesId);
+    const meta = getSeriesMeta(event.seriesId);
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const isFav = readFavorites().includes(event.id);
     const isPast = isPastEvent(event.dateEnd, event.sessions);

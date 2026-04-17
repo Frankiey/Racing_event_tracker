@@ -1,5 +1,5 @@
 import { isPlaceholderTime } from './client-utils';
-import { getClientSeriesMeta } from './series-client';
+import { getSeriesMeta } from './series';
 import { SESSION_LABELS } from './sessions';
 import type { RaceEvent } from './types';
 
@@ -130,7 +130,7 @@ function buildShareCardData(options: ShareCardBuildOptions, now = new Date()): W
 
       if (matchingSessions.length === 0) return null;
 
-      const meta = getClientSeriesMeta(event.seriesId);
+      const meta = getSeriesMeta(event.seriesId);
 
       return {
         id: event.id,

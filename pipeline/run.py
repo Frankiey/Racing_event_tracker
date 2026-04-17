@@ -131,7 +131,9 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
     write_json(GOLD_DIR / "calendar.json", calendar)
     write_json(GOLD_DIR / "upcoming.json", upcoming)
 
-    print(f"\nDone! {len(calendar)} total events, {len(upcoming)} upcoming.")
+    print(
+        f"\nDone! {calendar['eventCount']} total events, {upcoming['eventCount']} upcoming."
+    )
 
     print("\n[VALIDATE] Checking seed, silver, and gold data...")
     validation_exit_code = run_validation()
