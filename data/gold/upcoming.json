@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-12T14:52:46Z",
+  "generated": "2026-04-18T04:51:46Z",
   "season": 2026,
   "eventCount": 200,
   "sources": [
@@ -22,32 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "nascar-2026-r11",
-      "seriesId": "nascar",
-      "eventName": "Food City 500",
-      "round": 11,
-      "circuit": {
-        "name": "Bristol Motor Speedway",
-        "city": "Bristol",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.5158,
-        "lng": -82.2569
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "1900-01-01T00:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-12T15:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-12",
-      "dateEnd": "2026-04-12"
-    },
     {
       "id": "wsbk-2026-r03",
       "seriesId": "wsbk",
@@ -7030,6 +7004,32 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-11-21T20:00:00Z"
+        }
+      ],
+      "dateStart": "2026-11-20",
+      "dateEnd": "2026-11-22"
+    },
+    {
+      "id": "moto2-2026-r21",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Portugal",
+      "round": 21,
+      "circuit": {
+        "name": "Autódromo Internacional do Algarve",
+        "city": "Portimao",
+        "country": "POR",
+        "countryCode": "PT",
+        "lat": 37.2294,
+        "lng": -8.6267
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-11-20T22:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-21T22:00:00Z"
         }
       ],
       "dateStart": "2026-11-20",
