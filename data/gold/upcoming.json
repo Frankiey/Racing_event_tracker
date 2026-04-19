@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-18T04:51:46Z",
+  "generated": "2026-04-19T05:05:56Z",
   "season": 2026,
   "eventCount": 200,
   "sources": [
@@ -105,36 +105,6 @@
       ],
       "dateStart": "2026-04-17",
       "dateEnd": "2026-04-19"
-    },
-    {
-      "id": "imsa-2026-r03",
-      "seriesId": "imsa",
-      "eventName": "Acura Grand Prix of Long Beach",
-      "round": 3,
-      "circuit": {
-        "name": "Streets of Long Beach",
-        "city": "Long Beach",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.7623,
-        "lng": -118.1876
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-17T19:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-04-18T17:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-18T21:05:00Z"
-        }
-      ],
-      "dateStart": "2026-04-17",
-      "dateEnd": "2026-04-18"
     },
     {
       "id": "indycar-2026-r05",
@@ -7034,6 +7004,40 @@
       ],
       "dateStart": "2026-11-20",
       "dateEnd": "2026-11-22"
+    },
+    {
+      "id": "f2-2026-r11",
+      "seriesId": "f2",
+      "eventName": "Qatar",
+      "round": 11,
+      "circuit": {
+        "name": "Lusail International Circuit",
+        "city": "Lusail",
+        "country": "Qatar",
+        "countryCode": "QA",
+        "lat": 25.49,
+        "lng": 51.4542
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-27T11:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-11-27T15:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-11-28T12:30:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-11-29T13:00:00Z"
+        }
+      ],
+      "dateStart": "2026-11-27",
+      "dateEnd": "2026-11-29"
     }
   ]
 }
