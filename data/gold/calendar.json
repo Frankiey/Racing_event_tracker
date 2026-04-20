@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-19T05:05:56Z",
+  "generated": "2026-04-20T05:08:49Z",
   "season": 2026,
   "eventCount": 250,
   "sources": [
@@ -1619,7 +1619,7 @@
       "sessions": [
         {
           "type": "Qualifying",
-          "startTimeUTC": "1900-01-01T00:00:00Z"
+          "startTimeUTC": "2026-04-19T13:00:00Z"
         },
         {
           "type": "Race",
