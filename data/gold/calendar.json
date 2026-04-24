@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-12T14:52:46Z",
+  "generated": "2026-04-24T05:07:35Z",
   "season": 2026,
   "eventCount": 250,
   "sources": [
@@ -1163,7 +1163,7 @@
         },
         {
           "type": "Sprint",
-          "startTimeUTC": "2026-03-28T15:00:00Z"
+          "startTimeUTC": "2026-03-28T15:10:00Z"
         },
         {
           "type": "Warm Up",
@@ -1570,6 +1570,32 @@
       "dateEnd": "2026-04-19"
     },
     {
+      "id": "nascar-2026-r12",
+      "seriesId": "nascar",
+      "eventName": "AdventHealth 400",
+      "round": 12,
+      "circuit": {
+        "name": "Kansas Speedway",
+        "city": "Kansas City",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 39.1156,
+        "lng": -94.8311
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-04-18T00:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-04-19T14:00:00Z"
+        }
+      ],
+      "dateStart": "2026-04-18",
+      "dateEnd": "2026-04-19"
+    },
+    {
       "id": "nls-2026-r04",
       "seriesId": "nls",
       "eventName": "ADAC 24h Nürburgring Qualifiers",
@@ -1601,32 +1627,6 @@
         }
       ],
       "dateStart": "2026-04-18",
-      "dateEnd": "2026-04-19"
-    },
-    {
-      "id": "nascar-2026-r12",
-      "seriesId": "nascar",
-      "eventName": "AdventHealth 400",
-      "round": 12,
-      "circuit": {
-        "name": "Kansas Speedway",
-        "city": "Kansas City",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 39.1156,
-        "lng": -94.8311
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "1900-01-01T00:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-19T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-19",
       "dateEnd": "2026-04-19"
     },
     {
