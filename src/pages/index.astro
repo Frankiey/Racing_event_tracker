@@ -111,6 +111,8 @@ function getWeekLabel(event: RaceEvent): string {
   today.setHours(0, 0, 0, 0);
   const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
   if (diffDays === 0) return 'Today';
+  // Ongoing multi-day event: dateStart before today but dateEnd today or later
+  if (diffDays < 0 && new Date(event.dateEnd + 'T23:59:59Z').getTime() >= today.getTime()) return 'Today';
   if (diffDays === 1) return 'Tomorrow';
   // Week starts on Monday — compute the Monday boundaries in local time.
   const daysSinceMonday = (today.getDay() + 6) % 7; // 0=Mon … 6=Sun
@@ -125,14 +127,19 @@ function getWeekLabel(event: RaceEvent): string {
   return eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
 }
 
-// Track the first event's dateStart per section so client-side JS can recompute labels
+// Track the first event's dateStart and last dateEnd per section so client-side JS can recompute labels
 const grouped = new Map<string, typeof dashboardEvents>();
 const groupFirstDate = new Map<string, string>();
+const groupLastEnd = new Map<string, string>();
 for (const event of dashboardEvents) {
   const label = getWeekLabel(event);
   if (!grouped.has(label)) {
     grouped.set(label, []);
     groupFirstDate.set(label, event.dateStart);
+    groupLastEnd.set(label, event.dateEnd);
+  } else {
+    const cur = groupLastEnd.get(label) ?? '';
+    if (event.dateEnd > cur) groupLastEnd.set(label, event.dateEnd);
   }
   grouped.get(label)!.push(event);
 }
@@ -552,6 +559,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
         class="week-group mb-8"
         data-week-section={weekLabel}
         data-week-date={groupFirstDate.get(weekLabel) ?? ''}
+        data-week-dateend={groupLastEnd.get(weekLabel) ?? ''}
         data-lazy-group={i >= INITIAL_GROUPS ? 'true' : undefined}
         style={i >= INITIAL_GROUPS ? 'display:none' : undefined}
       >
@@ -689,6 +697,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
     document.querySelectorAll<HTMLElement>('[data-week-date]').forEach(section => {
       const dateStr = section.getAttribute('data-week-date');
       if (!dateStr) return;
+      const dateEndStr = section.getAttribute('data-week-dateend') ?? '';
       const heading = section.querySelector('h2');
       if (!heading) return;
 
@@ -697,8 +706,22 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
       const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
 
       let label: string;
-      if (diffDays < 0) return;        // fully past — leave it (or it'll be empty and removed)
-      else if (diffDays === 0) label = 'Today';
+      if (diffDays < 0) {
+        // Event dateStart is in the past. Check if it's still ongoing via dateEnd.
+        if (dateEndStr && new Date(dateEndStr + 'T23:59:59Z').getTime() >= today.getTime()) {
+          label = 'Today'; // Multi-day event still running
+        } else {
+          // No dateEnd info (stale build) or dateEnd also past.
+          // Fix stale Today/Tomorrow labels to prevent duplicates.
+          const staleLabel = section.getAttribute('data-week-section');
+          if (staleLabel !== 'Today' && staleLabel !== 'Tomorrow') return;
+          const daysSinceMonday = (today.getDay() + 6) % 7;
+          const nextMonday = new Date(today);
+          nextMonday.setDate(today.getDate() - daysSinceMonday + 7);
+          const eventLocal = new Date(dateStr + 'T00:00:00');
+          label = eventLocal < nextMonday ? 'This week' : eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
+        }
+      } else if (diffDays === 0) label = 'Today';
       else if (diffDays === 1) label = 'Tomorrow';
       else {
         // Week starts on Monday — compute boundaries in local time.
