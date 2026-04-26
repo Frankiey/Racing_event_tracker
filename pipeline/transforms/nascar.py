@@ -25,14 +25,16 @@ def transform(bronze_data: dict | list) -> list[dict]:
     for idx, race in enumerate(races, start=1):
         sessions = []
 
-        # NASCAR uses date_scheduled for the event date, race_date for actual race
-        race_date = race.get("date_scheduled") or race.get("race_date")
-        qualifying_date = race.get("qualifying_date")
+        race_time = _find_schedule_time(race, run_type=3, keywords=("race",))
+        qualifying_time = _find_schedule_time(race, run_type=2, keywords=("qualif",))
 
-        if qualifying_date:
+        # Fallback to the race-level fields only when schedule UTC entries are missing.
+        race_date = race_time or race.get("date_scheduled") or race.get("race_date")
+
+        if qualifying_time:
             sessions.append({
                 "type": "Qualifying",
-                "startTimeUTC": to_iso(qualifying_date),
+                "startTimeUTC": qualifying_time,
             })
         sessions.extend(build_single_session(race_date))
 
@@ -56,5 +58,18 @@ def transform(bronze_data: dict | list) -> list[dict]:
         )
 
     return events
+
+
+def _find_schedule_time(race: dict, *, run_type: int, keywords: tuple[str, ...]) -> str | None:
+    for schedule_item in race.get("schedule", []):
+        event_name = (schedule_item.get("event_name") or "").lower()
+        if schedule_item.get("run_type") != run_type and not any(keyword in event_name for keyword in keywords):
+            continue
+
+        start_time = schedule_item.get("start_time_utc")
+        if start_time:
+            return to_iso(start_time)
+
+    return None
 
 

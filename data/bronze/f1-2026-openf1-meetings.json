@@ -16,7 +16,8 @@
     "gmt_offset": "03:00:00",
     "date_start": "2026-02-11T07:00:00+00:00",
     "date_end": "2026-02-13T16:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1305,
@@ -35,7 +36,8 @@
     "gmt_offset": "03:00:00",
     "date_start": "2026-02-18T07:00:00+00:00",
     "date_end": "2026-02-20T16:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1279,
@@ -54,7 +56,8 @@
     "gmt_offset": "11:00:00",
     "date_start": "2026-03-06T01:30:00+00:00",
     "date_end": "2026-03-08T06:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1280,
@@ -73,7 +76,8 @@
     "gmt_offset": "08:00:00",
     "date_start": "2026-03-13T03:30:00+00:00",
     "date_end": "2026-03-15T09:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1281,
@@ -92,7 +96,8 @@
     "gmt_offset": "09:00:00",
     "date_start": "2026-03-27T02:30:00+00:00",
     "date_end": "2026-03-29T07:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1282,
@@ -111,7 +116,8 @@
     "gmt_offset": "03:00:00",
     "date_start": "2026-04-10T11:30:00+00:00",
     "date_end": "2026-04-12T17:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "meeting_key": 1283,
@@ -130,7 +136,8 @@
     "gmt_offset": "03:00:00",
     "date_start": "2026-04-17T13:30:00+00:00",
     "date_end": "2026-04-19T19:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "meeting_key": 1284,
@@ -147,9 +154,10 @@
     "circuit_info_url": "https://api.multiviewer.app/api/v1/circuits/151/2026",
     "circuit_image": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Miami%20carbon.png",
     "gmt_offset": "-04:00:00",
-    "date_start": "2026-05-01T16:30:00+00:00",
+    "date_start": "2026-05-01T16:00:00+00:00",
     "date_end": "2026-05-03T22:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1285,
@@ -168,7 +176,8 @@
     "gmt_offset": "-04:00:00",
     "date_start": "2026-05-22T16:30:00+00:00",
     "date_end": "2026-05-24T22:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1286,
@@ -187,7 +196,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-06-05T11:30:00+00:00",
     "date_end": "2026-06-07T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1287,
@@ -206,7 +216,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-06-12T11:30:00+00:00",
     "date_end": "2026-06-14T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1288,
@@ -225,7 +236,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-06-26T11:30:00+00:00",
     "date_end": "2026-06-28T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1289,
@@ -244,7 +256,8 @@
     "gmt_offset": "01:00:00",
     "date_start": "2026-07-03T11:30:00+00:00",
     "date_end": "2026-07-05T16:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1290,
@@ -263,7 +276,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-07-17T11:30:00+00:00",
     "date_end": "2026-07-19T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1291,
@@ -282,7 +296,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-07-24T11:30:00+00:00",
     "date_end": "2026-07-26T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1292,
@@ -301,7 +316,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-08-21T10:30:00+00:00",
     "date_end": "2026-08-23T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1293,
@@ -320,7 +336,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-09-04T10:30:00+00:00",
     "date_end": "2026-09-06T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1294,
@@ -339,7 +356,8 @@
     "gmt_offset": "02:00:00",
     "date_start": "2026-09-11T11:30:00+00:00",
     "date_end": "2026-09-13T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1295,
@@ -358,7 +376,8 @@
     "gmt_offset": "04:00:00",
     "date_start": "2026-09-24T08:30:00+00:00",
     "date_end": "2026-09-26T13:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1296,
@@ -377,7 +396,8 @@
     "gmt_offset": "08:00:00",
     "date_start": "2026-10-09T08:30:00+00:00",
     "date_end": "2026-10-11T14:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1297,
@@ -396,7 +416,8 @@
     "gmt_offset": "-05:00:00",
     "date_start": "2026-10-23T17:30:00+00:00",
     "date_end": "2026-10-25T22:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1298,
@@ -415,7 +436,8 @@
     "gmt_offset": "-06:00:00",
     "date_start": "2026-10-30T18:30:00+00:00",
     "date_end": "2026-11-01T22:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1299,
@@ -434,7 +456,8 @@
     "gmt_offset": "-03:00:00",
     "date_start": "2026-11-06T15:30:00+00:00",
     "date_end": "2026-11-08T19:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1300,
@@ -453,7 +476,8 @@
     "gmt_offset": "-08:00:00",
     "date_start": "2026-11-20T00:30:00+00:00",
     "date_end": "2026-11-22T06:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1301,
@@ -472,7 +496,8 @@
     "gmt_offset": "03:00:00",
     "date_start": "2026-11-27T13:30:00+00:00",
     "date_end": "2026-11-29T18:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "meeting_key": 1302,
@@ -491,6 +516,7 @@
     "gmt_offset": "04:00:00",
     "date_start": "2026-12-04T09:30:00+00:00",
     "date_end": "2026-12-06T15:00:00+00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   }
 ]

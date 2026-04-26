@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
+from pipeline.transforms import motogp as motogp_transform
+from pipeline.transforms import nascar as nascar_transform
 from pipeline.transforms.gold import build_calendar, build_upcoming
 from pipeline.validate import validate_event, validate_file
 
@@ -101,6 +103,65 @@ class ValidationTests(unittest.TestCase):
             errors = validate_file(path)
 
         self.assertTrue(any("eventCount '2' does not match actual event total '1'" in error for error in errors))
+
+
+class SeriesTransformTests(unittest.TestCase):
+    def test_motogp_transform_converts_circuit_local_times_to_utc(self):
+        bronze_events = [
+            {
+                "name": "GRAND PRIX OF SPAIN",
+                "short_name": "SPA",
+                "date_start": "2026-04-24",
+                "date_end": "2026-04-26",
+                "country": {"iso": "ES"},
+                "circuit": {
+                    "name": "Circuito de Jerez - Ángel Nieto",
+                    "place": "Jerez de la Frontera",
+                    "nation": "SPA",
+                },
+                "_sessions": [
+                    {"type": "RAC", "date": "2026-04-26T14:00:00+00:00"},
+                ],
+            }
+        ]
+
+        events = motogp_transform.transform(bronze_events)
+
+        self.assertEqual(events[0]["sessions"][0]["startTimeUTC"], "2026-04-26T12:00:00Z")
+
+    def test_nascar_transform_prefers_schedule_utc_times(self):
+        bronze_data = {
+            "series_1": [
+                {
+                    "race_name": "Jack Link's 500",
+                    "track_name": "Talladega Superspeedway",
+                    "date_scheduled": "2026-04-26T15:00:00",
+                    "qualifying_date": "1900-01-01T00:00:00",
+                    "schedule": [
+                        {
+                            "event_name": "Qualifying",
+                            "start_time_utc": "2026-04-25T14:00:00",
+                            "run_type": 2,
+                        },
+                        {
+                            "event_name": "Race",
+                            "start_time_utc": "2026-04-26T19:00:00",
+                            "run_type": 3,
+                        },
+                    ],
+                }
+            ]
+        }
+
+        events = nascar_transform.transform(bronze_data)
+
+        self.assertEqual(
+            events[0]["sessions"],
+            [
+                {"type": "Qualifying", "startTimeUTC": "2026-04-25T14:00:00Z"},
+                {"type": "Race", "startTimeUTC": "2026-04-26T19:00:00Z"},
+            ],
+        )
 
 
 if __name__ == "__main__":

@@ -1,5 +1,8 @@
 """MotoGP bronze → silver transform."""
 
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
 from pipeline.config import SEASON_YEAR
 
 from .common import build_circuit, build_event, build_mapped_sessions, build_single_session, derive_event_dates
@@ -31,6 +34,30 @@ _CALENDAR_OVERRIDES_2026 = {
     },
 }
 
+_COUNTRY_TIMEZONES = {
+    "AR": "America/Argentina/Buenos_Aires",
+    "AU": "Australia/Melbourne",
+    "BR": "America/Sao_Paulo",
+    "CZ": "Europe/Prague",
+    "DE": "Europe/Berlin",
+    "ES": "Europe/Madrid",
+    "FR": "Europe/Paris",
+    "GB": "Europe/London",
+    "HU": "Europe/Budapest",
+    "ID": "Asia/Jakarta",
+    "IN": "Asia/Kolkata",
+    "IT": "Europe/Rome",
+    "JP": "Asia/Tokyo",
+    "KZ": "Asia/Almaty",
+    "MY": "Asia/Kuala_Lumpur",
+    "NL": "Europe/Amsterdam",
+    "PT": "Europe/Lisbon",
+    "QA": "Asia/Qatar",
+    "SM": "Europe/Rome",
+    "TH": "Asia/Bangkok",
+    "US": "America/Chicago",
+}
+
 
 def transform(bronze_events: list) -> list[dict]:
     """Transform Pulselive API events into silver-layer format."""
@@ -43,8 +70,9 @@ def transform(bronze_events: list) -> list[dict]:
     for idx, event in enumerate(race_events, start=1):
         # Use real session data if available (from _sessions key added by fetcher)
         raw_sessions = event.get("_sessions", [])
+        country_code = (event.get("country") or {}).get("iso", "")
         if raw_sessions:
-            sessions = _build_sessions(raw_sessions)
+            sessions = _build_sessions(raw_sessions, country_code)
         else:
             # Fallback: single Race session from event dates
             race_time = event.get("date_end") or event.get("date_start")
@@ -61,7 +89,7 @@ def transform(bronze_events: list) -> list[dict]:
 
         override = _get_calendar_override(year, event.get("name", ""))
         if override:
-            sessions = override["sessions"]
+            sessions = _convert_sessions_from_local_time(override["sessions"], country_code, start_key="startTimeUTC")
             date_start = override["date_start"]
             date_end = override["date_end"]
 
@@ -88,9 +116,42 @@ def transform(bronze_events: list) -> list[dict]:
     return events
 
 
-def _build_sessions(raw_sessions: list) -> list[dict]:
+def _build_sessions(raw_sessions: list, country_code: str) -> list[dict]:
     """Convert Pulselive session objects to silver session format."""
-    return build_mapped_sessions(raw_sessions, _SESSION_TYPES, number_repeats=True)
+    return build_mapped_sessions(
+        _convert_sessions_from_local_time(raw_sessions, country_code),
+        _SESSION_TYPES,
+        number_repeats=True,
+    )
+
+
+def _convert_sessions_from_local_time(
+    sessions: list[dict],
+    country_code: str,
+    *,
+    start_key: str = "date",
+) -> list[dict]:
+    timezone_name = _COUNTRY_TIMEZONES.get(country_code)
+    if not timezone_name:
+        return sessions
+
+    converted: list[dict] = []
+    for session in sessions:
+        converted_session = dict(session)
+        start_time = converted_session.get(start_key)
+        if start_time:
+            converted_session[start_key] = _local_time_to_utc(start_time, timezone_name)
+        converted.append(converted_session)
+    return converted
+
+
+def _local_time_to_utc(dt_str: str, timezone_name: str) -> str:
+    try:
+        local_time = datetime.fromisoformat(dt_str.replace("Z", "").replace("+00:00", ""))
+    except ValueError:
+        return dt_str
+
+    return local_time.replace(tzinfo=ZoneInfo(timezone_name)).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _get_calendar_override(year: int, event_name: str) -> dict | None:

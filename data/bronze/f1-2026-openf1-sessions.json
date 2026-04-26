@@ -13,7 +13,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11466,
@@ -29,7 +30,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11467,
@@ -45,7 +47,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11470,
@@ -61,7 +64,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11469,
@@ -77,7 +81,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11468,
@@ -93,7 +98,8 @@
     "country_name": "Bahrain",
     "location": "Bahrain",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11227,
@@ -109,7 +115,8 @@
     "country_name": "Australia",
     "location": "Melbourne",
     "gmt_offset": "11:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11228,
@@ -125,7 +132,8 @@
     "country_name": "Australia",
     "location": "Melbourne",
     "gmt_offset": "11:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11229,
@@ -141,7 +149,8 @@
     "country_name": "Australia",
     "location": "Melbourne",
     "gmt_offset": "11:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11230,
@@ -157,7 +166,8 @@
     "country_name": "Australia",
     "location": "Melbourne",
     "gmt_offset": "11:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11234,
@@ -173,7 +183,8 @@
     "country_name": "Australia",
     "location": "Melbourne",
     "gmt_offset": "11:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11235,
@@ -189,7 +200,8 @@
     "country_name": "China",
     "location": "Shanghai",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11236,
@@ -205,7 +217,8 @@
     "country_name": "China",
     "location": "Shanghai",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11240,
@@ -221,7 +234,8 @@
     "country_name": "China",
     "location": "Shanghai",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11241,
@@ -237,7 +251,8 @@
     "country_name": "China",
     "location": "Shanghai",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11245,
@@ -253,7 +268,8 @@
     "country_name": "China",
     "location": "Shanghai",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11246,
@@ -269,7 +285,8 @@
     "country_name": "Japan",
     "location": "Suzuka",
     "gmt_offset": "09:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11247,
@@ -285,7 +302,8 @@
     "country_name": "Japan",
     "location": "Suzuka",
     "gmt_offset": "09:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11248,
@@ -301,7 +319,8 @@
     "country_name": "Japan",
     "location": "Suzuka",
     "gmt_offset": "09:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11249,
@@ -317,7 +336,8 @@
     "country_name": "Japan",
     "location": "Suzuka",
     "gmt_offset": "09:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11253,
@@ -333,7 +353,8 @@
     "country_name": "Japan",
     "location": "Suzuka",
     "gmt_offset": "09:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11254,
@@ -349,7 +370,8 @@
     "country_name": "Bahrain",
     "location": "Sakhir",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11255,
@@ -365,7 +387,8 @@
     "country_name": "Bahrain",
     "location": "Sakhir",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11256,
@@ -381,7 +404,8 @@
     "country_name": "Bahrain",
     "location": "Sakhir",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11257,
@@ -397,7 +421,8 @@
     "country_name": "Bahrain",
     "location": "Sakhir",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11261,
@@ -413,7 +438,8 @@
     "country_name": "Bahrain",
     "location": "Sakhir",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11262,
@@ -429,7 +455,8 @@
     "country_name": "Saudi Arabia",
     "location": "Jeddah",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11263,
@@ -445,7 +472,8 @@
     "country_name": "Saudi Arabia",
     "location": "Jeddah",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11264,
@@ -461,7 +489,8 @@
     "country_name": "Saudi Arabia",
     "location": "Jeddah",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11265,
@@ -477,7 +506,8 @@
     "country_name": "Saudi Arabia",
     "location": "Jeddah",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11269,
@@ -493,13 +523,14 @@
     "country_name": "Saudi Arabia",
     "location": "Jeddah",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": true
   },
   {
     "session_key": 11270,
     "session_type": "Practice",
     "session_name": "Practice 1",
-    "date_start": "2026-05-01T16:30:00+00:00",
+    "date_start": "2026-05-01T16:00:00+00:00",
     "date_end": "2026-05-01T17:30:00+00:00",
     "meeting_key": 1284,
     "circuit_key": 151,
@@ -509,7 +540,8 @@
     "country_name": "United States",
     "location": "Miami Gardens",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11271,
@@ -525,7 +557,8 @@
     "country_name": "United States",
     "location": "Miami Gardens",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11275,
@@ -541,7 +574,8 @@
     "country_name": "United States",
     "location": "Miami Gardens",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11276,
@@ -557,7 +591,8 @@
     "country_name": "United States",
     "location": "Miami Gardens",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11280,
@@ -573,7 +608,8 @@
     "country_name": "United States",
     "location": "Miami Gardens",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11281,
@@ -589,7 +625,8 @@
     "country_name": "Canada",
     "location": "Montréal",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11282,
@@ -605,7 +642,8 @@
     "country_name": "Canada",
     "location": "Montréal",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11286,
@@ -621,7 +659,8 @@
     "country_name": "Canada",
     "location": "Montréal",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11287,
@@ -637,7 +676,8 @@
     "country_name": "Canada",
     "location": "Montréal",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11291,
@@ -653,7 +693,8 @@
     "country_name": "Canada",
     "location": "Montréal",
     "gmt_offset": "-04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11292,
@@ -669,7 +710,8 @@
     "country_name": "Monaco",
     "location": "Monte Carlo",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11293,
@@ -685,7 +727,8 @@
     "country_name": "Monaco",
     "location": "Monte Carlo",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11294,
@@ -701,7 +744,8 @@
     "country_name": "Monaco",
     "location": "Monte Carlo",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11295,
@@ -717,7 +761,8 @@
     "country_name": "Monaco",
     "location": "Monte Carlo",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11299,
@@ -733,7 +778,8 @@
     "country_name": "Monaco",
     "location": "Monte Carlo",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11300,
@@ -749,7 +795,8 @@
     "country_name": "Spain",
     "location": "Barcelona",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11301,
@@ -765,7 +812,8 @@
     "country_name": "Spain",
     "location": "Barcelona",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11302,
@@ -781,7 +829,8 @@
     "country_name": "Spain",
     "location": "Barcelona",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11303,
@@ -797,7 +846,8 @@
     "country_name": "Spain",
     "location": "Barcelona",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11307,
@@ -813,7 +863,8 @@
     "country_name": "Spain",
     "location": "Barcelona",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11308,
@@ -829,7 +880,8 @@
     "country_name": "Austria",
     "location": "Spielberg",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11309,
@@ -845,7 +897,8 @@
     "country_name": "Austria",
     "location": "Spielberg",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11310,
@@ -861,7 +914,8 @@
     "country_name": "Austria",
     "location": "Spielberg",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11311,
@@ -877,7 +931,8 @@
     "country_name": "Austria",
     "location": "Spielberg",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11315,
@@ -893,7 +948,8 @@
     "country_name": "Austria",
     "location": "Spielberg",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11316,
@@ -909,7 +965,8 @@
     "country_name": "United Kingdom",
     "location": "Silverstone",
     "gmt_offset": "01:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11317,
@@ -925,7 +982,8 @@
     "country_name": "United Kingdom",
     "location": "Silverstone",
     "gmt_offset": "01:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11321,
@@ -941,7 +999,8 @@
     "country_name": "United Kingdom",
     "location": "Silverstone",
     "gmt_offset": "01:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11322,
@@ -957,7 +1016,8 @@
     "country_name": "United Kingdom",
     "location": "Silverstone",
     "gmt_offset": "01:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11326,
@@ -973,7 +1033,8 @@
     "country_name": "United Kingdom",
     "location": "Silverstone",
     "gmt_offset": "01:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11327,
@@ -989,7 +1050,8 @@
     "country_name": "Belgium",
     "location": "Spa-Francorchamps",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11328,
@@ -1005,7 +1067,8 @@
     "country_name": "Belgium",
     "location": "Spa-Francorchamps",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11329,
@@ -1021,7 +1084,8 @@
     "country_name": "Belgium",
     "location": "Spa-Francorchamps",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11330,
@@ -1037,7 +1101,8 @@
     "country_name": "Belgium",
     "location": "Spa-Francorchamps",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11334,
@@ -1053,7 +1118,8 @@
     "country_name": "Belgium",
     "location": "Spa-Francorchamps",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11335,
@@ -1069,7 +1135,8 @@
     "country_name": "Hungary",
     "location": "Budapest",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11336,
@@ -1085,7 +1152,8 @@
     "country_name": "Hungary",
     "location": "Budapest",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11337,
@@ -1101,7 +1169,8 @@
     "country_name": "Hungary",
     "location": "Budapest",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11338,
@@ -1117,7 +1186,8 @@
     "country_name": "Hungary",
     "location": "Budapest",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11342,
@@ -1133,7 +1203,8 @@
     "country_name": "Hungary",
     "location": "Budapest",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11343,
@@ -1149,7 +1220,8 @@
     "country_name": "Netherlands",
     "location": "Zandvoort",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11344,
@@ -1165,7 +1237,8 @@
     "country_name": "Netherlands",
     "location": "Zandvoort",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11348,
@@ -1181,7 +1254,8 @@
     "country_name": "Netherlands",
     "location": "Zandvoort",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11349,
@@ -1197,7 +1271,8 @@
     "country_name": "Netherlands",
     "location": "Zandvoort",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11353,
@@ -1213,7 +1288,8 @@
     "country_name": "Netherlands",
     "location": "Zandvoort",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11354,
@@ -1229,7 +1305,8 @@
     "country_name": "Italy",
     "location": "Monza",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11355,
@@ -1245,7 +1322,8 @@
     "country_name": "Italy",
     "location": "Monza",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11356,
@@ -1261,7 +1339,8 @@
     "country_name": "Italy",
     "location": "Monza",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11357,
@@ -1277,7 +1356,8 @@
     "country_name": "Italy",
     "location": "Monza",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11361,
@@ -1293,7 +1373,8 @@
     "country_name": "Italy",
     "location": "Monza",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11362,
@@ -1309,7 +1390,8 @@
     "country_name": "Spain",
     "location": "Madrid",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11363,
@@ -1325,7 +1407,8 @@
     "country_name": "Spain",
     "location": "Madrid",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11364,
@@ -1341,7 +1424,8 @@
     "country_name": "Spain",
     "location": "Madrid",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11365,
@@ -1357,7 +1441,8 @@
     "country_name": "Spain",
     "location": "Madrid",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11369,
@@ -1373,7 +1458,8 @@
     "country_name": "Spain",
     "location": "Madrid",
     "gmt_offset": "02:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11370,
@@ -1389,7 +1475,8 @@
     "country_name": "Azerbaijan",
     "location": "Baku",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11371,
@@ -1405,7 +1492,8 @@
     "country_name": "Azerbaijan",
     "location": "Baku",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11372,
@@ -1421,7 +1509,8 @@
     "country_name": "Azerbaijan",
     "location": "Baku",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11373,
@@ -1437,7 +1526,8 @@
     "country_name": "Azerbaijan",
     "location": "Baku",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11377,
@@ -1453,7 +1543,8 @@
     "country_name": "Azerbaijan",
     "location": "Baku",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11378,
@@ -1469,7 +1560,8 @@
     "country_name": "Singapore",
     "location": "Marina Bay",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11379,
@@ -1485,7 +1577,8 @@
     "country_name": "Singapore",
     "location": "Marina Bay",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11383,
@@ -1501,7 +1594,8 @@
     "country_name": "Singapore",
     "location": "Marina Bay",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11384,
@@ -1517,7 +1611,8 @@
     "country_name": "Singapore",
     "location": "Marina Bay",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11388,
@@ -1533,7 +1628,8 @@
     "country_name": "Singapore",
     "location": "Marina Bay",
     "gmt_offset": "08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11389,
@@ -1549,7 +1645,8 @@
     "country_name": "United States",
     "location": "Austin",
     "gmt_offset": "-05:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11390,
@@ -1565,7 +1662,8 @@
     "country_name": "United States",
     "location": "Austin",
     "gmt_offset": "-05:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11391,
@@ -1581,7 +1679,8 @@
     "country_name": "United States",
     "location": "Austin",
     "gmt_offset": "-05:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11392,
@@ -1597,7 +1696,8 @@
     "country_name": "United States",
     "location": "Austin",
     "gmt_offset": "-05:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11396,
@@ -1613,7 +1713,8 @@
     "country_name": "United States",
     "location": "Austin",
     "gmt_offset": "-05:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11397,
@@ -1629,7 +1730,8 @@
     "country_name": "Mexico",
     "location": "Mexico City",
     "gmt_offset": "-06:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11398,
@@ -1645,7 +1747,8 @@
     "country_name": "Mexico",
     "location": "Mexico City",
     "gmt_offset": "-06:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11399,
@@ -1661,7 +1764,8 @@
     "country_name": "Mexico",
     "location": "Mexico City",
     "gmt_offset": "-06:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11400,
@@ -1677,7 +1781,8 @@
     "country_name": "Mexico",
     "location": "Mexico City",
     "gmt_offset": "-06:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11404,
@@ -1693,7 +1798,8 @@
     "country_name": "Mexico",
     "location": "Mexico City",
     "gmt_offset": "-06:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11405,
@@ -1709,7 +1815,8 @@
     "country_name": "Brazil",
     "location": "São Paulo",
     "gmt_offset": "-03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11406,
@@ -1725,7 +1832,8 @@
     "country_name": "Brazil",
     "location": "São Paulo",
     "gmt_offset": "-03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11407,
@@ -1741,7 +1849,8 @@
     "country_name": "Brazil",
     "location": "São Paulo",
     "gmt_offset": "-03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11408,
@@ -1757,7 +1866,8 @@
     "country_name": "Brazil",
     "location": "São Paulo",
     "gmt_offset": "-03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11412,
@@ -1773,7 +1883,8 @@
     "country_name": "Brazil",
     "location": "São Paulo",
     "gmt_offset": "-03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11413,
@@ -1789,7 +1900,8 @@
     "country_name": "United States",
     "location": "Las Vegas",
     "gmt_offset": "-08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11414,
@@ -1805,7 +1917,8 @@
     "country_name": "United States",
     "location": "Las Vegas",
     "gmt_offset": "-08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11415,
@@ -1821,7 +1934,8 @@
     "country_name": "United States",
     "location": "Las Vegas",
     "gmt_offset": "-08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11416,
@@ -1837,7 +1951,8 @@
     "country_name": "United States",
     "location": "Las Vegas",
     "gmt_offset": "-08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11420,
@@ -1853,7 +1968,8 @@
     "country_name": "United States",
     "location": "Las Vegas",
     "gmt_offset": "-08:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11421,
@@ -1869,7 +1985,8 @@
     "country_name": "Qatar",
     "location": "Lusail",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11422,
@@ -1885,7 +2002,8 @@
     "country_name": "Qatar",
     "location": "Lusail",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11423,
@@ -1901,7 +2019,8 @@
     "country_name": "Qatar",
     "location": "Lusail",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11424,
@@ -1917,7 +2036,8 @@
     "country_name": "Qatar",
     "location": "Lusail",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11428,
@@ -1933,7 +2053,8 @@
     "country_name": "Qatar",
     "location": "Lusail",
     "gmt_offset": "03:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11429,
@@ -1949,7 +2070,8 @@
     "country_name": "United Arab Emirates",
     "location": "Yas Marina",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11430,
@@ -1965,7 +2087,8 @@
     "country_name": "United Arab Emirates",
     "location": "Yas Marina",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11431,
@@ -1981,7 +2104,8 @@
     "country_name": "United Arab Emirates",
     "location": "Yas Marina",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11432,
@@ -1997,7 +2121,8 @@
     "country_name": "United Arab Emirates",
     "location": "Yas Marina",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   },
   {
     "session_key": 11436,
@@ -2013,6 +2138,7 @@
     "country_name": "United Arab Emirates",
     "location": "Yas Marina",
     "gmt_offset": "04:00:00",
-    "year": 2026
+    "year": 2026,
+    "is_cancelled": false
   }
 ]
