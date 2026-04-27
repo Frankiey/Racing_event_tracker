@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-26T16:12:59Z",
+  "generated": "2026-04-27T05:11:09Z",
   "season": 2026,
   "eventCount": 250,
   "sources": [
@@ -3838,17 +3838,17 @@
       "dateEnd": "2026-06-21"
     },
     {
-      "id": "nascar-2026-r37",
+      "id": "nascar-2026-r21",
       "seriesId": "nascar",
-      "eventName": "Freeway Insurance 500",
-      "round": 37,
+      "eventName": "Andruil 250",
+      "round": 21,
       "circuit": {
-        "name": "Phoenix Raceway",
-        "city": "Avondale",
+        "name": "San Diego Street Course",
+        "city": "San Diego",
         "country": "United States",
         "countryCode": "US",
-        "lat": 33.3753,
-        "lng": -112.3108
+        "lat": 32.7069,
+        "lng": -117.1628
       },
       "sessions": [
         {
@@ -3861,28 +3861,6 @@
         }
       ],
       "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "nascar-2026-r21",
-      "seriesId": "nascar",
-      "eventName": "Anduril 250",
-      "round": 21,
-      "circuit": {
-        "name": "San Diego Street Course",
-        "city": "San Diego",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 32.7069,
-        "lng": -117.1628
-      },
-      "sessions": [
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T16:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-21",
       "dateEnd": "2026-06-21"
     },
     {
@@ -7566,6 +7544,28 @@
         }
       ],
       "dateStart": "2026-10-16",
+      "dateEnd": "2026-10-18"
+    },
+    {
+      "id": "nascar-2026-r37",
+      "seriesId": "nascar",
+      "eventName": "Freeway Insurance 500",
+      "round": 37,
+      "circuit": {
+        "name": "Phoenix Raceway",
+        "city": "Avondale",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 33.3753,
+        "lng": -112.3108
+      },
+      "sessions": [
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-18T15:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-18",
       "dateEnd": "2026-10-18"
     },
     {

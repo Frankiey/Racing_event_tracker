@@ -522,7 +522,7 @@
   {
     "id": "nascar-2026-r21",
     "seriesId": "nascar",
-    "eventName": "Anduril 250",
+    "eventName": "Andruil 250",
     "round": 21,
     "circuit": {
       "name": "San Diego Street Course",
@@ -534,11 +534,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-20T15:30:00Z"
+      },
+      {
         "type": "Race",
         "startTimeUTC": "2026-06-21T16:00:00Z"
       }
     ],
-    "dateStart": "2026-06-21",
+    "dateStart": "2026-06-20",
     "dateEnd": "2026-06-21"
   },
   {
@@ -886,16 +890,12 @@
     },
     "sessions": [
       {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-06-20T15:30:00Z"
-      },
-      {
         "type": "Race",
-        "startTimeUTC": "2026-06-21T16:00:00Z"
+        "startTimeUTC": "2026-10-18T15:00:00Z"
       }
     ],
-    "dateStart": "2026-06-20",
-    "dateEnd": "2026-06-21"
+    "dateStart": "2026-10-18",
+    "dateEnd": "2026-10-18"
   },
   {
     "id": "nascar-2026-r38",
