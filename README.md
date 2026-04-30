@@ -35,7 +35,10 @@ RaceTrack fixes that. One URL, every series, your local times, your watchlist. T
 | **Event Modal** | Full session breakdown with local times on click |
 | **Watchlist** | Star events you care about — stored locally, no account needed |
 | **Kiosk / Status View** | Minimal `/status` route for Raspberry Pi, wall tablets, small screens |
+| **Recap View** | Spoiler-aware look back at the last 7 days of racing |
 | **Passport View** | Globe-based season travel map for circuits with coordinates |
+| **Series Widgets** | Embeddable per-series countdown widgets for simple overlays or sidebars |
+| **Clash Detection** | Calls out overloaded weekends when three or more series overlap |
 | **Local Times** | Every session in your timezone — no configuration, just works |
 | **Dark Mode** | Default and only mode, as the racing gods intended |
 
@@ -135,7 +138,7 @@ Current toolchain note:
 
 ```
 src/
-  pages/          Astro pages (index, calendar, watchlist, status, series/[id])
+  pages/          Astro pages (index, calendar, recap, passport, watchlist, status, series/[id], widget/[series])
   components/     EventCard, EventModal, Countdown, SeriesBadge, Nav, ...
   lib/            series.ts metadata, time.ts utilities
   styles/         Tailwind v4 + global animations

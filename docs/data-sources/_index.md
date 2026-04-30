@@ -31,6 +31,7 @@ Each series has its own file. Use `_template.md` when researching a new series.
 | NLS | `nls` | Seed | Official schedule | [nls.md](nls.md) | 2026-03-28 |
 | World Superbike | `wsbk` | API + Seed fallback | WorldSBK Pulselive | [wsbk.md](wsbk.md) | 2026-03-28 |
 | Super Formula | `superformula` | Seed | Manual | [superformula.md](superformula.md) | 2026-03-28 |
+| Isle of Man TT | `iomtt` | Seed | Manual | n/a | 2026-04-30 |
 
 ---
 

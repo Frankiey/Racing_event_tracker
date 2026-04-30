@@ -1,5 +1,13 @@
 # Work Notes — RaceTrack
 
+## Maintenance Sweep (2026-04-30)
+- Bumped `@astrojs/check` to `^0.9.8`, which is the highest repo-documented safe upgrade while TypeScript remains on the 5.x line.
+- Tightened `pipeline.validate` so event envelopes must match their actual non-placeholder session dates.
+- Corrected seed source data where event date envelopes were out of sync with session timestamps: F3 Monaco, IndyCar Long Beach, GT World (Paul Ricard, Spa, Misano), and every Moto2/Moto3 weekend. Portugal and Valencia in Moto2/Moto3 had fully wrong weekend envelopes.
+- Pressing attention: rerun the pipeline to refresh `data/silver/` and `data/gold/` from the corrected seed layer as soon as terminal execution is available again.
+- Pressing attention: decide whether GT World paid tests / bronze tests should remain user-visible in the calendar, then align the seed file and docs.
+- Pressing attention: normalize Moto2/Moto3 `circuit.country` display values from shorthand codes to human-readable country names before those strings are surfaced more widely in UI or exports.
+
 ## Quality Refresh (2026-04-17)
 - Refreshed the frontend/tooling stack to Astro 6.1.7 and `@types/node` 25.6.0.
 - Removed the unused `clean` dependency.
@@ -10,7 +18,7 @@
 - Patched the Astro check YAML advisory chain with npm overrides so `npm audit` is clean without changing direct app behavior.
 
 ## Current Status
-**Frontend, pipeline, and validation refreshed** (updated 2026-04-17). `npm test`, `npm run validate:data`, and `npm run build` all pass, and the site now covers 16 tracked series/routes including passport, recap, watchlist, widgets, and kiosk mode.
+**Frontend, pipeline, and validation refreshed** (updated 2026-04-30). The repo covers 17 tracked series plus recap, passport, watchlist, widget, and kiosk routes. The seed layer and validator have been corrected for the latest known date-envelope issues; derived silver/gold files still need a fresh pipeline run.
 
 ## What was built (v2 frontend — 2026-03-28)
 
@@ -76,4 +84,4 @@
 - No real-time updates — data refreshes on cron schedule (nightly)
 - Broadcast info must be manually curated per season
 - NASCAR qualifying times are placeholders (1900 date) — hidden in UI
-- Country codes are inconsistent across series (alpha-2 vs alpha-3)
+- Some manually curated `circuit.country` values still use shorthand codes instead of display names

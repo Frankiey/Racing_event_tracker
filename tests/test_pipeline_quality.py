@@ -63,6 +63,18 @@ class GoldTransformTests(unittest.TestCase):
         self.assertEqual(upcoming["eventCount"], 1)
         self.assertEqual([event["id"] for event in upcoming["events"]], ["future"])
 
+    def test_build_upcoming_respects_limit(self):
+        events = [
+            make_event("future-a", "2026-06-01T10:00:00Z"),
+            make_event("future-b", "2026-06-02T10:00:00Z"),
+        ]
+
+        with patch("pipeline.transforms.gold.datetime", FrozenDateTime):
+            upcoming = build_upcoming(events, limit=1)
+
+        self.assertEqual(upcoming["eventCount"], 1)
+        self.assertEqual([event["id"] for event in upcoming["events"]], ["future-a"])
+
 
 class ValidationTests(unittest.TestCase):
     def test_validate_event_reports_invalid_formats(self):
@@ -103,6 +115,15 @@ class ValidationTests(unittest.TestCase):
             errors = validate_file(path)
 
         self.assertTrue(any("eventCount '2' does not match actual event total '1'" in error for error in errors))
+
+    def test_validate_event_checks_session_date_range(self):
+        event = make_event("range", "2026-05-02T10:00:00Z", end_date="2026-05-04")
+        event["dateStart"] = "2026-05-01"
+
+        errors = validate_event(event, "range.json", 0)
+
+        self.assertTrue(any("dateStart '2026-05-01' does not match earliest session date '2026-05-02'" in error for error in errors))
+        self.assertTrue(any("dateEnd '2026-05-04' does not match latest session date '2026-05-02'" in error for error in errors))
 
 
 class SeriesTransformTests(unittest.TestCase):

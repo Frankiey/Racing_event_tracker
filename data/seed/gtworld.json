@@ -22,7 +22,7 @@
       { "type": "Race", "startTimeUTC": "2026-04-11T16:00:00Z" }
     ],
     "dateStart": "2026-04-10",
-    "dateEnd": "2026-04-12"
+    "dateEnd": "2026-04-11"
   },
   {
     "id": "gtworld-2026-r02",
@@ -100,7 +100,7 @@
       { "type": "Warm Up", "startTimeUTC": "2026-06-26T17:20:00Z" },
       { "type": "Race", "startTimeUTC": "2026-06-27T14:30:00Z" }
     ],
-    "dateStart": "2026-06-24",
+    "dateStart": "2026-06-23",
     "dateEnd": "2026-06-28"
   },
   {
@@ -127,7 +127,7 @@
       { "type": "Qualifying 2 - Group B", "startTimeUTC": "2026-07-19T08:35:00Z" },
       { "type": "Race 2", "startTimeUTC": "2026-07-19T13:00:00Z" }
     ],
-    "dateStart": "2026-07-17",
+    "dateStart": "2026-07-16",
     "dateEnd": "2026-07-19"
   },
   {

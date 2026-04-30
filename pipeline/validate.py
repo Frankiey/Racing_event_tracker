@@ -58,6 +58,7 @@ def validate_event(event: dict, path: str, idx: int) -> list[str]:
     if not isinstance(sessions, list):
         errors.append(f"ERROR {prefix}: 'sessions' is not a list")
     else:
+        real_session_dates: list[str] = []
         for si, sess in enumerate(sessions):
             if not sess.get("type"):
                 errors.append(f"ERROR {prefix}.sessions[{si}]: missing 'type'")
@@ -68,6 +69,20 @@ def validate_event(event: dict, path: str, idx: int) -> list[str]:
                 pass  # placeholder times are expected for TBD sessions
             elif not ISO_RE.match(stime):
                 errors.append(f"ERROR {prefix}.sessions[{si}]: invalid time format '{stime}'")
+            else:
+                real_session_dates.append(stime[:10])
+
+        if real_session_dates:
+            earliest_session_date = min(real_session_dates)
+            latest_session_date = max(real_session_dates)
+            if ds and ds != earliest_session_date:
+                errors.append(
+                    f"ERROR {prefix}: dateStart '{ds}' does not match earliest session date '{earliest_session_date}'"
+                )
+            if de and de != latest_session_date:
+                errors.append(
+                    f"ERROR {prefix}: dateEnd '{de}' does not match latest session date '{latest_session_date}'"
+                )
 
     return errors
 
