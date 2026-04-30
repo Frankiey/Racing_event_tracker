@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-26T16:12:59Z",
+  "generated": "2026-04-30T05:13:32Z",
   "season": 2026,
-  "eventCount": 195,
+  "eventCount": 194,
   "sources": [
     "dtm",
     "f1",
@@ -22,32 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "nascar-2026-r13",
-      "seriesId": "nascar",
-      "eventName": "Jack Link's 500",
-      "round": 13,
-      "circuit": {
-        "name": "Talladega Superspeedway",
-        "city": "Lincoln",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.5669,
-        "lng": -86.0642
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-04-25T14:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-26T19:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-25",
-      "dateEnd": "2026-04-26"
-    },
     {
       "id": "wsbk-2026-r04",
       "seriesId": "wsbk",
@@ -718,32 +692,6 @@
       "dateEnd": "2026-05-16"
     },
     {
-      "id": "nascar-2026-r16",
-      "seriesId": "nascar",
-      "eventName": "NASCAR All-Star Race",
-      "round": 16,
-      "circuit": {
-        "name": "Dover Motor Speedway",
-        "city": "Dover",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 39.19,
-        "lng": -75.5303
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-15T20:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-17T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-05-15",
-      "dateEnd": "2026-05-17"
-    },
-    {
       "id": "moto3-2026-r06",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of Catalonia",
@@ -793,6 +741,32 @@
         }
       ],
       "dateStart": "2026-05-15",
+      "dateEnd": "2026-05-17"
+    },
+    {
+      "id": "nascar-2026-r16",
+      "seriesId": "nascar",
+      "eventName": "NASCAR All-Star Race",
+      "round": 16,
+      "circuit": {
+        "name": "Dover Motor Speedway",
+        "city": "Dover",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 39.19,
+        "lng": -75.5303
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-05-16T16:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-17T17:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-16",
       "dateEnd": "2026-05-17"
     },
     {
@@ -2057,35 +2031,9 @@
       "dateEnd": "2026-06-21"
     },
     {
-      "id": "nascar-2026-r37",
-      "seriesId": "nascar",
-      "eventName": "Freeway Insurance 500",
-      "round": 37,
-      "circuit": {
-        "name": "Phoenix Raceway",
-        "city": "Avondale",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.3753,
-        "lng": -112.3108
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T15:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T16:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-21"
-    },
-    {
       "id": "nascar-2026-r21",
       "seriesId": "nascar",
-      "eventName": "Anduril 250",
+      "eventName": "Andruil 250",
       "round": 21,
       "circuit": {
         "name": "San Diego Street Course",
@@ -2097,11 +2045,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-06-20T18:30:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-06-21T16:00:00Z"
+          "startTimeUTC": "2026-06-21T19:00:00Z"
         }
       ],
-      "dateStart": "2026-06-21",
+      "dateStart": "2026-06-20",
       "dateEnd": "2026-06-21"
     },
     {
@@ -5785,6 +5737,28 @@
         }
       ],
       "dateStart": "2026-10-16",
+      "dateEnd": "2026-10-18"
+    },
+    {
+      "id": "nascar-2026-r37",
+      "seriesId": "nascar",
+      "eventName": "Freeway Insurance 500",
+      "round": 37,
+      "circuit": {
+        "name": "Phoenix Raceway",
+        "city": "Avondale",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 33.3753,
+        "lng": -112.3108
+      },
+      "sessions": [
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-18T15:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-18",
       "dateEnd": "2026-10-18"
     },
     {
