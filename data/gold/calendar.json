@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-29T05:11:18Z",
+  "generated": "2026-04-30T05:13:32Z",
   "season": 2026,
   "eventCount": 250,
   "sources": [
@@ -2499,32 +2499,6 @@
       "dateEnd": "2026-05-16"
     },
     {
-      "id": "nascar-2026-r16",
-      "seriesId": "nascar",
-      "eventName": "NASCAR All-Star Race",
-      "round": 16,
-      "circuit": {
-        "name": "Dover Motor Speedway",
-        "city": "Dover",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 39.19,
-        "lng": -75.5303
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-15T20:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-17T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-05-15",
-      "dateEnd": "2026-05-17"
-    },
-    {
       "id": "moto3-2026-r06",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of Catalonia",
@@ -2574,6 +2548,32 @@
         }
       ],
       "dateStart": "2026-05-15",
+      "dateEnd": "2026-05-17"
+    },
+    {
+      "id": "nascar-2026-r16",
+      "seriesId": "nascar",
+      "eventName": "NASCAR All-Star Race",
+      "round": 16,
+      "circuit": {
+        "name": "Dover Motor Speedway",
+        "city": "Dover",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 39.19,
+        "lng": -75.5303
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-05-16T16:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-17T17:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-16",
       "dateEnd": "2026-05-17"
     },
     {
