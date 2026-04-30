@@ -3,7 +3,7 @@
 **Series ID:** `gtworld`
 **Status:** `integrated`
 **Integration path:** seed
-**Last reviewed:** 2026-04-12
+**Last reviewed:** 2026-04-30
 
 ---
 
@@ -28,7 +28,7 @@ GT World Challenge Europe Powered by AWS is SRO's flagship European GT3 champion
 ### GT World Challenge Europe event pages
 - **URL:** `https://www.gt-world-challenge-europe.com/event/<id>`
 - **Status:** Working
-- **Notes:** Official event pages expose timetable tables with `Session`, `Local Time`, and `GMT` columns. These were used for the 2026 seed session times.
+- **Notes:** Official event pages expose timetable tables with `Session`, `Local Time`, and `GMT` columns. These were used for the 2026 seed session times, but RaceTrack intentionally excludes `Official Paid Test Sessions` and `Bronze Test` entries from the public calendar.
 
 ---
 
@@ -41,7 +41,7 @@ GT World Challenge Europe Powered by AWS is SRO's flagship European GT3 champion
 **Trade-offs accepted:**
 - Manual update required each season
 - Session names follow the official GT World Europe timetable wording where useful, but are normalized to Race / Race 1 / Race 2 for downstream UI behavior
-- Non-racing public-facing sessions such as pit walks and parades are excluded from the seed data
+- Non-competitive public-facing sessions such as pit walks, parades, paid tests, and bronze tests are excluded from the seed data
 
 ---
 
@@ -51,7 +51,7 @@ GT World Challenge Europe Powered by AWS is SRO's flagship European GT3 champion
 |-------|-------|
 | `seriesId` | Always `gtworld` |
 | `eventName` | Official event title normalized to venue-first names |
-| `sessions` | Derived from official event timetable tables on each meeting page |
+| `sessions` | Derived from official event timetable tables on each meeting page, excluding paid/bronze test sessions |
 | `countryCode` | Venue country alpha-2 code |
 
 ---

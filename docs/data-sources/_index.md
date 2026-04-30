@@ -27,7 +27,7 @@ Each series has its own file. Use `_template.md` when researching a new series.
 | WEC | `wec` | Seed | Manual | [wec.md](wec.md) | 2026-03-22 |
 | IMSA WeatherTech | `imsa` | Seed | Manual | [imsa.md](imsa.md) | 2026-03-28 |
 | DTM | `dtm` | Seed | Manual | [dtm.md](dtm.md) | 2026-03-28 |
-| GT World Europe | `gtworld` | Seed | GT World Challenge Europe official site | [gtworld.md](gtworld.md) | 2026-04-12 |
+| GT World Europe | `gtworld` | Seed | GT World Challenge Europe official site | [gtworld.md](gtworld.md) | 2026-04-30 |
 | NLS | `nls` | Seed | Official schedule | [nls.md](nls.md) | 2026-03-28 |
 | World Superbike | `wsbk` | API + Seed fallback | WorldSBK Pulselive | [wsbk.md](wsbk.md) | 2026-03-28 |
 | Super Formula | `superformula` | Seed | Manual | [superformula.md](superformula.md) | 2026-03-28 |

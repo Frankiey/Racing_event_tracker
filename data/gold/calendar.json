@@ -1338,10 +1338,6 @@
       },
       "sessions": [
         {
-          "type": "Bronze Test",
-          "startTimeUTC": "2026-04-10T07:00:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-04-10T12:25:00Z"
         },
@@ -1367,7 +1363,7 @@
         }
       ],
       "dateStart": "2026-04-10",
-      "dateEnd": "2026-04-12"
+      "dateEnd": "2026-04-11"
     },
     {
       "id": "nls-2026-r03",
@@ -2844,14 +2840,6 @@
       },
       "sessions": [
         {
-          "type": "Bronze Test",
-          "startTimeUTC": "2026-05-28T13:45:00Z"
-        },
-        {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-05-29T14:50:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-05-30T07:00:00Z"
         },
@@ -2868,7 +2856,7 @@
           "startTimeUTC": "2026-05-31T13:30:00Z"
         }
       ],
-      "dateStart": "2026-05-29",
+      "dateStart": "2026-05-30",
       "dateEnd": "2026-05-31"
     },
     {
@@ -3878,14 +3866,6 @@
       },
       "sessions": [
         {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-06-23T12:40:00Z"
-        },
-        {
-          "type": "Bronze Test",
-          "startTimeUTC": "2026-06-23T14:55:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-06-25T08:10:00Z"
         },
@@ -3930,7 +3910,7 @@
           "startTimeUTC": "2026-06-27T14:30:00Z"
         }
       ],
-      "dateStart": "2026-06-24",
+      "dateStart": "2026-06-25",
       "dateEnd": "2026-06-28"
     },
     {
@@ -4720,10 +4700,6 @@
       },
       "sessions": [
         {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-07-16T08:45:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-07-17T11:40:00Z"
         },
@@ -5201,10 +5177,6 @@
         "lng": 3.1636
       },
       "sessions": [
-        {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-07-30T11:45:00Z"
-        },
         {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-07-31T11:30:00Z"
@@ -5841,14 +5813,6 @@
       },
       "sessions": [
         {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-08-28T09:45:00Z"
-        },
-        {
-          "type": "Bronze Test",
-          "startTimeUTC": "2026-08-28T15:40:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-08-29T09:20:00Z"
         },
@@ -5865,7 +5829,7 @@
           "startTimeUTC": "2026-08-30T13:00:00Z"
         }
       ],
-      "dateStart": "2026-08-28",
+      "dateStart": "2026-08-29",
       "dateEnd": "2026-08-30"
     },
     {
@@ -6984,10 +6948,6 @@
       },
       "sessions": [
         {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-10-01T11:30:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-10-02T07:00:00Z"
         },
@@ -7473,14 +7433,6 @@
       },
       "sessions": [
         {
-          "type": "Bronze Test",
-          "startTimeUTC": "2026-10-15T14:50:00Z"
-        },
-        {
-          "type": "Official Paid Test Sessions 1",
-          "startTimeUTC": "2026-10-16T15:00:00Z"
-        },
-        {
           "type": "Free Practice 1",
           "startTimeUTC": "2026-10-17T07:30:00Z"
         },
@@ -7497,7 +7449,7 @@
           "startTimeUTC": "2026-10-18T14:15:00Z"
         }
       ],
-      "dateStart": "2026-10-16",
+      "dateStart": "2026-10-17",
       "dateEnd": "2026-10-18"
     },
     {

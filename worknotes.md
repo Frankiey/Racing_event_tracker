@@ -4,8 +4,8 @@
 - Bumped `@astrojs/check` to `^0.9.8`, which is the highest repo-documented safe upgrade while TypeScript remains on the 5.x line.
 - Tightened `pipeline.validate` so event envelopes must match their actual non-placeholder session dates.
 - Corrected seed source data where event date envelopes were out of sync with session timestamps: F3 Monaco, IndyCar Long Beach, GT World (Paul Ricard, Spa, Misano), and every Moto2/Moto3 weekend. Portugal and Valencia in Moto2/Moto3 had fully wrong weekend envelopes.
+- Resolved product decision: GT World `Official Paid Test Sessions` and `Bronze Test` entries are excluded from public calendar-facing data.
 - Pressing attention: rerun the pipeline to refresh `data/silver/` and `data/gold/` from the corrected seed layer as soon as terminal execution is available again.
-- Pressing attention: decide whether GT World paid tests / bronze tests should remain user-visible in the calendar, then align the seed file and docs.
 - Pressing attention: normalize Moto2/Moto3 `circuit.country` display values from shorthand codes to human-readable country names before those strings are surfaced more widely in UI or exports.
 
 ## Quality Refresh (2026-04-17)
