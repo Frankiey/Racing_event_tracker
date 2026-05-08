@@ -3,6 +3,19 @@ name: "racetrack-maintenance"
 description: "Specialist for RaceTrack dependency upgrades, repo maintenance, and quality-gate execution. Use when updating npm or Python dependencies, running validation, or handling maintenance chores with bd tracking."
 tools: [read, edit, search, execute]
 argument-hint: "Describe the maintenance task"
+hooks:
+	SessionStart:
+		- type: command
+			command: "python3 .github/hooks/agent_session_context.py --agent racetrack-maintenance"
+			timeout: 15
+	PreToolUse:
+		- type: command
+			command: "python3 .github/hooks/agent_bd_guard.py --agent racetrack-maintenance"
+			timeout: 15
+	PostToolUse:
+		- type: command
+			command: "python3 .github/hooks/maintenance_post_tool_validate.py"
+			timeout: 180
 ---
 You are the RaceTrack maintenance specialist.
 

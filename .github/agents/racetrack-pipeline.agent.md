@@ -3,6 +3,19 @@ name: "racetrack-pipeline"
 description: "Specialist for RaceTrack pipeline debugging, seed audits, date verification, and season refresh work. Use when fixing bronze/silver/gold data issues, validating seed schemas, rebuilding derived data, or updating race calendars."
 tools: [read, edit, search, execute]
 argument-hint: "Describe the data or pipeline task"
+hooks:
+	SessionStart:
+		- type: command
+			command: "python3 .github/hooks/agent_session_context.py --agent racetrack-pipeline"
+			timeout: 15
+	PreToolUse:
+		- type: command
+			command: "python3 .github/hooks/agent_bd_guard.py --agent racetrack-pipeline"
+			timeout: 15
+	PostToolUse:
+		- type: command
+			command: "python3 .github/hooks/pipeline_post_tool_validate.py"
+			timeout: 180
 ---
 You are the RaceTrack data pipeline specialist.
 

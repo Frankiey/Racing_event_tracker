@@ -39,6 +39,13 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 | `racetrack-maintenance` | `.github/agents/racetrack-maintenance.agent.md` | Dependency upgrades, maintenance, quality gates |
 | `racetrack-workflow-router` | `.github/agents/racetrack-workflow-router.agent.md` | Workflow selection and delegation |
 
+## Copilot Hooks
+
+- Agent-specific hook command scripts live in `.github/hooks/`.
+- `racetrack-pipeline` and `racetrack-maintenance` use agent-scoped hooks to inject `bd` context at session start, ask for confirmation when edit or terminal work starts without `bd` context, and run narrow automatic validation after relevant writes.
+- Enable `chat.useCustomAgentHooks` in VS Code so custom-agent hooks run.
+- Keep hook scripts small and auditable; they run shell commands with the same permissions as VS Code.
+
 ## Choosing a Workflow
 
 - Use `/add-series` for new championship support, metadata wiring, and pipeline integration.
