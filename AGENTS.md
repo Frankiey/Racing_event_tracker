@@ -20,36 +20,22 @@ bd close <id>         # Complete work
 
 ## Session Completion
 
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+**When ending a work session**, complete the steps below.
 
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create issues for anything that needs follow-up
 2. **Run quality gates** (if code changed) - `npm test`, `npm run validate:data`, `npm run build`
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
-   ```bash
-   git pull --rebase
-   bd dolt push
-   git push
-   git status  # MUST show "up to date with origin"
-   ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
-
-**CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+3. **Update issue status** - Close finished work or leave the issue in progress with current context
+4. **Verify** - Ensure the touched files are staged or otherwise ready for the next step in your workflow
+5. **Hand off** - Provide context for the next session
 <!-- END BEADS INTEGRATION -->
 
 ---
 
 ## Project Overview
 
-RaceTrack is a **static motorsport event tracker**. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
+RaceTrack is a **static motorsport event tracker**. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, GT World Challenge, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
 
 **Tech stack:**
 - Frontend: Astro (static-first, island architecture) + Tailwind CSS v4
@@ -85,6 +71,8 @@ src/
   lib/
     series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
     series-client.ts    — Browser-safe series metadata (derived from series.ts)
+    event-client.ts     — Browser event registry + `rt-open-event` helpers
+    filters.ts          — Persisted series filter state + `rt-filters-changed`
     client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
                           formatLocalTime, formatDateRange, isPastEvent,
                           readFavorites, toggleFavorite, safeJsonParse,
@@ -92,6 +80,7 @@ src/
     ics.ts              — ICS calendar file generation (client-side .ics export)
     sessions.ts         — Session abbreviations, labels, and duration helpers
     share-card.ts       — Canvas-based share image generation
+    time-format.ts      — Backwards-compatible barrel re-exporting from time.ts
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
     types.ts            — Shared frontend event/session TypeScript types
@@ -105,17 +94,20 @@ pipeline/
   utils.py        — HTTP client, JSON read/write helpers
   run.py          — Main pipeline entrypoint
 data/
-  bronze/         — Raw API responses (cached, do NOT commit)
+  bronze/         — Raw API responses (cached)
   silver/         — Cleaned/normalized per-series JSON
   gold/           — calendar.json, upcoming.json, broadcasts.json
   seed/           — Manual JSON for series without APIs
 public/           — Static assets (logos, flags, images)
 .claude/commands/ — Claude Code skill files (slash commands)
+.github/prompts/  — Copilot workspace prompts matching the Claude workflows
+.github/agents/   — Copilot custom specialists for frontend, pipeline, and maintenance
+.github/hooks/    — Copilot custom-agent guard and validation hooks
 ```
 
 ## Series Identifiers
 
-`f1` `f2` `f3` `fe` `indycar` `nascar` `motogp` `moto2` `moto3` `wec` `imsa` `dtm` `nls` `wsbk` `superformula` `iomtt`
+`f1` `f2` `f3` `fe` `indycar` `nascar` `motogp` `moto2` `moto3` `wec` `imsa` `dtm` `gtworld` `nls` `wsbk` `superformula` `iomtt`
 
 ## Data Sources
 
@@ -127,7 +119,7 @@ public/           — Static assets (logos, flags, images)
 | WSBK | WorldSBK Pulselive API | API (JWT-gated, seed fallback) |
 | F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
 | Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
-| IMSA, DTM, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
+| IMSA, DTM, GT World, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
 
 ## Commands
 
@@ -136,6 +128,8 @@ public/           — Static assets (logos, flags, images)
 npm run dev                                    # local Astro dev server
 npm run build                                  # production build
 npm run preview                                # preview production build
+npm run typecheck                              # Astro typecheck only
+npm run test:smoke                             # frontend smoke test only
 
 # Quality gates — run before every commit
 npm test                                       # Astro check + smoke tests + pipeline unit tests
@@ -199,7 +193,7 @@ The pipeline uses a **medallion architecture**:
 2. **Silver** (`data/silver/`) — cleaned and normalized per-series JSON, committed
 3. **Gold** (`data/gold/`) — merged `calendar.json` and `upcoming.json`, committed
 
-Series with stable free APIs (F1, MotoGP, NASCAR) are fetched automatically. Series without APIs use manually curated **seed files** in `data/seed/` which feed directly into silver transforms.
+Series with stable free APIs (F1, MotoGP, NASCAR) are fetched automatically. Series without APIs use manually curated **seed files** in `data/seed/` which feed directly into silver transforms, including GT World.
 
 When editing seed data, always rebuild:
 ```bash
@@ -217,5 +211,6 @@ npm run validate:data
 | Full season data refresh | `/season-update` | Start of season / mid-season |
 | Add a new series | `/add-series` | On demand |
 | Debug pipeline issues | `/pipeline-debug` | On demand |
+| Show the shared workflow map | `/ai-workflows` | Route to the right workflow |
 
-Run skills via Claude Code: type `/verify-dates`, `/seed-audit`, etc. in the prompt.
+Run skills via Claude Code: type `/verify-dates`, `/seed-audit`, etc. in the prompt. Matching Copilot prompts live in `.github/prompts/`, with custom specialists in `.github/agents/` and optional hooks in `.github/hooks/`.

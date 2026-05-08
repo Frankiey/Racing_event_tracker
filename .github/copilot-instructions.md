@@ -5,21 +5,23 @@
 This project uses **bd (beads)** for issue tracking — do NOT use markdown TODO lists or GitHub issues for day-to-day tasks.
 
 ```bash
+bd prime              # Show workflow details
 bd ready              # Find available work
 bd show <id>          # View issue details
 bd update <id> --claim  # Claim work
 bd close <id>         # Complete work
+bd remember           # Store persistent tracker notes
 ```
 
 **Session close protocol** — before finishing a session:
 1. File issues for remaining work (`bd create`)
 2. Run quality gates (`npm test`, `npm run validate:data`, `npm run build`)
-3. Close finished issues (`bd close <id>`)
+3. Update or close the relevant issue (`bd update`, `bd close <id>`)
 ---
 
 ## Project Overview
 
-RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, WEC/endurance, and more into a single dashboard.
+RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, GT World Challenge, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
 
 **Tech stack:**
 - Frontend: Astro (static-first, island architecture) + Tailwind CSS v4
@@ -55,6 +57,8 @@ src/
   lib/
     series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
     series-client.ts    — Browser-safe series metadata (derived from series.ts)
+    event-client.ts     — Browser event registry + modal-opening helpers
+    filters.ts          — Persisted series filter state + change broadcasting
     client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
                           formatLocalTime, formatDateRange, isPastEvent,
                           readFavorites, toggleFavorite, safeJsonParse,
@@ -62,6 +66,7 @@ src/
     ics.ts              — ICS calendar file generation (client-side .ics export)
     sessions.ts         — Canonical session labels, abbreviations, and durations
     share-card.ts       — Social/share image generation for calendar selections
+    time-format.ts      — Backwards-compatible barrel re-exporting from time.ts
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
     types.ts            — Shared frontend event/session TypeScript types
@@ -78,15 +83,19 @@ data/
   bronze/         — Raw API responses (cached)
   silver/         — Cleaned/normalized per-series JSON
   gold/           — calendar.json, upcoming.json, broadcasts.json
-  seed/           — Manual JSON for series without APIs or stable free feeds (F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT; WSBK fallback)
+  seed/           — Manual JSON for series without APIs or stable free feeds (F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT; WSBK fallback)
 public/           — Static assets (logos, flags, images)
+.claude/commands/ — Claude workflow source files
+.github/prompts/  — Copilot workspace prompts mirroring shared workflows
+.github/agents/   — Copilot specialists for frontend, pipeline, maintenance, routing
+.github/hooks/    — Copilot custom-agent guard and validation hooks
 ```
 
 ## Key Conventions
 
 - All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
 - Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`, `iomtt`
+- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `gtworld`, `nls`, `wsbk`, `superformula`, `iomtt`
 - Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
 - Prefer static generation over client-side fetching
 - Dark mode is the default theme
@@ -102,6 +111,8 @@ public/           — Static assets (logos, flags, images)
 npm run dev                                    # local Astro dev server with hot reload
 npm run build                                  # production build
 npm run preview                                # preview production build locally
+npm run typecheck                              # Astro typecheck only
+npm run test:smoke                             # frontend smoke test only
 npm run fetch-data                             # run Python data pipeline
 uv run python -m pipeline --series f1,motogp  # fetch specific series only
 uv run python -m pipeline --bronze-only        # fetch raw data without transforms
@@ -115,7 +126,7 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 | MotoGP | Pulselive API | API (free, no auth) |
 | NASCAR | NASCAR CDN | API (free, no auth) |
 | WSBK | WorldSBK Pulselive API (seed fallback) | API + seed fallback |
-| F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
+| F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
 
 ## Don't
 
@@ -137,7 +148,8 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 | Add a new series | `/add-series` | On demand |
 | Debug pipeline issues | `/pipeline-debug` | On demand |
 | Scaffold a new component | `/new-component` | On demand |
+| Show the shared workflow map | `/ai-workflows` | Route to the right workflow |
 
-Claude Code reads the source workflow files in `.claude/commands/`. Copilot exposes matching workspace prompt files in `.github/prompts/`, so the same slash commands are available from Copilot Chat in this repo.
+Claude Code reads the source workflow files in `.claude/commands/`. Copilot exposes matching workspace prompt files in `.github/prompts/`, with task-focused specialists in `.github/agents/` and optional guard/validation hooks in `.github/hooks/`.
 
 For a shared index of Claude workflows, Copilot prompts, and `bd` expectations, see `docs/ai-workflows.md`.

@@ -38,7 +38,7 @@ bd close <id>         # Complete work
 # RaceTrack — Claude Instructions
 
 ## Project Overview
-RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
+RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, GT World Challenge, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
 
 ## Tech Stack
 - **Frontend:** Astro (static-first, island architecture) + Tailwind CSS v4
@@ -73,6 +73,8 @@ src/
   lib/
     series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
     series-client.ts    — Browser-safe series metadata (derived from series.ts)
+    event-client.ts     — Browser event registry + modal-opening helpers
+    filters.ts          — Persisted series filter state + change broadcasting
     client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
                           formatLocalTime, formatDateRange, isPastEvent,
                           readFavorites, toggleFavorite, safeJsonParse,
@@ -80,6 +82,7 @@ src/
     ics.ts              — ICS calendar file generation (client-side .ics export)
     sessions.ts         — Session abbreviations, labels, and duration helpers
     share-card.ts       — Canvas-based share image generation for calendar/date picks
+    time-format.ts      — Backwards-compatible barrel re-exporting from time.ts
     time.ts             — Server-side helpers: formatDateRange, getRaceSession,
                           isPlaceholderTime, countryFlag, isPastEvent
     types.ts            — Shared frontend event/session TypeScript types
@@ -96,14 +99,18 @@ data/
   bronze/         — Raw API responses (cached)
   silver/         — Cleaned/normalized per-series JSON
   gold/           — calendar.json, upcoming.json, broadcasts.json
-  seed/           — Manual JSON for series without APIs (FE, IndyCar, WEC, F2, F3)
+  seed/           — Manual JSON for series without APIs or stable free feeds
 public/           — Static assets (logos, flags, images)
+.claude/commands/ — Claude workflow source files
+.github/prompts/  — Copilot prompts mirroring the shared workflows
+.github/agents/   — Copilot specialists for frontend, pipeline, maintenance, routing
+.github/hooks/    — Copilot custom-agent guard and validation hooks
 ```
 
 ## Key Conventions
 - All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
 - Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `nls`, `wsbk`, `superformula`, `iomtt`
+- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `gtworld`, `nls`, `wsbk`, `superformula`, `iomtt`
 - Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
 - Prefer static generation over client-side fetching
 - Dark mode is the default theme
@@ -116,15 +123,17 @@ public/           — Static assets (logos, flags, images)
 - `npm run dev` — local Astro dev server with hot reload
 - `npm run build` — production build
 - `npm run preview` — preview production build locally
+- `npm run typecheck` — Astro typecheck only
 - `npm test` — Astro check, frontend smoke tests, and Python pipeline unit tests
 - `npm run test:pipeline` — Python pipeline unit tests only
+- `npm run test:smoke` — frontend smoke tests only
 - `npm run validate:data` — validate seed, silver, and gold JSON files
 - `npm run fetch-data` — run Python data pipeline (`uv run python -m pipeline`)
 - `uv run python -m pipeline --series f1,motogp` — fetch specific series only
 - `uv run python -m pipeline --bronze-only` — fetch raw data without transforms
 
 ## Data Pipeline
-Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without stable free public APIs (FE, IndyCar, WEC, F2, F3, Moto2, Moto3, IMSA, DTM, NLS, Super Formula, IOMTT) use manually curated seed files in `data/seed/`, while WSBK keeps a seed fallback. A GitHub Action runs this nightly and commits updated data.
+Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without stable free public APIs (FE, IndyCar, WEC, F2, F3, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT) use manually curated seed files in `data/seed/`, while WSBK keeps a seed fallback. A GitHub Action runs this nightly and commits updated data.
 
 ## Data Sources
 | Series | Source | Type |
@@ -135,12 +144,18 @@ Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive 
 | WSBK | WorldSBK Pulselive API | API (JWT-gated, seed fallback) |
 | F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
 | Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
-| IMSA, DTM, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
+| IMSA, DTM, GT World, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
 
 ## Slash Commands
 - `.claude/commands/add-series.md` — guide for adding a new series end to end
 - `.claude/commands/pipeline-debug.md` — pipeline debugging workflow
 - `.claude/commands/new-component.md` — scaffold a new Astro component following repo conventions
+- `.claude/commands/seed-audit.md` — audit manual seed data before bulk edits
+- `.claude/commands/season-update.md` — refresh a season of data end to end
+- `.claude/commands/update-deps.md` — upgrade npm and Python dependencies safely
+- `.claude/commands/verify-dates.md` — cross-check schedules for stale dates
+
+Matching Copilot prompts live in `.github/prompts/`, supported by `.github/agents/` and `.github/hooks/`.
 
 ## File Search Tips
 - When using Glob, always scope to a specific subdirectory (`src/`, `docs/`, `data/`, `pipeline/`) — never glob from the project root with `**` patterns, as it will match thousands of `node_modules` files

@@ -114,8 +114,14 @@ uv run python -m pipeline --bronze-only
 Quality and validation commands:
 
 ```bash
+# Frontend typecheck only
+npm run typecheck
+
 # Frontend typecheck + smoke tests + Python pipeline unit tests
 npm test
+
+# Frontend smoke tests only
+npm run test:smoke
 
 # Python pipeline unit tests only
 npm run test:pipeline
@@ -128,9 +134,8 @@ npm run build
 ```
 
 Current toolchain note:
-- Astro and `@types/node` are updated to the latest compatible releases used in this repo.
-- The transitive `yaml-language-server` / `yaml` advisory in the Astro check chain is patched via npm overrides, and `npm audit` is currently clean.
-- TypeScript 6 and Vite 8 are intentionally not adopted yet because the current `@astrojs/check` stack still peers against TypeScript `^5.0.0`.
+- `package.json` currently pins Astro 6.3.x, TypeScript 5.9.x, and Vite 7.3.x.
+- The transitive `yaml-language-server` / `yaml` advisory in the Astro toolchain is patched via npm overrides.
 
 ---
 
@@ -140,7 +145,7 @@ Current toolchain note:
 src/
   pages/          Astro pages (index, calendar, recap, passport, watchlist, status, series/[id], widget/[series])
   components/     EventCard, EventModal, Countdown, SeriesBadge, Nav, ...
-  lib/            series.ts metadata, time.ts utilities
+  lib/            series metadata, event registry helpers, filters, time utilities, ICS/share helpers
   styles/         Tailwind v4 + global animations
 pipeline/
   fetchers/       Bronze layer: raw API fetch scripts
@@ -148,9 +153,11 @@ pipeline/
 data/
   bronze/         Raw cached API responses
   silver/         Normalized per-series JSON
-  gold/           calendar.json + upcoming.json (consumed by Astro)
+  gold/           calendar.json, upcoming.json, broadcasts.json
   seed/           Manual JSON for series without public APIs
-docs/             Architecture decisions and data schema
+docs/             Architecture, AI workflow map, and data-source notes
+.github/          Copilot instructions, prompts, custom agents, hooks, workflows
+.claude/commands/ Claude workflow source files
 ```
 
 Full architecture: [docs/architecture.md](docs/architecture.md)
@@ -161,7 +168,7 @@ Full architecture: [docs/architecture.md](docs/architecture.md)
 
 Contributions are welcome — bug fixes, new series data, UI improvements, pipeline improvements. If you follow motorsport, you probably already know what's missing.
 
-**Before you start:** if you're working inside the repo, track work with `bd`; for external drive-by fixes, a PR is still fine.
+**Before you start:** if you're working inside the repo, track work with `bd`; for external drive-by fixes, a PR is still fine. For repo-maintenance sessions, file follow-up work in `bd`, run `npm test`, `npm run validate:data`, and `npm run build` when the touched slice warrants it, then update or close the relevant issue before handoff.
 
 **Good first contributions:**
 - Fix or update seed data for a series you follow closely
@@ -182,7 +189,7 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), and focused Copilot custom agents (`.github/agents/`).
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers
@@ -207,7 +214,7 @@ Try these slash commands once you've cloned the repo:
 | `/verify-dates` | Cross-check schedule dates for stale or implausible data |
 | `/ai-workflows` | Show the shared workflow map and route to the right command |
 
-Claude reads the source workflow files in `.claude/commands/`. Copilot exposes equivalent prompt files in `.github/prompts/`.
+Claude reads the source workflow files in `.claude/commands/`. Copilot exposes equivalent prompt files in `.github/prompts/`, with task-focused agents in `.github/agents/` and optional guard/validation hooks in `.github/hooks/`.
 
 ---
 

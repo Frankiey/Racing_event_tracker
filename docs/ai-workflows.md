@@ -7,15 +7,16 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 - Claude Code source workflows live in `.claude/commands/`.
 - GitHub Copilot workspace prompts live in `.github/prompts/`.
 - GitHub Copilot custom specialists live in `.github/agents/`.
+- GitHub Copilot custom-agent hook scripts live in `.github/hooks/`.
 - `bd` is the required issue tracker for both assistants. Do not use markdown TODO lists or GitHub issues for day-to-day task tracking.
 
 ## Agentic-First Rules
 
 - Start from tracked work when possible: check `bd ready`, inspect the relevant issue, and claim or update it.
+- Use `bd prime` when you need the full workflow reference, and `bd remember` for persistent tracker notes.
 - Prefer doing the work end-to-end in the repo when the user is asking for execution, not just advice.
 - Validate the touched slice as soon as possible after the first substantive change.
-- Before ending a coding session with file changes, run `npm test`, `npm run validate:data`, and `npm run build` unless the task scope clearly does not require all of them.
-- Close or update the relevant `bd` issue before handoff.
+- Before ending a coding session with file changes, file any follow-up work in `bd`, run `npm test`, `npm run validate:data`, and `npm run build` unless the task scope clearly does not require all of them, then update or close the relevant `bd` issue before handoff.
 
 ## Shared Slash Commands
 
@@ -46,6 +47,13 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 - Enable `chat.useCustomAgentHooks` in VS Code so custom-agent hooks run.
 - Keep hook scripts small and auditable; they run shell commands with the same permissions as VS Code.
 
+| Hook file | Purpose |
+|-----------|---------|
+| `.github/hooks/agent_session_context.py` | Pull issue/session context into matching agents at startup |
+| `.github/hooks/agent_bd_guard.py` | Guard edit and terminal actions when no `bd` context is attached |
+| `.github/hooks/pipeline_post_tool_validate.py` | Run narrow post-edit validation for pipeline-focused work |
+| `.github/hooks/maintenance_post_tool_validate.py` | Run narrow post-edit validation for maintenance work |
+
 ## Choosing a Workflow
 
 - Use `/add-series` for new championship support, metadata wiring, and pipeline integration.
@@ -59,10 +67,12 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 ## bd Quick Reference
 
 ```bash
+bd prime
 bd ready
 bd show <id>
 bd update <id> --claim
 bd close <id>
+bd remember
 ```
 
 If new follow-up work appears during execution, file it in `bd` before finishing the session.
