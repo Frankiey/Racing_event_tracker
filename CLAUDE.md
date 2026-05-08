@@ -165,6 +165,8 @@ Matching Copilot prompts live in `.github/prompts/`, supported by `.github/agent
 
 ## When Making Changes
 - Check `docs/architecture.md` for system design decisions
+- Check `docs/product-vision.md` for original product intent, covered series, and feature ideas
+- Check `docs/data-sources/` for per-series API research and source decisions
 - Check `worknotes.md` for current status and open questions
 - Run `bd ready` to find tracked open issues before starting new work
 - Keep the `/status` route minimal — it targets small screens and kiosk displays

@@ -201,6 +201,13 @@ uv run python -m pipeline --series <id>
 npm run validate:data
 ```
 
+## Key Reference Docs
+
+- `docs/architecture.md` — system design decisions
+- `docs/product-vision.md` — original product intent, covered series, and feature ideas
+- `docs/feature-ideas.md` — creative feature brainstorm with complexity ratings
+- `docs/data-sources/` — per-series API research and source decisions (one file per series)
+
 ## Agent Workflows (Slash Commands)
 
 | Task | Skill | When |
