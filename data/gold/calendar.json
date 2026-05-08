@@ -1,7 +1,7 @@
 {
   "generated": "2026-04-30T05:13:32Z",
   "season": 2026,
-  "eventCount": 250,
+  "eventCount": 251,
   "sources": [
     "dtm",
     "f1",
@@ -1872,6 +1872,40 @@
       "dateEnd": "2026-05-03"
     },
     {
+      "id": "f2-2026-r02",
+      "seriesId": "f2",
+      "eventName": "Miami",
+      "round": 2,
+      "circuit": {
+        "name": "Miami International Autodrome",
+        "city": "Miami",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 25.9581,
+        "lng": -80.2389
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-01T13:30:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-05-01T18:30:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-05-02T14:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-05-03T16:30:00Z"
+        }
+      ],
+      "dateStart": "2026-05-01",
+      "dateEnd": "2026-05-03"
+    },
+    {
       "id": "fe-2026-r07",
       "seriesId": "fe",
       "eventName": "Berlin E-Prix",
@@ -3132,10 +3166,10 @@
       "dateEnd": "2026-06-07"
     },
     {
-      "id": "f2-2026-r02",
+      "id": "f2-2026-r03",
       "seriesId": "f2",
       "eventName": "Monaco",
-      "round": 2,
+      "round": 3,
       "circuit": {
         "name": "Circuit de Monaco",
         "city": "Monte Carlo",
@@ -3447,10 +3481,10 @@
       "dateEnd": "2026-06-14"
     },
     {
-      "id": "f2-2026-r03",
+      "id": "f2-2026-r04",
       "seriesId": "f2",
       "eventName": "Spain",
-      "round": 3,
+      "round": 4,
       "circuit": {
         "name": "Circuit de Barcelona-Catalunya",
         "city": "Barcelona",
@@ -3982,10 +4016,10 @@
       "dateEnd": "2026-06-28"
     },
     {
-      "id": "f2-2026-r04",
+      "id": "f2-2026-r05",
       "seriesId": "f2",
       "eventName": "Austria",
-      "round": 4,
+      "round": 5,
       "circuit": {
         "name": "Red Bull Ring",
         "city": "Spielberg",
@@ -4247,10 +4281,10 @@
       "dateEnd": "2026-07-05"
     },
     {
-      "id": "f2-2026-r05",
+      "id": "f2-2026-r06",
       "seriesId": "f2",
       "eventName": "Great Britain",
-      "round": 5,
+      "round": 6,
       "circuit": {
         "name": "Silverstone Circuit",
         "city": "Silverstone",
@@ -4804,10 +4838,10 @@
       "dateEnd": "2026-07-19"
     },
     {
-      "id": "f2-2026-r06",
+      "id": "f2-2026-r07",
       "seriesId": "f2",
       "eventName": "Belgium",
-      "round": 6,
+      "round": 7,
       "circuit": {
         "name": "Circuit de Spa-Francorchamps",
         "city": "Stavelot",
@@ -4997,10 +5031,10 @@
       "dateEnd": "2026-07-26"
     },
     {
-      "id": "f2-2026-r07",
+      "id": "f2-2026-r08",
       "seriesId": "f2",
       "eventName": "Hungary",
-      "round": 7,
+      "round": 8,
       "circuit": {
         "name": "Hungaroring",
         "city": "Budapest",
@@ -5997,10 +6031,10 @@
       "dateEnd": "2026-09-06"
     },
     {
-      "id": "f2-2026-r08",
+      "id": "f2-2026-r09",
       "seriesId": "f2",
       "eventName": "Italy",
-      "round": 8,
+      "round": 9,
       "circuit": {
         "name": "Autodromo Nazionale Monza",
         "city": "Monza",
@@ -6244,10 +6278,10 @@
       "dateEnd": "2026-09-13"
     },
     {
-      "id": "f2-2026-r09",
+      "id": "f2-2026-r10",
       "seriesId": "f2",
       "eventName": "Madrid",
-      "round": 9,
+      "round": 10,
       "circuit": {
         "name": "Madring",
         "city": "Madrid",
@@ -6798,10 +6832,10 @@
       "dateEnd": "2026-09-27"
     },
     {
-      "id": "f2-2026-r10",
+      "id": "f2-2026-r11",
       "seriesId": "f2",
       "eventName": "Azerbaijan",
-      "round": 10,
+      "round": 11,
       "circuit": {
         "name": "Baku City Circuit",
         "city": "Baku",
@@ -8363,10 +8397,10 @@
       "dateEnd": "2026-11-29"
     },
     {
-      "id": "f2-2026-r11",
+      "id": "f2-2026-r12",
       "seriesId": "f2",
       "eventName": "Qatar",
-      "round": 11,
+      "round": 12,
       "circuit": {
         "name": "Lusail International Circuit",
         "city": "Lusail",
@@ -8436,10 +8470,10 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Qatar%20carbon.png"
     },
     {
-      "id": "f2-2026-r12",
+      "id": "f2-2026-r13",
       "seriesId": "f2",
       "eventName": "Abu Dhabi",
-      "round": 12,
+      "round": 13,
       "circuit": {
         "name": "Yas Marina Circuit",
         "city": "Abu Dhabi",
