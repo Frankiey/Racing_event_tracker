@@ -125,3 +125,17 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 - Don't hardcode timezone offsets — always use `Intl`/browser APIs
 - Don't use dynamic Tailwind class names like `bg-[#hex]` — use `style=` instead
 - Don't add features, refactor, or "improve" code beyond what was asked
+
+## Slash Commands (Claude Code Skills)
+
+| Task | Command | When |
+|------|---------|------|
+| Upgrade npm + Python deps | `/update-deps` | Monthly |
+| Check race dates vs reality | `/verify-dates` | Weekly |
+| Audit seed file schemas | `/seed-audit` | Before season updates |
+| Full season data refresh | `/season-update` | Start of season / mid-season |
+| Add a new series | `/add-series` | On demand |
+| Debug pipeline issues | `/pipeline-debug` | On demand |
+| Scaffold a new component | `/new-component` | On demand |
+
+These are Claude Code slash commands defined in `.claude/commands/`. Copilot does not run them, but they document the standard workflows an AI assistant should follow for recurring maintenance tasks.
