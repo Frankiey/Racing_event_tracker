@@ -126,7 +126,7 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 - Don't use dynamic Tailwind class names like `bg-[#hex]` — use `style=` instead
 - Don't add features, refactor, or "improve" code beyond what was asked
 
-## Slash Commands (Claude Code Skills)
+## Shared AI Workflows
 
 | Task | Command | When |
 |------|---------|------|
@@ -138,4 +138,6 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 | Debug pipeline issues | `/pipeline-debug` | On demand |
 | Scaffold a new component | `/new-component` | On demand |
 
-These are Claude Code slash commands defined in `.claude/commands/`. Copilot does not run them, but they document the standard workflows an AI assistant should follow for recurring maintenance tasks.
+Claude Code reads the source workflow files in `.claude/commands/`. Copilot exposes matching workspace prompt files in `.github/prompts/`, so the same slash commands are available from Copilot Chat in this repo.
+
+For a shared index of Claude workflows, Copilot prompts, and `bd` expectations, see `docs/ai-workflows.md`.

@@ -182,13 +182,17 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) — Anthropic's AI coding assistant — as a first-class collaborator. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)) and slash commands (`.claude/commands/`) that make Claude immediately productive in this repo.
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), and matching Copilot workspace prompts (`.github/prompts/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers
 - Tailwind v4 gotchas specific to this project
 - How to add a new series end-to-end
 - The issue tracking workflow (`bd`)
+
+**If you use GitHub Copilot**, open Chat and type `/` to access the matching workspace prompts for the same recurring workflows.
+
+See [docs/ai-workflows.md](docs/ai-workflows.md) for the shared Claude/Copilot workflow map and the `bd` expectations that apply to both assistants.
 
 Try these slash commands once you've cloned the repo:
 
@@ -197,6 +201,13 @@ Try these slash commands once you've cloned the repo:
 | `/add-series` | Step-by-step guide to add a new motorsport series |
 | `/pipeline-debug` | Diagnose and fix data pipeline issues |
 | `/new-component` | Scaffold a new Astro component following project conventions |
+| `/seed-audit` | Audit seed file schemas before bulk updates |
+| `/season-update` | Refresh a season's worth of data end-to-end |
+| `/update-deps` | Upgrade npm and Python dependencies safely |
+| `/verify-dates` | Cross-check schedule dates for stale or implausible data |
+| `/ai-workflows` | Show the shared workflow map and route to the right command |
+
+Claude reads the source workflow files in `.claude/commands/`. Copilot exposes equivalent prompt files in `.github/prompts/`.
 
 ---
 
