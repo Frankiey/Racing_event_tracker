@@ -2,7 +2,7 @@
 description: "Upgrade RaceTrack npm and Python dependencies. Use when refreshing package versions and validating the repo after dependency changes."
 name: "Update Dependencies"
 argument-hint: "Optional scope or constraints for the dependency update"
-agent: "agent"
+agent: "racetrack-maintenance"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/update-deps.md](./../../.claude/commands/update-deps.md).

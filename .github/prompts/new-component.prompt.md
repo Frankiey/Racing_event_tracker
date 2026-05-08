@@ -2,7 +2,7 @@
 description: "Scaffold a new Astro component for RaceTrack. Use when creating a new component or UI slice that should follow repo conventions."
 name: "New Component"
 argument-hint: "Describe the component and where it should be used"
-agent: "agent"
+agent: "racetrack-frontend"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/new-component.md](./../../.claude/commands/new-component.md).

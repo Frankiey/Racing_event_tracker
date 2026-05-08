@@ -2,7 +2,7 @@
 description: "Add a new motorsport series to RaceTrack end-to-end. Use when adding a new series, wiring pipeline support, or creating seed data."
 name: "Add Series"
 argument-hint: "Series name and ID, for example: GT World Challenge, id: gtworld"
-agent: "agent"
+agent: "racetrack-workflow-router"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/add-series.md](./../../.claude/commands/add-series.md).

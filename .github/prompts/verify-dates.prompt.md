@@ -2,7 +2,7 @@
 description: "Verify RaceTrack event dates against likely reality. Use when checking for stale schedules, wrong dates, placeholder times, or inconsistent statuses."
 name: "Verify Dates"
 argument-hint: "Optional series or date range to focus on"
-agent: "agent"
+agent: "racetrack-pipeline"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/verify-dates.md](./../../.claude/commands/verify-dates.md).

@@ -2,7 +2,7 @@
 description: "Audit RaceTrack seed file schemas. Use before season updates or when validating seed-file structure and data consistency."
 name: "Seed Audit"
 argument-hint: "Optional series to focus on, otherwise audit all seed files"
-agent: "agent"
+agent: "racetrack-pipeline"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/seed-audit.md](./../../.claude/commands/seed-audit.md).

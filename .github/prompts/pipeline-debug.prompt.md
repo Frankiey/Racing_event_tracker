@@ -2,7 +2,7 @@
 description: "Diagnose and fix a RaceTrack data pipeline issue. Use when data is missing, malformed, stale, or not rendering in the UI."
 name: "Pipeline Debug"
 argument-hint: "Describe the symptom and affected series"
-agent: "agent"
+agent: "racetrack-pipeline"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/pipeline-debug.md](./../../.claude/commands/pipeline-debug.md).

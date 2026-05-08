@@ -182,7 +182,7 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), and matching Copilot workspace prompts (`.github/prompts/`).
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), and focused Copilot custom agents (`.github/agents/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers

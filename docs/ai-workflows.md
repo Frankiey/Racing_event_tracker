@@ -6,6 +6,7 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 
 - Claude Code source workflows live in `.claude/commands/`.
 - GitHub Copilot workspace prompts live in `.github/prompts/`.
+- GitHub Copilot custom specialists live in `.github/agents/`.
 - `bd` is the required issue tracker for both assistants. Do not use markdown TODO lists or GitHub issues for day-to-day task tracking.
 
 ## Agentic-First Rules
@@ -28,6 +29,15 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 | `/update-deps` | `.claude/commands/update-deps.md` | `.github/prompts/update-deps.prompt.md` | Upgrade npm and Python dependencies |
 | `/verify-dates` | `.claude/commands/verify-dates.md` | `.github/prompts/verify-dates.prompt.md` | Cross-check race dates |
 | `/ai-workflows` | n/a | `.github/prompts/ai-workflows.prompt.md` | Explain and route to the right workflow |
+
+## Copilot Specialists
+
+| Agent | File | Focus |
+|-------|------|-------|
+| `racetrack-pipeline` | `.github/agents/racetrack-pipeline.agent.md` | Bronze/silver/gold data work, audits, calendar maintenance |
+| `racetrack-frontend` | `.github/agents/racetrack-frontend.agent.md` | Astro UI, components, pages, client-side conventions |
+| `racetrack-maintenance` | `.github/agents/racetrack-maintenance.agent.md` | Dependency upgrades, maintenance, quality gates |
+| `racetrack-workflow-router` | `.github/agents/racetrack-workflow-router.agent.md` | Workflow selection and delegation |
 
 ## Choosing a Workflow
 

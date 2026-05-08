@@ -2,7 +2,7 @@
 description: "Refresh RaceTrack season data end-to-end. Use at season rollover or for large calendar reshuffles across multiple series."
 name: "Season Update"
 argument-hint: "Season year or scope of the refresh"
-agent: "agent"
+agent: "racetrack-pipeline"
 ---
 
 Follow the full repo workflow in [./../../.claude/commands/season-update.md](./../../.claude/commands/season-update.md).
