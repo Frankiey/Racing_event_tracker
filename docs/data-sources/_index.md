@@ -22,8 +22,8 @@ Each series has its own file. Use `_template.md` when researching a new series.
 | IndyCar | `indycar` | Seed | Manual | [indycar.md](indycar.md) | 2026-03-22 |
 | NASCAR Cup | `nascar` | API | NASCAR CDN | [nascar.md](nascar.md) | 2026-03-22 |
 | MotoGP | `motogp` | API | Pulselive API | [motogp.md](motogp.md) | 2026-03-22 |
-| Moto2 | `moto2` | Seed | Manual (MotoGP offset) | [moto2-moto3.md](moto2-moto3.md) | 2026-03-22 |
-| Moto3 | `moto3` | Seed | Manual (MotoGP offset) | [moto2-moto3.md](moto2-moto3.md) | 2026-03-22 |
+| Moto2 | `moto2` | API | Pulselive support category | [moto2-moto3.md](moto2-moto3.md) | 2026-05-09 |
+| Moto3 | `moto3` | API | Pulselive support category | [moto2-moto3.md](moto2-moto3.md) | 2026-05-09 |
 | WEC | `wec` | Seed | Manual | [wec.md](wec.md) | 2026-03-22 |
 | IMSA WeatherTech | `imsa` | Seed | Manual | [imsa.md](imsa.md) | 2026-03-28 |
 | DTM | `dtm` | Seed | Manual | [dtm.md](dtm.md) | 2026-03-28 |

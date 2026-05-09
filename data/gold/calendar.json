@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-09T13:38:43Z",
+  "generated": "2026-05-09T13:43:43Z",
   "season": 2026,
   "eventCount": 251,
   "sources": [
@@ -383,82 +383,6 @@
       "dateEnd": "2026-02-22"
     },
     {
-      "id": "moto3-2026-r01",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Thailand",
-      "round": 1,
-      "circuit": {
-        "name": "Chang International Circuit",
-        "city": "Buriram",
-        "country": "THA",
-        "countryCode": "TH",
-        "lat": 14.9618,
-        "lng": 103.0851
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-02-27T02:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-02-27T06:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-02-28T01:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-02-28T05:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-03-01T05:00:00Z"
-        }
-      ],
-      "dateStart": "2026-02-27",
-      "dateEnd": "2026-03-01"
-    },
-    {
-      "id": "moto2-2026-r01",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Thailand",
-      "round": 1,
-      "circuit": {
-        "name": "Chang International Circuit",
-        "city": "Buriram",
-        "country": "THA",
-        "countryCode": "TH",
-        "lat": 14.9618,
-        "lng": 103.0851
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-02-27T02:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-02-27T07:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-02-28T02:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-02-28T06:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-03-01T06:20:00Z"
-        }
-      ],
-      "dateStart": "2026-02-27",
-      "dateEnd": "2026-03-01"
-    },
-    {
       "id": "motogp-2026-r01",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF THAILAND",
@@ -503,6 +427,94 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-03-01T08:00:00Z"
+        }
+      ],
+      "dateStart": "2026-02-27",
+      "dateEnd": "2026-03-01"
+    },
+    {
+      "id": "moto3-2026-r01",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Thailand",
+      "round": 1,
+      "circuit": {
+        "name": "Chang International Circuit",
+        "city": "Buriram",
+        "country": "THA",
+        "countryCode": "TH",
+        "lat": 14.9618,
+        "lng": 103.0851
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-02-27T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-02-27T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-02-28T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-02-28T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-02-28T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-03-01T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-02-27",
+      "dateEnd": "2026-03-01"
+    },
+    {
+      "id": "moto2-2026-r01",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Thailand",
+      "round": 1,
+      "circuit": {
+        "name": "Chang International Circuit",
+        "city": "Buriram",
+        "country": "THA",
+        "countryCode": "TH",
+        "lat": 14.9618,
+        "lng": 103.0851
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-02-27T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-02-27T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-02-28T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-02-28T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-02-28T14:05:00Z"
+        },
+        {
+          "type": "Race1",
+          "startTimeUTC": "2026-03-01T13:15:00Z"
+        },
+        {
+          "type": "Race2",
+          "startTimeUTC": "2026-03-01T13:45:00Z"
         }
       ],
       "dateStart": "2026-02-27",
@@ -898,23 +910,31 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-03-20T13:20:00Z"
+          "startTimeUTC": "2026-03-20T10:00:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-03-20T17:15:00Z"
+          "startTimeUTC": "2026-03-20T14:15:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-03-21T11:40:00Z"
+          "startTimeUTC": "2026-03-21T08:40:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-21T17:05:00Z"
+          "type": "Q1",
+          "startTimeUTC": "2026-03-21T17:10:00Z"
         },
         {
-          "type": "Race",
-          "startTimeUTC": "2026-03-22T15:00:00Z"
+          "type": "Q2",
+          "startTimeUTC": "2026-03-21T17:35:00Z"
+        },
+        {
+          "type": "Race1",
+          "startTimeUTC": "2026-03-22T12:00:00Z"
+        },
+        {
+          "type": "Race2",
+          "startTimeUTC": "2026-03-22T12:30:00Z"
         }
       ],
       "dateStart": "2026-03-20",
@@ -936,23 +956,27 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-03-20T14:10:00Z"
+          "startTimeUTC": "2026-03-20T11:00:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-03-20T18:05:00Z"
+          "startTimeUTC": "2026-03-20T15:05:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-03-21T12:25:00Z"
+          "startTimeUTC": "2026-03-21T09:25:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-21T18:05:00Z"
+          "type": "Q1",
+          "startTimeUTC": "2026-03-22T09:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-03-22T10:05:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-03-22T16:20:00Z"
+          "startTimeUTC": "2026-03-22T13:25:00Z"
         }
       ],
       "dateStart": "2026-03-20",
@@ -1130,6 +1154,48 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Japan%20carbon.png"
     },
     {
+      "id": "moto3-2026-r03",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of The United States",
+      "round": 3,
+      "circuit": {
+        "name": "Circuit Of The Americas",
+        "city": "Austin",
+        "country": "USA",
+        "countryCode": "US",
+        "lat": 30.1328,
+        "lng": -97.6411
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-03-27T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-03-27T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-03-28T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-03-28T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-03-28T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-03-29T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-03-27",
+      "dateEnd": "2026-03-29"
+    },
+    {
       "id": "wsbk-2026-r02",
       "seriesId": "wsbk",
       "eventName": "WorldSBK Portimão",
@@ -1176,44 +1242,6 @@
       "dateEnd": "2026-03-29"
     },
     {
-      "id": "moto3-2026-r03",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of The United States",
-      "round": 3,
-      "circuit": {
-        "name": "Circuit Of The Americas",
-        "city": "Austin",
-        "country": "USA",
-        "countryCode": "US",
-        "lat": 30.1328,
-        "lng": -97.6411
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-03-27T14:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-03-27T18:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-03-28T13:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-28T17:55:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-03-29T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-03-27",
-      "dateEnd": "2026-03-29"
-    },
-    {
       "id": "moto2-2026-r03",
       "seriesId": "moto2",
       "eventName": "Moto2 Grand Prix Of The United States",
@@ -1229,23 +1257,27 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-03-27T14:50:00Z"
+          "startTimeUTC": "2026-03-27T09:50:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-03-27T19:05:00Z"
+          "startTimeUTC": "2026-03-27T14:05:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-03-28T14:25:00Z"
+          "startTimeUTC": "2026-03-28T09:25:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-28T18:55:00Z"
+          "type": "Q1",
+          "startTimeUTC": "2026-03-28T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-03-28T14:17:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-03-29T18:20:00Z"
+          "startTimeUTC": "2026-03-29T13:50:00Z"
         }
       ],
       "dateStart": "2026-03-27",
@@ -1698,82 +1730,6 @@
       "dateEnd": "2026-04-19"
     },
     {
-      "id": "moto3-2026-r04",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Spain",
-      "round": 4,
-      "circuit": {
-        "name": "Circuito de Jerez - Ángel Nieto",
-        "city": "Jerez de la Frontera",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 36.7083,
-        "lng": -6.034
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-04-24T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-24T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-04-25T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-04-25T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-26T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-04-24",
-      "dateEnd": "2026-04-26"
-    },
-    {
-      "id": "moto2-2026-r04",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Spain",
-      "round": 4,
-      "circuit": {
-        "name": "Circuito de Jerez - Ángel Nieto",
-        "city": "Jerez de la Frontera",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 36.7083,
-        "lng": -6.034
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-04-24T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-04-24T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-04-25T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-04-25T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-04-26T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-04-24",
-      "dateEnd": "2026-04-26"
-    },
-    {
       "id": "motogp-2026-r04",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF SPAIN",
@@ -1818,6 +1774,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-04-26T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-04-24",
+      "dateEnd": "2026-04-26"
+    },
+    {
+      "id": "moto3-2026-r04",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Spain",
+      "round": 4,
+      "circuit": {
+        "name": "Circuito de Jerez - Ángel Nieto",
+        "city": "Jerez de la Frontera",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 36.7083,
+        "lng": -6.034
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-04-24T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-04-24T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-04-25T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-04-25T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-04-25T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-04-26T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-04-24",
+      "dateEnd": "2026-04-26"
+    },
+    {
+      "id": "moto2-2026-r04",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Spain",
+      "round": 4,
+      "circuit": {
+        "name": "Circuito de Jerez - Ángel Nieto",
+        "city": "Jerez de la Frontera",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 36.7083,
+        "lng": -6.034
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-04-24T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-04-24T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-04-25T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-04-25T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-04-25T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-04-26T12:15:00Z"
         }
       ],
       "dateStart": "2026-04-24",
@@ -2203,82 +2243,6 @@
       "dateEnd": "2026-05-03"
     },
     {
-      "id": "moto3-2026-r05",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix De France",
-      "round": 5,
-      "circuit": {
-        "name": "Le Mans",
-        "city": "Le Mans",
-        "country": "FRA",
-        "countryCode": "FR",
-        "lat": 47.956,
-        "lng": 0.2075
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-08T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-08T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-09T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-09T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-10T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-05-08",
-      "dateEnd": "2026-05-10"
-    },
-    {
-      "id": "moto2-2026-r05",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix De France",
-      "round": 5,
-      "circuit": {
-        "name": "Le Mans",
-        "city": "Le Mans",
-        "country": "FRA",
-        "countryCode": "FR",
-        "lat": 47.956,
-        "lng": 0.2075
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-08T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-08T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-09T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-09T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-10T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-05-08",
-      "dateEnd": "2026-05-10"
-    },
-    {
       "id": "motogp-2026-r05",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX DE FRANCE",
@@ -2329,6 +2293,48 @@
       "dateEnd": "2026-05-10"
     },
     {
+      "id": "moto3-2026-r05",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix De France",
+      "round": 5,
+      "circuit": {
+        "name": "Le Mans",
+        "city": "Le Mans",
+        "country": "FRA",
+        "countryCode": "FR",
+        "lat": 47.956,
+        "lng": 0.2075
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-08T09:30:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-08T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-09T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-09T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-09T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-10T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-08",
+      "dateEnd": "2026-05-10"
+    },
+    {
       "id": "wec-2026-r02",
       "seriesId": "wec",
       "eventName": "6 Hours of Spa-Francorchamps",
@@ -2361,6 +2367,48 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-05-10T10:30:00Z"
+        }
+      ],
+      "dateStart": "2026-05-08",
+      "dateEnd": "2026-05-10"
+    },
+    {
+      "id": "moto2-2026-r05",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix De France",
+      "round": 5,
+      "circuit": {
+        "name": "Le Mans",
+        "city": "Le Mans",
+        "country": "FRA",
+        "countryCode": "FR",
+        "lat": 47.956,
+        "lng": 0.2075
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-08T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-08T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-09T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-09T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-09T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-10T12:15:00Z"
         }
       ],
       "dateStart": "2026-05-08",
@@ -2519,82 +2567,6 @@
       "dateEnd": "2026-05-17"
     },
     {
-      "id": "moto3-2026-r06",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Catalonia",
-      "round": 6,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Barcelona",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.2611
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-15T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-15T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-16T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-16T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-17T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-05-15",
-      "dateEnd": "2026-05-17"
-    },
-    {
-      "id": "moto2-2026-r06",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Catalonia",
-      "round": 6,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Barcelona",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.2611
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-15T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-15T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-16T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-16T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-17T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-05-15",
-      "dateEnd": "2026-05-17"
-    },
-    {
       "id": "wsbk-2026-r05",
       "seriesId": "wsbk",
       "eventName": "WorldSBK Brno",
@@ -2685,6 +2657,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-05-17T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-15",
+      "dateEnd": "2026-05-17"
+    },
+    {
+      "id": "moto3-2026-r06",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Catalonia",
+      "round": 6,
+      "circuit": {
+        "name": "Circuit de Barcelona-Catalunya",
+        "city": "Barcelona",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 41.57,
+        "lng": 2.2611
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-15T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-15T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-16T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-16T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-16T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-17T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-15",
+      "dateEnd": "2026-05-17"
+    },
+    {
+      "id": "moto2-2026-r06",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Catalonia",
+      "round": 6,
+      "circuit": {
+        "name": "Circuit de Barcelona-Catalunya",
+        "city": "Barcelona",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 41.57,
+        "lng": 2.2611
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-15T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-15T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-16T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-16T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-16T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-17T12:15:00Z"
         }
       ],
       "dateStart": "2026-05-15",
@@ -3004,82 +3060,6 @@
       "dateEnd": "2026-06-06"
     },
     {
-      "id": "moto3-2026-r07",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Italy",
-      "round": 7,
-      "circuit": {
-        "name": "Autodromo Internazionale del Mugello",
-        "city": "Mugello",
-        "country": "ITA",
-        "countryCode": "IT",
-        "lat": 43.9975,
-        "lng": 11.3719
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-29T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-29T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-30T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-30T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-31T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-05-29",
-      "dateEnd": "2026-05-31"
-    },
-    {
-      "id": "moto2-2026-r07",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Italy",
-      "round": 7,
-      "circuit": {
-        "name": "Autodromo Internazionale del Mugello",
-        "city": "Mugello",
-        "country": "ITA",
-        "countryCode": "IT",
-        "lat": 43.9975,
-        "lng": 11.3719
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-05-29T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-05-29T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-05-30T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-05-30T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-05-31T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-05-29",
-      "dateEnd": "2026-05-31"
-    },
-    {
       "id": "motogp-2026-r07",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF ITALY",
@@ -3130,6 +3110,48 @@
       "dateEnd": "2026-05-31"
     },
     {
+      "id": "moto3-2026-r07",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Italy",
+      "round": 7,
+      "circuit": {
+        "name": "Autodromo Internazionale del Mugello",
+        "city": "Mugello",
+        "country": "ITA",
+        "countryCode": "IT",
+        "lat": 43.9975,
+        "lng": 11.3719
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-29T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-29T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-30T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-30T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-30T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-31T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-29",
+      "dateEnd": "2026-05-31"
+    },
+    {
       "id": "wsbk-2026-r06",
       "seriesId": "wsbk",
       "eventName": "WorldSBK Aragón",
@@ -3170,6 +3192,48 @@
         {
           "type": "Race 2",
           "startTimeUTC": "2026-05-31T13:00:00Z"
+        }
+      ],
+      "dateStart": "2026-05-29",
+      "dateEnd": "2026-05-31"
+    },
+    {
+      "id": "moto2-2026-r07",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Italy",
+      "round": 7,
+      "circuit": {
+        "name": "Autodromo Internazionale del Mugello",
+        "city": "Mugello",
+        "country": "ITA",
+        "countryCode": "IT",
+        "lat": 43.9975,
+        "lng": 11.3719
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-05-29T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-05-29T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-05-30T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-05-30T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-05-30T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-05-31T12:15:00Z"
         }
       ],
       "dateStart": "2026-05-29",
@@ -3334,44 +3398,6 @@
       "dateEnd": "2026-06-07"
     },
     {
-      "id": "moto3-2026-r08",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Hungary",
-      "round": 8,
-      "circuit": {
-        "name": "Balaton Park Circuit",
-        "city": "Balatonfokajár",
-        "country": "HUN",
-        "countryCode": "HU",
-        "lat": 46.9192,
-        "lng": 17.8853
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-05T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-05T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-06T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-06T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-07T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-05",
-      "dateEnd": "2026-06-07"
-    },
-    {
       "id": "f2-2026-r03",
       "seriesId": "f2",
       "eventName": "Monaco",
@@ -3403,44 +3429,6 @@
         }
       ],
       "dateStart": "2026-06-04",
-      "dateEnd": "2026-06-07"
-    },
-    {
-      "id": "moto2-2026-r08",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Hungary",
-      "round": 8,
-      "circuit": {
-        "name": "Balaton Park Circuit",
-        "city": "Balatonfokajár",
-        "country": "HUN",
-        "countryCode": "HU",
-        "lat": 46.9192,
-        "lng": 17.8853
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-05T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-05T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-06T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-06T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-07T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-06-05",
       "dateEnd": "2026-06-07"
     },
     {
@@ -3488,6 +3476,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-06-07T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-05",
+      "dateEnd": "2026-06-07"
+    },
+    {
+      "id": "moto3-2026-r08",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Hungary",
+      "round": 8,
+      "circuit": {
+        "name": "Balaton Park Circuit",
+        "city": "Balatonfokajár",
+        "country": "HUN",
+        "countryCode": "HU",
+        "lat": 46.9192,
+        "lng": 17.8853
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-05T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-05T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-06T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-06T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-06T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-07T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-05",
+      "dateEnd": "2026-06-07"
+    },
+    {
+      "id": "moto2-2026-r08",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Hungary",
+      "round": 8,
+      "circuit": {
+        "name": "Balaton Park Circuit",
+        "city": "Balatonfokajár",
+        "country": "HUN",
+        "countryCode": "HU",
+        "lat": 46.9192,
+        "lng": 17.8853
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-05T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-05T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-06T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-06T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-06T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-07T12:15:00Z"
         }
       ],
       "dateStart": "2026-06-05",
@@ -3818,82 +3890,6 @@
       "dateEnd": "2026-06-14"
     },
     {
-      "id": "moto3-2026-r09",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Czechia",
-      "round": 9,
-      "circuit": {
-        "name": "Automotodrom Brno",
-        "city": "Brno",
-        "country": "CZE",
-        "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-19T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-19T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-20T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "moto2-2026-r09",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Czechia",
-      "round": 9,
-      "circuit": {
-        "name": "Automotodrom Brno",
-        "city": "Brno",
-        "country": "CZE",
-        "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-19T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-19T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-20T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
       "id": "motogp-2026-r09",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF CZECHIA",
@@ -3938,6 +3934,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-06-21T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-19",
+      "dateEnd": "2026-06-21"
+    },
+    {
+      "id": "moto3-2026-r09",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Czechia",
+      "round": 9,
+      "circuit": {
+        "name": "Automotodrom Brno",
+        "city": "Brno",
+        "country": "CZE",
+        "countryCode": "CZ",
+        "lat": 49.2036,
+        "lng": 16.4317
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-19T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-19T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-20T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-20T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-20T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-21T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-19",
+      "dateEnd": "2026-06-21"
+    },
+    {
+      "id": "moto2-2026-r09",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Czechia",
+      "round": 9,
+      "circuit": {
+        "name": "Automotodrom Brno",
+        "city": "Brno",
+        "country": "CZE",
+        "countryCode": "CZ",
+        "lat": 49.2036,
+        "lng": 16.4317
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-19T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-19T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-20T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-20T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-20T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-21T12:15:00Z"
         }
       ],
       "dateStart": "2026-06-19",
@@ -4232,82 +4312,6 @@
       "dateEnd": "2026-06-28"
     },
     {
-      "id": "moto3-2026-r10",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of The Netherlands",
-      "round": 10,
-      "circuit": {
-        "name": "TT Circuit Assen",
-        "city": "Assen",
-        "country": "NED",
-        "countryCode": "NL",
-        "lat": 52.9614,
-        "lng": 6.5228
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-26T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-26T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-27T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-27T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-28T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-26",
-      "dateEnd": "2026-06-28"
-    },
-    {
-      "id": "moto2-2026-r10",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of The Netherlands",
-      "round": 10,
-      "circuit": {
-        "name": "TT Circuit Assen",
-        "city": "Assen",
-        "country": "NED",
-        "countryCode": "NL",
-        "lat": 52.9614,
-        "lng": 6.5228
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-26T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-26T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-27T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-27T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-28T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-06-26",
-      "dateEnd": "2026-06-28"
-    },
-    {
       "id": "f2-2026-r05",
       "seriesId": "f2",
       "eventName": "Austria",
@@ -4386,6 +4390,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-06-28T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-26",
+      "dateEnd": "2026-06-28"
+    },
+    {
+      "id": "moto3-2026-r10",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of The Netherlands",
+      "round": 10,
+      "circuit": {
+        "name": "TT Circuit Assen",
+        "city": "Assen",
+        "country": "NED",
+        "countryCode": "NL",
+        "lat": 52.9614,
+        "lng": 6.5228
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-26T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-26T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-27T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-27T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-27T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-28T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-26",
+      "dateEnd": "2026-06-28"
+    },
+    {
+      "id": "moto2-2026-r10",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of The Netherlands",
+      "round": 10,
+      "circuit": {
+        "name": "TT Circuit Assen",
+        "city": "Assen",
+        "country": "NED",
+        "countryCode": "NL",
+        "lat": 52.9614,
+        "lng": 6.5228
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-06-26T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-26T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-06-27T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-06-27T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-06-27T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-06-28T12:15:00Z"
         }
       ],
       "dateStart": "2026-06-26",
@@ -4722,82 +4810,6 @@
       "dateEnd": "2026-07-05"
     },
     {
-      "id": "moto3-2026-r11",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Germany",
-      "round": 11,
-      "circuit": {
-        "name": "Sachsenring",
-        "city": "Sachsenring",
-        "country": "GER",
-        "countryCode": "DE",
-        "lat": 50.7911,
-        "lng": 12.6886
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-07-10T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-07-11T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-11T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "moto2-2026-r11",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Germany",
-      "round": 11,
-      "circuit": {
-        "name": "Sachsenring",
-        "city": "Sachsenring",
-        "country": "GER",
-        "countryCode": "DE",
-        "lat": 50.7911,
-        "lng": 12.6886
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-07-10T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-07-11T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-11T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
       "id": "motogp-2026-r11",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF GERMANY",
@@ -4842,6 +4854,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-07-12T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-10",
+      "dateEnd": "2026-07-12"
+    },
+    {
+      "id": "moto3-2026-r11",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Germany",
+      "round": 11,
+      "circuit": {
+        "name": "Sachsenring",
+        "city": "Sachsenring",
+        "country": "GER",
+        "countryCode": "DE",
+        "lat": 50.7911,
+        "lng": 12.6886
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-07-10T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-07-10T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-07-11T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-07-11T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-07-11T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-12T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-10",
+      "dateEnd": "2026-07-12"
+    },
+    {
+      "id": "moto2-2026-r11",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Germany",
+      "round": 11,
+      "circuit": {
+        "name": "Sachsenring",
+        "city": "Sachsenring",
+        "country": "GER",
+        "countryCode": "DE",
+        "lat": 50.7911,
+        "lng": 12.6886
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-07-10T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-07-10T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-07-11T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-07-11T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-07-11T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-12T12:15:00Z"
         }
       ],
       "dateStart": "2026-07-10",
@@ -5587,61 +5683,27 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-08-07T09:00:00Z"
+          "startTimeUTC": "2026-08-07T10:00:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-08-07T13:15:00Z"
+          "startTimeUTC": "2026-08-07T14:15:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-08-08T08:40:00Z"
+          "startTimeUTC": "2026-08-08T09:40:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-08T12:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-09T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-07",
-      "dateEnd": "2026-08-09"
-    },
-    {
-      "id": "moto2-2026-r12",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of United Kingdom",
-      "round": 12,
-      "circuit": {
-        "name": "Silverstone Circuit",
-        "city": "Silverstone",
-        "country": "GBR",
-        "countryCode": "GB",
-        "lat": 52.0713,
-        "lng": -1.0147
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-07T09:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-07T14:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-08T09:25:00Z"
-        },
-        {
-          "type": "Qualifying",
+          "type": "Q1",
           "startTimeUTC": "2026-08-08T13:45:00Z"
         },
         {
+          "type": "Q2",
+          "startTimeUTC": "2026-08-08T14:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-08-09T10:20:00Z"
+          "startTimeUTC": "2026-08-09T14:30:00Z"
         }
       ],
       "dateStart": "2026-08-07",
@@ -5692,6 +5754,48 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-08-09T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-08-07",
+      "dateEnd": "2026-08-09"
+    },
+    {
+      "id": "moto2-2026-r12",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of United Kingdom",
+      "round": 12,
+      "circuit": {
+        "name": "Silverstone Circuit",
+        "city": "Silverstone",
+        "country": "GBR",
+        "countryCode": "GB",
+        "lat": 52.0713,
+        "lng": -1.0147
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-08-07T10:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-08-07T15:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-08-08T10:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-08-08T14:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-08-08T15:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-08-09T11:15:00Z"
         }
       ],
       "dateStart": "2026-08-07",
@@ -6071,82 +6175,6 @@
       "dateEnd": "2026-08-23"
     },
     {
-      "id": "moto3-2026-r13",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Aragon",
-      "round": 13,
-      "circuit": {
-        "name": "MotorLand Aragón",
-        "city": "Alcañiz",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 40.9417,
-        "lng": -0.1688
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-28T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-28T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-29T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-29T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-30"
-    },
-    {
-      "id": "moto2-2026-r13",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Aragon",
-      "round": 13,
-      "circuit": {
-        "name": "MotorLand Aragón",
-        "city": "Alcañiz",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 40.9417,
-        "lng": -0.1688
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-28T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-28T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-29T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-29T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-30"
-    },
-    {
       "id": "motogp-2026-r13",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF ARAGON",
@@ -6191,6 +6219,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-08-30T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-08-28",
+      "dateEnd": "2026-08-30"
+    },
+    {
+      "id": "moto3-2026-r13",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Aragon",
+      "round": 13,
+      "circuit": {
+        "name": "MotorLand Aragón",
+        "city": "Alcañiz",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 40.9417,
+        "lng": -0.1688
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-08-28T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-08-28T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-08-29T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-08-29T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-08-29T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-08-30T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-08-28",
+      "dateEnd": "2026-08-30"
+    },
+    {
+      "id": "moto2-2026-r13",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Aragon",
+      "round": 13,
+      "circuit": {
+        "name": "MotorLand Aragón",
+        "city": "Alcañiz",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 40.9417,
+        "lng": -0.1688
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-08-28T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-08-28T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-08-29T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-08-29T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-08-29T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-08-30T12:15:00Z"
         }
       ],
       "dateStart": "2026-08-28",
@@ -6590,82 +6702,6 @@
       "dateEnd": "2026-09-13"
     },
     {
-      "id": "moto3-2026-r14",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of San Marino",
-      "round": 14,
-      "circuit": {
-        "name": "Misano World Circuit Marco Simoncelli",
-        "city": "Misano Adriatico",
-        "country": "ITA",
-        "countryCode": "SM",
-        "lat": 43.9628,
-        "lng": 12.6836
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-09-12T06:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-12T10:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-09-13T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
-      "id": "moto2-2026-r14",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of San Marino",
-      "round": 14,
-      "circuit": {
-        "name": "Misano World Circuit Marco Simoncelli",
-        "city": "Misano Adriatico",
-        "country": "ITA",
-        "countryCode": "SM",
-        "lat": 43.9628,
-        "lng": 12.6836
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-09-11T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-09-12T07:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-12T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-09-13T10:20:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
       "id": "f2-2026-r10",
       "seriesId": "f2",
       "eventName": "Madrid",
@@ -6744,6 +6780,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T12:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "moto3-2026-r14",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of San Marino",
+      "round": 14,
+      "circuit": {
+        "name": "Misano World Circuit Marco Simoncelli",
+        "city": "Misano Adriatico",
+        "country": "ITA",
+        "countryCode": "SM",
+        "lat": 43.9628,
+        "lng": 12.6836
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-09-11T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-09-12T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-09-12T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-09-12T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-09-13T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "moto2-2026-r14",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of San Marino",
+      "round": 14,
+      "circuit": {
+        "name": "Misano World Circuit Marco Simoncelli",
+        "city": "Misano Adriatico",
+        "country": "ITA",
+        "countryCode": "SM",
+        "lat": 43.9628,
+        "lng": 12.6836
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-09-11T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-09-12T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-09-12T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-09-12T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-09-13T12:15:00Z"
         }
       ],
       "dateStart": "2026-09-11",
@@ -6963,8 +7083,12 @@
           "startTimeUTC": "2026-09-19T08:40:00Z"
         },
         {
-          "type": "Qualifying",
+          "type": "Q1",
           "startTimeUTC": "2026-09-19T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-09-19T13:10:00Z"
         },
         {
           "type": "Race",
@@ -7001,12 +7125,16 @@
           "startTimeUTC": "2026-09-19T09:25:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-19T13:45:00Z"
+          "type": "Q1",
+          "startTimeUTC": "2026-09-19T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-09-19T14:05:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-09-20T12:20:00Z"
+          "startTimeUTC": "2026-09-20T12:15:00Z"
         }
       ],
       "dateStart": "2026-09-18",
@@ -7328,82 +7456,6 @@
       "dateEnd": "2026-10-03"
     },
     {
-      "id": "moto3-2026-r16",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Japan",
-      "round": 16,
-      "circuit": {
-        "name": "Mobility Resort Motegi",
-        "city": "Motegi",
-        "country": "JPN",
-        "countryCode": "JP",
-        "lat": 36.5322,
-        "lng": 140.2281
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-02T00:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-02T04:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-02T23:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-03T03:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-04T02:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-02",
-      "dateEnd": "2026-10-04"
-    },
-    {
-      "id": "moto2-2026-r16",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Japan",
-      "round": 16,
-      "circuit": {
-        "name": "Mobility Resort Motegi",
-        "city": "Motegi",
-        "country": "JPN",
-        "countryCode": "JP",
-        "lat": 36.5322,
-        "lng": 140.2281
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-02T00:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-02T05:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-03T00:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-03T04:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-04T03:20:00Z"
-        }
-      ],
-      "dateStart": "2026-10-02",
-      "dateEnd": "2026-10-04"
-    },
-    {
       "id": "motogp-2026-r16",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF JAPAN",
@@ -7498,6 +7550,90 @@
         {
           "type": "Race 2",
           "startTimeUTC": "2026-10-04T14:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-02",
+      "dateEnd": "2026-10-04"
+    },
+    {
+      "id": "moto3-2026-r16",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Japan",
+      "round": 16,
+      "circuit": {
+        "name": "Mobility Resort Motegi",
+        "city": "Motegi",
+        "country": "JPN",
+        "countryCode": "JP",
+        "lat": 36.5322,
+        "lng": 140.2281
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-02T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-02T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-03T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-03T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-03T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-04T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-02",
+      "dateEnd": "2026-10-04"
+    },
+    {
+      "id": "moto2-2026-r16",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Japan",
+      "round": 16,
+      "circuit": {
+        "name": "Mobility Resort Motegi",
+        "city": "Motegi",
+        "country": "JPN",
+        "countryCode": "JP",
+        "lat": 36.5322,
+        "lng": 140.2281
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-02T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-02T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-03T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-03T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-03T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-04T12:15:00Z"
         }
       ],
       "dateStart": "2026-10-02",
@@ -7602,82 +7738,6 @@
       "dateEnd": "2026-10-11"
     },
     {
-      "id": "moto3-2026-r17",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Indonesia",
-      "round": 17,
-      "circuit": {
-        "name": "Pertamina Mandalika Circuit",
-        "city": "Lombok",
-        "country": "INA",
-        "countryCode": "ID",
-        "lat": -8.895,
-        "lng": 116.2975
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-09T02:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-09T06:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-10T01:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-10T05:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-11T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-09",
-      "dateEnd": "2026-10-11"
-    },
-    {
-      "id": "moto2-2026-r17",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Indonesia",
-      "round": 17,
-      "circuit": {
-        "name": "Pertamina Mandalika Circuit",
-        "city": "Lombok",
-        "country": "INA",
-        "countryCode": "ID",
-        "lat": -8.895,
-        "lng": 116.2975
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-09T02:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-09T07:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-10T02:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-10T06:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-11T05:20:00Z"
-        }
-      ],
-      "dateStart": "2026-10-09",
-      "dateEnd": "2026-10-11"
-    },
-    {
       "id": "motogp-2026-r17",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF INDONESIA",
@@ -7767,6 +7827,48 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Singapore%20carbon.png"
     },
     {
+      "id": "moto3-2026-r17",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Indonesia",
+      "round": 17,
+      "circuit": {
+        "name": "Pertamina Mandalika Circuit",
+        "city": "Lombok",
+        "country": "INA",
+        "countryCode": "ID",
+        "lat": -8.895,
+        "lng": 116.2975
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-09T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-09T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-10T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-10T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-10T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-11T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-09",
+      "dateEnd": "2026-10-11"
+    },
+    {
       "id": "wsbk-2026-r11",
       "seriesId": "wsbk",
       "eventName": "WorldSBK Estoril",
@@ -7807,6 +7909,48 @@
         {
           "type": "Race 2",
           "startTimeUTC": "2026-10-11T13:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-09",
+      "dateEnd": "2026-10-11"
+    },
+    {
+      "id": "moto2-2026-r17",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Indonesia",
+      "round": 17,
+      "circuit": {
+        "name": "Pertamina Mandalika Circuit",
+        "city": "Lombok",
+        "country": "INA",
+        "countryCode": "ID",
+        "lat": -8.895,
+        "lng": 116.2975
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-09T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-09T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-10T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-10T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-10T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-11T12:15:00Z"
         }
       ],
       "dateStart": "2026-10-09",
@@ -8001,82 +8145,6 @@
       "dateEnd": "2026-10-24"
     },
     {
-      "id": "moto3-2026-r18",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Australia",
-      "round": 18,
-      "circuit": {
-        "name": "Phillip Island",
-        "city": "Phillip Island",
-        "country": "AUS",
-        "countryCode": "AU",
-        "lat": -38.5006,
-        "lng": 145.2319
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-22T22:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-23T02:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-23T21:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-24T01:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-25T00:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-22",
-      "dateEnd": "2026-10-25"
-    },
-    {
-      "id": "moto2-2026-r18",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Australia",
-      "round": 18,
-      "circuit": {
-        "name": "Phillip Island",
-        "city": "Phillip Island",
-        "country": "AUS",
-        "countryCode": "AU",
-        "lat": -38.5006,
-        "lng": 145.2319
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-22T22:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-23T03:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-23T22:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-24T02:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-25T01:20:00Z"
-        }
-      ],
-      "dateStart": "2026-10-22",
-      "dateEnd": "2026-10-25"
-    },
-    {
       "id": "motogp-2026-r18",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF AUSTRALIA",
@@ -8124,6 +8192,90 @@
         }
       ],
       "dateStart": "2026-10-22",
+      "dateEnd": "2026-10-25"
+    },
+    {
+      "id": "moto3-2026-r18",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Australia",
+      "round": 18,
+      "circuit": {
+        "name": "Phillip Island",
+        "city": "Phillip Island",
+        "country": "AUS",
+        "countryCode": "AU",
+        "lat": -38.5006,
+        "lng": 145.2319
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-23T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-23T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-24T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-24T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-24T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-25T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-23",
+      "dateEnd": "2026-10-25"
+    },
+    {
+      "id": "moto2-2026-r18",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Australia",
+      "round": 18,
+      "circuit": {
+        "name": "Phillip Island",
+        "city": "Phillip Island",
+        "country": "AUS",
+        "countryCode": "AU",
+        "lat": -38.5006,
+        "lng": 145.2319
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-23T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-23T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-24T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-24T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-24T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-25T12:15:00Z"
+        }
+      ],
+      "dateStart": "2026-10-23",
       "dateEnd": "2026-10-25"
     },
     {
@@ -8188,82 +8340,6 @@
       "dateEnd": "2026-10-25"
     },
     {
-      "id": "moto3-2026-r19",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Malaysia",
-      "round": 19,
-      "circuit": {
-        "name": "Petronas Sepang International Circuit",
-        "city": "Sepang",
-        "country": "MAL",
-        "countryCode": "MY",
-        "lat": 2.7606,
-        "lng": 101.7381
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-30T01:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-30T05:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-31T00:40:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-31T04:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-01T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-30",
-      "dateEnd": "2026-11-01"
-    },
-    {
-      "id": "moto2-2026-r19",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Malaysia",
-      "round": 19,
-      "circuit": {
-        "name": "Petronas Sepang International Circuit",
-        "city": "Sepang",
-        "country": "MAL",
-        "countryCode": "MY",
-        "lat": 2.7606,
-        "lng": 101.7381
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-30T01:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-30T06:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-31T01:25:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-31T05:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-01T05:20:00Z"
-        }
-      ],
-      "dateStart": "2026-10-30",
-      "dateEnd": "2026-11-01"
-    },
-    {
       "id": "motogp-2026-r19",
       "seriesId": "motogp",
       "eventName": "GRAND PRIX OF MALAYSIA",
@@ -8308,6 +8384,90 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-11-01T07:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-30",
+      "dateEnd": "2026-11-01"
+    },
+    {
+      "id": "moto3-2026-r19",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Malaysia",
+      "round": 19,
+      "circuit": {
+        "name": "Petronas Sepang International Circuit",
+        "city": "Sepang",
+        "country": "MAL",
+        "countryCode": "MY",
+        "lat": 2.7606,
+        "lng": 101.7381
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-30T09:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-30T13:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-31T08:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-31T12:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-31T13:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-01T11:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-30",
+      "dateEnd": "2026-11-01"
+    },
+    {
+      "id": "moto2-2026-r19",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Malaysia",
+      "round": 19,
+      "circuit": {
+        "name": "Petronas Sepang International Circuit",
+        "city": "Sepang",
+        "country": "MAL",
+        "countryCode": "MY",
+        "lat": 2.7606,
+        "lng": 101.7381
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-30T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-30T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-31T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-31T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-31T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-01T13:15:00Z"
         }
       ],
       "dateStart": "2026-10-30",
@@ -8375,6 +8535,90 @@
       "dateEnd": "2026-11-01"
     },
     {
+      "id": "moto3-2026-r20",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Qatar",
+      "round": 20,
+      "circuit": {
+        "name": "Lusail International Circuit",
+        "city": "Doha",
+        "country": "QAT",
+        "countryCode": "QA",
+        "lat": 25.49,
+        "lng": 51.4542
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-11-04T14:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-04T18:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-11-05T13:30:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-11-05T17:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-05T18:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-06T17:00:00Z"
+        }
+      ],
+      "dateStart": "2026-11-04",
+      "dateEnd": "2026-11-06"
+    },
+    {
+      "id": "moto2-2026-r20",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Qatar",
+      "round": 20,
+      "circuit": {
+        "name": "Lusail International Circuit",
+        "city": "Doha",
+        "country": "QAT",
+        "countryCode": "QA",
+        "lat": 25.49,
+        "lng": 51.4542
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-11-04T14:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-04T19:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-11-05T14:15:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-11-05T18:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-05T19:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-06T18:15:00Z"
+        }
+      ],
+      "dateStart": "2026-11-04",
+      "dateEnd": "2026-11-06"
+    },
+    {
       "id": "wec-2026-r08",
       "seriesId": "wec",
       "eventName": "8 Hours of Bahrain",
@@ -8411,82 +8655,6 @@
       ],
       "dateStart": "2026-11-05",
       "dateEnd": "2026-11-07"
-    },
-    {
-      "id": "moto3-2026-r20",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Qatar",
-      "round": 20,
-      "circuit": {
-        "name": "Lusail International Circuit",
-        "city": "Doha",
-        "country": "QAT",
-        "countryCode": "QA",
-        "lat": 25.49,
-        "lng": 51.4542
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-11-06T11:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-11-06T15:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-11-07T10:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-07T14:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-08T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-11-06",
-      "dateEnd": "2026-11-08"
-    },
-    {
-      "id": "moto2-2026-r20",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Qatar",
-      "round": 20,
-      "circuit": {
-        "name": "Lusail International Circuit",
-        "city": "Doha",
-        "country": "QAT",
-        "countryCode": "QA",
-        "lat": 25.49,
-        "lng": 51.4542
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-11-06T11:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-11-06T16:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-11-07T11:15:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-07T15:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-08T15:20:00Z"
-        }
-      ],
-      "dateStart": "2026-11-06",
-      "dateEnd": "2026-11-08"
     },
     {
       "id": "motogp-2026-r20",
@@ -8626,12 +8794,16 @@
           "startTimeUTC": "2026-11-14T08:40:00Z"
         },
         {
-          "type": "Qualifying",
+          "type": "Q1",
           "startTimeUTC": "2026-11-14T12:45:00Z"
         },
         {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-14T13:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-11-15T10:00:00Z"
+          "startTimeUTC": "2026-11-15T14:30:00Z"
         }
       ],
       "dateStart": "2026-11-13",
@@ -8664,12 +8836,16 @@
           "startTimeUTC": "2026-11-14T09:25:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-14T13:45:00Z"
+          "type": "Q1",
+          "startTimeUTC": "2026-11-14T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-14T14:05:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-11-15T11:20:00Z"
+          "startTimeUTC": "2026-11-15T11:15:00Z"
         }
       ],
       "dateStart": "2026-11-13",
@@ -8814,61 +8990,27 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-11-20T08:00:00Z"
+          "startTimeUTC": "2026-11-20T09:00:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-11-20T12:15:00Z"
+          "startTimeUTC": "2026-11-20T13:15:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-11-21T07:40:00Z"
+          "startTimeUTC": "2026-11-21T08:40:00Z"
         },
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-21T11:45:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-22T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-11-20",
-      "dateEnd": "2026-11-22"
-    },
-    {
-      "id": "moto2-2026-r22",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Valencia",
-      "round": 22,
-      "circuit": {
-        "name": "Circuit Ricardo Tormo",
-        "city": "Cheste",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 39.4886,
-        "lng": -0.6268
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-11-20T08:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-11-20T13:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-11-21T08:25:00Z"
-        },
-        {
-          "type": "Qualifying",
+          "type": "Q1",
           "startTimeUTC": "2026-11-21T12:45:00Z"
         },
         {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-21T13:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-11-22T11:20:00Z"
+          "startTimeUTC": "2026-11-22T11:00:00Z"
         }
       ],
       "dateStart": "2026-11-20",
@@ -8919,6 +9061,48 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-11-22T13:00:00Z"
+        }
+      ],
+      "dateStart": "2026-11-20",
+      "dateEnd": "2026-11-22"
+    },
+    {
+      "id": "moto2-2026-r22",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Valencia",
+      "round": 22,
+      "circuit": {
+        "name": "Circuit Ricardo Tormo",
+        "city": "Cheste",
+        "country": "SPA",
+        "countryCode": "ES",
+        "lat": 39.4886,
+        "lng": -0.6268
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-11-20T09:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-20T14:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-11-21T09:25:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-11-21T13:40:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-21T14:05:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-22T12:15:00Z"
         }
       ],
       "dateStart": "2026-11-20",
