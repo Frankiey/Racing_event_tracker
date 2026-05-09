@@ -174,10 +174,10 @@ const todayKey = new Date().toISOString().slice(0, 10);
 
 <script>
   import { openEventById, registerEvents } from '../lib/event-client';
-  import { SESSION_ABBR, isRaceType } from '../lib/sessions';
   import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
   import { getSeriesMeta } from '../lib/series';
-  import { countryFlag, escapeHtml, formatLocalTime, isPastEvent, safeJsonParse } from '../lib/client-utils';
+  import { escapeHtml, safeJsonParse } from '../lib/client-utils';
+  import { renderClientEventCard } from '../lib/event-card-renderer';
   import { downloadShareCardForDates } from '../lib/share-card';
   import { loadFilters, saveFilters } from '../lib/filters';
   import type { RaceEvent, RaceSession } from '../lib/types';
@@ -538,53 +538,11 @@ const todayKey = new Date().toISOString().slice(0, 10);
         weekday: 'long', month: 'long', day: 'numeric',
       });
 
-      const cardsHtml = dayEvs.map(ev => {
-        const m = getSeriesMeta(ev.seriesId);
-        const sessions = sessionsOnDay(ev, dateStr);
-        const f = countryFlag(ev.circuit?.countryCode ?? '');
-        const isRaceDay = ev.dateEnd === dateStr;
-        const past = isPastEvent(ev.dateEnd, ev.sessions ?? []);
-        const isFirstDay = ev.dateStart === dateStr;
-
-        const sessHtml = sessions.map((s: any) => {
-          const lbl = SESSION_ABBR[s.type] ?? s.type;
-          const isRace = isRaceType(s.type);
-          const t = formatLocalTime(s.startTimeUTC);
-          return `<div class="flex items-center gap-1.5 text-xs">
-            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color:${isRace ? m.color : '#3f3f46'}"></span>
-            <span class="font-semibold ${isRace ? 'text-zinc-100' : 'text-zinc-400'}">${lbl}</span>
-            <span class="tabular-nums text-zinc-600">${t}</span>
-          </div>`;
-        }).join('');
-
-        const spanLabel = ev.dateStart === ev.dateEnd
-          ? ''
-          : isFirstDay
-            ? `<span class="text-[10px] text-zinc-600">Weekend starts</span>`
-            : isRaceDay
-              ? `<span class="text-[10px] font-bold uppercase tracking-wider" style="color:${m.color}">Race day</span>`
-              : `<span class="text-[10px] text-zinc-600">Race weekend</span>`;
-
-        return `<article
-          class="cal-detail-card flex gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${past ? 'border-zinc-800/40 bg-zinc-900/20 opacity-50' : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700'}"
-          data-event-id="${escapeHtml(ev.id)}"
-          role="button" tabindex="0"
-        >
-          <div class="w-0.5 self-stretch rounded-full shrink-0" style="background-color:${m.color}"></div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span class="text-xs font-bold px-2 py-0.5 rounded text-white uppercase tracking-wide" style="background-color:${m.color}">${m.shortLabel}</span>
-              <span class="text-[11px] text-zinc-500 font-mono">Rd ${ev.round}</span>
-              ${spanLabel}
-            </div>
-            <h3 class="font-bold text-sm ${past ? 'text-zinc-500' : 'text-zinc-100'} mb-1">${escapeHtml(ev.eventName)}</h3>
-            <div class="flex items-center gap-1.5 text-xs text-zinc-500 ${sessions.length > 0 ? 'mb-2' : ''}">
-              ${f ? `<span class="text-sm">${f}</span>` : ''}<span>${escapeHtml(ev.circuit?.name ?? '')}</span>
-            </div>
-            ${sessions.length > 0 ? `<div class="flex flex-wrap gap-x-3 gap-y-1">${sessHtml}</div>` : ''}
-          </div>
-        </article>`;
-      }).join('');
+      const cardsHtml = dayEvs.map(ev => renderClientEventCard(ev, {
+        variant: 'calendar-detail',
+        dateStr,
+        sessions: sessionsOnDay(ev, dateStr),
+      })).join('');
 
       return `
         <section class="grid gap-2">

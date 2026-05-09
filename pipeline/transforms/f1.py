@@ -1,6 +1,7 @@
 """F1 bronze → silver transform."""
 
 from pipeline.config import SEASON_YEAR
+from pipeline.session_taxonomy import get_session_type_map
 
 from .common import build_circuit, build_event, derive_event_dates
 
@@ -24,15 +25,7 @@ COUNTRY_NAME_TO_ALPHA2: dict[str, str] = {
     "Canada": "CA",
 }
 
-
-SESSION_MAP = [
-    ("FirstPractice", "FP1"),
-    ("SecondPractice", "FP2"),
-    ("ThirdPractice", "FP3"),
-    ("SprintQualifying", "Sprint Qualifying"),
-    ("Sprint", "Sprint"),
-    ("Qualifying", "Qualifying"),
-]
+SESSION_MAP = get_session_type_map("f1")
 
 
 def transform(bronze: dict) -> list[dict]:
@@ -52,7 +45,7 @@ def transform(bronze: dict) -> list[dict]:
     for race in races:
         sessions = []
 
-        for key, session_type in SESSION_MAP:
+        for key, session_type in SESSION_MAP.items():
             if key in race:
                 sessions.append({
                     "type": session_type,

@@ -4,18 +4,11 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
 from pipeline.config import SEASON_YEAR
+from pipeline.session_taxonomy import get_session_type_map
 
 from .common import build_circuit, build_event, build_mapped_sessions, build_single_session, derive_event_dates
 
-# Map Pulselive session type codes to display names
-_SESSION_TYPES = {
-    "FP": "FP",
-    "PR": "Practice",
-    "Q": "Q",
-    "SPR": "Sprint",
-    "RAC": "Race",
-    "WUP": "Warm Up",
-}
+_SESSION_TYPES = get_session_type_map("motogp")
 
 _CALENDAR_OVERRIDES_2026 = {
     "GRAND PRIX OF QATAR": {

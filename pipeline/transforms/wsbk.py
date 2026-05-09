@@ -6,6 +6,7 @@ Handles two input shapes:
 """
 
 from pipeline.config import SEASON_YEAR
+from pipeline.session_taxonomy import get_session_type_map
 
 from .common import (
     build_circuit,
@@ -18,6 +19,7 @@ from .common import (
 
 
 _SILVER_KEYS = {"id", "seriesId", "eventName", "round", "circuit", "sessions", "dateStart", "dateEnd"}
+_SESSION_TYPES = get_session_type_map("wsbk")
 
 
 def transform(bronze_events: list) -> list[dict]:
@@ -83,17 +85,7 @@ def _extract_sessions(event: dict) -> list[dict]:
     # falls back to just Race on date_end
     raw_sessions = event.get("sessions") or []
     if raw_sessions:
-        type_map = {
-            "RAC1": "Race 1",
-            "RAC2": "Race 2",
-            "SPR": "Superpole Race",
-            "SUP": "Superpole",
-            "FP1": "Practice 1",
-            "FP2": "Practice 2",
-            "FP3": "Practice 3",
-            "WUP": "Warm Up",
-        }
-        return build_mapped_sessions(raw_sessions, type_map)
+        return build_mapped_sessions(raw_sessions, _SESSION_TYPES)
 
     return build_single_session(event.get("date_end") or event.get("date_start"), "Race 1")
 
