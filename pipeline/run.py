@@ -29,6 +29,7 @@ from pipeline.fetchers.seed import load as load_seed
 
 # Transforms (silver)
 from pipeline.transforms import f1 as f1_transform
+from pipeline.transforms import moto_support as moto_support_transform
 from pipeline.transforms import motogp as motogp_transform
 from pipeline.transforms import nascar as nascar_transform
 from pipeline.transforms import wsbk as wsbk_transform
@@ -45,12 +46,16 @@ API_SERIES = {
 }
 
 # Series loaded from seed files (no API)
-SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec", "moto2", "moto3",
+GENERATED_SERIES = ["moto2", "moto3"]
+
+
+# Series loaded from seed files (no API)
+SEED_SERIES = ["f2", "f3", "fe", "indycar", "wec",
                "imsa", "dtm", "gtworld", "nls", "superformula", "iomtt"]
 
 
 def validate_series_configuration() -> None:
-    configured = set(API_SERIES) | set(SEED_SERIES)
+    configured = set(API_SERIES) | set(GENERATED_SERIES) | set(SEED_SERIES)
     expected = set(SERIES_IDS)
     if configured != expected:
         missing = sorted(expected - configured)
@@ -68,6 +73,7 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
 
     year = SEASON_YEAR
     all_silver: list[dict] = []
+    generated_sources: dict[str, list[dict]] = {}
     failed_series: list[str] = []
 
     print(f"=== RaceTrack Pipeline — {year} season ===\n")
@@ -86,12 +92,35 @@ def run_pipeline(series_filter: list[str] | None = None, bronze_only: bool = Fal
             for ev in silver_events:
                 enrich_circuit(ev.get("circuit", {}))
             write_json(SILVER_DIR / f"{series_id}.json", silver_events)
+            generated_sources[series_id] = silver_events
             all_silver.extend(silver_events)
             print(f"  [{series_id.upper()}] {len(silver_events)} events\n")
 
         except Exception as e:
             print(f"  [{series_id.upper()}] ERROR: {e}\n")
             failed_series.append(series_id)
+
+    motogp_events = generated_sources.get("motogp")
+    if motogp_events is None and (not series_filter or any(series_id in GENERATED_SERIES for series_id in series_filter)):
+        motogp_silver_path = SILVER_DIR / "motogp.json"
+        if motogp_silver_path.exists():
+            motogp_events = read_json(motogp_silver_path)
+
+    for series_id in GENERATED_SERIES:
+        if series_filter and series_id not in series_filter:
+            continue
+
+        if not motogp_events:
+            print(f"  [{series_id.upper()}] ERROR: missing MotoGP silver data for support-series generation\n")
+            failed_series.append(series_id)
+            continue
+
+        silver_events = moto_support_transform.transform(motogp_events, series_id)
+        for ev in silver_events:
+            enrich_circuit(ev.get("circuit", {}))
+        write_json(SILVER_DIR / f"{series_id}.json", silver_events)
+        all_silver.extend(silver_events)
+        print(f"  [{series_id.upper()}] {len(silver_events)} events (generated from MotoGP)\n")
 
     if bronze_only:
         print("Bronze-only mode — stopping before silver/gold.")

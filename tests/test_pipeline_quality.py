@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from pipeline.transforms import motogp as motogp_transform
+from pipeline.transforms import moto_support as moto_support_transform
 from pipeline.transforms import nascar as nascar_transform
 from pipeline.transforms.gold import build_calendar, build_upcoming
 from pipeline.validate import validate_event, validate_file
@@ -149,6 +150,55 @@ class SeriesTransformTests(unittest.TestCase):
         events = motogp_transform.transform(bronze_events)
 
         self.assertEqual(events[0]["sessions"][0]["startTimeUTC"], "2026-04-26T12:00:00Z")
+
+    def test_moto_support_transform_generates_support_weekend_sessions(self):
+        motogp_events = [
+            {
+                "id": "motogp-2026-r05",
+                "seriesId": "motogp",
+                "eventName": "GRAND PRIX DE FRANCE",
+                "round": 5,
+                "circuit": {
+                    "name": "Le Mans",
+                    "city": "Le Mans",
+                    "country": "FRA",
+                    "countryCode": "FR",
+                },
+                "sessions": [
+                    {"type": "FP1", "startTimeUTC": "2026-05-08T08:45:00Z"},
+                    {"type": "Practice", "startTimeUTC": "2026-05-08T13:00:00Z"},
+                    {"type": "FP2", "startTimeUTC": "2026-05-09T08:10:00Z"},
+                    {"type": "Sprint", "startTimeUTC": "2026-05-09T13:00:00Z"},
+                    {"type": "Race", "startTimeUTC": "2026-05-10T12:00:00Z"},
+                ],
+                "dateStart": "2026-05-08",
+                "dateEnd": "2026-05-10",
+            }
+        ]
+
+        moto2_events = moto_support_transform.transform(motogp_events, "moto2")
+        moto3_events = moto_support_transform.transform(motogp_events, "moto3")
+
+        self.assertEqual(
+            moto2_events[0]["sessions"],
+            [
+                {"type": "FP1", "startTimeUTC": "2026-05-08T07:50:00Z"},
+                {"type": "Practice", "startTimeUTC": "2026-05-08T12:05:00Z"},
+                {"type": "FP2", "startTimeUTC": "2026-05-09T07:25:00Z"},
+                {"type": "Qualifying", "startTimeUTC": "2026-05-09T11:45:00Z"},
+                {"type": "Race", "startTimeUTC": "2026-05-10T10:20:00Z"},
+            ],
+        )
+        self.assertEqual(
+            moto3_events[0]["sessions"],
+            [
+                {"type": "FP1", "startTimeUTC": "2026-05-08T07:00:00Z"},
+                {"type": "Practice", "startTimeUTC": "2026-05-08T11:15:00Z"},
+                {"type": "FP2", "startTimeUTC": "2026-05-09T06:40:00Z"},
+                {"type": "Qualifying", "startTimeUTC": "2026-05-09T10:45:00Z"},
+                {"type": "Race", "startTimeUTC": "2026-05-10T09:00:00Z"},
+            ],
+        )
 
     def test_nascar_transform_prefers_schedule_utc_times(self):
         bronze_data = {
