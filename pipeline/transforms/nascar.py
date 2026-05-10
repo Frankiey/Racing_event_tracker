@@ -63,7 +63,7 @@ def transform(bronze_data: dict | list) -> list[dict]:
 def _find_schedule_time(race: dict, *, run_type: int, keywords: tuple[str, ...]) -> str | None:
     for schedule_item in race.get("schedule", []):
         event_name = (schedule_item.get("event_name") or "").lower()
-        if schedule_item.get("run_type") != run_type and not any(keyword in event_name for keyword in keywords):
+        if schedule_item.get("run_type") != run_type or not any(keyword in event_name for keyword in keywords):
             continue
 
         start_time = schedule_item.get("start_time_utc")
