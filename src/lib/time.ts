@@ -105,8 +105,11 @@ export function isPlaceholderTime(utc: string): boolean {
 
 // ── Session helpers ─────────────────────────────────────────────────────────
 
-/** Get the main race session from an event's sessions array. */
+/** Get the main race session from an event's sessions array.
+ * Returns the LAST race-type session so that on sprint weekends the main Race
+ * (Sunday) is preferred over the Sprint (Saturday). Falls back to the last
+ * session overall if no race-type session exists. */
 export function getRaceSession(sessions: { type: string; startTimeUTC: string }[]): { type: string; startTimeUTC: string } | undefined {
-  return sessions.find(s => RACE_TYPES.has(s.type))
-    ?? sessions[sessions.length - 1];
+  const raceSessions = sessions.filter(s => RACE_TYPES.has(s.type));
+  return raceSessions[raceSessions.length - 1] ?? sessions[sessions.length - 1];
 }
