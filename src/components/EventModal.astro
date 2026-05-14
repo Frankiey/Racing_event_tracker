@@ -31,103 +31,130 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <!-- Series color bar -->
     <div id="modal-color-bar" class="h-1 w-full shrink-0" />
 
-    <!-- Header -->
-    <div class="p-6 pb-0 shrink-0">
-      <div class="flex items-start justify-between gap-4 mb-1">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span id="modal-badge" class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5" />
-          <span id="modal-round" class="text-xs text-zinc-500 font-mono" />
+    <!-- Body: stacked in normal mode, side-by-side when expanded -->
+    <div id="modal-body">
+
+      <!-- Left column: event info + broadcast + alert -->
+      <div id="modal-left">
+
+        <!-- Header -->
+        <div class="p-6 pb-0 shrink-0">
+          <div class="flex items-start justify-between gap-4 mb-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span id="modal-badge" class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5" />
+              <span id="modal-round" class="text-xs text-zinc-500 font-mono" />
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <!-- Share -->
+              <button
+                id="modal-share-btn"
+                class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+                aria-label="Share event"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+                </svg>
+              </button>
+              <!-- Favorite -->
+              <button
+                id="modal-fav-btn"
+                class="modal-fav-btn p-2 rounded-full hover:bg-zinc-800 transition-colors"
+                data-fav="false"
+                aria-label="Add to favorites"
+              >
+                <svg class="w-5 h-5 stroke-zinc-400 fill-none" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+              </button>
+              <!-- Expand / Contract -->
+              <button
+                id="modal-expand-btn"
+                class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+                aria-label="Expand to full screen"
+              >
+                <!-- Expand icon (compact mode) -->
+                <svg id="expand-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                </svg>
+                <!-- Contract icon (expanded mode) -->
+                <svg id="contract-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+                </svg>
+              </button>
+              <!-- Close -->
+              <button
+                id="modal-close"
+                class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
+                aria-label="Close"
+              >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h2 id="modal-title" class="text-2xl font-black text-zinc-100 tracking-tight leading-tight mb-1" />
+          <div id="modal-circuit" class="flex items-center gap-1.5 text-sm text-zinc-400 mb-4" />
         </div>
-        <div class="flex items-center gap-2 shrink-0">
-          <!-- Share -->
-          <button
-            id="modal-share-btn"
-            class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
-            aria-label="Share event"
-          >
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-            </svg>
-          </button>
-          <!-- Favorite -->
-          <button
-            id="modal-fav-btn"
-            class="modal-fav-btn p-2 rounded-full hover:bg-zinc-800 transition-colors"
-            data-fav="false"
-            aria-label="Add to favorites"
-          >
-            <svg class="w-5 h-5 stroke-zinc-400 fill-none" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-            </svg>
-          </button>
-          <!-- Close -->
-          <button
-            id="modal-close"
-            class="p-2 rounded-full hover:bg-zinc-800 transition-colors text-zinc-400 hover:text-zinc-200"
-            aria-label="Close"
-          >
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
+
+        <!-- Where to watch -->
+        <div id="modal-broadcast" class="px-6 pb-2 hidden">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Where to Watch</h3>
+            <select id="broadcast-region" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-0.5 text-zinc-300 cursor-pointer">
+              <option value="NL">🇳🇱 NL</option>
+              <option value="US">🇺🇸 US</option>
+              <option value="UK">🇬🇧 UK</option>
+            </select>
+          </div>
+          <div id="broadcast-list" class="space-y-1.5" />
         </div>
-      </div>
 
-      <h2 id="modal-title" class="text-2xl font-black text-zinc-100 tracking-tight leading-tight mb-1" />
-      <div id="modal-circuit" class="flex items-center gap-1.5 text-sm text-zinc-400 mb-4" />
-    </div>
-
-    <!-- Sessions -->
-    <div class="px-6 pb-2">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Session Schedule</h3>
-        <div class="flex rounded-md overflow-hidden border border-zinc-700/60">
-          <button id="view-list-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-zinc-700 text-zinc-200" aria-pressed="true">
-            List
-          </button>
-          <button id="view-timeline-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-300" aria-pressed="false">
-            Timeline
-          </button>
+        <!-- Session alert -->
+        <div id="modal-alert" class="px-6 pb-2 hidden">
+          <div class="flex items-center gap-2 p-3 rounded-lg bg-zinc-900/80 border border-zinc-800/60">
+            <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            <span class="text-xs text-zinc-400 flex-1">Remind me before the race</span>
+            <select id="alert-offset" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-0.5 text-zinc-300 cursor-pointer">
+              <option value="15">15 min</option>
+              <option value="30" selected>30 min</option>
+              <option value="60">1 hour</option>
+            </select>
+            <button id="alert-set-btn" class="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded bg-zinc-700 hover:bg-zinc-600 text-zinc-200 transition-colors">
+              Set
+            </button>
+          </div>
+          <div id="alert-status" class="text-[10px] text-zinc-600 mt-1 px-1 hidden" />
         </div>
-      </div>
-      <div id="modal-sessions" class="space-y-1.5" />
-      <WeekendTimeline />
-    </div>
 
-    <!-- Where to watch -->
-    <div id="modal-broadcast" class="px-6 pb-2 hidden">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Where to Watch</h3>
-        <select id="broadcast-region" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-0.5 text-zinc-300 cursor-pointer">
-          <option value="NL">🇳🇱 NL</option>
-          <option value="US">🇺🇸 US</option>
-          <option value="UK">🇬🇧 UK</option>
-        </select>
-      </div>
-      <div id="broadcast-list" class="space-y-1.5" />
-    </div>
+      </div><!-- end modal-left -->
 
-    <!-- Session alert -->
-    <div id="modal-alert" class="px-6 pb-2 hidden">
-      <div class="flex items-center gap-2 p-3 rounded-lg bg-zinc-900/80 border border-zinc-800/60">
-        <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-        </svg>
-        <span class="text-xs text-zinc-400 flex-1">Remind me before the race</span>
-        <select id="alert-offset" class="text-[10px] bg-zinc-800 border border-zinc-700 rounded px-2 py-0.5 text-zinc-300 cursor-pointer">
-          <option value="15">15 min</option>
-          <option value="30" selected>30 min</option>
-          <option value="60">1 hour</option>
-        </select>
-        <button id="alert-set-btn" class="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded bg-zinc-700 hover:bg-zinc-600 text-zinc-200 transition-colors">
-          Set
-        </button>
-      </div>
-      <div id="alert-status" class="text-[10px] text-zinc-600 mt-1 px-1 hidden" />
-    </div>
+      <!-- Right column: sessions -->
+      <div id="modal-right">
+        <div id="modal-sessions-wrap" class="px-6 pb-2">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-[10px] font-bold uppercase tracking-widest text-zinc-600">Session Schedule</h3>
+            <div class="flex rounded-md overflow-hidden border border-zinc-700/60">
+              <button id="view-list-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-zinc-700 text-zinc-200" aria-pressed="true">
+                List
+              </button>
+              <button id="view-timeline-btn" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-300" aria-pressed="false">
+                Timeline
+              </button>
+            </div>
+          </div>
+          <div id="modal-sessions" class="space-y-1.5" />
+          <WeekendTimeline />
+        </div>
+      </div><!-- end modal-right -->
 
-    <!-- Footer actions -->
-    <div class="px-6 py-4 border-t border-zinc-800/60 flex items-center justify-between gap-3 shrink-0">
+    </div><!-- end modal-body -->
+
+    <!-- Footer actions (full-width, below both columns) -->
+    <div id="modal-footer" class="px-6 py-4 border-t border-zinc-800/60 flex items-center justify-between gap-3 shrink-0">
       <a
         id="modal-series-link"
         href="#"
@@ -323,6 +350,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   function closeModal() {
+    contractModal();
     modal.classList.remove('open');
     document.body.style.overflow = '';
     // Remove event from URL
@@ -369,8 +397,46 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   document.getElementById('modal-close')!.addEventListener('click', closeModal);
   document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
   window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modalPanel.classList.contains('is-expanded')) {
+        contractModal();
+      } else {
+        closeModal();
+      }
+    }
+  });
   document.addEventListener('astro:before-swap', () => { document.body.style.overflow = ''; });
+
+  // ── Expand / Contract ──
+  const modalPanel = document.getElementById('modal-panel')!;
+  const expandBtn = document.getElementById('modal-expand-btn')!;
+  const expandIcon = document.getElementById('expand-icon')!;
+  const contractIcon = document.getElementById('contract-icon')!;
+
+  function expandModal() {
+    modalPanel.classList.add('is-expanded');
+    modal.classList.add('is-expanded');
+    expandIcon.classList.add('hidden');
+    contractIcon.classList.remove('hidden');
+    expandBtn.setAttribute('aria-label', 'Exit full screen');
+  }
+
+  function contractModal() {
+    modalPanel.classList.remove('is-expanded');
+    modal.classList.remove('is-expanded');
+    expandIcon.classList.remove('hidden');
+    contractIcon.classList.add('hidden');
+    expandBtn.setAttribute('aria-label', 'Expand to full screen');
+  }
+
+  expandBtn.addEventListener('click', () => {
+    if (modalPanel.classList.contains('is-expanded')) {
+      contractModal();
+    } else {
+      expandModal();
+    }
+  });
 
   // ── Share button ──
   const shareBtn = document.getElementById('modal-share-btn')!;
