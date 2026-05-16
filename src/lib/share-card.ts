@@ -1,6 +1,6 @@
 import { isPlaceholderTime } from './client-utils';
 import { getSeriesMeta } from './series';
-import { SESSION_LABELS } from './sessions';
+import { SESSION_LABELS, isRaceType } from './sessions';
 import type { RaceEvent } from './types';
 
 interface WeekendCardSession {
@@ -140,7 +140,10 @@ function buildShareCardData(options: ShareCardBuildOptions, now = new Date()): W
         color: meta.color,
         sessionCount: matchingSessions.length,
         firstSession: matchingSessions[0].start.getTime(),
-        sessions: matchingSessions.slice(0, 4).map(({ session, start }) => ({
+        sessions: [
+          ...matchingSessions.filter(({ session }) => isRaceType(session.type)),
+          ...matchingSessions.filter(({ session }) => !isRaceType(session.type)),
+        ].slice(0, 4).map(({ session, start }) => ({
           label: SESSION_LABELS[session.type] ?? session.type,
           dayLabel: start.toLocaleDateString(undefined, { weekday: 'short' }).toUpperCase(),
           timeLabel: start.toLocaleTimeString(undefined, {
