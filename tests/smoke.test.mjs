@@ -54,6 +54,9 @@ const expectedFiles = [
   'index.html',
   'calendar/index.html',
   'status/index.html',
+  'watchlist/index.html',
+  'recap/index.html',
+  'series/f1/index.html',
 ];
 
 for (const file of expectedFiles) {
@@ -70,6 +73,9 @@ assert(indexHtml.includes('data-countdown'), 'Contains countdown timer');
 assert(indexHtml.includes('series-filter'), 'Contains series filter');
 assert(indexHtml.includes('data-series='), 'Contains event cards with data-series');
 
+// Check F1 is specifically present on the dashboard
+assert(indexHtml.includes('data-series="f1"'), 'Dashboard contains F1 events (data-series="f1")');
+
 // Check multiple series are represented (not just one)
 const dashboardSeries = new Set(indexHtml.match(/data-series="(\w+)"/g)?.map(m => m.match(/"(\w+)"/)[1]) ?? []);
 assert(dashboardSeries.size >= 4, `Dashboard shows ${dashboardSeries.size} different series (expected ≥4)`);
@@ -77,6 +83,14 @@ assert(dashboardSeries.size >= 4, `Dashboard shows ${dashboardSeries.size} diffe
 // Check nav links use base path
 assert(indexHtml.includes('/Racing_event_tracker/calendar'), 'Nav links use base path for calendar');
 assert(indexHtml.includes('/Racing_event_tracker/'), 'Nav links use base path for home');
+
+// Check dashboard-events-data JSON is valid and sorted by dateStart
+const dashboardEvents = extractJsonScript(indexHtml, 'dashboard-events-data') ?? [];
+assert(Array.isArray(dashboardEvents) && dashboardEvents.length > 0, `dashboard-events-data is valid JSON with ${dashboardEvents.length} events`);
+if (dashboardEvents.length >= 2) {
+  const sorted = dashboardEvents.every((ev, i) => i === 0 || ev.dateStart >= dashboardEvents[i - 1].dateStart);
+  assert(sorted, 'dashboard-events-data events are sorted ascending by dateStart');
+}
 
 // --- Step 4: Calendar checks ---
 console.log('\n📅 Calendar (/calendar)...');
@@ -108,6 +122,15 @@ assert(!statusHtml.includes('series-filter'), 'Does NOT contain series filter (k
 console.log('\n⏰ Data integrity...');
 assert(!indexHtml.includes('datetime="1900-01-01'), 'Dashboard has no rendered 1900 placeholder times');
 assert(!statusHtml.includes('data-session-start="1900-01-01'), 'Status has no rendered 1900 placeholder times');
+
+// --- Step 7: Series page checks ---
+console.log('\n🏁 Series pages...');
+const f1SeriesHtml = readFileSync(resolve(DIST, 'series/f1/index.html'), 'utf-8');
+const f1SeriesEvents = extractJsonScript(f1SeriesHtml, 'series-events-data') ?? [];
+
+assert(f1SeriesHtml.includes('Formula 1') || f1SeriesHtml.includes('F1'), 'F1 series page contains F1 title');
+assert(Array.isArray(f1SeriesEvents) && f1SeriesEvents.length > 0, `F1 series page has ${f1SeriesEvents.length} events (expected >0)`);
+assert(f1SeriesEvents.every(ev => ev.seriesId === 'f1'), 'F1 series page only contains F1 events');
 
 // --- Summary ---
 console.log(`\n${'='.repeat(40)}`);

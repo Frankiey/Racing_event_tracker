@@ -14,7 +14,8 @@
     "fetch-data": "uv run python -m pipeline",
     "validate:data": "uv run python -m pipeline.validate",
     "typecheck": "astro check",
-    "test": "astro check && node tests/smoke.test.mjs && npm run test:pipeline",
+    "test": "astro check && npm run test:unit && npm run test:pipeline && node tests/smoke.test.mjs",
+    "test:unit": "TZ=UTC node --experimental-strip-types --loader ./tests/unit/ts-loader.mjs --test tests/unit/*.test.mjs",
     "test:pipeline": "uv run python -m unittest discover -s tests -p 'test_*.py'",
     "test:smoke": "node tests/smoke.test.mjs"
   },

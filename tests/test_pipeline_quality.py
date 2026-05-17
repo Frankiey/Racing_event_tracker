@@ -8,6 +8,7 @@ from unittest.mock import patch
 from pipeline.transforms import motogp as motogp_transform
 from pipeline.transforms import moto_support_api as moto_support_transform
 from pipeline.transforms import nascar as nascar_transform
+from pipeline.transforms import f1 as f1_transform
 from pipeline.transforms.gold import build_calendar, build_upcoming
 from pipeline.validate import validate_event, validate_file
 
@@ -228,6 +229,149 @@ class SeriesTransformTests(unittest.TestCase):
                 {"type": "Race", "startTimeUTC": "2026-04-26T19:00:00Z"},
             ],
         )
+
+
+class F1TransformTests(unittest.TestCase):
+    """Tests for pipeline/transforms/f1.py — F1 bronze → silver transform."""
+
+    def _make_bronze(self, races: list[dict]) -> dict:
+        return {
+            "jolpica": {
+                "MRData": {
+                    "RaceTable": {
+                        "season": "2026",
+                        "Races": races,
+                    }
+                }
+            },
+            "openf1_meetings": [],
+        }
+
+    def _make_race(self, round_num: int = 1, **sessions) -> dict:
+        """Build a minimal Jolpica race entry. Extra kwargs add session keys."""
+        base = {
+            "round": str(round_num),
+            "raceName": "Test Grand Prix",
+            "date": "2026-07-05",
+            "time": "14:00:00Z",
+            "Circuit": {
+                "circuitName": "Test Circuit",
+                "Location": {
+                    "locality": "Testville",
+                    "country": "Australia",
+                    "lat": "-27.5",
+                    "long": "153.1",
+                },
+            },
+        }
+        base.update(sessions)
+        return base
+
+    def test_session_types_map_correctly(self):
+        """FP1/FP2/FP3, Qualifying, Sprint, Race all map to canonical types."""
+        race = self._make_race(
+            FirstPractice={"date": "2026-07-03", "time": "11:30:00Z"},
+            SecondPractice={"date": "2026-07-03", "time": "15:00:00Z"},
+            ThirdPractice={"date": "2026-07-04", "time": "11:30:00Z"},
+            Qualifying={"date": "2026-07-04", "time": "15:00:00Z"},
+        )
+        events = f1_transform.transform(self._make_bronze([race]))
+        session_types = [s["type"] for s in events[0]["sessions"]]
+
+        self.assertIn("FP1", session_types)
+        self.assertIn("FP2", session_types)
+        self.assertIn("FP3", session_types)
+        self.assertIn("Qualifying", session_types)
+        self.assertIn("Race", session_types)
+
+    def test_sprint_weekend_maps_sprint_and_sprint_qualifying(self):
+        """Sprint weekends produce Sprint Qualifying and Sprint session types."""
+        race = self._make_race(
+            SprintQualifying={"date": "2026-06-14", "time": "12:00:00Z"},
+            Sprint={"date": "2026-06-14", "time": "16:00:00Z"},
+            Qualifying={"date": "2026-06-15", "time": "15:00:00Z"},
+        )
+        events = f1_transform.transform(self._make_bronze([race]))
+        session_types = [s["type"] for s in events[0]["sessions"]]
+
+        self.assertIn("Sprint Qualifying", session_types)
+        self.assertIn("Sprint", session_types)
+
+    def test_country_code_alpha2_from_openf1(self):
+        """OpenF1 alpha-3 country codes are converted to alpha-2."""
+        race = self._make_race()
+        bronze = {
+            "jolpica": {
+                "MRData": {
+                    "RaceTable": {
+                        "season": "2026",
+                        "Races": [race],
+                    }
+                }
+            },
+            "openf1_meetings": [
+                {
+                    "location": "testville",
+                    "country_code": "AUS",  # alpha-3
+                    "circuit_image": None,
+                }
+            ],
+        }
+        events = f1_transform.transform(bronze)
+        self.assertEqual(events[0]["circuit"]["countryCode"], "AU")
+
+    def test_country_code_falls_back_to_name_lookup(self):
+        """When no OpenF1 match, country name is used to derive alpha-2."""
+        race = self._make_race()  # country = "Australia" in Location
+        events = f1_transform.transform(self._make_bronze([race]))
+        self.assertEqual(events[0]["circuit"]["countryCode"], "AU")
+
+    def test_date_start_end_derived_from_sessions(self):
+        """dateStart and dateEnd span the full range of real sessions."""
+        race = self._make_race(
+            FirstPractice={"date": "2026-07-03", "time": "11:30:00Z"},
+            Qualifying={"date": "2026-07-04", "time": "15:00:00Z"},
+        )
+        events = f1_transform.transform(self._make_bronze([race]))
+        self.assertEqual(events[0]["dateStart"], "2026-07-03")
+        self.assertEqual(events[0]["dateEnd"], "2026-07-05")  # race day
+
+    def test_placeholder_sessions_excluded_from_date_derivation(self):
+        """Sessions with 1900-01-01 dates do not affect dateStart/dateEnd."""
+        race = {
+            "round": "1",
+            "raceName": "Placeholder GP",
+            "date": "2026-09-13",
+            "time": "14:00:00Z",
+            "Circuit": {
+                "circuitName": "TBD",
+                "Location": {
+                    "locality": "tbd",
+                    "country": "TBD",
+                    "lat": "0",
+                    "long": "0",
+                },
+            },
+            "Qualifying": {"date": "1900-01-01", "time": "00:00:00Z"},
+        }
+        events = f1_transform.transform(self._make_bronze([race]))
+        # dateStart should be the race day, not 1900
+        self.assertEqual(events[0]["dateStart"], "2026-09-13")
+
+    def test_event_id_format(self):
+        """Event ID follows the f1-YYYY-rNN pattern."""
+        events = f1_transform.transform(self._make_bronze([self._make_race(round_num=3)]))
+        self.assertEqual(events[0]["id"], "f1-2026-r03")
+
+    def test_sessions_sorted_chronologically(self):
+        """Sessions within an event are sorted by startTimeUTC."""
+        race = self._make_race(
+            Qualifying={"date": "2026-07-04", "time": "15:00:00Z"},
+            FirstPractice={"date": "2026-07-03", "time": "11:30:00Z"},
+        )
+        events = f1_transform.transform(self._make_bronze([race]))
+        times = [s["startTimeUTC"] for s in events[0]["sessions"]]
+        self.assertEqual(times, sorted(times))
 
 
 if __name__ == "__main__":
