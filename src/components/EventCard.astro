@@ -156,9 +156,25 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
   import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
 
   function initCards() {
-    // ── Local time conversion ──
+    // ── Local time conversion + today indicators ──
+    const _now = new Date();
     document.querySelectorAll<HTMLTimeElement>('[data-local-time][data-format="time-short"]').forEach(el => {
       el.textContent = formatLocalValue(el.dataset.localTime!, 'time-short');
+
+      const d = new Date(el.dataset.localTime!);
+      const isTodaySession =
+        d.getFullYear() === _now.getFullYear() &&
+        d.getMonth()    === _now.getMonth()    &&
+        d.getDate()     === _now.getDate()     &&
+        d > _now; // only upcoming sessions today (live already has its own badge)
+
+      const sessionRow = el.parentElement;
+      if (isTodaySession && sessionRow && !sessionRow.querySelector('.today-dot')) {
+        const badge = document.createElement('span');
+        badge.className = 'today-dot text-[9px] font-bold uppercase tracking-wide text-amber-400 border border-amber-400/40 px-1 rounded leading-none py-px shrink-0';
+        badge.textContent = 'today';
+        sessionRow.appendChild(badge);
+      }
     });
 
     // ── Live session indicators ──

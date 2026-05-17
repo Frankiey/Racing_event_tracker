@@ -168,8 +168,21 @@
 
       // Day label
       const label = document.createElement('div');
-      label.className = 'text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-1';
-      label.textContent = dayLabel(dateKey);
+      label.className = 'text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-1 flex items-center gap-2';
+      const labelText = document.createElement('span');
+      labelText.textContent = dayLabel(dateKey);
+      label.appendChild(labelText);
+
+      // "Today" pill on the current day
+      const [dk_y, dk_m, dk_d] = dateKey.split('-').map(Number);
+      const _tlNow = new Date();
+      if (dk_y === _tlNow.getFullYear() && dk_m - 1 === _tlNow.getMonth() && dk_d === _tlNow.getDate()) {
+        const todayPill = document.createElement('span');
+        todayPill.className = 'text-[9px] font-bold uppercase tracking-widest text-amber-400 bg-amber-400/15 px-1.5 py-0.5 rounded-full';
+        todayPill.textContent = 'Today';
+        label.appendChild(todayPill);
+      }
+
       dayRow.appendChild(label);
 
       // Bar container — blocks + ruler
