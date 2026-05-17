@@ -104,15 +104,7 @@ function getWeekLabel(event: RaceEvent): string {
   const isPast = (raceSession && !isPlaceholderTime(raceSession.startTimeUTC))
     ? new Date(raceSession.startTimeUTC) < now
     : isPastEvent(event.dateEnd, event.sessions);
-  if (isPast) {
-    // Events whose race day is today stay visible as "Today" — only truly past
-    // (i.e. the race date is before today's UTC date) go to Recent.
-    const raceDate = (raceSession && !isPlaceholderTime(raceSession.startTimeUTC))
-      ? raceSession.startTimeUTC.slice(0, 10)
-      : event.dateEnd;
-    if (raceDate < now.toISOString().slice(0, 10)) return '__recent__';
-    // Fall through: race is today — let the day-diff logic below label it "Today"
-  }
+  if (isPast) return '__recent__';
 
   const eventDate = new Date(event.dateStart + 'T12:00:00Z');
   const today = new Date();
@@ -679,9 +671,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
     mainWrappers.forEach(wrapper => {
       const raceUtc = wrapper.getAttribute('data-race-utc') ?? '';
       if (!raceUtc || isPlaceholderTime(raceUtc)) return;
-      const todayUtcDate = new Date().toISOString().slice(0, 10);
-      // Only move to Recent if the race was on a previous day, not today
-      if (new Date(raceUtc) < new Date() && raceUtc.slice(0, 10) < todayUtcDate) {
+      if (new Date(raceUtc) < new Date()) {
         recentGrid?.appendChild(wrapper);
         moved++;
       }
