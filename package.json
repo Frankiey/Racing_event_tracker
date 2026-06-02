@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
-    "astro": "^6.3.1",
+    "astro": "^6.4.2",
     "d3-drag": "^3.0.0",
     "d3-geo": "^3.1.1",
     "d3-interpolate": "^3.0.1",
@@ -38,9 +38,9 @@
     "@types/d3-interpolate": "^3.0.4",
     "@types/d3-selection": "^3.0.11",
     "@types/d3-timer": "^3.0.2",
-    "@types/node": "^25.6.2",
+    "@types/node": "^25.9.1",
     "@types/topojson-client": "^3.1.5",
     "tailwindcss": "^4.2.4",
-    "vite": "^7.3.3"
+    "vite": "^7.3.5"
   }
 }
