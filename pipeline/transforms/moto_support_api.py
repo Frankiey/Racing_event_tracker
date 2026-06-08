@@ -3,7 +3,13 @@
 from pipeline.config import SEASON_YEAR
 from pipeline.session_taxonomy import get_session_type_map
 
-from .common import build_circuit, build_event, build_mapped_sessions, derive_event_dates
+from .common import (
+    build_circuit,
+    build_event,
+    build_mapped_sessions,
+    convert_sessions_from_local_time,
+    derive_event_dates,
+)
 
 
 _SESSION_TYPES = get_session_type_map("motogp")
@@ -21,8 +27,9 @@ def transform(bronze_events: list, series_id: str) -> list[dict]:
 
     for index, event in enumerate(bronze_events or [], start=1):
         raw_sessions = event.get("_sessions", [])
+        country_code = (event.get("country") or {}).get("iso", "")
         sessions = build_mapped_sessions(
-            raw_sessions,
+            convert_sessions_from_local_time(raw_sessions, country_code),
             _SESSION_TYPES,
             number_repeats=True,
         )

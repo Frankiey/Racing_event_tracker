@@ -1,8 +1,35 @@
 """Shared helpers for bronze-to-silver transforms."""
 
 from collections.abc import Iterable, Sequence
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from pipeline.utils import to_date, to_iso
+
+
+COUNTRY_TIMEZONES = {
+    "AR": "America/Argentina/Buenos_Aires",
+    "AU": "Australia/Melbourne",
+    "BR": "America/Sao_Paulo",
+    "CZ": "Europe/Prague",
+    "DE": "Europe/Berlin",
+    "ES": "Europe/Madrid",
+    "FR": "Europe/Paris",
+    "GB": "Europe/London",
+    "HU": "Europe/Budapest",
+    "ID": "Asia/Jakarta",
+    "IN": "Asia/Kolkata",
+    "IT": "Europe/Rome",
+    "JP": "Asia/Tokyo",
+    "KZ": "Asia/Almaty",
+    "MY": "Asia/Kuala_Lumpur",
+    "NL": "Europe/Amsterdam",
+    "PT": "Europe/Lisbon",
+    "QA": "Asia/Qatar",
+    "SM": "Europe/Rome",
+    "TH": "Asia/Bangkok",
+    "US": "America/Chicago",
+}
 
 
 def build_circuit(
@@ -87,6 +114,35 @@ def build_single_session(start: str | None, label: str = "Race") -> list[dict]:
     if not start:
         return []
     return [{"type": label, "startTimeUTC": to_iso(start)}]
+
+
+def convert_sessions_from_local_time(
+    sessions: Sequence[dict],
+    country_code: str,
+    *,
+    start_key: str = "date",
+) -> list[dict]:
+    timezone_name = COUNTRY_TIMEZONES.get(country_code)
+    if not timezone_name:
+        return [dict(session) for session in sessions]
+
+    converted: list[dict] = []
+    for session in sessions:
+        converted_session = dict(session)
+        start_time = converted_session.get(start_key)
+        if start_time:
+            converted_session[start_key] = local_time_to_utc(start_time, timezone_name)
+        converted.append(converted_session)
+    return converted
+
+
+def local_time_to_utc(dt_str: str, timezone_name: str) -> str:
+    try:
+        local_time = datetime.fromisoformat(dt_str.replace("Z", "").replace("+00:00", ""))
+    except ValueError:
+        return dt_str
+
+    return local_time.replace(tzinfo=ZoneInfo(timezone_name)).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def derive_event_dates(sessions: Sequence[dict], fallback_start: str = "", fallback_end: str = "") -> tuple[str, str]:

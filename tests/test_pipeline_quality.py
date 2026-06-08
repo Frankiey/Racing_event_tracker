@@ -152,7 +152,7 @@ class SeriesTransformTests(unittest.TestCase):
 
         self.assertEqual(events[0]["sessions"][0]["startTimeUTC"], "2026-04-26T12:00:00Z")
 
-    def test_moto_support_transform_maps_direct_support_sessions(self):
+    def test_moto_support_transform_converts_circuit_local_times_to_utc(self):
         support_events = [
             {
                 "id": "edcfdba3-7a1f-44f3-8fe8-1f8a6609770c",
@@ -185,12 +185,12 @@ class SeriesTransformTests(unittest.TestCase):
         self.assertEqual(
             moto2_events[0]["sessions"],
             [
-                {"type": "FP1", "startTimeUTC": "2026-05-08T09:50:00Z"},
-                {"type": "Practice", "startTimeUTC": "2026-05-08T14:05:00Z"},
-                {"type": "FP2", "startTimeUTC": "2026-05-09T09:25:00Z"},
-                {"type": "Q1", "startTimeUTC": "2026-05-09T13:40:00Z"},
-                {"type": "Q2", "startTimeUTC": "2026-05-09T14:05:00Z"},
-                {"type": "Race", "startTimeUTC": "2026-05-10T12:15:00Z"},
+                {"type": "FP1", "startTimeUTC": "2026-05-08T07:50:00Z"},
+                {"type": "Practice", "startTimeUTC": "2026-05-08T12:05:00Z"},
+                {"type": "FP2", "startTimeUTC": "2026-05-09T07:25:00Z"},
+                {"type": "Q1", "startTimeUTC": "2026-05-09T11:40:00Z"},
+                {"type": "Q2", "startTimeUTC": "2026-05-09T12:05:00Z"},
+                {"type": "Race", "startTimeUTC": "2026-05-10T10:15:00Z"},
             ],
         )
         self.assertEqual(moto2_events[0]["dateStart"], "2026-05-08")
