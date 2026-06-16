@@ -686,6 +686,57 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
   // Labels (Today/Tomorrow) are baked at build time; race sessions may have
   // passed since the last deploy. This runs on page load and tab-focus to
   // move finished events to Recent and correct stale headings.
+  function updateWeekSectionCount(section: HTMLElement) {
+    const heading = section.querySelector('h2');
+    if (!heading) return;
+
+    const countChip = heading.lastElementChild;
+    if (countChip) {
+      countChip.textContent = String(section.querySelectorAll('.event-card-wrapper').length);
+    }
+  }
+
+  function mergeVisibleDuplicateWeekSections() {
+    const visibleSections = [...document.querySelectorAll<HTMLElement>('.week-group')]
+      .filter(section => section.style.display !== 'none');
+
+    let previous: HTMLElement | null = null;
+    visibleSections.forEach(section => {
+      const label = section.getAttribute('data-week-section');
+      if (!previous || !label) {
+        previous = section;
+        updateWeekSectionCount(section);
+        return;
+      }
+
+      const previousLabel = previous.getAttribute('data-week-section');
+      if (previousLabel !== label) {
+        previous = section;
+        updateWeekSectionCount(section);
+        return;
+      }
+
+      const previousGrid = previous.children[1];
+      const sectionGrid = section.children[1];
+      if (!(previousGrid instanceof HTMLElement) || !(sectionGrid instanceof HTMLElement)) {
+        previous = section;
+        updateWeekSectionCount(section);
+        return;
+      }
+
+      section.querySelectorAll<HTMLElement>('.event-card-wrapper').forEach(card => {
+        previousGrid.appendChild(card);
+      });
+
+      const previousEnd = previous.getAttribute('data-week-dateend') ?? '';
+      const sectionEnd = section.getAttribute('data-week-dateend') ?? '';
+      if (sectionEnd > previousEnd) previous.setAttribute('data-week-dateend', sectionEnd);
+
+      updateWeekSectionCount(previous);
+      section.remove();
+    });
+  }
+
   function refreshDashboard() {
     // 1. Move events whose race session has started to the Recent grid
     const recentGrid   = document.getElementById('recent-events');
@@ -772,7 +823,10 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
         n => n.nodeType === Node.TEXT_NODE && (n.textContent ?? '').trim().length > 0
       );
       if (textNode) textNode.textContent = label;
+      updateWeekSectionCount(section);
     });
+
+    mergeVisibleDuplicateWeekSections();
   }
 
   function initWeekendShare() {
@@ -873,6 +927,8 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
           card.style.animationDelay = `${i * 55}ms`;
           card.classList.add('card-enter');
         });
+
+        refreshDashboard();
 
         skeleton?.classList.add('hidden');
         loading = false;
