@@ -1,7 +1,7 @@
 {
-  "generated": "2026-06-08T16:06:08Z",
+  "generated": "2026-06-17T19:31:52Z",
   "season": 2026,
-  "eventCount": 151,
+  "eventCount": 145,
   "sources": [
     "dtm",
     "f1",
@@ -22,235 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "wec-2026-r03",
-      "seriesId": "wec",
-      "eventName": "24 Hours of Le Mans",
-      "round": 3,
-      "circuit": {
-        "name": "Circuit de la Sarthe",
-        "city": "Le Mans",
-        "country": "France",
-        "countryCode": "FR",
-        "lat": 47.9562,
-        "lng": 0.2075
-      },
-      "sessions": [
-        {
-          "type": "Test Day",
-          "startTimeUTC": "2026-06-07T08:00:00Z"
-        },
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-06-10T13:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-06-10T19:00:00Z"
-        },
-        {
-          "type": "Practice 3",
-          "startTimeUTC": "2026-06-11T13:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-11T19:00:00Z"
-        },
-        {
-          "type": "Hyperpole",
-          "startTimeUTC": "2026-06-12T19:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-06-13T09:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-13T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-07",
-      "dateEnd": "2026-06-14"
-    },
-    {
-      "id": "f3-2026-r03",
-      "seriesId": "f3",
-      "eventName": "Spain",
-      "round": 3,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Barcelona",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.2611
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-12T05:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-12T09:30:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-06-13T06:30:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-06-14T07:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-12",
-      "dateEnd": "2026-06-14"
-    },
-    {
-      "id": "f2-2026-r04",
-      "seriesId": "f2",
-      "eventName": "Spain",
-      "round": 4,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Barcelona",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.2611
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-12T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-12T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-06-13T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-06-14T08:30:00Z"
-        }
-      ],
-      "dateStart": "2026-06-12",
-      "dateEnd": "2026-06-14"
-    },
-    {
-      "id": "wsbk-2026-r07",
-      "seriesId": "wsbk",
-      "eventName": "WorldSBK Misano",
-      "round": 7,
-      "circuit": {
-        "name": "Misano World Circuit Marco Simoncelli",
-        "city": "Misano Adriatico",
-        "country": "Italy",
-        "countryCode": "IT",
-        "lat": 43.9647,
-        "lng": 12.6839
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-06-12T09:30:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-06-12T13:00:00Z"
-        },
-        {
-          "type": "Superpole",
-          "startTimeUTC": "2026-06-13T11:00:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-06-13T13:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-06-14T09:15:00Z"
-        },
-        {
-          "type": "Superpole Race",
-          "startTimeUTC": "2026-06-14T11:00:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-06-14T13:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-12",
-      "dateEnd": "2026-06-14"
-    },
-    {
-      "id": "f1-2026-r07",
-      "seriesId": "f1",
-      "eventName": "Barcelona Grand Prix",
-      "round": 7,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Barcelona",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.26111
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-12T11:30:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-12T15:00:00Z"
-        },
-        {
-          "type": "FP3",
-          "startTimeUTC": "2026-06-13T10:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-13T14:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-14T13:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-12",
-      "dateEnd": "2026-06-14",
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Barcelona-Catalunya%20carbon.png"
-    },
-    {
-      "id": "nascar-2026-r20",
-      "seriesId": "nascar",
-      "eventName": "Great American Getaway 400 presented by VISITPA",
-      "round": 20,
-      "circuit": {
-        "name": "Pocono Raceway",
-        "city": "Long Pond",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 41.0556,
-        "lng": -75.5097
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-13T18:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-14T19:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-13",
-      "dateEnd": "2026-06-14"
-    },
     {
       "id": "moto3-2026-r09",
       "seriesId": "moto3",
@@ -603,7 +374,7 @@
         }
       ],
       "dateStart": "2026-06-25",
-      "dateEnd": "2026-06-28"
+      "dateEnd": "2026-06-27"
     },
     {
       "id": "imsa-2026-r06",
@@ -3712,8 +3483,8 @@
           "startTimeUTC": "2026-09-27T08:00:00Z"
         }
       ],
-      "dateStart": "2026-09-24",
-      "dateEnd": "2026-09-26"
+      "dateStart": "2026-09-25",
+      "dateEnd": "2026-09-27"
     },
     {
       "id": "wsbk-2026-r10",

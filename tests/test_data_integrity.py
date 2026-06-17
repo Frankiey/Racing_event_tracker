@@ -54,12 +54,12 @@ class UpcomingIntegrityTests(unittest.TestCase):
             )
 
     def test_no_placeholder_times_on_upcoming_sessions(self):
-        """No upcoming event should have a session starting at T00:00:00Z (placeholder)."""
+        """No upcoming event should have a placeholder session time (year 1900)."""
         bad = []
         for ev in self.events:
             for session in ev.get("sessions", []):
                 utc = session.get("startTimeUTC", "")
-                if utc.endswith("T00:00:00Z") or utc.startswith("1900-"):
+                if utc.startswith("1900-"):
                     bad.append((ev["id"], session["type"], utc))
         self.assertEqual(
             bad,

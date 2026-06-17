@@ -37,64 +37,13 @@ const { targetUTC, label } = Astro.props;
 </div>
 
 <script>
-  const _countdownIntervals: ReturnType<typeof window.setInterval>[] = [];
+  import { cleanupCountdowns, initCountdowns } from '../lib/ui/countdown';
 
-  function initCountdowns() {
-    document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
-      if (el.dataset.countdownInit) return; // guard against double-init
-      el.dataset.countdownInit = '1';
-
-      const target = new Date(el.dataset.countdown!).getTime();
-
-      function update() {
-        const now = Date.now();
-        const diff = target - now;
-
-        if (diff <= 0) {
-          // Session has started — show "IN PROGRESS" with elapsed time
-          const elapsed = now - target;
-          const elMin = Math.floor(elapsed / 60000);
-          const elHrs = Math.floor(elMin / 60);
-          const labelEl = el.querySelector('p');
-          if (labelEl && !labelEl.dataset.liveSet) {
-            labelEl.dataset.liveSet = '1';
-            labelEl.innerHTML = '<span class="live-pulse inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span><span class="text-emerald-400">In Progress</span></span>';
-          }
-          el.querySelector('[data-unit="days"]')!.textContent = '0';
-          el.querySelector('[data-unit="hours"]')!.textContent = String(elHrs).padStart(2, '0');
-          el.querySelector('[data-unit="minutes"]')!.textContent = String(elMin % 60).padStart(2, '0');
-          el.querySelector('[data-unit="seconds"]')!.textContent = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
-          // Change label of first unit to elapsed context
-          const daysLabel = el.querySelector('[data-unit="days"]')?.nextElementSibling;
-          if (daysLabel && daysLabel.textContent !== 'elapsed') daysLabel.textContent = 'elapsed';
-          return;
-        }
-
-        const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-
-        el.querySelector('[data-unit="days"]')!.textContent = String(days);
-        el.querySelector('[data-unit="hours"]')!.textContent = String(hours).padStart(2, '0');
-        el.querySelector('[data-unit="minutes"]')!.textContent = String(minutes).padStart(2, '0');
-        el.querySelector('[data-unit="seconds"]')!.textContent = String(seconds).padStart(2, '0');
-      }
-
-      update();
-      _countdownIntervals.push(setInterval(update, 1000));
-    });
-  }
-
-  function cleanupCountdowns() {
-    _countdownIntervals.splice(0).forEach(clearInterval);
-    document.querySelectorAll<HTMLElement>('[data-countdown-init]').forEach(el => {
-      delete el.dataset.countdownInit;
-    });
-  }
+  const initCountdownNodes = () => initCountdowns();
+  const cleanupCountdownNodes = () => cleanupCountdowns();
 
   // Run on initial load and after Astro page transitions
-  initCountdowns();
-  document.addEventListener('astro:before-swap', cleanupCountdowns);
-  document.addEventListener('astro:after-swap', initCountdowns);
+  initCountdownNodes();
+  document.addEventListener('astro:before-swap', cleanupCountdownNodes);
+  document.addEventListener('astro:after-swap', initCountdownNodes);
 </script>

@@ -176,12 +176,26 @@ for (const s of SERIES_LIST) {
 
 <script>
   // ═══ Season Passport — D3 Orthographic Globe ═══
-  import { formatDateRange } from '../lib/client-utils';
-  import { geoOrthographic, geoPath, geoGraticule, geoInterpolate, geoDistance } from 'd3-geo';
   import { drag } from 'd3-drag';
   import { select } from 'd3-selection';
-  import { timer } from 'd3-timer';
   import { feature } from 'topojson-client';
+  import { renderEmptyPassportPanel, renderPassportEventPanel } from '../lib/passport/panel';
+  import { createPassportRenderer } from '../lib/passport/renderer';
+  import {
+    applyPassportFilterButtonState,
+    applyPassportFlightSeriesButtonState,
+    findNearestProjectedEvent,
+    renderPassportStats,
+    renderPassportTooltip,
+    setPassportFlightSeries,
+    updatePassportFlightState,
+  } from '../lib/passport/state';
+  import type {
+    PassportEvent,
+    PassportFullEvent,
+    PassportRenderState,
+    PassportSeriesMetaMap,
+  } from '../lib/passport/types';
   // @ts-ignore — world-atlas ships JSON
   import worldData from 'world-atlas/land-110m.json';
 
@@ -198,541 +212,63 @@ for (const s of SERIES_LIST) {
   const __data = JSON.parse(document.getElementById('globe-data')!.textContent!);
 
   // ── State ──
-  const events: any[] = __data.events;
-  const meta: any = __data.seriesMeta;
-  let activeFilter = 'all';
-  let hoveredEvent: any = null;
-  let selectedEvent: any = null;
-  let autoRotate = true;
-  let lastInteraction = 0;
-  let currentRotation: [number, number, number] = [0, -20, 0]; // [λ, φ, γ]
-  let velocityX = 0;
-  let scaleFactor = 1;
-
-  // ── Flight animation state ──
-  let flightProgress = 0;    // 0 → totalSegments
-  let flightActive = false;
-  let flightPaused = false;
-  let followPlane = true;
+  const events: PassportEvent[] = __data.events;
+  const meta: PassportSeriesMetaMap = __data.seriesMeta;
   const FLIGHT_SPEED = 0.004; // progress per frame
-  // Default to first flightable series (or 'f1')
   const flightableIds: string[] = __data.flightableSeriesIds ?? ['f1'];
-  let flightSeries: string = flightableIds[0] ?? 'f1';
-  let lastFlightSegIndex = -1; // for destination-arrival detection
+  const fullEvents: PassportFullEvent[] = __data.fullEvents ?? [];
+  const renderState: PassportRenderState = {
+    activeFilter: 'all',
+    hoveredEvent: null,
+    selectedEvent: null,
+    autoRotate: true,
+    lastInteraction: 0,
+    currentRotation: [0, -20, 0],
+    velocityX: 0,
+    scaleFactor: 1,
+    flightProgress: 0,
+    flightActive: false,
+    flightPaused: false,
+    followPlane: true,
+    flightSeries: flightableIds[0] ?? 'f1',
+    lastFlightSegIndex: -1,
+    isDragging: false,
+    projectedDots: [],
+  };
 
-  function filteredEvents() {
-    if (activeFilter === 'all') return events;
-    return events.filter((e: any) => e.seriesId === activeFilter);
+  function updateStats() {
+    statsEl.innerHTML = renderPassportStats(events, renderState.activeFilter);
   }
 
-  // ── Star field (generated once) ──
-  const stars = Array.from({ length: 400 }, () => ({
-    x: Math.random(),
-    y: Math.random(),
-    r: Math.random() * 1.2 + 0.2,
-    a: Math.random() * 0.5 + 0.1,
-    speed: Math.random() * 0.003 + 0.001,
-    phase: Math.random() * Math.PI * 2,
-  }));
-
-  // ══════════════════════════════════════════════
-  //  D3 PROJECTION + PATH
-  // ══════════════════════════════════════════════
-
-  const projection = geoOrthographic()
-    .clipAngle(90)
-    .precision(0.5);
-
-  const pathGen = geoPath(projection, ctx);
-  const graticule = geoGraticule().step([20, 20]);
-
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    if (canvas.width !== Math.round(rect.width * dpr) || canvas.height !== Math.round(rect.height * dpr)) {
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(rect.height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    const w = rect.width;
-    const h = rect.height;
-    const r = Math.min(w, h) * 0.40 * scaleFactor;
-    projection.translate([w / 2, h / 2]).scale(r);
-    return { w, h, r };
-  }
-
-  // ══════════════════════════════════════════════
-  //  RENDERING
-  // ══════════════════════════════════════════════
-
-  function render() {
-    const { w, h, r } = resize();
-    const cx = w / 2, cy = h / 2;
-    ctx.clearRect(0, 0, w, h);
-
-    projection.rotate(currentRotation);
-
-    // 1. Stars
-    const t = Date.now();
-    const rSafe = r + 8;
-    for (const s of stars) {
-      const sx = s.x * w, sy = s.y * h;
-      const dx = sx - cx, dy = sy - cy;
-      if (dx * dx + dy * dy < rSafe * rSafe) continue;
-      const twinkle = Math.sin(t * s.speed + s.phase) * 0.35 + 0.65;
-      ctx.beginPath();
-      ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180, 200, 255, ${s.a * twinkle})`;
-      ctx.fill();
-    }
-
-    // 2. Atmospheric glow
-    const atmoGrad = ctx.createRadialGradient(cx, cy, r * 0.96, cx, cy, r * 1.3);
-    atmoGrad.addColorStop(0, 'rgba(70, 140, 255, 0.15)');
-    atmoGrad.addColorStop(0.4, 'rgba(50, 120, 240, 0.06)');
-    atmoGrad.addColorStop(0.8, 'rgba(30, 90, 200, 0.02)');
-    atmoGrad.addColorStop(1, 'rgba(20, 60, 150, 0)');
-    ctx.beginPath();
-    ctx.arc(cx, cy, r * 1.3, 0, Math.PI * 2);
-    ctx.fillStyle = atmoGrad;
-    ctx.fill();
-
-    // 3. Ocean sphere
-    const oceanGrad = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.3, r * 0.05, cx + r * 0.1, cy + r * 0.1, r);
-    oceanGrad.addColorStop(0, '#1a3d5c');
-    oceanGrad.addColorStop(0.4, '#133050');
-    oceanGrad.addColorStop(0.75, '#0d2038');
-    oceanGrad.addColorStop(1, '#091528');
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = oceanGrad;
-    ctx.fill();
-
-    // 4. Graticule
-    ctx.beginPath();
-    pathGen(graticule());
-    ctx.strokeStyle = 'rgba(50, 100, 150, 0.10)';
-    ctx.lineWidth = 0.4;
-    ctx.stroke();
-
-    // 5. Land masses
-    ctx.beginPath();
-    pathGen(land);
-    ctx.fillStyle = '#1c2e25';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(70, 120, 90, 0.5)';
-    ctx.lineWidth = 0.6;
-    ctx.stroke();
-
-    // 6. Series route lines
-    drawRoutes();
-
-    // 7. Flight animation arcs (draw before dots so dots are on top)
-    drawFlightAnimation();
-
-    // 8. Event dots
-    drawDots();
-
-    // 9. Specular highlight
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.clip();
-    const specGrad = ctx.createRadialGradient(cx - r * 0.38, cy - r * 0.4, 0, cx - r * 0.2, cy - r * 0.2, r * 0.6);
-    specGrad.addColorStop(0, 'rgba(255, 255, 255, 0.06)');
-    specGrad.addColorStop(0.3, 'rgba(255, 255, 255, 0.02)');
-    specGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-    ctx.fillStyle = specGrad;
-    ctx.fillRect(0, 0, w, h);
-    ctx.restore();
-
-    // 10. Limb darkening
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.clip();
-    const limbGrad = ctx.createRadialGradient(cx, cy, r * 0.5, cx, cy, r);
-    limbGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-    limbGrad.addColorStop(0.6, 'rgba(0, 0, 0, 0)');
-    limbGrad.addColorStop(0.85, 'rgba(0, 8, 25, 0.15)');
-    limbGrad.addColorStop(0.95, 'rgba(0, 10, 35, 0.30)');
-    limbGrad.addColorStop(1, 'rgba(0, 10, 40, 0.45)');
-    ctx.fillStyle = limbGrad;
-    ctx.fillRect(0, 0, w, h);
-    const atmoEdge = ctx.createRadialGradient(cx, cy, r * 0.92, cx, cy, r);
-    atmoEdge.addColorStop(0, 'rgba(60, 140, 255, 0)');
-    atmoEdge.addColorStop(0.7, 'rgba(60, 140, 255, 0.02)');
-    atmoEdge.addColorStop(1, 'rgba(80, 160, 255, 0.06)');
-    ctx.fillStyle = atmoEdge;
-    ctx.fillRect(0, 0, w, h);
-    ctx.restore();
-
-    // 11. Globe edge ring
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(80, 150, 255, 0.10)';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // Physics
-    if (!isDragging) {
-      if (Math.abs(velocityX) > 0.01) {
-        currentRotation[0] += velocityX;
-        velocityX *= 0.95;
-      }
-      if (!autoRotate && Date.now() - lastInteraction > 6000) autoRotate = true;
-      if (autoRotate) currentRotation[0] += 0.15;
-    }
-  }
-
-  // ── Routes ──
-  function drawRoutes() {
-    const filtered = filteredEvents();
-    const bySeries: Record<string, any[]> = {};
-    for (const e of filtered) {
-      if (!bySeries[e.seriesId]) bySeries[e.seriesId] = [];
-      bySeries[e.seriesId].push(e);
-    }
-
-    for (const [sid, sevents] of Object.entries(bySeries)) {
-      const sorted = sevents.sort((a: any, b: any) => a.round - b.round);
-      const color = meta[sid]?.color ?? '#71717a';
-
-      // Draw great-circle arcs between consecutive events
-      for (let i = 0; i < sorted.length - 1; i++) {
-        const from = sorted[i];
-        const to = sorted[i + 1];
-        const line: GeoJSON.Feature = {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: [[from.lng, from.lat], [to.lng, to.lat]]
-          }
-        };
-        ctx.beginPath();
-        pathGen(line);
-        ctx.strokeStyle = color + '18';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([3, 4]);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      }
-    }
-  }
-
-  // ── Dots ──
-  let projectedDots: any[] = [];
-  function drawDots() {
-    const filtered = filteredEvents();
-    projectedDots = [];
-
-    // Find next race per series
-    const nextRace: Record<string, any> = {};
-    for (const e of filtered) {
-      if (e.isPast) continue;
-      if (!nextRace[e.seriesId] || e.dateStart < nextRace[e.seriesId].dateStart) {
-        nextRace[e.seriesId] = e;
-      }
-    }
-
-    // Project all visible dots
-    for (const e of filtered) {
-      const coords: [number, number] = [e.lng, e.lat];
-      const d = geoDistance(coords, [
-        -currentRotation[0], -currentRotation[1]
-      ]);
-      if (d > Math.PI / 2 + 0.05) continue; // behind globe
-
-      const pos = projection(coords);
-      if (!pos) continue;
-
-      projectedDots.push({ ...e, px: pos[0], py: pos[1], d });
-    }
-
-    // Sort: farthest first (painter's)
-    projectedDots.sort((a, b) => b.d - a.d);
-
-    for (const e of projectedDots) {
-      const color = meta[e.seriesId]?.color ?? '#71717a';
-      const isNext = nextRace[e.seriesId]?.id === e.id;
-      const isHovered = hoveredEvent?.id === e.id;
-      const isSelected = selectedEvent?.id === e.id;
-      const dotR = isHovered || isSelected ? 7 : isNext ? 6 : 4;
-
-      ctx.shadowColor = 'rgba(0,0,0,0.5)';
-      ctx.shadowBlur = 3;
-      ctx.shadowOffsetX = 1;
-      ctx.shadowOffsetY = 1;
-
-      if (e.isPast) {
-        ctx.beginPath();
-        ctx.arc(e.px, e.py, dotR, 0, Math.PI * 2);
-        ctx.fillStyle = color + '90';
-        ctx.fill();
-      } else if (isNext) {
-        const pulse = Math.sin(Date.now() / 400) * 0.3 + 0.7;
-        ctx.shadowColor = color;
-        ctx.shadowBlur = 15;
-        ctx.beginPath();
-        ctx.arc(e.px, e.py, dotR + 5, 0, Math.PI * 2);
-        ctx.fillStyle = color + Math.round(pulse * 35).toString(16).padStart(2, '0');
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(e.px, e.py, dotR, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      } else {
-        ctx.beginPath();
-        ctx.arc(e.px, e.py, dotR, 0, Math.PI * 2);
-        ctx.strokeStyle = color + '80';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-
-      if (isHovered || isSelected) {
-        ctx.beginPath();
-        ctx.arc(e.px, e.py, dotR + 3, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([2, 2]);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      }
-    }
-  }
-
-  // ══════════════════════════════════════════════
-  //  FLIGHT ANIMATION (multi-series)
-  // ══════════════════════════════════════════════
-
-  function getFlightRoute() {
-    return events
-      .filter((e: any) => e.seriesId === flightSeries)
-      .sort((a: any, b: any) => a.round - b.round);
-  }
-
-  function drawFlightAnimation() {
-    if (!flightActive) return;
-    const route = getFlightRoute();
-    if (route.length < 2) return;
-
-    const segCount = route.length - 1;
-    const segIndex = Math.min(Math.floor(flightProgress), segCount - 1);
-    const segT = flightProgress - segIndex;
-
-    // Draw completed arc segments with gradient fade
-    for (let i = 0; i <= segIndex; i++) {
-      const from = route[i];
-      const to = route[i + 1];
-      if (!to) break;
-
-      const isCurrent = i === segIndex;
-      const drawT = isCurrent ? segT : 1;
-
-      // Interpolate points along the great circle
-      const interp = geoInterpolate([from.lng, from.lat], [to.lng, to.lat]);
-      const nPts = 60;
-      const pts: [number, number][] = [];
-      for (let j = 0; j <= Math.floor(nPts * drawT); j++) {
-        pts.push(interp(j / nPts) as [number, number]);
-      }
-      // Add the exact endpoint for current segment
-      if (isCurrent && pts.length > 0) {
-        pts.push(interp(drawT) as [number, number]);
-      }
-
-      if (pts.length < 2) continue;
-
-      const line: GeoJSON.Feature = {
-        type: 'Feature',
-        properties: {},
-        geometry: { type: 'LineString', coordinates: pts }
-      };
-
-      // Past segments dimmer, current segment bright
-      const alpha = isCurrent ? 'cc' : '55';
-      const flightColor = meta[flightSeries]?.color ?? '#e10600';
-      ctx.beginPath();
-      pathGen(line);
-      ctx.strokeStyle = flightColor + alpha;
-      ctx.lineWidth = isCurrent ? 2.5 : 1.5;
-      ctx.shadowColor = flightColor;
-      ctx.shadowBlur = isCurrent ? 10 : 3;
-      ctx.stroke();
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-    }
-
-    // Draw the "plane" at the current position
-    if (segIndex < segCount) {
-      const from = route[segIndex];
-      const to = route[segIndex + 1];
-      if (to) {
-        const interp = geoInterpolate([from.lng, from.lat], [to.lng, to.lat]);
-        const planeCoord = interp(segT);
-        const pos = projection(planeCoord as [number, number]);
-        const d = geoDistance(planeCoord as [number, number], [-currentRotation[0], -currentRotation[1]]);
-
-        // Auto-follow: smoothly rotate globe to keep plane centered
-        if (followPlane && !isDragging && !flightPaused) {
-          const targetLon = -(planeCoord as [number, number])[0];
-          const targetLat = -(planeCoord as [number, number])[1];
-          const followSpeed = 0.08;
-          currentRotation[0] += (targetLon - currentRotation[0]) * followSpeed;
-          currentRotation[1] += (targetLat - currentRotation[1]) * followSpeed;
-          autoRotate = false;
-        }
-
-        if (pos && d < Math.PI / 2) {
-          // Direction for rotation (look-ahead)
-          const aheadCoord = interp(Math.min(segT + 0.02, 1));
-          const aheadPos = projection(aheadCoord as [number, number]);
-
-          ctx.save();
-          ctx.translate(pos[0], pos[1]);
-
-          // Rotate plane icon to face direction of travel
-          let angle = 0;
-          if (aheadPos) {
-            angle = Math.atan2(aheadPos[1] - pos[1], aheadPos[0] - pos[0]);
-            ctx.rotate(angle);
-          }
-
-          // Glow
-          const flightColor = meta[flightSeries]?.color ?? '#e10600';
-          ctx.shadowColor = flightColor;
-          ctx.shadowBlur = 16;
-
-          // 3D plane shape — fuselage + wings + tail
-          const planeColor = '#ffffff';
-          const planeAccent = flightColor;
-
-          // Main fuselage
-          ctx.beginPath();
-          ctx.moveTo(10, 0);       // nose
-          ctx.lineTo(4, -1.5);     // upper fuselage
-          ctx.lineTo(-8, -1.2);    // rear upper
-          ctx.lineTo(-10, 0);      // tail
-          ctx.lineTo(-8, 1.2);     // rear lower
-          ctx.lineTo(4, 1.5);      // lower fuselage
-          ctx.closePath();
-          ctx.fillStyle = planeColor;
-          ctx.fill();
-
-          // Wings (swept back)
-          ctx.beginPath();
-          ctx.moveTo(2, -1.5);     // wing root leading edge
-          ctx.lineTo(-2, -9);      // left wingtip
-          ctx.lineTo(-5, -8);      // left wingtip trailing
-          ctx.lineTo(-3, -1.3);    // wing root trailing edge
-          ctx.closePath();
-          ctx.fillStyle = planeAccent;
-          ctx.globalAlpha = 0.85;
-          ctx.fill();
-
-          ctx.beginPath();
-          ctx.moveTo(2, 1.5);      // wing root leading edge
-          ctx.lineTo(-2, 9);       // right wingtip
-          ctx.lineTo(-5, 8);       // right wingtip trailing
-          ctx.lineTo(-3, 1.3);     // wing root trailing edge
-          ctx.closePath();
-          ctx.fill();
-          ctx.globalAlpha = 1;
-
-          // Tail fin (vertical stabilizer — drawn as perspective)
-          ctx.beginPath();
-          ctx.moveTo(-7, -1.2);    // base
-          ctx.lineTo(-10, -5);     // tip
-          ctx.lineTo(-10, -1);     // trailing edge
-          ctx.closePath();
-          ctx.fillStyle = planeAccent;
-          ctx.globalAlpha = 0.7;
-          ctx.fill();
-          ctx.globalAlpha = 1;
-
-          // Cockpit window
-          ctx.beginPath();
-          ctx.arc(6, 0, 1.2, 0, Math.PI * 2);
-          ctx.fillStyle = '#60a5fa';
-          ctx.fill();
-
-          // Engine glow trail
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-          const trailGrad = ctx.createLinearGradient(-10, 0, -22, 0);
-          trailGrad.addColorStop(0, 'rgba(255, 160, 50, 0.6)');
-          trailGrad.addColorStop(0.4, 'rgba(255, 100, 30, 0.3)');
-          trailGrad.addColorStop(1, 'rgba(255, 80, 20, 0)');
-          ctx.beginPath();
-          ctx.moveTo(-10, -1);
-          ctx.lineTo(-22, -0.5);
-          ctx.lineTo(-22, 0.5);
-          ctx.lineTo(-10, 1);
-          ctx.closePath();
-          ctx.fillStyle = trailGrad;
-          ctx.fill();
-
-          ctx.restore();
-        }
-      }
-    }
-
-    // Advance animation and detect destination arrival
-    if (!flightPaused) {
-      flightProgress += FLIGHT_SPEED;
-      if (flightProgress >= segCount) {
-        flightProgress = 0; // loop
-        lastFlightSegIndex = -1;
-      } else {
-        const newSegIdx = Math.min(Math.floor(flightProgress), segCount - 1);
-        if (newSegIdx !== lastFlightSegIndex) {
-          lastFlightSegIndex = newSegIdx;
-          // Plane just arrived at route[newSegIdx] (start of new segment = end of previous)
-          if (route[newSegIdx]) {
-            const arrived = route[newSegIdx];
-            selectedEvent = arrived;
-            showEventPanel(arrived);
-          }
-        }
-      }
-    }
-  }
-
-  // Start flight animation — always active while a flightable series is chosen
   function updateFlightState() {
-    const route = getFlightRoute();
-    flightActive = route.length >= 2;
-    if (!flightActive) { flightProgress = 0; lastFlightSegIndex = -1; }
+    updatePassportFlightState(renderState, events);
   }
 
   function setFlightSeries(sid: string) {
-    if (sid === flightSeries) return;
-    flightSeries = sid;
-    flightProgress = 0;
-    lastFlightSegIndex = -1;
-    updateFlightState();
+    setPassportFlightSeries(renderState, sid, events);
     updateFlightSeriesUI();
   }
 
   function updateFlightSeriesUI() {
-    document.querySelectorAll<HTMLElement>('.flight-series-btn').forEach(btn => {
-      const isActive = btn.dataset.flightSeries === flightSeries;
-      btn.classList.toggle('bg-zinc-800', isActive);
-      btn.classList.toggle('text-zinc-200', isActive);
-      btn.classList.toggle('border-zinc-600', isActive);
-      btn.classList.toggle('text-zinc-600', !isActive);
-      btn.classList.toggle('border-zinc-800', !isActive);
-    });
+    applyPassportFlightSeriesButtonState(renderState.flightSeries);
   }
+
+  function showEventPanel(event: PassportEvent) {
+    renderPassportEventPanel(panel, event, meta, fullEvents);
+  }
+
+  renderEmptyPassportPanel(panel);
+
+  const renderer = createPassportRenderer({
+    canvas,
+    ctx,
+    land,
+    events,
+    meta,
+    state: renderState,
+    flightSpeed: FLIGHT_SPEED,
+    onArrival: (event) => showEventPanel(event),
+  });
 
   // ══════════════════════════════════════════════
   //  INTERACTIONS
@@ -750,24 +286,26 @@ for (const s of SERIES_LIST) {
     drag<HTMLCanvasElement, unknown>()
       .on('start', (event) => {
         isDragging = true;
-        autoRotate = false;
-        lastInteraction = Date.now();
-        velocityX = 0;
-        rotStart = [...currentRotation] as [number, number, number];
+        renderState.isDragging = true;
+        renderState.autoRotate = false;
+        renderState.lastInteraction = Date.now();
+        renderState.velocityX = 0;
+        rotStart = [...renderState.currentRotation] as [number, number, number];
         dragStart = [event.x, event.y];
         canvas.style.cursor = 'grabbing';
       })
       .on('drag', (event) => {
         const dx = event.x - dragStart[0];
         const dy = event.y - dragStart[1];
-        currentRotation[0] = rotStart[0] + dx * sensitivity;
-        currentRotation[1] = Math.max(-60, Math.min(60, rotStart[1] - dy * sensitivity));
-        velocityX = dx * sensitivity * 0.1;
+        renderState.currentRotation[0] = rotStart[0] + dx * sensitivity;
+        renderState.currentRotation[1] = Math.max(-60, Math.min(60, rotStart[1] - dy * sensitivity));
+        renderState.velocityX = dx * sensitivity * 0.1;
       })
       .on('end', () => {
         isDragging = false;
-        lastInteraction = Date.now();
-        canvas.style.cursor = hoveredEvent ? 'pointer' : 'grab';
+        renderState.isDragging = false;
+        renderState.lastInteraction = Date.now();
+        canvas.style.cursor = renderState.hoveredEvent ? 'pointer' : 'grab';
       })
   );
 
@@ -778,30 +316,12 @@ for (const s of SERIES_LIST) {
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
 
-    let best: any = null;
-    let bestDist = 18;
-    for (const ev of projectedDots) {
-      const dx = ev.px - mx, dy = ev.py - my;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < bestDist) { bestDist = dist; best = ev; }
-    }
-    hoveredEvent = best;
+    const best = findNearestProjectedEvent(renderState.projectedDots, mx, my, 18);
+    renderState.hoveredEvent = best;
     canvas.style.cursor = best ? 'pointer' : 'grab';
 
     if (best) {
-      const color = meta[best.seriesId]?.color ?? '#71717a';
-      const label = meta[best.seriesId]?.shortLabel ?? best.seriesId;
-      const dateStr = new Date(best.dateStart + 'T12:00:00Z').toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      tooltip.innerHTML = `
-        <div class="flex items-center gap-1.5 mb-1">
-          <span class="w-2 h-2 rounded-full" style="background:${color}"></span>
-          <span class="text-[10px] font-bold uppercase tracking-wide" style="color:${color}">${label}</span>
-          <span class="text-[10px] text-zinc-600 font-mono">R${best.round}</span>
-        </div>
-        <p class="text-sm font-semibold text-zinc-100">${best.name}</p>
-        <p class="text-xs text-zinc-400">${best.circuit}</p>
-        <p class="text-[10px] text-zinc-500 mt-1">${dateStr} · ${best.country}</p>
-      `;
+      tooltip.innerHTML = renderPassportTooltip(best, meta);
       tooltip.style.left = Math.min(mx + 12, rect.width - 260) + 'px';
       tooltip.style.top = (my - 10) + 'px';
       tooltip.classList.remove('hidden');
@@ -811,7 +331,7 @@ for (const s of SERIES_LIST) {
   });
 
   canvas.addEventListener('mouseleave', () => {
-    hoveredEvent = null;
+    renderState.hoveredEvent = null;
     tooltip.classList.add('hidden');
   });
 
@@ -821,15 +341,9 @@ for (const s of SERIES_LIST) {
     const rect = canvas.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
-    let best: any = null;
-    let bestDist = 18;
-    for (const ev of projectedDots) {
-      const dx = ev.px - mx, dy = ev.py - my;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < bestDist) { bestDist = dist; best = ev; }
-    }
+    const best = findNearestProjectedEvent(renderState.projectedDots, mx, my, 18);
     if (best) {
-      selectedEvent = best;
+      renderState.selectedEvent = best;
       showEventPanel(best);
       const pUrl = new URL(window.location.href);
       pUrl.searchParams.set('event', best.id);
@@ -853,15 +367,9 @@ for (const s of SERIES_LIST) {
   canvas.addEventListener('touchend', () => {
     if (touchStart && Date.now() - touchStart.t < 300) {
       const mx = touchStart.x, my = touchStart.y;
-      let best: any = null;
-      let bestDist = 25;
-      for (const ev of projectedDots) {
-        const dx = ev.px - mx, dy = ev.py - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < bestDist) { bestDist = dist; best = ev; }
-      }
+      const best = findNearestProjectedEvent(renderState.projectedDots, mx, my, 25);
       if (best) {
-        selectedEvent = best;
+        renderState.selectedEvent = best;
         showEventPanel(best);
         const pUrl = new URL(window.location.href);
         pUrl.searchParams.set('event', best.id);
@@ -874,112 +382,37 @@ for (const s of SERIES_LIST) {
   // Zoom
   canvas.addEventListener('wheel', (e) => {
     e.preventDefault();
-    scaleFactor *= e.deltaY > 0 ? 0.95 : 1.05;
-    scaleFactor = Math.max(0.5, Math.min(3, scaleFactor));
-    lastInteraction = Date.now();
-    autoRotate = false;
+    renderState.scaleFactor *= e.deltaY > 0 ? 0.95 : 1.05;
+    renderState.scaleFactor = Math.max(0.5, Math.min(3, renderState.scaleFactor));
+    renderState.lastInteraction = Date.now();
+    renderState.autoRotate = false;
   }, { passive: false });
 
   document.getElementById('globe-zoom-in')!.addEventListener('click', () => {
-    scaleFactor = Math.min(3, scaleFactor * 1.15);
-    lastInteraction = Date.now();
+    renderState.scaleFactor = Math.min(3, renderState.scaleFactor * 1.15);
+    renderState.lastInteraction = Date.now();
   });
   document.getElementById('globe-zoom-out')!.addEventListener('click', () => {
-    scaleFactor = Math.max(0.5, scaleFactor * 0.85);
-    lastInteraction = Date.now();
+    renderState.scaleFactor = Math.max(0.5, renderState.scaleFactor * 0.85);
+    renderState.lastInteraction = Date.now();
   });
   document.getElementById('globe-reset')!.addEventListener('click', () => {
-    scaleFactor = 1;
-    currentRotation = [0, -20, 0];
-    autoRotate = true;
-    velocityX = 0;
-    selectedEvent = null;
-    flightProgress = 0;
-    flightPaused = false;
+    renderState.scaleFactor = 1;
+    renderState.currentRotation = [0, -20, 0];
+    renderState.autoRotate = true;
+    renderState.velocityX = 0;
+    renderState.selectedEvent = null;
+    renderState.flightProgress = 0;
+    renderState.flightPaused = false;
     // Reset pause button UI
     document.getElementById('pause-icon')?.classList.remove('hidden');
     document.getElementById('play-icon')?.classList.add('hidden');
-    panel.innerHTML = '<p class="text-sm text-zinc-600 text-center">Click a dot on the globe to see event details</p>';
+    renderEmptyPassportPanel(panel);
     // Clear event from URL
     const rUrl = new URL(window.location.href);
     rUrl.searchParams.delete('event');
     history.replaceState(null, '', rUrl.toString());
   });
-
-  // ══════════════════════════════════════════════
-  //  EVENT PANEL
-  // ══════════════════════════════════════════════
-
-  function showEventPanel(e: any) {
-    const color = meta[e.seriesId]?.color ?? '#71717a';
-    const shortLabel = meta[e.seriesId]?.shortLabel ?? e.seriesId;
-    const dateRange = formatDateRange(e.dateStart, e.dateEnd);
-    const status = e.isPast ? 'Completed' : 'Upcoming';
-    const statusClass = e.isPast ? 'bg-zinc-800 text-zinc-500' : '';
-
-    let flag = '';
-    if (e.countryCode && e.countryCode.length === 2) {
-      const base = 0x1F1E6 - 0x41;
-      flag = String.fromCodePoint(
-        e.countryCode.toUpperCase().charCodeAt(0) + base,
-        e.countryCode.toUpperCase().charCodeAt(1) + base
-      );
-    }
-
-    panel.innerHTML = `
-      <div class="w-full">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="inline-block rounded font-bold uppercase tracking-wide text-white text-xs px-2 py-0.5" style="background:${color}">${shortLabel}</span>
-          <span class="text-xs text-zinc-500 font-mono">Round ${e.round}</span>
-          <span class="text-xs px-2 py-0.5 rounded-full font-semibold ${statusClass}" ${!e.isPast ? `style="background:${color}20;color:${color}"` : ''}>${status}</span>
-        </div>
-        <h3 class="text-xl font-black text-zinc-100 tracking-tight leading-tight mb-2">${e.name}</h3>
-        <div class="space-y-3 mt-4">
-          <div class="flex items-start gap-3">
-            <svg class="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0 1 15 0Z"/>
-            </svg>
-            <div>
-              <p class="text-sm font-medium text-zinc-200">${e.circuit}</p>
-              <p class="text-xs text-zinc-500">${[e.city, e.country].filter(Boolean).join(', ')}</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            ${flag ? `<span class="text-lg leading-none mt-0.5">${flag}</span>` : `<svg class="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/></svg>`}
-            <div><p class="text-sm text-zinc-300">${e.country}</p></div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/>
-            </svg>
-            <div><p class="text-sm text-zinc-300">${dateRange}</p></div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"/>
-            </svg>
-            <div><p class="text-xs text-zinc-500 font-mono">${e.lat.toFixed(3)}, ${e.lng.toFixed(3)}</p></div>
-          </div>
-        </div>
-        <div class="mt-5 pt-4 border-t border-zinc-800/60">
-          <button class="globe-open-modal text-xs font-medium px-3 py-2 rounded-lg border border-zinc-700/60 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors w-full" data-event-id="${e.id}">
-            View full event details →
-          </button>
-        </div>
-      </div>
-    `;
-
-    const btn = panel.querySelector('.globe-open-modal');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const fullEvent = __data.fullEvents?.find((ev: any) => ev.id === e.id);
-        if (fullEvent) {
-          window.dispatchEvent(new CustomEvent('rt-open-event', { detail: fullEvent }));
-        }
-      });
-    }
-  }
 
   // ══════════════════════════════════════════════
   //  FILTERS + STATS
@@ -988,23 +421,15 @@ for (const s of SERIES_LIST) {
   document.querySelectorAll('.passport-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = (btn as HTMLElement).dataset.filter!;
-      activeFilter = filter;
-      selectedEvent = null;
-      panel.innerHTML = '<p class="text-sm text-zinc-600 text-center">Click a dot on the globe to see event details</p>';
+      renderState.activeFilter = filter;
+      renderState.selectedEvent = null;
+      renderEmptyPassportPanel(panel);
       // Clear event from URL when filter changes
       const fUrl = new URL(window.location.href);
       fUrl.searchParams.delete('event');
       history.replaceState(null, '', fUrl.toString());
 
-      document.querySelectorAll('.passport-filter-btn').forEach(b => {
-        if ((b as HTMLElement).dataset.filter === filter) {
-          b.classList.add('bg-zinc-800', 'text-zinc-200', 'border-zinc-700');
-          b.classList.remove('text-zinc-500', 'border-zinc-800');
-        } else {
-          b.classList.remove('bg-zinc-800', 'text-zinc-200', 'border-zinc-700');
-          b.classList.add('text-zinc-500', 'border-zinc-800');
-        }
-      });
+      applyPassportFilterButtonState(filter);
 
       // When filtering to a specific series that is flightable, auto-switch the flight route
       if (filter !== 'all' && flightableIds.includes(filter)) {
@@ -1023,20 +448,6 @@ for (const s of SERIES_LIST) {
     });
   });
 
-  function updateStats() {
-    const filtered = filteredEvents();
-    const done = filtered.filter((e: any) => e.isPast).length;
-    const total = filtered.length;
-    const countries = new Set(filtered.map((e: any) => e.country)).size;
-    const circuits = new Set(filtered.map((e: any) => e.circuit)).size;
-
-    statsEl.innerHTML = `
-      <div>${done}/${total} rounds</div>
-      <div>${countries} countries</div>
-      <div>${circuits} circuits</div>
-    `;
-  }
-
   // ── Init ──
   updateStats();
   updateFlightState();
@@ -1044,10 +455,10 @@ for (const s of SERIES_LIST) {
 
   // Pause/play button
   document.getElementById('globe-pause')!.addEventListener('click', () => {
-    flightPaused = !flightPaused;
+    renderState.flightPaused = !renderState.flightPaused;
     const pauseIcon = document.getElementById('pause-icon')!;
     const playIcon = document.getElementById('play-icon')!;
-    if (flightPaused) {
+    if (renderState.flightPaused) {
       pauseIcon.classList.add('hidden');
       playIcon.classList.remove('hidden');
     } else {
@@ -1059,30 +470,31 @@ for (const s of SERIES_LIST) {
   // Follow plane toggle
   const followBtn = document.getElementById('globe-follow')!;
   followBtn.addEventListener('click', () => {
-    followPlane = !followPlane;
-    if (followPlane) {
+    renderState.followPlane = !renderState.followPlane;
+    if (renderState.followPlane) {
       followBtn.classList.remove('text-zinc-400');
       followBtn.classList.add('text-emerald-400');
-      autoRotate = false;
+      renderState.autoRotate = false;
     } else {
       followBtn.classList.remove('text-emerald-400');
       followBtn.classList.add('text-zinc-400');
     }
   });
 
-  timer(() => render());
+  renderer.start();
+  document.addEventListener('astro:before-swap', () => renderer.stop());
 
   // ── Deeplink: focus globe on event from ?event= param ──
   (function resolvePassportDeeplink() {
     const eventId = new URLSearchParams(window.location.search).get('event');
     if (!eventId) return;
-    const ev = events.find((e: any) => e.id === eventId);
+    const ev = events.find((e) => e.id === eventId);
     if (ev) {
-      selectedEvent = ev;
+      renderState.selectedEvent = ev;
       showEventPanel(ev);
       // Rotate globe to centre on this event
-      currentRotation = [-ev.lng, -ev.lat, 0];
-      autoRotate = false;
+      renderState.currentRotation = [-ev.lng, -ev.lat, 0];
+      renderState.autoRotate = false;
     }
   })();
 </script>

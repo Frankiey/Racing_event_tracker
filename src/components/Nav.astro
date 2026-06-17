@@ -205,79 +205,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </nav>
 
 <script>
-  function updateNavFavCount() {
-    const favs: string[] = (JSON.parse(localStorage.getItem('rt-favs') ?? '[]') as unknown[]).filter(Boolean) as string[];
+  import { initNavControllers } from '../lib/ui/nav';
 
-    // Desktop badge
-    const badge = document.getElementById('nav-fav-count');
-    if (badge) {
-      if (favs.length > 0) {
-        badge.textContent = String(favs.length);
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
-    }
+  let cleanupNav = initNavControllers();
 
-    // Mobile badge
-    const mobileBadge = document.getElementById('nav-fav-count-mobile');
-    if (mobileBadge) {
-      if (favs.length > 0) {
-        mobileBadge.textContent = String(favs.length);
-        mobileBadge.classList.remove('hidden');
-      } else {
-        mobileBadge.classList.add('hidden');
-      }
-    }
-  }
-
-  function initMobileNav() {
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const hamburger = document.getElementById('hamburger-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    if (!btn || !menu) return;
-
-    function openMenu() {
-      menu!.classList.remove('hidden');
-      hamburger!.classList.add('hidden');
-      closeIcon!.classList.remove('hidden');
-      btn!.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeMenu() {
-      menu!.classList.add('hidden');
-      hamburger!.classList.remove('hidden');
-      closeIcon!.classList.add('hidden');
-      btn!.setAttribute('aria-expanded', 'false');
-    }
-
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = !menu.classList.contains('hidden');
-      isOpen ? closeMenu() : openMenu();
-    });
-
-    // Close when a link inside the menu is tapped
-    menu.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a')) closeMenu();
-    });
-
-    // Close on outside click
-    document.addEventListener('click', (e) => {
-      if (!document.getElementById('main-nav')?.contains(e.target as Node)) {
-        closeMenu();
-      }
-    });
-  }
-
-  updateNavFavCount();
-  initMobileNav();
-
-  window.addEventListener('rt-favs-changed', updateNavFavCount);
+  document.addEventListener('astro:before-swap', () => cleanupNav());
   document.addEventListener('astro:after-swap', () => {
-    updateNavFavCount();
-    initMobileNav();
+    cleanupNav = initNavControllers();
   });
 </script>

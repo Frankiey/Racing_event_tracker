@@ -50,23 +50,13 @@ const { title, currentPath = `${base}/`, bare = false } = Astro.props;
           </svg>
         </button>
         <script>
-          function initBackToTop() {
-            const btn = document.getElementById('back-to-top');
-            if (!btn) return;
+          import { initBackToTop } from '../lib/ui/back-to-top';
 
-            function update() {
-              const show = window.scrollY > 400;
-              btn!.style.opacity = show ? '1' : '0';
-              btn!.style.pointerEvents = show ? 'auto' : 'none';
-            }
-
-            window.addEventListener('scroll', update, { passive: true });
-            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            update();
-          }
-
-          initBackToTop();
-          document.addEventListener('astro:after-swap', initBackToTop);
+          let cleanupBackToTop = initBackToTop();
+          document.addEventListener('astro:before-swap', () => cleanupBackToTop());
+          document.addEventListener('astro:after-swap', () => {
+            cleanupBackToTop = initBackToTop();
+          });
         </script>
       </>
     )}
