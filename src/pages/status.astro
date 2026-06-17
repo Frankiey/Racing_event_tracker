@@ -288,24 +288,24 @@ const sidebarEvents = sorted
     import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
     import { isPlaceholderTime } from '../lib/time';
     import { countryFlag } from '../lib/client-utils';
-    import { getSessionDurationMinutes, isRaceType } from '../lib/sessions';
-
-    // ── Types ────────────────────────────────────────────────────────────────
-    interface Session {
-      type: string;
-      startTimeUTC: string;
-      endTimeUTC?: string;
-    }
-    interface KioskEvent {
-      id: string;
-      seriesId: string;
-      eventName: string;
-      round: number;
-      circuit: { name: string; city: string; country: string; countryCode: string };
-      sessions: Session[];
-      dateStart: string;
-      dateEnd: string;
-    }
+    import { getSessionEstimatedEndTime, isRaceType } from '../lib/sessions';
+    import {
+      createKioskScheduler,
+      type KioskScheduler,
+    } from '../lib/kiosk/scheduler';
+    import {
+      clearManualSelection,
+      createManualSelection,
+      getKioskMode,
+      getNextKioskSession,
+      type KioskEvent,
+      KIOSK_GRACE_MS,
+      type KioskMode,
+      type KioskSession as Session,
+      type ModeResult,
+      resolveKioskEvent,
+      updateRotationState,
+    } from '../lib/kiosk/state';
 
     // ── Series metadata (imported from series-client.ts) ──
     function getColor(id: string) { return SERIES_META[id]?.color ?? '#71717a'; }
@@ -313,61 +313,6 @@ const sidebarEvents = sorted
     function getShortLabel(id: string) { return SERIES_META[id]?.shortLabel ?? id; }
 
     // ── Constants ────────────────────────────────────────────────────────────
-    const GRACE_MS = 30 * 60_000;
-    const MANUAL_TIMEOUT_MS = 60_000;
-
-    function estimatedEnd(session: Session): number {
-      if (session.endTimeUTC) return new Date(session.endTimeUTC).getTime();
-      const dur = getSessionDurationMinutes(session.type) * 60_000;
-      return new Date(session.startTimeUTC).getTime() + dur;
-    }
-
-    function isSessionLive(session: Session, now: number): boolean {
-      if (isPlaceholderTime(session.startTimeUTC)) return false;
-      const start = new Date(session.startTimeUTC).getTime();
-      return now >= start && now < estimatedEnd(session) + GRACE_MS;
-    }
-
-    // ── Mode detection ───────────────────────────────────────────────────────
-    type KioskMode = 'idle' | 'weekend' | 'live';
-    interface ModeResult {
-      mode: KioskMode;
-      event: KioskEvent | null;
-      session: Session | null;
-      alsoLive: { event: KioskEvent; session: Session }[];
-    }
-
-    function getNextEvent(events: KioskEvent[], now: number): KioskEvent | null {
-      return events.find(e =>
-        e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now)
-      ) ?? null;
-    }
-
-    function getKioskMode(events: KioskEvent[], now: number): ModeResult {
-      const liveHits: { event: KioskEvent; session: Session }[] = [];
-      for (const event of events) {
-        for (const session of event.sessions) {
-          if (!isPlaceholderTime(session.startTimeUTC) && isSessionLive(session, now)) {
-            liveHits.push({ event, session });
-          }
-        }
-      }
-      if (liveHits.length > 0) {
-        liveHits.sort((a, b) => getOrder(a.event.seriesId) - getOrder(b.event.seriesId));
-        const primary = liveHits[0];
-        return { mode: 'live', event: primary.event, session: primary.session, alsoLive: liveHits.slice(1) };
-      }
-      const next = getNextEvent(events, now);
-      if (!next) return { mode: 'idle', event: null, session: null, alsoLive: [] };
-      const daysUntil = (new Date(next.dateStart).getTime() - now) / 86_400_000;
-      if (daysUntil <= 7) return { mode: 'weekend', event: next, session: null, alsoLive: [] };
-      return { mode: 'idle', event: next, session: null, alsoLive: [] };
-    }
-
-    function getNextSession(event: KioskEvent, now: number): Session | null {
-      return event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now) ?? null;
-    }
-
     // ── Auto-rotation ────────────────────────────────────────────────────────
     let rotationEvents: KioskEvent[] = [];
     let rotationIndex = 0;
@@ -375,52 +320,43 @@ const sidebarEvents = sorted
     const ROTATION_POOL_SIZE = 5;
     const SIDEBAR_EVENT_COUNT = 8;
 
-    function updateRotationEvents(events: KioskEvent[], now: number) {
-      const upcoming = events
-        .filter(e => e.sessions.some(s => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC).getTime() > now))
-        .slice(0, ROTATION_POOL_SIZE);
-      // Reset index only when the pool changes identity
-      if (upcoming[0]?.id !== rotationEvents[0]?.id || upcoming.length !== rotationEvents.length) {
-        rotationEvents = upcoming;
-        rotationIndex = 0;
-      } else {
-        rotationEvents = upcoming;
-        if (rotationIndex >= rotationEvents.length) rotationIndex = 0;
-      }
-    }
-
     // ── Manual event override ────────────────────────────────────────────────
     let manualEventId: string | null = null;
     let manualExpiresAt: number = 0;
 
     function setManualEvent(id: string) {
-      manualEventId = id;
-      manualExpiresAt = Date.now() + MANUAL_TIMEOUT_MS;
+      const nextState = createManualSelection(id);
+      manualEventId = nextState.eventId;
+      manualExpiresAt = nextState.expiresAt;
       const badge = document.getElementById('kiosk-manual-badge');
       if (badge) badge.style.display = 'flex';
     }
 
     function clearManualEvent() {
-      manualEventId = null;
-      manualExpiresAt = 0;
+      const nextState = clearManualSelection();
+      manualEventId = nextState.eventId;
+      manualExpiresAt = nextState.expiresAt;
       const badge = document.getElementById('kiosk-manual-badge');
       if (badge) badge.style.display = 'none';
       updateKioskDisplay(allEvents);
     }
 
     function resolveEvent(autoResult: ModeResult, events: KioskEvent[]): { event: KioskEvent | null; isManual: boolean } {
-      if (manualEventId && Date.now() < manualExpiresAt) {
-        const found = events.find(e => e.id === manualEventId);
-        if (found) return { event: found, isManual: true };
-      }
-      manualEventId = null;
+      const resolved = resolveKioskEvent(
+        autoResult,
+        events,
+        { events: rotationEvents, index: rotationIndex },
+        { eventId: manualEventId, expiresAt: manualExpiresAt },
+      );
+
+      manualEventId = resolved.manualState.eventId;
+      manualExpiresAt = resolved.manualState.expiresAt;
       const badge = document.getElementById('kiosk-manual-badge');
       if (badge) badge.style.display = 'none';
-      // Live mode: always show auto-detected live event
-      if (autoResult.mode === 'live') return { event: autoResult.event, isManual: false };
-      // Idle/weekend: use rotation index
-      if (rotationEvents.length > 0) return { event: rotationEvents[rotationIndex], isManual: false };
-      return { event: autoResult.event, isManual: false };
+      if (resolved.isManual) {
+        if (badge) badge.style.display = 'flex';
+      }
+      return { event: resolved.event, isManual: resolved.isManual };
     }
 
     // ── Countdown ────────────────────────────────────────────────────────────
@@ -613,7 +549,7 @@ const sidebarEvents = sorted
 
         let targetSession: Session | null = null;
         if (mode === 'weekend') {
-          targetSession = getNextSession(event, now);
+          targetSession = getNextKioskSession(event, now);
           if (!targetSession) {
             targetSession = event.sessions.find(s => !isPlaceholderTime(s.startTimeUTC) && isRaceType(s.type)) ?? null;
           }
@@ -655,9 +591,9 @@ const sidebarEvents = sorted
 
       strip.innerHTML = validSessions.map(s => {
         const startMs = new Date(s.startTimeUTC).getTime();
-        const endMs = estimatedEnd(s);
-        const isLive = now >= startMs && now < endMs + GRACE_MS;
-        const isPast = now >= endMs + GRACE_MS;
+        const endMs = getSessionEstimatedEndTime(s);
+        const isLive = now >= startMs && now < endMs + KIOSK_GRACE_MS;
+        const isPast = now >= endMs + KIOSK_GRACE_MS;
         const isNext = !isPast && !isLive && startMs === nextStart;
 
         let classes = 'kiosk-session-pill flex-none flex flex-col gap-1 px-3 py-2.5 rounded-xl border min-w-[88px] backdrop-blur-sm';
@@ -736,10 +672,17 @@ const sidebarEvents = sorted
     // ── Main display update ──────────────────────────────────────────────────
     function updateKioskDisplay(events: KioskEvent[]) {
       const now = Date.now();
-      const autoResult = getKioskMode(events, now);
+      const autoResult = getKioskMode(events, now, getOrder);
       // Refresh rotation pool when not in live or manual mode
       if (autoResult.mode !== 'live' && !(manualEventId && now < manualExpiresAt)) {
-        updateRotationEvents(events, now);
+        const rotationState = updateRotationState(
+          { events: rotationEvents, index: rotationIndex },
+          events,
+          now,
+          ROTATION_POOL_SIZE,
+        );
+        rotationEvents = rotationState.events;
+        rotationIndex = rotationState.index;
       }
       const { event: resolvedEvent, isManual } = resolveEvent(autoResult, events);
       const mode: KioskMode = isManual ? 'idle' : autoResult.mode;
@@ -773,6 +716,7 @@ const sidebarEvents = sorted
     // ── Refresh ──────────────────────────────────────────────────────────────
     let allEvents: KioskEvent[] = JSON.parse(document.getElementById('kiosk-data')!.textContent ?? '[]');
     let cachedFingerprint: string | null = null;
+    let kioskScheduler: KioskScheduler | null = null;
 
     function updateLastRefreshed() {
       const el = document.getElementById('kiosk-refreshed');
@@ -800,6 +744,7 @@ const sidebarEvents = sorted
 
     // ── Boot ─────────────────────────────────────────────────────────────────
     function init() {
+      kioskScheduler?.stop();
       initLocalTimes();
       updateKioskDisplay(allEvents);
       updateLastRefreshed();
@@ -808,34 +753,32 @@ const sidebarEvents = sorted
       // Manual badge click
       document.getElementById('kiosk-manual-badge')?.addEventListener('click', clearManualEvent);
 
-      // 1-second tick
-      setInterval(() => {
-        tickCountdown();
-        updateClock();
-        if (currentMode === 'live' || manualEventId) updateKioskDisplay(allEvents);
-      }, 1000);
-
-      // Mode check every 30s
-      setInterval(() => updateKioskDisplay(allEvents), 30_000);
-
-      // Auto-rotation through next 5 events every 20s (paused in live/manual)
-      setInterval(() => {
-        if (manualEventId && Date.now() < manualExpiresAt) return;
-        const autoResult = getKioskMode(allEvents, Date.now());
-        if (autoResult.mode === 'live') return;
-        if (rotationEvents.length > 1) {
-          rotationIndex = (rotationIndex + 1) % rotationEvents.length;
-          updateKioskDisplay(allEvents);
-        }
-      }, ROTATION_INTERVAL_MS);
-
-      // Data refresh every 5 min
-      setInterval(refreshData, 5 * 60_000);
+      kioskScheduler = createKioskScheduler({
+        rotationIntervalMs: ROTATION_INTERVAL_MS,
+        onSecondTick: () => {
+          tickCountdown();
+          updateClock();
+          if (currentMode === 'live' || manualEventId) updateKioskDisplay(allEvents);
+        },
+        onModeRefresh: () => updateKioskDisplay(allEvents),
+        onRotate: () => {
+          if (manualEventId && Date.now() < manualExpiresAt) return;
+          const autoResult = getKioskMode(allEvents, Date.now(), getOrder);
+          if (autoResult.mode === 'live') return;
+          if (rotationEvents.length > 1) {
+            rotationIndex = (rotationIndex + 1) % rotationEvents.length;
+            updateKioskDisplay(allEvents);
+          }
+        },
+        onDataRefresh: refreshData,
+      });
+      kioskScheduler.start();
 
       updateClock();
     }
 
     init();
+    document.addEventListener('astro:before-swap', () => kioskScheduler?.stop());
     document.addEventListener('astro:after-swap', init);
   </script>
 </Layout>

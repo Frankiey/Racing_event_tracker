@@ -1,6 +1,7 @@
 import type { RaceEvent } from './types';
+import { emitEventsRegistered, emitOpenEvent, RT_EVENTS_REGISTERED } from './ui/rt-events';
 
-export const RT_EVENTS_REGISTERED = 'rt-events-registered';
+export { RT_EVENTS_REGISTERED };
 
 /** Unified RaceTrack namespace on window — avoids polluting global scope. */
 declare global {
@@ -23,7 +24,7 @@ export function registerEvents(events: RaceEvent[]): void {
   const registry = getEventRegistry();
   for (const event of events) registry.set(event.id, event);
   rt().allEvents = events;
-  window.dispatchEvent(new CustomEvent(RT_EVENTS_REGISTERED));
+  emitEventsRegistered();
 }
 
 export function getRegisteredEvent(eventId: string): RaceEvent | undefined {
@@ -39,7 +40,7 @@ export function getRegisteredEvent(eventId: string): RaceEvent | undefined {
 export function openEventById(eventId: string): boolean {
   const event = getRegisteredEvent(eventId);
   if (!event) return false;
-  window.dispatchEvent(new CustomEvent('rt-open-event', { detail: event }));
+  emitOpenEvent(event);
   return true;
 }
 

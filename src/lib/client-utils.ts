@@ -7,7 +7,9 @@
  * Browser-only helpers (localStorage, DOM events) stay here.
  */
 
-import { getSessionDurationMinutes } from './sessions';
+import { isSessionLiveAt } from './sessions';
+import { emitFavoritesChanged } from './ui/rt-events';
+import { isStringArray, readStoredJson, writeStoredJson } from './ui/storage';
 import {
   countryFlag,
   formatDateRange,
@@ -49,23 +51,13 @@ export function safeJsonParse<T>(json: string, fallback: T): T {
 
 /** Read favorites from localStorage. */
 export function readFavorites(): string[] {
-  try {
-    const raw = localStorage.getItem('rt-favs');
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
-  } catch {
-    return [];
-  }
+  return readStoredJson('rt-favs', [], isStringArray);
 }
 
 /** Check if a session is currently live. */
 export function isSessionLive(session: { type: string; startTimeUTC: string }): boolean {
   if (isPlaceholderTime(session.startTimeUTC)) return false;
-  const now = Date.now();
-  const start = new Date(session.startTimeUTC).getTime();
-  const dur = getSessionDurationMinutes(session.type) * 60_000;
-  return now >= start && now < start + dur;
+  return isSessionLiveAt(session);
 }
 
 /** Check if any session in an event is currently live. Returns the live session or null. */
@@ -88,7 +80,7 @@ export function toggleFavorite(eventId: string): boolean {
   const isFav = favs.has(eventId);
   if (isFav) favs.delete(eventId);
   else favs.add(eventId);
-  localStorage.setItem('rt-favs', JSON.stringify([...favs]));
-  window.dispatchEvent(new CustomEvent('rt-favs-changed'));
+  writeStoredJson('rt-favs', [...favs]);
+  emitFavoritesChanged();
   return !isFav;
 }

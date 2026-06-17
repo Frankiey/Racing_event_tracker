@@ -177,10 +177,18 @@ const todayKey = new Date().toISOString().slice(0, 10);
   import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
   import { getSeriesMeta } from '../lib/series';
   import { escapeHtml, safeJsonParse } from '../lib/client-utils';
+  import { buildCalendarDateIndex, getEventsOnDate, getSessionsOnCalendarDate } from '../lib/calendar/date-index';
+  import {
+    formatSelectionLabel,
+    getSelectedDates,
+    monDow,
+    toDateStr,
+    updateCalendarSelection,
+  } from '../lib/calendar/state';
   import { renderClientEventCard } from '../lib/event-card-renderer';
   import { downloadShareCardForDates } from '../lib/share-card';
   import { loadFilters, saveFilters } from '../lib/filters';
-  import type { RaceEvent, RaceSession } from '../lib/types';
+  import type { RaceEvent } from '../lib/types';
 
   // ── Data & series meta ────────────────────────────────────────────────────
   const allEvents: RaceEvent[] = safeJsonParse(document.getElementById('all-events-data')!.textContent!, []);
@@ -212,102 +220,26 @@ const todayKey = new Date().toISOString().slice(0, 10);
     rebuildDateIndex();
   }
 
-  // ── Helpers ───────────────────────────────────────────────────────────────
-  function toDateStr(d: Date): string {
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${day}`;
-  }
-
-  // Monday-based day of week: 0=Mon … 6=Sun
-  function monDow(d: Date): number {
-    return (d.getDay() + 6) % 7;
-  }
-
   function eventsOnDate(dateStr: string): RaceEvent[] {
-    return dateIndex.get(dateStr) ?? [];
-  }
-
-  function getSelectedDates(): string[] {
-    return [...selectedDates].sort();
-  }
-
-  function formatSelectionLabel(dateStrings: string[]): string {
-    if (dateStrings.length === 0) return '';
-    if (dateStrings.length === 1) {
-      return new Date(dateStrings[0] + 'T12:00:00').toLocaleDateString('en', {
-        weekday: 'long', month: 'long', day: 'numeric',
-      });
-    }
-    const first = new Date(dateStrings[0] + 'T12:00:00');
-    const last = new Date(dateStrings[dateStrings.length - 1] + 'T12:00:00');
-    return `${dateStrings.length} days · ${first.toLocaleDateString('en', { month: 'short', day: 'numeric' })}–${last.toLocaleDateString('en', { month: 'short', day: 'numeric' })}`;
-  }
-
-  function getDatesBetween(startStr: string, endStr: string): string[] {
-    const start = new Date(startStr + 'T12:00:00');
-    const end = new Date(endStr + 'T12:00:00');
-    const from = start <= end ? start : end;
-    const to = start <= end ? end : start;
-    const dates: string[] = [];
-    for (const cursor = new Date(from); cursor <= to; cursor.setDate(cursor.getDate() + 1)) {
-      dates.push(toDateStr(cursor));
-    }
-    return dates;
+    return getEventsOnDate(dateIndex, dateStr);
   }
 
   function updateSelection(dateStr: string, event?: MouseEvent) {
-    if (event?.shiftKey && lastSelectedDate) {
-      selectedDates.clear();
-      getDatesBetween(lastSelectedDate, dateStr).forEach(date => selectedDates.add(date));
-      lastSelectedDate = dateStr;
-      return;
-    }
-
-    if (event?.metaKey || event?.ctrlKey) {
-      if (selectedDates.has(dateStr)) selectedDates.delete(dateStr);
-      else selectedDates.add(dateStr);
-      lastSelectedDate = selectedDates.size > 0 ? dateStr : null;
-      return;
-    }
-
-    if (selectedDates.size === 1 && selectedDates.has(dateStr)) {
-      selectedDates.clear();
-      lastSelectedDate = null;
-      return;
-    }
-
+    const nextState = updateCalendarSelection(
+      { selectedDates, lastSelectedDate },
+      dateStr,
+      event,
+    );
     selectedDates.clear();
-    selectedDates.add(dateStr);
-    lastSelectedDate = dateStr;
-  }
-
-  function sessionsOnDay(ev: RaceEvent, dateStr: string): RaceSession[] {
-    return (ev.sessions ?? []).filter((s) => {
-      if (s.startTimeUTC.startsWith('1900')) return false;
-      return s.startTimeUTC.slice(0, 10) === dateStr || new Date(s.startTimeUTC).toLocaleDateString('en-CA') === dateStr;
-    });
+    nextState.selectedDates.forEach((date) => selectedDates.add(date));
+    lastSelectedDate = nextState.lastSelectedDate;
   }
 
   // Build a Map<dateStr, Event[]> index for O(1) lookup per calendar cell
   let dateIndex = new Map<string, RaceEvent[]>();
 
   function rebuildDateIndex() {
-    dateIndex = new Map();
-    const showAll = activeFilters.size === 0;
-    for (const e of allEvents) {
-      if (!showAll && !activeFilters.has(e.seriesId)) continue;
-      // Walk from dateStart to dateEnd
-      const start = new Date(e.dateStart + 'T12:00:00Z');
-      const end = new Date(e.dateEnd + 'T12:00:00Z');
-      for (let d = new Date(start); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
-        const key = d.toISOString().slice(0, 10);
-        const arr = dateIndex.get(key);
-        if (arr) arr.push(e);
-        else dateIndex.set(key, [e]);
-      }
-    }
+    dateIndex = buildCalendarDateIndex(allEvents, activeFilters);
   }
 
   // ── Filter UI ─────────────────────────────────────────────────────────────
@@ -527,7 +459,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
   // ── Day detail panel ──────────────────────────────────────────────────────
   function renderDayDetail() {
     const panel = document.getElementById('cal-day-detail')!;
-    const dateStrings = getSelectedDates();
+    const dateStrings = getSelectedDates(selectedDates);
 
     if (dateStrings.length === 0) { panel.innerHTML = ''; return; }
 
@@ -541,7 +473,7 @@ const todayKey = new Date().toISOString().slice(0, 10);
       const cardsHtml = dayEvs.map(ev => renderClientEventCard(ev, {
         variant: 'calendar-detail',
         dateStr,
-        sessions: sessionsOnDay(ev, dateStr),
+        sessions: getSessionsOnCalendarDate(ev, dateStr),
       })).join('');
 
       return `

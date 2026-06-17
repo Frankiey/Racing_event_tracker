@@ -189,79 +189,58 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <script>
   import { getRegisteredEvent } from '../lib/event-client';
-  import { SESSION_LABELS, isRaceType } from '../lib/sessions';
   import { getSeriesMeta } from '../lib/series';
-  import { countryFlag, isPlaceholderTime, isPastEvent, readFavorites, toggleFavorite, sleepVerdict, isSessionLive } from '../lib/client-utils';
+  import { readFavorites, toggleFavorite } from '../lib/client-utils';
   import { exportEventIcs } from '../lib/ics';
   import type { RaceEvent } from '../lib/types';
-
-  function localSessionDayKey(utc: string) {
-    const date = new Date(utc);
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  }
-
-  function formatSessionDayLabel(utc: string) {
-    return new Intl.DateTimeFormat(undefined, {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    }).format(new Date(utc));
-  }
-
-  function formatSessionTime(utc: string) {
-    return new Intl.DateTimeFormat(undefined, {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    }).format(new Date(utc));
-  }
-
-  interface BroadcastChannel {
-    channel: string;
-    type: string;
-    note?: string;
-  }
+  import { onOpenEvent } from '../lib/ui/rt-events';
+  import {
+    getBroadcastChannels,
+    parseBroadcastDb,
+    readBroadcastRegion,
+    renderBroadcastChannels,
+    type BroadcastChannel,
+    type BroadcastDb,
+    type BroadcastRegion,
+    writeBroadcastRegion,
+  } from '../lib/modal/broadcasts';
+  import {
+    buildStoredAlert,
+    findEventAlert,
+    getAlertRaceSession,
+    partitionDueAlerts,
+    shouldShowAlertSection,
+  } from '../lib/modal/alerts';
+  import { getStoredAlerts, saveStoredAlerts, type StoredAlert } from '../lib/modal/alert-store';
+  import { renderModalSessionViewModel } from '../lib/modal/session-list';
+  import { getEventShareUrl, shareOrCopyEventUrl } from '../lib/modal/share';
 
   // ── Broadcast data ──
   const _bdRaw = document.getElementById('broadcast-data')?.textContent ?? '{}';
-  const broadcastDb: { series?: Record<string, Record<string, { channel: string; type: string; note?: string }[]>> } = JSON.parse(_bdRaw);
+  const broadcastDb: BroadcastDb = parseBroadcastDb(_bdRaw);
   const broadcastSection = document.getElementById('modal-broadcast')!;
   const broadcastList = document.getElementById('broadcast-list')!;
   const regionSelect = document.getElementById('broadcast-region') as HTMLSelectElement;
 
   // Restore saved region preference
-  const savedRegion = localStorage.getItem('rt-broadcast-region');
-  if (savedRegion && ['NL', 'US', 'UK'].includes(savedRegion)) {
-    regionSelect.value = savedRegion;
-  }
+  regionSelect.value = readBroadcastRegion();
   regionSelect.addEventListener('change', () => {
-    localStorage.setItem('rt-broadcast-region', regionSelect.value);
+    writeBroadcastRegion(regionSelect.value as BroadcastRegion);
     renderBroadcast(currentEvent?.seriesId);
   });
 
   function renderBroadcast(seriesId?: string) {
-    if (!seriesId || !broadcastDb.series?.[seriesId]) {
-      broadcastSection.classList.add('hidden');
-      return;
-    }
-    const region = regionSelect.value;
-    const channels: BroadcastChannel[] = broadcastDb.series[seriesId][region] ?? [];
+    const channels: BroadcastChannel[] = getBroadcastChannels(
+      broadcastDb,
+      seriesId,
+      regionSelect.value as BroadcastRegion,
+    );
     if (channels.length === 0) {
       broadcastSection.classList.add('hidden');
       return;
     }
     broadcastSection.classList.remove('hidden');
-    broadcastList.innerHTML = channels.map((ch) => {
-      const icon = ch.type === 'streaming'
-        ? '<svg class="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" /></svg>'
-        : '<svg class="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" /></svg>';
-      return `<div class="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-zinc-900">
-        ${icon}
-        <span class="text-sm text-zinc-300 font-medium">${ch.channel}</span>
-        <span class="text-[10px] uppercase tracking-wide font-semibold ${ch.type === 'streaming' ? 'text-blue-400' : 'text-zinc-500'}">${ch.type}</span>
-        ${ch.note ? `<span class="text-[10px] text-zinc-600 ml-auto">${ch.note}</span>` : ''}
-      </div>`;
-    }).join('');
+    broadcastList.innerHTML = renderBroadcastChannels(channels);
   }
 
   // ── Series metadata (imported from series-client.ts) ──
@@ -272,7 +251,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const meta = getSeriesMeta(event.seriesId);
     const base = (document.getElementById('event-modal')!.dataset.base ?? '');
     const isFav = readFavorites().includes(event.id);
-    const isPast = isPastEvent(event.dateEnd, event.sessions);
+    const viewModel = renderModalSessionViewModel(event, meta.color);
 
     // Color bar
     (document.getElementById('modal-color-bar') as HTMLElement).style.background = meta.color;
@@ -290,73 +269,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Circuit
     const circuitEl = document.getElementById('modal-circuit') as HTMLElement;
-    const flag = countryFlag(event.circuit.countryCode);
-    circuitEl.innerHTML = `
-      ${flag ? `<span class="text-lg">${flag}</span>` : ''}
-      <span class="font-medium text-zinc-300">${event.circuit.name}</span>
-      ${event.circuit.city ? `<span class="text-zinc-600">·</span><span>${event.circuit.city}</span>` : ''}
-      ${event.circuit.country ? `<span class="text-zinc-600">·</span><span>${event.circuit.country}</span>` : ''}
-    `;
+    circuitEl.innerHTML = viewModel.circuitHtml;
 
     // Sessions
     const sessionsEl = document.getElementById('modal-sessions') as HTMLElement;
-    const validSessions = event.sessions.filter((session) => !isPlaceholderTime(session.startTimeUTC));
-    const sessionGroups = validSessions.reduce<{ dayKey: string; dayLabel: string; sessions: typeof validSessions }[]>((groups, session) => {
-      const dayKey = localSessionDayKey(session.startTimeUTC);
-      const existing = groups.at(-1);
-      if (existing && existing.dayKey === dayKey) {
-        existing.sessions.push(session);
-        return groups;
-      }
-
-      groups.push({
-        dayKey,
-        dayLabel: formatSessionDayLabel(session.startTimeUTC),
-        sessions: [session],
-      });
-      return groups;
-    }, []);
-
-    sessionsEl.innerHTML = sessionGroups.map((group) => {
-      const rows = group.sessions.map((s) => {
-        const isRace = isRaceType(s.type);
-        const isPastSession = new Date(s.startTimeUTC) < new Date();
-        const isLive = isSessionLive(s);
-        const isNext = !isPastSession && !isLive && validSessions.filter((x) => new Date(x.startTimeUTC) < new Date()).length === validSessions.indexOf(s);
-        const label = SESSION_LABELS[s.type] ?? s.type;
-        const dotColor = isLive ? '#10b981' : isRace ? meta.color : isPastSession ? '#27272a' : '#52525b';
-        const sleep = !isPastSession && !isLive ? sleepVerdict(s.startTimeUTC) : null;
-        const _sd = new Date(s.startTimeUTC);
-        const _tn = new Date();
-        const isTodaySession = !isPastSession && !isLive &&
-          _sd.getFullYear() === _tn.getFullYear() &&
-          _sd.getMonth() === _tn.getMonth() &&
-          _sd.getDate() === _tn.getDate();
-
-        return `
-          <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg ${isLive ? 'bg-emerald-950/30 ring-1 ring-emerald-800/50' : isPastSession ? 'opacity-40' : isNext ? 'bg-zinc-800/80 ring-1 ring-zinc-700' : 'hover:bg-zinc-900'}">
-            <span class="w-2 h-2 rounded-full shrink-0 ${isLive ? 'live-pulse' : ''}" style="background-color:${dotColor}"></span>
-            <span class="flex-1 text-sm font-semibold ${isLive ? 'text-emerald-300' : isRace ? 'text-zinc-100' : isPastSession ? 'text-zinc-600' : 'text-zinc-300'}">${label}</span>
-            <time class="text-sm tabular-nums font-mono ${isPastSession ? 'text-zinc-700' : isRace ? 'text-zinc-200' : 'text-zinc-400'}" title="${s.startTimeUTC}">
-              ${formatSessionTime(s.startTimeUTC)}
-            </time>
-            ${isLive ? '<span class="live-pulse inline-flex items-center gap-1 text-[10px] text-emerald-400 font-bold uppercase tracking-wide ml-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>Live</span>' : ''}
-            ${isTodaySession ? '<span class="inline-flex items-center gap-1 text-[10px] text-amber-400 bg-amber-400/10 font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ml-1"><span class="w-1 h-1 rounded-full bg-amber-400 inline-block"></span>Today</span>' : ''}
-            ${sleep ? `<span class="text-[10px] ${sleep.cssClass} font-semibold ml-1" title="${sleep.label}">${sleep.emoji}</span>` : ''}
-            ${isPastSession && !isLive ? '<span class="text-[10px] text-zinc-700 font-semibold uppercase tracking-wide ml-2">Done</span>' : ''}
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <section class="relative mt-3 rounded-xl border border-zinc-800/70 bg-zinc-900/35 px-2.5 pb-2.5 pt-4">
-          <div class="absolute -top-3 left-3 px-1 bg-zinc-950">
-            <span class="inline-flex items-center rounded-full border border-zinc-700/70 bg-zinc-800/90 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400 shadow-sm shadow-black/40">${group.dayLabel}</span>
-          </div>
-          <div class="space-y-1.5">${rows}</div>
-        </section>
-      `;
-    }).join('');
+    sessionsEl.innerHTML = viewModel.sessionsHtml;
 
     // Series link
     const link = document.getElementById('modal-series-link') as HTMLAnchorElement;
@@ -365,7 +282,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Status badge
     const statusBadge = document.getElementById('modal-status-badge') as HTMLElement;
-    if (isPast) {
+    if (viewModel.isPastEvent) {
       statusBadge.textContent = 'Completed';
       statusBadge.className = 'text-xs px-2 py-1 rounded-full font-semibold bg-zinc-800 text-zinc-500';
     } else {
@@ -451,7 +368,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   document.getElementById('modal-close')!.addEventListener('click', closeModal);
   document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
-  window.addEventListener('rt-open-event', (e: Event) => openModal((e as CustomEvent).detail));
+  onOpenEvent(openModal);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (modalPanel.classList.contains('is-expanded')) {
@@ -508,30 +425,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const alertOffsetSelect = document.getElementById('alert-offset') as HTMLSelectElement;
   const alertSetBtn = document.getElementById('alert-set-btn')!;
   const alertStatus = document.getElementById('alert-status')!;
-  const RT_ALERTS_KEY = 'rt-alerts';
-
-  interface StoredAlert { eventId: string; eventName: string; sessionType: string; fireAt: string; offset: number; }
-
-  function getAlerts(): StoredAlert[] {
-    try { return JSON.parse(localStorage.getItem(RT_ALERTS_KEY) ?? '[]'); } catch { return []; }
-  }
-  function saveAlerts(alerts: StoredAlert[]) {
-    localStorage.setItem(RT_ALERTS_KEY, JSON.stringify(alerts));
-  }
+  let alertCheckInterval: number | null = null;
 
   function updateAlertUI() {
-    if (!currentEvent) { alertSection.classList.add('hidden'); return; }
-    const eventId = currentEvent.id;
-    // Find race session
-    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
-    if (!race || new Date(race.startTimeUTC) < new Date()) {
+    if (!currentEvent || !shouldShowAlertSection(currentEvent)) {
       alertSection.classList.add('hidden');
       return;
     }
+    const eventId = currentEvent.id;
     alertSection.classList.remove('hidden');
-    // Check if alert already set
-    const alerts = getAlerts();
-    const existing = alerts.find((a: StoredAlert) => a.eventId === eventId);
+    const alerts = getStoredAlerts();
+    const existing = findEventAlert(alerts, eventId);
     if (existing) {
       alertStatus.textContent = `Reminder set: ${existing.offset} min before race`;
       alertStatus.classList.remove('hidden');
@@ -545,11 +449,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   alertSetBtn.addEventListener('click', async () => {
     if (!currentEvent) return;
     const eventId = currentEvent.id;
-    const alerts = getAlerts();
+    const alerts = getStoredAlerts();
     const existing = alerts.findIndex((a: StoredAlert) => a.eventId === eventId);
     if (existing >= 0) {
       alerts.splice(existing, 1);
-      saveAlerts(alerts);
+      saveStoredAlerts(alerts);
       updateAlertUI();
       return;
     }
@@ -562,54 +466,58 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       alertStatus.classList.remove('hidden');
       return;
     }
-    const race = currentEvent.sessions?.find((s) => isRaceType(s.type));
+    const race = getAlertRaceSession(currentEvent);
     if (!race) return;
     const offset = parseInt(alertOffsetSelect.value);
-    const fireAt = new Date(new Date(race.startTimeUTC).getTime() - offset * 60000).toISOString();
-    alerts.push({ eventId, eventName: currentEvent.eventName, sessionType: race.type, fireAt, offset });
-    saveAlerts(alerts);
+    alerts.push(buildStoredAlert(currentEvent, race, offset));
+    saveStoredAlerts(alerts);
     updateAlertUI();
   });
 
   // Check and fire pending alerts every 30s
   function checkAlerts() {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
-    const alerts = getAlerts();
-    const now = Date.now();
-    const remaining: StoredAlert[] = [];
-    for (const alert of alerts) {
-      if (new Date(alert.fireAt).getTime() <= now) {
-        new Notification(`🏁 ${alert.eventName}`, {
-          body: `${alert.sessionType} starts in ${alert.offset} minutes!`,
-          icon: (document.getElementById('event-modal')?.dataset.base ?? '') + '/icon-192.png',
-        });
-      } else {
-        remaining.push(alert);
-      }
+    const alerts = getStoredAlerts();
+    const { due, remaining } = partitionDueAlerts(alerts);
+    for (const alert of due) {
+      new Notification(`🏁 ${alert.eventName}`, {
+        body: `${alert.sessionType} starts in ${alert.offset} minutes!`,
+        icon: (document.getElementById('event-modal')?.dataset.base ?? '') + '/icon-192.png',
+      });
     }
-    if (remaining.length !== alerts.length) saveAlerts(remaining);
+    if (remaining.length !== alerts.length) saveStoredAlerts(remaining);
   }
-  setInterval(checkAlerts, 30000);
+
+  function startAlertChecks() {
+    if (alertCheckInterval !== null) return;
+    alertCheckInterval = window.setInterval(checkAlerts, 30000);
+  }
+
+  function stopAlertChecks() {
+    if (alertCheckInterval === null) return;
+    window.clearInterval(alertCheckInterval);
+    alertCheckInterval = null;
+  }
+
+  startAlertChecks();
   checkAlerts();
 
   shareBtn.addEventListener('click', async () => {
     if (!currentEvent) return;
-    const shareUrl = new URL(window.location.href);
-    shareUrl.searchParams.set('event', currentEvent.id);
-    const url = shareUrl.toString();
-    if (typeof navigator.share === 'function') {
-      try {
-        await navigator.share({ title: currentEvent.eventName, url });
-        return;
-      } catch (err) {
-        if ((err as Error).name === 'AbortError') return;
-      }
+    const url = getEventShareUrl(currentEvent.id);
+    try {
+      const result = await shareOrCopyEventUrl(currentEvent.eventName, url);
+      if (result === 'shared') return;
+    } catch (err) {
+      if ((err as Error).name === 'AbortError') return;
+      return;
     }
-    try { await navigator.clipboard.writeText(url); } catch {}
     shareToast.classList.remove('hidden');
     if (shareToastTimer) clearTimeout(shareToastTimer);
     shareToastTimer = setTimeout(() => shareToast.classList.add('hidden'), 2000);
   });
+
+  document.addEventListener('astro:before-swap', stopAlertChecks);
 
   // ── Deeplink: open event from ?event= param on page load ──
   (function resolveDeeplink() {

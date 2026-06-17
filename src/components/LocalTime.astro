@@ -17,15 +17,9 @@ import { formatUtcValue } from '../lib/time';
 </time>
 
 <script>
-  import { formatLocalValue } from '../lib/time';
+  import { hydrateLocalTimes } from '../lib/ui/time-client';
 
-  function initLocalTimes() {
-    document.querySelectorAll<HTMLTimeElement>('[data-local-time]').forEach(el => {
-      const utc = el.dataset.localTime!;
-      const fmt = el.dataset.format as 'datetime' | 'time' | 'time-short' | 'date' | 'weekday-time';
-      el.textContent = formatLocalValue(utc, fmt);
-    });
-  }
+  const initLocalTimes = () => hydrateLocalTimes();
 
   initLocalTimes();
   document.addEventListener('astro:after-swap', initLocalTimes);
