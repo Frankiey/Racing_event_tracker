@@ -1,7 +1,7 @@
 {
-  "generated": "2026-06-20T05:36:06Z",
+  "generated": "2026-06-21T05:44:03Z",
   "season": 2026,
-  "eventCount": 145,
+  "eventCount": 143,
   "sources": [
     "dtm",
     "f1",
@@ -231,62 +231,6 @@
       ],
       "dateStart": "2026-06-19",
       "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "fe-2026-r11",
-      "seriesId": "fe",
-      "eventName": "Sanya E-Prix",
-      "round": 11,
-      "circuit": {
-        "name": "Sanya Street Circuit",
-        "city": "Sanya",
-        "country": "China",
-        "countryCode": "CN",
-        "lat": 18.2528,
-        "lng": 109.5119
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-20T05:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T07:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-20T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-20"
-    },
-    {
-      "id": "nls-2026-r05",
-      "seriesId": "nls",
-      "eventName": "NLS 6",
-      "round": 6,
-      "circuit": {
-        "name": "Nürburgring Nordschleife",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T06:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-20T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-20"
     },
     {
       "id": "nascar-2026-r21",
