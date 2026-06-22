@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-21T05:44:03Z",
+  "generated": "2026-06-22T05:57:48Z",
   "season": 2026,
   "eventCount": 251,
   "sources": [
@@ -3895,12 +3895,12 @@
       "eventName": "Moto3 Grand Prix Of Czechia",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
@@ -3937,12 +3937,12 @@
       "eventName": "Moto2 Grand Prix Of Czechia",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
@@ -3979,12 +3979,12 @@
       "eventName": "GRAND PRIX OF CZECHIA",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
