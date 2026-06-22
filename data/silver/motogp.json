@@ -292,8 +292,12 @@
         "startTimeUTC": "2026-05-17T07:40:00Z"
       },
       {
-        "type": "Race",
+        "type": "Race1",
         "startTimeUTC": "2026-05-17T12:00:00Z"
+      },
+      {
+        "type": "Race2",
+        "startTimeUTC": "2026-05-17T13:17:00Z"
       }
     ],
     "dateStart": "2026-05-15",
@@ -405,12 +409,12 @@
     "eventName": "GRAND PRIX OF CZECHIA",
     "round": 9,
     "circuit": {
-      "name": "Automotodrom Brno",
+      "name": "CREDITAS Autodrom Brno",
       "city": "Brno",
       "country": "CZE",
       "countryCode": "CZ",
-      "lat": 49.2036,
-      "lng": 16.4317
+      "lat": null,
+      "lng": null
     },
     "sessions": [
       {
@@ -552,7 +556,7 @@
   {
     "id": "motogp-2026-r12",
     "seriesId": "motogp",
-    "eventName": "GRAND PRIX OF UNITED KINGDOM",
+    "eventName": "GRAND PRIX OF GREAT BRITAIN",
     "round": 12,
     "circuit": {
       "name": "Silverstone Circuit",

@@ -1,7 +1,7 @@
 {
-  "generated": "2026-06-17T19:31:52Z",
+  "generated": "2026-06-22T05:57:48Z",
   "season": 2026,
-  "eventCount": 145,
+  "eventCount": 137,
   "sources": [
     "dtm",
     "f1",
@@ -22,298 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "moto3-2026-r09",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Czechia",
-      "round": 9,
-      "circuit": {
-        "name": "Automotodrom Brno",
-        "city": "Brno",
-        "country": "CZE",
-        "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-19T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-19T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-20T06:40:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-06-20T10:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-06-20T11:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "moto2-2026-r09",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Czechia",
-      "round": 9,
-      "circuit": {
-        "name": "Automotodrom Brno",
-        "city": "Brno",
-        "country": "CZE",
-        "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-19T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-19T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-20T07:25:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-06-20T11:40:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-06-20T12:05:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T10:15:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "motogp-2026-r09",
-      "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF CZECHIA",
-      "round": 9,
-      "circuit": {
-        "name": "Automotodrom Brno",
-        "city": "Brno",
-        "country": "CZE",
-        "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-06-19T08:45:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-19T13:00:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-06-20T08:10:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-06-20T08:50:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-06-20T09:15:00Z"
-        },
-        {
-          "type": "Sprint",
-          "startTimeUTC": "2026-06-20T13:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-06-21T07:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T12:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "dtm-2026-r03",
-      "seriesId": "dtm",
-      "eventName": "DTM Lausitzring",
-      "round": 3,
-      "circuit": {
-        "name": "Dekra Lausitzring",
-        "city": "Klettwitz",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 51.5233,
-        "lng": 13.9361
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-06-19T11:05:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-06-19T15:30:00Z"
-        },
-        {
-          "type": "Qualifying 1",
-          "startTimeUTC": "2026-06-20T09:30:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-06-20T13:30:00Z"
-        },
-        {
-          "type": "Qualifying 2",
-          "startTimeUTC": "2026-06-21T09:30:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-06-21T13:30:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "indycar-2026-r10",
-      "seriesId": "indycar",
-      "eventName": "XPEL Grand Prix at Road America",
-      "round": 10,
-      "circuit": {
-        "name": "Road America",
-        "city": "Elkhart Lake",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 43.7978,
-        "lng": -87.9893
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-06-19T17:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-06-20T17:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-21T15:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T18:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-19",
-      "dateEnd": "2026-06-21"
-    },
-    {
-      "id": "fe-2026-r11",
-      "seriesId": "fe",
-      "eventName": "Sanya E-Prix",
-      "round": 11,
-      "circuit": {
-        "name": "Sanya Street Circuit",
-        "city": "Sanya",
-        "country": "China",
-        "countryCode": "CN",
-        "lat": 18.2528,
-        "lng": 109.5119
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-20T05:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T07:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-20T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-20"
-    },
-    {
-      "id": "nls-2026-r05",
-      "seriesId": "nls",
-      "eventName": "NLS 6",
-      "round": 6,
-      "circuit": {
-        "name": "Nürburgring Nordschleife",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T06:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-20T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-20"
-    },
-    {
-      "id": "nascar-2026-r21",
-      "seriesId": "nascar",
-      "eventName": "Andruil 250",
-      "round": 21,
-      "circuit": {
-        "name": "San Diego Street Course",
-        "city": "San Diego",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 32.7069,
-        "lng": -117.1628
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-20T18:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-21T19:00:00Z"
-        }
-      ],
-      "dateStart": "2026-06-20",
-      "dateEnd": "2026-06-21"
-    },
     {
       "id": "gtworld-2026-r04",
       "seriesId": "gtworld",
@@ -666,11 +374,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-06-27T19:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-06-28T15:30:00Z"
+          "startTimeUTC": "2026-06-28T19:30:00Z"
         }
       ],
-      "dateStart": "2026-06-28",
+      "dateStart": "2026-06-27",
       "dateEnd": "2026-06-28"
     },
     {
@@ -891,6 +603,32 @@
       "dateEnd": "2026-07-05"
     },
     {
+      "id": "nascar-2026-r23",
+      "seriesId": "nascar",
+      "eventName": "eero 400",
+      "round": 23,
+      "circuit": {
+        "name": "Chicagoland Speedway",
+        "city": "Joliet",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 41.475,
+        "lng": -88.0581
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-04T19:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-05T22:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-04",
+      "dateEnd": "2026-07-05"
+    },
+    {
       "id": "fe-2026-r13",
       "seriesId": "fe",
       "eventName": "Shanghai E-Prix II",
@@ -915,28 +653,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-07-05T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-05",
-      "dateEnd": "2026-07-05"
-    },
-    {
-      "id": "nascar-2026-r23",
-      "seriesId": "nascar",
-      "eventName": "NASCAR Cup Series Race at Chicagoland",
-      "round": 23,
-      "circuit": {
-        "name": "Chicagoland Speedway",
-        "city": "Joliet",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 41.475,
-        "lng": -88.0581
-      },
-      "sessions": [
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-05T18:00:00Z"
         }
       ],
       "dateStart": "2026-07-05",
@@ -1205,11 +921,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-11T20:30:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-07-12T19:00:00Z"
+          "startTimeUTC": "2026-07-12T23:00:00Z"
         }
       ],
-      "dateStart": "2026-07-12",
+      "dateStart": "2026-07-11",
       "dateEnd": "2026-07-12"
     },
     {
@@ -1448,11 +1168,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-18T22:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-07-19T19:00:00Z"
+          "startTimeUTC": "2026-07-19T23:00:00Z"
         }
       ],
-      "dateStart": "2026-07-19",
+      "dateStart": "2026-07-18",
       "dateEnd": "2026-07-19"
     },
     {
@@ -1639,6 +1363,32 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Hungary%20carbon.png"
     },
     {
+      "id": "nascar-2026-r26",
+      "seriesId": "nascar",
+      "eventName": "Brickyard 400",
+      "round": 26,
+      "circuit": {
+        "name": "Indianapolis Motor Speedway",
+        "city": "Indianapolis",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 39.795,
+        "lng": -86.2353
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-25T17:30:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-26T18:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-25",
+      "dateEnd": "2026-07-26"
+    },
+    {
       "id": "fe-2026-r15",
       "seriesId": "fe",
       "eventName": "Tokyo E-Prix II",
@@ -1663,28 +1413,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-07-26T08:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-26",
-      "dateEnd": "2026-07-26"
-    },
-    {
-      "id": "nascar-2026-r26",
-      "seriesId": "nascar",
-      "eventName": "Brickyard 400",
-      "round": 26,
-      "circuit": {
-        "name": "Indianapolis Motor Speedway",
-        "city": "Indianapolis",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 39.795,
-        "lng": -86.2353
-      },
-      "sessions": [
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-26T14:00:00Z"
         }
       ],
       "dateStart": "2026-07-26",
@@ -1887,7 +1615,7 @@
     {
       "id": "motogp-2026-r12",
       "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF UNITED KINGDOM",
+      "eventName": "GRAND PRIX OF GREAT BRITAIN",
       "round": 12,
       "circuit": {
         "name": "Silverstone Circuit",
@@ -2288,7 +2016,7 @@
     {
       "id": "nascar-2026-r29",
       "seriesId": "nascar",
-      "eventName": "NASCAR Cup Series Race at New Hampshire",
+      "eventName": "Dollar Tree 301",
       "round": 29,
       "circuit": {
         "name": "New Hampshire Motor Speedway",

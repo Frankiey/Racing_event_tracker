@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-17T19:31:52Z",
+  "generated": "2026-06-22T05:57:48Z",
   "season": 2026,
   "eventCount": 251,
   "sources": [
@@ -161,12 +161,8 @@
       },
       "sessions": [
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-02-04T18:30:00Z"
-        },
-        {
           "type": "Race",
-          "startTimeUTC": "2026-02-04T22:45:00Z"
+          "startTimeUTC": "2026-02-04T23:00:00Z"
         }
       ],
       "dateStart": "2026-02-04",
@@ -188,14 +184,14 @@
       "sessions": [
         {
           "type": "Qualifying",
-          "startTimeUTC": "2026-02-10T21:00:00Z"
+          "startTimeUTC": "2026-02-12T01:15:00Z"
         },
         {
           "type": "Race",
           "startTimeUTC": "2026-02-15T18:30:00Z"
         }
       ],
-      "dateStart": "2026-02-10",
+      "dateStart": "2026-02-12",
       "dateEnd": "2026-02-15"
     },
     {
@@ -218,10 +214,10 @@
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-02-13T00:00:00Z"
+          "startTimeUTC": "2026-02-12T19:00:00Z"
         }
       ],
-      "dateStart": "2026-02-13",
+      "dateStart": "2026-02-12",
       "dateEnd": "2026-02-13"
     },
     {
@@ -244,10 +240,10 @@
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-02-13T01:45:00Z"
+          "startTimeUTC": "2026-02-12T20:45:00Z"
         }
       ],
-      "dateStart": "2026-02-13",
+      "dateStart": "2026-02-12",
       "dateEnd": "2026-02-13"
     },
     {
@@ -703,7 +699,7 @@
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-03-08T18:45:00Z"
+          "startTimeUTC": "2026-03-08T19:30:00Z"
         }
       ],
       "dateStart": "2026-03-07",
@@ -2091,7 +2087,7 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-05-01T16:30:00Z"
+          "startTimeUTC": "2026-05-01T16:00:00Z"
         },
         {
           "type": "Sprint Qualifying",
@@ -2739,8 +2735,12 @@
           "startTimeUTC": "2026-05-17T07:40:00Z"
         },
         {
-          "type": "Race",
+          "type": "Race1",
           "startTimeUTC": "2026-05-17T12:00:00Z"
+        },
+        {
+          "type": "Race2",
+          "startTimeUTC": "2026-05-17T13:17:00Z"
         }
       ],
       "dateStart": "2026-05-15",
@@ -3883,7 +3883,7 @@
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-06-14T19:00:00Z"
+          "startTimeUTC": "2026-06-14T17:00:00Z"
         }
       ],
       "dateStart": "2026-06-13",
@@ -3895,12 +3895,12 @@
       "eventName": "Moto3 Grand Prix Of Czechia",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
@@ -3937,12 +3937,12 @@
       "eventName": "Moto2 Grand Prix Of Czechia",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
@@ -3979,12 +3979,12 @@
       "eventName": "GRAND PRIX OF CZECHIA",
       "round": 9,
       "circuit": {
-        "name": "Automotodrom Brno",
+        "name": "CREDITAS Autodrom Brno",
         "city": "Brno",
         "country": "CZE",
         "countryCode": "CZ",
-        "lat": 49.2036,
-        "lng": 16.4317
+        "lat": null,
+        "lng": null
       },
       "sessions": [
         {
@@ -4158,7 +4158,7 @@
     {
       "id": "nascar-2026-r21",
       "seriesId": "nascar",
-      "eventName": "Andruil 250",
+      "eventName": "Anduril 250",
       "round": 21,
       "circuit": {
         "name": "San Diego Street Course",
@@ -4175,7 +4175,7 @@
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-06-21T19:00:00Z"
+          "startTimeUTC": "2026-06-21T20:00:00Z"
         }
       ],
       "dateStart": "2026-06-20",
@@ -4533,11 +4533,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-06-27T19:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-06-28T15:30:00Z"
+          "startTimeUTC": "2026-06-28T19:30:00Z"
         }
       ],
-      "dateStart": "2026-06-28",
+      "dateStart": "2026-06-27",
       "dateEnd": "2026-06-28"
     },
     {
@@ -4758,6 +4762,32 @@
       "dateEnd": "2026-07-05"
     },
     {
+      "id": "nascar-2026-r23",
+      "seriesId": "nascar",
+      "eventName": "eero 400",
+      "round": 23,
+      "circuit": {
+        "name": "Chicagoland Speedway",
+        "city": "Joliet",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 41.475,
+        "lng": -88.0581
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-04T19:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-05T22:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-04",
+      "dateEnd": "2026-07-05"
+    },
+    {
       "id": "fe-2026-r13",
       "seriesId": "fe",
       "eventName": "Shanghai E-Prix II",
@@ -4782,28 +4812,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-07-05T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-05",
-      "dateEnd": "2026-07-05"
-    },
-    {
-      "id": "nascar-2026-r23",
-      "seriesId": "nascar",
-      "eventName": "NASCAR Cup Series Race at Chicagoland",
-      "round": 23,
-      "circuit": {
-        "name": "Chicagoland Speedway",
-        "city": "Joliet",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 41.475,
-        "lng": -88.0581
-      },
-      "sessions": [
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-05T18:00:00Z"
         }
       ],
       "dateStart": "2026-07-05",
@@ -5072,11 +5080,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-11T20:30:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-07-12T19:00:00Z"
+          "startTimeUTC": "2026-07-12T23:00:00Z"
         }
       ],
-      "dateStart": "2026-07-12",
+      "dateStart": "2026-07-11",
       "dateEnd": "2026-07-12"
     },
     {
@@ -5315,11 +5327,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-18T22:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-07-19T19:00:00Z"
+          "startTimeUTC": "2026-07-19T23:00:00Z"
         }
       ],
-      "dateStart": "2026-07-19",
+      "dateStart": "2026-07-18",
       "dateEnd": "2026-07-19"
     },
     {
@@ -5506,6 +5522,32 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Hungary%20carbon.png"
     },
     {
+      "id": "nascar-2026-r26",
+      "seriesId": "nascar",
+      "eventName": "Brickyard 400",
+      "round": 26,
+      "circuit": {
+        "name": "Indianapolis Motor Speedway",
+        "city": "Indianapolis",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 39.795,
+        "lng": -86.2353
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-25T17:30:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-07-26T18:00:00Z"
+        }
+      ],
+      "dateStart": "2026-07-25",
+      "dateEnd": "2026-07-26"
+    },
+    {
       "id": "fe-2026-r15",
       "seriesId": "fe",
       "eventName": "Tokyo E-Prix II",
@@ -5530,28 +5572,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-07-26T08:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-26",
-      "dateEnd": "2026-07-26"
-    },
-    {
-      "id": "nascar-2026-r26",
-      "seriesId": "nascar",
-      "eventName": "Brickyard 400",
-      "round": 26,
-      "circuit": {
-        "name": "Indianapolis Motor Speedway",
-        "city": "Indianapolis",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 39.795,
-        "lng": -86.2353
-      },
-      "sessions": [
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-26T14:00:00Z"
         }
       ],
       "dateStart": "2026-07-26",
@@ -5754,7 +5774,7 @@
     {
       "id": "motogp-2026-r12",
       "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF UNITED KINGDOM",
+      "eventName": "GRAND PRIX OF GREAT BRITAIN",
       "round": 12,
       "circuit": {
         "name": "Silverstone Circuit",
@@ -6155,7 +6175,7 @@
     {
       "id": "nascar-2026-r29",
       "seriesId": "nascar",
-      "eventName": "NASCAR Cup Series Race at New Hampshire",
+      "eventName": "Dollar Tree 301",
       "round": 29,
       "circuit": {
         "name": "New Hampshire Motor Speedway",

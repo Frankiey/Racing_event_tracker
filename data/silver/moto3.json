@@ -345,12 +345,12 @@
     "eventName": "Moto3 Grand Prix Of Czechia",
     "round": 9,
     "circuit": {
-      "name": "Automotodrom Brno",
+      "name": "CREDITAS Autodrom Brno",
       "city": "Brno",
       "country": "CZE",
       "countryCode": "CZ",
-      "lat": 49.2036,
-      "lng": 16.4317
+      "lat": null,
+      "lng": null
     },
     "sessions": [
       {

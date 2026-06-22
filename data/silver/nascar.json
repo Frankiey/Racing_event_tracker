@@ -14,12 +14,8 @@
     },
     "sessions": [
       {
-        "type": "Qualifying",
-        "startTimeUTC": "2026-02-04T18:30:00Z"
-      },
-      {
         "type": "Race",
-        "startTimeUTC": "2026-02-04T22:45:00Z"
+        "startTimeUTC": "2026-02-04T23:00:00Z"
       }
     ],
     "dateStart": "2026-02-04",
@@ -45,10 +41,10 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-02-13T00:00:00Z"
+        "startTimeUTC": "2026-02-12T19:00:00Z"
       }
     ],
-    "dateStart": "2026-02-13",
+    "dateStart": "2026-02-12",
     "dateEnd": "2026-02-13"
   },
   {
@@ -71,10 +67,10 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-02-13T01:45:00Z"
+        "startTimeUTC": "2026-02-12T20:45:00Z"
       }
     ],
-    "dateStart": "2026-02-13",
+    "dateStart": "2026-02-12",
     "dateEnd": "2026-02-13"
   },
   {
@@ -93,14 +89,14 @@
     "sessions": [
       {
         "type": "Qualifying",
-        "startTimeUTC": "2026-02-10T21:00:00Z"
+        "startTimeUTC": "2026-02-12T01:15:00Z"
       },
       {
         "type": "Race",
         "startTimeUTC": "2026-02-15T18:30:00Z"
       }
     ],
-    "dateStart": "2026-02-10",
+    "dateStart": "2026-02-12",
     "dateEnd": "2026-02-15"
   },
   {
@@ -175,7 +171,7 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-03-08T18:45:00Z"
+        "startTimeUTC": "2026-03-08T19:30:00Z"
       }
     ],
     "dateStart": "2026-03-07",
@@ -513,7 +509,7 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-06-14T19:00:00Z"
+        "startTimeUTC": "2026-06-14T17:00:00Z"
       }
     ],
     "dateStart": "2026-06-13",
@@ -522,7 +518,7 @@
   {
     "id": "nascar-2026-r21",
     "seriesId": "nascar",
-    "eventName": "Andruil 250",
+    "eventName": "Anduril 250",
     "round": 21,
     "circuit": {
       "name": "San Diego Street Course",
@@ -539,7 +535,7 @@
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-06-21T19:00:00Z"
+        "startTimeUTC": "2026-06-21T20:00:00Z"
       }
     ],
     "dateStart": "2026-06-20",
@@ -560,17 +556,21 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-06-27T19:10:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-06-28T15:30:00Z"
+        "startTimeUTC": "2026-06-28T19:30:00Z"
       }
     ],
-    "dateStart": "2026-06-28",
+    "dateStart": "2026-06-27",
     "dateEnd": "2026-06-28"
   },
   {
     "id": "nascar-2026-r23",
     "seriesId": "nascar",
-    "eventName": "NASCAR Cup Series Race at Chicagoland",
+    "eventName": "eero 400",
     "round": 23,
     "circuit": {
       "name": "Chicagoland Speedway",
@@ -582,11 +582,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-04T19:00:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-07-05T18:00:00Z"
+        "startTimeUTC": "2026-07-05T22:00:00Z"
       }
     ],
-    "dateStart": "2026-07-05",
+    "dateStart": "2026-07-04",
     "dateEnd": "2026-07-05"
   },
   {
@@ -604,11 +608,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-11T20:30:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-07-12T19:00:00Z"
+        "startTimeUTC": "2026-07-12T23:00:00Z"
       }
     ],
-    "dateStart": "2026-07-12",
+    "dateStart": "2026-07-11",
     "dateEnd": "2026-07-12"
   },
   {
@@ -626,11 +634,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-18T22:10:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-07-19T19:00:00Z"
+        "startTimeUTC": "2026-07-19T23:00:00Z"
       }
     ],
-    "dateStart": "2026-07-19",
+    "dateStart": "2026-07-18",
     "dateEnd": "2026-07-19"
   },
   {
@@ -648,11 +660,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-07-25T17:30:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-07-26T14:00:00Z"
+        "startTimeUTC": "2026-07-26T18:00:00Z"
       }
     ],
-    "dateStart": "2026-07-26",
+    "dateStart": "2026-07-25",
     "dateEnd": "2026-07-26"
   },
   {
@@ -702,7 +718,7 @@
   {
     "id": "nascar-2026-r29",
     "seriesId": "nascar",
-    "eventName": "NASCAR Cup Series Race at New Hampshire",
+    "eventName": "Dollar Tree 301",
     "round": 29,
     "circuit": {
       "name": "New Hampshire Motor Speedway",
