@@ -73,7 +73,7 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       ? 'border-zinc-800/40 bg-zinc-900/20 opacity-40 hover:opacity-60'
       : highlight
         ? 'border-zinc-500/60 bg-zinc-900 shadow-lg shadow-black/40'
-        : 'border-zinc-800 bg-zinc-900/70 hover:border-zinc-700 hover:bg-zinc-900',
+        : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700',
   ]}
   data-event-id={event.id}
   role="button"
@@ -152,12 +152,12 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       <div class="flex flex-wrap gap-2.5 pt-2 border-t border-zinc-800/60" data-session-strip>
         {sessionGroups.map(group => (
           <div
-            class="session-day-group inline-flex items-center gap-2 rounded-lg border border-zinc-800/80 bg-zinc-950/40 px-2.5 py-1.5"
+            class="session-day-group inline-flex items-center gap-2 rounded-lg border border-zinc-800/80 bg-zinc-950 px-2.5 py-1.5"
             data-session-group
             data-session-day-key={group.dayKey}
           >
             <span
-              class="session-day-chip inline-flex items-center rounded-full border border-zinc-700/70 bg-zinc-800/80 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-zinc-400 shrink-0"
+              class="session-day-chip inline-flex items-center rounded-full border border-zinc-700/70 bg-zinc-800 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-zinc-400 shrink-0"
               data-session-day
             >
               {group.dayLabel}
