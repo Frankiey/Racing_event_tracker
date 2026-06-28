@@ -1,7 +1,7 @@
 {
-  "generated": "2026-06-27T05:23:13Z",
+  "generated": "2026-06-28T05:36:30Z",
   "season": 2026,
-  "eventCount": 137,
+  "eventCount": 136,
   "sources": [
     "dtm",
     "f1",
@@ -22,68 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "gtworld-2026-r04",
-      "seriesId": "gtworld",
-      "eventName": "GT World 24 Hours of Spa",
-      "round": 4,
-      "circuit": {
-        "name": "Circuit de Spa-Francorchamps",
-        "city": "Stavelot",
-        "country": "Belgium",
-        "countryCode": "BE",
-        "lat": 50.4372,
-        "lng": 5.9714
-      },
-      "sessions": [
-        {
-          "type": "Free Practice 1",
-          "startTimeUTC": "2026-06-25T08:10:00Z"
-        },
-        {
-          "type": "Free Practice 2",
-          "startTimeUTC": "2026-06-25T14:10:00Z"
-        },
-        {
-          "type": "Qualifying 1",
-          "startTimeUTC": "2026-06-25T17:45:00Z"
-        },
-        {
-          "type": "Qualifying 2",
-          "startTimeUTC": "2026-06-25T18:07:00Z"
-        },
-        {
-          "type": "Qualifying 3",
-          "startTimeUTC": "2026-06-25T18:29:00Z"
-        },
-        {
-          "type": "Qualifying 4",
-          "startTimeUTC": "2026-06-25T18:51:00Z"
-        },
-        {
-          "type": "Combined Qualifying",
-          "startTimeUTC": "2026-06-25T19:06:00Z"
-        },
-        {
-          "type": "Night Practice",
-          "startTimeUTC": "2026-06-25T19:35:00Z"
-        },
-        {
-          "type": "Superpole",
-          "startTimeUTC": "2026-06-26T13:25:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-06-26T17:20:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-06-27T14:30:00Z"
-        }
-      ],
-      "dateStart": "2026-06-25",
-      "dateEnd": "2026-06-27"
-    },
     {
       "id": "imsa-2026-r06",
       "seriesId": "imsa",
