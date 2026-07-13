@@ -22,7 +22,7 @@ bd close <id>         # Complete work
 
 ## Session Completion
 
-**When ending a work session**, you MUST complete ALL steps below. 
+**When ending a work session**, you MUST complete ALL steps below.
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create issues for anything that needs follow-up
@@ -31,145 +31,67 @@ bd close <id>         # Complete work
 
 4. **Verify** - All changes staged and verified
 5. **Hand off** - Provide context for next session
-
 <!-- END BEADS INTEGRATION -->
-
 
 # RaceTrack — Claude Instructions
 
 ## Project Overview
-RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, GT World Challenge, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
 
-## Tech Stack
-- **Frontend:** Astro (static-first, island architecture) + Tailwind CSS v4
-- **Data pipeline:** Python (managed with uv) — separate process from the website
-- **Data:** JSON files in `data/` — medallion architecture (bronze → silver → gold)
-- **Hosting:** GitHub Pages via GitHub Actions
-- **No backend, no database, no auth**
+RaceTrack is a **static motorsport event tracker**: race calendars, session schedules, standings, and broadcast info for 17 series (F1 through IOMTT) in one dashboard.
 
-## Project Structure
+- Frontend: Astro (static-first) + Tailwind CSS v4, dark mode default
+- Data pipeline: Python managed with `uv` — separate process from the website
+- Data: JSON in `data/` — medallion architecture (bronze → silver → gold)
+- Hosting: GitHub Pages via GitHub Actions
+- **No backend, no database, no auth** — don't add them; don't over-abstract or add features beyond what was asked
+
+## Directory Map
+
 ```
-src/
-  pages/
-    index.astro         — Dashboard: next 20 events, countdown hero, series stats, clash detector
-    calendar.astro      — Full 2026 calendar, grouped by month, jump-to-today, series heatmap
-    watchlist.astro     — User's saved/favorited events (localStorage), ICS export
-    status.astro        — Kiosk view (bare, auto-refresh)
-    recap.astro         — Past 7 days recap with spoiler-free toggle
-    passport.astro      — Globe-based circuit passport / season travel view
-    series/[id].astro   — Per-series page: progress bar, schedule, next race, ICS export
-    widget/[series].astro — Embeddable countdown widget per series
-  components/
-    EventCard.astro     — Card with flag, sessions, fav button, opens modal on click
-    EventModal.astro    — Global detail modal (rt-open-event CustomEvent)
-    Countdown.astro     — Live countdown timer (days:hrs:min:sec)
-    SeriesBadge.astro   — Colored pill badge (F1, MotoGP, etc.)
-    SeriesFilter.astro  — Toggle filter buttons by series
-    Nav.astro           — Sticky nav with Series dropdown + Watchlist heart
-    LocalTime.astro     — UTC → local time hydration (use data-local-time attr)
-    WeekendTimeline.astro — Timeline view for session scheduling in EventModal
-  layouts/
-    Layout.astro        — HTML shell + Nav + EventModal
-  lib/
-    series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
-    series-client.ts    — Browser-safe series metadata (derived from series.ts)
-    event-client.ts     — Browser event registry + modal-opening helpers
-    filters.ts          — Persisted series filter state + change broadcasting
-    client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
-                          formatLocalTime, formatDateRange, isPastEvent,
-                          readFavorites, toggleFavorite, safeJsonParse,
-                          isSessionLive, getLiveSession, sleepVerdict
-    ics.ts              — ICS calendar file generation (client-side .ics export)
-    sessions.ts         — Session abbreviations, labels, and duration helpers
-    share-card.ts       — Canvas-based share image generation for calendar/date picks
-    time-format.ts      — Backwards-compatible barrel re-exporting from time.ts
-    time.ts             — Server-side helpers: formatDateRange, getRaceSession,
-                          isPlaceholderTime, countryFlag, isPastEvent
-    types.ts            — Shared frontend event/session TypeScript types
-    world-data.ts       — World map support for the passport globe view
-  styles/
-    global.css          — Tailwind v4 import + racing stripe, modal, fav animations
-pipeline/
-  fetchers/       — Bronze layer: API fetch scripts (Python)
-  transforms/     — Silver + gold layer transforms (Python)
-  config.py       — Shared config (paths, API URLs, season year)
-  utils.py        — HTTP client, JSON read/write helpers
-  run.py          — Main pipeline entrypoint
-data/
-  bronze/         — Raw API responses (cached)
-  silver/         — Cleaned/normalized per-series JSON
-  gold/           — calendar.json, upcoming.json, broadcasts.json
-  seed/           — Manual JSON for series without APIs or stable free feeds
-public/           — Static assets (logos, flags, images)
-.claude/commands/ — Claude workflow source files
-.github/prompts/  — Copilot prompts mirroring the shared workflows
-.github/agents/   — Copilot specialists for frontend, pipeline, maintenance, routing
-.github/hooks/    — Copilot custom-agent guard and validation hooks
+src/pages/        — index, calendar, watchlist, status (kiosk), recap, passport, series/[id], widget/[series]
+src/components/   — EventCard, EventModal, Countdown, SeriesBadge, SeriesFilter, Nav, LocalTime, WeekendTimeline
+src/layouts/      — Layout.astro (HTML shell + Nav + EventModal)
+src/lib/          — series.ts, client-utils.ts, ics.ts, sessions.ts, time.ts, types.ts, and friends
+pipeline/         — Python fetchers (bronze) + transforms (silver/gold), config.py, run.py
+data/             — bronze/ (local cache), silver/, gold/, seed/ (manual JSON for non-API series)
+public/           — static assets
+.github/skills/   — shared agent skills (auto-discovered; .claude/skills symlinks here)
+.claude/commands/ — Claude slash-command workflows; Copilot mirrors in .github/prompts/, agents in .github/agents/
 ```
 
-## Key Conventions
-- All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
-- Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `gtworld`, `nls`, `wsbk`, `superformula`, `iomtt`
-- Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
-- Prefer static generation over client-side fetching
-- Dark mode is the default theme
-- **Tailwind v4**: dynamic class names like `bg-[#hex]` do NOT work at runtime — always use `style=` for series colors
-- **Country flags**: `countryFlag()` only handles alpha-2 codes (2 letters). Alpha-3 silently returns empty string
-- **Favorites**: stored in `localStorage['rt-favs']` as a JSON array of event IDs; use `rt-favs-changed` CustomEvent to sync UI across components
-- **Cross-component events**: `rt-open-event` (detail: event object) opens the modal; `rt-favs-changed` triggers fav UI sync
+## Domain Knowledge (Skills)
+
+Domain knowledge lives in `.github/skills/` and loads automatically when relevant:
+
+- `astro-frontend-conventions` — Tailwind v4 gotchas, vanilla-script pattern, event bus, time rendering
+- `medallion-data-pipeline` — bronze/silver/gold flow, rebuild commands, debugging order
+- `seed-data-schema` — seed JSON schema, series IDs, UTC time rules
+- `add-new-series` — end-to-end checklist for new championships
 
 ## Commands
-- `npm run dev` — local Astro dev server with hot reload
-- `npm run build` — production build
-- `npm run preview` — preview production build locally
-- `npm run typecheck` — Astro typecheck only
-- `npm test` — Astro check, frontend smoke tests, and Python pipeline unit tests
-- `npm run test:pipeline` — Python pipeline unit tests only
-- `npm run test:smoke` — frontend smoke tests only
-- `npm run validate:data` — validate seed, silver, and gold JSON files
-- `npm run fetch-data` — run Python data pipeline (`uv run python -m pipeline`)
-- `uv run python -m pipeline --series f1,motogp` — fetch specific series only
-- `uv run python -m pipeline --bronze-only` — fetch raw data without transforms
 
-## Data Pipeline
-Python scripts in `pipeline/` fetch from APIs (Jolpica/OpenF1 for F1, Pulselive for MotoGP and WSBK, NASCAR CDN for NASCAR), normalize into the medallion layers, and write JSON to `data/`. Series without stable free public APIs (FE, IndyCar, WEC, F2, F3, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT) use manually curated seed files in `data/seed/`, while WSBK keeps a seed fallback. A GitHub Action runs this nightly and commits updated data.
-
-## Data Sources
-| Series | Source | Type |
-|--------|--------|------|
-| F1 | Jolpica API + OpenF1 | API (free, no auth) |
-| MotoGP | Pulselive API | API (free, no auth) |
-| NASCAR | NASCAR CDN | API (free, no auth) |
-| WSBK | WorldSBK Pulselive API | API (JWT-gated, seed fallback) |
-| F2, F3, FE, IndyCar, WEC | `data/seed/*.json` | Manual seed data |
-| Moto2, Moto3 | `data/seed/*.json` | Manual seed data |
-| IMSA, DTM, GT World, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
-
-## Slash Commands
-- `.claude/commands/add-series.md` — guide for adding a new series end to end
-- `.claude/commands/pipeline-debug.md` — pipeline debugging workflow
-- `.claude/commands/new-component.md` — scaffold a new Astro component following repo conventions
-- `.claude/commands/seed-audit.md` — audit manual seed data before bulk edits
-- `.claude/commands/season-update.md` — refresh a season of data end to end
-- `.claude/commands/update-deps.md` — upgrade npm and Python dependencies safely
-- `.claude/commands/verify-dates.md` — cross-check schedules for stale dates
-
-Matching Copilot prompts live in `.github/prompts/`, supported by `.github/agents/` and `.github/hooks/`.
+```bash
+npm run dev              # local dev server
+npm run build            # production build (quality gate)
+npm test                 # Astro check + smoke tests + pipeline unit tests (quality gate)
+npm run validate:data    # validate seed/silver/gold JSON (quality gate)
+npm run typecheck        # Astro typecheck only
+npm run fetch-data       # full Python pipeline
+uv run python -m pipeline --series f1,motogp   # specific series
+```
 
 ## File Search Tips
-- When using Glob, always scope to a specific subdirectory (`src/`, `docs/`, `data/`, `pipeline/`) — never glob from the project root with `**` patterns, as it will match thousands of `node_modules` files
-- `pattern: "*.md", path: project_root` finds only root-level files (safe)
-- `pattern: "**/*.md", path: "docs/"` finds all docs (safe)
-- `pattern: "**/*.md", path: project_root` — avoid this
 
-## When Making Changes
-- Check `docs/architecture.md` for system design decisions
-- Check `docs/product-vision.md` for original product intent, covered series, and feature ideas
-- Check `docs/data-sources/` for per-series API research and source decisions
-- Check `worknotes.md` for current status and open questions
-- Run `bd ready` to find tracked open issues before starting new work
-- Keep the `/status` route minimal — it targets small screens and kiosk displays
-- `upcoming.json` is sorted chronologically by `dateStart`
-- `data/gold/broadcasts.json` contains per-series broadcast/streaming channels for NL, US, UK regions
-- When adding a new page, also add it to `Nav.astro` and update this CLAUDE.md structure section
+- When using Glob, always scope to a subdirectory (`src/`, `docs/`, `data/`, `pipeline/`) — never glob from the project root with `**` patterns (matches thousands of `node_modules` files)
+- `pattern: "*.md", path: project_root` finds only root-level files (safe)
+
+## Key Reference Docs
+
+- `docs/architecture.md` — system design, event schema, data-flow paths
+- `docs/product-vision.md` — product intent and covered series
+- `docs/feature-ideas.md` — feature brainstorm with complexity ratings
+- `docs/data-sources/` — per-series API research
+- `docs/ai-workflows.md` — Claude/Copilot workflow map and layer model
+- `worknotes.md` — current status and open questions
+
+When adding a new page, also add it to `Nav.astro` and update the Directory Map above.

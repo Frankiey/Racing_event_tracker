@@ -11,9 +11,7 @@ Apply that workflow to the user's requested series and complete the implementati
 
 Key constraints to keep in mind while working:
 - Use `bd` for task tracking.
-- Keep `countryCode` values ISO alpha-2.
-- Store all event times in UTC.
-- Use `style=` for dynamic series colors instead of dynamic Tailwind classes.
+- Follow the **add-new-series** and **seed-data-schema** skills in `.github/skills/` for the checklist and event schema.
 
 Agentic execution requirements:
 - Start by checking `bd ready` or the user-provided issue context, then claim or update the relevant issue when appropriate.

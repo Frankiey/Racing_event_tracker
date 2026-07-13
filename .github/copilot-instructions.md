@@ -17,125 +17,55 @@ bd remember           # Store persistent tracker notes
 1. File issues for remaining work (`bd create`)
 2. Run quality gates (`npm test`, `npm run validate:data`, `npm run build`)
 3. Update or close the relevant issue (`bd update`, `bd close <id>`)
+
 ---
 
 ## Project Overview
 
-RaceTrack is a static motorsport event tracker. It aggregates race calendars, session schedules, standings, and broadcast info across F1, F2, F3, Formula E, IndyCar, NASCAR, MotoGP, Moto2, Moto3, WEC/endurance, IMSA, DTM, GT World Challenge, NLS, WSBK, Super Formula, and IOMTT into a single dashboard.
+RaceTrack is a **static motorsport event tracker**: race calendars, session schedules, standings, and broadcast info for 17 series (F1 through IOMTT) in one dashboard.
 
-**Tech stack:**
-- Frontend: Astro (static-first, island architecture) + Tailwind CSS v4
-- Data pipeline: Python (managed with uv) — separate process from the website
-- Data: JSON files in `data/` — medallion architecture (bronze → silver → gold)
+- Frontend: Astro (static-first) + Tailwind CSS v4, dark mode default
+- Data pipeline: Python managed with `uv` (never pip, never npm for Python deps)
+- Data: JSON in `data/` — medallion architecture (bronze → silver → gold)
 - Hosting: GitHub Pages via GitHub Actions
-- No backend, no database, no auth
+- **No backend, no database, no auth** — don't add them; don't over-abstract or add features beyond what was asked
 
-## Project Structure
+## Directory Map
 
 ```
-src/
-  pages/
-    index.astro         — Dashboard: next 20 events, countdown hero, series stats, clash detector
-    calendar.astro      — Full 2026 calendar, grouped by month, jump-to-today, series heatmap
-    watchlist.astro     — User's saved/favorited events (localStorage), ICS export
-    status.astro        — Kiosk view (bare, auto-refresh)
-    recap.astro         — Past 7 days recap with spoiler-free toggle
-    passport.astro      — Globe-based circuit passport / season travel view
-    series/[id].astro   — Per-series page: progress bar, schedule, next race, ICS export
-    widget/[series].astro — Embeddable countdown widget per series
-  components/
-    EventCard.astro     — Card with flag, sessions, fav button, opens modal on click
-    EventModal.astro    — Global detail modal (rt-open-event CustomEvent)
-    Countdown.astro     — Live countdown timer (days:hrs:min:sec)
-    SeriesBadge.astro   — Colored pill badge (F1, MotoGP, etc.)
-    SeriesFilter.astro  — Toggle filter buttons by series
-    Nav.astro           — Sticky nav with Series dropdown + Watchlist heart
-    LocalTime.astro     — UTC → local time hydration (use data-local-time attr)
-    WeekendTimeline.astro — Session timeline used inside the event modal
-  layouts/
-    Layout.astro        — HTML shell + Nav + EventModal
-  lib/
-    series.ts           — SERIES metadata map + SERIES_LIST + getSeriesMeta()
-    series-client.ts    — Browser-safe series metadata (derived from series.ts)
-    event-client.ts     — Browser event registry + modal-opening helpers
-    filters.ts          — Persisted series filter state + change broadcasting
-    client-utils.ts     — Shared client-side utilities: countryFlag, escapeHtml,
-                          formatLocalTime, formatDateRange, isPastEvent,
-                          readFavorites, toggleFavorite, safeJsonParse,
-                          isSessionLive, getLiveSession, sleepVerdict
-    ics.ts              — ICS calendar file generation (client-side .ics export)
-    sessions.ts         — Canonical session labels, abbreviations, and durations
-    share-card.ts       — Social/share image generation for calendar selections
-    time-format.ts      — Backwards-compatible barrel re-exporting from time.ts
-    time.ts             — Server-side helpers: formatDateRange, getRaceSession,
-                          isPlaceholderTime, countryFlag, isPastEvent
-    types.ts            — Shared frontend event/session TypeScript types
-    world-data.ts       — World map helpers for the passport page
-  styles/
-    global.css          — Tailwind v4 import + racing stripe, modal, fav animations
-pipeline/
-  fetchers/       — Bronze layer: API fetch scripts (Python)
-  transforms/     — Silver + gold layer transforms (Python)
-  config.py       — Shared config (paths, API URLs, season year)
-  utils.py        — HTTP client, JSON read/write helpers
-  run.py          — Main pipeline entrypoint
-data/
-  bronze/         — Raw API responses (cached)
-  silver/         — Cleaned/normalized per-series JSON
-  gold/           — calendar.json, upcoming.json, broadcasts.json
-  seed/           — Manual JSON for series without APIs or stable free feeds (F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT; WSBK fallback)
-public/           — Static assets (logos, flags, images)
-.claude/commands/ — Claude workflow source files
-.github/prompts/  — Copilot workspace prompts mirroring shared workflows
-.github/agents/   — Copilot specialists for frontend, pipeline, maintenance, routing
+src/pages/        — index, calendar, watchlist, status (kiosk), recap, passport, series/[id], widget/[series]
+src/components/   — EventCard, EventModal, Countdown, SeriesBadge, SeriesFilter, Nav, LocalTime, WeekendTimeline
+src/layouts/      — Layout.astro (HTML shell + Nav + EventModal)
+src/lib/          — series.ts, client-utils.ts, ics.ts, sessions.ts, time.ts, types.ts, and friends
+pipeline/         — Python fetchers (bronze) + transforms (silver/gold), config.py, run.py
+data/             — bronze/ (local cache, not committed), silver/, gold/, seed/ (manual JSON for non-API series)
+public/           — static assets
+.github/skills/   — shared agent skills (auto-discovered; .claude/skills symlinks here)
+.github/prompts/  — Copilot workspace prompts mirroring .claude/commands/
+.github/agents/   — Copilot specialists (frontend, pipeline, maintenance, router)
 .github/hooks/    — Copilot custom-agent guard and validation hooks
 ```
 
-## Key Conventions
+## Domain Knowledge (Skills)
 
-- All times stored in UTC, converted to local time in the browser via `data-local-time` attribute
-- Data files are JSON, committed to the repo
-- Series identifiers: `f1`, `f2`, `f3`, `fe`, `indycar`, `nascar`, `motogp`, `moto2`, `moto3`, `wec`, `imsa`, `dtm`, `gtworld`, `nls`, `wsbk`, `superformula`, `iomtt`
-- Keep components small and focused — interactivity via vanilla `<script>` tags, not framework islands
-- Prefer static generation over client-side fetching
-- Dark mode is the default theme
-- **Tailwind v4**: dynamic class names like `bg-[#hex]` do NOT work at runtime — always use `style=` for series colors
-- **Country flags**: `countryFlag()` only handles alpha-2 codes (2 letters). Alpha-3 silently returns empty string
-- **Favorites**: stored in `localStorage['rt-favs']` as a JSON array of event IDs; use `rt-favs-changed` CustomEvent to sync UI across components
-- **Cross-component events**: `rt-open-event` (detail: event object) opens the modal; `rt-favs-changed` triggers fav UI sync
-- `upcoming.json` is sorted chronologically by `dateStart`
+Domain knowledge lives in `.github/skills/` and loads automatically when relevant — do not duplicate it here:
+
+- `astro-frontend-conventions` — Tailwind v4 gotchas, vanilla-script pattern, event bus, time rendering
+- `medallion-data-pipeline` — bronze/silver/gold flow, rebuild commands, debugging order
+- `seed-data-schema` — seed JSON schema, canonical series IDs, UTC time rules
+- `add-new-series` — end-to-end checklist for new championships
 
 ## Commands
 
 ```bash
-npm run dev                                    # local Astro dev server with hot reload
-npm run build                                  # production build
-npm run preview                                # preview production build locally
-npm run typecheck                              # Astro typecheck only
-npm run test:smoke                             # frontend smoke test only
-npm run fetch-data                             # run Python data pipeline
-uv run python -m pipeline --series f1,motogp  # fetch specific series only
-uv run python -m pipeline --bronze-only        # fetch raw data without transforms
+npm run dev              # local dev server
+npm run build            # production build (quality gate)
+npm test                 # Astro check + smoke tests + pipeline unit tests (quality gate)
+npm run validate:data    # validate seed/silver/gold JSON (quality gate)
+npm run typecheck        # Astro typecheck only
+npm run fetch-data       # full Python pipeline
+uv run python -m pipeline --series f1,motogp   # specific series
 ```
-
-## Data Sources
-
-| Series | Source | Type |
-|--------|--------|------|
-| F1 | Jolpica API + OpenF1 | API (free, no auth) |
-| MotoGP | Pulselive API | API (free, no auth) |
-| NASCAR | NASCAR CDN | API (free, no auth) |
-| WSBK | WorldSBK Pulselive API (seed fallback) | API + seed fallback |
-| F2, F3, FE, IndyCar, WEC, Moto2, Moto3, IMSA, DTM, GT World, NLS, Super Formula, IOMTT | `data/seed/*.json` | Manual seed data |
-
-## Don't
-
-- Don't add a backend or database
-- Don't over-abstract — keep it simple and direct
-- Don't use heavy client-side frameworks — vanilla JS or Astro islands only
-- Don't hardcode timezone offsets — always use `Intl`/browser APIs
-- Don't use dynamic Tailwind class names like `bg-[#hex]` — use `style=` instead
-- Don't add features, refactor, or "improve" code beyond what was asked
 
 ## Shared AI Workflows
 
@@ -150,6 +80,4 @@ uv run python -m pipeline --bronze-only        # fetch raw data without transfor
 | Scaffold a new component | `/new-component` | On demand |
 | Show the shared workflow map | `/ai-workflows` | Route to the right workflow |
 
-Claude Code reads the source workflow files in `.claude/commands/`. Copilot exposes matching workspace prompt files in `.github/prompts/`, with task-focused specialists in `.github/agents/` and optional guard/validation hooks in `.github/hooks/`.
-
-For a shared index of Claude workflows, Copilot prompts, and `bd` expectations, see `docs/ai-workflows.md`.
+For the shared workflow index and layer model, see `docs/ai-workflows.md`.

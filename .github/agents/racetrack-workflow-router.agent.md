@@ -12,6 +12,7 @@ Your job is to pick the smallest fitting workflow, explain the recommendation br
 ## Constraints
 - Always account for `bd` issue tracking.
 - Prefer a specialist agent over generic advice when the task maps cleanly.
+- Domain knowledge auto-loads from `.github/skills/` (astro-frontend-conventions, medallion-data-pipeline, seed-data-schema, add-new-series) — route by task shape, don't restate knowledge.
 - Keep routing concise and practical.
 
 ## Approach

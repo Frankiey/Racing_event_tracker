@@ -2,6 +2,26 @@
 
 RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 
+## The Layer Model
+
+AI configuration is layered from always-loaded to on-demand:
+
+1. **Always-on instructions** — `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`. Short universal rules only: project one-liner, directory map, `bd` workflow, quality-gate commands. No domain knowledge.
+2. **Auto-triggered skills** — `.github/skills/<name>/SKILL.md`. Domain knowledge that loads when the task matches the skill's USE FOR triggers. `.claude/skills` is a symlink to `.github/skills`, so Claude Code and Copilot share one set.
+3. **User-invoked commands** — `.claude/commands/` (Claude slash commands) and `.github/prompts/` (Copilot prompts). Workflow orchestration: ordered steps, commands to run, `bd` bookkeeping. They reference skills instead of restating knowledge.
+4. **Agent personas** — `.github/agents/*.agent.md`. Lean role + tool constraints; they rely on skills for domain knowledge.
+
+> **Warning:** never place a `SKILL.md` in the same directory as an `.agent.md` — the `SKILL.md` takes priority and tooling (e.g. waza) ignores the agent. Skills live in their own folders under `.github/skills/`.
+
+## Skills
+
+| Skill | Covers |
+|-------|--------|
+| `astro-frontend-conventions` | Tailwind v4 gotchas, vanilla-script pattern, event bus, time rendering |
+| `medallion-data-pipeline` | Bronze/silver/gold flow, rebuild commands, debugging order |
+| `seed-data-schema` | Seed JSON schema, canonical series IDs, UTC time rules |
+| `add-new-series` | End-to-end checklist for new championships |
+
 ## How It Fits Together
 
 - Claude Code source workflows live in `.claude/commands/`.

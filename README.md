@@ -189,13 +189,15 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes project-specific Claude instructions ([CLAUDE.md](CLAUDE.md)), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes short always-on instructions ([CLAUDE.md](CLAUDE.md), [AGENTS.md](AGENTS.md), `.github/copilot-instructions.md`), auto-discovered **agent skills** (`.github/skills/`, shared with Claude Code via the `.claude/skills` symlink), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers
-- Tailwind v4 gotchas specific to this project
-- How to add a new series end-to-end
+- Tailwind v4 gotchas specific to this project (via the `astro-frontend-conventions` skill)
+- How to add a new series end-to-end (via the `add-new-series` skill)
 - The issue tracking workflow (`bd`)
+
+Domain knowledge lives in `.github/skills/` and loads automatically when a task matches a skill's triggers — see [docs/ai-workflows.md](docs/ai-workflows.md) for the layer model.
 
 **If you use GitHub Copilot**, open Chat and type `/` to access the matching workspace prompts for the same recurring workflows.
 

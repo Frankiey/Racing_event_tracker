@@ -10,9 +10,7 @@ Your job is to implement UI work in Astro while preserving this repo's static-fi
 
 ## Constraints
 - Start from `bd` tracked work when possible.
-- Use vanilla scripts only; do not introduce framework islands unless explicitly requested.
-- Use `style=` for dynamic colors and `LocalTime` for UTC-to-local rendering.
-- Respect existing event bus conventions such as `rt-open-event` and `rt-favs-changed`.
+- Follow the **astro-frontend-conventions** skill (`.github/skills/astro-frontend-conventions/`) for all styling, scripting, time-rendering, and event-bus rules.
 - Before handoff on file changes, run the relevant quality gates and update the `bd` issue state.
 
 ## Approach

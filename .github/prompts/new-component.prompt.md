@@ -11,10 +11,7 @@ Create the component requested by the user and wire it into the appropriate page
 
 Key constraints to keep in mind while working:
 - Use `bd` for task tracking.
-- Vanilla `<script>` only, no framework islands.
-- Use `LocalTime` for UTC-to-local rendering.
-- Use `style=` for dynamic colors.
-- Follow existing cross-component event patterns such as `rt-open-event` and `rt-favs-changed`.
+- Follow the **astro-frontend-conventions** skill in `.github/skills/` for all styling, scripting, time-rendering, and event-bus rules.
 
 Agentic execution requirements:
 - Check for an existing relevant `bd` issue before starting new work, and claim or update it when appropriate.
