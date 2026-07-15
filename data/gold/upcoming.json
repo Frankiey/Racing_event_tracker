@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-14T06:13:37Z",
+  "generated": "2026-07-15T06:17:58Z",
   "season": 2026,
   "eventCount": 113,
   "sources": [
@@ -963,11 +963,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-08-14T20:40:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-08-15T19:00:00Z"
+          "startTimeUTC": "2026-08-15T23:00:00Z"
         }
       ],
-      "dateStart": "2026-08-15",
+      "dateStart": "2026-08-14",
       "dateEnd": "2026-08-15"
     },
     {
@@ -1260,6 +1264,32 @@
       "dateEnd": "2026-08-30"
     },
     {
+      "id": "nascar-2026-r30",
+      "seriesId": "nascar",
+      "eventName": "Coke Zero Sugar 400",
+      "round": 30,
+      "circuit": {
+        "name": "Daytona International Speedway",
+        "city": "Daytona Beach",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 29.1872,
+        "lng": -81.0711
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-08-28T21:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-08-29T23:30:00Z"
+        }
+      ],
+      "dateStart": "2026-08-28",
+      "dateEnd": "2026-08-29"
+    },
+    {
       "id": "gtworld-2026-r07",
       "seriesId": "gtworld",
       "eventName": "GT World Nürburgring",
@@ -1315,28 +1345,6 @@
           "type": "Qualifying",
           "startTimeUTC": "2026-08-29T18:30:00Z"
         },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-29T19:30:00Z"
-        }
-      ],
-      "dateStart": "2026-08-29",
-      "dateEnd": "2026-08-29"
-    },
-    {
-      "id": "nascar-2026-r30",
-      "seriesId": "nascar",
-      "eventName": "Coke Zero Sugar 400",
-      "round": 30,
-      "circuit": {
-        "name": "Daytona International Speedway",
-        "city": "Daytona Beach",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 29.1872,
-        "lng": -81.0711
-      },
-      "sessions": [
         {
           "type": "Race",
           "startTimeUTC": "2026-08-29T19:30:00Z"
