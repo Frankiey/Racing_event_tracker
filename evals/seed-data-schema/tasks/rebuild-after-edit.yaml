@@ -1,0 +1,20 @@
+id: rebuild-after-edit
+name: Recommend rebuild + validate after a seed edit
+description: >-
+  Correct behavior: after any seed edit, rebuild silver with uv run python -m
+  pipeline --series and run npm run validate:data, then rebuild gold.
+tags:
+  - happy-path
+inputs:
+  prompt: >-
+    I just corrected a race date in a seed file. What exactly do I run before
+    committing?
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: names-the-commands
+    config:
+      contains:
+        - "validate:data"
+        - "--series"

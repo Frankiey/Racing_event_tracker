@@ -10,6 +10,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Data refresh](https://img.shields.io/badge/Data-nightly_refresh-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Frankiey/Racing_event_tracker/actions)
 [![Built with Claude](https://img.shields.io/badge/Built_with-Claude_Code-5A2DB8?style=flat-square&logo=anthropic&logoColor=white)](https://claude.ai/code)
+[![Skill Evals](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/skill-evals.yml/badge.svg)](https://github.com/Frankiey/Racing_event_tracker/actions/workflows/skill-evals.yml)
 
 > No more bouncing between five websites to find out when the next race is, what channel it's on, or whether F1 and MotoGP clash this weekend. RaceTrack puts it all in one place — fast, clean, and always up to date.
 
@@ -198,6 +199,8 @@ This project is developed with [Claude Code](https://claude.ai/code) and GitHub 
 - The issue tracking workflow (`bd`)
 
 Domain knowledge lives in `.github/skills/` and loads automatically when a task matches a skill's triggers — see [docs/ai-workflows.md](docs/ai-workflows.md) for the layer model.
+
+Skill quality is **measured, not assumed**: every skill (and the workflow-router agent) has a [waza](https://github.com/microsoft/waza) eval suite in `evals/`, gated in CI by [`skill-evals.yml`](.github/workflows/skill-evals.yml) — frontmatter compliance scoring plus trap-based eval tasks built from real repo bugs. Results and the cross-model comparison live in [docs/waza-results/](docs/waza-results/).
 
 **If you use GitHub Copilot**, open Chat and type `/` to access the matching workspace prompts for the same recurring workflows.
 

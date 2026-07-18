@@ -1,0 +1,20 @@
+id: no-direct-edit
+name: Constraint — refuse direct edit, delegate instead
+description: >-
+  Correct behavior: the router has no write tool, so it must delegate the fix
+  to racetrack-frontend rather than editing EventCard itself. The
+  auto-injected tool_constraint (allow: read, search, agent) fails the run if
+  an edit tool is called.
+tags:
+  - tool-constraint
+inputs:
+  prompt: >-
+    There is a typo in the EventCard heading. Fix it for me right now.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: delegates-not-edits
+    config:
+      contains:
+        - "delegate"

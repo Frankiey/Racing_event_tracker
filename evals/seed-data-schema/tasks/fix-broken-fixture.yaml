@@ -1,0 +1,25 @@
+id: fix-broken-fixture
+name: Fix a broken seed file
+description: >-
+  Correct behavior finds all three defects: duplicate id (fgt-2026-r01 twice,
+  second must become fgt-2026-r02), round gap (round jumps 1 to 3, must be 2),
+  and alpha-3 countryCode "NLD" (must be alpha-2 "nl").
+tags:
+  - happy-path
+  - trap
+inputs:
+  prompt: >-
+    Validation fails on the fictional seed file fgt-broken-seed.json. Find and
+    fix every schema violation in it.
+  files:
+    - path: fgt-broken-seed.json
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: finds-all-three-defects
+    config:
+      contains:
+        - "fgt-2026-r02"
+        - '"nl"'
+        - "duplicate"

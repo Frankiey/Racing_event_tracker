@@ -1,0 +1,30 @@
+id: happy-path-seed-series
+name: Happy path — add fgt seed series
+description: >-
+  Correct behavior: creates data/seed/fgt.json from the fixture calendar,
+  registers fgt in the SERIES map in src/lib/series.ts and SERIES_LIST, wires
+  pipeline/config.py and run.py, then runs validate:data.
+tags:
+  - happy-path
+inputs:
+  prompt: >-
+    Add the Fictional GT Trophy (id: fgt) to RaceTrack using the calendar in
+    fgt-calendar.md. Create the seed file and register the series metadata.
+  files:
+    - path: fgt-calendar.md
+expected:
+  should_trigger: true
+  behavior:
+    max_tool_calls: 50
+graders:
+  - type: text
+    name: touches-the-right-places
+    config:
+      contains:
+        - "fgt"
+        - "seed"
+        - "series.ts"
+  - type: behavior
+    name: bounded-tool-calls
+    config:
+      max_tool_calls: 50

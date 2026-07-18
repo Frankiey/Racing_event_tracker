@@ -1,0 +1,22 @@
+id: debug-missing-series
+name: Debug — Moto3 missing from dashboard
+description: >-
+  Correct behavior: route the diagnosis seed/bronze → silver → gold, check
+  data/silver/moto3.json, then rebuild gold via build_calendar and
+  build_upcoming — never hand-edit gold JSON.
+tags:
+  - happy-path
+inputs:
+  prompt: >-
+    Moto3 events are missing from the dashboard, but Moto2 shows fine. Walk
+    through debugging this.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: routes-through-layers
+    config:
+      contains:
+        - "silver"
+        - "gold"
+        - "build_calendar"

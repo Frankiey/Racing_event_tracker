@@ -1,0 +1,19 @@
+id: routing-negative
+name: Anti-trigger — UI styling change
+description: >-
+  Anti-trigger: badge styling is frontend work; the pipeline skill must not
+  activate.
+tags:
+  - negative-trigger
+inputs:
+  prompt: "Make the series badge corners more rounded on EventCard."
+expected:
+  should_trigger: false
+graders:
+  - type: text
+    name: no-pipeline-advice
+    config:
+      not_contains:
+        - "bronze"
+        - "silver"
+        - "transforms"

@@ -1,0 +1,18 @@
+id: routing-negative
+name: Anti-trigger — fetcher bug
+description: >-
+  Anti-trigger: a live-API fetcher bug belongs to the medallion pipeline
+  skill, not to manual JSON editing.
+tags:
+  - negative-trigger
+inputs:
+  prompt: "The F1 fetcher returns HTTP 500 from the Jolpica API. Debug it."
+expected:
+  should_trigger: false
+graders:
+  - type: text
+    name: no-seed-editing
+    config:
+      not_contains:
+        - "countryCode"
+        - "T00:00:00Z"

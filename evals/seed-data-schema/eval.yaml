@@ -1,0 +1,21 @@
+name: seed-data-schema-eval
+description: >-
+  Eval for the seed-data-schema skill: fix a broken fictional seed fixture
+  (duplicate id, round gap, alpha-3 code), require the rebuild + validate
+  follow-up, and an anti-trigger routing check.
+skill: seed-data-schema
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

@@ -1,0 +1,30 @@
+name: racetrack-workflow-router-eval
+description: >-
+  Agent eval for racetrack-workflow-router.agent.md. The router declares
+  tools: [read, search, agent] — waza auto-injects a tool_constraint grader,
+  so any edit/write attempt fails the run. Tasks are routing prompts where
+  correct behavior is delegation, never editing.
+skill: racetrack-workflow-router
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+  - type: tool_constraint
+    name: router-no-write-tools
+    config:
+      reject_tools:
+        - tool: "edit"
+        - tool: "write"
+        - tool: "fileWrite"
+        - tool: "bash"
+tasks:
+  - "tasks/*.yaml"

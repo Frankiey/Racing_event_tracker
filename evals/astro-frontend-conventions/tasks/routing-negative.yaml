@@ -1,0 +1,19 @@
+id: routing-negative
+name: Anti-trigger — pipeline change
+description: >-
+  Anti-trigger: fetcher configuration is pipeline work; frontend conventions
+  must not activate.
+tags:
+  - negative-trigger
+inputs:
+  prompt: "Increase the HTTP timeout for the MotoGP fetcher."
+expected:
+  should_trigger: false
+graders:
+  - type: text
+    name: no-frontend-advice
+    config:
+      not_contains:
+        - "astro:after-swap"
+        - "data-local-time"
+        - "<script>"

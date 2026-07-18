@@ -1,0 +1,22 @@
+name: add-new-series-eval
+description: >-
+  Flagship eval for the add-new-series skill: happy-path seed series plus the
+  three classic RaceTrack traps (alpha-3 country codes, dynamic Tailwind
+  classes, invented session times) and an anti-trigger routing check.
+  Fixtures use the fictional "fgt" series only — never real seed data.
+skill: add-new-series
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

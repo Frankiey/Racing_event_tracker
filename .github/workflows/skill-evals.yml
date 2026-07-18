@@ -1,0 +1,63 @@
+name: Skill Evals
+
+on:
+  pull_request:
+    paths:
+      - ".github/skills/**"
+      - ".github/agents/**"
+      - "evals/**"
+      - ".github/workflows/skill-evals.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  WAZA_VERSION: 0.38.0
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install waza (pinned)
+        run: |
+          curl -fsSL -o /tmp/waza \
+            "https://github.com/microsoft/waza/releases/download/v${WAZA_VERSION}/waza-linux-amd64"
+          curl -fsSL -o /tmp/checksums.txt \
+            "https://github.com/microsoft/waza/releases/download/v${WAZA_VERSION}/checksums.txt"
+          (cd /tmp && grep waza-linux-amd64 checksums.txt | sha256sum -c --status)
+          sudo install /tmp/waza /usr/local/bin/waza
+          waza --version
+
+      - name: Compliance check (fail under Medium-High)
+        run: |
+          waza check --format json --no-update-check > check.json
+          python3 - <<'EOF'
+          import json, sys
+          ok_levels = {"Medium-High", "High"}
+          data = json.load(open("check.json"))
+          failed = [s["name"] for s in data["skills"]
+                    if s["compliance"]["level"] not in ok_levels]
+          for s in data["skills"]:
+              print(f'{s["name"]}: {s["compliance"]["level"]} '
+                    f'({s["tokenBudget"]["count"]} tokens)')
+          if failed:
+              sys.exit(f"Below Medium-High: {', '.join(failed)}")
+          EOF
+
+      - name: Run skill evals (mock executor)
+        run: waza run --no-update-check -o results-skills.json
+
+      - name: Run agent eval (mock executor)
+        run: waza run evals/racetrack-workflow-router/eval.yaml --no-update-check -o results-agent.json
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: waza-results
+          path: |
+            check.json
+            results-*.json

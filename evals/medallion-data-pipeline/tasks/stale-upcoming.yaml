@@ -1,0 +1,20 @@
+id: stale-upcoming
+name: Stale events in upcoming.json
+description: >-
+  Correct behavior: rebuild gold with build_upcoming from silver and run npm
+  run validate:data — not manual deletion from the gold JSON.
+tags:
+  - trap
+inputs:
+  prompt: >-
+    upcoming.json still lists events whose dateEnd passed last weekend. How do
+    I fix the data?
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: rebuild-not-hand-edit
+    config:
+      contains:
+        - "build_upcoming"
+        - "validate:data"

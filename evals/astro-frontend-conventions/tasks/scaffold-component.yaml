@@ -1,0 +1,24 @@
+id: scaffold-component
+name: Scaffold a session-list component
+description: >-
+  Correct behavior: vanilla script with init() re-run on astro:after-swap,
+  session times rendered via data-local-time, no framework imports.
+tags:
+  - happy-path
+inputs:
+  prompt: >-
+    Scaffold a new Astro component that lists a weekend's sessions with their
+    start times, following RaceTrack conventions.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: follows-conventions
+    config:
+      contains:
+        - "astro:after-swap"
+        - "data-local-time"
+      not_contains:
+        - "from 'react'"
+        - "from 'vue'"
+        - "useState"

@@ -1,0 +1,20 @@
+id: route-pipeline-task
+name: Route — missing series data
+description: >-
+  Correct behavior: recommends the pipeline-debug workflow and delegates to
+  the racetrack-pipeline specialist, states the bd expectation. No file edits.
+tags:
+  - routing
+inputs:
+  prompt: >-
+    Moto3 events are missing from the dashboard. Which workflow handles this,
+    and who should execute it?
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: routes-to-pipeline
+    config:
+      contains:
+        - "pipeline"
+        - "bd"

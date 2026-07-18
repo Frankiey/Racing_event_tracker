@@ -1,0 +1,28 @@
+id: trap-alpha3-country
+name: Trap — alpha-3 country codes in source data
+description: >-
+  Trap: the fixture lists alpha-3 codes. Correct output converts them to
+  alpha-2 "nl" and "gb" for countryCode — alpha-3 silently renders an empty
+  flag via countryFlag().
+tags:
+  - trap
+inputs:
+  prompt: >-
+    Create the seed events for the Fictional GT Trophy rounds listed in
+    fgt-calendar.md, using the country codes given in the calendar table.
+  files:
+    - path: fgt-calendar.md
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: uses-alpha2-codes
+    config:
+      contains:
+        - '"nl"'
+        - '"gb"'
+      not_contains:
+        - '"countryCode": "NLD"'
+        - '"countryCode": "GBR"'
+        - '"countryCode": "nld"'
+        - '"countryCode": "gbr"'

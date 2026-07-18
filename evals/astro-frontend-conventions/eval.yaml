@@ -1,0 +1,21 @@
+name: astro-frontend-conventions-eval
+description: >-
+  Eval for the astro-frontend-conventions skill: component scaffold that must
+  use vanilla scripts with astro:after-swap and data-local-time (no framework
+  imports), a time-rendering trap, and an anti-trigger routing check.
+skill: astro-frontend-conventions
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

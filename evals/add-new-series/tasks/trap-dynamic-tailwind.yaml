@@ -1,0 +1,24 @@
+id: trap-dynamic-tailwind
+name: Trap — dynamic Tailwind class for series color
+description: >-
+  Trap: Tailwind v4 cannot build class names from variables at runtime.
+  Correct answer applies the color with an inline style attribute
+  (style="background:...") from getSeriesMeta, never a bracketed utility
+  class assembled from the hex value.
+tags:
+  - trap
+inputs:
+  prompt: >-
+    The Fictional GT Trophy brand color is #00c2a8. Explain how to wire this
+    series color so EventCard badges render it, per RaceTrack conventions.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: inline-style-not-dynamic-class
+    config:
+      contains:
+        - "style"
+      not_contains:
+        - "bg-[#00c2a8]"
+        - "bg-[${"

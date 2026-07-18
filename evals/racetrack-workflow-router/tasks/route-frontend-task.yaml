@@ -1,0 +1,20 @@
+id: route-frontend-task
+name: Route — new component request
+description: >-
+  Correct behavior: recommends the new-component workflow and delegates to
+  the racetrack-frontend specialist. No file edits by the router.
+tags:
+  - routing
+inputs:
+  prompt: >-
+    I want a card on the dashboard showing the next race for each favorited
+    series. Route this to the right workflow.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: routes-to-frontend
+    config:
+      contains:
+        - "component"
+        - "frontend"

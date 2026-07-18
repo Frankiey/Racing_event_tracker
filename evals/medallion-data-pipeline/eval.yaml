@@ -1,0 +1,21 @@
+name: medallion-data-pipeline-eval
+description: >-
+  Eval for the medallion-data-pipeline skill: a missing-series debugging task
+  that must route bronze → silver → gold and name the gold rebuild (never
+  hand-edit gold), a stale-data task, and an anti-trigger routing check.
+skill: medallion-data-pipeline
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

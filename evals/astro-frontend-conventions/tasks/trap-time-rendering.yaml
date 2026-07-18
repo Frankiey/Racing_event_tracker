@@ -1,0 +1,23 @@
+id: trap-time-rendering
+name: Trap — raw UTC times in a component
+description: >-
+  Trap: the broken component formats times itself. Correct fix renders via
+  data-local-time hydration (LocalTime pattern) — never formats in the
+  component or hardcodes timezone offsets.
+tags:
+  - trap
+inputs:
+  prompt: >-
+    Session times in my new card component show raw UTC strings instead of the
+    visitor's local time. Fix the time rendering.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: uses-localtime-hydration
+    config:
+      contains:
+        - "data-local-time"
+      not_contains:
+        - "data-utc"
+        - "UTC+1"

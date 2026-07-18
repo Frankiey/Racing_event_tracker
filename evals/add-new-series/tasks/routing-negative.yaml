@@ -1,0 +1,19 @@
+id: routing-negative
+name: Anti-trigger — component typo fix
+description: >-
+  Anti-trigger: a one-line frontend typo fix. The add-new-series checklist
+  must not activate; no new championship is involved.
+tags:
+  - negative-trigger
+inputs:
+  prompt: "Fix a typo in the EventCard component heading text."
+expected:
+  should_trigger: false
+graders:
+  - type: text
+    name: no-series-onboarding
+    config:
+      not_contains:
+        - "data/seed/"
+        - "SERIES_LIST"
+        - "pipeline/config.py"

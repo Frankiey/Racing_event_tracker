@@ -1,0 +1,22 @@
+id: trap-placeholder-times
+name: Trap — unannounced session times
+description: >-
+  Trap: round 3 times are TBA. Correct output uses the placeholder
+  T00:00:00Z for unconfirmed sessions — never invents plausible times.
+tags:
+  - trap
+inputs:
+  prompt: >-
+    Round 3 of the Fictional GT Trophy (FGT Dunes Finale, 2026-09-11 to 13)
+    has confirmed dates but the session times are still TBA per
+    fgt-calendar.md. Add the round 3 sessions to the fgt seed events.
+  files:
+    - path: fgt-calendar.md
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: placeholder-not-invented
+    config:
+      contains:
+        - "T00:00:00Z"
