@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-06T08:24:14Z",
+  "generated": "2026-07-18T06:07:22Z",
   "season": 2026,
-  "eventCount": 120,
+  "eventCount": 113,
   "sources": [
     "dtm",
     "f1",
@@ -22,280 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "moto3-2026-r11",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Germany",
-      "round": 11,
-      "circuit": {
-        "name": "Sachsenring",
-        "city": "Sachsenring",
-        "country": "GER",
-        "countryCode": "DE",
-        "lat": 50.7911,
-        "lng": 12.6886
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-07-10T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-07-11T06:40:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-07-11T10:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-07-11T11:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "moto2-2026-r11",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Germany",
-      "round": 11,
-      "circuit": {
-        "name": "Sachsenring",
-        "city": "Sachsenring",
-        "country": "GER",
-        "countryCode": "DE",
-        "lat": 50.7911,
-        "lng": 12.6886
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-07-10T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-07-11T07:25:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-07-11T11:40:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-07-11T12:05:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T10:15:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "motogp-2026-r11",
-      "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF GERMANY",
-      "round": 11,
-      "circuit": {
-        "name": "Sachsenring",
-        "city": "Sachsenring",
-        "country": "GER",
-        "countryCode": "DE",
-        "lat": 50.7911,
-        "lng": 12.6886
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-07-10T08:45:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T13:00:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-07-11T08:10:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-07-11T08:50:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-07-11T09:15:00Z"
-        },
-        {
-          "type": "Sprint",
-          "startTimeUTC": "2026-07-11T13:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-07-12T07:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T12:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "wsbk-2026-r08",
-      "seriesId": "wsbk",
-      "eventName": "WorldSBK Donington Park",
-      "round": 8,
-      "circuit": {
-        "name": "Donington Park",
-        "city": "Castle Donington",
-        "country": "United Kingdom",
-        "countryCode": "GB",
-        "lat": 52.8302,
-        "lng": -1.3751
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-07-10T10:30:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-07-10T14:00:00Z"
-        },
-        {
-          "type": "Superpole",
-          "startTimeUTC": "2026-07-11T12:00:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-07-11T14:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-07-12T10:15:00Z"
-        },
-        {
-          "type": "Superpole Race",
-          "startTimeUTC": "2026-07-12T12:00:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-07-12T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "wec-2026-r04",
-      "seriesId": "wec",
-      "eventName": "6 Hours of São Paulo",
-      "round": 4,
-      "circuit": {
-        "name": "Autodromo Jose Carlos Pace",
-        "city": "São Paulo",
-        "country": "Brazil",
-        "countryCode": "BR",
-        "lat": -23.7014,
-        "lng": -46.6969
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-07-10T13:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-07-10T18:30:00Z"
-        },
-        {
-          "type": "Practice 3",
-          "startTimeUTC": "2026-07-11T13:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-11T16:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "imsa-2026-r07",
-      "seriesId": "imsa",
-      "eventName": "Chevrolet Grand Prix",
-      "round": 7,
-      "circuit": {
-        "name": "Canadian Tire Motorsport Park",
-        "city": "Bowmanville",
-        "country": "Canada",
-        "countryCode": "CA",
-        "lat": 43.9444,
-        "lng": -78.6733
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-10T17:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-11T14:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-10",
-      "dateEnd": "2026-07-12"
-    },
-    {
-      "id": "nascar-2026-r24",
-      "seriesId": "nascar",
-      "eventName": "Quaker State 400 Available at Walmart",
-      "round": 24,
-      "circuit": {
-        "name": "Atlanta Motor Speedway",
-        "city": "Hampton",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.3847,
-        "lng": -84.3131
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-11T20:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-12T23:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-11",
-      "dateEnd": "2026-07-12"
-    },
     {
       "id": "superformula-2026-e04",
       "seriesId": "superformula",
@@ -532,11 +258,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-07-18T22:10:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-07-19T19:00:00Z"
+          "startTimeUTC": "2026-07-19T23:00:00Z"
         }
       ],
-      "dateStart": "2026-07-19",
+      "dateStart": "2026-07-18",
       "dateEnd": "2026-07-19"
     },
     {
@@ -1233,11 +963,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-08-14T20:40:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-08-15T19:00:00Z"
+          "startTimeUTC": "2026-08-15T23:00:00Z"
         }
       ],
-      "dateStart": "2026-08-15",
+      "dateStart": "2026-08-14",
       "dateEnd": "2026-08-15"
     },
     {
@@ -1530,6 +1264,32 @@
       "dateEnd": "2026-08-30"
     },
     {
+      "id": "nascar-2026-r30",
+      "seriesId": "nascar",
+      "eventName": "Coke Zero Sugar 400",
+      "round": 30,
+      "circuit": {
+        "name": "Daytona International Speedway",
+        "city": "Daytona Beach",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 29.1872,
+        "lng": -81.0711
+      },
+      "sessions": [
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-08-28T21:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-08-29T23:30:00Z"
+        }
+      ],
+      "dateStart": "2026-08-28",
+      "dateEnd": "2026-08-29"
+    },
+    {
       "id": "gtworld-2026-r07",
       "seriesId": "gtworld",
       "eventName": "GT World Nürburgring",
@@ -1585,28 +1345,6 @@
           "type": "Qualifying",
           "startTimeUTC": "2026-08-29T18:30:00Z"
         },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-29T19:30:00Z"
-        }
-      ],
-      "dateStart": "2026-08-29",
-      "dateEnd": "2026-08-29"
-    },
-    {
-      "id": "nascar-2026-r30",
-      "seriesId": "nascar",
-      "eventName": "Coke Zero Sugar 400",
-      "round": 30,
-      "circuit": {
-        "name": "Daytona International Speedway",
-        "city": "Daytona Beach",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 29.1872,
-        "lng": -81.0711
-      },
-      "sessions": [
         {
           "type": "Race",
           "startTimeUTC": "2026-08-29T19:30:00Z"
