@@ -1,0 +1,21 @@
+id: scaffold-component
+name: Build — new dashboard component
+description: >-
+  Correct behavior: creates the component under src/components following the
+  astro-frontend-conventions skill — vanilla script tag with astro:after-swap
+  re-init, inline style for series colors, and bd issue tracking.
+tags:
+  - frontend
+inputs:
+  prompt: >-
+    Add a NextRaceStrip component to the dashboard showing the next session
+    for each favorited series.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: follows-conventions
+    config:
+      contains:
+        - "component"
+        - "bd"

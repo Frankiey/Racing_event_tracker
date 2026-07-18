@@ -1,0 +1,20 @@
+id: dep-upgrade
+name: Upgrade — npm dependencies with quality gates
+description: >-
+  Correct behavior: applies incremental upgrades, calls out major version
+  bumps and breakage risk, runs npm test, validate:data, and build before
+  handoff, and updates the bd issue state.
+tags:
+  - maintenance
+inputs:
+  prompt: >-
+    Bring the npm dependencies up to date and make sure nothing breaks.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: incremental-with-gates
+    config:
+      contains:
+        - "major"
+        - "bd"

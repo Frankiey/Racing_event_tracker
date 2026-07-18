@@ -1,0 +1,21 @@
+id: seed-date-fix
+name: Constraint — seed edit follows seed-data-schema
+description: >-
+  Correct behavior: edits the seed file under the seed-data-schema rules,
+  keeps session times in UTC, then rebuilds silver and gold for just that
+  series before validating.
+tags:
+  - seed
+inputs:
+  prompt: >-
+    The Le Mans 24h race start in the WEC seed file is one hour off.
+    Correct it.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: respects-seed-rules
+    config:
+      contains:
+        - "seed"
+        - "UTC"

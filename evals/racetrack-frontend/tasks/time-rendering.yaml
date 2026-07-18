@@ -1,0 +1,22 @@
+id: time-rendering
+name: Constraint — session times use LocalTime hydration
+description: >-
+  Correct behavior: renders session times through the LocalTime pattern with
+  the data-local-time attribute instead of formatting UTC server-side, per
+  the astro-frontend-conventions time-rendering rules.
+tags:
+  - frontend
+  - time
+inputs:
+  prompt: >-
+    Session start times on the series page show in UTC for everyone. Make
+    them display in the visitor's timezone.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: uses-localtime-pattern
+    config:
+      contains:
+        - "LocalTime"
+        - "data-local-time"

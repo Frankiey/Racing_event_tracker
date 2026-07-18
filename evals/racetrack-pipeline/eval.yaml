@@ -1,0 +1,21 @@
+name: racetrack-pipeline-eval
+description: >-
+  Agent eval for racetrack-pipeline.agent.md. The specialist declares
+  tools: [read, edit, search, execute] — editing is allowed, but tasks check
+  it follows the medallion debugging order, seed rules, and bd tracking.
+skill: racetrack-pipeline
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

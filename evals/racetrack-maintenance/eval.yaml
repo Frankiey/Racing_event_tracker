@@ -1,0 +1,21 @@
+name: racetrack-maintenance-eval
+description: >-
+  Agent eval for racetrack-maintenance.agent.md. The specialist declares
+  tools: [read, edit, search, execute]. Tasks check incremental upgrades,
+  stop-on-failed-validation behavior, quality gates, and bd tracking.
+skill: racetrack-maintenance
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

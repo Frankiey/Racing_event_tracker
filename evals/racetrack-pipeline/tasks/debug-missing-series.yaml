@@ -1,0 +1,21 @@
+id: debug-missing-series
+name: Debug — series missing from gold
+description: >-
+  Correct behavior: follows the medallion debugging order (bronze → silver →
+  gold), inspects the narrowest layer first, rebuilds only the affected
+  series, and ties the work to a bd issue before handoff.
+tags:
+  - pipeline
+inputs:
+  prompt: >-
+    WSBK events stopped appearing in upcoming.json after the last fetch.
+    Diagnose and fix it.
+expected:
+  should_trigger: true
+graders:
+  - type: text
+    name: follows-medallion-order
+    config:
+      contains:
+        - "silver"
+        - "bd"

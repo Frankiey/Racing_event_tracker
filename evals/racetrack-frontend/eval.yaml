@@ -1,0 +1,22 @@
+name: racetrack-frontend-eval
+description: >-
+  Agent eval for racetrack-frontend.agent.md. The specialist declares
+  tools: [read, edit, search, execute]. Tasks check it follows
+  astro-frontend-conventions: vanilla scripts, no dynamic Tailwind classes,
+  LocalTime for time rendering, bd tracking.
+skill: racetrack-frontend
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: mock
+  model: claude-sonnet-4.6
+graders:
+  - type: code
+    name: has-output
+    config:
+      assertions:
+        - "len(output) > 40"
+tasks:
+  - "tasks/*.yaml"

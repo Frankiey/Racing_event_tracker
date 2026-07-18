@@ -50,8 +50,11 @@ jobs:
       - name: Run skill evals (mock executor)
         run: waza run --no-update-check -o results-skills.json
 
-      - name: Run agent eval (mock executor)
-        run: waza run evals/racetrack-workflow-router/eval.yaml --no-update-check -o results-agent.json
+      - name: Run agent evals (mock executor)
+        run: |
+          for agent in racetrack-workflow-router racetrack-pipeline racetrack-frontend racetrack-maintenance; do
+            waza run "evals/${agent}/eval.yaml" --no-update-check -o "results-agent-${agent}.json"
+          done
 
       - name: Upload results
         if: always()
