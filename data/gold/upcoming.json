@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-18T06:07:22Z",
+  "generated": "2026-07-19T06:32:41Z",
   "season": 2026,
-  "eventCount": 113,
+  "eventCount": 112,
   "sources": [
     "dtm",
     "f1",
@@ -22,40 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "superformula-2026-e04",
-      "seriesId": "superformula",
-      "eventName": "Super Formula Rounds 6–7 – Fuji",
-      "round": 4,
-      "circuit": {
-        "name": "Fuji Speedway",
-        "city": "Oyama",
-        "country": "Japan",
-        "countryCode": "JP",
-        "lat": 35.3717,
-        "lng": 138.9258
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-07-17T01:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-17T05:00:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-07-18T04:30:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-07-19T04:30:00Z"
-        }
-      ],
-      "dateStart": "2026-07-17",
-      "dateEnd": "2026-07-19"
-    },
     {
       "id": "f3-2026-r06",
       "seriesId": "f3",
