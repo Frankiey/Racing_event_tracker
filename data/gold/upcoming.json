@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-20T06:49:57Z",
+  "generated": "2026-07-21T06:31:13Z",
   "season": 2026,
   "eventCount": 106,
   "sources": [
@@ -208,7 +208,7 @@
     {
       "id": "nascar-2026-r26",
       "seriesId": "nascar",
-      "eventName": "Brickyard 400",
+      "eventName": "Brickyard 400 presented by PPG",
       "round": 26,
       "circuit": {
         "name": "Indianapolis Motor Speedway",
