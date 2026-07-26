@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-25T06:20:38Z",
+  "generated": "2026-07-26T05:11:50Z",
   "season": 2026,
-  "eventCount": 106,
+  "eventCount": 105,
   "sources": [
     "dtm",
     "f1",
@@ -22,40 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "fe-2026-r14",
-      "seriesId": "fe",
-      "eventName": "Tokyo E-Prix",
-      "round": 14,
-      "circuit": {
-        "name": "Tokyo Street Circuit",
-        "city": "Tokyo",
-        "country": "Japan",
-        "countryCode": "JP",
-        "lat": 35.6762,
-        "lng": 139.6503
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-07-24T05:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-07-25T04:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-07-25T06:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-07-25T08:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-24",
-      "dateEnd": "2026-07-25"
-    },
     {
       "id": "f3-2026-r07",
       "seriesId": "f3",
