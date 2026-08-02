@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-01T05:08:52Z",
+  "generated": "2026-08-02T05:08:23Z",
   "season": 2026,
-  "eventCount": 100,
+  "eventCount": 99,
   "sources": [
     "dtm",
     "f1",
@@ -105,32 +105,6 @@
       ],
       "dateStart": "2026-07-31",
       "dateEnd": "2026-08-02"
-    },
-    {
-      "id": "nls-2026-r06",
-      "seriesId": "nls",
-      "eventName": "NLS 7",
-      "round": 7,
-      "circuit": {
-        "name": "Nürburgring Nordschleife",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-01T06:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-01T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-01",
-      "dateEnd": "2026-08-01"
     },
     {
       "id": "moto3-2026-r12",
