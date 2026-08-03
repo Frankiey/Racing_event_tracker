@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-02T05:08:23Z",
+  "generated": "2026-08-03T05:17:48Z",
   "season": 2026,
-  "eventCount": 99,
+  "eventCount": 97,
   "sources": [
     "dtm",
     "f1",
@@ -22,90 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "imsa-2026-r08",
-      "seriesId": "imsa",
-      "eventName": "Motul SportsCar Endurance Grand Prix",
-      "round": 8,
-      "circuit": {
-        "name": "Road America",
-        "city": "Elkhart Lake",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 43.7975,
-        "lng": -87.99
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-07-30T17:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-07-31T16:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-01T15:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-02T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-07-30",
-      "dateEnd": "2026-08-02"
-    },
-    {
-      "id": "gtworld-2026-r06",
-      "seriesId": "gtworld",
-      "eventName": "GT World Magny-Cours",
-      "round": 6,
-      "circuit": {
-        "name": "Circuit de Nevers Magny-Cours",
-        "city": "Magny-Cours",
-        "country": "France",
-        "countryCode": "FR",
-        "lat": 46.8642,
-        "lng": 3.1636
-      },
-      "sessions": [
-        {
-          "type": "Free Practice 1",
-          "startTimeUTC": "2026-07-31T11:30:00Z"
-        },
-        {
-          "type": "Free Practice 2",
-          "startTimeUTC": "2026-07-31T18:40:00Z"
-        },
-        {
-          "type": "Qualifying 1 - Group A",
-          "startTimeUTC": "2026-08-01T12:55:00Z"
-        },
-        {
-          "type": "Qualifying 1 - Group B",
-          "startTimeUTC": "2026-08-01T13:10:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-08-01T19:15:00Z"
-        },
-        {
-          "type": "Qualifying 2 - Group A",
-          "startTimeUTC": "2026-08-02T08:55:00Z"
-        },
-        {
-          "type": "Qualifying 2 - Group B",
-          "startTimeUTC": "2026-08-02T09:05:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-08-02T13:30:00Z"
-        }
-      ],
-      "dateStart": "2026-07-31",
-      "dateEnd": "2026-08-02"
-    },
     {
       "id": "moto3-2026-r12",
       "seriesId": "moto3",
