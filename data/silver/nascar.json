@@ -790,11 +790,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-05T21:05:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-09-06T17:00:00Z"
+        "startTimeUTC": "2026-09-06T21:00:00Z"
       }
     ],
-    "dateStart": "2026-09-06",
+    "dateStart": "2026-09-05",
     "dateEnd": "2026-09-06"
   },
   {
@@ -834,11 +838,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-18T21:35:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-09-19T19:30:00Z"
+        "startTimeUTC": "2026-09-19T23:30:00Z"
       }
     ],
-    "dateStart": "2026-09-19",
+    "dateStart": "2026-09-18",
     "dateEnd": "2026-09-19"
   },
   {
@@ -856,11 +864,15 @@
     },
     "sessions": [
       {
+        "type": "Qualifying",
+        "startTimeUTC": "2026-09-26T15:05:00Z"
+      },
+      {
         "type": "Race",
-        "startTimeUTC": "2026-09-27T15:00:00Z"
+        "startTimeUTC": "2026-09-27T19:00:00Z"
       }
     ],
-    "dateStart": "2026-09-27",
+    "dateStart": "2026-09-26",
     "dateEnd": "2026-09-27"
   },
   {
