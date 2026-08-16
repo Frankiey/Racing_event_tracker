@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-15T04:12:09Z",
+  "generated": "2026-08-16T04:15:48Z",
   "season": 2026,
-  "eventCount": 91,
+  "eventCount": 89,
   "sources": [
     "dtm",
     "f1",
@@ -22,40 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "fe-2026-r16",
-      "seriesId": "fe",
-      "eventName": "London E-Prix",
-      "round": 16,
-      "circuit": {
-        "name": "ExCeL London Circuit",
-        "city": "London",
-        "country": "United Kingdom",
-        "countryCode": "GB",
-        "lat": 51.5087,
-        "lng": 0.0317
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-08-14T11:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-08-15T09:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-15T11:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-15T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-14",
-      "dateEnd": "2026-08-15"
-    },
     {
       "id": "dtm-2026-r06",
       "seriesId": "dtm",
@@ -131,32 +97,6 @@
       ],
       "dateStart": "2026-08-14",
       "dateEnd": "2026-08-16"
-    },
-    {
-      "id": "nascar-2026-r28",
-      "seriesId": "nascar",
-      "eventName": "Cook Out 400",
-      "round": 28,
-      "circuit": {
-        "name": "Richmond Raceway",
-        "city": "Richmond",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 37.5928,
-        "lng": -77.4197
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-14T20:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-15T23:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-14",
-      "dateEnd": "2026-08-15"
     },
     {
       "id": "fe-2026-r17",
