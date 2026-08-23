@@ -1,26 +1,8 @@
 {
-  "generated": "2026-08-23T17:09:56Z",
+  "generated": "2026-08-23T17:51:54Z",
   "season": 2026,
   "eventCount": 252,
-  "sources": [
-    "dtm",
-    "f1",
-    "f2",
-    "f3",
-    "fe",
-    "gtworld",
-    "imsa",
-    "indycar",
-    "iomtt",
-    "moto2",
-    "moto3",
-    "motogp",
-    "nascar",
-    "nls",
-    "superformula",
-    "wec",
-    "wsbk"
-  ],
+  "sources": [],
   "events": [
     {
       "id": "fe-2026-r01",
@@ -573,6 +555,40 @@
       "dateEnd": "2026-03-01"
     },
     {
+      "id": "f3-2026-r01",
+      "seriesId": "f3",
+      "eventName": "Australia",
+      "round": 1,
+      "circuit": {
+        "name": "Albert Park Circuit",
+        "city": "Melbourne",
+        "country": "Australia",
+        "countryCode": "AU",
+        "lat": -37.8497,
+        "lng": 144.968
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-03-06T01:30:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-03-06T04:30:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-03-07T20:30:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-03-08T19:30:00Z"
+        }
+      ],
+      "dateStart": "2026-03-06",
+      "dateEnd": "2026-03-08"
+    },
+    {
       "id": "f1-2026-r01",
       "seriesId": "f1",
       "eventName": "Australian Grand Prix",
@@ -610,40 +626,6 @@
       "dateStart": "2026-03-06",
       "dateEnd": "2026-03-08",
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png"
-    },
-    {
-      "id": "f3-2026-r01",
-      "seriesId": "f3",
-      "eventName": "Australia",
-      "round": 1,
-      "circuit": {
-        "name": "Albert Park Circuit",
-        "city": "Melbourne",
-        "country": "Australia",
-        "countryCode": "AU",
-        "lat": -37.8497,
-        "lng": 144.968
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-03-06T01:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-06T04:30:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-03-07T20:30:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-03-08T19:30:00Z"
-        }
-      ],
-      "dateStart": "2026-03-06",
-      "dateEnd": "2026-03-08"
     },
     {
       "id": "f2-2026-r01",
@@ -4278,40 +4260,6 @@
       "dateEnd": "2026-06-28"
     },
     {
-      "id": "f3-2026-r04",
-      "seriesId": "f3",
-      "eventName": "Austria",
-      "round": 4,
-      "circuit": {
-        "name": "Red Bull Ring",
-        "city": "Spielberg",
-        "country": "Austria",
-        "countryCode": "AT",
-        "lat": 47.2197,
-        "lng": 14.7647
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-26T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-26T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-06-27T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-06-28T06:40:00Z"
-        }
-      ],
-      "dateStart": "2026-06-26",
-      "dateEnd": "2026-06-28"
-    },
-    {
       "id": "moto3-2026-r10",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of The Netherlands",
@@ -4348,6 +4296,40 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-06-28T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-26",
+      "dateEnd": "2026-06-28"
+    },
+    {
+      "id": "f3-2026-r04",
+      "seriesId": "f3",
+      "eventName": "Austria",
+      "round": 4,
+      "circuit": {
+        "name": "Red Bull Ring",
+        "city": "Spielberg",
+        "country": "Austria",
+        "countryCode": "AT",
+        "lat": 47.2197,
+        "lng": 14.7647
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-26T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-06-26T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-06-27T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-06-28T06:40:00Z"
         }
       ],
       "dateStart": "2026-06-26",
@@ -6196,11 +6178,11 @@
       "sessions": [
         {
           "type": "Qualifying",
-          "startTimeUTC": "2026-08-22T15:35:00Z"
+          "startTimeUTC": "2026-08-22T15:40:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-08-23T19:00:00Z"
+          "startTimeUTC": "2026-08-23T18:00:00Z"
         }
       ],
       "dateStart": "2026-08-22",
@@ -6708,40 +6690,6 @@
       "dateEnd": "2026-09-06"
     },
     {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -6778,6 +6726,40 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",
@@ -7039,11 +7021,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-12T20:35:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-09-13T15:00:00Z"
+          "startTimeUTC": "2026-09-13T19:00:00Z"
         }
       ],
-      "dateStart": "2026-09-13",
+      "dateStart": "2026-09-12",
       "dateEnd": "2026-09-13"
     },
     {

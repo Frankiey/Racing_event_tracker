@@ -1,26 +1,8 @@
 {
-  "generated": "2026-08-23T17:09:56Z",
+  "generated": "2026-08-23T17:51:54Z",
   "season": 2026,
   "eventCount": 85,
-  "sources": [
-    "dtm",
-    "f1",
-    "f2",
-    "f3",
-    "fe",
-    "gtworld",
-    "imsa",
-    "indycar",
-    "iomtt",
-    "moto2",
-    "moto3",
-    "motogp",
-    "nascar",
-    "nls",
-    "superformula",
-    "wec",
-    "wsbk"
-  ],
+  "sources": [],
   "events": [
     {
       "id": "imsa-2026-r09",
@@ -102,11 +84,11 @@
       "sessions": [
         {
           "type": "Qualifying",
-          "startTimeUTC": "2026-08-22T15:35:00Z"
+          "startTimeUTC": "2026-08-22T15:40:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-08-23T19:00:00Z"
+          "startTimeUTC": "2026-08-23T18:00:00Z"
         }
       ],
       "dateStart": "2026-08-22",
@@ -614,40 +596,6 @@
       "dateEnd": "2026-09-06"
     },
     {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -684,6 +632,40 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",
@@ -945,11 +927,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-12T20:35:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-09-13T15:00:00Z"
+          "startTimeUTC": "2026-09-13T19:00:00Z"
         }
       ],
-      "dateStart": "2026-09-13",
+      "dateStart": "2026-09-12",
       "dateEnd": "2026-09-13"
     },
     {
