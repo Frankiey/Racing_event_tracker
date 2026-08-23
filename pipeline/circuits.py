@@ -15,6 +15,7 @@ CIRCUIT_COORDS: dict[str, tuple[float, float, str]] = {
     "Autodromo Internazionale del Mugello":                  (43.9975, 11.3719, "Scarperia"),
     "Balaton Park Circuit":                                 (46.9192, 17.8853, "Balatonfőkajár"),
     "Automotodrom Brno":                                    (49.2036, 16.4317, "Brno"),
+    "CREDITAS Autodrom Brno":                                (49.2036, 16.4317, "Brno"),  # same circuit, sponsor-renamed by the API
     "TT Circuit Assen":                                     (52.9614, 6.5228, "Assen"),
     "Sachsenring":                                          (50.7911, 12.6886, "Hohenstein-Ernstthal"),
     "Silverstone Circuit":                                  (52.0713, -1.0147, "Silverstone"),

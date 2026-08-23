@@ -1,0 +1,109 @@
+name: Dependency Audit
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Weekly, Monday 08:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 25
+          cache: npm
+      - run: npm ci
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.11.x"
+          enable-cache: true
+
+      - name: npm audit
+        run: npm audit --audit-level=moderate --json > npm-audit.json || true
+
+      - name: pip-audit
+        run: uvx pip-audit --format json -o pip-audit.json || true
+
+      - name: npm outdated
+        run: npm outdated --json > npm-outdated.json || true
+
+      - name: File GitHub issues for anything found
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'EOF'
+          import json, subprocess
+
+          def file_issue(title, body):
+              subprocess.run(
+                  ["gh", "issue", "create", "--title", title, "--body", body],
+                  check=True,
+              )
+
+          # --- npm audit ---
+          npm_audit = json.load(open("npm-audit.json")) if open("npm-audit.json").read().strip() else {}
+          vulns = npm_audit.get("vulnerabilities", {}) if isinstance(npm_audit, dict) else {}
+          at_or_above_moderate = {
+              name: v for name, v in vulns.items()
+              if v.get("severity") in ("moderate", "high", "critical")
+          }
+          if at_or_above_moderate:
+              rows = "\n".join(
+                  f"| {name} | {v.get('severity')} | {v.get('range', '-')} |"
+                  for name, v in at_or_above_moderate.items()
+              )
+              file_issue(
+                  "npm audit: moderate+ vulnerabilities found",
+                  f"| Package | Severity | Range |\n|---|---|---|\n{rows}\n\nRun `npm audit` locally for fix guidance.",
+              )
+
+          # --- pip-audit ---
+          try:
+              pip_audit = json.load(open("pip-audit.json"))
+          except (FileNotFoundError, json.JSONDecodeError):
+              pip_audit = {"dependencies": []}
+          vulnerable = [d for d in pip_audit.get("dependencies", []) if d.get("vulns")]
+          if vulnerable:
+              rows = "\n".join(
+                  f"| {d['name']} {d['version']} | {', '.join(v['id'] for v in d['vulns'])} |"
+                  for d in vulnerable
+              )
+              file_issue(
+                  "pip-audit: vulnerabilities found",
+                  f"| Package | Advisory IDs |\n|---|---|\n{rows}\n\nRun `uvx pip-audit` locally for fix guidance.",
+              )
+
+          # --- npm outdated: flag packages more than 2 major versions behind ---
+          try:
+              outdated = json.load(open("npm-outdated.json"))
+          except (FileNotFoundError, json.JSONDecodeError):
+              outdated = {}
+
+          def major(v):
+              try:
+                  return int(v.lstrip("^~=v").split(".")[0])
+              except (ValueError, IndexError):
+                  return None
+
+          far_behind = {}
+          for name, info in outdated.items():
+              cur, latest = major(info.get("current", "")), major(info.get("latest", ""))
+              if cur is not None and latest is not None and latest - cur > 2:
+                  far_behind[name] = (info.get("current"), info.get("latest"))
+
+          if far_behind:
+              rows = "\n".join(
+                  f"| {name} | {cur} | {latest} |"
+                  for name, (cur, latest) in far_behind.items()
+              )
+              file_issue(
+                  "npm packages more than 2 major versions behind",
+                  f"| Package | Current | Latest |\n|---|---|---|\n{rows}\n",
+              )
+          EOF

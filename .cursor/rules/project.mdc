@@ -1,0 +1,19 @@
+---
+description: RaceTrack core project rules — static site, no backend, dark mode
+globs:
+alwaysApply: true
+---
+
+RaceTrack is a static motorsport event tracker (F1 through IOMTT, 17 series). Astro (static-first) + Tailwind CSS v4, dark mode default. Python data pipeline (managed with `uv`) is a separate process from the website.
+
+Non-negotiables:
+
+- **No backend, no database, no auth.** Don't add them. Don't over-abstract or add features beyond what was asked.
+- **No dynamic Tailwind class names** (`bg-[#hex]` built at runtime doesn't work in Tailwind v4). Use inline `style=` for dynamic series colors instead.
+- **Country codes are ISO alpha-2 only.** Alpha-3 codes silently render an empty flag — always convert at the data layer, never in the UI.
+- **All stored/transmitted times are UTC** (`...Z` suffix). The browser localizes at render time — never hardcode offsets or store local times.
+- **Vanilla JS only on the client** — no framework islands (no React/Vue/Svelte components for interactivity).
+
+Data flows bronze → silver → gold (medallion architecture) under `data/`; the frontend only ever reads `data/gold/`.
+
+When adding a new page: add it to `src/components/Nav.astro` and to the directory map in `CLAUDE.md`.

@@ -1,0 +1,52 @@
+name: Date Verify
+
+on:
+  schedule:
+    - cron: '0 6 * * 3'  # Weekly, Wednesday 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.11.x"
+          enable-cache: true
+
+      - name: Run date verification
+        run: uv run python -m pipeline.verify_dates > issues.json
+
+      - name: File GitHub issue if problems found
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'EOF'
+          import json, subprocess
+
+          issues = json.load(open("issues.json"))
+          if not issues:
+              print("No date-verify issues found.")
+              raise SystemExit(0)
+
+          rows = "\n".join(
+              f"| {i['file']} | {i.get('eventId') or '-'} | {i['type']} | {i['detail']} |"
+              for i in issues
+          )
+          body = (
+              f"Weekly date-verify found {len(issues)} issue(s):\n\n"
+              "| File | Event | Type | Detail |\n"
+              "|---|---|---|---|\n"
+              f"{rows}\n"
+          )
+          open("body.md", "w").write(body)
+          subprocess.run(
+              ["gh", "issue", "create", "--title", "Date verify findings", "--body-file", "body.md"],
+              check=True,
+          )
+          EOF

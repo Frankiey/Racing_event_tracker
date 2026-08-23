@@ -1,0 +1,53 @@
+---
+description: RaceTrack data pipeline — medallion layers, seed schema, gold rebuild
+globs: pipeline/**,data/**
+alwaysApply: false
+---
+
+Python pipeline, managed with **uv** — never pip. See `docs/architecture.md` for full detail.
+
+Medallion layers:
+
+1. **Bronze** (`data/bronze/`) — raw API responses, local cache, never committed.
+2. **Silver** (`data/silver/`) — normalized per-series JSON, committed; built by `pipeline/transforms/` from bronze or seed files (`data/seed/`).
+3. **Gold** (`data/gold/`) — merged `calendar.json` / `upcoming.json` / `broadcasts.json`; what the frontend reads. Built by `pipeline/transforms/gold.py`. Never hand-edit gold — fix at the controlling layer and rebuild.
+
+API-backed series: F1, MotoGP, Moto2, Moto3 (all via `pipeline/fetchers/`), NASCAR, WSBK (seed fallback on fetch failure). Everything else is seed-only. `pipeline/circuits.py` has a `CIRCUIT_COORDS` lookup table `enrich_circuit()` applies to fill in lat/lng the source API doesn't provide — check there first before assuming a series needs a seed-file coordinate fix.
+
+Series identifiers (canonical, lowercase): `f1, f2, f3, fe, indycar, nascar, motogp, moto2, moto3, wec, imsa, dtm, gtworld, nls, wsbk, superformula, iomtt`.
+
+Seed file schema (`data/seed/<seriesId>.json`):
+
+```jsonc
+{
+  "id": "dtm-2026-r01",       // unique across ALL seed files
+  "seriesId": "dtm",
+  "eventName": "...",
+  "round": 1,                 // sequential, no gaps
+  "circuit": { "name", "city", "country", "countryCode": "de" }, // alpha-2 ONLY
+  "sessions": [{ "type": "race", "startTimeUTC": "2026-05-10T13:00:00Z" }],
+  "dateStart": "2026-05-08",  // = first session date
+  "dateEnd": "2026-05-10"     // = last session date
+}
+```
+
+Time rules: ISO 8601 UTC (`...Z`) only, never local times. Unconfirmed sessions use the `T00:00:00Z` placeholder — never invent a time. Moto2/Moto3 race time ≈ MotoGP −2h / −4h.
+
+Commands:
+
+```bash
+npm run fetch-data                             # full pipeline
+uv run python -m pipeline --series f1,motogp   # specific series
+npm run validate:data                          # quality gate
+```
+
+Rebuild gold from all silver after any silver/seed edit:
+
+```bash
+uv run python3 -c "import pathlib,json
+from pipeline.transforms.gold import build_calendar, build_upcoming
+e=[x for f in pathlib.Path('data/silver').glob('*.json') for x in json.loads(f.read_text())]
+build_calendar(e); build_upcoming(e)"
+```
+
+Commit seed/silver/gold changes; never commit bronze. `upcoming.json` is not pre-sorted by date — sort by `dateStart` before use.

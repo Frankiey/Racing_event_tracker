@@ -1,0 +1,212 @@
+# Windsurf Rules — RaceTrack
+
+## Project Overview
+
+RaceTrack is a **static motorsport event tracker**: race calendars, session schedules,
+standings, and broadcast info for 17 series (F1 through IOMTT) in one dashboard.
+
+- Frontend: Astro (static-first) + Tailwind CSS v4, dark mode default
+- Data pipeline: Python managed with `uv` — a separate process from the website
+- Data: JSON in `data/` — medallion architecture (bronze → silver → gold)
+- Hosting: GitHub Pages via GitHub Actions
+- **No backend, no database, no auth** — don't add them; don't over-abstract or add
+  features beyond what was asked
+
+## Tech Stack
+
+| Layer | Tech |
+|---|---|
+| Frontend framework | Astro (static output) |
+| Styling | Tailwind CSS v4 |
+| Client interactivity | Vanilla `<script>` — no framework islands |
+| Data pipeline | Python 3.11+, managed with `uv` (never `pip`) |
+| HTTP client (pipeline) | `httpx` |
+| Data format | JSON, medallion layers under `data/` |
+| Hosting / CI | GitHub Pages, GitHub Actions |
+| Issue tracking | `bd` (beads) — not GitHub Issues, not markdown TODOs |
+
+## Directory Map
+
+```
+src/pages/        — index, calendar, watchlist, status (kiosk), recap, passport,
+                     series/[id], widget/[series]
+src/components/    — EventCard, EventModal, Countdown, SeriesBadge, SeriesFilter,
+                     Nav, LocalTime, WeekendTimeline
+src/layouts/       — Layout.astro (HTML shell + Nav + EventModal)
+src/lib/           — series.ts, client-utils.ts, ics.ts, sessions.ts, time.ts,
+                     types.ts, and friends
+pipeline/          — Python fetchers (bronze) + transforms (silver/gold),
+                     config.py, run.py, validate.py, verify_dates.py
+data/              — bronze/ (local cache, never committed), silver/, gold/,
+                     seed/ (manual JSON for non-API series)
+public/            — static assets
+.github/skills/    — shared agent skills (auto-discovered by Claude/Copilot)
+.github/workflows/ — CI: pr-validate, fetch-data, deploy, date-verify, dep-audit
+```
+
+When adding a new page: add a link in `src/components/Nav.astro` and update the
+directory map wherever this repo's convention doc lives (`CLAUDE.md`).
+
+## Task Tracking
+
+This project uses **bd (beads)** for issue tracking. Do not use GitHub Issues or
+markdown TODO lists for day-to-day task tracking.
+
+```bash
+bd prime               # show full workflow context
+bd ready               # find available work
+bd show <id>           # view issue details
+bd update <id> --claim # claim work
+bd close <id>          # complete work
+bd remember "insight"  # store persistent knowledge across sessions
+```
+
+Session close protocol before finishing a work session:
+
+1. File issues for remaining work (`bd create`)
+2. Run quality gates (`npm test`, `npm run validate:data`, `npm run build`)
+3. Update or close the relevant issue (`bd update`, `bd close <id>`)
+
+## Key Conventions
+
+- **No backend, no database, no auth.** This is a static site. Don't propose
+  server endpoints, sessions, or persistence beyond `localStorage`.
+- **No framework islands.** No React/Vue/Svelte components for interactivity —
+  vanilla `<script>` only. Prefer static generation over client-side rendering.
+- **Tailwind v4 cannot build dynamic class names at runtime** — a variable-built
+  `bg-[#hex]` fails silently. Use inline `style=` with `getSeriesMeta(seriesId).color`
+  for dynamic series colors; opacity tint = hex suffix (`color + '20'` ≈ 12%).
+- **Country codes are ISO alpha-2 only.** `countryFlag()` returns an empty string
+  for alpha-3 input — always convert to alpha-2 at the data layer, not in the UI.
+- **All stored/transmitted times are UTC** (`...Z` suffix). The browser localizes
+  at render time via the `<LocalTime>` component — never format times manually in
+  a component, hardcode an offset, or store local time in data files.
+- **Session durations** come from `getSessionDurationMinutes()` in
+  `src/lib/sessions.ts` — don't redefine duration maps elsewhere (UI helpers, ICS
+  export, timelines, kiosk logic).
+- Keep `/status` (the kiosk page) minimal — small screens, auto-refresh, no
+  interactive chrome.
+
+## Commands
+
+```bash
+npm run dev              # local dev server
+npm run build             # production build (quality gate)
+npm test                  # astro check + smoke tests + pipeline unit tests (quality gate)
+npm run validate:data     # validate seed/silver/gold JSON (quality gate)
+npm run typecheck         # astro typecheck only
+npm run fetch-data        # full Python pipeline
+uv run python -m pipeline --series f1,motogp   # specific series
+```
+
+## Data Pipeline Overview
+
+Medallion architecture, three layers under `data/`:
+
+1. **Bronze** (`data/bronze/`) — raw API responses, local cache, never committed.
+2. **Silver** (`data/silver/`) — normalized per-series JSON, committed; built by
+   `pipeline/transforms/<series>.py` from bronze or from seed files.
+3. **Gold** (`data/gold/`) — merged `calendar.json` / `upcoming.json` /
+   `broadcasts.json`; the only layer the frontend reads. Built by
+   `pipeline/transforms/gold.py`. **Never hand-edit gold** — fix at the
+   controlling layer (silver transform or seed file) and rebuild.
+
+API-backed series: F1, MotoGP, Moto2, Moto3 (all via `pipeline/fetchers/`), NASCAR,
+WSBK (seed fallback if the fetch fails). Everything else is seed-only, hand-curated
+in `data/seed/`. `pipeline/circuits.py` has a `CIRCUIT_COORDS` lookup table that
+`enrich_circuit()` applies to fill in lat/lng the source API doesn't provide —
+check there first before assuming a missing-coordinate bug needs a seed-file fix.
+
+Canonical series identifiers (lowercase):
+
+```
+f1, f2, f3, fe, indycar, nascar, motogp, moto2, moto3, wec,
+imsa, dtm, gtworld, nls, wsbk, superformula, iomtt
+```
+
+### Seed file schema
+
+`data/seed/<seriesId>.json` — required per-event fields:
+
+```jsonc
+{
+  "id": "dtm-2026-r01",       // unique across ALL seed files
+  "seriesId": "dtm",
+  "eventName": "...",
+  "round": 1,                 // sequential, no gaps
+  "circuit": {
+    "name": "...", "city": "...", "country": "...",
+    "countryCode": "de"       // alpha-2 ONLY — alpha-3 renders an empty flag
+  },
+  "sessions": [
+    { "type": "race", "startTimeUTC": "2026-05-10T13:00:00Z" }
+  ],
+  "dateStart": "2026-05-08",  // must equal the first session's date
+  "dateEnd": "2026-05-10"     // must equal the last session's date
+}
+```
+
+Time rules:
+
+- ISO 8601 UTC (`...Z`) only. Never store or infer local time.
+- Unconfirmed session times use the `T00:00:00Z` placeholder
+  (`isPlaceholderTime()` in `src/lib/time.ts` detects this) — never invent a time.
+- Moto2/Moto3 race start ≈ MotoGP start −2h / −4h respectively.
+
+After any silver or seed edit:
+
+```bash
+uv run python -m pipeline --series <id>
+npm run validate:data
+```
+
+Rebuild gold from all silver:
+
+```bash
+uv run python3 -c "import pathlib,json
+from pipeline.transforms.gold import build_calendar, build_upcoming
+e=[x for f in pathlib.Path('data/silver').glob('*.json') for x in json.loads(f.read_text())]
+build_calendar(e); build_upcoming(e)"
+```
+
+Commit seed/silver/gold changes; never commit `data/bronze/`.
+`data/gold/upcoming.json` is sorted by series, not by date — always sort by
+`dateStart` before applying any per-series display cap.
+
+## Frontend Conventions
+
+Client script pattern — no framework, re-initializes on Astro page transitions:
+
+```astro
+<script>
+  function init() { /* queries, listeners */ }
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
+```
+
+Cross-component event bus (CustomEvents on `window`):
+
+- `rt-open-event` (detail: event) — opens `EventModal`.
+- `rt-favs-changed` — favorites changed; dispatch after writing to
+  `localStorage['rt-favs']` (a JSON array of event IDs).
+- `rt-filters-changed` — broadcasts active dashboard filters.
+
+## Do / Don't
+
+**Do:**
+- Use `bd` for all task tracking.
+- Fix data problems at the seed or silver layer, then rebuild gold.
+- Run `npm test`, `npm run validate:data`, and `npm run build` before calling
+  work done.
+- Keep new frontend interactivity in vanilla `<script>` blocks.
+- Use `<LocalTime data-local-time>` for any user-facing time.
+
+**Don't:**
+- Don't add a backend, database, or auth system.
+- Don't add a frontend framework or component library for interactivity.
+- Don't hand-edit `data/gold/*.json`.
+- Don't store or render alpha-3 country codes.
+- Don't hardcode timezone offsets or store local times in data files.
+- Don't use `pip` for the Python pipeline — always `uv`.
+- Don't use GitHub Issues or markdown TODO files for task tracking — use `bd`.

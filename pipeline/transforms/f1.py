@@ -12,7 +12,7 @@ ALPHA3_TO_ALPHA2: dict[str, str] = {
     "MON": "MC", "ESP": "ES", "AUT": "AT", "GBR": "GB", "HUN": "HU",
     "NED": "NL", "ITA": "IT", "AZE": "AZ", "SGP": "SG", "USA": "US",
     "MEX": "MX", "BRA": "BR", "QAT": "QA", "ARE": "AE", "CAN": "CA",
-    "BEL": "BE",
+    "BEL": "BE", "BRN": "BH",  # OpenF1 uses non-standard "BRN" for Bahrain
 }
 
 # Fallback: Jolpica country name → alpha-2 (for events with no OpenF1 match)

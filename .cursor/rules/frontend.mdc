@@ -1,0 +1,35 @@
+---
+description: RaceTrack Astro frontend — no islands, time rendering, event bus, series colors
+globs: src/**
+alwaysApply: false
+---
+
+Static-first Astro + Tailwind v4, dark mode only, no backend. Page map in `docs/architecture.md`.
+
+- **No framework islands** — vanilla `<script>` only, no React/Vue/Svelte. Prefer static generation.
+- **Tailwind v4 cannot build dynamic class names at runtime** (`bg-[#hex]` from a variable fails). Use `style=` with `getSeriesMeta(seriesId).color` instead; opacity tint = hex suffix (`color + '20'` for ~12%).
+- **Times are UTC in data** — render via the `<LocalTime>` component using `data-local-time` (+ `data-format`); never format times manually in a component or hardcode offsets. `data-utc` is NOT read by the hydration script — this was a real bug, don't reintroduce it.
+- **Country codes are ISO alpha-2** — `countryFlag()` returns an empty string for alpha-3 input.
+- **Session durations**: use `getSessionDurationMinutes()` from `src/lib/sessions.ts` — don't redefine duration maps in UI helpers, ICS export, timelines, or kiosk logic.
+
+Client script pattern (no framework, re-runs on page transitions):
+
+```astro
+<script>
+  function init() { /* queries, listeners */ }
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
+```
+
+Cross-component event bus (CustomEvents):
+
+- `rt-open-event` (detail: event) — opens `EventModal`.
+- `rt-favs-changed` — favorites changed; dispatch after writing `localStorage['rt-favs']` (JSON array of event IDs).
+- `rt-filters-changed` — broadcasts active filters.
+
+Gotchas:
+
+- `data/gold/upcoming.json` is sorted by series, not by date — sort by `dateStart` yourself before applying per-series caps.
+- New pages: add a link in `src/components/Nav.astro`.
+- Keep `/status` (kiosk) minimal — small screens, auto-refresh.
