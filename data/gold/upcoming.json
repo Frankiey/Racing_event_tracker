@@ -1,99 +1,27 @@
 {
-  "generated": "2026-08-23T17:51:54Z",
+  "generated": "2026-08-24T04:18:44Z",
   "season": 2026,
-  "eventCount": 85,
-  "sources": [],
+  "eventCount": 82,
+  "sources": [
+    "dtm",
+    "f1",
+    "f2",
+    "f3",
+    "fe",
+    "gtworld",
+    "imsa",
+    "indycar",
+    "iomtt",
+    "moto2",
+    "moto3",
+    "motogp",
+    "nascar",
+    "nls",
+    "superformula",
+    "wec",
+    "wsbk"
+  ],
   "events": [
-    {
-      "id": "imsa-2026-r09",
-      "seriesId": "imsa",
-      "eventName": "Michelin GT Challenge at VIR",
-      "round": 9,
-      "circuit": {
-        "name": "Virginia International Raceway",
-        "city": "Alton",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.5487,
-        "lng": -79.2082
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-21T17:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-22T15:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-23T18:30:00Z"
-        }
-      ],
-      "dateStart": "2026-08-21",
-      "dateEnd": "2026-08-23"
-    },
-    {
-      "id": "indycar-2026-r15",
-      "seriesId": "indycar",
-      "eventName": "Freedom 250 Grand Prix of Washington D.C.",
-      "round": 15,
-      "circuit": {
-        "name": "Streets of Washington D.C.",
-        "city": "Washington D.C.",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 38.9072,
-        "lng": -77.0369
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-08-21T17:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-08-22T14:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-23T15:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-23T18:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-21",
-      "dateEnd": "2026-08-23"
-    },
-    {
-      "id": "nascar-2026-r29",
-      "seriesId": "nascar",
-      "eventName": "Dollar Tree 301",
-      "round": 29,
-      "circuit": {
-        "name": "New Hampshire Motor Speedway",
-        "city": "Loudon",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 43.3628,
-        "lng": -71.4606
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-22T15:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-23T18:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-22",
-      "dateEnd": "2026-08-23"
-    },
     {
       "id": "moto3-2026-r13",
       "seriesId": "moto3",
@@ -596,6 +524,40 @@
       "dateEnd": "2026-09-06"
     },
     {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -632,40 +594,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",
