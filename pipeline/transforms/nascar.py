@@ -28,6 +28,14 @@ def transform(bronze_data: dict | list) -> list[dict]:
         race_time = _find_schedule_time(race, run_type=3, keywords=("race",))
         qualifying_time = _find_schedule_time(race, run_type=2, keywords=("qualif",))
 
+        # Duel/heat races (e.g. Daytona Duels) have no run_type=3 entry — the
+        # "Qualifying Race N" schedule item under run_type=2 IS the actual race.
+        # Without this, we'd fall back to the pre-race ceremony time as a fake
+        # "Race" session while also emitting the real race time as "Qualifying",
+        # putting qualifying after the race.
+        if not race_time and qualifying_time:
+            race_time, qualifying_time = qualifying_time, None
+
         # Fallback to the race-level fields only when schedule UTC entries are missing.
         race_date = race_time or race.get("date_scheduled") or race.get("race_date")
 

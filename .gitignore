@@ -34,8 +34,15 @@ __pycache__/
 .turbo/
 data/bronze/
 
+# Local docs scratchpads
+docs/ignore/
+
 # Beads / Dolt files (added by bd init)
 .dolt/
 .beads/
 *.db
 .beads-credential-key
+
+# Beads / Dolt files (added by bd init)
+.beads/proxieddb/
+*.gate.lock*

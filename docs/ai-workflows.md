@@ -10,6 +10,7 @@ AI configuration is layered from always-loaded to on-demand:
 2. **Auto-triggered skills** — `.github/skills/<name>/SKILL.md`. Domain knowledge that loads when the task matches the skill's USE FOR triggers. `.claude/skills` is a symlink to `.github/skills`, so Claude Code and Copilot share one set.
 3. **User-invoked commands** — `.claude/commands/` (Claude slash commands) and `.github/prompts/` (Copilot prompts). Workflow orchestration: ordered steps, commands to run, `bd` bookkeeping. They reference skills instead of restating knowledge.
 4. **Agent personas** — `.github/agents/*.agent.md`. Lean role + tool constraints; they rely on skills for domain knowledge.
+5. **Skill evals** — `evals/<skill-or-agent>/` ([waza](https://github.com/microsoft/waza), pinned 0.38.0). Measures the layers above: `waza check` scores skill frontmatter (all four at **High**, ≤500 tokens), `waza run` executes trap-based eval suites (mock executor in CI via `.github/workflows/skill-evals.yml`, real models via copilot-sdk locally), and the workflow-router agent eval enforces its `tools:` constraint with a `tool_constraint` grader. Results in `docs/waza-results/`.
 
 > **Warning:** never place a `SKILL.md` in the same directory as an `.agent.md` — the `SKILL.md` takes priority and tooling (e.g. waza) ignores the agent. Skills live in their own folders under `.github/skills/`.
 
