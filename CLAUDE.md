@@ -114,6 +114,6 @@ uv run python -m pipeline --series f1,motogp   # specific series
 - `docs/feature-ideas.md` — feature brainstorm with complexity ratings
 - `docs/data-sources/` — per-series API research
 - `docs/ai-workflows.md` — Claude/Copilot workflow map and layer model
-- `worknotes.md` — current status and open questions
+- current status and open work — see `bd list` / `bd ready`
 
 When adding a new page, also add it to `Nav.astro` and update the Directory Map above.

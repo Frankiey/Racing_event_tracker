@@ -602,6 +602,7 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
               data-series={event.seriesId}
               class="event-card-wrapper"
               data-race-utc={getRaceSession(event.sessions)?.startTimeUTC ?? ''}
+              data-date-start={event.dateStart}
             >
               <EventCard
                 event={event}

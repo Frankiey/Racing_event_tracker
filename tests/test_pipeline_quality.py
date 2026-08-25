@@ -9,6 +9,7 @@ from pipeline.transforms import motogp as motogp_transform
 from pipeline.transforms import moto_support_api as moto_support_transform
 from pipeline.transforms import nascar as nascar_transform
 from pipeline.transforms import f1 as f1_transform
+from pipeline.transforms import wsbk as wsbk_transform
 from pipeline.transforms.gold import build_calendar, build_upcoming
 from pipeline.validate import validate_event, validate_file
 
@@ -229,6 +230,126 @@ class SeriesTransformTests(unittest.TestCase):
                 {"type": "Race", "startTimeUTC": "2026-04-26T19:00:00Z"},
             ],
         )
+
+
+class WSBKTransformTests(unittest.TestCase):
+    """Tests for pipeline/transforms/wsbk.py — WorldSBK bronze → silver transform."""
+
+    def test_transform_api_maps_sessions_from_pulselive_shape(self):
+        bronze_events = [
+            {
+                "name": "ARUBA.IT RACE ITALY",
+                "short_name": "ITA",
+                "date_start": "2026-05-08",
+                "date_end": "2026-05-10",
+                "country": {"iso": "IT"},
+                "circuit": {
+                    "name": "Misano World Circuit",
+                    "place": "Misano Adriatico",
+                    "nation": "ITA",
+                    "lat": 43.9,
+                    "lng": 12.68,
+                },
+                "sessions": [
+                    {"type": "FP1", "date": "2026-05-08T09:00:00Z"},
+                    {"type": "SUP", "date": "2026-05-09T11:00:00Z"},
+                    {"type": "RAC1", "date": "2026-05-09T14:00:00Z"},
+                    {"type": "RAC2", "date": "2026-05-10T14:00:00Z"},
+                ],
+            }
+        ]
+
+        events = wsbk_transform.transform(bronze_events)
+
+        self.assertEqual(len(events), 1)
+        event = events[0]
+        self.assertEqual(event["seriesId"], "wsbk")
+        self.assertEqual(event["circuit"]["name"], "Misano World Circuit")
+        self.assertEqual(event["circuit"]["countryCode"], "IT")
+        self.assertEqual(
+            event["sessions"],
+            [
+                {"type": "Practice 1", "startTimeUTC": "2026-05-08T09:00:00Z"},
+                {"type": "Superpole", "startTimeUTC": "2026-05-09T11:00:00Z"},
+                {"type": "Race 1", "startTimeUTC": "2026-05-09T14:00:00Z"},
+                {"type": "Race 2", "startTimeUTC": "2026-05-10T14:00:00Z"},
+            ],
+        )
+        self.assertEqual(event["dateStart"], "2026-05-08")
+        self.assertEqual(event["dateEnd"], "2026-05-10")
+
+    def test_transform_api_falls_back_to_single_race_session(self):
+        bronze_events = [
+            {
+                "name": "ROUND WITHOUT SCHEDULE",
+                "short_name": "TBD",
+                "date_start": "2026-06-12",
+                "date_end": "2026-06-14T14:00:00Z",
+                "country": {"iso": "FR"},
+                "circuit": {
+                    "name": "Circuit Paul Ricard",
+                    "place": "Le Castellet",
+                    "nation": "FRA",
+                },
+                # No "sessions" key present at all.
+            }
+        ]
+
+        events = wsbk_transform.transform(bronze_events)
+
+        self.assertEqual(len(events), 1)
+        self.assertEqual(
+            events[0]["sessions"],
+            [{"type": "Race 1", "startTimeUTC": "2026-06-14T14:00:00Z"}],
+        )
+
+    def test_transform_api_filters_out_test_events(self):
+        bronze_events = [
+            {
+                "name": "PRE-SEASON TEST",
+                "test": True,
+                "date_start": "2026-01-20",
+                "date_end": "2026-01-20T10:00:00Z",
+                "country": {"iso": "ES"},
+                "circuit": {"name": "Jerez", "place": "Jerez", "nation": "ESP"},
+            },
+            {
+                "name": "REAL ROUND",
+                "test": False,
+                "date_start": "2026-05-08",
+                "date_end": "2026-05-10T14:00:00Z",
+                "country": {"iso": "IT"},
+                "circuit": {"name": "Misano", "place": "Misano", "nation": "ITA"},
+            },
+        ]
+
+        events = wsbk_transform.transform(bronze_events)
+
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["eventName"], "REAL ROUND")
+        # The surviving event is still numbered round 1, not round 2.
+        self.assertEqual(events[0]["round"], 1)
+
+    def test_transform_passes_through_seed_data_unchanged(self):
+        seed_events = [
+            {
+                "id": "wsbk-2026-r01",
+                "seriesId": "wsbk",
+                "eventName": "Seed Round",
+                "round": 1,
+                "circuit": {"name": "Phillip Island", "city": "Phillip Island", "country": "Australia", "countryCode": "AU"},
+                "sessions": [{"type": "Race 1", "startTimeUTC": "2026-02-22T05:00:00Z"}],
+                "dateStart": "2026-02-20",
+                "dateEnd": "2026-02-22",
+            }
+        ]
+
+        events = wsbk_transform.transform(seed_events)
+
+        # Identity passthrough, not merely equal content: same list and same
+        # first element object, with no copying/reshaping performed.
+        self.assertIs(events, seed_events)
+        self.assertIs(events[0], seed_events[0])
 
 
 class F1TransformTests(unittest.TestCase):

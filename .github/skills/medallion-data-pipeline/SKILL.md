@@ -20,7 +20,7 @@ Python, managed with **uv** (never pip). Details: `docs/architecture.md`.
 2. **Silver** (`data/silver/`) — normalized per-series JSON, committed; built by `pipeline/transforms/` from bronze or seed files (`data/seed/`).
 3. **Gold** (`data/gold/`) — merged `calendar.json` / `upcoming.json` / `broadcasts.json`; what the frontend reads; built by `transforms/gold.py`.
 
-API-backed: F1, MotoGP, NASCAR, WSBK (seed fallback); everything else seed-only.
+API-backed: F1, MotoGP, Moto2, Moto3, NASCAR, WSBK (seed fallback on fetch failure). Everything else (`run.py`'s `SEED_SERIES`) is seed-only.
 
 ## Commands
 

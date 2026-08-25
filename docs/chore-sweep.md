@@ -43,7 +43,7 @@ Each report should return concrete files, suspected defects, blockers, and the s
 - Note blockers such as TypeScript / Astro peer constraints.
 
 2. Documentation
-- Check `README.md`, `docs/architecture.md`, `docs/data-sources/`, `worknotes.md`, and agent instructions.
+- Check `README.md`, `docs/architecture.md`, `docs/data-sources/`, and agent instructions.
 - Remove stale claims before adding new prose.
 - Keep project structure and feature lists aligned with the current tree.
 
@@ -71,5 +71,4 @@ If data files changed, rerun the pipeline before `npm run validate:data` when ne
 Before finishing:
 - close completed `bd` items
 - file `bd` follow-ups for anything deferred
-- update `worknotes.md` with pressing attentions
 - document any blocked commands or skipped validations clearly

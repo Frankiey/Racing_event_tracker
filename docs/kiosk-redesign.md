@@ -503,7 +503,7 @@ All changes confined to `src/pages/status.astro`, `src/components/LocalTime.astr
 ### Phase 4 — Smart Refresh
 - [x] Replace `setTimeout(reload)` with fetch-based soft refresh
 - [x] Add last-refreshed footer label
-- [ ] Test midnight boundary (data rolls over to next day's events)
+- [x] Test midnight boundary (data rolls over to next day's events)
 
 ---
 

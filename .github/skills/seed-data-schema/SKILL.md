@@ -4,7 +4,7 @@ description: >-
   Schema and editing rules for RaceTrack's manually curated seed JSON files.
   USE FOR: editing files under data/seed/, adding or correcting events,
   sessions, circuits, dates, or times for any seed-based series — all except
-  API-backed F1, MotoGP, NASCAR. DO NOT
+  API-backed F1, MotoGP, Moto2, Moto3, NASCAR, WSBK. DO NOT
   USE FOR: live-API fetcher changes under pipeline/ (medallion-data-pipeline
   skill), frontend work. INVOKES: medallion-data-pipeline for silver/gold
   rebuilds.
@@ -26,10 +26,11 @@ Seed files (`data/seed/<seriesId>.json`) are the source of truth for series with
     "countryCode": "de" },   // alpha-2 ONLY — alpha-3 = empty flag
   "sessions": [{ "type": "race", "startTimeUTC": "2026-05-10T13:00:00Z", "endTimeUTC": "…" }],
   "dateStart": "2026-05-08", // = first session date
-  "dateEnd": "2026-05-10",   // = last session date
-  "status": "upcoming"       // | live | completed | cancelled
+  "dateEnd": "2026-05-10"    // = last session date
 }
 ```
+
+No `status` field — real seed files don't carry one; status is derived downstream from dates, not stored in seed.
 
 ## Time rules
 
