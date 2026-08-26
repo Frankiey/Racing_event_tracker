@@ -6,6 +6,7 @@ import { countryFlag, formatDateRange, isPlaceholderTime } from '../lib/time';
 
 import type { EventFeed } from '../lib/types';
 import upcomingData from '../../data/gold/upcoming.json';
+import broadcastsData from '../../data/gold/broadcasts.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -35,6 +36,7 @@ const sidebarEvents = sorted
 <Layout title="RaceTrack — Kiosk" bare={true}>
   <script id="kiosk-data" type="application/json" set:html={JSON.stringify(sorted)} is:inline />
   <script id="kiosk-base" type="application/json" set:html={JSON.stringify(base)} is:inline />
+  <script id="kiosk-broadcasts" type="application/json" set:html={JSON.stringify(broadcastsData)} is:inline />
 
   <!-- Scanline overlay -->
   <div class="kiosk-scanlines fixed inset-0 z-0 pointer-events-none" />
@@ -133,12 +135,18 @@ const sidebarEvents = sorted
             >
               {nextEvent?.eventName ?? '—'}
             </h1>
+            <!-- Live session progress -->
+            <div id="kiosk-session-progress-wrap" class="hidden mb-3 h-1 max-w-md rounded-full bg-zinc-800/60 overflow-hidden">
+              <div id="kiosk-session-progress-bar" class="h-full rounded-full" style={`width: 0%; background: ${heroColor};`} />
+            </div>
             <p id="kiosk-circuit-name" class="text-base text-zinc-400 font-medium">
               {nextEvent?.circuit?.name}
               {nextEvent?.circuit?.city ? ` · ${nextEvent.circuit.city}` : ''}
             </p>
             <!-- Live elapsed -->
             <p id="kiosk-live-elapsed" class="hidden mt-2 text-sm font-medium" style={`color: ${heroColor};`}></p>
+            <!-- Broadcast info -->
+            <p id="kiosk-broadcast-info" class="hidden mt-2 text-xs text-zinc-500 font-medium"></p>
           </div>
           <!-- Flag -->
           <div
@@ -155,9 +163,9 @@ const sidebarEvents = sorted
         Race starts in
       </p>
 
-      <!-- Countdown — digit blocks -->
+      <!-- Countdown — digit blocks (days : hrs : min; seconds revive only in the final 10 min) -->
       <div id="kiosk-countdown" class="flex items-stretch gap-1 sm:gap-3 mb-10">
-        {(['days','hrs','min','sec'] as const).map(unit => (
+        {(['days','hrs','min'] as const).map((unit, i) => (
           <Fragment>
             <div class="kiosk-digit-block flex flex-col items-center justify-center rounded-xl sm:rounded-2xl px-2 py-2 sm:px-5 sm:py-4 min-w-[44px] sm:min-w-[80px]">
               <span
@@ -169,7 +177,7 @@ const sidebarEvents = sorted
               </span>
               <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-zinc-600 mt-1.5">{unit}</span>
             </div>
-            {unit !== 'sec' && (
+            {i < 2 && (
               <span
                 class="font-mono font-black text-zinc-800 self-center"
                 style="font-size: clamp(1.4rem, 4.5vw, 4rem); line-height: 1; margin-top: -0.5rem;"
@@ -179,6 +187,25 @@ const sidebarEvents = sorted
             )}
           </Fragment>
         ))}
+        <!-- Seconds — hidden outside the final 10 minutes before live; secondary/smaller styling -->
+        <div id="kiosk-cd-sec-group" class="hidden items-stretch gap-1 sm:gap-3">
+          <span
+            class="font-mono font-black text-zinc-800 self-center"
+            style="font-size: clamp(1.4rem, 4.5vw, 4rem); line-height: 1; margin-top: -0.5rem;"
+          >
+            :
+          </span>
+          <div class="kiosk-digit-block flex flex-col items-center justify-center self-end rounded-xl sm:rounded-2xl px-1.5 py-1.5 sm:px-3 sm:py-2.5 min-w-[32px] sm:min-w-[52px]">
+            <span
+              id="kiosk-cd-sec"
+              class="font-mono font-black tabular-nums text-zinc-400 leading-none block"
+              style="font-size: clamp(1.1rem, 4.5vw, 3rem);"
+            >
+              --
+            </span>
+            <span class="text-[7px] sm:text-[8px] uppercase tracking-[0.2em] text-zinc-700 mt-1">sec</span>
+          </div>
+        </div>
       </div>
 
       <!-- Rotation indicator -->
@@ -312,11 +339,24 @@ const sidebarEvents = sorted
     function getOrder(id: string) { const idx = SERIES_ORDER.indexOf(id); return idx >= 0 ? idx : 99; }
     function getShortLabel(id: string) { return SERIES_META[id]?.shortLabel ?? id; }
 
+    // ── Broadcast info (data/gold/broadcasts.json) ──────────────────────────
+    // Kiosk shows one configured region's channels under the hero event.
+    const KIOSK_BROADCAST_REGION = 'US';
+    type BroadcastEntry = { channel: string; type: string; note?: string };
+    type BroadcastsData = { regions: Record<string, unknown>; series: Record<string, Record<string, BroadcastEntry[]>> };
+    const broadcastsData: BroadcastsData = JSON.parse(document.getElementById('kiosk-broadcasts')!.textContent ?? '{"regions":{},"series":{}}');
+
+    function getBroadcastLine(seriesId: string): string | null {
+      const entries = broadcastsData.series?.[seriesId]?.[KIOSK_BROADCAST_REGION];
+      if (!entries || entries.length === 0) return null;
+      return entries.map(e => e.channel).join(' · ');
+    }
+
     // ── Constants ────────────────────────────────────────────────────────────
     // ── Auto-rotation ────────────────────────────────────────────────────────
     let rotationEvents: KioskEvent[] = [];
     let rotationIndex = 0;
-    const ROTATION_INTERVAL_MS = 20_000;
+    const ROTATION_INTERVAL_MS = 60_000;
     const ROTATION_POOL_SIZE = 5;
     const SIDEBAR_EVENT_COUNT = 8;
 
@@ -360,18 +400,55 @@ const sidebarEvents = sorted
     }
 
     // ── Countdown ────────────────────────────────────────────────────────────
+    // Normal cadence renders D:H:M once a minute; inside the final 10 minutes
+    // before an event goes live, seconds reappear and the render loop speeds
+    // up to once a second. Either way the displayed value is always computed
+    // fresh from Date.now() — never a locally-incrementing counter.
     let cdTargetMs: number | null = null;
+    const COUNTDOWN_FINAL_WINDOW_MS = 10 * 60_000;
+    const COUNTDOWN_SLOW_MS = 60_000;
+    const COUNTDOWN_FAST_MS = 1_000;
+    let countdownTimerId: number | null = null;
+    let countdownFast = false;
 
     function pad(n: number) { return String(Math.max(0, n)).padStart(2, '0'); }
 
+    function setSecondsVisible(visible: boolean) {
+      const group = document.getElementById('kiosk-cd-sec-group');
+      if (group) group.style.display = visible ? 'flex' : 'none';
+    }
+
+    // (re)schedules the countdown render loop at the given cadence. No-op if
+    // already running at that cadence, so calling this on every render doesn't
+    // churn the timer.
+    function scheduleCountdownTimer(fast: boolean) {
+      if (countdownTimerId !== null && fast === countdownFast) return;
+      if (countdownTimerId !== null) { window.clearInterval(countdownTimerId); countdownTimerId = null; }
+      countdownFast = fast;
+      countdownTimerId = window.setInterval(tickCountdown, fast ? COUNTDOWN_FAST_MS : COUNTDOWN_SLOW_MS);
+    }
+
     function tickCountdown() {
-      if (cdTargetMs === null) return;
+      if (cdTargetMs === null) {
+        setSecondsVisible(false);
+        scheduleCountdownTimer(false);
+        return;
+      }
       const diff = cdTargetMs - Date.now();
       const totalSec = Math.max(0, Math.floor(diff / 1000));
+      const inFinalWindow = diff > 0 && diff <= COUNTDOWN_FINAL_WINDOW_MS;
+
       setDigit('days', pad(Math.floor(totalSec / 86400)));
       setDigit('hrs', pad(Math.floor((totalSec % 86400) / 3600)));
       setDigit('min', pad(Math.floor((totalSec % 3600) / 60)));
-      setDigit('sec', pad(totalSec % 60));
+      setSecondsVisible(inFinalWindow);
+      if (inFinalWindow) setDigit('sec', pad(totalSec % 60));
+
+      scheduleCountdownTimer(inFinalWindow);
+    }
+
+    function stopCountdownTimer() {
+      if (countdownTimerId !== null) { window.clearInterval(countdownTimerId); countdownTimerId = null; }
     }
 
     function setDigit(unit: string, val: string) {
@@ -385,13 +462,26 @@ const sidebarEvents = sorted
     }
 
     // ── Clock ────────────────────────────────────────────────────────────────
+    // Corner clock — HH:MM only, updated once a minute (no seconds, no flash).
+    let clockTimerId: number | null = null;
+
     function updateClock() {
       const el = document.getElementById('kiosk-clock');
       if (!el) return;
       const now = new Date();
-      const time = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const time = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
       const date = now.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
       el.textContent = `${time}  ${date}`;
+    }
+
+    function startClockTimer() {
+      if (clockTimerId !== null) return;
+      updateClock();
+      clockTimerId = window.setInterval(updateClock, 60_000);
+    }
+
+    function stopClockTimer() {
+      if (clockTimerId !== null) { window.clearInterval(clockTimerId); clockTimerId = null; }
     }
 
     // ── LocalTime hydration ──────────────────────────────────────────────────
@@ -569,11 +659,52 @@ const sidebarEvents = sorted
         }
       }
 
+      // Force an immediate, accurate render + re-arm the countdown loop at the
+      // right cadence (fast in the final 10 min, slow otherwise) whenever the
+      // hero re-renders — don't wait for the next scheduled tick.
+      tickCountdown();
+
+      // Live session progress bar
+      renderSessionProgress(mode, liveSession, color);
+
+      // Broadcast info footer
+      const broadcastEl = document.getElementById('kiosk-broadcast-info');
+      if (broadcastEl) {
+        const line = getBroadcastLine(event.seriesId);
+        if (line) {
+          broadcastEl.textContent = `📺 ${line}`;
+          broadcastEl.style.display = '';
+        } else {
+          broadcastEl.textContent = '';
+          broadcastEl.style.display = 'none';
+        }
+      }
+
       // Rotation dots
       renderRotationDots(color, mode);
 
       // Session strip
       renderSessionStrip(event, color, now);
+    }
+
+    function renderSessionProgress(mode: KioskMode, liveSession: Session | null, color: string) {
+      const wrap = document.getElementById('kiosk-session-progress-wrap');
+      const bar = document.getElementById('kiosk-session-progress-bar');
+      if (!wrap || !bar) return;
+
+      if (mode !== 'live' || !liveSession) {
+        wrap.classList.add('hidden');
+        return;
+      }
+
+      const startMs = new Date(liveSession.startTimeUTC).getTime();
+      const endMs = getSessionEstimatedEndTime(liveSession);
+      const totalMs = endMs - startMs;
+      const pct = totalMs > 0 ? Math.min(100, Math.max(0, ((Date.now() - startMs) / totalMs) * 100)) : 0;
+
+      wrap.classList.remove('hidden');
+      (bar as HTMLElement).style.width = `${pct}%`;
+      (bar as HTMLElement).style.background = color;
     }
 
     function renderSessionStrip(event: KioskEvent, color: string, now: number) {
@@ -745,8 +876,10 @@ const sidebarEvents = sorted
     // ── Boot ─────────────────────────────────────────────────────────────────
     function init() {
       kioskScheduler?.stop();
+      stopClockTimer();
+      stopCountdownTimer();
       initLocalTimes();
-      updateKioskDisplay(allEvents);
+      updateKioskDisplay(allEvents); // also arms the countdown loop via tickCountdown()
       updateLastRefreshed();
       cachedFingerprint = `${allEvents.length}-${allEvents[0]?.id ?? ''}`;
 
@@ -756,8 +889,10 @@ const sidebarEvents = sorted
       kioskScheduler = createKioskScheduler({
         rotationIntervalMs: ROTATION_INTERVAL_MS,
         onSecondTick: () => {
-          tickCountdown();
-          updateClock();
+          // Countdown + clock run on their own (slower) timers — see
+          // scheduleCountdownTimer() / startClockTimer(). This 1s heartbeat is
+          // only for keeping the live-mode display (elapsed time, also-live
+          // chips, progress bar) fresh while a session is live.
           if (currentMode === 'live' || manualEventId) updateKioskDisplay(allEvents);
         },
         onModeRefresh: () => updateKioskDisplay(allEvents),
@@ -774,11 +909,15 @@ const sidebarEvents = sorted
       });
       kioskScheduler.start();
 
-      updateClock();
+      startClockTimer();
     }
 
     init();
-    document.addEventListener('astro:before-swap', () => kioskScheduler?.stop());
+    document.addEventListener('astro:before-swap', () => {
+      kioskScheduler?.stop();
+      stopClockTimer();
+      stopCountdownTimer();
+    });
     document.addEventListener('astro:after-swap', init);
   </script>
 </Layout>
