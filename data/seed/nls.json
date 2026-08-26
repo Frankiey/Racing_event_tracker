@@ -10,7 +10,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-03-14T07:30:00Z" },
@@ -30,7 +32,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-03-21T07:30:00Z" },
@@ -50,7 +54,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-04-11T06:30:00Z" },
@@ -70,7 +76,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying 1", "startTimeUTC": "2026-04-18T06:30:00Z" },
@@ -92,7 +100,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 25.378,
+      "lapRecord": { "time": "8:08.006", "driver": "Daniel Keilwitz", "car": "Ferrari 296 GT3", "year": 2023 }
     },
     "sessions": [
       { "type": "Qualifying 1", "startTimeUTC": "2026-05-14T11:15:00Z" },
@@ -118,7 +128,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-06-20T06:30:00Z" },
@@ -138,7 +150,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-08-01T06:30:00Z" },
@@ -158,7 +172,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying 1", "startTimeUTC": "2026-09-12T06:30:00Z" },
@@ -180,7 +196,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 20.832,
+      "lapRecord": { "time": "8:07.507", "driver": "Marc Lieb / Arno Klasen", "car": "Porsche 911 (997 II) GT3 R", "year": 2010 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-10-10T06:30:00Z" },

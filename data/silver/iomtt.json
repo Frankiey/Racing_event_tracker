@@ -10,7 +10,14 @@
       "country": "Isle of Man",
       "countryCode": "IM",
       "lat": 54.1857,
-      "lng": -4.5305
+      "lng": -4.5305,
+      "lengthKm": 60.72,
+      "lapRecord": {
+        "time": "16:36.114",
+        "driver": "Peter Hickman",
+        "car": "BMW M1000RR (Superstock)",
+        "year": 2023
+      }
     },
     "sessions": [
       {

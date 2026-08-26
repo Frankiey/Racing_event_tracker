@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-25T16:03:43Z",
+  "generated": "2026-08-26T09:17:18Z",
   "season": 2026,
   "eventCount": 252,
   "sources": [
@@ -33,7 +33,14 @@
         "country": "Brazil",
         "countryCode": "BR",
         "lat": -23.522,
-        "lng": -46.628
+        "lng": -46.628,
+        "lengthKm": 2.933,
+        "lapRecord": {
+          "time": "1:12.239",
+          "driver": "Norman Nato",
+          "car": "Nissan e-4ORCE 05",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -63,7 +70,14 @@
         "country": "Mexico",
         "countryCode": "MX",
         "lat": 19.4042,
-        "lng": -99.0907
+        "lng": -99.0907,
+        "lengthKm": 2.606,
+        "lapRecord": {
+          "time": "1:07.474",
+          "driver": "Jake Dennis",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -93,7 +107,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 29.1847,
-        "lng": -81.0717
+        "lng": -81.0717,
+        "lengthKm": 5.729,
+        "lapRecord": {
+          "time": "1:33.724",
+          "driver": "Álex Palou",
+          "car": "Cadillac DPi-V.R",
+          "year": 2022
+        }
       },
       "sessions": [
         {
@@ -249,7 +270,14 @@
         "country": "Saudi Arabia",
         "countryCode": "SA",
         "lat": 21.5169,
-        "lng": 39.1364
+        "lng": 39.1364,
+        "lengthKm": 3.001,
+        "lapRecord": {
+          "time": "1:15.653",
+          "driver": "Jake Dennis",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -279,7 +307,14 @@
         "country": "Saudi Arabia",
         "countryCode": "SA",
         "lat": 21.5169,
-        "lng": 39.1364
+        "lng": 39.1364,
+        "lengthKm": 3.001,
+        "lapRecord": {
+          "time": "1:15.653",
+          "driver": "Jake Dennis",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -545,7 +580,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 27.7676,
-        "lng": -82.6316
+        "lng": -82.6316,
+        "lengthKm": 2.897,
+        "lapRecord": {
+          "time": "1:00.6795",
+          "driver": "Josef Newgarden",
+          "car": "Dallara DW12",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -614,7 +656,14 @@
         "country": "Australia",
         "countryCode": "AU",
         "lat": -37.8497,
-        "lng": 144.968
+        "lng": 144.968,
+        "lengthKm": 5.278,
+        "lapRecord": {
+          "time": "1:19.813",
+          "driver": "Charles Leclerc",
+          "car": "Ferrari SF-24",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -648,7 +697,14 @@
         "country": "Australia",
         "countryCode": "AU",
         "lat": -37.8497,
-        "lng": 144.968
+        "lng": 144.968,
+        "lengthKm": 5.278,
+        "lapRecord": {
+          "time": "1:19.813",
+          "driver": "Charles Leclerc",
+          "car": "Ferrari SF-24",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -708,7 +764,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 33.5731,
-        "lng": -112.089
+        "lng": -112.089,
+        "lengthKm": 1.644,
+        "lapRecord": {
+          "time": "0:19.7379",
+          "driver": "Tony Kanaan",
+          "car": "Dallara DW12",
+          "year": 2016
+        }
       },
       "sessions": [
         {
@@ -777,7 +840,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -803,7 +873,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 32.7357,
-        "lng": -97.1081
+        "lng": -97.1081,
+        "lengthKm": 4.394,
+        "lapRecord": {
+          "time": "1:33.9902",
+          "driver": "Scott Dixon",
+          "car": "Dallara DW12",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -859,7 +936,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 27.4542,
-        "lng": -81.349
+        "lng": -81.349,
+        "lengthKm": 6.019,
+        "lapRecord": {
+          "time": "1:41.800",
+          "driver": "Kamui Kobayashi",
+          "car": "Toyota TS050 Hybrid",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -1031,7 +1115,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -1332,7 +1423,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 33.5394,
-        "lng": -86.6213
+        "lng": -86.6213,
+        "lengthKm": 3.83,
+        "lapRecord": {
+          "time": "1:06.8182",
+          "driver": "Pato O'Ward",
+          "car": "Dallara DW12",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -1392,7 +1490,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 36.5403,
-        "lng": 140.1947
+        "lng": 140.1947,
+        "lengthKm": 4.801,
+        "lapRecord": {
+          "time": "1:31.379",
+          "driver": "Sena Sakaguchi",
+          "car": "Dallara SF23",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -1426,7 +1531,14 @@
         "country": "France",
         "countryCode": "FR",
         "lat": 43.2506,
-        "lng": 5.7917
+        "lng": 5.7917,
+        "lengthKm": 5.842,
+        "lapRecord": {
+          "time": "1:32.740",
+          "driver": "Sebastian Vettel",
+          "car": "Ferrari SF90",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -1468,7 +1580,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -1566,7 +1685,14 @@
         "country": "Italy",
         "countryCode": "IT",
         "lat": 44.3439,
-        "lng": 11.7167
+        "lng": 11.7167,
+        "lengthKm": 4.909,
+        "lapRecord": {
+          "time": "1:15.484",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W11 EQ Performance",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -1604,7 +1730,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 33.7623,
-        "lng": -118.1876
+        "lng": -118.1876,
+        "lengthKm": 3.167,
+        "lapRecord": {
+          "time": "1:07.2359",
+          "driver": "Álex Palou",
+          "car": "Dallara DW12",
+          "year": 2022
+        }
       },
       "sessions": [
         {
@@ -1634,7 +1767,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 33.7623,
-        "lng": -118.1876
+        "lng": -118.1876,
+        "lengthKm": 3.167,
+        "lapRecord": {
+          "time": "1:07.2359",
+          "driver": "Álex Palou",
+          "car": "Dallara DW12",
+          "year": 2022
+        }
       },
       "sessions": [
         {
@@ -1668,7 +1808,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -1862,7 +2009,14 @@
         "country": "Austria",
         "countryCode": "AT",
         "lat": 47.2197,
-        "lng": 14.7647
+        "lng": 14.7647,
+        "lengthKm": 4.326,
+        "lapRecord": {
+          "time": "1:07.924",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -1904,7 +2058,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 33.0633,
-        "lng": 131.0747
+        "lng": 131.0747,
+        "lengthKm": 4.673,
+        "lapRecord": {
+          "time": "1:26.960",
+          "driver": "Naoki Yamamoto",
+          "car": "Dallara SF19",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -2006,7 +2167,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 25.9581,
-        "lng": -80.2389
+        "lng": -80.2389,
+        "lengthKm": 5.412,
+        "lapRecord": {
+          "time": "1:29.708",
+          "driver": "Max Verstappen",
+          "car": "Red Bull Racing RB19",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -2040,7 +2208,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 52.4727,
-        "lng": 13.4039
+        "lng": 13.4039,
+        "lengthKm": 2.343,
+        "lapRecord": {
+          "time": "0:58.648",
+          "driver": "Pascal Wehrlein",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -2113,7 +2288,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 36.5841,
-        "lng": -121.7544
+        "lng": -121.7544,
+        "lengthKm": 3.602,
+        "lapRecord": {
+          "time": "1:14.196",
+          "driver": "Sébastien Bourdais",
+          "car": "Cadillac V-Series.R (LMDh)",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -2143,7 +2325,14 @@
         "country": "Great Britain",
         "countryCode": "GB",
         "lat": 51.3569,
-        "lng": 0.2631
+        "lng": 0.2631,
+        "lengthKm": 3.916,
+        "lapRecord": {
+          "time": "1:12.276",
+          "driver": "Adam Carroll",
+          "car": "A1GP Ferrari",
+          "year": 2009
+        }
       },
       "sessions": [
         {
@@ -2211,7 +2400,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 52.4727,
-        "lng": 13.4039
+        "lng": 13.4039,
+        "lengthKm": 2.343,
+        "lapRecord": {
+          "time": "0:58.648",
+          "driver": "Pascal Wehrlein",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -2375,7 +2571,14 @@
         "country": "Belgium",
         "countryCode": "BE",
         "lat": 50.4372,
-        "lng": 5.9714
+        "lng": 5.9714,
+        "lengthKm": 7.004,
+        "lapRecord": {
+          "time": "1:44.701",
+          "driver": "Sergio Pérez",
+          "car": "Red Bull Racing RB20",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -2413,7 +2616,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 39.7955,
-        "lng": -86.2347
+        "lng": -86.2347,
+        "lengthKm": 3.925,
+        "lapRecord": {
+          "time": "1:09.3888",
+          "driver": "Josef Newgarden",
+          "car": "Dallara DW12",
+          "year": 2017
+        }
       },
       "sessions": [
         {
@@ -2469,7 +2679,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 39.7955,
-        "lng": -86.2347
+        "lng": -86.2347,
+        "lengthKm": 4.023,
+        "lapRecord": {
+          "time": "0:37.895",
+          "driver": "Arie Luyendyk",
+          "car": "Reynard 95I-Ford Cosworth",
+          "year": 1996
+        }
       },
       "sessions": [
         {
@@ -2515,7 +2732,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 25.378,
+        "lapRecord": {
+          "time": "8:08.006",
+          "driver": "Daniel Keilwitz",
+          "car": "Ferrari 296 GT3",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -2749,7 +2973,14 @@
         "country": "Monaco",
         "countryCode": "MC",
         "lat": 43.7347,
-        "lng": 7.4206
+        "lng": 7.4206,
+        "lengthKm": 3.337,
+        "lapRecord": {
+          "time": "1:12.909",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -2809,7 +3040,14 @@
         "country": "Monaco",
         "countryCode": "MC",
         "lat": 43.7347,
-        "lng": 7.4206
+        "lng": 7.4206,
+        "lengthKm": 3.337,
+        "lapRecord": {
+          "time": "1:12.909",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -2839,7 +3077,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 34.8431,
-        "lng": 136.5407
+        "lng": 136.5407,
+        "lengthKm": 5.807,
+        "lapRecord": {
+          "time": "1:30.965",
+          "driver": "Andrea Kimi Antonelli",
+          "car": "Mercedes AMG W16",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -2873,7 +3118,14 @@
         "country": "Netherlands",
         "countryCode": "NL",
         "lat": 52.3888,
-        "lng": 4.5409
+        "lng": 4.5409,
+        "lengthKm": 4.259,
+        "lapRecord": {
+          "time": "1:11.097",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -2980,7 +3232,14 @@
         "country": "Isle of Man",
         "countryCode": "IM",
         "lat": 54.1857,
-        "lng": -4.5305
+        "lng": -4.5305,
+        "lengthKm": 60.72,
+        "lapRecord": {
+          "time": "16:36.114",
+          "driver": "Peter Hickman",
+          "car": "BMW M1000RR (Superstock)",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -3242,7 +3501,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 42.3314,
-        "lng": -83.0458
+        "lng": -83.0458,
+        "lengthKm": 2.647,
+        "lapRecord": {
+          "time": "1:01.9410",
+          "driver": "Kyle Kirkwood",
+          "car": "Dallara DW12",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -3272,7 +3538,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 42.3293,
-        "lng": -83.0458
+        "lng": -83.0458,
+        "lengthKm": 2.647,
+        "lapRecord": {
+          "time": "1:01.9410",
+          "driver": "Kyle Kirkwood",
+          "car": "Dallara DW12",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -3306,7 +3579,14 @@
         "country": "Italy",
         "countryCode": "IT",
         "lat": 45.6156,
-        "lng": 9.2811
+        "lng": 9.2811,
+        "lengthKm": 5.793,
+        "lapRecord": {
+          "time": "1:20.901",
+          "driver": "Lando Norris",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -3366,7 +3646,14 @@
         "country": "Monaco",
         "countryCode": "MC",
         "lat": 43.7347,
-        "lng": 7.4206
+        "lng": 7.4206,
+        "lengthKm": 3.337,
+        "lapRecord": {
+          "time": "1:12.909",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -3442,7 +3729,14 @@
         "country": "Monaco",
         "countryCode": "MC",
         "lat": 43.7347,
-        "lng": 7.4206
+        "lng": 7.4206,
+        "lengthKm": 3.337,
+        "lapRecord": {
+          "time": "1:12.909",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -3633,7 +3927,14 @@
         "country": "France",
         "countryCode": "FR",
         "lat": 47.9562,
-        "lng": 0.2075
+        "lng": 0.2075,
+        "lengthKm": 13.626,
+        "lapRecord": {
+          "time": "3:17.297",
+          "driver": "Mike Conway",
+          "car": "Toyota TS050 Hybrid (LMP1)",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -3683,7 +3984,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 38.6459,
-        "lng": -90.1363
+        "lng": -90.1363,
+        "lengthKm": 2.012,
+        "lapRecord": {
+          "time": "0:24.6317",
+          "driver": "Josef Newgarden",
+          "car": "Dallara DW12",
+          "year": 2017
+        }
       },
       "sessions": [
         {
@@ -3713,7 +4021,14 @@
         "country": "Spain",
         "countryCode": "ES",
         "lat": 41.57,
-        "lng": 2.2611
+        "lng": 2.2611,
+        "lengthKm": 4.657,
+        "lapRecord": {
+          "time": "1:15.743",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -3747,7 +4062,14 @@
         "country": "Spain",
         "countryCode": "ES",
         "lat": 41.57,
-        "lng": 2.2611
+        "lng": 2.2611,
+        "lengthKm": 4.657,
+        "lapRecord": {
+          "time": "1:15.743",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -4026,7 +4348,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 51.5233,
-        "lng": 13.9361
+        "lng": 13.9361,
+        "lengthKm": 4.345,
+        "lapRecord": {
+          "time": "1:32.059",
+          "driver": "Scott Mansell",
+          "car": "Benetton B197 (EuroBOSS)",
+          "year": 2004
+        }
       },
       "sessions": [
         {
@@ -4068,7 +4397,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 43.7978,
-        "lng": -87.9893
+        "lng": -87.9893,
+        "lengthKm": 6.515,
+        "lapRecord": {
+          "time": "1:49.676",
+          "driver": "Filipe Albuquerque",
+          "car": "Acura ARX-06 (LMDh)",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -4102,7 +4438,14 @@
         "country": "China",
         "countryCode": "CN",
         "lat": 18.2528,
-        "lng": 109.5119
+        "lng": 109.5119,
+        "lengthKm": 2.52,
+        "lapRecord": {
+          "time": "1:08.455",
+          "driver": "Nyck de Vries",
+          "car": "Mahindra M12Electro",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -4132,7 +4475,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -4184,7 +4534,14 @@
         "country": "Belgium",
         "countryCode": "BE",
         "lat": 50.4372,
-        "lng": 5.9714
+        "lng": 5.9714,
+        "lengthKm": 7.004,
+        "lapRecord": {
+          "time": "1:44.701",
+          "driver": "Sergio Pérez",
+          "car": "Red Bull Racing RB20",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -4246,7 +4603,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 42.3369,
-        "lng": -76.9271
+        "lng": -76.9271,
+        "lengthKm": 5.552,
+        "lapRecord": {
+          "time": "1:29.657",
+          "driver": "Olivier Pla",
+          "car": "Mazda RT24-P (DPi)",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -4280,7 +4644,14 @@
         "country": "Austria",
         "countryCode": "AT",
         "lat": 47.2197,
-        "lng": 14.7647
+        "lng": 14.7647,
+        "lengthKm": 4.326,
+        "lapRecord": {
+          "time": "1:07.924",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -4398,7 +4769,14 @@
         "country": "Austria",
         "countryCode": "AT",
         "lat": 47.2197,
-        "lng": 14.7647
+        "lng": 14.7647,
+        "lengthKm": 4.326,
+        "lapRecord": {
+          "time": "1:07.924",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -4547,7 +4925,14 @@
         "country": "China",
         "countryCode": "CN",
         "lat": 31.2304,
-        "lng": 121.4737
+        "lng": 121.4737,
+        "lengthKm": 3.051,
+        "lapRecord": {
+          "time": "1:10.564",
+          "driver": "Nick Cassidy",
+          "car": "Jaguar I-Type 7",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -4581,7 +4966,14 @@
         "country": "United Kingdom",
         "countryCode": "GB",
         "lat": 52.0786,
-        "lng": -1.0169
+        "lng": -1.0169,
+        "lengthKm": 5.891,
+        "lapRecord": {
+          "time": "1:27.097",
+          "driver": "Max Verstappen",
+          "car": "Red Bull RB16",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -4615,7 +5007,14 @@
         "country": "United Kingdom",
         "countryCode": "GB",
         "lat": 52.0786,
-        "lng": -1.0169
+        "lng": -1.0169,
+        "lengthKm": 5.891,
+        "lapRecord": {
+          "time": "1:27.097",
+          "driver": "Max Verstappen",
+          "car": "Red Bull RB16",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -4649,7 +5048,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 49.4478,
-        "lng": 11.0553
+        "lng": 11.0553,
+        "lengthKm": 2.3,
+        "lapRecord": {
+          "time": "0:46.618",
+          "driver": "Nico Müller",
+          "car": "Audi RS5 Turbo DTM",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -4730,7 +5136,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 40.6828,
-        "lng": -82.6368
+        "lng": -82.6368,
+        "lengthKm": 3.634,
+        "lapRecord": {
+          "time": "1:10.034",
+          "driver": "Marco Werner",
+          "car": "Audi R10 TDI (LMP1)",
+          "year": 2008
+        }
       },
       "sessions": [
         {
@@ -4790,7 +5203,14 @@
         "country": "China",
         "countryCode": "CN",
         "lat": 31.2304,
-        "lng": 121.4737
+        "lng": 121.4737,
+        "lengthKm": 3.051,
+        "lapRecord": {
+          "time": "1:10.564",
+          "driver": "Nick Cassidy",
+          "car": "Jaguar I-Type 7",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -5000,7 +5420,14 @@
         "country": "Brazil",
         "countryCode": "BR",
         "lat": -23.7014,
-        "lng": -46.6969
+        "lng": -46.6969,
+        "lengthKm": 4.309,
+        "lapRecord": {
+          "time": "1:10.540",
+          "driver": "Valtteri Bottas",
+          "car": "Mercedes AMG F1 W09 EQ Power+",
+          "year": 2018
+        }
       },
       "sessions": [
         {
@@ -5038,7 +5465,14 @@
         "country": "Canada",
         "countryCode": "CA",
         "lat": 43.9444,
-        "lng": -78.6733
+        "lng": -78.6733,
+        "lengthKm": 3.957,
+        "lapRecord": {
+          "time": "1:05.823",
+          "driver": "Marco Werner",
+          "car": "Audi R10 TDI (LMP1)",
+          "year": 2008
+        }
       },
       "sessions": [
         {
@@ -5094,7 +5528,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 35.3717,
-        "lng": 138.9258
+        "lng": 138.9258,
+        "lengthKm": 4.563,
+        "lapRecord": {
+          "time": "1:21.391",
+          "driver": "Nirei Fukuzumi",
+          "car": "Dallara SF19",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -5128,7 +5569,14 @@
         "country": "Belgium",
         "countryCode": "BE",
         "lat": 50.4372,
-        "lng": 5.9714
+        "lng": 5.9714,
+        "lengthKm": 7.004,
+        "lapRecord": {
+          "time": "1:44.701",
+          "driver": "Sergio Pérez",
+          "car": "Red Bull Racing RB20",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -5162,7 +5610,14 @@
         "country": "Belgium",
         "countryCode": "BE",
         "lat": 50.4372,
-        "lng": 5.9714
+        "lng": 5.9714,
+        "lengthKm": 7.004,
+        "lapRecord": {
+          "time": "1:44.701",
+          "driver": "Sergio Pérez",
+          "car": "Red Bull Racing RB20",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -5235,7 +5690,14 @@
         "country": "Italy",
         "countryCode": "IT",
         "lat": 43.9628,
-        "lng": 12.6836
+        "lng": 12.6836,
+        "lengthKm": 4.226,
+        "lapRecord": {
+          "time": "1:20.042",
+          "driver": "Haralds Šlēgelmilhs",
+          "car": "Dallara T12 (BOSS GP/Formula Renault 3.5)",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -5285,7 +5747,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 36.2058,
-        "lng": -86.0829
+        "lng": -86.0829,
+        "lengthKm": 2.14,
+        "lapRecord": {
+          "time": "0:22.9685",
+          "driver": "Sam Hornish Jr.",
+          "car": "Dallara IR-02",
+          "year": 2003
+        }
       },
       "sessions": [
         {
@@ -5341,7 +5810,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 35.6762,
-        "lng": 139.6503
+        "lng": 139.6503,
+        "lengthKm": 2.575,
+        "lapRecord": {
+          "time": "1:13.251",
+          "driver": "Dan Ticktum",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -5375,7 +5851,14 @@
         "country": "Hungary",
         "countryCode": "HU",
         "lat": 47.5789,
-        "lng": 19.2486
+        "lng": 19.2486,
+        "lengthKm": 4.381,
+        "lapRecord": {
+          "time": "1:16.627",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W11 EQ Performance",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -5409,7 +5892,14 @@
         "country": "Hungary",
         "countryCode": "HU",
         "lat": 47.5789,
-        "lng": 19.2486
+        "lng": 19.2486,
+        "lengthKm": 4.381,
+        "lapRecord": {
+          "time": "1:16.627",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W11 EQ Performance",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -5443,7 +5933,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 52.0278,
-        "lng": 11.2794
+        "lng": 11.2794,
+        "lengthKm": 3.696,
+        "lapRecord": {
+          "time": "1:18.846",
+          "driver": "Sergey Afanasyev",
+          "car": "Lola B05/52 (Auto GP)",
+          "year": 2011
+        }
       },
       "sessions": [
         {
@@ -5550,7 +6047,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 35.6762,
-        "lng": 139.6503
+        "lng": 139.6503,
+        "lengthKm": 2.575,
+        "lapRecord": {
+          "time": "1:13.251",
+          "driver": "Dan Ticktum",
+          "car": "Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -5580,7 +6084,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 43.7975,
-        "lng": -87.99
+        "lng": -87.99,
+        "lengthKm": 6.515,
+        "lapRecord": {
+          "time": "1:49.676",
+          "driver": "Filipe Albuquerque",
+          "car": "Acura ARX-06 (LMDh)",
+          "year": 2023
+        }
       },
       "sessions": [
         {
@@ -5614,7 +6125,14 @@
         "country": "France",
         "countryCode": "FR",
         "lat": 46.8642,
-        "lng": 3.1636
+        "lng": 3.1636,
+        "lengthKm": 4.411,
+        "lapRecord": {
+          "time": "1:15.377",
+          "driver": "Michael Schumacher",
+          "car": "Ferrari F2004",
+          "year": 2004
+        }
       },
       "sessions": [
         {
@@ -5664,7 +6182,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -5824,7 +6349,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 45.5949,
-        "lng": -122.6894
+        "lng": -122.6894,
+        "lengthKm": 3.166,
+        "lapRecord": {
+          "time": "0:58.7403",
+          "driver": "Carlos Muñoz",
+          "car": "Dallara DW12",
+          "year": 2018
+        }
       },
       "sessions": [
         {
@@ -5858,7 +6390,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 38.14,
-        "lng": 140.7197
+        "lng": 140.7197,
+        "lengthKm": 3.704,
+        "lapRecord": {
+          "time": "1:06.350",
+          "driver": "Nick Cassidy",
+          "car": "Dallara SF19",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -5914,7 +6453,14 @@
         "country": "United Kingdom",
         "countryCode": "GB",
         "lat": 51.5087,
-        "lng": 0.0317
+        "lng": 0.0317,
+        "lengthKm": 2.086,
+        "lapRecord": {
+          "time": "1:08.135",
+          "driver": "Dan Ticktum",
+          "car": "Cupra Kiro-Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -5948,7 +6494,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 5.148,
+        "lapRecord": {
+          "time": "1:28.139",
+          "driver": "Max Verstappen",
+          "car": "Red Bull Racing RB16",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -5990,7 +6543,8 @@
         "country": "Canada",
         "countryCode": "CA",
         "lat": 43.8561,
-        "lng": -79.337
+        "lng": -79.337,
+        "lengthKm": 3.52
       },
       "sessions": [
         {
@@ -6050,7 +6604,14 @@
         "country": "United Kingdom",
         "countryCode": "GB",
         "lat": 51.5087,
-        "lng": 0.0317
+        "lng": 0.0317,
+        "lengthKm": 2.086,
+        "lapRecord": {
+          "time": "1:08.135",
+          "driver": "Dan Ticktum",
+          "car": "Cupra Kiro-Porsche 99X Electric",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -6119,7 +6680,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 36.5487,
-        "lng": -79.2082
+        "lng": -79.2082,
+        "lengthKm": 5.262,
+        "lapRecord": {
+          "time": "1:36.112",
+          "driver": "Lucas Luhr",
+          "car": "HPD ARX-03a (LMP1)",
+          "year": 2012
+        }
       },
       "sessions": [
         {
@@ -6149,7 +6717,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 38.9072,
-        "lng": -77.0369
+        "lng": -77.0369,
+        "lengthKm": 2.736,
+        "lapRecord": {
+          "time": "0:57.9495",
+          "driver": "Will Power",
+          "car": "Dallara DW12",
+          "year": 2026
+        }
       },
       "sessions": [
         {
@@ -6369,7 +6944,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 5.148,
+        "lapRecord": {
+          "time": "1:28.139",
+          "driver": "Max Verstappen",
+          "car": "Red Bull Racing RB16",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -6403,7 +6985,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 43.0469,
-        "lng": -88.0373
+        "lng": -88.0373,
+        "lengthKm": 1.633,
+        "lapRecord": {
+          "time": "0:21.519",
+          "driver": "Scott Pruett",
+          "car": "Reynard 97I",
+          "year": 1998
+        }
       },
       "sessions": [
         {
@@ -6433,7 +7022,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 43.0469,
-        "lng": -88.0373
+        "lng": -88.0373,
+        "lengthKm": 1.633,
+        "lapRecord": {
+          "time": "0:21.519",
+          "driver": "Scott Pruett",
+          "car": "Reynard 97I",
+          "year": 1998
+        }
       },
       "sessions": [
         {
@@ -6459,7 +7055,14 @@
         "country": "Italy",
         "countryCode": "IT",
         "lat": 45.6156,
-        "lng": 9.2811
+        "lng": 9.2811,
+        "lengthKm": 5.793,
+        "lapRecord": {
+          "time": "1:20.901",
+          "driver": "Lando Norris",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -6493,7 +7096,14 @@
         "country": "Italy",
         "countryCode": "IT",
         "lat": 45.6156,
-        "lng": 9.2811
+        "lng": 9.2811,
+        "lengthKm": 5.793,
+        "lapRecord": {
+          "time": "1:20.901",
+          "driver": "Lando Norris",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -6612,7 +7222,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 30.1328,
-        "lng": -97.6411
+        "lng": -97.6411,
+        "lengthKm": 5.513,
+        "lapRecord": {
+          "time": "1:36.169",
+          "driver": "Charles Leclerc",
+          "car": "Ferrari SF90",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -6650,7 +7267,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 36.5841,
-        "lng": -121.7534
+        "lng": -121.7534,
+        "lengthKm": 3.602,
+        "lapRecord": {
+          "time": "1:14.196",
+          "driver": "Sébastien Bourdais",
+          "car": "Cadillac V-Series.R (LMDh)",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -6912,7 +7536,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.7897,
-        "lng": 12.6869
+        "lng": 12.6869,
+        "lengthKm": 3.671,
+        "lapRecord": {
+          "time": "1:13.714",
+          "driver": "Frédéric Vervisch",
+          "car": "Dallara F306 (Formula Three)",
+          "year": 2008
+        }
       },
       "sessions": [
         {
@@ -6993,7 +7624,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -7053,7 +7691,14 @@
         "country": "Netherlands",
         "countryCode": "NL",
         "lat": 52.3888,
-        "lng": 4.5409
+        "lng": 4.5409,
+        "lengthKm": 4.259,
+        "lapRecord": {
+          "time": "1:11.097",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W12 E Performance",
+          "year": 2021
+        }
       },
       "sessions": [
         {
@@ -7237,7 +7882,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 39.795,
-        "lng": -86.2352
+        "lng": -86.2352,
+        "lengthKm": 4.023,
+        "lapRecord": {
+          "time": "0:37.895",
+          "driver": "Arie Luyendyk",
+          "car": "Reynard 95I-Ford Cosworth",
+          "year": 1996
+        }
       },
       "sessions": [
         {
@@ -7332,7 +7984,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 35.3725,
-        "lng": 138.9275
+        "lng": 138.9275,
+        "lengthKm": 4.563,
+        "lapRecord": {
+          "time": "1:21.391",
+          "driver": "Nirei Fukuzumi",
+          "car": "Dallara SF19",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -7370,7 +8029,14 @@
         "country": "Azerbaijan",
         "countryCode": "AZ",
         "lat": 40.3725,
-        "lng": 49.8533
+        "lng": 49.8533,
+        "lengthKm": 6.003,
+        "lapRecord": {
+          "time": "1:43.009",
+          "driver": "Charles Leclerc",
+          "car": "Ferrari SF90",
+          "year": 2019
+        }
       },
       "sessions": [
         {
@@ -7476,7 +8142,14 @@
         "country": "United States",
         "countryCode": "US",
         "lat": 34.1497,
-        "lng": -83.8157
+        "lng": -83.8157,
+        "lengthKm": 4.088,
+        "lapRecord": {
+          "time": "1:07.056",
+          "driver": "Christian Klien",
+          "car": "Peugeot 908 HDi FAP (LMP1)",
+          "year": 2008
+        }
       },
       "sessions": [
         {
@@ -7683,7 +8356,14 @@
         "country": "Spain",
         "countryCode": "ES",
         "lat": 41.57,
-        "lng": 2.2611
+        "lng": 2.2611,
+        "lengthKm": 4.657,
+        "lapRecord": {
+          "time": "1:15.743",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -7733,7 +8413,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 49.3278,
-        "lng": 8.5656
+        "lng": 8.5656,
+        "lengthKm": 4.574,
+        "lapRecord": {
+          "time": "1:13.780",
+          "driver": "Kimi Räikkönen",
+          "car": "McLaren MP4-19B",
+          "year": 2004
+        }
       },
       "sessions": [
         {
@@ -7797,7 +8484,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 35.3717,
-        "lng": 138.9258
+        "lng": 138.9258,
+        "lengthKm": 4.563,
+        "lapRecord": {
+          "time": "1:21.391",
+          "driver": "Nirei Fukuzumi",
+          "car": "Dallara SF19",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -8050,7 +8744,14 @@
         "country": "Germany",
         "countryCode": "DE",
         "lat": 50.3356,
-        "lng": 6.9475
+        "lng": 6.9475,
+        "lengthKm": 20.832,
+        "lapRecord": {
+          "time": "8:07.507",
+          "driver": "Marc Lieb / Arno Klasen",
+          "car": "Porsche 911 (997 II) GT3 R",
+          "year": 2010
+        }
       },
       "sessions": [
         {
@@ -8144,7 +8845,14 @@
         "country": "Portugal",
         "countryCode": "PT",
         "lat": 37.2294,
-        "lng": -8.6267
+        "lng": -8.6267,
+        "lengthKm": 4.653,
+        "lapRecord": {
+          "time": "1:18.750",
+          "driver": "Lewis Hamilton",
+          "car": "Mercedes-AMG F1 W11 EQ Performance",
+          "year": 2020
+        }
       },
       "sessions": [
         {
@@ -8200,7 +8908,14 @@
         "country": "Qatar",
         "countryCode": "QA",
         "lat": 25.49,
-        "lng": 51.4542
+        "lng": 51.4542,
+        "lengthKm": 5.419,
+        "lapRecord": {
+          "time": "1:22.384",
+          "driver": "Lando Norris",
+          "car": "McLaren MCL38",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -8712,7 +9427,14 @@
         "country": "Bahrain",
         "countryCode": "BH",
         "lat": 26.0325,
-        "lng": 50.5106
+        "lng": 50.5106,
+        "lengthKm": 5.412,
+        "lapRecord": {
+          "time": "1:31.447",
+          "driver": "Pedro de la Rosa",
+          "car": "McLaren MP4-20",
+          "year": 2005
+        }
       },
       "sessions": [
         {
@@ -9034,7 +9756,14 @@
         "country": "Japan",
         "countryCode": "JP",
         "lat": 34.8431,
-        "lng": 136.5407
+        "lng": 136.5407,
+        "lengthKm": 5.807,
+        "lapRecord": {
+          "time": "1:30.965",
+          "driver": "Andrea Kimi Antonelli",
+          "car": "Mercedes AMG W16",
+          "year": 2025
+        }
       },
       "sessions": [
         {
@@ -9202,7 +9931,14 @@
         "country": "Qatar",
         "countryCode": "QA",
         "lat": 25.49,
-        "lng": 51.4542
+        "lng": 51.4542,
+        "lengthKm": 5.419,
+        "lapRecord": {
+          "time": "1:22.384",
+          "driver": "Lando Norris",
+          "car": "McLaren MCL38",
+          "year": 2024
+        }
       },
       "sessions": [
         {
@@ -9275,7 +10011,14 @@
         "country": "United Arab Emirates",
         "countryCode": "AE",
         "lat": 24.4672,
-        "lng": 54.6031
+        "lng": 54.6031,
+        "lengthKm": 5.281,
+        "lapRecord": {
+          "time": "1:25.637",
+          "driver": "Kevin Magnussen",
+          "car": "Haas VF-24",
+          "year": 2024
+        }
       },
       "sessions": [
         {

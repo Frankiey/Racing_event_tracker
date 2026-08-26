@@ -10,7 +10,9 @@
       "country": "Austria",
       "countryCode": "AT",
       "lat": 47.2197,
-      "lng": 14.7647
+      "lng": 14.7647,
+      "lengthKm": 4.326,
+      "lapRecord": { "time": "1:07.924", "driver": "Oscar Piastri", "car": "McLaren MCL39", "year": 2025 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-04-24T11:05:00Z" },
@@ -34,7 +36,9 @@
       "country": "Netherlands",
       "countryCode": "NL",
       "lat": 52.3888,
-      "lng": 4.5409
+      "lng": 4.5409,
+      "lengthKm": 4.259,
+      "lapRecord": { "time": "1:11.097", "driver": "Lewis Hamilton", "car": "Mercedes-AMG F1 W12 E Performance", "year": 2021 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-05-22T11:05:00Z" },
@@ -58,7 +62,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 51.5233,
-      "lng": 13.9361
+      "lng": 13.9361,
+      "lengthKm": 4.345,
+      "lapRecord": { "time": "1:32.059", "driver": "Scott Mansell", "car": "Benetton B197 (EuroBOSS)", "year": 2004 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-06-19T11:05:00Z" },
@@ -82,7 +88,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 49.4478,
-      "lng": 11.0553
+      "lng": 11.0553,
+      "lengthKm": 2.3,
+      "lapRecord": { "time": "0:46.618", "driver": "Nico Müller", "car": "Audi RS5 Turbo DTM", "year": 2019 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-07-03T11:05:00Z" },
@@ -106,7 +114,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 52.0278,
-      "lng": 11.2794
+      "lng": 11.2794,
+      "lengthKm": 3.696,
+      "lapRecord": { "time": "1:18.846", "driver": "Sergey Afanasyev", "car": "Lola B05/52 (Auto GP)", "year": 2011 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-07-24T11:05:00Z" },
@@ -130,7 +140,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 5.148,
+      "lapRecord": { "time": "1:28.139", "driver": "Max Verstappen", "car": "Red Bull Racing RB16", "year": 2020 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-08-14T11:05:00Z" },
@@ -154,7 +166,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.7897,
-      "lng": 12.6869
+      "lng": 12.6869,
+      "lengthKm": 3.671,
+      "lapRecord": { "time": "1:13.714", "driver": "Frédéric Vervisch", "car": "Dallara F306 (Formula Three)", "year": 2008 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-09-11T11:05:00Z" },
@@ -178,7 +192,9 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 49.3278,
-      "lng": 8.5656
+      "lng": 8.5656,
+      "lengthKm": 4.574,
+      "lapRecord": { "time": "1:13.780", "driver": "Kimi Räikkönen", "car": "McLaren MP4-19B", "year": 2004 }
     },
     "sessions": [
       { "type": "Practice 1",   "startTimeUTC": "2026-10-03T11:05:00Z" },

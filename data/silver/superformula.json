@@ -10,7 +10,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 36.5403,
-      "lng": 140.1947
+      "lng": 140.1947,
+      "lengthKm": 4.801,
+      "lapRecord": {
+        "time": "1:31.379",
+        "driver": "Sena Sakaguchi",
+        "car": "Dallara SF23",
+        "year": 2026
+      }
     },
     "sessions": [
       {
@@ -44,7 +51,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 33.0633,
-      "lng": 131.0747
+      "lng": 131.0747,
+      "lengthKm": 4.673,
+      "lapRecord": {
+        "time": "1:26.960",
+        "driver": "Naoki Yamamoto",
+        "car": "Dallara SF19",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -74,7 +88,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 34.8431,
-      "lng": 136.5407
+      "lng": 136.5407,
+      "lengthKm": 5.807,
+      "lapRecord": {
+        "time": "1:30.965",
+        "driver": "Andrea Kimi Antonelli",
+        "car": "Mercedes AMG W16",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -108,7 +129,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 35.3717,
-      "lng": 138.9258
+      "lng": 138.9258,
+      "lengthKm": 4.563,
+      "lapRecord": {
+        "time": "1:21.391",
+        "driver": "Nirei Fukuzumi",
+        "car": "Dallara SF19",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -142,7 +170,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 38.14,
-      "lng": 140.7197
+      "lng": 140.7197,
+      "lengthKm": 3.704,
+      "lapRecord": {
+        "time": "1:06.350",
+        "driver": "Nick Cassidy",
+        "car": "Dallara SF19",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -172,7 +207,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 35.3717,
-      "lng": 138.9258
+      "lng": 138.9258,
+      "lengthKm": 4.563,
+      "lapRecord": {
+        "time": "1:21.391",
+        "driver": "Nirei Fukuzumi",
+        "car": "Dallara SF19",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -206,7 +248,14 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 34.8431,
-      "lng": 136.5407
+      "lng": 136.5407,
+      "lengthKm": 5.807,
+      "lapRecord": {
+        "time": "1:30.965",
+        "driver": "Andrea Kimi Antonelli",
+        "car": "Mercedes AMG W16",
+        "year": 2025
+      }
     },
     "sessions": [
       {

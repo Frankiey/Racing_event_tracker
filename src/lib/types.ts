@@ -3,6 +3,13 @@ export interface RaceSession {
   startTimeUTC: string;
 }
 
+export interface CircuitLapRecord {
+  time: string;
+  driver: string;
+  car: string;
+  year: number;
+}
+
 export interface Circuit {
   name: string;
   city: string;
@@ -10,6 +17,10 @@ export interface Circuit {
   countryCode: string;
   lat: number | null;
   lng: number | null;
+  /** Circuit length in kilometers. Trivia field — not present for every circuit. */
+  lengthKm?: number;
+  /** Official lap record for the circuit. Trivia field — not present for every circuit. */
+  lapRecord?: CircuitLapRecord;
 }
 
 export interface RaceEvent {

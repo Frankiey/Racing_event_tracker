@@ -10,7 +10,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 29.1847,
-      "lng": -81.0717
+      "lng": -81.0717,
+      "lengthKm": 5.729,
+      "lapRecord": {
+        "time": "1:33.724",
+        "driver": "Álex Palou",
+        "car": "Cadillac DPi-V.R",
+        "year": 2022
+      }
     },
     "sessions": [
       {
@@ -44,7 +51,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 27.4542,
-      "lng": -81.349
+      "lng": -81.349,
+      "lengthKm": 6.019,
+      "lapRecord": {
+        "time": "1:41.800",
+        "driver": "Kamui Kobayashi",
+        "car": "Toyota TS050 Hybrid",
+        "year": 2019
+      }
     },
     "sessions": [
       {
@@ -78,7 +92,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 33.7623,
-      "lng": -118.1876
+      "lng": -118.1876,
+      "lengthKm": 3.167,
+      "lapRecord": {
+        "time": "1:07.2359",
+        "driver": "Álex Palou",
+        "car": "Dallara DW12",
+        "year": 2022
+      }
     },
     "sessions": [
       {
@@ -108,7 +129,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 36.5841,
-      "lng": -121.7544
+      "lng": -121.7544,
+      "lengthKm": 3.602,
+      "lapRecord": {
+        "time": "1:14.196",
+        "driver": "Sébastien Bourdais",
+        "car": "Cadillac V-Series.R (LMDh)",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -138,7 +166,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 42.3314,
-      "lng": -83.0458
+      "lng": -83.0458,
+      "lengthKm": 2.647,
+      "lapRecord": {
+        "time": "1:01.9410",
+        "driver": "Kyle Kirkwood",
+        "car": "Dallara DW12",
+        "year": 2023
+      }
     },
     "sessions": [
       {
@@ -168,7 +203,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 42.3369,
-      "lng": -76.9271
+      "lng": -76.9271,
+      "lengthKm": 5.552,
+      "lapRecord": {
+        "time": "1:29.657",
+        "driver": "Olivier Pla",
+        "car": "Mazda RT24-P (DPi)",
+        "year": 2019
+      }
     },
     "sessions": [
       {
@@ -202,7 +244,14 @@
       "country": "Canada",
       "countryCode": "CA",
       "lat": 43.9444,
-      "lng": -78.6733
+      "lng": -78.6733,
+      "lengthKm": 3.957,
+      "lapRecord": {
+        "time": "1:05.823",
+        "driver": "Marco Werner",
+        "car": "Audi R10 TDI (LMP1)",
+        "year": 2008
+      }
     },
     "sessions": [
       {
@@ -232,7 +281,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 43.7975,
-      "lng": -87.99
+      "lng": -87.99,
+      "lengthKm": 6.515,
+      "lapRecord": {
+        "time": "1:49.676",
+        "driver": "Filipe Albuquerque",
+        "car": "Acura ARX-06 (LMDh)",
+        "year": 2023
+      }
     },
     "sessions": [
       {
@@ -266,7 +322,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 36.5487,
-      "lng": -79.2082
+      "lng": -79.2082,
+      "lengthKm": 5.262,
+      "lapRecord": {
+        "time": "1:36.112",
+        "driver": "Lucas Luhr",
+        "car": "HPD ARX-03a (LMP1)",
+        "year": 2012
+      }
     },
     "sessions": [
       {
@@ -296,7 +359,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 39.795,
-      "lng": -86.2352
+      "lng": -86.2352,
+      "lengthKm": 4.023,
+      "lapRecord": {
+        "time": "0:37.895",
+        "driver": "Arie Luyendyk",
+        "car": "Reynard 95I-Ford Cosworth",
+        "year": 1996
+      }
     },
     "sessions": [
       {
@@ -326,7 +396,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 34.1497,
-      "lng": -83.8157
+      "lng": -83.8157,
+      "lengthKm": 4.088,
+      "lapRecord": {
+        "time": "1:07.056",
+        "driver": "Christian Klien",
+        "car": "Peugeot 908 HDi FAP (LMP1)",
+        "year": 2008
+      }
     },
     "sessions": [
       {

@@ -10,7 +10,9 @@
       "country": "Italy",
       "countryCode": "IT",
       "lat": 44.3439,
-      "lng": 11.7167
+      "lng": 11.7167,
+      "lengthKm": 4.909,
+      "lapRecord": { "time": "1:15.484", "driver": "Lewis Hamilton", "car": "Mercedes-AMG F1 W11 EQ Performance", "year": 2020 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-04-17T09:00:00Z" },
@@ -33,7 +35,9 @@
       "country": "Belgium",
       "countryCode": "BE",
       "lat": 50.4372,
-      "lng": 5.9714
+      "lng": 5.9714,
+      "lengthKm": 7.004,
+      "lapRecord": { "time": "1:44.701", "driver": "Sergio Pérez", "car": "Red Bull Racing RB20", "year": 2024 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-05-08T09:30:00Z" },
@@ -56,7 +60,9 @@
       "country": "France",
       "countryCode": "FR",
       "lat": 47.9562,
-      "lng": 0.2075
+      "lng": 0.2075,
+      "lengthKm": 13.626,
+      "lapRecord": { "time": "3:17.297", "driver": "Mike Conway", "car": "Toyota TS050 Hybrid (LMP1)", "year": 2019 }
     },
     "sessions": [
       { "type": "Test Day",   "startTimeUTC": "2026-06-07T08:00:00Z" },
@@ -82,7 +88,9 @@
       "country": "Brazil",
       "countryCode": "BR",
       "lat": -23.7014,
-      "lng": -46.6969
+      "lng": -46.6969,
+      "lengthKm": 4.309,
+      "lapRecord": { "time": "1:10.540", "driver": "Valtteri Bottas", "car": "Mercedes AMG F1 W09 EQ Power+", "year": 2018 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-07-10T13:00:00Z" },
@@ -105,7 +113,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 30.1328,
-      "lng": -97.6411
+      "lng": -97.6411,
+      "lengthKm": 5.513,
+      "lapRecord": { "time": "1:36.169", "driver": "Charles Leclerc", "car": "Ferrari SF90", "year": 2019 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-09-04T16:00:00Z" },
@@ -128,7 +138,9 @@
       "country": "Japan",
       "countryCode": "JP",
       "lat": 35.3725,
-      "lng": 138.9275
+      "lng": 138.9275,
+      "lengthKm": 4.563,
+      "lapRecord": { "time": "1:21.391", "driver": "Nirei Fukuzumi", "car": "Dallara SF19", "year": 2020 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-09-25T01:00:00Z" },
@@ -151,7 +163,9 @@
       "country": "Qatar",
       "countryCode": "QA",
       "lat": 25.4900,
-      "lng": 51.4542
+      "lng": 51.4542,
+      "lengthKm": 5.419,
+      "lapRecord": { "time": "1:22.384", "driver": "Lando Norris", "car": "McLaren MCL38", "year": 2024 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-10-22T09:00:00Z" },
@@ -174,7 +188,9 @@
       "country": "Bahrain",
       "countryCode": "BH",
       "lat": 26.0325,
-      "lng": 50.5106
+      "lng": 50.5106,
+      "lengthKm": 5.412,
+      "lapRecord": { "time": "1:31.447", "driver": "Pedro de la Rosa", "car": "McLaren MP4-20", "year": 2005 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-11-05T08:00:00Z" },

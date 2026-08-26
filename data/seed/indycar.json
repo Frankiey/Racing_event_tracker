@@ -10,7 +10,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 27.7676,
-      "lng": -82.6316
+      "lng": -82.6316,
+      "lengthKm": 2.897,
+      "lapRecord": { "time": "1:00.6795", "driver": "Josef Newgarden", "car": "Dallara DW12", "year": 2024 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-02-28T18:00:00Z" },
@@ -31,7 +33,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 33.5731,
-      "lng": -112.0890
+      "lng": -112.0890,
+      "lengthKm": 1.644,
+      "lapRecord": { "time": "0:19.7379", "driver": "Tony Kanaan", "car": "Dallara DW12", "year": 2016 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-03-07T20:00:00Z" },
@@ -52,7 +56,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 32.7357,
-      "lng": -97.1081
+      "lng": -97.1081,
+      "lengthKm": 4.394,
+      "lapRecord": { "time": "1:33.9902", "driver": "Scott Dixon", "car": "Dallara DW12", "year": 2026 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-03-14T17:00:00Z" },
@@ -73,7 +79,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 33.5394,
-      "lng": -86.6213
+      "lng": -86.6213,
+      "lengthKm": 3.830,
+      "lapRecord": { "time": "1:06.8182", "driver": "Pato O'Ward", "car": "Dallara DW12", "year": 2021 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-03-28T17:00:00Z" },
@@ -95,7 +103,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 33.7623,
-      "lng": -118.1876
+      "lng": -118.1876,
+      "lengthKm": 3.167,
+      "lapRecord": { "time": "1:07.2359", "driver": "Álex Palou", "car": "Dallara DW12", "year": 2022 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-04-17T22:00:00Z" },
@@ -117,7 +127,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 39.7955,
-      "lng": -86.2347
+      "lng": -86.2347,
+      "lengthKm": 3.925,
+      "lapRecord": { "time": "1:09.3888", "driver": "Josef Newgarden", "car": "Dallara DW12", "year": 2017 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-05-08T17:00:00Z" },
@@ -138,7 +150,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 39.7955,
-      "lng": -86.2347
+      "lng": -86.2347,
+      "lengthKm": 4.023,
+      "lapRecord": { "time": "0:37.895", "driver": "Arie Luyendyk", "car": "Reynard 95I-Ford Cosworth", "year": 1996 }
     },
     "sessions": [
       { "type": "Practice 1",       "startTimeUTC": "2026-05-13T16:00:00Z" },
@@ -163,7 +177,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 42.3293,
-      "lng": -83.0458
+      "lng": -83.0458,
+      "lengthKm": 2.647,
+      "lapRecord": { "time": "1:01.9410", "driver": "Kyle Kirkwood", "car": "Dallara DW12", "year": 2023 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-05-29T17:00:00Z" },
@@ -185,7 +201,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 38.6459,
-      "lng": -90.1363
+      "lng": -90.1363,
+      "lengthKm": 2.012,
+      "lapRecord": { "time": "0:24.6317", "driver": "Josef Newgarden", "car": "Dallara DW12", "year": 2017 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-06-07T22:00:00Z" },
@@ -206,7 +224,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 43.7978,
-      "lng": -87.9893
+      "lng": -87.9893,
+      "lengthKm": 6.515,
+      "lapRecord": { "time": "1:49.676", "driver": "Filipe Albuquerque", "car": "Acura ARX-06 (LMDh)", "year": 2023 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-06-19T17:00:00Z" },
@@ -228,7 +248,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 40.6828,
-      "lng": -82.6368
+      "lng": -82.6368,
+      "lengthKm": 3.634,
+      "lapRecord": { "time": "1:10.034", "driver": "Marco Werner", "car": "Audi R10 TDI (LMP1)", "year": 2008 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-07-03T17:00:00Z" },
@@ -250,7 +272,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 36.2058,
-      "lng": -86.0829
+      "lng": -86.0829,
+      "lengthKm": 2.140,
+      "lapRecord": { "time": "0:22.9685", "driver": "Sam Hornish Jr.", "car": "Dallara IR-02", "year": 2003 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-07-18T19:00:00Z" },
@@ -271,7 +295,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 45.5949,
-      "lng": -122.6894
+      "lng": -122.6894,
+      "lengthKm": 3.166,
+      "lapRecord": { "time": "0:58.7403", "driver": "Carlos Muñoz", "car": "Dallara DW12", "year": 2018 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-08-07T20:00:00Z" },
@@ -293,7 +319,8 @@
       "country": "Canada",
       "countryCode": "CA",
       "lat": 43.8561,
-      "lng": -79.3370
+      "lng": -79.3370,
+      "lengthKm": 3.52
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-08-14T17:00:00Z" },
@@ -315,7 +342,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 38.9072,
-      "lng": -77.0369
+      "lng": -77.0369,
+      "lengthKm": 2.736,
+      "lapRecord": { "time": "0:57.9495", "driver": "Will Power", "car": "Dallara DW12", "year": 2026 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-08-21T17:00:00Z" },
@@ -337,7 +366,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 43.0469,
-      "lng": -88.0373
+      "lng": -88.0373,
+      "lengthKm": 1.633,
+      "lapRecord": { "time": "0:21.519", "driver": "Scott Pruett", "car": "Reynard 97I", "year": 1998 }
     },
     "sessions": [
       { "type": "Practice",   "startTimeUTC": "2026-08-29T17:00:00Z" },
@@ -358,7 +389,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 43.0469,
-      "lng": -88.0373
+      "lng": -88.0373,
+      "lengthKm": 1.633,
+      "lapRecord": { "time": "0:21.519", "driver": "Scott Pruett", "car": "Reynard 97I", "year": 1998 }
     },
     "sessions": [
       { "type": "Qualifying", "startTimeUTC": "2026-08-30T15:00:00Z" },
@@ -378,7 +411,9 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 36.5841,
-      "lng": -121.7534
+      "lng": -121.7534,
+      "lengthKm": 3.602,
+      "lapRecord": { "time": "1:14.196", "driver": "Sébastien Bourdais", "car": "Cadillac V-Series.R (LMDh)", "year": 2024 }
     },
     "sessions": [
       { "type": "Practice 1", "startTimeUTC": "2026-09-04T19:00:00Z" },

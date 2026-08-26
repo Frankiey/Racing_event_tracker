@@ -10,7 +10,14 @@
       "country": "France",
       "countryCode": "FR",
       "lat": 43.2506,
-      "lng": 5.7917
+      "lng": 5.7917,
+      "lengthKm": 5.842,
+      "lapRecord": {
+        "time": "1:32.740",
+        "driver": "Sebastian Vettel",
+        "car": "Ferrari SF90",
+        "year": 2019
+      }
     },
     "sessions": [
       {
@@ -52,7 +59,14 @@
       "country": "Great Britain",
       "countryCode": "GB",
       "lat": 51.3569,
-      "lng": 0.2631
+      "lng": 0.2631,
+      "lengthKm": 3.916,
+      "lapRecord": {
+        "time": "1:12.276",
+        "driver": "Adam Carroll",
+        "car": "A1GP Ferrari",
+        "year": 2009
+      }
     },
     "sessions": [
       {
@@ -94,7 +108,14 @@
       "country": "Italy",
       "countryCode": "IT",
       "lat": 45.6156,
-      "lng": 9.2811
+      "lng": 9.2811,
+      "lengthKm": 5.793,
+      "lapRecord": {
+        "time": "1:20.901",
+        "driver": "Lando Norris",
+        "car": "McLaren MCL39",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -128,7 +149,14 @@
       "country": "Belgium",
       "countryCode": "BE",
       "lat": 50.4372,
-      "lng": 5.9714
+      "lng": 5.9714,
+      "lengthKm": 7.004,
+      "lapRecord": {
+        "time": "1:44.701",
+        "driver": "Sergio Pérez",
+        "car": "Red Bull Racing RB20",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -190,7 +218,14 @@
       "country": "Italy",
       "countryCode": "IT",
       "lat": 43.9628,
-      "lng": 12.6836
+      "lng": 12.6836,
+      "lengthKm": 4.226,
+      "lapRecord": {
+        "time": "1:20.042",
+        "driver": "Haralds Šlēgelmilhs",
+        "car": "Dallara T12 (BOSS GP/Formula Renault 3.5)",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -240,7 +275,14 @@
       "country": "France",
       "countryCode": "FR",
       "lat": 46.8642,
-      "lng": 3.1636
+      "lng": 3.1636,
+      "lengthKm": 4.411,
+      "lapRecord": {
+        "time": "1:15.377",
+        "driver": "Michael Schumacher",
+        "car": "Ferrari F2004",
+        "year": 2004
+      }
     },
     "sessions": [
       {
@@ -290,7 +332,14 @@
       "country": "Germany",
       "countryCode": "DE",
       "lat": 50.3356,
-      "lng": 6.9475
+      "lng": 6.9475,
+      "lengthKm": 5.148,
+      "lapRecord": {
+        "time": "1:28.139",
+        "driver": "Max Verstappen",
+        "car": "Red Bull Racing RB16",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -324,7 +373,14 @@
       "country": "Netherlands",
       "countryCode": "NL",
       "lat": 52.3888,
-      "lng": 4.5409
+      "lng": 4.5409,
+      "lengthKm": 4.259,
+      "lapRecord": {
+        "time": "1:11.097",
+        "driver": "Lewis Hamilton",
+        "car": "Mercedes-AMG F1 W12 E Performance",
+        "year": 2021
+      }
     },
     "sessions": [
       {
@@ -374,7 +430,14 @@
       "country": "Spain",
       "countryCode": "ES",
       "lat": 41.57,
-      "lng": 2.2611
+      "lng": 2.2611,
+      "lengthKm": 4.657,
+      "lapRecord": {
+        "time": "1:15.743",
+        "driver": "Oscar Piastri",
+        "car": "McLaren MCL39",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -424,7 +487,14 @@
       "country": "Portugal",
       "countryCode": "PT",
       "lat": 37.2294,
-      "lng": -8.6267
+      "lng": -8.6267,
+      "lengthKm": 4.653,
+      "lapRecord": {
+        "time": "1:18.750",
+        "driver": "Lewis Hamilton",
+        "car": "Mercedes-AMG F1 W11 EQ Performance",
+        "year": 2020
+      }
     },
     "sessions": [
       {

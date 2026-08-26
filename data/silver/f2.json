@@ -10,7 +10,14 @@
       "country": "Australia",
       "countryCode": "AU",
       "lat": -37.8497,
-      "lng": 144.968
+      "lng": 144.968,
+      "lengthKm": 5.278,
+      "lapRecord": {
+        "time": "1:19.813",
+        "driver": "Charles Leclerc",
+        "car": "Ferrari SF-24",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -44,7 +51,14 @@
       "country": "United States",
       "countryCode": "US",
       "lat": 25.9581,
-      "lng": -80.2389
+      "lng": -80.2389,
+      "lengthKm": 5.412,
+      "lapRecord": {
+        "time": "1:29.708",
+        "driver": "Max Verstappen",
+        "car": "Red Bull Racing RB19",
+        "year": 2023
+      }
     },
     "sessions": [
       {
@@ -78,7 +92,14 @@
       "country": "Monaco",
       "countryCode": "MC",
       "lat": 43.7347,
-      "lng": 7.4206
+      "lng": 7.4206,
+      "lengthKm": 3.337,
+      "lapRecord": {
+        "time": "1:12.909",
+        "driver": "Lewis Hamilton",
+        "car": "Mercedes-AMG F1 W12 E Performance",
+        "year": 2021
+      }
     },
     "sessions": [
       {
@@ -112,7 +133,14 @@
       "country": "Spain",
       "countryCode": "ES",
       "lat": 41.57,
-      "lng": 2.2611
+      "lng": 2.2611,
+      "lengthKm": 4.657,
+      "lapRecord": {
+        "time": "1:15.743",
+        "driver": "Oscar Piastri",
+        "car": "McLaren MCL39",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -146,7 +174,14 @@
       "country": "Austria",
       "countryCode": "AT",
       "lat": 47.2197,
-      "lng": 14.7647
+      "lng": 14.7647,
+      "lengthKm": 4.326,
+      "lapRecord": {
+        "time": "1:07.924",
+        "driver": "Oscar Piastri",
+        "car": "McLaren MCL39",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -180,7 +215,14 @@
       "country": "United Kingdom",
       "countryCode": "GB",
       "lat": 52.0786,
-      "lng": -1.0169
+      "lng": -1.0169,
+      "lengthKm": 5.891,
+      "lapRecord": {
+        "time": "1:27.097",
+        "driver": "Max Verstappen",
+        "car": "Red Bull RB16",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -214,7 +256,14 @@
       "country": "Belgium",
       "countryCode": "BE",
       "lat": 50.4372,
-      "lng": 5.9714
+      "lng": 5.9714,
+      "lengthKm": 7.004,
+      "lapRecord": {
+        "time": "1:44.701",
+        "driver": "Sergio Pérez",
+        "car": "Red Bull Racing RB20",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -248,7 +297,14 @@
       "country": "Hungary",
       "countryCode": "HU",
       "lat": 47.5789,
-      "lng": 19.2486
+      "lng": 19.2486,
+      "lengthKm": 4.381,
+      "lapRecord": {
+        "time": "1:16.627",
+        "driver": "Lewis Hamilton",
+        "car": "Mercedes-AMG F1 W11 EQ Performance",
+        "year": 2020
+      }
     },
     "sessions": [
       {
@@ -282,7 +338,14 @@
       "country": "Italy",
       "countryCode": "IT",
       "lat": 45.6156,
-      "lng": 9.2811
+      "lng": 9.2811,
+      "lengthKm": 5.793,
+      "lapRecord": {
+        "time": "1:20.901",
+        "driver": "Lando Norris",
+        "car": "McLaren MCL39",
+        "year": 2025
+      }
     },
     "sessions": [
       {
@@ -350,7 +413,14 @@
       "country": "Azerbaijan",
       "countryCode": "AZ",
       "lat": 40.3725,
-      "lng": 49.8533
+      "lng": 49.8533,
+      "lengthKm": 6.003,
+      "lapRecord": {
+        "time": "1:43.009",
+        "driver": "Charles Leclerc",
+        "car": "Ferrari SF90",
+        "year": 2019
+      }
     },
     "sessions": [
       {
@@ -384,7 +454,14 @@
       "country": "Qatar",
       "countryCode": "QA",
       "lat": 25.49,
-      "lng": 51.4542
+      "lng": 51.4542,
+      "lengthKm": 5.419,
+      "lapRecord": {
+        "time": "1:22.384",
+        "driver": "Lando Norris",
+        "car": "McLaren MCL38",
+        "year": 2024
+      }
     },
     "sessions": [
       {
@@ -418,7 +495,14 @@
       "country": "United Arab Emirates",
       "countryCode": "AE",
       "lat": 24.4672,
-      "lng": 54.6031
+      "lng": 54.6031,
+      "lengthKm": 5.281,
+      "lapRecord": {
+        "time": "1:25.637",
+        "driver": "Kevin Magnussen",
+        "car": "Haas VF-24",
+        "year": 2024
+      }
     },
     "sessions": [
       {
