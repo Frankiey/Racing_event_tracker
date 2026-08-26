@@ -198,6 +198,26 @@ body::before {
   animation: kiosk-glow-pulse 4s ease-in-out infinite;
 }
 
+/* ── Kiosk: Slow ambient background drift (jwt3.11) ──
+   A second, much slower layer on top of the glow-pulse above: a ~75s cycle
+   that nudges the secondary glow's position/scale/opacity so the screen
+   never reads as frozen, even in idle mode where the glow-pulse itself is
+   muted (see the mode-signature block below). Deliberately low-amplitude —
+   it should never be the thing a viewer's eye catches. transform + opacity
+   only, so it's cheap to run continuously on kiosk hardware.
+*/
+@keyframes kiosk-bg-drift {
+  0%   { transform: translate(0%, 0%)   scale(1);    opacity: 0.4; }
+  25%  { transform: translate(2%, -3%)  scale(1.05); opacity: 0.5; }
+  50%  { transform: translate(-2%, 2%)  scale(1.08); opacity: 0.35; }
+  75%  { transform: translate(3%, 1%)   scale(1.03); opacity: 0.45; }
+  100% { transform: translate(0%, 0%)   scale(1);    opacity: 0.4; }
+}
+.kiosk-bg-drift {
+  animation: kiosk-bg-drift 75s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 /* ── Kiosk: Scanline texture ── */
 .kiosk-scanlines {
   background-image: repeating-linear-gradient(
@@ -208,6 +228,44 @@ body::before {
     rgba(0,0,0,0.03) 4px
   );
   pointer-events: none;
+  opacity: 1;
+  transition: opacity 600ms ease;
+}
+
+/* ── Kiosk: One signature ambient animation per mode (jwt3.4) ──
+   Running the scanline texture + glow-pulse + live-ring + digit-tick all
+   at once reads as busy rather than cinematic on an ambient side-screen.
+   Each kiosk mode now has exactly one primary ambient motion; the rest are
+   muted (opacity/animation:none) rather than removed from the DOM, so mode
+   switches stay a cheap CSS transition instead of a re-mount:
+
+     idle    → scanline texture is the signature (calm "standby" grain).
+               The glow-pulse is frozen at its resting opacity so it doesn't
+               compete with the texture.
+     weekend → glow-pulse is the signature (rising energy as the race
+               weekend approaches). Scanlines fade out.
+     live    → the live-ring/live-dot pulse (already scoped to live mode by
+               the renderHero() display toggle in status.astro) is the
+               signature broadcast heartbeat. Scanlines fade out and the
+               glow-pulse is frozen so the ring stays the only thing moving
+               near the hero header.
+
+   status.astro sets body[data-kiosk-mode] on every render; the slow
+   kiosk-bg-drift above deliberately isn't gated here — it's low-key enough
+   to sit under any of the three signatures without competing.
+   The digit-tick flash (.kiosk-cd-tick) is excluded from this audit: it's
+   event-driven feedback tied to an actual countdown value change, not a
+   looping ambient animation, and it already only fires while a countdown
+   is on screen (idle/weekend), not in live mode.
+*/
+body[data-kiosk-mode="weekend"] .kiosk-scanlines,
+body[data-kiosk-mode="live"] .kiosk-scanlines {
+  opacity: 0;
+}
+body[data-kiosk-mode="idle"] .kiosk-bg-glow,
+body[data-kiosk-mode="live"] .kiosk-bg-glow {
+  animation: none;
+  opacity: 0.6;
 }
 
 /* ── Kiosk: Digit block ── */
@@ -228,6 +286,20 @@ body::before {
 }
 .kiosk-sidebar-event.kiosk-sidebar-active {
   border-color: rgba(255,255,255,0.15);
+}
+
+/* ── Kiosk: Hero event name — stronger typographic hierarchy (jwt3.12) ──
+   The existing font-black + tracking-tight utilities cap out at
+   font-weight: 900 and -0.025em tracking. Push both further specifically
+   on the hero name: request a heavier axis on variable system fonts (macOS
+   San Francisco, Segoe UI Variable, Roboto Flex, etc. all support "wght"
+   past 900; the rule is a no-op on non-variable fonts) and tighten kerning
+   a bit more, which is the correct direction for very large display type.
+   No new DOM elements — just more deliberate use of what's there.
+*/
+#kiosk-event-name {
+  font-variation-settings: "wght" 950;
+  letter-spacing: -0.035em;
 }
 
 /* ── Kiosk: Live ring pulse ── */

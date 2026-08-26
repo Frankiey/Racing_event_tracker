@@ -78,10 +78,10 @@ const sidebarEvents = sorted
         class="kiosk-bg-glow absolute inset-0 pointer-events-none"
         style={`background: radial-gradient(ellipse 90% 70% at 35% 55%, ${heroColor}12 0%, transparent 65%);`}
       />
-      <!-- Secondary glow for depth -->
+      <!-- Secondary glow for depth: slow ambient drift, always on and deliberately subtle (jwt3.11) -->
       <div
         id="kiosk-hero-bg2"
-        class="absolute inset-0 pointer-events-none opacity-40"
+        class="kiosk-bg-drift absolute inset-0 pointer-events-none"
         style={`background: radial-gradient(ellipse 50% 40% at 70% 20%, ${heroColor}08 0%, transparent 60%);`}
       />
 
@@ -436,6 +436,10 @@ const sidebarEvents = sorted
     function renderHero(event: KioskEvent, mode: KioskMode, liveSession: Session | null, alsoLive: { event: KioskEvent; session: Session }[]) {
       const color = getColor(event.seriesId);
       const now = Date.now();
+
+      // Mode signature animation (jwt3.4): drives which ambient animation
+      // is active — see the body[data-kiosk-mode] rules in global.css.
+      document.body.dataset.kioskMode = mode;
 
       // Backgrounds
       const bg1 = document.getElementById('kiosk-hero-bg');
