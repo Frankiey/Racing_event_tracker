@@ -1,7 +1,8 @@
 # waza results
 
-Artifacts backing the skill-eval story (see `docs/waza-eval-plan.md` and
-`blog-outline.md`). Produced with [microsoft/waza](https://github.com/microsoft/waza) **0.38.0**.
+Artifacts backing the skill-eval story (see the internal eval plan and blog outline —
+draft planning docs, not part of this public directory). Produced with
+[microsoft/waza](https://github.com/microsoft/waza) **0.38.0**.
 
 | Path | What it is |
 |------|------------|
@@ -10,7 +11,6 @@ Artifacts backing the skill-eval story (see `docs/waza-eval-plan.md` and
 | `agent-constraint/router-green.txt` | Workflow-router agent eval passing 3/3 with an explicit `tool_constraint` grader |
 | `agent-constraint/router-violation-demo.txt` | The violation case: tool-usage policy mismatch → run fails, exit code 1 |
 | `model-comparison.md` | Flagship `add-new-series` suite run on real models via the copilot-sdk executor |
-| `blog-outline.md` | Draft outline; every claim maps to one of the artifacts above |
 
 Reproduce locally:
 
