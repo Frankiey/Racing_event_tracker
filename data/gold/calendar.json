@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-30T04:16:41Z",
+  "generated": "2026-08-30T15:03:00Z",
   "season": 2026,
   "eventCount": 252,
   "sources": [
@@ -190,32 +190,6 @@
       "dateEnd": "2026-02-04"
     },
     {
-      "id": "nascar-2026-r04",
-      "seriesId": "nascar",
-      "eventName": "DAYTONA 500",
-      "round": 4,
-      "circuit": {
-        "name": "Daytona International Speedway",
-        "city": "Daytona Beach",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 29.1872,
-        "lng": -81.0711
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-02-12T01:15:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-02-15T18:30:00Z"
-        }
-      ],
-      "dateStart": "2026-02-12",
-      "dateEnd": "2026-02-15"
-    },
-    {
       "id": "nascar-2026-r02",
       "seriesId": "nascar",
       "eventName": "America 250 Florida Duel at DAYTONA",
@@ -332,6 +306,28 @@
       ],
       "dateStart": "2026-02-14",
       "dateEnd": "2026-02-14"
+    },
+    {
+      "id": "nascar-2026-r04",
+      "seriesId": "nascar",
+      "eventName": "DAYTONA 500",
+      "round": 4,
+      "circuit": {
+        "name": "Daytona International Speedway",
+        "city": "Daytona Beach",
+        "country": "United States",
+        "countryCode": "US",
+        "lat": 29.1872,
+        "lng": -81.0711
+      },
+      "sessions": [
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-02-15T18:30:00Z"
+        }
+      ],
+      "dateStart": "2026-02-15",
+      "dateEnd": "2026-02-15"
     },
     {
       "id": "wsbk-2026-r01",
@@ -607,45 +603,6 @@
       "dateEnd": "2026-03-01"
     },
     {
-      "id": "f1-2026-r01",
-      "seriesId": "f1",
-      "eventName": "Australian Grand Prix",
-      "round": 1,
-      "circuit": {
-        "name": "Albert Park Grand Prix Circuit",
-        "city": "Melbourne",
-        "country": "Australia",
-        "countryCode": "AU",
-        "lat": -37.8497,
-        "lng": 144.968
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-03-06T01:30:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-03-06T05:00:00Z"
-        },
-        {
-          "type": "FP3",
-          "startTimeUTC": "2026-03-07T01:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-03-07T05:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-03-08T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-03-06",
-      "dateEnd": "2026-03-08",
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png"
-    },
-    {
       "id": "f3-2026-r01",
       "seriesId": "f3",
       "eventName": "Australia",
@@ -685,6 +642,45 @@
       ],
       "dateStart": "2026-03-06",
       "dateEnd": "2026-03-08"
+    },
+    {
+      "id": "f1-2026-r01",
+      "seriesId": "f1",
+      "eventName": "Australian Grand Prix",
+      "round": 1,
+      "circuit": {
+        "name": "Albert Park Grand Prix Circuit",
+        "city": "Melbourne",
+        "country": "Australia",
+        "countryCode": "AU",
+        "lat": -37.8497,
+        "lng": 144.968
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-03-06T01:30:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-03-06T05:00:00Z"
+        },
+        {
+          "type": "FP3",
+          "startTimeUTC": "2026-03-07T01:30:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-03-07T05:00:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-03-08T04:00:00Z"
+        }
+      ],
+      "dateStart": "2026-03-06",
+      "dateEnd": "2026-03-08",
+      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Australia%20carbon.png"
     },
     {
       "id": "f2-2026-r01",
@@ -4634,47 +4630,6 @@
       "dateEnd": "2026-06-28"
     },
     {
-      "id": "f3-2026-r04",
-      "seriesId": "f3",
-      "eventName": "Austria",
-      "round": 4,
-      "circuit": {
-        "name": "Red Bull Ring",
-        "city": "Spielberg",
-        "country": "Austria",
-        "countryCode": "AT",
-        "lat": 47.2197,
-        "lng": 14.7647,
-        "lengthKm": 4.326,
-        "lapRecord": {
-          "time": "1:07.924",
-          "driver": "Oscar Piastri",
-          "car": "McLaren MCL39",
-          "year": 2025
-        }
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-06-26T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-06-26T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-06-27T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-06-28T06:40:00Z"
-        }
-      ],
-      "dateStart": "2026-06-26",
-      "dateEnd": "2026-06-28"
-    },
-    {
       "id": "moto3-2026-r10",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of The Netherlands",
@@ -4711,6 +4666,47 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-06-28T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-06-26",
+      "dateEnd": "2026-06-28"
+    },
+    {
+      "id": "f3-2026-r04",
+      "seriesId": "f3",
+      "eventName": "Austria",
+      "round": 4,
+      "circuit": {
+        "name": "Red Bull Ring",
+        "city": "Spielberg",
+        "country": "Austria",
+        "countryCode": "AT",
+        "lat": 47.2197,
+        "lng": 14.7647,
+        "lengthKm": 4.326,
+        "lapRecord": {
+          "time": "1:07.924",
+          "driver": "Oscar Piastri",
+          "car": "McLaren MCL39",
+          "year": 2025
+        }
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-06-26T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-06-26T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-06-27T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-06-28T06:40:00Z"
         }
       ],
       "dateStart": "2026-06-26",
@@ -7324,40 +7320,6 @@
       "dateEnd": "2026-09-06"
     },
     {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -7394,6 +7356,40 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",

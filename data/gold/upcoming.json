@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-30T04:16:41Z",
+  "generated": "2026-08-30T15:03:00Z",
   "season": 2026,
-  "eventCount": 80,
+  "eventCount": 76,
   "sources": [
     "dtm",
     "f1",
@@ -22,181 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "moto3-2026-r13",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Aragon",
-      "round": 13,
-      "circuit": {
-        "name": "MotorLand Aragón",
-        "city": "Alcañiz",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 40.9417,
-        "lng": -0.1688
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-28T07:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-28T11:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-29T06:40:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-08-29T10:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-08-29T11:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-30"
-    },
-    {
-      "id": "moto2-2026-r13",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Aragon",
-      "round": 13,
-      "circuit": {
-        "name": "MotorLand Aragón",
-        "city": "Alcañiz",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 40.9417,
-        "lng": -0.1688
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-28T07:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-28T12:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-29T07:25:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-08-29T11:40:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-08-29T12:05:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T10:15:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-30"
-    },
-    {
-      "id": "motogp-2026-r13",
-      "seriesId": "motogp",
-      "eventName": "GRAND PRIX OF ARAGON",
-      "round": 13,
-      "circuit": {
-        "name": "MotorLand Aragón",
-        "city": "Alcañiz",
-        "country": "SPA",
-        "countryCode": "ES",
-        "lat": 40.9417,
-        "lng": -0.1688
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-08-28T08:45:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-28T13:00:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-08-29T08:10:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-08-29T08:50:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-08-29T09:15:00Z"
-        },
-        {
-          "type": "Sprint",
-          "startTimeUTC": "2026-08-29T13:00:00Z"
-        },
-        {
-          "type": "Warm Up",
-          "startTimeUTC": "2026-08-30T07:40:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T12:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-30"
-    },
-    {
-      "id": "gtworld-2026-r07",
-      "seriesId": "gtworld",
-      "eventName": "GT World Nürburgring",
-      "round": 7,
-      "circuit": {
-        "name": "Nürburgring GP-Strecke",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475,
-        "lengthKm": 5.148,
-        "lapRecord": {
-          "time": "1:28.139",
-          "driver": "Max Verstappen",
-          "car": "Red Bull Racing RB16",
-          "year": 2020
-        }
-      },
-      "sessions": [
-        {
-          "type": "Free Practice 1",
-          "startTimeUTC": "2026-08-29T09:20:00Z"
-        },
-        {
-          "type": "Free Practice 2",
-          "startTimeUTC": "2026-08-29T14:45:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-30T08:20:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T13:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-29",
-      "dateEnd": "2026-08-30"
-    },
     {
       "id": "indycar-2026-r17",
       "seriesId": "indycar",
@@ -510,40 +335,6 @@
       "dateEnd": "2026-09-06"
     },
     {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -580,6 +371,40 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",
