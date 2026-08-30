@@ -1,0 +1,43 @@
+id: orchestration-invokes-dependencies
+name: Orchestration — invokes seed-data-schema then medallion-data-pipeline
+description: >-
+  End-to-end onboarding request for the Fictional GT Trophy. add-new-series'
+  own checklist creates data/seed/fgt.json and registers fgt in the SERIES
+  map in src/lib/series.ts per seed-data-schema (step 3) before wiring and
+  rebuilding the pipeline per medallion-data-pipeline (steps 4-5). Asserts
+  that composition actually happens at runtime, in that order, via the
+  skill_invocation grader — the INVOKES: frontmatter line is otherwise an
+  unchecked assertion. NOTE: under executor: mock, this grader's
+  required_skills check cannot meaningfully pass — see limitation note in
+  the bd issue / commit message.
+tags:
+  - orchestration
+  - skill-composition
+inputs:
+  prompt: >-
+    Add the Fictional GT Trophy (id: fgt) to RaceTrack end to end: create the
+    seed file from the calendar in fgt-calendar.md, register the series
+    metadata, wire it into the pipeline, rebuild gold data for fgt, and
+    verify validate:data passes.
+  files:
+    - path: fgt-calendar.md
+expected:
+  should_trigger: true
+  behavior:
+    max_tool_calls: 60
+graders:
+  - type: text
+    name: touches-the-right-places
+    config:
+      contains:
+        - "fgt"
+        - "seed"
+        - "series.ts"
+  - type: skill_invocation
+    name: invokes-dependencies-in-order
+    config:
+      mode: in_order
+      required_skills:
+        - seed-data-schema
+        - medallion-data-pipeline
+      allow_extra: true
