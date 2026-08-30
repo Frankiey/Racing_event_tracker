@@ -1,0 +1,35 @@
+id: program-grader-real-validators
+name: Program grader — real validators, not re-encoded rules
+description: >-
+  Companion to rebuild-after-edit (which already checks the agent
+  *recommends* validate:data + verify_dates): this task instead shells out
+  to the ACTUAL project validators via a `program` grader
+  (evals/seed-data-schema/graders/validate.sh), so grading doesn't
+  duplicate pipeline/validate.py and pipeline/verify_dates.py as a second,
+  hand-maintained copy of the same rules in eval YAML. Added as a new task
+  file (not a graders: addition to fix-broken-fixture.yaml or
+  rebuild-after-edit.yaml) to avoid colliding with other in-flight
+  edits to those files. See the wrapper script's header comment for the
+  full mock-vs-real (Track A vs Track B) discussion: under the `mock`
+  executor here, this proves the workspace fixture is materialized and
+  valid JSON, and that the real validator commands are invocable and
+  currently pass against the project's actual data (a regression
+  tripwire) — it does not (and cannot, under mock) prove that a specific
+  agent-authored fix is what made validation pass.
+tags:
+  - happy-path
+inputs:
+  prompt: >-
+    Validation fails on the fictional seed file fgt-broken-seed.json. Find
+    and fix every schema violation in it.
+  files:
+    - path: fgt-broken-seed.json
+expected:
+  should_trigger: true
+graders:
+  - type: program
+    name: real-validators-pass
+    config:
+      command: bash
+      args: ["evals/seed-data-schema/graders/validate.sh"]
+      timeout: 120
