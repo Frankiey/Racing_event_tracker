@@ -19,6 +19,18 @@ graders:
     config:
       contains:
         - "style"
-      not_contains:
-        - "bg-[#00c2a8]"
-        - "bg-[${"
+      # Use regex_not_match instead of a bare not_contains substring ban.
+      # A model that CORRECTLY warns against the anti-pattern still says
+      # the words "bg-[#00c2a8]" / "bg-[${" out loud (e.g. "never write
+      # bg-[#00c2a8], Tailwind can't see it") — a plain not_contains trips
+      # on that mention alone, which is the exact false negative observed
+      # in docs/waza-results/model-comparison.md (claude-sonnet-4.6 and
+      # gemini both gave the correct answer but "failed" this grader).
+      # These patterns instead require the banned string to appear wired
+      # into an actual class attribute — class="bg-[#00c2a8]",
+      # className={`bg-[${...}]`}, class:list={["bg-[#00c2a8]"]} — which is
+      # what a genuinely wrong recommendation looks like, not a warning
+      # sentence quoting the class name in prose.
+      regex_not_match:
+        - 'class[\w:]*\s*=\s*[{"''`\[][^\n]{0,40}bg-\[#00c2a8\]'
+        - 'class[\w:]*\s*=\s*[{"''`\[][^\n]{0,40}bg-\[\$\{'
