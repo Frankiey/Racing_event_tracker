@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import EventCard from '../../components/EventCard.astro';
 import SeriesBadge from '../../components/SeriesBadge.astro';
 import { SERIES_LIST, getSeriesMeta } from '../../lib/series';
-import { getRaceSession, isPlaceholderTime, isPastEvent } from '../../lib/time';
+import { getNextRaceMatch, isPastEvent } from '../../lib/time';
 
 import type { EventFeed } from '../../lib/types';
 import calendarData from '../../../data/gold/calendar.json';
@@ -22,10 +22,7 @@ const doneEvents = allEvents.filter(e => isPastEvent(e.dateEnd, e.sessions));
 const upcomingEvents = allEvents.filter(e => !isPastEvent(e.dateEnd, e.sessions));
 
 // Next race for this series
-const nextRace = upcomingEvents
-  .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
-  .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC))
-  .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())[0];
+const nextRace = getNextRaceMatch(upcomingEvents);
 
 function groupEventsByMonth(events: typeof allEvents) {
   const grouped = new Map<string, typeof allEvents>();

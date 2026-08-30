@@ -1,4 +1,5 @@
-import { isPlaceholderTime } from '../time';
+import { isPastEvent } from '../time';
+import { getRegisteredEvent } from '../event-client';
 
 interface DisclosureConfig {
   toggleId: string;
@@ -60,13 +61,16 @@ function mergeVisibleDuplicateWeekSections(): void {
 export function refreshDashboardSections(): void {
   const recentGrid = document.getElementById('recent-events');
   const recentSection = document.getElementById('recent-section');
-  const mainWrappers = document.querySelectorAll<HTMLElement>('.week-group .event-card-wrapper[data-race-utc]');
+  const mainWrappers = document.querySelectorAll<HTMLElement>('.week-group .event-card-wrapper');
   let moved = 0;
 
   mainWrappers.forEach((wrapper) => {
-    const raceUtc = wrapper.getAttribute('data-race-utc') ?? '';
-    if (!raceUtc || isPlaceholderTime(raceUtc)) return;
-    if (new Date(raceUtc) < new Date()) {
+    const eventId = wrapper.querySelector<HTMLElement>('[data-event-id]')?.dataset.eventId;
+    const event = eventId ? getRegisteredEvent(eventId) : undefined;
+    if (!event) return;
+    // Uses the same end-time-based isPastEvent as EventCard's own badge, so a still-live
+    // race (e.g. a Race session in progress) never gets moved into "Recent" out from under it.
+    if (isPastEvent(event.dateEnd, event.sessions)) {
       recentGrid?.appendChild(wrapper);
       moved++;
     }

@@ -15,7 +15,8 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 
 // ── Imports ─────────────────────────────────────────────────────────────────
-import { countryFlag, isPastEvent, isPlaceholderTime } from '../../src/lib/time.ts';
+import { countryFlag, isPastEvent, isPlaceholderTime, getNextRaceMatch } from '../../src/lib/time.ts';
+import { isSessionLiveAt } from '../../src/lib/sessions.ts';
 import { getSessionDurationMinutes } from '../../src/lib/sessions.ts';
 import { isSessionLive, getLiveSession, sleepVerdict } from '../../src/lib/client-utils.ts';
 
@@ -73,11 +74,11 @@ describe('isPastEvent', () => {
     assert.equal(isPastEvent('2099-12-31'), false);
   });
 
-  test('uses latest session startTimeUTC when sessions are provided', () => {
+  test('uses the estimated end of the latest session when sessions are provided', () => {
     const pastSessions = [
       { type: 'Race', startTimeUTC: '2020-01-05T14:00:00Z' },
     ];
-    assert.equal(isPastEvent('2099-12-31', pastSessions), true, 'last session in past → past');
+    assert.equal(isPastEvent('2099-12-31', pastSessions), true, 'last session ended in past → past');
 
     const futureSessions = [
       { type: 'Race', startTimeUTC: '2099-01-01T14:00:00Z' },
@@ -92,6 +93,53 @@ describe('isPastEvent', () => {
     ];
     assert.equal(isPastEvent('2020-01-01', sessions), true, 'placeholder + old dateEnd → past');
     assert.equal(isPastEvent('2099-12-31', sessions), false, 'placeholder + future dateEnd → not past');
+  });
+
+  // Regression: a MotoGP race showed up dimmed in "Recent" with a "Done" badge
+  // while its own Live badge was still showing — isPastEvent flipped to true
+  // the instant the Race session *started*, contradicting isSessionLiveAt for
+  // that same session. past and live must never both be true at once.
+  test('a currently-live race session is never also "past"', () => {
+    const raceStart = new Date('2026-08-30T14:00:00Z');
+    const during = new Date(raceStart.getTime() + 45 * 60_000); // 45 min into the race
+    const sessions = [{ type: 'Race', startTimeUTC: raceStart.toISOString() }];
+
+    assert.equal(isSessionLiveAt(sessions[0], during.getTime()), true, 'sanity: race is live at +45min');
+    assert.equal(isPastEvent('2026-08-30', sessions, during), false, 'still-live race must not count as past');
+  });
+});
+
+// ── getNextRaceMatch ─────────────────────────────────────────────────────────
+// Regression coverage for the Moto3/MotoGP bug: a race whose session has
+// already started must never be picked as "next up", even if it was the
+// soonest race at the last static build.
+
+describe('getNextRaceMatch', () => {
+  const now = new Date('2026-08-30T13:00:00Z');
+
+  test('picks the soonest future race session, ignoring ones already started', () => {
+    const events = [
+      { id: 'moto3', sessions: [{ type: 'Race', startTimeUTC: '2026-08-30T11:00:00Z' }] }, // already started
+      { id: 'motogp', sessions: [{ type: 'Race', startTimeUTC: '2026-08-30T14:00:00Z' }] }, // still upcoming, sooner
+      { id: 'moto2', sessions: [{ type: 'Race', startTimeUTC: '2026-08-30T12:15:00Z' }] }, // already started
+    ];
+    const match = getNextRaceMatch(events, now);
+    assert.equal(match?.event.id, 'motogp');
+  });
+
+  test('ignores placeholder session times', () => {
+    const events = [
+      { id: 'tbd', sessions: [{ type: 'Race', startTimeUTC: '1900-01-01T00:00:00Z' }] },
+      { id: 'real', sessions: [{ type: 'Race', startTimeUTC: '2026-09-01T14:00:00Z' }] },
+    ];
+    assert.equal(getNextRaceMatch(events, now)?.event.id, 'real');
+  });
+
+  test('returns undefined when every race has already started', () => {
+    const events = [
+      { id: 'moto3', sessions: [{ type: 'Race', startTimeUTC: '2026-08-30T11:00:00Z' }] },
+    ];
+    assert.equal(getNextRaceMatch(events, now), undefined);
   });
 });
 

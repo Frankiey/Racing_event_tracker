@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import LightfallBg from '../components/LightfallBg.astro';
 import EventCard from '../components/EventCard.astro';
 import SeriesFilter from '../components/SeriesFilter.astro';
-import { getRaceSession, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
+import { getRaceSession, getNextRaceMatch, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
 import { SERIES_LIST, getSeriesMeta } from '../lib/series';
 import type { EventFeed, RaceEvent } from '../lib/types';
 
@@ -17,10 +17,7 @@ const upcoming = (upcomingData as EventFeed).events;
 const allEvents = (calendarData as EventFeed).events;
 
 // Find the next race session across all series
-const nextRace = upcoming
-  .map(e => ({ event: e, session: getRaceSession(e.sessions) }))
-  .filter(x => x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
-  .sort((a, b) => new Date(a.session!.startTimeUTC).getTime() - new Date(b.session!.startTimeUTC).getTime())[0];
+const nextRace = getNextRaceMatch(upcoming, now);
 
 const fallbackHero = nextRace
   ?? upcoming
@@ -99,13 +96,7 @@ dashboardEvents.sort((a, b) => a.dateStart.localeCompare(b.dateStart));
 
 // Group by week label
 function getWeekLabel(event: RaceEvent): string {
-  // Use the race session start time for past-detection if available;
-  // fall back to dateEnd for events with placeholder/missing race times.
-  const raceSession = getRaceSession(event.sessions);
-  const isPast = (raceSession && !isPlaceholderTime(raceSession.startTimeUTC))
-    ? new Date(raceSession.startTimeUTC) < now
-    : isPastEvent(event.dateEnd, event.sessions);
-  if (isPast) return '__recent__';
+  if (isPastEvent(event.dateEnd, event.sessions)) return '__recent__';
 
   const eventDate = new Date(event.dateStart + 'T12:00:00Z');
   const today = new Date();
@@ -601,7 +592,6 @@ const nextRaceMeta = fallbackHero ? getSeriesMeta(fallbackHero.event.seriesId) :
             <div
               data-series={event.seriesId}
               class="event-card-wrapper"
-              data-race-utc={getRaceSession(event.sessions)?.startTimeUTC ?? ''}
               data-date-start={event.dateStart}
             >
               <EventCard

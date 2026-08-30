@@ -5,7 +5,7 @@
  * Consolidates the former time-format.ts into a single module.
  */
 
-import { RACE_TYPES } from './sessions';
+import { RACE_TYPES, getSessionEstimatedEndTime } from './sessions';
 
 // ── Types ───────────────────────────────────────────────────────────────────
 
@@ -77,25 +77,27 @@ export function formatDateRange(dateStart: string, dateEnd: string): string {
 export interface SessionLike {
   type: string;
   startTimeUTC: string;
+  endTimeUTC?: string;
 }
 
-/** Latest real session start time for an event, if one exists. */
+/** Estimated end time of an event's chronologically-last real session, if one exists.
+ * Uses the session's end time (explicit or estimated from duration), not its start —
+ * otherwise a still-live final session (e.g. the Race) would count as "past" the
+ * instant it starts, contradicting isSessionLiveAt for the same session. */
 export function getEventLastSessionTime(sessions: SessionLike[] = []): Date | null {
-  const validTimes = sessions
-    .map(session => session.startTimeUTC)
-    .filter(utc => !isPlaceholderTime(utc))
-    .map(utc => new Date(utc))
-    .filter(date => !Number.isNaN(date.getTime()));
+  const validSessions = sessions.filter(s => !isPlaceholderTime(s.startTimeUTC));
+  if (validSessions.length === 0) return null;
 
-  if (validTimes.length === 0) return null;
-  return new Date(Math.max(...validTimes.map(date => date.getTime())));
+  const last = validSessions.reduce((latest, s) =>
+    new Date(s.startTimeUTC).getTime() > new Date(latest.startTimeUTC).getTime() ? s : latest);
+  return new Date(getSessionEstimatedEndTime(last));
 }
 
-/** True if an event has no remaining real sessions. */
-export function isPastEvent(dateEnd: string, sessions: SessionLike[] = []): boolean {
-  const lastSession = getEventLastSessionTime(sessions);
-  if (lastSession) return lastSession < new Date();
-  return new Date(dateEnd + 'T23:59:59Z') < new Date();
+/** True if an event has no remaining real sessions (including the last one still running). */
+export function isPastEvent(dateEnd: string, sessions: SessionLike[] = [], now: Date = new Date()): boolean {
+  const lastSessionEnd = getEventLastSessionTime(sessions);
+  if (lastSessionEnd) return lastSessionEnd < now;
+  return new Date(dateEnd + 'T23:59:59Z') < now;
 }
 
 /** True if the timestamp is a placeholder (year 1900). */
@@ -112,4 +114,18 @@ export function isPlaceholderTime(utc: string): boolean {
 export function getRaceSession(sessions: { type: string; startTimeUTC: string }[]): { type: string; startTimeUTC: string } | undefined {
   const raceSessions = sessions.filter(s => RACE_TYPES.has(s.type));
   return raceSessions[raceSessions.length - 1] ?? sessions[sessions.length - 1];
+}
+
+/** Among a set of events, find the one whose race session starts soonest after `now`.
+ * Single source of truth for "next up" — used both at build time (index/series pages)
+ * and recomputed client-side (EventCard) so the answer can't go stale between builds. */
+export function getNextRaceMatch<T extends { sessions: { type: string; startTimeUTC: string }[] }>(
+  events: T[],
+  now: Date = new Date(),
+): { event: T; session: { type: string; startTimeUTC: string } } | undefined {
+  return events
+    .map(event => ({ event, session: getRaceSession(event.sessions) }))
+    .filter((x): x is { event: T; session: { type: string; startTimeUTC: string } } =>
+      !!x.session && !isPlaceholderTime(x.session.startTimeUTC) && new Date(x.session.startTimeUTC) > now)
+    .sort((a, b) => new Date(a.session.startTimeUTC).getTime() - new Date(b.session.startTimeUTC).getTime())[0];
 }

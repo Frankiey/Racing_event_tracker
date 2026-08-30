@@ -70,7 +70,7 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
   class:list={[
     'group relative rounded-xl border transition-all duration-200 cursor-pointer select-none',
     past
-      ? 'border-zinc-800/40 bg-zinc-900/20 opacity-40 hover:opacity-60'
+      ? 'border-zinc-800/40 bg-zinc-900/20 opacity-70 hover:opacity-100'
       : highlight
         ? 'border-zinc-500/60 bg-zinc-900 shadow-lg shadow-black/40'
         : 'border-zinc-800 bg-zinc-900 hover:border-zinc-700',
@@ -81,12 +81,11 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
   aria-label={`View details for ${event.eventName}`}
 >
   {/* Left accent bar in series color */}
-  {!past && (
-    <div
-      class="absolute left-0 top-3 bottom-3 w-0.5 rounded-full"
-      style={`background-color: ${meta.color};`}
-    />
-  )}
+  <div
+    data-accent-bar
+    class:list={['absolute left-0 top-3 bottom-3 w-0.5 rounded-full', past && 'hidden']}
+    style={`background-color: ${meta.color};`}
+  />
 
   <div class="px-5 py-4">
     {/* Top row: badge + round + date + fav */}
@@ -94,19 +93,19 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       <div class="flex items-center gap-2 flex-wrap min-w-0">
         <SeriesBadge seriesId={event.seriesId} />
         <span class="text-[11px] text-zinc-500 font-mono tracking-tight">Rd {event.round}</span>
-        {past && (
-          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-800 text-zinc-600 font-semibold uppercase tracking-widest">
-            Done
-          </span>
-        )}
-        {highlight && !past && (
-          <span
-            class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest animate-pulse"
-            style={`background-color: ${meta.color}25; color: ${meta.color};`}
-          >
-            Next up
-          </span>
-        )}
+        <span
+          data-done-badge
+          class:list={['text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-800 text-zinc-600 font-semibold uppercase tracking-widest', !past && 'hidden']}
+        >
+          Done
+        </span>
+        <span
+          data-next-badge
+          class:list={['text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest animate-pulse', (!highlight || past) && 'hidden']}
+          style={`background-color: ${meta.color}25; color: ${meta.color};`}
+        >
+          Next up
+        </span>
       </div>
       <div class="flex items-center gap-2 shrink-0">
         <span class="text-sm font-medium text-zinc-400 tabular-nums">
@@ -127,7 +126,7 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
     </div>
 
     {/* Event name */}
-    <h3 class:list={[
+    <h3 data-event-name class:list={[
       'font-bold leading-tight mb-2 text-base',
       past ? 'text-zinc-500' : 'text-zinc-100',
     ]}>
@@ -201,8 +200,30 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
 </article>
 
 <script>
-  import { formatLocalValue, getLiveSession, readFavorites, toggleFavorite } from '../lib/client-utils';
+  import { formatLocalValue, getLiveSession, isPastEvent, readFavorites, toggleFavorite } from '../lib/client-utils';
+  import { getNextRaceMatch } from '../lib/time';
   import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
+
+  // Static builds run ~once/day (see .github/workflows/fetch-data.yml); "past"/"Next up"
+  // were baked in at that build time. Recompute both against the real clock on every load,
+  // the same way the Live badge below already does, so a finished race can't stay tagged
+  // "Next up" for the rest of the day.
+  const CARD_PAST_CLASSES = ['border-zinc-800/40', 'bg-zinc-900/20', 'opacity-70', 'hover:opacity-100'];
+  const CARD_HIGHLIGHT_CLASSES = ['border-zinc-500/60', 'bg-zinc-900', 'shadow-lg', 'shadow-black/40'];
+  const CARD_PLAIN_CLASSES = ['border-zinc-800', 'bg-zinc-900', 'hover:border-zinc-700'];
+
+  function applyCardVisualState(card: HTMLElement, past: boolean, highlight: boolean) {
+    card.classList.remove(...CARD_PAST_CLASSES, ...CARD_HIGHLIGHT_CLASSES, ...CARD_PLAIN_CLASSES);
+    card.classList.add(...(past ? CARD_PAST_CLASSES : highlight ? CARD_HIGHLIGHT_CLASSES : CARD_PLAIN_CLASSES));
+
+    card.querySelector('[data-accent-bar]')?.classList.toggle('hidden', past);
+    card.querySelector('[data-done-badge]')?.classList.toggle('hidden', !past);
+    card.querySelector('[data-next-badge]')?.classList.toggle('hidden', !highlight || past);
+
+    const nameEl = card.querySelector('[data-event-name]');
+    nameEl?.classList.toggle('text-zinc-500', past);
+    nameEl?.classList.toggle('text-zinc-100', !past);
+  }
 
   function initCards() {
     // ── Local time conversion + today indicators ──
@@ -270,12 +291,20 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       });
     });
 
-    // ── Live session indicators ──
+    // ── Live / past / next-up recompute (against the real clock, not the last build) ──
+    const nextRaceEventId = getNextRaceMatch(window.__rt?.allEvents ?? [])?.event.id ?? null;
+
     document.querySelectorAll<HTMLElement>('[data-event-id]').forEach(card => {
       const eventId = card.dataset.eventId;
       if (!eventId) return;
 
       const ev = getRegisteredEvent(eventId);
+      if (ev) {
+        const past = isPastEvent(ev.dateEnd, ev.sessions ?? []);
+        const highlight = !past && nextRaceEventId === eventId;
+        applyCardVisualState(card, past, highlight);
+      }
+
       const live = ev ? getLiveSession(ev.sessions ?? []) : null;
       const existing = card.querySelector('.live-badge');
       if (existing) existing.remove();
