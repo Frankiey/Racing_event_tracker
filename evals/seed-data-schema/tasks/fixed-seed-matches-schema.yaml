@@ -1,0 +1,92 @@
+id: fixed-seed-matches-schema
+name: Corrected seed file structurally matches the real schema
+description: >-
+  Structural check on top of fix-broken-fixture: fgt-fixed-seed.json is the
+  corrected version of fgt-broken-seed.json (duplicate id resolved to
+  fgt-2026-r02, round gap closed to 2, countryCode fixed to alpha-2 NL) and
+  must validate against the real pipeline/validate.py seed schema, not just
+  contain the right substrings.
+tags:
+  - happy-path
+  - schema
+inputs:
+  prompt: >-
+    Here is fgt-fixed-seed.json after every schema violation was corrected.
+    Echo back the full corrected event array so it can be re-validated.
+  files:
+    - path: fgt-fixed-seed.json
+expected:
+  should_trigger: true
+graders:
+  - type: json_schema
+    name: corrected-seed-conforms-to-schema
+    config:
+      extract_json: true
+      schema:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          required:
+            - id
+            - seriesId
+            - eventName
+            - dateStart
+            - dateEnd
+            - sessions
+          properties:
+            id:
+              type: string
+              pattern: "^[a-z0-9]+-[0-9]{4}-r[0-9]{2}$"
+            seriesId:
+              type: string
+              pattern: "^[a-z0-9]+$"
+            eventName:
+              type: string
+              minLength: 1
+            round:
+              type: integer
+              minimum: 1
+            circuit:
+              type: object
+              required:
+                - name
+                - country
+                - countryCode
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                city:
+                  type: string
+                  minLength: 1
+                country:
+                  type: string
+                  minLength: 1
+                countryCode:
+                  type: string
+                  pattern: "^[A-Z]{2}$"
+            sessions:
+              type: array
+              minItems: 1
+              items:
+                type: object
+                required:
+                  - type
+                  - startTimeUTC
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                  startTimeUTC:
+                    type: string
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+                  endTimeUTC:
+                    type: string
+                    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            dateStart:
+              type: string
+              pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            dateEnd:
+              type: string
+              pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
