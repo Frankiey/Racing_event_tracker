@@ -1,0 +1,62 @@
+id: action-sequence-happy-path
+name: Action sequence — happy path tool ordering (Track B only)
+description: >-
+  Same scenario as happy-path-seed-series: add the Fictional GT Trophy from
+  fgt-calendar.md. Where that task's `behavior` grader only checks a bounded
+  tool-call COUNT, this one checks the ORDER of tool calls against the
+  add-new-series checklist: read the fixture, create the seed file, edit the
+  three registration/wiring files, then validate. That is a materially richer
+  signal for this skill — it can catch an agent that e.g. runs validate:data
+  before writing the seed file, or never touches series.ts at all, which a
+  bare tool-call-count budget cannot.
+
+  DISABLED (`enabled: false`) on purpose. waza's `mock` executor (see
+  internal/execution/mock.go upstream) always returns an empty tool-call
+  list — it only text-echoes the prompt/description/fixture content, it never
+  actually invokes tools. Given that, `action_sequence` is mathematically
+  unpassable under mock for any non-empty `expected_actions`: exact_match
+  requires equal length (0 vs N), in_order_match and any_order_match both
+  require every expected action to appear at least once, and the grader
+  config itself rejects an empty `expected_actions` list at load time. There
+  is no config of this grader that both (a) says something real and (b) can
+  score a pass against zero tool calls. Turning this task on under mock would
+  therefore permanently fail `waza run` for this suite — including in CI
+  (.github/workflows/skill-evals.yml runs `waza run` with no failure
+  tolerance) — for every future PR, with zero signal value: it would always
+  fail, on every model, forever, regardless of the skill's real behavior.
+
+  This task is left fully specified and disabled so it's ready to flip on
+  (`enabled: true`) once Track B wires up a real engine (e.g. `copilot`)
+  that actually executes tools. At that point, the `expected_actions` list
+  below should be recalibrated against a real transcript — the tool-name
+  vocabulary here follows the canonical examples in waza's own
+  docs/graders/action_sequence.md ("bash", "edit", "view", "create",
+  "report_progress"), not a confirmed capture of what the underlying
+  GitHub Copilot CLI SDK actually names its tools call-by-call; that still
+  needs to be checked against a live non-mock session log before this is
+  trusted as gospel.
+enabled: false
+tags:
+  - happy-path
+  - action-sequence
+  - track-b-only
+inputs:
+  prompt: >-
+    Add the Fictional GT Trophy (id: fgt) to RaceTrack using the calendar in
+    fgt-calendar.md. Create the seed file and register the series metadata.
+  files:
+    - path: fgt-calendar.md
+expected:
+  should_trigger: true
+graders:
+  - type: action_sequence
+    name: checklist-order
+    config:
+      matching_mode: in_order_match
+      expected_actions:
+        - "view"
+        - "create"
+        - "edit"
+        - "edit"
+        - "edit"
+        - "bash"
