@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-29T04:15:32Z",
+  "generated": "2026-08-30T04:16:41Z",
   "season": 2026,
-  "eventCount": 82,
+  "eventCount": 80,
   "sources": [
     "dtm",
     "f1",
@@ -157,32 +157,6 @@
       "dateEnd": "2026-08-30"
     },
     {
-      "id": "nascar-2026-r30",
-      "seriesId": "nascar",
-      "eventName": "Coke Zero Sugar 400",
-      "round": 30,
-      "circuit": {
-        "name": "Daytona International Speedway",
-        "city": "Daytona Beach",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 29.1872,
-        "lng": -81.0711
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-28T21:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-29T23:30:00Z"
-        }
-      ],
-      "dateStart": "2026-08-28",
-      "dateEnd": "2026-08-29"
-    },
-    {
       "id": "gtworld-2026-r07",
       "seriesId": "gtworld",
       "eventName": "GT World Nürburgring",
@@ -222,43 +196,6 @@
       ],
       "dateStart": "2026-08-29",
       "dateEnd": "2026-08-30"
-    },
-    {
-      "id": "indycar-2026-r16",
-      "seriesId": "indycar",
-      "eventName": "Snap-on Makers and Fixers 250",
-      "round": 16,
-      "circuit": {
-        "name": "Milwaukee Mile",
-        "city": "West Allis",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 43.0469,
-        "lng": -88.0373,
-        "lengthKm": 1.633,
-        "lapRecord": {
-          "time": "0:21.519",
-          "driver": "Scott Pruett",
-          "car": "Reynard 97I",
-          "year": 1998
-        }
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-08-29T17:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-29T18:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-29T19:30:00Z"
-        }
-      ],
-      "dateStart": "2026-08-29",
-      "dateEnd": "2026-08-29"
     },
     {
       "id": "indycar-2026-r17",
