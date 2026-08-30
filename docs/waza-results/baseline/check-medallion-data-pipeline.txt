@@ -1,0 +1,51 @@
+
+🔍 Skill Readiness Check
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Skill: medallion-data-pipeline
+
+📋 Compliance Score: Medium-High
+   ⚠️  Good, but could be improved. Missing routing clarity.
+
+   Issues found:
+   ❌  SKILL.md is 744 tokens (hard limit 500)
+
+📐 Spec Compliance: 9/9 checks passed
+   ✅  Meets agentskills.io specification.
+
+📎 Links: 0/0 valid
+   —  No links found.
+
+📊 Token Budget: 744 / 500 tokens
+   ❌  Exceeds limit by 244 tokens. Consider reducing content.
+
+🧪 Evaluation Suite: Not Found
+   ⚠️  No eval.yaml found. Consider creating tests.
+
+💡 Advisory Checks
+   ✅  [module-count] Found 0 reference module(s)
+   ❌  [complexity] Complexity: comprehensive (744 tokens, 0 modules)
+   ✅  [negative-delta-risk] No negative delta risk patterns detected
+   ✅  [procedural-content] Description contains procedural language
+   ✅  [over-specificity] No over-specificity patterns detected
+   ✅  [cross-model-density] Advisory 16: first sentence doesn't lead with action verb (reduces clarity)
+   ❌  [body-structure] Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found
+   ✅  [progressive-disclosure] Content structure supports progressive disclosure
+   ✅  [scope-reduction] Capability scope: 4 signal(s) detected (4 level-2 heading(s), 1 numbered procedure(s))
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 Overall Readiness
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  Your skill needs some work before submission.
+
+🎯 Next Steps
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+To improve your skill:
+
+1. Add routing clarity (e.g., **UTILITY SKILL**, INVOKES:, FOR SINGLE OPERATIONS:)
+2. Run 'waza dev' for interactive compliance improvement
+3. Reduce SKILL.md by 244 tokens. Run 'waza tokens suggest' for optimization tips
+4. Create an evaluation suite with 'waza init' or 'waza generate SKILL.md'
+

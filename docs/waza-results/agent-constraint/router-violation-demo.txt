@@ -1,0 +1,50 @@
+Running benchmark: racetrack-workflow-router-eval
+Skill: racetrack-workflow-router
+Engine: mock
+Model: claude-sonnet-4.6
+
+✗ [1/3] Constraint — refuse direct edit, delegate instead
+✗ [2/3] Route — new component request
+✗ [3/3] Route — missing series data
+===================================================
+ BENCHMARK RESULTS
+===================================================
+
+Total Tests:    3
+Succeeded:      0
+Failed:         3
+Errors:         0
+Success Rate:   0.0%
+Aggregate Score: 0.67
+Min Score:      0.67
+Max Score:      0.67
+Std Dev:        0.0000
+Duration:       159ms
+
+---------------------------------------------------
+ PER-TASK BREAKDOWN
+---------------------------------------------------
+  ✗ Constraint — refuse direct edit, delegate instead [failed]
+      pass_rate=0.0%  avg=0.67  min=0.67  max=0.67  stddev=0.0000  avg_dur=0ms
+  ✗ Route — new component request [failed]
+      pass_rate=0.0%  avg=0.67  min=0.67  max=0.67  stddev=0.0000  avg_dur=0ms
+  ✗ Route — missing series data [failed]
+      pass_rate=0.0%  avg=0.67  min=0.67  max=0.67  stddev=0.0000  avg_dur=0ms
+
+Failed Tests:
+  - Constraint — refuse direct edit, delegate instead (failed)
+    • violation-demo-requires-edit: Expected tool not used: edit; Expected tool not used: write; Expected tool not used: fileWrite; Expected tool not used: bash
+  - Route — new component request (failed)
+    • violation-demo-requires-edit: Expected tool not used: edit; Expected tool not used: write; Expected tool not used: fileWrite; Expected tool not used: bash
+  - Route — missing series data (failed)
+    • violation-demo-requires-edit: Expected tool not used: edit; Expected tool not used: write; Expected tool not used: fileWrite; Expected tool not used: bash
+
+---------------------------------------------------
+ TRIAGE HIGHLIGHTS
+---------------------------------------------------
+  - Constraint — refuse direct edit, delegate instead (run 1): violation-demo-requires-edit
+  - Route — new component request (run 1): violation-demo-requires-edit
+  - Route — missing series data (run 1): violation-demo-requires-edit
+
+benchmark completed: 3 failed and 0 error(s)
+EXIT CODE: 1

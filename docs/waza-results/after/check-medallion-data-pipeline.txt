@@ -1,0 +1,50 @@
+
+🔍 Skill Readiness Check
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Skill: medallion-data-pipeline
+
+📋 Compliance Score: High
+   ✅  Excellent! Your skill meets all compliance requirements.
+
+📐 Spec Compliance: 9/9 checks passed
+   ✅  Meets agentskills.io specification.
+
+🔌 MCP Integration: 2/4
+   ⚠️  MCP documentation incomplete (2/4 checks passed).
+   ⚠️  [mcp-tools-table] No MCP tools table found — add a Markdown table listing tools used
+   ⚠️  [mcp-prerequisites] MCP prerequisites not documented — describe which MCP servers are needed
+
+📎 Links: 0/0 valid
+   —  No links found.
+
+📊 Token Budget: 489 / 500 tokens
+   ✅  Within budget (11 tokens remaining).
+
+🧪 Evaluation Suite: Not Found
+   ⚠️  No eval.yaml found. Consider creating tests.
+
+💡 Advisory Checks
+   ✅  [module-count] Found 0 reference module(s)
+   ✅  [complexity] Complexity: compact (489 tokens, 0 modules)
+   ✅  [negative-delta-risk] No negative delta risk patterns detected
+   ✅  [procedural-content] Description contains procedural language
+   ✅  [over-specificity] No over-specificity patterns detected
+   ✅  [cross-model-density] Advisory 16: first sentence doesn't lead with action verb (reduces clarity)
+   ❌  [body-structure] Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found
+   ✅  [progressive-disclosure] Content structure supports progressive disclosure
+   ✅  [scope-reduction] Capability scope: 3 signal(s) detected (3 level-2 heading(s), 1 numbered procedure(s))
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 Overall Readiness
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅  Your skill is ready for submission!
+
+🎯 Next Steps
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+To improve your skill:
+
+1. Create an evaluation suite with 'waza init' or 'waza generate SKILL.md'
+

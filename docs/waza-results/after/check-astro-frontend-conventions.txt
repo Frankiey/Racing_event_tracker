@@ -1,0 +1,51 @@
+
+🔍 Skill Readiness Check
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Skill: astro-frontend-conventions
+
+📋 Compliance Score: High
+   ✅  Excellent! Your skill meets all compliance requirements.
+
+📐 Spec Compliance: 9/9 checks passed
+   ✅  Meets agentskills.io specification.
+
+📎 Links: 0/0 valid
+   —  No links found.
+
+📊 Token Budget: 496 / 500 tokens
+   ✅  Within budget (4 tokens remaining).
+
+🧪 Evaluation Suite: Found
+   ✅  eval.yaml detected. Run 'waza run eval.yaml' to test.
+
+📐 Schema Validation: Passed
+   ✅  eval.yaml schema valid
+   ✅  3 task file(s) validated
+
+💡 Advisory Checks
+   ✅  [module-count] Found 0 reference module(s)
+   ✅  [complexity] Complexity: compact (496 tokens, 0 modules)
+   ✅  [negative-delta-risk] No negative delta risk patterns detected
+   ✅  [procedural-content] Description contains procedural language
+   ✅  [over-specificity] No over-specificity patterns detected
+   ✅  [cross-model-density] Advisory 16: first sentence doesn't lead with action verb (reduces clarity)
+   ❌  [body-structure] Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found
+   ✅  [progressive-disclosure] Content structure supports progressive disclosure
+   ✅  [scope-reduction] Capability scope: 4 signal(s) detected (2 USE FOR item(s), 4 level-2 heading(s), 1 numbered procedure(s))
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 Overall Readiness
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅  Your skill is ready for submission!
+
+🎯 Next Steps
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ No action needed! Your skill looks great.
+
+Consider:
+  • Running 'waza run eval.yaml' to verify functionality
+  • Sharing your skill with the community
+

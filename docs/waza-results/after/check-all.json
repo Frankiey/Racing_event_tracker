@@ -1,0 +1,617 @@
+{
+  "timestamp": "2026-07-15T09:56:58.507692Z",
+  "skills": [
+    {
+      "name": "add-new-series",
+      "path": "/Users/franknoorloos/projects/Racing_event_tracker/.github/skills/add-new-series/SKILL.md",
+      "ready": true,
+      "compliance": {
+        "level": "High"
+      },
+      "tokenBudget": {
+        "count": 491,
+        "limit": 500,
+        "exceeded": false,
+        "warning": false,
+        "status": "ok"
+      },
+      "specCompliance": [
+        {
+          "name": "spec-frontmatter",
+          "passed": true,
+          "summary": "Frontmatter structure valid with required fields",
+          "status": "ok"
+        },
+        {
+          "name": "spec-allowed-fields",
+          "passed": true,
+          "summary": "All frontmatter fields are spec-allowed",
+          "status": "ok"
+        },
+        {
+          "name": "spec-name",
+          "passed": true,
+          "summary": "Name follows spec naming rules",
+          "status": "ok"
+        },
+        {
+          "name": "spec-dir-match",
+          "passed": true,
+          "summary": "Directory name matches skill name",
+          "status": "ok"
+        },
+        {
+          "name": "spec-description",
+          "passed": true,
+          "summary": "Description is valid",
+          "status": "ok"
+        },
+        {
+          "name": "spec-security",
+          "passed": true,
+          "summary": "No security risks detected in frontmatter",
+          "status": "ok"
+        },
+        {
+          "name": "spec-compatibility",
+          "passed": true,
+          "summary": "No compatibility field (optional)",
+          "status": "ok"
+        },
+        {
+          "name": "spec-license",
+          "passed": true,
+          "summary": "No license field found",
+          "status": "warning",
+          "evidence": "Best practice: include a license field (e.g., MIT, Apache-2.0)"
+        },
+        {
+          "name": "spec-version",
+          "passed": true,
+          "summary": "No metadata.version field found",
+          "status": "warning",
+          "evidence": "Best practice: include metadata.version for tracking and compatibility"
+        }
+      ],
+      "mcpIntegration": {
+        "score": 1,
+        "total": 4,
+        "issues": [
+          {
+            "severity": "warning",
+            "message": "[mcp-tools-table] No MCP tools table found — add a Markdown table listing tools used"
+          },
+          {
+            "severity": "warning",
+            "message": "[mcp-prerequisites] MCP prerequisites not documented — describe which MCP servers are needed"
+          },
+          {
+            "severity": "warning",
+            "message": "[mcp-cli-fallback] No CLI fallback documented — describe behavior when MCP is unavailable"
+          }
+        ]
+      },
+      "links": {
+        "valid": 0,
+        "total": 0,
+        "passed": true
+      },
+      "eval": {
+        "found": false
+      },
+      "advisoryChecks": [
+        {
+          "name": "module-count",
+          "passed": true,
+          "summary": "Found 0 reference module(s)",
+          "status": "ok"
+        },
+        {
+          "name": "complexity",
+          "passed": true,
+          "summary": "Complexity: compact (491 tokens, 0 modules)",
+          "status": "ok"
+        },
+        {
+          "name": "negative-delta-risk",
+          "passed": true,
+          "summary": "No negative delta risk patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "procedural-content",
+          "passed": true,
+          "summary": "Description contains procedural language",
+          "status": "ok"
+        },
+        {
+          "name": "over-specificity",
+          "passed": true,
+          "summary": "No over-specificity patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "cross-model-density",
+          "passed": false,
+          "summary": "Advisory 16: word count is 63 (\u003e60 may reduce cross-model effectiveness); first sentence doesn't lead with action verb (reduces clarity)",
+          "status": "warning"
+        },
+        {
+          "name": "body-structure",
+          "passed": false,
+          "summary": "Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found",
+          "status": "warning"
+        },
+        {
+          "name": "progressive-disclosure",
+          "passed": true,
+          "summary": "Content structure supports progressive disclosure",
+          "status": "ok"
+        },
+        {
+          "name": "scope-reduction",
+          "passed": true,
+          "summary": "Capability scope: 3 signal(s) detected (3 USE FOR item(s), 1 level-2 heading(s), 1 numbered procedure(s))",
+          "status": "ok"
+        }
+      ],
+      "nextSteps": [
+        "Create an evaluation suite with 'waza init' or 'waza generate SKILL.md'"
+      ]
+    },
+    {
+      "name": "astro-frontend-conventions",
+      "path": "/Users/franknoorloos/projects/Racing_event_tracker/.github/skills/astro-frontend-conventions/SKILL.md",
+      "ready": true,
+      "compliance": {
+        "level": "High"
+      },
+      "tokenBudget": {
+        "count": 496,
+        "limit": 500,
+        "exceeded": false,
+        "warning": false,
+        "status": "ok"
+      },
+      "specCompliance": [
+        {
+          "name": "spec-frontmatter",
+          "passed": true,
+          "summary": "Frontmatter structure valid with required fields",
+          "status": "ok"
+        },
+        {
+          "name": "spec-allowed-fields",
+          "passed": true,
+          "summary": "All frontmatter fields are spec-allowed",
+          "status": "ok"
+        },
+        {
+          "name": "spec-name",
+          "passed": true,
+          "summary": "Name follows spec naming rules",
+          "status": "ok"
+        },
+        {
+          "name": "spec-dir-match",
+          "passed": true,
+          "summary": "Directory name matches skill name",
+          "status": "ok"
+        },
+        {
+          "name": "spec-description",
+          "passed": true,
+          "summary": "Description is valid",
+          "status": "ok"
+        },
+        {
+          "name": "spec-security",
+          "passed": true,
+          "summary": "No security risks detected in frontmatter",
+          "status": "ok"
+        },
+        {
+          "name": "spec-compatibility",
+          "passed": true,
+          "summary": "No compatibility field (optional)",
+          "status": "ok"
+        },
+        {
+          "name": "spec-license",
+          "passed": true,
+          "summary": "No license field found",
+          "status": "warning",
+          "evidence": "Best practice: include a license field (e.g., MIT, Apache-2.0)"
+        },
+        {
+          "name": "spec-version",
+          "passed": true,
+          "summary": "No metadata.version field found",
+          "status": "warning",
+          "evidence": "Best practice: include metadata.version for tracking and compatibility"
+        }
+      ],
+      "links": {
+        "valid": 0,
+        "total": 0,
+        "passed": true
+      },
+      "eval": {
+        "found": true,
+        "path": "/Users/franknoorloos/projects/Racing_event_tracker/evals/astro-frontend-conventions/eval.yaml"
+      },
+      "schema": {
+        "valid": true
+      },
+      "advisoryChecks": [
+        {
+          "name": "module-count",
+          "passed": true,
+          "summary": "Found 0 reference module(s)",
+          "status": "ok"
+        },
+        {
+          "name": "complexity",
+          "passed": true,
+          "summary": "Complexity: compact (496 tokens, 0 modules)",
+          "status": "ok"
+        },
+        {
+          "name": "negative-delta-risk",
+          "passed": true,
+          "summary": "No negative delta risk patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "procedural-content",
+          "passed": true,
+          "summary": "Description contains procedural language",
+          "status": "ok"
+        },
+        {
+          "name": "over-specificity",
+          "passed": true,
+          "summary": "No over-specificity patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "cross-model-density",
+          "passed": true,
+          "summary": "Advisory 16: first sentence doesn't lead with action verb (reduces clarity)",
+          "status": "ok"
+        },
+        {
+          "name": "body-structure",
+          "passed": false,
+          "summary": "Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found",
+          "status": "warning"
+        },
+        {
+          "name": "progressive-disclosure",
+          "passed": true,
+          "summary": "Content structure supports progressive disclosure",
+          "status": "ok"
+        },
+        {
+          "name": "scope-reduction",
+          "passed": true,
+          "summary": "Capability scope: 4 signal(s) detected (2 USE FOR item(s), 4 level-2 heading(s), 1 numbered procedure(s))",
+          "status": "ok"
+        }
+      ],
+      "nextSteps": null
+    },
+    {
+      "name": "medallion-data-pipeline",
+      "path": "/Users/franknoorloos/projects/Racing_event_tracker/.github/skills/medallion-data-pipeline/SKILL.md",
+      "ready": true,
+      "compliance": {
+        "level": "High"
+      },
+      "tokenBudget": {
+        "count": 489,
+        "limit": 500,
+        "exceeded": false,
+        "warning": false,
+        "status": "ok"
+      },
+      "specCompliance": [
+        {
+          "name": "spec-frontmatter",
+          "passed": true,
+          "summary": "Frontmatter structure valid with required fields",
+          "status": "ok"
+        },
+        {
+          "name": "spec-allowed-fields",
+          "passed": true,
+          "summary": "All frontmatter fields are spec-allowed",
+          "status": "ok"
+        },
+        {
+          "name": "spec-name",
+          "passed": true,
+          "summary": "Name follows spec naming rules",
+          "status": "ok"
+        },
+        {
+          "name": "spec-dir-match",
+          "passed": true,
+          "summary": "Directory name matches skill name",
+          "status": "ok"
+        },
+        {
+          "name": "spec-description",
+          "passed": true,
+          "summary": "Description is valid",
+          "status": "ok"
+        },
+        {
+          "name": "spec-security",
+          "passed": true,
+          "summary": "No security risks detected in frontmatter",
+          "status": "ok"
+        },
+        {
+          "name": "spec-compatibility",
+          "passed": true,
+          "summary": "No compatibility field (optional)",
+          "status": "ok"
+        },
+        {
+          "name": "spec-license",
+          "passed": true,
+          "summary": "No license field found",
+          "status": "warning",
+          "evidence": "Best practice: include a license field (e.g., MIT, Apache-2.0)"
+        },
+        {
+          "name": "spec-version",
+          "passed": true,
+          "summary": "No metadata.version field found",
+          "status": "warning",
+          "evidence": "Best practice: include metadata.version for tracking and compatibility"
+        }
+      ],
+      "mcpIntegration": {
+        "score": 2,
+        "total": 4,
+        "issues": [
+          {
+            "severity": "warning",
+            "message": "[mcp-tools-table] No MCP tools table found — add a Markdown table listing tools used"
+          },
+          {
+            "severity": "warning",
+            "message": "[mcp-prerequisites] MCP prerequisites not documented — describe which MCP servers are needed"
+          }
+        ]
+      },
+      "links": {
+        "valid": 0,
+        "total": 0,
+        "passed": true
+      },
+      "eval": {
+        "found": false
+      },
+      "advisoryChecks": [
+        {
+          "name": "module-count",
+          "passed": true,
+          "summary": "Found 0 reference module(s)",
+          "status": "ok"
+        },
+        {
+          "name": "complexity",
+          "passed": true,
+          "summary": "Complexity: compact (489 tokens, 0 modules)",
+          "status": "ok"
+        },
+        {
+          "name": "negative-delta-risk",
+          "passed": true,
+          "summary": "No negative delta risk patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "procedural-content",
+          "passed": true,
+          "summary": "Description contains procedural language",
+          "status": "ok"
+        },
+        {
+          "name": "over-specificity",
+          "passed": true,
+          "summary": "No over-specificity patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "cross-model-density",
+          "passed": true,
+          "summary": "Advisory 16: first sentence doesn't lead with action verb (reduces clarity)",
+          "status": "ok"
+        },
+        {
+          "name": "body-structure",
+          "passed": false,
+          "summary": "Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found",
+          "status": "warning"
+        },
+        {
+          "name": "progressive-disclosure",
+          "passed": true,
+          "summary": "Content structure supports progressive disclosure",
+          "status": "ok"
+        },
+        {
+          "name": "scope-reduction",
+          "passed": true,
+          "summary": "Capability scope: 3 signal(s) detected (3 level-2 heading(s), 1 numbered procedure(s))",
+          "status": "ok"
+        }
+      ],
+      "nextSteps": [
+        "Create an evaluation suite with 'waza init' or 'waza generate SKILL.md'"
+      ]
+    },
+    {
+      "name": "seed-data-schema",
+      "path": "/Users/franknoorloos/projects/Racing_event_tracker/.github/skills/seed-data-schema/SKILL.md",
+      "ready": true,
+      "compliance": {
+        "level": "High"
+      },
+      "tokenBudget": {
+        "count": 499,
+        "limit": 500,
+        "exceeded": false,
+        "warning": false,
+        "status": "ok"
+      },
+      "specCompliance": [
+        {
+          "name": "spec-frontmatter",
+          "passed": true,
+          "summary": "Frontmatter structure valid with required fields",
+          "status": "ok"
+        },
+        {
+          "name": "spec-allowed-fields",
+          "passed": true,
+          "summary": "All frontmatter fields are spec-allowed",
+          "status": "ok"
+        },
+        {
+          "name": "spec-name",
+          "passed": true,
+          "summary": "Name follows spec naming rules",
+          "status": "ok"
+        },
+        {
+          "name": "spec-dir-match",
+          "passed": true,
+          "summary": "Directory name matches skill name",
+          "status": "ok"
+        },
+        {
+          "name": "spec-description",
+          "passed": true,
+          "summary": "Description is valid",
+          "status": "ok"
+        },
+        {
+          "name": "spec-security",
+          "passed": true,
+          "summary": "No security risks detected in frontmatter",
+          "status": "ok"
+        },
+        {
+          "name": "spec-compatibility",
+          "passed": true,
+          "summary": "No compatibility field (optional)",
+          "status": "ok"
+        },
+        {
+          "name": "spec-license",
+          "passed": true,
+          "summary": "No license field found",
+          "status": "warning",
+          "evidence": "Best practice: include a license field (e.g., MIT, Apache-2.0)"
+        },
+        {
+          "name": "spec-version",
+          "passed": true,
+          "summary": "No metadata.version field found",
+          "status": "warning",
+          "evidence": "Best practice: include metadata.version for tracking and compatibility"
+        }
+      ],
+      "mcpIntegration": {
+        "score": 1,
+        "total": 4,
+        "issues": [
+          {
+            "severity": "warning",
+            "message": "[mcp-tools-table] No MCP tools table found — add a Markdown table listing tools used"
+          },
+          {
+            "severity": "warning",
+            "message": "[mcp-prerequisites] MCP prerequisites not documented — describe which MCP servers are needed"
+          },
+          {
+            "severity": "warning",
+            "message": "[mcp-cli-fallback] No CLI fallback documented — describe behavior when MCP is unavailable"
+          }
+        ]
+      },
+      "links": {
+        "valid": 0,
+        "total": 0,
+        "passed": true
+      },
+      "eval": {
+        "found": false
+      },
+      "advisoryChecks": [
+        {
+          "name": "module-count",
+          "passed": true,
+          "summary": "Found 0 reference module(s)",
+          "status": "ok"
+        },
+        {
+          "name": "complexity",
+          "passed": true,
+          "summary": "Complexity: compact (499 tokens, 0 modules)",
+          "status": "ok"
+        },
+        {
+          "name": "negative-delta-risk",
+          "passed": true,
+          "summary": "No negative delta risk patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "procedural-content",
+          "passed": true,
+          "summary": "Description contains procedural language",
+          "status": "ok"
+        },
+        {
+          "name": "over-specificity",
+          "passed": true,
+          "summary": "No over-specificity patterns detected",
+          "status": "ok"
+        },
+        {
+          "name": "cross-model-density",
+          "passed": true,
+          "summary": "Advisory 16: first sentence doesn't lead with action verb (reduces clarity)",
+          "status": "ok"
+        },
+        {
+          "name": "body-structure",
+          "passed": false,
+          "summary": "Advisory 17: body structure quality — no examples section found; no error handling or troubleshooting section found",
+          "status": "warning"
+        },
+        {
+          "name": "progressive-disclosure",
+          "passed": true,
+          "summary": "Content structure supports progressive disclosure",
+          "status": "ok"
+        },
+        {
+          "name": "scope-reduction",
+          "passed": true,
+          "summary": "Capability scope: 3 signal(s) detected (3 USE FOR item(s), 3 level-2 heading(s))",
+          "status": "ok"
+        }
+      ],
+      "nextSteps": [
+        "Create an evaluation suite with 'waza init' or 'waza generate SKILL.md'"
+      ]
+    }
+  ]
+}
