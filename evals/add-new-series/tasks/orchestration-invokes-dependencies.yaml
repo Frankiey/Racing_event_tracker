@@ -1,5 +1,5 @@
 id: orchestration-invokes-dependencies
-name: Orchestration — invokes seed-data-schema then medallion-data-pipeline
+name: Orchestration — invokes seed-data-schema then medallion-data-pipeline (Track B only)
 description: >-
   End-to-end onboarding request for the Fictional GT Trophy. add-new-series'
   own checklist creates data/seed/fgt.json and registers fgt in the SERIES
@@ -7,12 +7,29 @@ description: >-
   rebuilding the pipeline per medallion-data-pipeline (steps 4-5). Asserts
   that composition actually happens at runtime, in that order, via the
   skill_invocation grader — the INVOKES: frontmatter line is otherwise an
-  unchecked assertion. NOTE: under executor: mock, this grader's
-  required_skills check cannot meaningfully pass — see limitation note in
-  the bd issue / commit message.
+  unchecked assertion.
+
+  DISABLED (`enabled: false`) on purpose, same root cause as the
+  action-sequence-happy-path task in this same directory: waza's `mock`
+  executor never populates SkillInvocations (internal/execution/mock.go
+  returns an empty event list; internal/graders/skill_invocation_grader.go
+  reads gradingContext.SkillInvocations directly, which is only populated
+  from real SessionEventTypeSkillInvoked events on a real Copilot SDK
+  session). A non-empty required_skills list can therefore never be
+  satisfied under mock, for any prompt or fixture design — confirmed
+  empirically, not just from reading the source. Turning this on under mock
+  would permanently fail `waza run` for this suite (including in CI, which
+  runs with no failure tolerance) for every future PR, regardless of the
+  skill's real behavior.
+
+  Left fully specified and disabled so it's ready to flip on
+  (`enabled: true`) once Track B wires up a real engine that actually
+  invokes skills.
 tags:
   - orchestration
   - skill-composition
+  - track-b-only
+enabled: false
 inputs:
   prompt: >-
     Add the Fictional GT Trophy (id: fgt) to RaceTrack end to end: create the
