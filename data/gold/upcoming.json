@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-30T15:03:00Z",
+  "generated": "2026-08-31T04:19:32Z",
   "season": 2026,
-  "eventCount": 76,
+  "eventCount": 75,
   "sources": [
     "dtm",
     "f1",
@@ -22,39 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "indycar-2026-r17",
-      "seriesId": "indycar",
-      "eventName": "Snap-on Milwaukee Mile 250",
-      "round": 17,
-      "circuit": {
-        "name": "Milwaukee Mile",
-        "city": "West Allis",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 43.0469,
-        "lng": -88.0373,
-        "lengthKm": 1.633,
-        "lapRecord": {
-          "time": "0:21.519",
-          "driver": "Scott Pruett",
-          "car": "Reynard 97I",
-          "year": 1998
-        }
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-08-30T15:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-08-30T17:00:00Z"
-        }
-      ],
-      "dateStart": "2026-08-30",
-      "dateEnd": "2026-08-30"
-    },
     {
       "id": "f3-2026-r08",
       "seriesId": "f3",
@@ -335,6 +302,40 @@
       "dateEnd": "2026-09-06"
     },
     {
+      "id": "f3-2026-r09",
+      "seriesId": "f3",
+      "eventName": "Madrid",
+      "round": 9,
+      "circuit": {
+        "name": "Madring",
+        "city": "Madrid",
+        "country": "Spain",
+        "countryCode": "ES",
+        "lat": 40.4653,
+        "lng": -3.6153
+      },
+      "sessions": [
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-09-11T07:00:00Z"
+        },
+        {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-09-11T11:00:00Z"
+        },
+        {
+          "type": "Sprint Race",
+          "startTimeUTC": "2026-09-12T08:00:00Z"
+        },
+        {
+          "type": "Feature Race",
+          "startTimeUTC": "2026-09-13T08:30:00Z"
+        }
+      ],
+      "dateStart": "2026-09-11",
+      "dateEnd": "2026-09-13"
+    },
+    {
       "id": "moto3-2026-r14",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of San Marino",
@@ -371,40 +372,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-09-13T09:00:00Z"
-        }
-      ],
-      "dateStart": "2026-09-11",
-      "dateEnd": "2026-09-13"
-    },
-    {
-      "id": "f3-2026-r09",
-      "seriesId": "f3",
-      "eventName": "Madrid",
-      "round": 9,
-      "circuit": {
-        "name": "Madring",
-        "city": "Madrid",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 40.4653,
-        "lng": -3.6153
-      },
-      "sessions": [
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-09-11T07:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-11T11:00:00Z"
-        },
-        {
-          "type": "Sprint Race",
-          "startTimeUTC": "2026-09-12T08:00:00Z"
-        },
-        {
-          "type": "Feature Race",
-          "startTimeUTC": "2026-09-13T08:30:00Z"
         }
       ],
       "dateStart": "2026-09-11",
