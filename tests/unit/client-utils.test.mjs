@@ -16,7 +16,7 @@ import assert from 'node:assert/strict';
 
 // ── Imports ─────────────────────────────────────────────────────────────────
 import { countryFlag, isPastEvent, isPlaceholderTime, getNextRaceMatch } from '../../src/lib/time.ts';
-import { isSessionLiveAt } from '../../src/lib/sessions.ts';
+import { isSessionLiveAt, getNextSession } from '../../src/lib/sessions.ts';
 import { getSessionDurationMinutes } from '../../src/lib/sessions.ts';
 import { isSessionLive, getLiveSession, sleepVerdict } from '../../src/lib/client-utils.ts';
 
@@ -140,6 +140,41 @@ describe('getNextRaceMatch', () => {
       { id: 'moto3', sessions: [{ type: 'Race', startTimeUTC: '2026-08-30T11:00:00Z' }] },
     ];
     assert.equal(getNextRaceMatch(events, now), undefined);
+  });
+});
+
+// ── getNextSession ───────────────────────────────────────────────────────────
+// Backs both EventCard's SSR isNext bold/dot highlight and its client-side
+// initCards() recompute (see src/components/EventCard.astro). Regression
+// coverage: once all of a day's sessions have passed (e.g. Friday practice
+// and quali both ran), the "next" pick must move to the next future session
+// (e.g. Saturday's sprint race) rather than staying stuck on the passed one.
+
+describe('getNextSession', () => {
+  const sessions = [
+    { type: 'Practice', startTimeUTC: '2026-09-04T09:00:00Z' },
+    { type: 'Qualifying', startTimeUTC: '2026-09-04T13:00:00Z' },
+    { type: 'Sprint', startTimeUTC: '2026-09-05T10:00:00Z' },
+    { type: 'Race', startTimeUTC: '2026-09-06T14:00:00Z' },
+  ];
+
+  test('at build time (before any session), picks the first session', () => {
+    const buildTime = new Date('2026-09-04T08:00:00Z').getTime();
+    assert.equal(getNextSession(sessions, buildTime)?.type, 'Practice');
+  });
+
+  test('after Friday practice + quali both pass, moves on to Saturday sprint (not stuck on Friday)', () => {
+    const fridayAfternoon = new Date('2026-09-04T15:00:00Z').getTime(); // after both Friday sessions
+    assert.equal(getNextSession(sessions, fridayAfternoon)?.type, 'Sprint');
+  });
+
+  test('after every session has passed, returns null', () => {
+    const afterAll = new Date('2026-09-07T00:00:00Z').getTime();
+    assert.equal(getNextSession(sessions, afterAll), null);
+  });
+
+  test('returns null for an empty session list', () => {
+    assert.equal(getNextSession([]), null);
   });
 });
 

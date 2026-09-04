@@ -2,7 +2,7 @@
 import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { formatDateRange, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
-import { SESSION_ABBR, isRaceType } from '../lib/sessions';
+import { SESSION_ABBR, getNextSession, isRaceType } from '../lib/sessions';
 import broadcastData from '../../data/gold/broadcasts.json';
 
 const hasBroadcast = (seriesId: string) => !!(broadcastData as any).series?.[seriesId];
@@ -62,8 +62,12 @@ const sessionGroups = validSessions.reduce<{ dayKey: string; dayLabel: string; s
   return groups;
 }, []);
 
-// Find next session that hasn't started yet (for "next session" chip)
-const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date());
+// Find next session that hasn't started yet (for "next session" chip). Baked in at
+// static build time — the client script recomputes this against the real clock on
+// load (see initCards() in the <script> block below), the same way past/highlight
+// already are, so it can't stay stuck on a session that has since passed.
+const nextSession = getNextSession(validSessions);
+const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUTC) : null;
 ---
 
 <article
@@ -151,7 +155,10 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
       <div class="flex flex-wrap gap-2.5 pt-2 border-t border-zinc-800/60" data-session-strip>
         {sessionGroups.map(group => (
           <div
-            class="session-day-group inline-flex items-center gap-2 rounded-lg border border-zinc-800/80 bg-zinc-950 px-2.5 py-1.5"
+            class:list={[
+              'session-day-group inline-flex items-center gap-2 rounded-lg border border-zinc-800/80 bg-zinc-950 px-2.5 py-1.5',
+              !past && nextSessionDayKey === group.dayKey && 'ring-1 ring-zinc-500',
+            ]}
             data-session-group
             data-session-day-key={group.dayKey}
           >
@@ -170,12 +177,17 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
                     class:list={['flex items-center gap-1.5 text-xs', isNext ? 'text-zinc-200' : '']}
                     data-session-row
                     data-session-utc={session.startTimeUTC}
+                    data-session-type={session.type}
                   >
                     <span
                       class="w-1.5 h-1.5 rounded-full shrink-0"
+                      data-session-dot
                       style={isRaceType(session.type) ? `background-color: ${meta.color}` : isNext ? 'background-color: #a1a1aa' : 'background-color: #3f3f46'}
                     />
-                    <span class:list={['font-semibold', isRaceType(session.type) ? 'text-zinc-100' : isNext ? 'text-zinc-300' : 'text-zinc-500']}>
+                    <span
+                      class:list={['font-semibold', isRaceType(session.type) ? 'text-zinc-100' : isNext ? 'text-zinc-300' : 'text-zinc-500']}
+                      data-session-type-text
+                    >
                       {abbr(session.type)}
                     </span>
                     <time
@@ -202,6 +214,7 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
 <script>
   import { formatLocalValue, getLiveSession, isPastEvent, readFavorites, toggleFavorite } from '../lib/client-utils';
   import { getNextRaceMatch } from '../lib/time';
+  import { getNextSession, isRaceType } from '../lib/sessions';
   import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
 
   // Static builds run ~once/day (see .github/workflows/fetch-data.yml); "past"/"Next up"
@@ -288,6 +301,49 @@ const nextSession = validSessions.find(s => new Date(s.startTimeUTC) > new Date(
         wrapper.appendChild(inner);
 
         strip.appendChild(wrapper);
+      });
+
+      // Recompute which session row is "next" against the real clock. Static builds
+      // run ~once/day, so the isNext bold/dot styling baked in at build time goes stale
+      // as soon as all of today's sessions pass (e.g. Friday practice + quali both run,
+      // but the SSR highlight stays stuck there instead of moving to Saturday's race).
+      // `rows` still reference the live elements moved into the regrouped DOM above.
+      const nextRow = getNextSession(
+        rows.map(row => ({ type: row.dataset.sessionType ?? '', startTimeUTC: row.dataset.sessionUtc ?? '' })),
+        _now.getTime(),
+      );
+
+      let nextWrapper: HTMLElement | null = null;
+
+      rows.forEach(row => {
+        const isNext = !!nextRow && row.dataset.sessionUtc === nextRow.startTimeUTC;
+        row.classList.toggle('text-zinc-200', isNext);
+        if (isNext) nextWrapper = row.closest<HTMLElement>('[data-session-group]');
+
+        // Race-type sessions always get the brighter treatment regardless of isNext
+        // (see the SSR isRaceType branch above) — only non-race "next" styling moves.
+        if (isRaceType(row.dataset.sessionType ?? '')) return;
+
+        const dot = row.querySelector<HTMLElement>('[data-session-dot]');
+        if (dot) dot.style.backgroundColor = isNext ? '#a1a1aa' : '#3f3f46';
+
+        const typeText = row.querySelector<HTMLElement>('[data-session-type-text]');
+        typeText?.classList.toggle('text-zinc-300', isNext);
+        typeText?.classList.toggle('text-zinc-500', !isNext);
+      });
+
+      // Outline whichever day-group box holds the realtime "next" session — same
+      // ring-zinc-500 treatment as the SSR pass above, but keyed off `nextWrapper`
+      // so it moves boxes on the client once a day's sessions have all passed. A
+      // fully-past event has no "next" day, so the ring is suppressed for it.
+      const card = strip.closest<HTMLElement>('[data-event-id]');
+      const ev = card?.dataset.eventId ? getRegisteredEvent(card.dataset.eventId) : null;
+      const cardPast = ev ? isPastEvent(ev.dateEnd, ev.sessions ?? []) : false;
+
+      strip.querySelectorAll<HTMLElement>('[data-session-group]').forEach(wrapper => {
+        const showRing = !cardPast && wrapper === nextWrapper;
+        wrapper.classList.toggle('ring-1', showRing);
+        wrapper.classList.toggle('ring-zinc-500', showRing);
       });
     });
 
