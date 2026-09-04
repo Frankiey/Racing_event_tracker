@@ -123,48 +123,61 @@ const isPast = raceTime ? new Date(raceTime) < now : true;
       <div class="event-name">{flag} {eventName}</div>
       <div class="circuit">{circuitName}</div>
 
-      {isPast ? (
-        <div class="race-weekend" style={`color: ${meta.color};`}>
-          {raceTime ? 'Race weekend!' : 'Season complete'}
-        </div>
+      {raceTime ? (
+        <>
+          <div id="race-weekend" class="race-weekend" style={`color: ${meta.color}; display: ${isPast ? 'block' : 'none'};`}>
+            Race weekend!
+          </div>
+          <div id="countdown" class="countdown" data-target={raceTime} style={`display: ${isPast ? 'none' : 'flex'};`}>
+            <div class="unit"><div class="unit-value" id="c-d">--</div><div class="unit-label">Days</div></div>
+            <div class="sep">:</div>
+            <div class="unit"><div class="unit-value" id="c-h">--</div><div class="unit-label">Hours</div></div>
+            <div class="sep">:</div>
+            <div class="unit"><div class="unit-value" id="c-m">--</div><div class="unit-label">Min</div></div>
+            <div class="sep">:</div>
+            <div class="unit"><div class="unit-value" id="c-s">--</div><div class="unit-label">Sec</div></div>
+          </div>
+        </>
       ) : (
-        <div id="countdown" class="countdown" data-target={raceTime}>
-          <div class="unit"><div class="unit-value" id="c-d">--</div><div class="unit-label">Days</div></div>
-          <div class="sep">:</div>
-          <div class="unit"><div class="unit-value" id="c-h">--</div><div class="unit-label">Hours</div></div>
-          <div class="sep">:</div>
-          <div class="unit"><div class="unit-value" id="c-m">--</div><div class="unit-label">Min</div></div>
-          <div class="sep">:</div>
-          <div class="unit"><div class="unit-value" id="c-s">--</div><div class="unit-label">Sec</div></div>
-        </div>
+        <div class="race-weekend" style={`color: ${meta.color};`}>Season complete</div>
       )}
 
       <a class="branding" href={`${base}/series/${series}`}>RaceTrack</a>
     </div>
 
-    {!isPast && (
+    {raceTime && !isPast && (
       <script>
-        const el = document.getElementById('countdown');
-        const target = new Date(el?.dataset.target ?? '').getTime();
+        const countdownEl = document.getElementById('countdown')!;
+        const raceWeekendEl = document.getElementById('race-weekend')!;
+        const target = new Date(countdownEl.dataset.target ?? '').getTime();
         const d = document.getElementById('c-d')!;
         const h = document.getElementById('c-h')!;
         const m = document.getElementById('c-m')!;
         const s = document.getElementById('c-s')!;
 
-        function tick() {
-          const diff = Math.max(0, target - Date.now());
-          if (diff === 0) {
-            el!.innerHTML = '<div class="race-weekend" style="color: inherit;">Race weekend!</div>';
-            return;
+        // Recomputes against the real clock every second so a long-lived
+        // embed (iframe on a third-party page, no reload) still flips from
+        // countdown to "Race weekend!" at the right moment.
+        function tick(): boolean {
+          const diff = target - Date.now();
+          if (diff <= 0) {
+            countdownEl.style.display = 'none';
+            raceWeekendEl.style.display = 'block';
+            return true;
           }
           const sec = Math.floor(diff / 1000);
           d.textContent = String(Math.floor(sec / 86400));
           h.textContent = String(Math.floor((sec % 86400) / 3600)).padStart(2, '0');
           m.textContent = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
           s.textContent = String(sec % 60).padStart(2, '0');
-          requestAnimationFrame(tick);
+          return false;
         }
-        tick();
+
+        if (!tick()) {
+          const intervalId = window.setInterval(() => {
+            if (tick()) clearInterval(intervalId);
+          }, 1000);
+        }
       </script>
     )}
   </body>

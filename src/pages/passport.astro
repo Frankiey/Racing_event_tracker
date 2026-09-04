@@ -196,6 +196,7 @@ for (const s of SERIES_LIST) {
     PassportRenderState,
     PassportSeriesMetaMap,
   } from '../lib/passport/types';
+  import { isPastEvent } from '../lib/time';
   // @ts-ignore — world-atlas ships JSON
   import worldData from 'world-atlas/land-110m.json';
 
@@ -217,6 +218,18 @@ for (const s of SERIES_LIST) {
   const FLIGHT_SPEED = 0.004; // progress per frame
   const flightableIds: string[] = __data.flightableSeriesIds ?? ['f1'];
   const fullEvents: PassportFullEvent[] = __data.fullEvents ?? [];
+
+  // `isPast` was baked into `events` at static build time (site rebuilds ~once/day),
+  // so it can drift by up to a day — stale dot styling/next-race indication on the
+  // globe. Recompute it against the real clock before the renderer starts, using
+  // the full session data already embedded in `fullEvents` for the event panel.
+  const now = new Date();
+  const fullEventsById = new Map(fullEvents.map((e: any) => [e.id, e]));
+  for (const event of events) {
+    const full = fullEventsById.get(event.id);
+    if (full) event.isPast = isPastEvent(full.dateEnd as string, (full.sessions as any) ?? [], now);
+  }
+
   const renderState: PassportRenderState = {
     activeFilter: 'all',
     hoveredEvent: null,

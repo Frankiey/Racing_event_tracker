@@ -21,7 +21,10 @@ const allEvents = (calendarData as EventFeed).events.filter(e => e.seriesId === 
 const doneEvents = allEvents.filter(e => isPastEvent(e.dateEnd, e.sessions));
 const upcomingEvents = allEvents.filter(e => !isPastEvent(e.dateEnd, e.sessions));
 
-// Next race for this series
+// Next race for this series. Baked in at static build time — the client script
+// recomputes this against the real clock on load (see updateNextRace() in the
+// <script> block below), the same way EventCard's own highlight already does,
+// so the hero can't stay stuck on a race that has since finished.
 const nextRace = getNextRaceMatch(upcomingEvents);
 
 function groupEventsByMonth(events: typeof allEvents) {
@@ -92,15 +95,16 @@ const previousEventPreview = [...doneEvents].slice(-4).reverse();
 
     <!-- Next race callout -->
     {nextRace && (
-      <div class="mb-8 rounded-xl border p-4 flex items-center gap-4 flex-wrap" style={`border-color: ${meta.color}40; background-color: ${meta.color}08;`}>
+      <div data-next-race-hero class="mb-8 rounded-xl border p-4 flex items-center gap-4 flex-wrap" style={`border-color: ${meta.color}40; background-color: ${meta.color}08;`}>
         <div class="flex-1 min-w-0">
           <p class="text-xs font-semibold uppercase tracking-widest mb-1" style={`color: ${meta.color};`}>Next race</p>
-          <p class="font-semibold text-zinc-100">{nextRace.event.eventName}</p>
-          <p class="text-sm text-zinc-400">{nextRace.event.circuit.name}</p>
+          <p data-hero-name class="font-semibold text-zinc-100">{nextRace.event.eventName}</p>
+          <p data-hero-circuit class="text-sm text-zinc-400">{nextRace.event.circuit.name}</p>
         </div>
         <div class="text-right">
           <p class="text-xs text-zinc-500 mb-0.5">Race</p>
           <time
+            data-hero-time
             class="text-sm font-mono text-zinc-300 tabular-nums"
             datetime={nextRace.session!.startTimeUTC}
             data-local-time={nextRace.session!.startTimeUTC}
@@ -197,8 +201,10 @@ const previousEventPreview = [...doneEvents].slice(-4).reverse();
   import { registerEvents } from '../../lib/event-client';
   import { exportEventsIcs } from '../../lib/ics';
   import { safeJsonParse } from '../../lib/client-utils';
+  import { getNextRaceMatch } from '../../lib/time';
+  import type { RaceEvent } from '../../lib/types';
 
-  const events = safeJsonParse(
+  const events: RaceEvent[] = safeJsonParse(
     document.getElementById('series-events-data')!.textContent!, []
   );
 
@@ -211,6 +217,56 @@ const previousEventPreview = [...doneEvents].slice(-4).reverse();
       exportEventsIcs(`RaceTrack ${label} 2026`, events);
     });
   }
+
+  function formatHeroTime(utc: string): string {
+    return `${new Date(utc).toLocaleString('en', {
+      month: 'short', day: 'numeric',
+      hour: '2-digit', minute: '2-digit',
+      hour12: false, timeZone: 'UTC',
+    })} UTC`;
+  }
+
+  // Static builds run ~once/day (see .github/workflows/fetch-data.yml); the "Next
+  // race" hero and the [data-next-race] wrapper (used for scroll targeting below)
+  // were baked in at that build time. Recompute against the real clock on every
+  // load, the same way EventCard's own highlight already does, so a finished race
+  // can't keep spotlighting the hero for the rest of the day.
+  function updateNextRace(): void {
+    const match = getNextRaceMatch(events);
+
+    document.querySelectorAll<HTMLElement>('[data-next-race="true"]').forEach(el => {
+      el.removeAttribute('data-next-race');
+    });
+
+    const hero = document.querySelector<HTMLElement>('[data-next-race-hero]');
+    if (hero) {
+      if (!match) {
+        hero.classList.add('hidden');
+      } else {
+        hero.classList.remove('hidden');
+        const nameEl = hero.querySelector<HTMLElement>('[data-hero-name]');
+        const circuitEl = hero.querySelector<HTMLElement>('[data-hero-circuit]');
+        const timeEl = hero.querySelector<HTMLTimeElement>('[data-hero-time]');
+        if (nameEl) nameEl.textContent = match.event.eventName;
+        if (circuitEl) circuitEl.textContent = match.event.circuit.name;
+        if (timeEl) {
+          timeEl.dateTime = match.session.startTimeUTC;
+          timeEl.dataset.localTime = match.session.startTimeUTC;
+          timeEl.textContent = formatHeroTime(match.session.startTimeUTC);
+        }
+      }
+    }
+
+    if (match) {
+      const wrapper = document
+        .querySelector<HTMLElement>(`[data-event-id="${match.event.id}"]`)
+        ?.closest<HTMLElement>('.scroll-mt-28');
+      wrapper?.setAttribute('data-next-race', 'true');
+    }
+  }
+
+  updateNextRace();
+  document.addEventListener('astro:after-swap', updateNextRace);
 
   const nextRaceCard = document.querySelector<HTMLElement>('[data-next-race="true"]');
   if (nextRaceCard) {

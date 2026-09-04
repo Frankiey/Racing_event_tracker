@@ -35,7 +35,7 @@ const seriesSet = new Set(recentEvents.map(e => e.seriesId));
         {/* Summary header */}
         <div class="mb-6 flex items-center gap-3 flex-wrap">
           <span class="text-lg">🏁</span>
-          <span class="text-sm font-semibold text-zinc-300">
+          <span class="text-sm font-semibold text-zinc-300" id="recap-summary">
             {recentEvents.length} event{recentEvents.length !== 1 ? 's' : ''} across {seriesSet.size} series
           </span>
           <button
@@ -58,6 +58,8 @@ const seriesSet = new Set(recentEvents.map(e => e.seriesId));
               <article
                 class="group relative rounded-xl border border-zinc-800 bg-zinc-900/70 hover:border-zinc-700 hover:bg-zinc-900 transition-all cursor-pointer"
                 data-event-id={event.id}
+                data-event-end={event.dateEnd}
+                data-series-id={event.seriesId}
                 role="button"
                 tabindex="0"
               >
@@ -106,6 +108,36 @@ const seriesSet = new Set(recentEvents.map(e => e.seriesId));
   import { safeJsonParse } from '../lib/client-utils';
 
   registerEvents(safeJsonParse(document.getElementById('recap-events-data')?.textContent ?? '[]', []));
+
+  // The "past 7 days" window was computed once at static build time (site rebuilds
+  // ~once/day), so it can drift by up to that much before the next rebuild catches
+  // up. Recap is inherently a look-back page (low stakes either way), so we only
+  // cheaply re-hide events that have aged out of the window (>7 days old) against
+  // the real clock — no full re-render needed. Events that only just finished since
+  // the last build (and so would newly qualify) aren't sent to the client at all;
+  // showing those would mean embedding the full calendar and duplicating this list's
+  // markup in JS, which isn't worth it for a few hours of drift on a page whose whole
+  // point is looking backward.
+  function recomputeRecapWindow() {
+    const list = document.getElementById('recap-list');
+    if (!list) return;
+    const now = new Date();
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    let visible = 0;
+    const seriesSeen = new Set<string>();
+    list.querySelectorAll<HTMLElement>('[data-event-id]').forEach(article => {
+      const end = article.dataset.eventEnd ? new Date(article.dataset.eventEnd + 'T23:59:59Z') : null;
+      const inWindow = !end || end >= weekAgo;
+      article.classList.toggle('hidden', !inWindow);
+      if (inWindow) {
+        visible++;
+        if (article.dataset.seriesId) seriesSeen.add(article.dataset.seriesId);
+      }
+    });
+    const summary = document.getElementById('recap-summary');
+    if (summary) summary.textContent = `${visible} event${visible !== 1 ? 's' : ''} across ${seriesSeen.size} series`;
+  }
+  recomputeRecapWindow();
 
   // Spoiler-free toggle
   const toggle = document.getElementById('spoiler-toggle');
