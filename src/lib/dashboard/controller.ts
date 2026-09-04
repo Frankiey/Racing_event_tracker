@@ -1,4 +1,5 @@
-import { isPastEvent } from '../time';
+import { getWeekLabelForDate, isPastEvent } from '../time';
+import { getEventAnchorDate } from '../sessions';
 import { getRegisteredEvent } from '../event-client';
 
 interface DisclosureConfig {
@@ -17,70 +18,98 @@ function updateWeekSectionCount(section: HTMLElement): void {
   }
 }
 
-function mergeVisibleDuplicateWeekSections(): void {
-  const visibleSections = [...document.querySelectorAll<HTMLElement>('.week-group')]
-    .filter((section) => section.style.display !== 'none');
+function getSectionGrid(section: HTMLElement): HTMLElement | null {
+  const grid = section.children[1];
+  return grid instanceof HTMLElement ? grid : null;
+}
 
-  let previous: HTMLElement | null = null;
-  visibleSections.forEach((section) => {
-    const label = section.getAttribute('data-week-section');
-    if (!previous || !label) {
-      previous = section;
-      updateWeekSectionCount(section);
-      return;
-    }
+/** The section carrying `label`, creating an empty one at the right chronological spot if
+ * there is none yet (e.g. a "Today" section after the page has been open past midnight).
+ * Reusing the first section with the label is also what keeps duplicates from appearing:
+ * every card with a given label converges on one section, and the emptied ones are dropped
+ * by the cleanup pass below. */
+function findOrCreateWeekSection(label: string, anchor: string): HTMLElement | null {
+  const sections = [...document.querySelectorAll<HTMLElement>('.week-group')];
+  const existing = sections.find((section) => section.getAttribute('data-week-section') === label);
+  if (existing) return existing;
 
-    const previousLabel = previous.getAttribute('data-week-section');
-    if (previousLabel !== label) {
-      previous = section;
-      updateWeekSectionCount(section);
-      return;
-    }
+  const last = sections.at(-1);
+  const container = last?.parentElement;
+  if (!last || !container) return null;
 
-    const previousGrid = previous.children[1];
-    const sectionGrid = section.children[1];
-    if (!(previousGrid instanceof HTMLElement) || !(sectionGrid instanceof HTMLElement)) {
-      previous = section;
-      updateWeekSectionCount(section);
-      return;
-    }
+  const section = document.createElement('section');
+  section.className = 'week-group mb-8';
+  section.setAttribute('data-week-section', label);
+  section.setAttribute('data-week-date', anchor);
+  section.innerHTML =
+    '<h2 class="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mb-3 flex items-center gap-3">'
+    + label
+    + '<span class="h-px flex-1 bg-zinc-800/60"></span><span class="text-zinc-700">0</span></h2>'
+    + '<div class="grid gap-2.5"></div>';
 
-    section.querySelectorAll<HTMLElement>('.event-card-wrapper').forEach((card) => {
-      previousGrid.appendChild(card);
-    });
+  // `>=`, not `>`: a section's date is the earliest anchor it held at the last refresh, which
+  // can already equal this one (a "Tomorrow" section on the day it becomes today) — the new
+  // section still belongs in front of it.
+  const before = sections.find((other) => (other.getAttribute('data-week-date') ?? '') >= anchor);
+  container.insertBefore(section, before ?? last.nextSibling);
+  return section;
+}
 
-    const previousEnd = previous.getAttribute('data-week-dateend') ?? '';
-    const sectionEnd = section.getAttribute('data-week-dateend') ?? '';
-    if (sectionEnd > previousEnd) previous.setAttribute('data-week-dateend', sectionEnd);
-
-    updateWeekSectionCount(previous);
-    section.remove();
-  });
+function insertCardByAnchor(grid: HTMLElement, wrapper: HTMLElement, anchor: string): void {
+  const before = [...grid.querySelectorAll<HTMLElement>('.event-card-wrapper')]
+    .find((card) => card !== wrapper && (card.dataset.anchorDate ?? '') > anchor);
+  grid.insertBefore(wrapper, before ?? null);
 }
 
 export function refreshDashboardSections(): void {
+  const now = new Date();
   const recentGrid = document.getElementById('recent-events');
   const recentSection = document.getElementById('recent-section');
-  const mainWrappers = document.querySelectorAll<HTMLElement>('.week-group .event-card-wrapper');
   let moved = 0;
 
-  mainWrappers.forEach((wrapper) => {
+  document.querySelectorAll<HTMLElement>('.week-group .event-card-wrapper').forEach((wrapper) => {
     const eventId = wrapper.querySelector<HTMLElement>('[data-event-id]')?.dataset.eventId;
     const event = eventId ? getRegisteredEvent(eventId) : undefined;
     if (!event) return;
     // Uses the same end-time-based isPastEvent as EventCard's own badge, so a still-live
     // race (e.g. a Race session in progress) never gets moved into "Recent" out from under it.
-    if (isPastEvent(event.dateEnd, event.sessions)) {
+    if (isPastEvent(event.dateEnd, event.sessions, now)) {
       recentGrid?.appendChild(wrapper);
       moved++;
+      return;
     }
+
+    // Re-bucket against the real clock: sessions finish while the page sits open, which pushes
+    // an event's anchor day forward (Friday night → "Tomorrow"), and midnight pulls it back.
+    const anchor = getEventAnchorDate(event, now.getTime());
+    wrapper.dataset.anchorDate = anchor;
+    const label = getWeekLabelForDate(anchor, now);
+    const current = wrapper.closest<HTMLElement>('.week-group');
+    if (!current || current.getAttribute('data-week-section') === label) return;
+
+    const target = findOrCreateWeekSection(label, anchor);
+    const grid = target && getSectionGrid(target);
+    if (!target || !grid) return;
+    // A card the user can see must not vanish into a section that the lazy loader (or the
+    // series filter) has hidden — reveal the destination instead.
+    if (target.style.display === 'none' && current.style.display !== 'none') {
+      target.style.display = '';
+      target.removeAttribute('data-lazy-group');
+    }
+    insertCardByAnchor(grid, wrapper, anchor);
   });
 
   document.querySelectorAll<HTMLElement>('.week-group').forEach((section) => {
-    if (section.getAttribute('data-lazy-group') === 'true') return;
-    if (section.querySelectorAll('.event-card-wrapper').length === 0) {
-      section.remove();
+    const cards = [...section.querySelectorAll<HTMLElement>('.event-card-wrapper')];
+    if (cards.length === 0) {
+      // Lazy sections stay even when empty: the loader holds a reference and still has to
+      // step past them, and a card may yet be re-bucketed into one.
+      if (section.getAttribute('data-lazy-group') !== 'true') section.remove();
+      return;
     }
+    const earliest = cards.map((card) => card.dataset.anchorDate ?? '').filter(Boolean).sort()[0];
+    if (earliest) section.setAttribute('data-week-date', earliest);
+    updateWeekSectionCount(section);
   });
 
   if (moved > 0 && recentSection && recentGrid) {
@@ -89,62 +118,6 @@ export function refreshDashboardSections(): void {
     const countSpan = document.querySelector<HTMLElement>('#recent-toggle span:first-of-type');
     if (countSpan) countSpan.textContent = `Recent (${count})`;
   }
-
-  document.querySelectorAll<HTMLElement>('[data-week-date]').forEach((section) => {
-    const dateStr = section.getAttribute('data-week-date');
-    if (!dateStr) return;
-    const dateEndStr = section.getAttribute('data-week-dateend') ?? '';
-    const heading = section.querySelector('h2');
-    if (!heading) return;
-
-    const eventDate = new Date(dateStr + 'T12:00:00Z');
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const diffDays = Math.floor((eventDate.getTime() - today.getTime()) / 86400000);
-
-    let label: string;
-    if (diffDays < 0) {
-      if (dateEndStr && new Date(dateEndStr + 'T23:59:59Z').getTime() >= today.getTime()) {
-        label = 'Today';
-      } else {
-        const staleLabel = section.getAttribute('data-week-section');
-        if (staleLabel !== 'Today' && staleLabel !== 'Tomorrow') return;
-        const daysSinceMonday = (today.getDay() + 6) % 7;
-        const nextMonday = new Date(today);
-        nextMonday.setDate(today.getDate() - daysSinceMonday + 7);
-        const eventLocal = new Date(dateStr + 'T00:00:00');
-        label = eventLocal < nextMonday
-          ? 'This week'
-          : eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
-      }
-    } else if (diffDays === 0) {
-      label = 'Today';
-    } else if (diffDays === 1) {
-      label = 'Tomorrow';
-    } else {
-      const daysSinceMonday = (today.getDay() + 6) % 7;
-      const nextMonday = new Date(today);
-      nextMonday.setDate(today.getDate() - daysSinceMonday + 7);
-      const nextNextMonday = new Date(nextMonday);
-      nextNextMonday.setDate(nextMonday.getDate() + 7);
-      const eventLocal = new Date(dateStr + 'T00:00:00');
-      if (eventLocal < nextMonday) label = 'This week';
-      else if (eventLocal < nextNextMonday) label = 'Next week';
-      else label = eventDate.toLocaleDateString('en', { month: 'long', year: 'numeric' });
-    }
-
-    const current = section.getAttribute('data-week-section');
-    if (current === label) return;
-
-    section.setAttribute('data-week-section', label);
-    const textNode = [...heading.childNodes].find(
-      (node) => node.nodeType === Node.TEXT_NODE && (node.textContent ?? '').trim().length > 0,
-    );
-    if (textNode) textNode.textContent = label;
-    updateWeekSectionCount(section);
-  });
-
-  mergeVisibleDuplicateWeekSections();
 }
 
 export function initDashboardDisclosures(configs: DisclosureConfig[]): () => void {

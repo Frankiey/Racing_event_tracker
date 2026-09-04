@@ -23,6 +23,7 @@ interface CardInfo {
   eventId: string;
   seriesId: string;
   dateStart: string | null;
+  anchorDate: string | null;
   raceUtc: string | null;
   sessionUtcs: string[];
   sessionTexts: string[];
@@ -48,6 +49,7 @@ async function collectUpcomingCards(page: Page): Promise<CardInfo[]> {
         eventId: article.dataset.eventId ?? '',
         seriesId: wrapper.dataset.series ?? '',
         dateStart: wrapper.dataset.dateStart || null,
+        anchorDate: wrapper.dataset.anchorDate || null,
         raceUtc: wrapper.dataset.raceUtc || null,
         sessionUtcs: sessionEls.map(el => el.dataset.sessionUtc ?? ''),
         sessionTexts: sessionEls.map(el => el.querySelector('time')?.textContent?.trim() ?? ''),
@@ -82,20 +84,21 @@ test.describe('Dashboard correctness', () => {
   test('event cards are in chronological order', async ({ page }) => {
     await page.goto('./');
     const cards = await collectUpcomingCards(page);
-    // Sort key is dateStart (a "YYYY-MM-DD" string, so lexicographic order
-    // is chronological order) — NOT the race session's exact UTC time.
-    // Two events with adjacent dateStarts can legitimately have race
-    // sessions that don't share that same relative order (e.g. different
-    // series racing at different local times of day on the same weekend),
-    // so asserting on data-race-utc directly would be flaky against real data.
-    const dateStarts = cards.map(c => c.dateStart).filter((d): d is string => !!d);
+    // Sort key is the anchor date (a "YYYY-MM-DD" string, so lexicographic
+    // order is chronological order) — the day of the event's next unfinished
+    // session, which is what the dashboard buckets and orders by. NOT dateStart
+    // (a weekend whose Friday running is over sorts after a Saturday-only event)
+    // and NOT the race session's exact UTC time: two events on the same day can
+    // legitimately race in an order that doesn't match their day ordering, so
+    // asserting on data-race-utc directly would be flaky against real data.
+    const anchors = cards.map(c => c.anchorDate).filter((d): d is string => !!d);
 
-    expect(dateStarts.length).toBeGreaterThan(1);
+    expect(anchors.length).toBeGreaterThan(1);
 
-    for (let i = 1; i < dateStarts.length; i++) {
+    for (let i = 1; i < anchors.length; i++) {
       expect(
-        dateStarts[i] >= dateStarts[i - 1],
-        `card ${i} (${dateStarts[i]}) is out of order relative to card ${i - 1} (${dateStarts[i - 1]})`,
+        anchors[i] >= anchors[i - 1],
+        `card ${i} (${anchors[i]}) is out of order relative to card ${i - 1} (${anchors[i - 1]})`,
       ).toBe(true);
     }
   });

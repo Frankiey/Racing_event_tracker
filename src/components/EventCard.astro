@@ -2,7 +2,7 @@
 import SeriesBadge from './SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { formatDateRange, isPlaceholderTime, countryFlag, isPastEvent } from '../lib/time';
-import { SESSION_ABBR, getNextSession, isRaceType } from '../lib/sessions';
+import { SESSION_ABBR, getNextSession, isRaceType, isSessionPastAt } from '../lib/sessions';
 import broadcastData from '../../data/gold/broadcasts.json';
 
 const hasBroadcast = (seriesId: string) => !!(broadcastData as any).series?.[seriesId];
@@ -67,7 +67,16 @@ const sessionGroups = validSessions.reduce<{ dayKey: string; dayLabel: string; s
 // load (see initCards() in the <script> block below), the same way past/highlight
 // already are, so it can't stay stuck on a session that has since passed.
 const nextSession = getNextSession(validSessions);
-const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUTC) : null;
+
+// Day-group state, by running order rather than by calendar date: a group whose
+// sessions have all finished is dimmed, and the ring goes on the first group that
+// still has something live or upcoming. Keying the ring off "today" instead put it
+// on Friday's box all Friday evening, hours after practice and quali were over.
+// Baked in at build time; the client script recomputes against the real clock.
+const nowMs = Date.now();
+const isDayDone = (group: typeof sessionGroups[number]) =>
+  group.sessions.every(s => isSessionPastAt(s, nowMs));
+const activeDayKey = sessionGroups.find(g => !isDayDone(g))?.dayKey ?? null;
 ---
 
 <article
@@ -157,7 +166,8 @@ const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUT
           <div
             class:list={[
               'session-day-group inline-flex items-center gap-2 rounded-lg border border-zinc-800/80 bg-zinc-950 px-2.5 py-1.5',
-              !past && nextSessionDayKey === group.dayKey && 'ring-1 ring-zinc-500',
+              !past && activeDayKey === group.dayKey && 'ring-1 ring-zinc-500',
+              isDayDone(group) && 'opacity-45',
             ]}
             data-session-group
             data-session-day-key={group.dayKey}
@@ -214,7 +224,7 @@ const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUT
 <script>
   import { formatLocalValue, getLiveSession, isPastEvent, readFavorites, toggleFavorite } from '../lib/client-utils';
   import { getNextRaceMatch } from '../lib/time';
-  import { getNextSession, isRaceType } from '../lib/sessions';
+  import { getNextSession, isRaceType, isSessionPastAt } from '../lib/sessions';
   import { bindEventOpeners, getRegisteredEvent, RT_EVENTS_REGISTERED } from '../lib/event-client';
 
   // Static builds run ~once/day (see .github/workflows/fetch-data.yml); "past"/"Next up"
@@ -308,17 +318,15 @@ const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUT
       // as soon as all of today's sessions pass (e.g. Friday practice + quali both run,
       // but the SSR highlight stays stuck there instead of moving to Saturday's race).
       // `rows` still reference the live elements moved into the regrouped DOM above.
-      const nextRow = getNextSession(
-        rows.map(row => ({ type: row.dataset.sessionType ?? '', startTimeUTC: row.dataset.sessionUtc ?? '' })),
-        _now.getTime(),
-      );
-
-      let nextWrapper: HTMLElement | null = null;
+      const toSession = (row: HTMLElement) => ({
+        type: row.dataset.sessionType ?? '',
+        startTimeUTC: row.dataset.sessionUtc ?? '',
+      });
+      const nextRow = getNextSession(rows.map(toSession), _now.getTime());
 
       rows.forEach(row => {
         const isNext = !!nextRow && row.dataset.sessionUtc === nextRow.startTimeUTC;
         row.classList.toggle('text-zinc-200', isNext);
-        if (isNext) nextWrapper = row.closest<HTMLElement>('[data-session-group]');
 
         // Race-type sessions always get the brighter treatment regardless of isNext
         // (see the SSR isRaceType branch above) — only non-race "next" styling moves.
@@ -332,18 +340,27 @@ const nextSessionDayKey = nextSession ? sessionDayKeyUTC(nextSession.startTimeUT
         typeText?.classList.toggle('text-zinc-500', !isNext);
       });
 
-      // Outline whichever day-group box holds the realtime "next" session — same
-      // ring-zinc-500 treatment as the SSR pass above, but keyed off `nextWrapper`
-      // so it moves boxes on the client once a day's sessions have all passed. A
-      // fully-past event has no "next" day, so the ring is suppressed for it.
+      // Day-group state by running order, not by calendar date: dim the groups whose
+      // sessions have all finished, and ring the first group that still has something
+      // live or upcoming. Keying the ring off "today" left it on Friday's box all
+      // Friday evening, hours after practice and quali were done. A fully-past event
+      // has no active day, so the ring is suppressed for it.
       const card = strip.closest<HTMLElement>('[data-event-id]');
       const ev = card?.dataset.eventId ? getRegisteredEvent(card.dataset.eventId) : null;
       const cardPast = ev ? isPastEvent(ev.dateEnd, ev.sessions ?? []) : false;
 
-      strip.querySelectorAll<HTMLElement>('[data-session-group]').forEach(wrapper => {
-        const showRing = !cardPast && wrapper === nextWrapper;
+      let activeFound = false;
+      groups.forEach(group => {
+        const wrapper = group.rows[0]?.closest<HTMLElement>('[data-session-group]');
+        if (!wrapper) return;
+
+        const dayDone = group.rows.every(row => isSessionPastAt(toSession(row), _now.getTime()));
+        const showRing = !cardPast && !dayDone && !activeFound;
+        if (showRing) activeFound = true;
+
         wrapper.classList.toggle('ring-1', showRing);
         wrapper.classList.toggle('ring-zinc-500', showRing);
+        wrapper.classList.toggle('opacity-45', dayDone);
       });
     });
 

@@ -72,6 +72,32 @@ export function formatDateRange(dateStart: string, dateEnd: string): string {
   return `${fmt.format(start)} – ${fmt.format(end)}`;
 }
 
+/** Dashboard section label ("Today", "Tomorrow", "This week", "October 2026", …) for a
+ * local YYYY-MM-DD day. Single source of truth: index.astro groups with it at build time
+ * and dashboard/controller.ts re-buckets with it against the live clock, so the two can't
+ * drift apart the way two hand-kept copies did. */
+export function getWeekLabelForDate(dateStr: string, now: Date = new Date()): string {
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  // Parse as a local date so it lines up with the local week boundaries below.
+  const date = new Date(dateStr + 'T00:00:00');
+  // Round, not floor: a DST switch makes a calendar day 23 or 25 hours long.
+  const diffDays = Math.round((date.getTime() - today.getTime()) / 86_400_000);
+  // A day before today can only be an event still running today — its next unfinished
+  // session is on that (earlier) day, e.g. a session that started before midnight.
+  if (diffDays <= 0) return 'Today';
+  if (diffDays === 1) return 'Tomorrow';
+  // Week starts on Monday — compute the Monday boundaries in local time.
+  const daysSinceMonday = (today.getDay() + 6) % 7; // 0=Mon … 6=Sun
+  const nextMonday = new Date(today);
+  nextMonday.setDate(today.getDate() - daysSinceMonday + 7);
+  const nextNextMonday = new Date(nextMonday);
+  nextNextMonday.setDate(nextMonday.getDate() + 7);
+  if (date < nextMonday) return 'This week';
+  if (date < nextNextMonday) return 'Next week';
+  return date.toLocaleDateString('en', { month: 'long', year: 'numeric' });
+}
+
 // ── Date predicates ─────────────────────────────────────────────────────────
 
 export interface SessionLike {

@@ -105,6 +105,22 @@ export function getNextSession<T extends SessionTimeLike>(sessions: T[], now = D
   return sessions.find(session => new Date(session.startTimeUTC).getTime() > now) ?? null;
 }
 
+/** Local calendar day (YYYY-MM-DD) an event should be filed under: the day of its first
+ * session that has not finished yet. Filing by dateStart instead pins a Fri–Sun weekend
+ * to Friday for the whole weekend, so on Friday night an event whose Friday running is
+ * long over still sits under "Today" instead of moving to "Tomorrow".
+ * Falls back to dateStart when every session is done (the event is past anyway) or when
+ * none has a real time — year-1900 placeholders count as finished, so they never anchor. */
+export function getEventAnchorDate(
+  event: { dateStart: string; sessions?: SessionTimeLike[] },
+  now = Date.now(),
+): string {
+  const next = (event.sessions ?? [])
+    .filter(session => !isSessionPastAt(session, now))
+    .sort((a, b) => a.startTimeUTC.localeCompare(b.startTimeUTC))[0];
+  return next ? getSessionLocalDayKey(next.startTimeUTC) : event.dateStart;
+}
+
 export function groupSessionsByLocalDay<T extends SessionTimeLike>(sessions: T[]): SessionDayGroup<T>[] {
   return sessions.reduce<SessionDayGroup<T>[]>((groups, session) => {
     const dayKey = getSessionLocalDayKey(session.startTimeUTC);

@@ -123,17 +123,20 @@ const config = {
 
   // ── Shaders ───────────────────────────────────────────────────────────────
 
-  const vertex = `
-attribute vec2 position;
-attribute vec2 uv;
-varying vec2 vUv;
+  // GLSL ES 3.00 (WebGL2). Required because the fragment shader uses dFdx/dFdy,
+  // which ANGLE does not expose to ESSL1 shaders even inside a WebGL2 context
+  // (GL_OES_standard_derivatives reports as unsupported there).
+  const vertex = `#version 300 es
+in vec2 position;
+in vec2 uv;
+out vec2 vUv;
 void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
 }
 `;
 
-  const fragment = `
+  const fragment = `#version 300 es
 precision highp float;
 
 uniform vec3  iResolution;
@@ -166,7 +169,8 @@ uniform float uMouseEnabled;
 uniform float uMouseStrength;
 uniform float uMouseRadius;
 
-varying vec2 vUv;
+in vec2 vUv;
+out vec4 fragColor;
 
 vec3 palette(float h) {
   int count = uColorCount;
@@ -208,11 +212,14 @@ void mainImage(out vec4 o, vec2 C) {
   float angRings = max(1.0, floor(6.28318530718 * max(uDensity, 0.05) + 0.5));
   vec2 Y = vec2(5e-3, 6.28318530718 / angRings);
 
+  // sceneC is a 39-iteration raymarch. The original called it three times per
+  // pixel purely to finite-difference its own screen-space derivatives, which
+  // is exactly what dFdx/dFdy give for free from the 2x2 fragment quad.
+  // .y is an atan angle, so each derivative still needs the 2*pi wrap fix
+  // (a raw derivative across the +pi/-pi seam is a full turn, not a step).
   vec2 c0 = sceneC(C, r);
-  vec2 cdx = sceneC(C + vec2(1.0, 0.0), r);
-  vec2 cdy = sceneC(C + vec2(0.0, 1.0), r);
-  vec2 dCx = cdx - c0;
-  vec2 dCy = cdy - c0;
+  vec2 dCx = dFdx(c0);
+  vec2 dCy = dFdy(c0);
   dCx.y -= 6.28318530718 * floor(dCx.y / 6.28318530718 + 0.5);
   dCy.y -= 6.28318530718 * floor(dCy.y / 6.28318530718 + 0.5);
   vec2 fw = abs(dCx) + abs(dCy);
@@ -256,7 +263,7 @@ void mainImage(out vec4 o, vec2 C) {
 void main() {
   vec4 color;
   mainImage(color, vUv * iResolution.xy);
-  gl_FragColor = color;
+  fragColor = color;
 }
 `;
 
@@ -291,12 +298,25 @@ void main() {
     if (!raw) return null;
     const cfg: LightfallConfig = JSON.parse(raw);
 
+    // This is a soft, out-of-focus background: rendering it at 2x on a Retina
+    // display quadruples the fragment count of a shader that is already the
+    // most expensive thing on the page, for no visible gain. Cap at 1x.
+    // `antialias` is MSAA on a fullscreen triangle — there are no geometry
+    // edges to smooth, so it is pure cost; the shader antialiases the streaks
+    // itself via smoothstep. No depth/stencil buffers are used either.
     const renderer = new Renderer({
-      dpr: cfg.dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+      dpr: cfg.dpr ?? Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 1),
       alpha: true,
-      antialias: true,
+      antialias: false,
+      depth: false,
+      stencil: false,
+      powerPreference: 'low-power',
     });
     const gl = renderer.gl;
+    // The shader is GLSL ES 3.00; ogl silently falls back to a WebGL1 context
+    // when WebGL2 is missing, where it would fail to compile. Decorative
+    // background — just skip it rather than spamming the console.
+    if (!renderer.isWebgl2) return null;
     const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
@@ -347,12 +367,9 @@ void main() {
       (uniforms.iResolution.value as number[])[1] = gl.drawingBufferHeight;
     };
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(container);
 
     // Mouse — listen on window so pointer events still reach page UI elements
     let mouseTarget: [number, number] = [0, 0];
-    let lastTime = 0;
 
     const onPointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect();
@@ -369,40 +386,104 @@ void main() {
       window.addEventListener('pointermove', onPointerMove);
     }
 
-    // Animation loop
-    let rafId: number;
+    // Animation loop. This is the single most expensive thing on the page, so
+    // it only runs when it can actually be seen, and at half the display rate:
+    // the motion is slow and ambient, 30fps is indistinguishable from 60.
+    const FRAME_MS = 1000 / 30;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let rafId = 0;
+    let running = false;
+    let onscreen = true;
+    // Animation time is accumulated rather than taken from the rAF timestamp,
+    // so pausing and resuming does not make the streaks jump forward.
+    let clock = 0;
+    let prevT = 0;
+    let lastDraw = -Infinity;
+
+    const draw = () => {
+      uniforms.iTime.value = clock;
+      try {
+        renderer.render({ scene: mesh });
+      } catch (err) {
+        console.error('[LightfallBg]', err);
+      }
+    };
+
     const loop = (t: number) => {
       rafId = requestAnimationFrame(loop);
-      uniforms.iTime.value = t * 0.001;
+      if (t - lastDraw < FRAME_MS - 1) return;
+      // Clamped so a stalled frame does not fast-forward the animation.
+      const dt = Math.min((t - prevT) / 1000, 0.1);
+      prevT = t;
+      lastDraw = t;
+      clock += dt;
 
       if (cfg.mouseDampening > 0) {
-        if (!lastTime) lastTime = t;
-        const dt = (t - lastTime) / 1000;
-        lastTime = t;
         const tau = Math.max(1e-4, cfg.mouseDampening);
-        let factor = 1 - Math.exp(-dt / tau);
-        if (factor > 1) factor = 1;
+        const factor = Math.min(1, 1 - Math.exp(-dt / tau));
         const cur = uniforms.iMouse.value as number[];
         cur[0] += (mouseTarget[0] - cur[0]) * factor;
         cur[1] += (mouseTarget[1] - cur[1]) * factor;
-      } else {
-        lastTime = t;
       }
 
-      if (!cfg.paused) {
-        try {
-          renderer.render({ scene: mesh });
-        } catch (err) {
-          console.error('[LightfallBg]', err);
-        }
-      }
+      draw();
     };
-    rafId = requestAnimationFrame(loop);
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      prevT = performance.now();
+      lastDraw = -Infinity;
+      rafId = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(rafId);
+    };
+    // Nothing worth animating for a hidden tab, an off-screen or display:none
+    // container, an explicit pause, or a reduced-motion preference — in every
+    // one of those cases the last drawn frame simply stays on screen.
+    const sync = () => {
+      if (!cfg.paused && !document.hidden && onscreen && !reduceMotion.matches) start();
+      else stop();
+    };
+
+    draw(); // one frame up front, so a paused/reduced-motion canvas is not blank
+
+    // ResizeObserver can fire many times per frame during a drag; coalesce.
+    let resizeRaf = 0;
+    const ro = new ResizeObserver(() => {
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(() => {
+        resizeRaf = 0;
+        resize();
+        if (!running) draw();
+      });
+    });
+    ro.observe(container);
+
+    // The container is position:fixed so it is normally always on screen, but
+    // this still covers display:none and any non-fixed use of the component.
+    const io = new IntersectionObserver((entries) => {
+      onscreen = entries.some((e) => e.isIntersecting);
+      sync();
+    });
+    io.observe(container);
+
+    document.addEventListener('visibilitychange', sync);
+    reduceMotion.addEventListener('change', sync);
+    sync();
 
     // Cleanup
     return () => {
-      cancelAnimationFrame(rafId);
+      stop();
+      cancelAnimationFrame(resizeRaf);
       if (cfg.mouseInteraction) window.removeEventListener('pointermove', onPointerMove);
+      document.removeEventListener('visibilitychange', sync);
+      reduceMotion.removeEventListener('change', sync);
+      io.disconnect();
       ro.disconnect();
       if (canvas.parentElement === container) container.removeChild(canvas);
       const call = (obj: unknown, key: string) => {
