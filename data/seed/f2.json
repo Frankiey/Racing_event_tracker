@@ -207,10 +207,10 @@
       "lapRecord": { "time": "1:20.901", "driver": "Lando Norris", "car": "McLaren MCL39", "year": 2025 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-09-04T08:30:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-09-04T12:30:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-09-05T09:30:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-09-06T10:00:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-09-04T08:00:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-09-04T12:55:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-09-05T12:15:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-09-06T07:45:00Z" }
     ],
     "dateStart": "2026-09-04",
     "dateEnd": "2026-09-06"

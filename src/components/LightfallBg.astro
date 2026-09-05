@@ -74,19 +74,9 @@ const config = {
 <div
   id="lightfall-bg"
   data-lightfall-config={JSON.stringify(config)}
-  style={mixBlendMode ? `mix-blend-mode: ${mixBlendMode}` : undefined}
+  style={`position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;${mixBlendMode ? `mix-blend-mode:${mixBlendMode};` : ''}`}
 >
 </div>
-
-<style>
-  #lightfall-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-</style>
 
 <script>
   import { Renderer, Program, Mesh, Triangle } from 'ogl';
@@ -318,6 +308,11 @@ void main() {
     // background — just skip it rather than spamming the console.
     if (!renderer.isWebgl2) return null;
     const canvas = gl.canvas as HTMLCanvasElement;
+    // Absolute, not static: a canvas in normal flow contributes its height to the
+    // page. If the container ever renders unstyled the canvas would push the whole
+    // document down by a viewport — which is what a stale cached stylesheet did.
+    canvas.style.position = 'absolute';
+    canvas.style.inset = '0';
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
