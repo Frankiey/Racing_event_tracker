@@ -15,13 +15,13 @@
       "lapRecord": { "time": "1:19.813", "driver": "Charles Leclerc", "car": "Ferrari SF-24", "year": 2024 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-03-06T01:30:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-03-06T04:30:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-03-07T20:30:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-03-08T19:30:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-03-05T21:50:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-03-06T03:00:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-03-07T00:15:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-03-07T21:50:00Z" }
     ],
-    "dateStart": "2026-03-06",
-    "dateEnd": "2026-03-08"
+    "dateStart": "2026-03-05",
+    "dateEnd": "2026-03-07"
   },
   {
     "id": "f3-2026-r02",
@@ -39,12 +39,12 @@
       "lapRecord": { "time": "1:12.909", "driver": "Lewis Hamilton", "car": "Mercedes-AMG F1 W12 E Performance", "year": 2021 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-06-05T06:00:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-06-05T09:30:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-06-06T06:00:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-06-07T06:00:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-06-04T11:25:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-06-05T09:05:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-06-06T08:45:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-06-07T05:45:00Z" }
     ],
-    "dateStart": "2026-06-05",
+    "dateStart": "2026-06-04",
     "dateEnd": "2026-06-07"
   },
   {
@@ -63,10 +63,10 @@
       "lapRecord": { "time": "1:15.743", "driver": "Oscar Piastri", "car": "McLaren MCL39", "year": 2025 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-06-12T05:30:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-06-12T09:30:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-06-13T06:30:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-06-14T07:00:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-06-12T07:55:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-06-12T13:00:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-06-13T08:05:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-06-14T06:40:00Z" }
     ],
     "dateStart": "2026-06-12",
     "dateEnd": "2026-06-14"
@@ -87,9 +87,9 @@
       "lapRecord": { "time": "1:07.924", "driver": "Oscar Piastri", "car": "McLaren MCL39", "year": 2025 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-06-26T07:00:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-06-26T11:00:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-06-27T08:00:00Z" },
+      { "type": "Practice",     "startTimeUTC": "2026-06-26T07:55:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-06-26T13:00:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-06-27T08:05:00Z" },
       { "type": "Feature Race", "startTimeUTC": "2026-06-28T06:40:00Z" }
     ],
     "dateStart": "2026-06-26",
@@ -111,10 +111,10 @@
       "lapRecord": { "time": "1:27.097", "driver": "Max Verstappen", "car": "Red Bull RB16", "year": 2020 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-07-03T07:30:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-07-03T11:30:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-07-04T09:00:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-07-05T09:30:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-07-03T07:50:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-07-03T13:00:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-07-04T08:35:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-07-05T07:25:00Z" }
     ],
     "dateStart": "2026-07-03",
     "dateEnd": "2026-07-05"
@@ -135,10 +135,10 @@
       "lapRecord": { "time": "1:44.701", "driver": "Sergio Pérez", "car": "Red Bull Racing RB20", "year": 2024 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-07-17T07:00:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-07-17T11:00:00Z" },
+      { "type": "Practice",     "startTimeUTC": "2026-07-17T07:55:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-07-17T13:00:00Z" },
       { "type": "Sprint Race",  "startTimeUTC": "2026-07-18T08:00:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-07-19T08:30:00Z" }
+      { "type": "Feature Race", "startTimeUTC": "2026-07-19T06:30:00Z" }
     ],
     "dateStart": "2026-07-17",
     "dateEnd": "2026-07-19"
@@ -159,10 +159,10 @@
       "lapRecord": { "time": "1:16.627", "driver": "Lewis Hamilton", "car": "Mercedes-AMG F1 W11 EQ Performance", "year": 2020 }
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-07-24T07:00:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-07-24T11:00:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-07-25T08:00:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-07-26T08:30:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-07-24T07:55:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-07-24T13:00:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-07-25T08:05:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-07-26T06:40:00Z" }
     ],
     "dateStart": "2026-07-24",
     "dateEnd": "2026-07-26"
@@ -205,10 +205,10 @@
       "lng": -3.6153
     },
     "sessions": [
-      { "type": "Practice",     "startTimeUTC": "2026-09-11T07:00:00Z" },
-      { "type": "Qualifying",   "startTimeUTC": "2026-09-11T11:00:00Z" },
-      { "type": "Sprint Race",  "startTimeUTC": "2026-09-12T08:00:00Z" },
-      { "type": "Feature Race", "startTimeUTC": "2026-09-13T08:30:00Z" }
+      { "type": "Practice",     "startTimeUTC": "2026-09-11T07:55:00Z" },
+      { "type": "Qualifying",   "startTimeUTC": "2026-09-11T16:25:00Z" },
+      { "type": "Sprint Race",  "startTimeUTC": "2026-09-12T09:05:00Z" },
+      { "type": "Feature Race", "startTimeUTC": "2026-09-13T07:45:00Z" }
     ],
     "dateStart": "2026-09-11",
     "dateEnd": "2026-09-13"

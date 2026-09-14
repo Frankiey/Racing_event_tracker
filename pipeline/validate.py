@@ -2,6 +2,7 @@
 
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 from pipeline.config import SILVER_DIR, GOLD_DIR, SEED_DIR, SERIES_IDS
@@ -87,6 +88,83 @@ def validate_event(event: dict, path: str, idx: int) -> list[str]:
     return errors
 
 
+def validate_series_calendar(events: list, name: str) -> list[str]:
+    """Cross-round checks within one series.
+
+    validate_event() only ever sees a single round, so a whole calendar of copied
+    session times passes it clean — which is exactly how F2/F3 shipped rounds whose
+    start times were a template rather than the published schedule, wrong by up to
+    2h45m. These checks look across rounds instead.
+
+    ponytail: seed files only. Hand-maintained data is where this rot happens; the
+    API-backed series were verified correct to the minute. Widen to silver if an
+    upstream feed ever starts repeating itself.
+    """
+    errors: list[str] = []
+
+    by_series: dict[str, list[dict]] = {}
+    for event in events:
+        if isinstance(event, dict) and event.get("seriesId"):
+            by_series.setdefault(event["seriesId"], []).append(event)
+
+    for sid, rounds in by_series.items():
+        prefix = f"{name}[{sid}]"
+
+        # Round numbers should be unique and contiguous from 1.
+        numbers = [e.get("round") for e in rounds if isinstance(e.get("round"), int)]
+        duplicates = sorted({n for n in numbers if numbers.count(n) > 1})
+        if duplicates:
+            errors.append(f"ERROR {prefix}: duplicate round numbers {duplicates}")
+        if numbers and sorted(numbers) != list(range(1, len(numbers) + 1)):
+            missing = sorted(set(range(1, max(numbers) + 1)) - set(numbers))
+            errors.append(
+                f"ERROR {prefix}: round numbers are not contiguous 1..{len(numbers)}"
+                + (f", missing {missing}" if missing else "")
+            )
+
+        # Rounds should run in date order.
+        dated = [(e.get("dateStart"), e.get("round")) for e in rounds if e.get("dateStart")]
+        if dated != sorted(dated) and sorted(dated, key=lambda d: d[0]) != dated:
+            errors.append(f"ERROR {prefix}: rounds are not ordered by dateStart")
+
+        # Identical session patterns across rounds = a copied template. Compare the
+        # clock time and the day offset from dateStart, not the absolute date, so the
+        # signature survives being pasted onto a different weekend.
+        patterns: dict[tuple, list[int]] = {}
+        for event in rounds:
+            sessions = event.get("sessions")
+            ds = event.get("dateStart")
+            if not isinstance(sessions, list) or len(sessions) < 2 or not ds:
+                continue
+            times = [s.get("startTimeUTC", "") for s in sessions]
+            if any(not ISO_RE.match(t) or PLACEHOLDER_RE.match(t) for t in times):
+                continue
+            start = date.fromisoformat(ds)
+            signature = tuple(
+                (s.get("type"), (date.fromisoformat(t[:10]) - start).days, t[11:16])
+                for s, t in zip(sessions, times)
+            )
+            patterns.setdefault(signature, []).append(event.get("round"))
+
+        for signature, shared in patterns.items():
+            if len(shared) < 2:
+                continue
+            slots = " ".join(f"{typ}+{off}d@{hhmm}" for typ, off, hhmm in signature)
+            # WARN, never ERROR. Repeated times were how the F2/F3 template was spotted,
+            # but they are not proof of one: F1's European support-race slots really are
+            # standardised, so F3 rounds 3/4/7 share a signature with every value
+            # independently verified, and moto2 repeats across 15 API-sourced rounds.
+            # This is a smell worth printing, not a gate — the actual guarantee comes
+            # from checking a round against its published timetable.
+            errors.append(
+                f"WARN  {prefix}: rounds {sorted(shared)} share identical session times"
+                f" ({slots}) — verify against the published timetable; identical slots"
+                f" are normal for standardised support-race weekends"
+            )
+
+    return errors
+
+
 def validate_file(filepath: Path) -> list[str]:
     """Validate a single JSON file containing an event array or gold envelope."""
     import json
@@ -116,6 +194,9 @@ def validate_file(filepath: Path) -> list[str]:
 
     for i, event in enumerate(events):
         errors.extend(validate_event(event, name, i))
+
+    if filepath.parent.name == "seed":
+        errors.extend(validate_series_calendar(events, name))
 
     return errors
 
