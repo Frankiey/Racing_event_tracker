@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-14T15:35:39Z",
+  "generated": "2026-09-15T04:18:04Z",
   "season": 2026,
   "eventCount": 59,
   "sources": [
@@ -2321,7 +2321,7 @@
       "eventName": "Qatar Grand Prix",
       "round": 22,
       "circuit": {
-        "name": "Losail International Circuit",
+        "name": "Lusail International Circuit",
         "city": "Lusail",
         "country": "Qatar",
         "countryCode": "QA",
