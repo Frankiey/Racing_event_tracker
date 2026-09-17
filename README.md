@@ -5,7 +5,7 @@
 ## [🏎 frankiey.github.io/Racing_event_tracker](https://frankiey.github.io/Racing_event_tracker)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
-[![Built with Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Built with Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Data refresh](https://img.shields.io/badge/Data-nightly_refresh-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Frankiey/Racing_event_tracker/actions)
@@ -30,7 +30,7 @@ RaceTrack fixes that. One URL, every series, your local times, your watchlist. T
 
 | | |
 |---|---|
-| **Dashboard** | Next 20 events across all series with live countdown |
+| **Dashboard** | Upcoming events across all series (lazy-loaded, capped per series) with live countdown |
 | **Full Calendar** | Complete 2026 season grouped by month, jump-to-today |
 | **Series Pages** | Per-series schedule with season progress bar |
 | **Event Modal** | Full session breakdown with local times on click |
@@ -77,7 +77,7 @@ RaceTrack fixes that. One URL, every series, your local times, your watchlist. T
 | Data pipeline | Python + [uv](https://github.com/astral-sh/uv) | Fast, reproducible, no venv friction |
 | Data architecture | Medallion JSON (bronze → silver → gold) | Easy to debug, cache-friendly, versionable |
 | Hosting | GitHub Pages | Free, automatic deploys on push |
-| CI / Data refresh | GitHub Actions | Nightly fetch + commit + deploy |
+| CI / Data refresh | GitHub Actions | Nightly fetch + commit + deploy, weekly dependency audit |
 
 No backend. No database. No auth. No infra to babysit.
 
@@ -130,12 +130,15 @@ npm run test:pipeline
 # Validate seed/silver/gold JSON envelopes and event schema
 npm run validate:data
 
+# End-to-end tests (Playwright)
+npm run test:e2e
+
 # Production build
 npm run build
 ```
 
 Current toolchain note:
-- `package.json` currently pins Astro 6.3.x, TypeScript 5.9.x, and Vite 7.3.x.
+- `package.json` currently pins Astro 7.3.x, TypeScript 6.0.x, and Vite 8.3.x.
 - The transitive `yaml-language-server` / `yaml` advisory in the Astro toolchain is patched via npm overrides.
 
 ---
@@ -217,7 +220,6 @@ Try these slash commands once you've cloned the repo:
 | `/season-update` | Refresh a season's worth of data end-to-end |
 | `/update-deps` | Upgrade npm and Python dependencies safely |
 | `/verify-dates` | Cross-check schedule dates for stale or implausible data |
-| `/ai-workflows` | Show the shared workflow map and route to the right command |
 
 Claude reads the source workflow files in `.claude/commands/`. Copilot exposes equivalent prompt files in `.github/prompts/`, with task-focused agents in `.github/agents/` and optional guard/validation hooks in `.github/hooks/`.
 
@@ -226,7 +228,3 @@ Claude reads the source workflow files in `.claude/commands/`. Copilot exposes e
 ## License
 
 [MIT](LICENSE) — free to use, fork, build on.
-
----
-
-*Built to scratch your own itch. If it's useful to you, it'll be useful to other racing fans.*
