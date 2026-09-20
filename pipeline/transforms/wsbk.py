@@ -54,6 +54,7 @@ def _transform_api(bronze_events: list) -> list[dict]:
             sessions,
             event.get("date_start", ""),
             event.get("date_end", ""),
+            country_code=normalize_alpha2_country_code(country.get("iso", "")),
         )
 
         events.append(

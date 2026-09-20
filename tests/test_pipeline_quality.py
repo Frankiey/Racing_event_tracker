@@ -455,7 +455,10 @@ class F1TransformTests(unittest.TestCase):
         )
         events = f1_transform.transform(self._make_bronze([race]))
         self.assertEqual(events[0]["dateStart"], "2026-07-03")
-        self.assertEqual(events[0]["dateEnd"], "2026-07-05")  # race day
+        # Race is 14:00 UTC on July 5; the fixture's country ("Australia") is
+        # AEST (UTC+10) in July, so the race falls on July 6 local — dateEnd is
+        # the circuit-local date, not the raw UTC date (see derive_event_dates).
+        self.assertEqual(events[0]["dateEnd"], "2026-07-06")
 
     def test_placeholder_sessions_excluded_from_date_derivation(self):
         """Sessions with 1900-01-01 dates do not affect dateStart/dateEnd."""

@@ -12150,7 +12150,7 @@
         "menu_position": 1
       },
       "podiums": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/AUT/Podiums.pdf",
         "menu_position": 2
       },
       "pole_positions": {
@@ -12158,11 +12158,11 @@
         "menu_position": 2
       },
       "nations_statistics": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/AUT/table2.pdf",
         "menu_position": 2
       },
       "riders_all_time": {
-        "url": "",
+        "url": "https://resources.motogp.com/files/results/2026/AUT/table4.pdf",
         "menu_position": 2
       }
     },
@@ -12202,7 +12202,7 @@
     },
     "short_name": "AUT",
     "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-    "status": "CURRENT",
+    "status": "FINISHED",
     "_sessions": [
       {
         "date": "2026-09-18T10:45:00+00:00",
@@ -12901,52 +12901,52 @@
         "date": "2026-09-20T14:00:00+00:00",
         "number": null,
         "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
+          "track": "Dry",
+          "air": "23º",
+          "humidity": "39%",
+          "ground": "16º",
+          "weather": "Clear"
         },
         "circuit": "Red Bull Ring - Spielberg",
         "session_files": {
           "classification": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/Classification.pdf",
             "menu_position": 1
           },
           "analysis": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/Analysis.pdf",
             "menu_position": 2
           },
           "average_speed": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/AverageSpeed.pdf",
             "menu_position": 2
           },
           "fast_lap_sequence": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/FastLapSequence.pdf",
             "menu_position": 2
           },
           "lap_chart": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/LapChart.pdf",
             "menu_position": 2
           },
           "analysis_by_lap": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/analysisbylap.pdf",
             "menu_position": 2
           },
           "fast_lap_rider": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/FastLapRider.pdf",
             "menu_position": 2
           },
           "grid": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/Grid.pdf",
             "menu_position": 2
           },
           "session": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/Session.pdf",
             "menu_position": 2
           },
           "world_standing": {
-            "url": "",
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/RAC/worldstanding.pdf",
             "menu_position": 2
           },
           "best_partial_time": {
@@ -12994,7 +12994,7 @@
             "region_iso": ""
           }
         },
-        "status": "NOT-STARTED"
+        "status": "FINISHED"
       }
     ]
   },

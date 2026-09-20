@@ -40,6 +40,7 @@ def transform(bronze_events: list, series_id: str) -> list[dict]:
             sessions,
             event.get("date_start", ""),
             event.get("date_end", ""),
+            country_code=country_code,
         )
 
         events.append(

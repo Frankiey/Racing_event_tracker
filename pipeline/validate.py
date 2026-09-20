@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 
 from pipeline.config import SILVER_DIR, GOLD_DIR, SEED_DIR, SERIES_IDS
+from pipeline.transforms.common import local_date_from_utc
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
@@ -56,10 +57,19 @@ def validate_event(event: dict, path: str, idx: int) -> list[str]:
 
     # Sessions
     sessions = event.get("sessions", [])
+    circuit_country_code = (circuit or {}).get("countryCode", "")
     if not isinstance(sessions, list):
         errors.append(f"ERROR {prefix}: 'sessions' is not a list")
     else:
-        real_session_dates: list[str] = []
+        # Two conventions currently coexist for dateStart/dateEnd: the older
+        # raw-UTC-date-of-session convention (still used by seed data and
+        # NASCAR) and the newer circuit-local-date convention (used by
+        # F1/MotoGP-family/WSBK since the Phillip Island date-range bug —
+        # a UTC timestamp's calendar date can differ from the circuit's local
+        # calendar date near midnight). Accept either so this stays a real
+        # self-consistency check without false-flagging not-yet-migrated data.
+        real_session_dates_utc: list[str] = []
+        real_session_dates_local: list[str] = []
         for si, sess in enumerate(sessions):
             if not sess.get("type"):
                 errors.append(f"ERROR {prefix}.sessions[{si}]: missing 'type'")
@@ -71,16 +81,19 @@ def validate_event(event: dict, path: str, idx: int) -> list[str]:
             elif not ISO_RE.match(stime):
                 errors.append(f"ERROR {prefix}.sessions[{si}]: invalid time format '{stime}'")
             else:
-                real_session_dates.append(stime[:10])
+                real_session_dates_utc.append(stime[:10])
+                real_session_dates_local.append(local_date_from_utc(stime, circuit_country_code))
 
-        if real_session_dates:
-            earliest_session_date = min(real_session_dates)
-            latest_session_date = max(real_session_dates)
-            if ds and ds != earliest_session_date:
+        if real_session_dates_utc:
+            valid_starts = {min(real_session_dates_utc), min(real_session_dates_local)}
+            valid_ends = {max(real_session_dates_utc), max(real_session_dates_local)}
+            earliest_session_date = min(real_session_dates_local)
+            latest_session_date = max(real_session_dates_local)
+            if ds and ds not in valid_starts:
                 errors.append(
                     f"ERROR {prefix}: dateStart '{ds}' does not match earliest session date '{earliest_session_date}'"
                 )
-            if de and de != latest_session_date:
+            if de and de not in valid_ends:
                 errors.append(
                     f"ERROR {prefix}: dateEnd '{de}' does not match latest session date '{latest_session_date}'"
                 )

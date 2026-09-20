@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-20T11:23:23Z",
+  "generated": "2026-09-20T17:22:41Z",
   "season": 2026,
   "eventCount": 253,
   "sources": [
@@ -8515,6 +8515,48 @@
       "dateEnd": "2026-10-04"
     },
     {
+      "id": "moto3-2026-r17",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Indonesia",
+      "round": 17,
+      "circuit": {
+        "name": "Pertamina Mandalika Circuit",
+        "city": "Lombok",
+        "country": "INA",
+        "countryCode": "ID",
+        "lat": -8.895,
+        "lng": 116.2975
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-10-09T01:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-10-09T05:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-10-10T00:40:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-10-10T04:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-10-10T05:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-10-11T03:00:00Z"
+        }
+      ],
+      "dateStart": "2026-10-09",
+      "dateEnd": "2026-10-11"
+    },
+    {
       "id": "superformula-2026-e06",
       "seriesId": "superformula",
       "eventName": "Super Formula Rounds 9–10 – Fuji",
@@ -8556,48 +8598,6 @@
       "dateEnd": "2026-10-11"
     },
     {
-      "id": "moto3-2026-r17",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Indonesia",
-      "round": 17,
-      "circuit": {
-        "name": "Pertamina Mandalika Circuit",
-        "city": "Lombok",
-        "country": "INA",
-        "countryCode": "ID",
-        "lat": -8.895,
-        "lng": 116.2975
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-09T02:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-09T06:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-10T01:40:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-10-10T05:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-10-10T06:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-11T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-09",
-      "dateEnd": "2026-10-11"
-    },
-    {
       "id": "moto2-2026-r17",
       "seriesId": "moto2",
       "eventName": "Moto2 Grand Prix Of Indonesia",
@@ -8613,27 +8613,27 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-10-09T02:50:00Z"
+          "startTimeUTC": "2026-10-09T01:50:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-10-09T07:05:00Z"
+          "startTimeUTC": "2026-10-09T06:05:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-10-10T02:25:00Z"
+          "startTimeUTC": "2026-10-10T01:25:00Z"
         },
         {
           "type": "Q1",
-          "startTimeUTC": "2026-10-10T06:40:00Z"
+          "startTimeUTC": "2026-10-10T05:40:00Z"
         },
         {
           "type": "Q2",
-          "startTimeUTC": "2026-10-10T07:05:00Z"
+          "startTimeUTC": "2026-10-10T06:05:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-10-11T05:15:00Z"
+          "startTimeUTC": "2026-10-11T04:15:00Z"
         }
       ],
       "dateStart": "2026-10-09",
@@ -8655,35 +8655,35 @@
       "sessions": [
         {
           "type": "FP1",
-          "startTimeUTC": "2026-10-09T03:45:00Z"
+          "startTimeUTC": "2026-10-09T02:45:00Z"
         },
         {
           "type": "Practice",
-          "startTimeUTC": "2026-10-09T08:00:00Z"
+          "startTimeUTC": "2026-10-09T07:00:00Z"
         },
         {
           "type": "FP2",
-          "startTimeUTC": "2026-10-10T03:10:00Z"
+          "startTimeUTC": "2026-10-10T02:10:00Z"
         },
         {
           "type": "Q1",
-          "startTimeUTC": "2026-10-10T03:50:00Z"
+          "startTimeUTC": "2026-10-10T02:50:00Z"
         },
         {
           "type": "Q2",
-          "startTimeUTC": "2026-10-10T04:15:00Z"
+          "startTimeUTC": "2026-10-10T03:15:00Z"
         },
         {
           "type": "Sprint",
-          "startTimeUTC": "2026-10-10T08:00:00Z"
+          "startTimeUTC": "2026-10-10T07:00:00Z"
         },
         {
           "type": "Warm Up",
-          "startTimeUTC": "2026-10-11T03:40:00Z"
+          "startTimeUTC": "2026-10-11T02:40:00Z"
         },
         {
           "type": "Race",
-          "startTimeUTC": "2026-10-11T07:00:00Z"
+          "startTimeUTC": "2026-10-11T06:00:00Z"
         }
       ],
       "dateStart": "2026-10-09",
@@ -9030,7 +9030,7 @@
           "startTimeUTC": "2026-10-25T00:00:00Z"
         }
       ],
-      "dateStart": "2026-10-22",
+      "dateStart": "2026-10-23",
       "dateEnd": "2026-10-25"
     },
     {
@@ -9072,7 +9072,7 @@
           "startTimeUTC": "2026-10-25T01:15:00Z"
         }
       ],
-      "dateStart": "2026-10-22",
+      "dateStart": "2026-10-23",
       "dateEnd": "2026-10-25"
     },
     {
@@ -9122,7 +9122,7 @@
           "startTimeUTC": "2026-10-25T03:00:00Z"
         }
       ],
-      "dateStart": "2026-10-22",
+      "dateStart": "2026-10-23",
       "dateEnd": "2026-10-25"
     },
     {
@@ -9790,8 +9790,8 @@
           "startTimeUTC": "2026-11-22T04:00:00Z"
         }
       ],
-      "dateStart": "2026-11-20",
-      "dateEnd": "2026-11-22",
+      "dateStart": "2026-11-19",
+      "dateEnd": "2026-11-21",
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Las Vegas%20carbon.png"
     },
     {

@@ -76,6 +76,7 @@ def transform(bronze: dict) -> list[dict]:
             sessions,
             race.get("date", ""),
             race.get("date", ""),
+            country_code=country_code,
         )
 
         events.append(

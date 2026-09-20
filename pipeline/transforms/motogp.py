@@ -57,6 +57,7 @@ def transform(bronze_events: list) -> list[dict]:
             sessions,
             event.get("date_start", ""),
             event.get("date_end", ""),
+            country_code=country_code,
         )
 
         override = _get_calendar_override(year, event.get("name", ""))

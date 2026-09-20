@@ -18,7 +18,10 @@ COUNTRY_TIMEZONES = {
     "FR": "Europe/Paris",
     "GB": "Europe/London",
     "HU": "Europe/Budapest",
-    "ID": "Asia/Jakarta",
+    # Mandalika (Lombok) is the only Indonesian circuit on the calendar and sits
+    # in WITA (UTC+8), not WIB/Jakarta (UTC+7) — revisit if a Java-based round
+    # (WIB) is ever added, since this country-level mapping can't serve both.
+    "ID": "Asia/Makassar",
     "IN": "Asia/Kolkata",
     "IT": "Europe/Rome",
     "JP": "Asia/Tokyo",
@@ -146,10 +149,35 @@ def local_time_to_utc(dt_str: str, timezone_name: str) -> str:
     return local_time.replace(tzinfo=ZoneInfo(timezone_name)).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def derive_event_dates(sessions: Sequence[dict], fallback_start: str = "", fallback_end: str = "") -> tuple[str, str]:
-    """Derive event start/end dates from real sessions, with event-level fallback."""
+def local_date_from_utc(utc_dt_str: str, country_code: str | None) -> str:
+    """Return the calendar date a UTC timestamp falls on in the circuit's local timezone.
+
+    Falls back to the raw UTC date when no timezone is known for the country,
+    which matches the previous (timezone-naive) behavior for unmapped countries.
+    """
+    timezone_name = COUNTRY_TIMEZONES.get(country_code or "")
+    if not timezone_name:
+        return utc_dt_str[:10]
+
+    utc_time = datetime.fromisoformat(utc_dt_str.replace("Z", "+00:00")).replace(tzinfo=timezone.utc)
+    return utc_time.astimezone(ZoneInfo(timezone_name)).strftime("%Y-%m-%d")
+
+
+def derive_event_dates(
+    sessions: Sequence[dict],
+    fallback_start: str = "",
+    fallback_end: str = "",
+    country_code: str | None = None,
+) -> tuple[str, str]:
+    """Derive event start/end dates from real sessions, with event-level fallback.
+
+    A UTC timestamp's calendar date can differ from the circuit's local calendar
+    date near midnight (e.g. an early-morning local session at a circuit far
+    ahead of UTC, like Phillip Island at UTC+11, lands on the *previous* UTC
+    day). Pass country_code so the date is taken from local time, not raw UTC.
+    """
     session_dates = [
-        session["startTimeUTC"][:10]
+        local_date_from_utc(session["startTimeUTC"], country_code)
         for session in sessions
         if session.get("startTimeUTC") and not session["startTimeUTC"].startswith("1900-")
     ]
