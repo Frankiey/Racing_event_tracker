@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-19T04:16:51Z",
+  "generated": "2026-09-20T04:17:05Z",
   "season": 2026,
-  "eventCount": 59,
+  "eventCount": 58,
   "sources": [
     "dtm",
     "f1",
@@ -249,32 +249,6 @@
       ],
       "dateStart": "2026-09-18",
       "dateEnd": "2026-09-20"
-    },
-    {
-      "id": "nascar-2026-r33",
-      "seriesId": "nascar",
-      "eventName": "Bass Pro Shops Night Race",
-      "round": 33,
-      "circuit": {
-        "name": "Bristol Motor Speedway",
-        "city": "Bristol",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.5158,
-        "lng": -82.2569
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-09-18T21:35:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-09-19T23:30:00Z"
-        }
-      ],
-      "dateStart": "2026-09-18",
-      "dateEnd": "2026-09-19"
     },
     {
       "id": "f2-2026-r12",
