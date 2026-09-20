@@ -10120,7 +10120,7 @@
         "status": "FINISHED"
       },
       {
-        "date": "2026-08-08T16:00:00+00:00",
+        "date": "2026-08-08T16:05:00+00:00",
         "number": null,
         "condition": {
           "track": "Dry",
@@ -10415,6 +10415,2586 @@
           }
         },
         "status": "FINISHED"
+      }
+    ]
+  },
+  {
+    "country": {
+      "iso": "ES",
+      "name": "Spain",
+      "region_iso": "AR"
+    },
+    "event_files": {
+      "circuit_information": {
+        "url": "https://resources.motogp.com/files/results/2026/ARA/CircuitInformation.pdf",
+        "menu_position": 1
+      },
+      "podiums": {
+        "url": "https://resources.motogp.com/files/results/2026/ARA/Podiums.pdf",
+        "menu_position": 2
+      },
+      "pole_positions": {
+        "url": "https://resources.motogp.com/files/results/2026/ARA/PolePositions.pdf",
+        "menu_position": 2
+      },
+      "nations_statistics": {
+        "url": "https://resources.motogp.com/files/results/2026/ARA/table2.pdf",
+        "menu_position": 2
+      },
+      "riders_all_time": {
+        "url": "https://resources.motogp.com/files/results/2026/ARA/table4.pdf",
+        "menu_position": 2
+      }
+    },
+    "circuit": {
+      "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+      "name": "MotorLand Aragón",
+      "legacy_id": 100,
+      "place": "Alcañiz",
+      "nation": "SPA",
+      "events_id": null
+    },
+    "test": false,
+    "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+    "date_end": "2026-08-30",
+    "toad_api_uuid": "86abdbde-5e3d-45b1-a1f0-f74044a90eb3",
+    "date_start": "2026-08-28",
+    "additional_name": "ARAGON",
+    "name": "GRAND PRIX OF ARAGON",
+    "legacy_id": [
+      {
+        "categoryId": 3,
+        "eventId": 14
+      },
+      {
+        "categoryId": 2,
+        "eventId": 14
+      },
+      {
+        "categoryId": 1,
+        "eventId": 14
+      }
+    ],
+    "season": {
+      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
+      "year": 2026,
+      "current": true
+    },
+    "short_name": "ARA",
+    "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+    "status": "FINISHED",
+    "_sessions": [
+      {
+        "date": "2026-08-28T10:45:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Dry",
+          "air": "22º",
+          "humidity": "45%",
+          "ground": "37º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "aaa72f6b-6bae-4f50-b692-8eb2e732f68a",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-28T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "25º",
+          "humidity": "33%",
+          "ground": "49º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/PR/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "fd00ecb7-c4f8-4799-a4e3-ca2795cb2abd",
+        "type": "PR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-29T10:10:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "22º",
+          "humidity": "45%",
+          "ground": "30º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/FP2/CombinedPracticeTimes.pdf",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "27274032-f624-45c9-9676-2d3a5a678ce1",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-29T10:50:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Dry",
+          "air": "24º",
+          "humidity": "40%",
+          "ground": "34º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "4ae190b5-fc31-4a44-bdaf-fd6d87ef3fac",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-29T11:15:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "25º",
+          "humidity": "38%",
+          "ground": "36º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/Q2/QualifyingResults.pdf",
+            "menu_position": 2
+          }
+        },
+        "id": "e5bee906-7522-4aa3-ae75-a083e34ea9b7",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-29T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "29º",
+          "humidity": "32%",
+          "ground": "51º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/LapChart.pdf",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/analysisbylap.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/FastLapRider.pdf",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/SPR/worldstanding.pdf",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "80456df3-d5fb-4184-9ca7-6292f97f2e99",
+        "type": "SPR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-30T09:40:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "21º",
+          "humidity": "55%",
+          "ground": "29º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/WUP/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "095543da-7756-435a-9cf9-fab11715e18d",
+        "type": "WUP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-08-30T14:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "31º",
+          "humidity": "34%",
+          "ground": "51º",
+          "weather": "Clear"
+        },
+        "circuit": "MotorLand Aragón",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/LapChart.pdf",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/analysisbylap.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/FastLapRider.pdf",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "https://resources.motogp.com/files/results/2026/ARA/MotoGP/RAC/worldstanding.pdf",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "0c6f6ec2-1f96-4b95-b634-54d01a5bf1d2",
+        "type": "RAC",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
+          "name": "GRAND PRIX OF ARAGON",
+          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
+          "short_name": "ARA",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
+            "name": "MotorLand Aragón",
+            "legacy_id": 100,
+            "place": "Alcañiz",
+            "nation": "SPA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "ES",
+            "name": "Spain",
+            "region_iso": "AR"
+          }
+        },
+        "status": "FINISHED"
+      }
+    ]
+  },
+  {
+    "country": {
+      "iso": "SM",
+      "name": "San Marino",
+      "region_iso": ""
+    },
+    "event_files": {
+      "circuit_information": {
+        "url": "https://resources.motogp.com/files/results/2026/RSM/CircuitInformation.pdf",
+        "menu_position": 1
+      },
+      "podiums": {
+        "url": "https://resources.motogp.com/files/results/2026/RSM/Podiums.pdf",
+        "menu_position": 2
+      },
+      "pole_positions": {
+        "url": "https://resources.motogp.com/files/results/2026/RSM/PolePositions.pdf",
+        "menu_position": 2
+      },
+      "nations_statistics": {
+        "url": "https://resources.motogp.com/files/results/2026/RSM/table2.pdf",
+        "menu_position": 2
+      },
+      "riders_all_time": {
+        "url": "https://resources.motogp.com/files/results/2026/RSM/table4.pdf",
+        "menu_position": 2
+      }
+    },
+    "circuit": {
+      "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+      "name": "Misano World Circuit Marco Simoncelli",
+      "legacy_id": 38,
+      "place": "Misano Adriatico",
+      "nation": "ITA",
+      "events_id": null
+    },
+    "test": false,
+    "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+    "date_end": "2026-09-13",
+    "toad_api_uuid": "537f71f7-25ea-4cb2-a259-70b0da576cc6",
+    "date_start": "2026-09-11",
+    "additional_name": "SAN MARINO",
+    "name": "GRAND PRIX OF SAN MARINO",
+    "legacy_id": [
+      {
+        "categoryId": 3,
+        "eventId": 15
+      },
+      {
+        "categoryId": 2,
+        "eventId": 15
+      },
+      {
+        "categoryId": 1,
+        "eventId": 15
+      }
+    ],
+    "season": {
+      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
+      "year": 2026,
+      "current": true
+    },
+    "short_name": "RSM",
+    "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+    "status": "FINISHED",
+    "_sessions": [
+      {
+        "date": "2026-09-11T10:45:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Dry",
+          "air": "22º",
+          "humidity": "75%",
+          "ground": "26º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "41026d4b-8d60-4133-bea8-99ecf10854b9",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-11T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "25º",
+          "humidity": "60%",
+          "ground": "36º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/PR/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "ec3b45f4-d22b-4cea-9fc6-4f1e6d72914b",
+        "type": "PR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-12T10:10:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "23º",
+          "humidity": "76%",
+          "ground": "23º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/FP2/CombinedPracticeTimes.pdf",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "bee39340-2ac4-4676-8b0c-db5ddfbe2e01",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-12T10:50:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Dry",
+          "air": "25º",
+          "humidity": "53%",
+          "ground": "26º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "e554084d-3598-4a30-bd4e-00f4250724ec",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-12T11:15:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "26º",
+          "humidity": "47%",
+          "ground": "30º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/Q2/QualifyingResults.pdf",
+            "menu_position": 2
+          }
+        },
+        "id": "ee6ba0bb-1752-4d5f-81cf-6582c8573378",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-12T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "27º",
+          "humidity": "43%",
+          "ground": "39º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/LapChart.pdf",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/analysisbylap.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/FastLapRider.pdf",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/SPR/worldstanding.pdf",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "1b8850b9-53fc-4ff2-b5f7-2935eb53dad1",
+        "type": "SPR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-13T09:40:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "22º",
+          "humidity": "58%",
+          "ground": "19º",
+          "weather": "Clear"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/WUP/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "68cdd505-800b-461c-bef7-bbbe3082e67e",
+        "type": "WUP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-13T14:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "27º",
+          "humidity": "48%",
+          "ground": "40º",
+          "weather": "Clear"
+        },
+        "circuit": "Misano World Circuit Marco Simoncelli",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/LapChart.pdf",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/analysisbylap.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/FastLapRider.pdf",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "https://resources.motogp.com/files/results/2026/RSM/MotoGP/RAC/worldstanding.pdf",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "ed730383-6989-4868-9e16-db8d0d9d4cbf",
+        "type": "RAC",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
+          "name": "GRAND PRIX OF SAN MARINO",
+          "sponsored_name": "RED BULL GRAND PRIX OF SAN MARINO AND THE RIMINI RIVIERA ",
+          "short_name": "RSM",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
+            "name": "Misano World Circuit Marco Simoncelli",
+            "legacy_id": 38,
+            "place": "Misano Adriatico",
+            "nation": "ITA",
+            "events_id": null
+          },
+          "country": {
+            "iso": "SM",
+            "name": "San Marino",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      }
+    ]
+  },
+  {
+    "country": {
+      "iso": "AT",
+      "name": "Austria",
+      "region_iso": ""
+    },
+    "event_files": {
+      "circuit_information": {
+        "url": "https://resources.motogp.com/files/results/2026/AUT/CircuitInformation.pdf",
+        "menu_position": 1
+      },
+      "podiums": {
+        "url": "",
+        "menu_position": 2
+      },
+      "pole_positions": {
+        "url": "https://resources.motogp.com/files/results/2026/AUT/PolePositions.pdf",
+        "menu_position": 2
+      },
+      "nations_statistics": {
+        "url": "",
+        "menu_position": 2
+      },
+      "riders_all_time": {
+        "url": "",
+        "menu_position": 2
+      }
+    },
+    "circuit": {
+      "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+      "name": "Red Bull Ring - Spielberg",
+      "legacy_id": 24,
+      "place": "Spielberg",
+      "nation": "AUT",
+      "events_id": null
+    },
+    "test": false,
+    "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+    "date_end": "2026-09-20",
+    "toad_api_uuid": "1d659e29-247a-402c-ba1e-33fa14670cbe",
+    "date_start": "2026-09-18",
+    "additional_name": "AUSTRIA",
+    "name": "GRAND PRIX OF AUSTRIA",
+    "legacy_id": [
+      {
+        "categoryId": 3,
+        "eventId": 16
+      },
+      {
+        "categoryId": 2,
+        "eventId": 16
+      },
+      {
+        "categoryId": 1,
+        "eventId": 16
+      }
+    ],
+    "season": {
+      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
+      "year": 2026,
+      "current": true
+    },
+    "short_name": "AUT",
+    "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+    "status": "CURRENT",
+    "_sessions": [
+      {
+        "date": "2026-09-18T10:45:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Dry",
+          "air": "12º",
+          "humidity": "82%",
+          "ground": "15º",
+          "weather": "Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "ac5f5765-c0a9-44c3-9a5b-6f9baced574d",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-18T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "20º",
+          "humidity": "51%",
+          "ground": "19º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/PR/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "4a95fbbe-3ba2-4e5a-8be8-50f9cfbd424e",
+        "type": "PR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-19T10:10:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "16º",
+          "humidity": "79%",
+          "ground": "16º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/FP2/CombinedPracticeTimes.pdf",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "43eb898d-01f4-4d36-90ed-fa6e54ac16ab",
+        "type": "FP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-19T10:50:00+00:00",
+        "number": 1,
+        "condition": {
+          "track": "Wet",
+          "air": "16º",
+          "humidity": "79%",
+          "ground": "16º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q1/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "150b2768-e068-4ccd-89a4-33625ece3f7a",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-19T11:15:00+00:00",
+        "number": 2,
+        "condition": {
+          "track": "Dry",
+          "air": "17º",
+          "humidity": "74%",
+          "ground": "16º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/Q2/QualifyingResults.pdf",
+            "menu_position": 2
+          }
+        },
+        "id": "df25e534-ee1f-459d-82c2-6ef2581a9a4a",
+        "type": "Q",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-19T15:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "22º",
+          "humidity": "51%",
+          "ground": "19º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/LapChart.pdf",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/analysisbylap.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/FastLapRider.pdf",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/SPR/worldstanding.pdf",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "7c10aec1-5dec-49ce-8a93-1f0d2e03dc22",
+        "type": "SPR",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-20T09:40:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "Dry",
+          "air": "12º",
+          "humidity": "84%",
+          "ground": "13º",
+          "weather": "Partly-Cloudy"
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/Classification.pdf",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/Analysis.pdf",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/AverageSpeed.pdf",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/FastLapSequence.pdf",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/Grid.pdf",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/Session.pdf",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/BestPartialTime.pdf",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "https://resources.motogp.com/files/results/2026/AUT/MotoGP/WUP/MaximumSpeed.pdf",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "164e7f69-0e92-4395-bf98-0a161759f348",
+        "type": "WUP",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "FINISHED"
+      },
+      {
+        "date": "2026-09-20T14:00:00+00:00",
+        "number": null,
+        "condition": {
+          "track": "",
+          "air": "º",
+          "humidity": "%",
+          "ground": "º",
+          "weather": ""
+        },
+        "circuit": "Red Bull Ring - Spielberg",
+        "session_files": {
+          "classification": {
+            "url": "",
+            "menu_position": 1
+          },
+          "analysis": {
+            "url": "",
+            "menu_position": 2
+          },
+          "average_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_sequence": {
+            "url": "",
+            "menu_position": 2
+          },
+          "lap_chart": {
+            "url": "",
+            "menu_position": 2
+          },
+          "analysis_by_lap": {
+            "url": "",
+            "menu_position": 2
+          },
+          "fast_lap_rider": {
+            "url": "",
+            "menu_position": 2
+          },
+          "grid": {
+            "url": "",
+            "menu_position": 2
+          },
+          "session": {
+            "url": "",
+            "menu_position": 2
+          },
+          "world_standing": {
+            "url": "",
+            "menu_position": 2
+          },
+          "best_partial_time": {
+            "url": "",
+            "menu_position": 2
+          },
+          "maximum_speed": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_practice": {
+            "url": "",
+            "menu_position": 2
+          },
+          "combined_classification": {
+            "url": "",
+            "menu_position": 2
+          }
+        },
+        "id": "4d2ef1ce-9282-4dbb-87e3-debea643d911",
+        "type": "RAC",
+        "category": {
+          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+          "legacy_id": 3,
+          "name": "MotoGP™"
+        },
+        "event": {
+          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
+          "name": "GRAND PRIX OF AUSTRIA",
+          "sponsored_name": "QATAR AIRWAYS GRAND PRIX OF AUSTRIA ",
+          "short_name": "AUT",
+          "test": false,
+          "season": "2026",
+          "circuit": {
+            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
+            "name": "Red Bull Ring - Spielberg",
+            "legacy_id": 24,
+            "place": "Spielberg",
+            "nation": "AUT",
+            "events_id": null
+          },
+          "country": {
+            "iso": "AT",
+            "name": "Austria",
+            "region_iso": ""
+          }
+        },
+        "status": "NOT-STARTED"
       }
     ]
   },
@@ -10875,2586 +13455,6 @@
     "short_name": "CT1",
     "id": "b7551b27-a4de-4aec-8343-08902fb00c63",
     "status": "FINISHED"
-  },
-  {
-    "country": {
-      "iso": "ES",
-      "name": "Spain",
-      "region_iso": "AR"
-    },
-    "event_files": {
-      "circuit_information": {
-        "url": "",
-        "menu_position": 1
-      },
-      "podiums": {
-        "url": "",
-        "menu_position": 2
-      },
-      "pole_positions": {
-        "url": "",
-        "menu_position": 2
-      },
-      "nations_statistics": {
-        "url": "",
-        "menu_position": 2
-      },
-      "riders_all_time": {
-        "url": "",
-        "menu_position": 2
-      }
-    },
-    "circuit": {
-      "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-      "name": "MotorLand Aragón",
-      "legacy_id": 100,
-      "place": "Alcañiz",
-      "nation": "SPA",
-      "events_id": null
-    },
-    "test": false,
-    "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-    "date_end": "2026-08-30",
-    "toad_api_uuid": "86abdbde-5e3d-45b1-a1f0-f74044a90eb3",
-    "date_start": "2026-08-28",
-    "additional_name": "ARAGON",
-    "name": "GRAND PRIX OF ARAGON",
-    "legacy_id": [
-      {
-        "categoryId": 3,
-        "eventId": 14
-      },
-      {
-        "categoryId": 2,
-        "eventId": 14
-      },
-      {
-        "categoryId": 1,
-        "eventId": 14
-      }
-    ],
-    "season": {
-      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
-      "year": 2026,
-      "current": true
-    },
-    "short_name": "ARA",
-    "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-    "status": "NOT-STARTED",
-    "_sessions": [
-      {
-        "date": "2026-08-28T10:45:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "aaa72f6b-6bae-4f50-b692-8eb2e732f68a",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-28T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "fd00ecb7-c4f8-4799-a4e3-ca2795cb2abd",
-        "type": "PR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-29T10:10:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "27274032-f624-45c9-9676-2d3a5a678ce1",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-29T10:50:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "4ae190b5-fc31-4a44-bdaf-fd6d87ef3fac",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-29T11:15:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "e5bee906-7522-4aa3-ae75-a083e34ea9b7",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-29T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "80456df3-d5fb-4184-9ca7-6292f97f2e99",
-        "type": "SPR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-30T09:40:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "095543da-7756-435a-9cf9-fab11715e18d",
-        "type": "WUP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-08-30T14:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "MotorLand Aragón",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "0c6f6ec2-1f96-4b95-b634-54d01a5bf1d2",
-        "type": "RAC",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "23b7a561-17e4-4aa6-9be3-2529a5b69938",
-          "name": "GRAND PRIX OF ARAGON",
-          "sponsored_name": "MICHELIN® GRAND PRIX OF ARAGON ",
-          "short_name": "ARA",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "50209e25-6cd8-4d8d-912e-c48a06275a8a",
-            "name": "MotorLand Aragón",
-            "legacy_id": 100,
-            "place": "Alcañiz",
-            "nation": "SPA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "ES",
-            "name": "Spain",
-            "region_iso": "AR"
-          }
-        },
-        "status": "NOT-STARTED"
-      }
-    ]
-  },
-  {
-    "country": {
-      "iso": "SM",
-      "name": "San Marino",
-      "region_iso": ""
-    },
-    "event_files": {
-      "circuit_information": {
-        "url": "",
-        "menu_position": 1
-      },
-      "podiums": {
-        "url": "",
-        "menu_position": 2
-      },
-      "pole_positions": {
-        "url": "",
-        "menu_position": 2
-      },
-      "nations_statistics": {
-        "url": "",
-        "menu_position": 2
-      },
-      "riders_all_time": {
-        "url": "",
-        "menu_position": 2
-      }
-    },
-    "circuit": {
-      "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-      "name": "Misano World Circuit Marco Simoncelli",
-      "legacy_id": 38,
-      "place": "Misano Adriatico",
-      "nation": "ITA",
-      "events_id": null
-    },
-    "test": false,
-    "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-    "date_end": "2026-09-13",
-    "toad_api_uuid": "537f71f7-25ea-4cb2-a259-70b0da576cc6",
-    "date_start": "2026-09-11",
-    "additional_name": "SAN MARINO",
-    "name": "GRAND PRIX OF SAN MARINO",
-    "legacy_id": [
-      {
-        "categoryId": 3,
-        "eventId": 15
-      },
-      {
-        "categoryId": 2,
-        "eventId": 15
-      },
-      {
-        "categoryId": 1,
-        "eventId": 15
-      }
-    ],
-    "season": {
-      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
-      "year": 2026,
-      "current": true
-    },
-    "short_name": "RSM",
-    "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-    "status": "NOT-STARTED",
-    "_sessions": [
-      {
-        "date": "2026-09-11T10:45:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "41026d4b-8d60-4133-bea8-99ecf10854b9",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-11T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "ec3b45f4-d22b-4cea-9fc6-4f1e6d72914b",
-        "type": "PR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-12T10:10:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "bee39340-2ac4-4676-8b0c-db5ddfbe2e01",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-12T10:50:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "e554084d-3598-4a30-bd4e-00f4250724ec",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-12T11:15:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "ee6ba0bb-1752-4d5f-81cf-6582c8573378",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-12T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "1b8850b9-53fc-4ff2-b5f7-2935eb53dad1",
-        "type": "SPR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-13T09:40:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "68cdd505-800b-461c-bef7-bbbe3082e67e",
-        "type": "WUP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-13T14:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Misano World Circuit Marco Simoncelli",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "ed730383-6989-4868-9e16-db8d0d9d4cbf",
-        "type": "RAC",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "a5881826-ec88-4a41-8e4c-ba58709d4591",
-          "name": "GRAND PRIX OF SAN MARINO",
-          "sponsored_name": "Red Bull Grand Prix of San Marino and The Rimini Riviera",
-          "short_name": "RSM",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "e0d07d48-0b62-40fa-9d36-411b15af406f",
-            "name": "Misano World Circuit Marco Simoncelli",
-            "legacy_id": 38,
-            "place": "Misano Adriatico",
-            "nation": "ITA",
-            "events_id": null
-          },
-          "country": {
-            "iso": "SM",
-            "name": "San Marino",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      }
-    ]
-  },
-  {
-    "country": {
-      "iso": "AT",
-      "name": "Austria",
-      "region_iso": ""
-    },
-    "event_files": {
-      "circuit_information": {
-        "url": "",
-        "menu_position": 1
-      },
-      "podiums": {
-        "url": "",
-        "menu_position": 2
-      },
-      "pole_positions": {
-        "url": "",
-        "menu_position": 2
-      },
-      "nations_statistics": {
-        "url": "",
-        "menu_position": 2
-      },
-      "riders_all_time": {
-        "url": "",
-        "menu_position": 2
-      }
-    },
-    "circuit": {
-      "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-      "name": "Red Bull Ring - Spielberg",
-      "legacy_id": 24,
-      "place": "Spielberg",
-      "nation": "AUT",
-      "events_id": null
-    },
-    "test": false,
-    "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-    "date_end": "2026-09-20",
-    "toad_api_uuid": "1d659e29-247a-402c-ba1e-33fa14670cbe",
-    "date_start": "2026-09-18",
-    "additional_name": "AUSTRIA",
-    "name": "GRAND PRIX OF AUSTRIA",
-    "legacy_id": [
-      {
-        "categoryId": 3,
-        "eventId": 16
-      },
-      {
-        "categoryId": 2,
-        "eventId": 16
-      },
-      {
-        "categoryId": 1,
-        "eventId": 16
-      }
-    ],
-    "season": {
-      "id": "e88b4e43-2209-47aa-8e83-0e0b1cedde6e",
-      "year": 2026,
-      "current": true
-    },
-    "short_name": "AUT",
-    "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-    "status": "NOT-STARTED",
-    "_sessions": [
-      {
-        "date": "2026-09-18T10:45:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "ac5f5765-c0a9-44c3-9a5b-6f9baced574d",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-18T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "4a95fbbe-3ba2-4e5a-8be8-50f9cfbd424e",
-        "type": "PR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-19T10:10:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "43eb898d-01f4-4d36-90ed-fa6e54ac16ab",
-        "type": "FP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-19T10:50:00+00:00",
-        "number": 1,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "150b2768-e068-4ccd-89a4-33625ece3f7a",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-19T11:15:00+00:00",
-        "number": 2,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "df25e534-ee1f-459d-82c2-6ef2581a9a4a",
-        "type": "Q",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-19T15:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "7c10aec1-5dec-49ce-8a93-1f0d2e03dc22",
-        "type": "SPR",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-20T09:40:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "164e7f69-0e92-4395-bf98-0a161759f348",
-        "type": "WUP",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      },
-      {
-        "date": "2026-09-20T14:00:00+00:00",
-        "number": null,
-        "condition": {
-          "track": "",
-          "air": "º",
-          "humidity": "%",
-          "ground": "º",
-          "weather": ""
-        },
-        "circuit": "Red Bull Ring - Spielberg",
-        "session_files": {
-          "classification": {
-            "url": "",
-            "menu_position": 1
-          },
-          "analysis": {
-            "url": "",
-            "menu_position": 2
-          },
-          "average_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_sequence": {
-            "url": "",
-            "menu_position": 2
-          },
-          "lap_chart": {
-            "url": "",
-            "menu_position": 2
-          },
-          "analysis_by_lap": {
-            "url": "",
-            "menu_position": 2
-          },
-          "fast_lap_rider": {
-            "url": "",
-            "menu_position": 2
-          },
-          "grid": {
-            "url": "",
-            "menu_position": 2
-          },
-          "session": {
-            "url": "",
-            "menu_position": 2
-          },
-          "world_standing": {
-            "url": "",
-            "menu_position": 2
-          },
-          "best_partial_time": {
-            "url": "",
-            "menu_position": 2
-          },
-          "maximum_speed": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_practice": {
-            "url": "",
-            "menu_position": 2
-          },
-          "combined_classification": {
-            "url": "",
-            "menu_position": 2
-          }
-        },
-        "id": "4d2ef1ce-9282-4dbb-87e3-debea643d911",
-        "type": "RAC",
-        "category": {
-          "id": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-          "legacy_id": 3,
-          "name": "MotoGP™"
-        },
-        "event": {
-          "id": "e191f3f6-218b-4a1c-bbd2-3ed8b5135683",
-          "name": "GRAND PRIX OF AUSTRIA",
-          "sponsored_name": "GRAND PRIX OF AUSTRIA ",
-          "short_name": "AUT",
-          "test": false,
-          "season": "2026",
-          "circuit": {
-            "id": "8dc64efd-25f8-41cf-aa4f-dfbfa41a762a",
-            "name": "Red Bull Ring - Spielberg",
-            "legacy_id": 24,
-            "place": "Spielberg",
-            "nation": "AUT",
-            "events_id": null
-          },
-          "country": {
-            "iso": "AT",
-            "name": "Austria",
-            "region_iso": ""
-          }
-        },
-        "status": "NOT-STARTED"
-      }
-    ]
   },
   {
     "country": {

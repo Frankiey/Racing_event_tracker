@@ -9,6 +9,7 @@ from pipeline.utils import to_date, to_iso
 
 COUNTRY_TIMEZONES = {
     "AR": "America/Argentina/Buenos_Aires",
+    "AT": "Europe/Vienna",
     "AU": "Australia/Melbourne",
     "BR": "America/Sao_Paulo",
     "CZ": "Europe/Prague",

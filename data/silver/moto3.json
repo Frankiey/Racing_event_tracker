@@ -607,27 +607,27 @@
     "sessions": [
       {
         "type": "FP1",
-        "startTimeUTC": "2026-09-18T09:00:00Z"
+        "startTimeUTC": "2026-09-18T07:00:00Z"
       },
       {
         "type": "Practice",
-        "startTimeUTC": "2026-09-18T13:15:00Z"
+        "startTimeUTC": "2026-09-18T11:15:00Z"
       },
       {
         "type": "FP2",
-        "startTimeUTC": "2026-09-19T08:40:00Z"
+        "startTimeUTC": "2026-09-19T06:40:00Z"
       },
       {
         "type": "Q1",
-        "startTimeUTC": "2026-09-19T12:45:00Z"
+        "startTimeUTC": "2026-09-19T10:45:00Z"
       },
       {
         "type": "Q2",
-        "startTimeUTC": "2026-09-19T13:10:00Z"
+        "startTimeUTC": "2026-09-19T11:10:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-09-20T11:00:00Z"
+        "startTimeUTC": "2026-09-20T09:00:00Z"
       }
     ],
     "dateStart": "2026-09-18",
