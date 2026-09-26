@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-22T08:31:07Z",
+  "generated": "2026-09-26T04:17:37Z",
   "season": 2026,
   "eventCount": 53,
   "sources": [
@@ -1425,11 +1425,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-10-31T18:05:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-11-01T14:00:00Z"
+          "startTimeUTC": "2026-11-01T19:00:00Z"
         }
       ],
-      "dateStart": "2026-11-01",
+      "dateStart": "2026-10-31",
       "dateEnd": "2026-11-01"
     },
     {
@@ -1665,11 +1669,15 @@
       },
       "sessions": [
         {
+          "type": "Qualifying",
+          "startTimeUTC": "2026-11-07T19:30:00Z"
+        },
+        {
           "type": "Race",
-          "startTimeUTC": "2026-11-08T15:00:00Z"
+          "startTimeUTC": "2026-11-08T20:00:00Z"
         }
       ],
-      "dateStart": "2026-11-08",
+      "dateStart": "2026-11-07",
       "dateEnd": "2026-11-08"
     },
     {
