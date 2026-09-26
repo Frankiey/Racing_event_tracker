@@ -10,7 +10,14 @@ export interface KioskEvent {
   seriesId: string;
   eventName: string;
   round: number;
-  circuit: { name: string; city: string; country: string; countryCode: string };
+  circuit: {
+    name: string;
+    city: string;
+    country: string;
+    countryCode: string;
+    lengthKm?: number;
+    lapRecord?: { time: string; driver: string; year: number };
+  };
   sessions: KioskSession[];
   dateStart: string;
   dateEnd: string;
@@ -19,11 +26,20 @@ export interface KioskEvent {
 /** 'empty' = nothing left to show (off-season, or the whole feed is in the past). */
 export type KioskMode = 'idle' | 'weekend' | 'live' | 'empty';
 
+export interface LiveHit {
+  event: KioskEvent;
+  session: KioskSession;
+}
+
 export interface ModeResult {
   mode: KioskMode;
   event: KioskEvent | null;
   session: KioskSession | null;
-  alsoLive: { event: KioskEvent; session: KioskSession }[];
+  alsoLive: LiveHit[];
+  /** Every live session, favorites first then series order (empty unless mode is 'live'). */
+  live: LiveHit[];
+  /** How many leading `live` hits take turns as the hero: the favorites if any are live, else all. */
+  livePoolSize: number;
 }
 
 export interface RotationState {
@@ -66,8 +82,13 @@ export function getNextKioskEvent(events: KioskEvent[], now: number): KioskEvent
   ) ?? null;
 }
 
-export function getKioskMode(events: KioskEvent[], now: number, getOrder: (seriesId: string) => number): ModeResult {
-  const liveHits: { event: KioskEvent; session: KioskSession }[] = [];
+export function getKioskMode(
+  events: KioskEvent[],
+  now: number,
+  getOrder: (seriesId: string) => number,
+  favoriteEventIds: ReadonlySet<string> = new Set(),
+): ModeResult {
+  const liveHits: LiveHit[] = [];
   for (const event of events) {
     for (const session of event.sessions) {
       if (!isPlaceholderTime(session.startTimeUTC) && isKioskSessionLive(session, now)) {
@@ -77,15 +98,25 @@ export function getKioskMode(events: KioskEvent[], now: number, getOrder: (serie
   }
 
   if (liveHits.length > 0) {
-    liveHits.sort((left, right) => getOrder(left.event.seriesId) - getOrder(right.event.seriesId));
+    const fav = (hit: LiveHit) => (favoriteEventIds.has(hit.event.id) ? 0 : 1);
+    liveHits.sort((left, right) => fav(left) - fav(right) || getOrder(left.event.seriesId) - getOrder(right.event.seriesId));
     const primary = liveHits[0];
-    return { mode: 'live', event: primary.event, session: primary.session, alsoLive: liveHits.slice(1) };
+    const livePoolSize = liveHits.filter((hit) => fav(hit) === fav(primary)).length;
+    return { mode: 'live', event: primary.event, session: primary.session, alsoLive: liveHits.slice(1), live: liveHits, livePoolSize };
   }
 
   const next = getNextKioskEvent(events, now);
-  if (!next) return { mode: 'empty', event: null, session: null, alsoLive: [] };
+  if (!next) return { mode: 'empty', event: null, session: null, alsoLive: [], live: [], livePoolSize: 0 };
 
-  return { mode: isKioskWeekendEvent(next, now) ? 'weekend' : 'idle', event: next, session: null, alsoLive: [] };
+  return { mode: isKioskWeekendEvent(next, now) ? 'weekend' : 'idle', event: next, session: null, alsoLive: [], live: [], livePoolSize: 0 };
+}
+
+/** Live mode with several sessions on air: make `live[index % livePoolSize]` the hero and the rest
+ * "also live" chips. Non-live results pass through untouched. */
+export function rotateLiveResult(result: ModeResult, index: number): ModeResult {
+  if (result.mode !== 'live' || result.livePoolSize < 2) return result;
+  const primary = result.live[index % result.livePoolSize];
+  return { ...result, event: primary.event, session: primary.session, alsoLive: result.live.filter((hit) => hit !== primary) };
 }
 
 export const KIOSK_WEEKEND_WINDOW_DAYS = 7;
@@ -203,4 +234,40 @@ export function getKioskFreshness(generated: string | null | undefined, now: num
   const generatedMs = generated ? new Date(generated).getTime() : NaN;
   if (!Number.isNaN(generatedMs) && now - generatedMs > KIOSK_STALE_MS) return 'old';
   return 'fresh';
+}
+
+// ── Burn-in protection (jwt3.15) ─────────────────────────────────────────────
+
+/** Whole-content offsets (px) the kiosk steps through so static high-contrast elements never sit on
+ * the same pixels for hours. Small enough to be invisible as a "move", big enough to spread wear. */
+const KIOSK_SHIFT_STEPS: readonly (readonly [number, number])[] = [[0, 0], [5, 3], [-4, 5], [-5, -3], [3, -5]];
+export const KIOSK_SHIFT_INTERVAL_MS = 5 * 60_000;
+
+/** Offset for the current time: stateless (derived from the clock), so any timer/reload agrees. */
+export function getKioskShift(now: number): { x: number; y: number } {
+  const [x, y] = KIOSK_SHIFT_STEPS[Math.floor(now / KIOSK_SHIFT_INTERVAL_MS) % KIOSK_SHIFT_STEPS.length];
+  return { x, y };
+}
+
+// ── Legibility (jwt3.20) ─────────────────────────────────────────────────────
+
+/** Black or white, whichever reads better on the given `#rrggbb` series colour (yellow badges with
+ * white text are unreadable from across a room). 0.179 is the WCAG luminance where both contrast equally. */
+export function getReadableTextColor(hex: string): '#ffffff' | '#09090b' {
+  const [r, g, b] = [1, 3, 5]
+    .map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.179 ? '#09090b' : '#ffffff';
+}
+
+// ── Trivia (jwt3.10) ─────────────────────────────────────────────────────────
+
+/** "6.003 km · Lap record 1:43.009 Charles Leclerc (2019)" from whatever real circuit data exists;
+ * null when there is none (most circuits) so the line stays hidden — never a placeholder. */
+export function getKioskTrivia(circuit: KioskEvent['circuit']): string | null {
+  const parts: string[] = [];
+  if (circuit.lengthKm) parts.push(`${circuit.lengthKm} km`);
+  const r = circuit.lapRecord;
+  if (r?.time) parts.push(`Lap record ${r.time}${r.driver ? ` ${r.driver}` : ''}${r.year ? ` (${r.year})` : ''}`);
+  return parts.length > 0 ? parts.join(' · ') : null;
 }

@@ -20,6 +20,10 @@ import {
   formatKioskDuration,
   getKioskFingerprint,
   getKioskFreshness,
+  getKioskShift,
+  getKioskTrivia,
+  getReadableTextColor,
+  KIOSK_SHIFT_INTERVAL_MS,
   KIOSK_MAX_FAILURES,
   KIOSK_STALE_MS,
   formatKioskRound,
@@ -27,8 +31,10 @@ import {
   getNextKioskEvent,
   getNextKioskTransition,
   isKioskSessionLive,
+  rotateLiveResult,
   updateRotationState,
 } from '../../src/lib/kiosk/state.ts';
+import { filterKioskEvents, parseKioskConfig } from '../../src/lib/kiosk/config.ts';
 import { isSessionLiveAt, isSessionPastAt } from '../../src/lib/sessions.ts';
 
 // ── Fixture: two events straddling a midnight boundary ──────────────────────
@@ -370,5 +376,110 @@ describe('data freshness', () => {
   test('missing/invalid generated is not treated as stale', () => {
     assert.equal(getKioskFreshness(undefined, Date.now(), 0), 'fresh');
     assert.equal(getKioskFreshness('nonsense', Date.now(), 0), 'fresh');
+  });
+});
+
+// ── URL-param config (jwt3.22) ───────────────────────────────────────────────
+
+describe('parseKioskConfig / filterKioskEvents', () => {
+  const series = ['f1', 'motogp', 'wec'];
+  const regions = ['NL', 'US', 'UK'];
+
+  test('no params: default region NL, all series', () => {
+    assert.deepEqual(parseKioskConfig('', series, regions), { region: 'NL', series: null });
+  });
+
+  test('region is case-insensitive and validated; series list is trimmed, lowercased, deduped', () => {
+    assert.deepEqual(parseKioskConfig('?region=us&series=F1, motogp,f1', series, regions), { region: 'US', series: ['f1', 'motogp'] });
+  });
+
+  test('invalid region and series fall back to defaults; unknown series ids are dropped', () => {
+    assert.deepEqual(parseKioskConfig('?region=ZZ&series=bogus', series, regions), { region: 'NL', series: null });
+    assert.deepEqual(parseKioskConfig('?series=bogus,wec', series, regions).series, ['wec']);
+  });
+
+  test('filterKioskEvents keeps only the chosen series (null = all)', () => {
+    const events = [{ seriesId: 'f1' }, { seriesId: 'wec' }, { seriesId: 'motogp' }];
+    assert.equal(filterKioskEvents(events, null).length, 3);
+    assert.deepEqual(filterKioskEvents(events, ['wec', 'f1']).map((e) => e.seriesId), ['f1', 'wec']);
+  });
+});
+
+// ── Simultaneous live sessions (jwt3.18) ─────────────────────────────────────
+
+describe('getKioskMode / rotateLiveResult — several live sessions', () => {
+  const mk = (id, seriesId) => ({
+    id, seriesId, eventName: id, round: 1,
+    circuit: { name: 'C', city: 'City', country: 'X', countryCode: 'XX' },
+    dateStart: '2026-06-14', dateEnd: '2026-06-14',
+    sessions: [{ type: 'Race', startTimeUTC: '2026-06-14T10:00:00Z' }],
+  });
+  const events = [mk('a', 'f1'), mk('b', 'motogp'), mk('c', 'wec')];
+  const order = (id) => ({ f1: 1, motogp: 2, wec: 3 })[id];
+  const now = new Date('2026-06-14T10:05:00Z').getTime();
+
+  test('3 live: hero cycles through all three, the others are chips', () => {
+    const auto = getKioskMode(events, now, order);
+    assert.equal(auto.live.length, 3);
+    const heroes = [0, 1, 2, 3].map((i) => rotateLiveResult(auto, i).event.id);
+    assert.deepEqual(heroes, ['a', 'b', 'c', 'a']);
+    const r = rotateLiveResult(auto, 1);
+    assert.deepEqual(r.alsoLive.map((h) => h.event.id), ['a', 'c']);
+    assert.equal(r.session, r.live[1].session);
+  });
+
+  test('favorites lead and are the only heroes while any is live; the rest become chips', () => {
+    const auto = getKioskMode(events, now, order, new Set(['c']));
+    assert.equal(auto.event.id, 'c');
+    assert.equal(auto.livePoolSize, 1);
+    assert.equal(rotateLiveResult(auto, 5).event.id, 'c');
+    const two = getKioskMode(events, now, order, new Set(['c', 'b']));
+    assert.equal(two.livePoolSize, 2);
+    assert.deepEqual([0, 1, 2].map((i) => rotateLiveResult(two, i).event.id), ['b', 'c', 'b']);
+  });
+
+  test('single live session and non-live results are untouched', () => {
+    const one = getKioskMode([events[0]], now, order);
+    assert.equal(rotateLiveResult(one, 7), one);
+    const idle = getKioskMode(events, new Date('2026-06-14T09:00:00Z').getTime(), order);
+    assert.equal(rotateLiveResult(idle, 3), idle);
+  });
+});
+
+// ── Burn-in shift (jwt3.15) ──────────────────────────────────────────────────
+
+describe('getKioskShift', () => {
+  test('is stable within a slot, moves between slots, and stays within a few px', () => {
+    const t = Date.UTC(2026, 5, 14, 10, 0, 0);
+    assert.deepEqual(getKioskShift(t), getKioskShift(t + 299_000));
+    const seen = new Set();
+    for (let i = 0; i < 10; i++) {
+      const a = getKioskShift(t + i * KIOSK_SHIFT_INTERVAL_MS);
+      const b = getKioskShift(t + (i + 1) * KIOSK_SHIFT_INTERVAL_MS);
+      assert.notDeepEqual(a, b);
+      assert.ok(Math.abs(a.x) <= 6 && Math.abs(a.y) <= 6);
+      seen.add(`${a.x},${a.y}`);
+    }
+    assert.ok(seen.size > 2);
+  });
+});
+
+describe('getReadableTextColor', () => {
+  test('dark text on light series colours, white on dark ones', () => {
+    assert.equal(getReadableTextColor('#facc15'), '#09090b'); // Moto3 yellow
+    assert.equal(getReadableTextColor('#eab308'), '#09090b'); // NASCAR
+    assert.equal(getReadableTextColor('#e10600'), '#ffffff'); // F1 red
+    assert.equal(getReadableTextColor('#92400e'), '#ffffff'); // IOM TT brown
+    assert.equal(getReadableTextColor('#1e40af'), '#ffffff'); // IndyCar blue
+  });
+});
+
+describe('getKioskTrivia', () => {
+  test('length + lap record, either alone, or null when the circuit has neither', () => {
+    const rec = { time: '1:43.009', driver: 'Charles Leclerc', car: 'Ferrari', year: 2019 };
+    assert.equal(getKioskTrivia({ lengthKm: 6.003, lapRecord: rec }), '6.003 km · Lap record 1:43.009 Charles Leclerc (2019)');
+    assert.equal(getKioskTrivia({ lengthKm: 5.4 }), '5.4 km');
+    assert.equal(getKioskTrivia({ lapRecord: rec }), 'Lap record 1:43.009 Charles Leclerc (2019)');
+    assert.equal(getKioskTrivia({ name: 'X' }), null);
   });
 });
