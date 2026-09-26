@@ -57,7 +57,7 @@ const { propA, propB } = Astro.props;
 
 1. Import and use the component in the relevant page (`src/pages/*.astro`)
 2. If it needs to appear site-wide, add it to `src/layouts/Layout.astro`
-3. If it's navigation-related, update `src/components/Nav.astro` and add a note to `CLAUDE.md`
+3. If it's navigation-related, update `src/components/Nav.astro` and add a note to `AGENTS.md`
 4. Check it works with `npm run dev` and test the `astro:after-swap` path by navigating between pages
 
 ### Track the work

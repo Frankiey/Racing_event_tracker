@@ -16,4 +16,4 @@ Non-negotiables:
 
 Data flows bronze → silver → gold (medallion architecture) under `data/`; the frontend only ever reads `data/gold/`.
 
-When adding a new page: add it to `src/components/Nav.astro` and to the directory map in `CLAUDE.md`.
+When adding a new page: add it to `src/components/Nav.astro` and to the directory map in `AGENTS.md`.

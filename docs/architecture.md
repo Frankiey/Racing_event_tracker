@@ -146,7 +146,7 @@ interface Session {
 - Add a route to `src/pages/series/[id].astro` (auto-handled if using dynamic route)
 - Verify the series badge renders correctly in `SeriesBadge.astro`
 - Add series to the Nav dropdown in `Nav.astro` if not auto-populated
-- Update `CLAUDE.md` and this file
+- Update `AGENTS.md` and this file
 
 ---
 

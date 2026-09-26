@@ -24,4 +24,4 @@ Source-selection guidance: `docs/architecture.md` ("Adding a New Data Source") a
 7. **Quality gates:** `npm run validate:data`, `npm test`, `npm run build`.
 8. **Track it** in bd: create + claim a feature issue before starting.
 
-Also update the Data Sources table in CLAUDE.md / AGENTS.md / copilot-instructions.md and, if known, `data/gold/broadcasts.json`.
+Also update the Data Sources table in AGENTS.md and, if known, `data/gold/broadcasts.json`.

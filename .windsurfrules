@@ -45,7 +45,7 @@ public/            — static assets
 ```
 
 When adding a new page: add a link in `src/components/Nav.astro` and update the
-directory map wherever this repo's convention doc lives (`CLAUDE.md`).
+directory map wherever this repo's convention doc lives (`AGENTS.md`).
 
 ## Task Tracking
 

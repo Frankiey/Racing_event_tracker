@@ -6,7 +6,7 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 
 AI configuration is layered from always-loaded to on-demand:
 
-1. **Always-on instructions** — `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`. Short universal rules only: project one-liner, directory map, `bd` workflow, quality-gate commands. No domain knowledge.
+1. **Always-on instructions** — `AGENTS.md` is the single source of truth; `CLAUDE.md` (a one-line `@AGENTS.md` import) and `.github/copilot-instructions.md` (a pointer) only point to it. Short universal rules only: project one-liner, directory map, `bd` workflow, quality-gate commands. No domain knowledge.
 2. **Auto-triggered skills** — `.github/skills/<name>/SKILL.md`. Domain knowledge that loads when the task matches the skill's USE FOR triggers. `.claude/skills` is a symlink to `.github/skills`, so Claude Code and Copilot share one set.
 3. **User-invoked commands** — `.claude/commands/` (Claude slash commands) and `.github/prompts/` (Copilot prompts). Workflow orchestration: ordered steps, commands to run, `bd` bookkeeping. They reference skills instead of restating knowledge.
 4. **Agent personas** — `.github/agents/*.agent.md`. Lean role + tool constraints; they rely on skills for domain knowledge.

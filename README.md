@@ -193,7 +193,7 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes short always-on instructions ([CLAUDE.md](CLAUDE.md), [AGENTS.md](AGENTS.md), `.github/copilot-instructions.md`), auto-discovered **agent skills** (`.github/skills/`, shared with Claude Code via the `.claude/skills` symlink), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes short always-on instructions ([AGENTS.md](AGENTS.md) as the single source of truth, with `CLAUDE.md` and `.github/copilot-instructions.md` pointing to it), auto-discovered **agent skills** (`.github/skills/`, shared with Claude Code via the `.claude/skills` symlink), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers
