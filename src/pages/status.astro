@@ -3,9 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import SeriesBadge from '../components/SeriesBadge.astro';
 import { getSeriesMeta } from '../lib/series';
 import { countryFlag, formatDateRange, isPlaceholderTime } from '../lib/time';
+import { formatKioskRound } from '../lib/kiosk/state';
 
 import type { EventFeed } from '../lib/types';
 import upcomingData from '../../data/gold/upcoming.json';
+import calendarData from '../../data/gold/calendar.json';
 import broadcastsData from '../../data/gold/broadcasts.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -14,9 +16,11 @@ const allEvents = (upcomingData as EventFeed).events;
 const sorted = [...allEvents].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
 
 const now = new Date();
+// No fallback to sorted[0]: that is a past event when the feed is stale/off-season, and would be
+// shown as the hero with a dead countdown. null renders the empty state instead.
 const nextEvent = sorted.find(e =>
   e.sessions.some((s) => !isPlaceholderTime(s.startTimeUTC) && new Date(s.startTimeUTC) > now)
-) ?? sorted[0];
+) ?? null;
 
 const heroSeriesMeta = nextEvent ? getSeriesMeta(nextEvent.seriesId) : null;
 const heroColor = heroSeriesMeta?.color ?? '#71717a';
@@ -24,8 +28,20 @@ const heroFlag = nextEvent?.circuit?.countryCode ? countryFlag(nextEvent.circuit
 const heroSessions = nextEvent
   ? nextEvent.sessions.filter((s) => !isPlaceholderTime(s.startTimeUTC))
   : [];
-const seriesEvents = sorted.filter(e => nextEvent && e.seriesId === nextEvent.seriesId);
-const totalRounds = seriesEvents.length;
+// Season round totals per series come from the full calendar (upcoming.json only holds the
+// events still to run, so counting it gives "Round 12 / 3"). Only this tiny map is embedded.
+const roundTotals: Record<string, number> = {};
+for (const e of (calendarData as EventFeed).events) roundTotals[e.seriesId] = (roundTotals[e.seriesId] ?? 0) + 1;
+
+// Off-season hint for the empty state: first calendar event that hasn't finished yet at build time
+// (the client only shows it if it's still ahead). Tiny object — the calendar itself is not embedded.
+const todayIso = now.toISOString().slice(0, 10);
+const nextCalendarEvent = [...(calendarData as EventFeed).events]
+  .filter(e => e.dateEnd >= todayIso)
+  .sort((a, b) => a.dateStart.localeCompare(b.dateStart))[0];
+const nextCalendarHint = nextCalendarEvent
+  ? { eventName: nextCalendarEvent.eventName, dateStart: nextCalendarEvent.dateStart, dateEnd: nextCalendarEvent.dateEnd }
+  : null;
 
 const SIDEBAR_EVENT_COUNT = 8;
 const sidebarEvents = sorted
@@ -35,6 +51,9 @@ const sidebarEvents = sorted
 
 <Layout title="RaceTrack — Kiosk" bare={true}>
   <script id="kiosk-data" type="application/json" set:html={JSON.stringify(sorted)} is:inline />
+  <script id="kiosk-round-totals" type="application/json" set:html={JSON.stringify(roundTotals)} is:inline />
+  <script id="kiosk-next-calendar" type="application/json" set:html={JSON.stringify(nextCalendarHint)} is:inline />
+  <script id="kiosk-generated" type="application/json" set:html={JSON.stringify((upcomingData as { generated?: string }).generated ?? null)} is:inline />
   <script id="kiosk-base" type="application/json" set:html={JSON.stringify(base)} is:inline />
   <script id="kiosk-broadcasts" type="application/json" set:html={JSON.stringify(broadcastsData)} is:inline />
 
@@ -87,6 +106,14 @@ const sidebarEvents = sorted
         style={`background: radial-gradient(ellipse 50% 40% at 70% 20%, ${heroColor}08 0%, transparent 60%);`}
       />
 
+      <!-- Empty state (off-season / nothing left to show); toggled by renderEmpty() -->
+      <div id="kiosk-empty" hidden={nextEvent !== null} class="relative pl-5" style="border-left: 3px solid #3f3f46;">
+        <p class="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-3">Off-season</p>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tight text-zinc-300 mb-4">No upcoming events</h1>
+        <p id="kiosk-empty-next" class="text-base text-zinc-400 font-medium"></p>
+      </div>
+
+      <div id="kiosk-hero-content" hidden={nextEvent === null}>
       <!-- Live mode header -->
       <div id="kiosk-live-header" class="hidden mb-8 items-center gap-4">
         <!-- Ring + dot -->
@@ -115,11 +142,12 @@ const sidebarEvents = sorted
             id="kiosk-round-badge"
             class="text-xs font-mono tabular-nums px-2 py-0.5 rounded-md bg-zinc-900/80 border border-zinc-800 text-zinc-500"
           >
-            {nextEvent ? `Round ${nextEvent.round} / ${totalRounds}` : ''}
+            {nextEvent ? formatKioskRound(nextEvent.round, roundTotals[nextEvent.seriesId]) : ''}
           </span>
           <span
             id="kiosk-weekend-badge"
-            class="hidden text-[11px] font-black uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full"
+            hidden
+            class="text-[11px] font-black uppercase tracking-[0.2em] px-2.5 py-0.5 rounded-full"
             style={`background: ${heroColor}25; color: ${heroColor}; border: 1px solid ${heroColor}50;`}
           >
             This Weekend
@@ -144,9 +172,9 @@ const sidebarEvents = sorted
               {nextEvent?.circuit?.city ? ` · ${nextEvent.circuit.city}` : ''}
             </p>
             <!-- Live elapsed -->
-            <p id="kiosk-live-elapsed" class="hidden mt-2 text-sm font-medium" style={`color: ${heroColor};`}></p>
+            <p id="kiosk-live-elapsed" hidden class="mt-2 text-sm font-medium" style={`color: ${heroColor};`}></p>
             <!-- Broadcast info -->
-            <p id="kiosk-broadcast-info" class="hidden mt-2 text-xs text-zinc-500 font-medium"></p>
+            <p id="kiosk-broadcast-info" hidden class="mt-2 text-xs text-zinc-500 font-medium"></p>
           </div>
           <!-- Flag -->
           <div
@@ -208,6 +236,9 @@ const sidebarEvents = sorted
         </div>
       </div>
 
+      <!-- Live mode: next session countdown (secondary to the time-remaining block above) -->
+      <p id="kiosk-next-line" hidden class="-mt-6 mb-8 ml-1 text-sm font-medium text-zinc-400 tabular-nums"></p>
+
       <!-- Rotation indicator -->
       <div id="kiosk-rotation-dots" class="hidden items-center gap-1.5 mb-5 ml-1"></div>
 
@@ -232,9 +263,14 @@ const sidebarEvents = sorted
         </div>
       </div>
 
+      </div><!-- /kiosk-hero-content -->
+
       <!-- Footer row: refreshed + clock -->
       <div class="mt-auto pt-10 flex items-end justify-between">
-        <span id="kiosk-refreshed" class="text-[11px] font-mono text-zinc-800">Data as of --:--</span>
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <span id="kiosk-refreshed" class="text-[11px] font-mono text-zinc-500">Data as of --:--</span>
+          <span id="kiosk-stale" hidden class="text-[11px] font-mono text-amber-400"></span>
+        </div>
         <span id="kiosk-clock" class="text-sm font-mono tabular-nums text-zinc-500 tracking-wide">--:-- ---</span>
       </div>
     </section>
@@ -313,9 +349,9 @@ const sidebarEvents = sorted
 
   <script>
     import { SERIES_META, SERIES_ORDER } from '../lib/series-client';
-    import { isPlaceholderTime } from '../lib/time';
+    import { formatDateRange, isPlaceholderTime } from '../lib/time';
     import { countryFlag } from '../lib/client-utils';
-    import { getSessionEstimatedEndTime, isRaceType } from '../lib/sessions';
+    import { getSessionEstimatedEndTime, isRaceType, isSessionLiveAt, isSessionPastAt } from '../lib/sessions';
     import {
       createKioskScheduler,
       type KioskScheduler,
@@ -323,10 +359,15 @@ const sidebarEvents = sorted
     import {
       clearManualSelection,
       createManualSelection,
+      getKioskFingerprint,
+      getKioskFreshness,
       getKioskMode,
+      getKioskRenderMode,
       getNextKioskSession,
+      formatKioskDuration,
+      formatKioskRound,
+      getNextKioskTransition,
       type KioskEvent,
-      KIOSK_GRACE_MS,
       type KioskMode,
       type KioskSession as Session,
       type ModeResult,
@@ -351,6 +392,13 @@ const sidebarEvents = sorted
       if (!entries || entries.length === 0) return null;
       return entries.map(e => e.channel).join(' · ');
     }
+
+    // Season round totals per series (embedded at build time from calendar.json), read once.
+    const roundTotals: Record<string, number> = JSON.parse(document.getElementById('kiosk-round-totals')?.textContent ?? '{}');
+
+    // Build-time hint for the empty state (first calendar event not yet finished when the site was built).
+    const nextCalendarHint: { eventName: string; dateStart: string; dateEnd: string } | null =
+      JSON.parse(document.getElementById('kiosk-next-calendar')?.textContent ?? 'null');
 
     // ── Constants ────────────────────────────────────────────────────────────
     // ── Auto-rotation ────────────────────────────────────────────────────────
@@ -428,7 +476,21 @@ const sidebarEvents = sorted
       countdownTimerId = window.setInterval(tickCountdown, fast ? COUNTDOWN_FAST_MS : COUNTDOWN_SLOW_MS);
     }
 
+    // Live mode only: "Next · Race in 2h 05m" under the time-remaining block. Refreshed by the
+    // countdown timer (once a minute) — never by the 1s heartbeat.
+    let nextTarget: { ms: number; label: string } | null = null;
+
+    function renderNextLine() {
+      const el = document.getElementById('kiosk-next-line');
+      if (!el) return;
+      if (!nextTarget) { el.hidden = true; return; }
+      const text = `Next · ${nextTarget.label} in ${formatKioskDuration(nextTarget.ms - Date.now())}`;
+      el.hidden = false;
+      if (el.textContent !== text) el.textContent = text;
+    }
+
     function tickCountdown() {
+      renderNextLine();
       if (cdTargetMs === null) {
         setSecondsVisible(false);
         scheduleCountdownTimer(false);
@@ -523,9 +585,24 @@ const sidebarEvents = sorted
       return `Started ${m} min ago`;
     }
 
-    function renderHero(event: KioskEvent, mode: KioskMode, liveSession: Session | null, alsoLive: { event: KioskEvent; session: Session }[]) {
+    // The live session currently shown, so the 1s tick can refresh elapsed text + progress bar
+    // without re-rendering the hero (which rebuilds the session strip and sidebar).
+    let liveSession: Session | null = null;
+
+    function tickLive() {
+      if (!liveSession || currentMode !== 'live') return;
+      const el = document.getElementById('kiosk-live-elapsed');
+      if (el) {
+        const text = `${liveSession.type} · ${formatElapsed(new Date(liveSession.startTimeUTC).getTime())}`;
+        if (el.textContent !== text) el.textContent = text;
+      }
+      updateSessionProgressWidth(liveSession);
+    }
+
+    function renderHero(event: KioskEvent, mode: KioskMode, liveNow: Session | null, alsoLive: { event: KioskEvent; session: Session }[]) {
       const color = getColor(event.seriesId);
       const now = Date.now();
+      liveSession = mode === 'live' ? liveNow : null;
 
       // Mode signature animation (jwt3.4): drives which ambient animation
       // is active — see the body[data-kiosk-mode] rules in global.css.
@@ -599,16 +676,14 @@ const sidebarEvents = sorted
       }
 
       // Round badge
-      const allEvts: KioskEvent[] = JSON.parse(document.getElementById('kiosk-data')!.textContent ?? '[]');
-      const totalR = allEvts.filter(e => e.seriesId === event.seriesId).length;
       const roundBadge = document.getElementById('kiosk-round-badge');
       if (roundBadge) {
-        roundBadge.textContent = `Round ${event.round} / ${totalR}`;
+        roundBadge.textContent = formatKioskRound(event.round, roundTotals[event.seriesId]);
         roundBadge.style.display = mode === 'weekend' ? 'none' : '';
       }
       const weekendBadge = document.getElementById('kiosk-weekend-badge');
       if (weekendBadge) {
-        weekendBadge.style.display = mode === 'weekend' ? '' : 'none';
+        weekendBadge.hidden = mode !== 'weekend';
         weekendBadge.style.background = `${color}25`;
         weekendBadge.style.color = color;
         weekendBadge.style.borderColor = `${color}50`;
@@ -620,22 +695,26 @@ const sidebarEvents = sorted
       const cdEl = document.getElementById('kiosk-countdown');
 
       if (mode === 'live' && liveSession) {
-        cdTargetMs = null;
-        if (cdLabel) cdLabel.textContent = '';
+        // The big block counts down the time REMAINING in the live session (never a dead 00:00:00);
+        // the next session's countdown is the smaller secondary line. tickCountdown() drives both.
+        cdTargetMs = getSessionEstimatedEndTime(liveSession);
+        if (cdLabel) cdLabel.textContent = 'Time remaining';
+        const nextSession = getNextKioskSession(event, now);
+        nextTarget = nextSession ? { ms: new Date(nextSession.startTimeUTC).getTime(), label: nextSession.type } : null;
         if (liveElapsed) {
-          liveElapsed.style.display = '';
+          liveElapsed.hidden = false;
           liveElapsed.style.color = color;
-          liveElapsed.textContent = `${liveSession.type} · ${formatElapsed(new Date(liveSession.startTimeUTC).getTime())}`;
         }
+        tickLive();
         if (cdEl) (cdEl as HTMLElement).style.setProperty('--cd-glow', `${color}60`);
-        setDigit('days', '00'); setDigit('hrs', '00'); setDigit('min', '00'); setDigit('sec', '00');
         // Tint digit blocks in live mode
         document.querySelectorAll<HTMLElement>('.kiosk-digit-block').forEach(b => {
           b.style.borderColor = `${color}30`;
           b.style.boxShadow = `0 0 20px ${color}10, inset 0 0 20px ${color}05`;
         });
       } else {
-        if (liveElapsed) liveElapsed.style.display = 'none';
+        if (liveElapsed) liveElapsed.hidden = true;
+        nextTarget = null;
         document.querySelectorAll<HTMLElement>('.kiosk-digit-block').forEach(b => {
           b.style.borderColor = '';
           b.style.boxShadow = '';
@@ -677,10 +756,10 @@ const sidebarEvents = sorted
         const line = getBroadcastLine(event.seriesId);
         if (line) {
           broadcastEl.textContent = `📺 ${line}`;
-          broadcastEl.style.display = '';
+          broadcastEl.hidden = false;
         } else {
           broadcastEl.textContent = '';
-          broadcastEl.style.display = 'none';
+          broadcastEl.hidden = true;
         }
       }
 
@@ -689,6 +768,32 @@ const sidebarEvents = sorted
 
       // Session strip
       renderSessionStrip(event, color, now);
+    }
+
+    // ── Empty state ──────────────────────────────────────────────────────────
+    // Nothing left to show: swap the hero for a calm "Off-season" panel. The next updateKioskDisplay
+    // that finds an event calls renderHero + showHero() again, so no reload is needed to recover.
+    function setHeroVisible(visible: boolean) {
+      const content = document.getElementById('kiosk-hero-content');
+      const empty = document.getElementById('kiosk-empty');
+      if (content) content.hidden = !visible;
+      if (empty) empty.hidden = visible;
+    }
+
+    function renderEmpty() {
+      document.body.dataset.kioskMode = 'empty';
+      cdTargetMs = null;
+      nextTarget = null;
+      liveSession = null;
+      stopCountdownTimer();
+      setHeroVisible(false);
+      const nextEl = document.getElementById('kiosk-empty-next');
+      if (nextEl) {
+        const todayIso = new Date().toISOString().slice(0, 10);
+        nextEl.textContent = nextCalendarHint && nextCalendarHint.dateEnd >= todayIso
+          ? `Next event: ${nextCalendarHint.eventName} · ${formatDateRange(nextCalendarHint.dateStart, nextCalendarHint.dateEnd)}`
+          : '';
+      }
     }
 
     function renderSessionProgress(mode: KioskMode, liveSession: Session | null, color: string) {
@@ -701,14 +806,19 @@ const sidebarEvents = sorted
         return;
       }
 
-      const startMs = new Date(liveSession.startTimeUTC).getTime();
-      const endMs = getSessionEstimatedEndTime(liveSession);
-      const totalMs = endMs - startMs;
-      const pct = totalMs > 0 ? Math.min(100, Math.max(0, ((Date.now() - startMs) / totalMs) * 100)) : 0;
-
       wrap.classList.remove('hidden');
-      (bar as HTMLElement).style.width = `${pct}%`;
       (bar as HTMLElement).style.background = color;
+      updateSessionProgressWidth(liveSession);
+    }
+
+    function updateSessionProgressWidth(session: Session) {
+      const bar = document.getElementById('kiosk-session-progress-bar');
+      if (!bar) return;
+      const startMs = new Date(session.startTimeUTC).getTime();
+      const totalMs = getSessionEstimatedEndTime(session) - startMs;
+      const pct = totalMs > 0 ? Math.min(100, Math.max(0, ((Date.now() - startMs) / totalMs) * 100)) : 0;
+      const width = `${pct.toFixed(1)}%`;
+      if ((bar as HTMLElement).style.width !== width) (bar as HTMLElement).style.width = width;
     }
 
     function renderSessionStrip(event: KioskEvent, color: string, now: number) {
@@ -726,9 +836,9 @@ const sidebarEvents = sorted
 
       strip.innerHTML = validSessions.map(s => {
         const startMs = new Date(s.startTimeUTC).getTime();
-        const endMs = getSessionEstimatedEndTime(s);
-        const isLive = now >= startMs && now < endMs + KIOSK_GRACE_MS;
-        const isPast = now >= endMs + KIOSK_GRACE_MS;
+        // Same definitions as the main page (no grace) — see lib/sessions.ts.
+        const isLive = isSessionLiveAt(s, now);
+        const isPast = isSessionPastAt(s, now);
         const isNext = !isPast && !isLive && startMs === nextStart;
 
         let classes = 'kiosk-session-pill flex-none flex flex-col gap-1 px-3 py-2.5 rounded-xl border min-w-[88px] backdrop-blur-sm';
@@ -770,13 +880,8 @@ const sidebarEvents = sorted
         const color = getColor(event.seriesId);
         const short = getShortLabel(event.seriesId);
         const flag = countryFlag(event.circuit?.countryCode ?? '');
-        const start = new Date(event.dateStart);
-        const end = new Date(event.dateEnd);
-        const mf = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' });
-        let dateStr = mf.format(start);
-        if (event.dateStart !== event.dateEnd) {
-          dateStr += start.getMonth() === end.getMonth() ? `–${end.getDate()}` : ` – ${mf.format(end)}`;
-        }
+        // dateStart/dateEnd are circuit-local dates: same helper as the SSR markup (parses at noon UTC).
+        const dateStr = formatDateRange(event.dateStart, event.dateEnd);
         const isActive = event.id === manualEventId;
         return `
           <button class="kiosk-sidebar-event${isActive ? ' kiosk-sidebar-active' : ''} w-full text-left flex items-center gap-3 px-3 py-3 rounded-xl border ${isActive ? 'border-zinc-600/50 bg-zinc-900/80' : 'border-transparent hover:border-zinc-700/40 hover:bg-zinc-900/60'}" data-event-id="${event.id}">
@@ -805,9 +910,16 @@ const sidebarEvents = sorted
     }
 
     // ── Main display update ──────────────────────────────────────────────────
+    // Next instant a session starts/ends; the 1s heartbeat re-renders once the clock passes it.
+    let nextTransitionMs: number | null = null;
+
     function updateKioskDisplay(events: KioskEvent[]) {
       const now = Date.now();
+      nextTransitionMs = getNextKioskTransition(events, now);
       const autoResult = getKioskMode(events, now, getOrder);
+      // A live session just ended: restart rotation at the soonest event instead of
+      // resuming wherever the rotation index was parked before the session went live.
+      if (currentMode === 'live' && autoResult.mode !== 'live') rotationIndex = 0;
       // Refresh rotation pool when not in live or manual mode
       if (autoResult.mode !== 'live' && !(manualEventId && now < manualExpiresAt)) {
         const rotationState = updateRotationState(
@@ -820,10 +932,19 @@ const sidebarEvents = sorted
         rotationIndex = rotationState.index;
       }
       const { event: resolvedEvent, isManual } = resolveEvent(autoResult, events);
-      const mode: KioskMode = isManual ? 'idle' : autoResult.mode;
       const event = resolvedEvent;
+      // Derived from the event actually shown (rotation/manual can pick one weeks away), not the next event.
+      const mode: KioskMode = getKioskRenderMode(autoResult, event, isManual, now);
 
-      if (!event) return;
+      if (!event) {
+        currentMode = 'empty';
+        currentEventId = null;
+        renderEmpty();
+        const sidebarEl = document.getElementById('kiosk-sidebar');
+        if (sidebarEl) sidebarEl.style.display = 'none';
+        return;
+      }
+      setHeroVisible(true);
 
       const modeChanged = mode !== currentMode || event.id !== currentEventId;
       currentMode = mode;
@@ -853,29 +974,72 @@ const sidebarEvents = sorted
     let cachedFingerprint: string | null = null;
     let kioskScheduler: KioskScheduler | null = null;
 
-    function updateLastRefreshed() {
+    // Freshness: `generated` is when the pipeline built the feed; lastOkAt is our last good fetch.
+    let dataGenerated: string | null = JSON.parse(document.getElementById('kiosk-generated')?.textContent ?? 'null');
+    let lastOkAt = Date.now();
+    let consecutiveFailures = 0;
+    let refreshInFlight = false;
+
+    function clockTime(ms: number) {
+      return new Date(ms).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+
+    function renderFreshness() {
       const el = document.getElementById('kiosk-refreshed');
-      if (!el) return;
-      const t = new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-      el.textContent = `Updated ${t}`;
+      if (el) {
+        const g = dataGenerated ? new Date(dataGenerated) : null;
+        el.textContent = g && !isNaN(g.getTime())
+          ? `Data as of ${g.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })}`
+          : `Updated ${clockTime(lastOkAt)}`;
+      }
+      const stale = document.getElementById('kiosk-stale');
+      if (stale) {
+        const state = getKioskFreshness(dataGenerated, Date.now(), consecutiveFailures);
+        stale.hidden = state === 'fresh';
+        stale.textContent = state === 'offline'
+          ? `Offline? Data may be stale (last ok ${clockTime(lastOkAt)})`
+          : state === 'old' ? 'Data may be stale (feed is over 36h old)' : '';
+      }
     }
 
     async function refreshData() {
+      if (refreshInFlight) return;
+      refreshInFlight = true;
       try {
         const base = JSON.parse(document.getElementById('kiosk-base')!.textContent ?? '""');
         const res = await fetch(`${base}/data/gold/upcoming.json`, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`upcoming.json ${res.status}`);
         const envelope = await res.json();
         const data: KioskEvent[] = envelope.events ?? envelope;
-        const sorted = [...data].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
-        const fp = `${sorted.length}-${sorted[0]?.id ?? ''}`;
+        const fp = getKioskFingerprint(envelope);
         if (cachedFingerprint && fp !== cachedFingerprint) { location.reload(); return; }
         cachedFingerprint = fp;
-        allEvents = sorted;
-        updateKioskDisplay(allEvents);
-        renderSidebar(allEvents, currentEventId);
-        updateLastRefreshed();
-      } catch { /* silently fail */ }
+        consecutiveFailures = 0;
+        lastOkAt = Date.now();
+        dataGenerated = envelope.generated ?? dataGenerated;
+        allEvents = [...data].sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+        updateKioskDisplay(allEvents); // already re-renders the sidebar
+      } catch {
+        consecutiveFailures++;
+      } finally {
+        refreshInFlight = false;
+        renderFreshness();
+      }
     }
+
+    // After a display sleep / throttled background tab / network return: fix the view NOW
+    // (timers may have been frozen for hours) and then check for fresh data.
+    function wake() {
+      if (document.visibilityState === 'hidden') return;
+      updateKioskDisplay(allEvents);
+      tickCountdown();
+      updateClock();
+      renderFreshness();
+      void refreshData();
+    }
+    document.addEventListener('visibilitychange', wake);
+    window.addEventListener('online', wake);
+    window.addEventListener('pageshow', (e) => { if (e.persisted) wake(); });
 
     // ── Boot ─────────────────────────────────────────────────────────────────
     function init() {
@@ -884,8 +1048,8 @@ const sidebarEvents = sorted
       stopCountdownTimer();
       initLocalTimes();
       updateKioskDisplay(allEvents); // also arms the countdown loop via tickCountdown()
-      updateLastRefreshed();
-      cachedFingerprint = `${allEvents.length}-${allEvents[0]?.id ?? ''}`;
+      cachedFingerprint = getKioskFingerprint({ generated: dataGenerated ?? undefined, events: allEvents });
+      renderFreshness();
 
       // Manual badge click
       document.getElementById('kiosk-manual-badge')?.addEventListener('click', clearManualEvent);
@@ -893,13 +1057,19 @@ const sidebarEvents = sorted
       kioskScheduler = createKioskScheduler({
         rotationIntervalMs: ROTATION_INTERVAL_MS,
         onSecondTick: () => {
-          // Countdown + clock run on their own (slower) timers — see
-          // scheduleCountdownTimer() / startClockTimer(). This 1s heartbeat is
-          // only for keeping the live-mode display (elapsed time, also-live
-          // chips, progress bar) fresh while a session is live.
-          if (currentMode === 'live' || manualEventId) updateKioskDisplay(allEvents);
+          // Countdown + clock run on their own timers — see scheduleCountdownTimer() /
+          // startClockTimer(). This 1s heartbeat only (a) does a full re-render at the
+          // moment any session starts/ends (nextTransitionMs) or a manual pick expires,
+          // and (b) otherwise just refreshes the live elapsed text + progress bar —
+          // it must not touch the session strip / sidebar DOM (that resets their scroll).
+          const t = Date.now();
+          if ((nextTransitionMs !== null && t >= nextTransitionMs) || (manualEventId && t >= manualExpiresAt)) {
+            updateKioskDisplay(allEvents);
+          } else {
+            tickLive();
+          }
         },
-        onModeRefresh: () => updateKioskDisplay(allEvents),
+        onModeRefresh: () => { updateKioskDisplay(allEvents); renderFreshness(); },
         onRotate: () => {
           if (manualEventId && Date.now() < manualExpiresAt) return;
           const autoResult = getKioskMode(allEvents, Date.now(), getOrder);

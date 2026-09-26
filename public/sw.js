@@ -1,5 +1,5 @@
 // RaceTrack Service Worker — offline-first caching for static assets
-const CACHE_NAME = 'racetrack-v1';
+const CACHE_NAME = 'racetrack-v2';
 const BASE = '/Racing_event_tracker';
 
 // Core assets to pre-cache on install
@@ -33,13 +33,16 @@ self.addEventListener('fetch', (event) => {
   // Only cache same-origin GET requests
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  // Network-first for HTML pages (always get fresh content when online)
-  if (event.request.headers.get('accept')?.includes('text/html')) {
+  // Network-first for HTML pages and /data/*.json (always fresh when online, cache offline)
+  const isData = url.pathname.startsWith(`${BASE}/data/`) && url.pathname.endsWith('.json');
+  if (isData || event.request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
           return response;
         })
         .catch(() => caches.match(event.request))
