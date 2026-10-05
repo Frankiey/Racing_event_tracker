@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-04T05:36:01Z",
+  "generated": "2026-10-05T04:24:17Z",
   "season": 2026,
-  "eventCount": 44,
+  "eventCount": 41,
   "sources": [
     "dtm",
     "f1",
@@ -22,102 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "f1-2026-r16",
-      "seriesId": "f1",
-      "eventName": "Bahrain Grand Prix in Malaysia",
-      "round": 16,
-      "circuit": {
-        "name": "Sepang International Circuit",
-        "city": "Kuala Lumpur",
-        "country": "Malaysia",
-        "countryCode": "BH",
-        "lat": 2.76083,
-        "lng": 101.738
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-02T04:30:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-02T08:00:00Z"
-        },
-        {
-          "type": "FP3",
-          "startTimeUTC": "2026-10-03T04:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-03T08:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-04T07:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-02",
-      "dateEnd": "2026-10-04",
-      "circuitImage": "https://media.formula1.com/image/upload/c_fit,h_704/q_auto/v1740000001/common/f1/2026/track/2026trackkualalumpurdetailed.webp"
-    },
-    {
-      "id": "gtworld-2026-r09",
-      "seriesId": "gtworld",
-      "eventName": "GT World Barcelona",
-      "round": 9,
-      "circuit": {
-        "name": "Circuit de Barcelona-Catalunya",
-        "city": "Montmeló",
-        "country": "Spain",
-        "countryCode": "ES",
-        "lat": 41.57,
-        "lng": 2.2611,
-        "lengthKm": 4.657,
-        "lapRecord": {
-          "time": "1:15.743",
-          "driver": "Oscar Piastri",
-          "car": "McLaren MCL39",
-          "year": 2025
-        }
-      },
-      "sessions": [
-        {
-          "type": "Free Practice 1",
-          "startTimeUTC": "2026-10-02T07:00:00Z"
-        },
-        {
-          "type": "Free Practice 2",
-          "startTimeUTC": "2026-10-02T11:55:00Z"
-        },
-        {
-          "type": "Qualifying 1 - Group A",
-          "startTimeUTC": "2026-10-03T07:45:00Z"
-        },
-        {
-          "type": "Qualifying 1 - Group B",
-          "startTimeUTC": "2026-10-03T08:00:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-10-03T12:00:00Z"
-        },
-        {
-          "type": "Qualifying 2 - Group A",
-          "startTimeUTC": "2026-10-04T09:10:00Z"
-        },
-        {
-          "type": "Qualifying 2 - Group B",
-          "startTimeUTC": "2026-10-04T09:25:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-10-04T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-02",
-      "dateEnd": "2026-10-04"
-    },
     {
       "id": "dtm-2026-r08",
       "seriesId": "dtm",
@@ -166,32 +70,6 @@
       ],
       "dateStart": "2026-10-03",
       "dateEnd": "2026-10-05"
-    },
-    {
-      "id": "nascar-2026-r35",
-      "seriesId": "nascar",
-      "eventName": "South Point 400",
-      "round": 35,
-      "circuit": {
-        "name": "Las Vegas Motor Speedway",
-        "city": "Las Vegas",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.2719,
-        "lng": -115.0103
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-03T21:35:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-04T21:30:00Z"
-        }
-      ],
-      "dateStart": "2026-10-03",
-      "dateEnd": "2026-10-04"
     },
     {
       "id": "moto3-2026-r17",
