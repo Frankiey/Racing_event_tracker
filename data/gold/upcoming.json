@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-05T04:24:17Z",
+  "generated": "2026-10-06T04:19:15Z",
   "season": 2026,
-  "eventCount": 41,
+  "eventCount": 40,
   "sources": [
     "dtm",
     "f1",
@@ -22,55 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "dtm-2026-r08",
-      "seriesId": "dtm",
-      "eventName": "DTM Hockenheim",
-      "round": 8,
-      "circuit": {
-        "name": "Hockenheimring",
-        "city": "Hockenheim",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 49.3278,
-        "lng": 8.5656,
-        "lengthKm": 4.574,
-        "lapRecord": {
-          "time": "1:13.780",
-          "driver": "Kimi Räikkönen",
-          "car": "McLaren MP4-19B",
-          "year": 2004
-        }
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-10-03T11:05:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-10-03T15:30:00Z"
-        },
-        {
-          "type": "Qualifying 1",
-          "startTimeUTC": "2026-10-04T09:35:00Z"
-        },
-        {
-          "type": "Race 1",
-          "startTimeUTC": "2026-10-04T13:30:00Z"
-        },
-        {
-          "type": "Qualifying 2",
-          "startTimeUTC": "2026-10-05T09:30:00Z"
-        },
-        {
-          "type": "Race 2",
-          "startTimeUTC": "2026-10-05T13:30:00Z"
-        }
-      ],
-      "dateStart": "2026-10-03",
-      "dateEnd": "2026-10-05"
-    },
     {
       "id": "moto3-2026-r17",
       "seriesId": "moto3",
