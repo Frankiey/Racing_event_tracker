@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-07T04:19:37Z",
+  "generated": "2026-10-08T04:19:49Z",
   "season": 2026,
   "eventCount": 253,
   "sources": [
@@ -8321,11 +8321,11 @@
         },
         {
           "type": "Q1",
-          "startTimeUTC": "2026-10-03T01:50:00Z"
+          "startTimeUTC": "2026-10-03T01:58:00Z"
         },
         {
           "type": "Q2",
-          "startTimeUTC": "2026-10-03T02:15:00Z"
+          "startTimeUTC": "2026-10-03T02:23:00Z"
         },
         {
           "type": "Sprint",
@@ -8333,7 +8333,7 @@
         },
         {
           "type": "Warm Up",
-          "startTimeUTC": "2026-10-04T00:40:00Z"
+          "startTimeUTC": "2026-10-04T00:35:00Z"
         },
         {
           "type": "Race",
