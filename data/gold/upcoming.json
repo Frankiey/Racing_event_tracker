@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-10T04:18:41Z",
+  "generated": "2026-10-11T04:19:35Z",
   "season": 2026,
-  "eventCount": 40,
+  "eventCount": 38,
   "sources": [
     "dtm",
     "f1",
@@ -22,48 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "moto3-2026-r17",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Indonesia",
-      "round": 17,
-      "circuit": {
-        "name": "Pertamina Mandalika Circuit",
-        "city": "Lombok",
-        "country": "INA",
-        "countryCode": "ID",
-        "lat": -8.895,
-        "lng": 116.2975
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-09T01:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-10-09T05:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-10T00:40:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-10-10T04:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-10-10T05:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-11T04:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-09",
-      "dateEnd": "2026-10-11"
-    },
     {
       "id": "superformula-2026-e06",
       "seriesId": "superformula",
@@ -283,39 +241,6 @@
       "dateEnd": "2026-10-11"
     },
     {
-      "id": "nls-2026-r08",
-      "seriesId": "nls",
-      "eventName": "NLS 10",
-      "round": 9,
-      "circuit": {
-        "name": "Nürburgring Nordschleife",
-        "city": "Nürburg",
-        "country": "Germany",
-        "countryCode": "DE",
-        "lat": 50.3356,
-        "lng": 6.9475,
-        "lengthKm": 20.832,
-        "lapRecord": {
-          "time": "8:07.507",
-          "driver": "Marc Lieb / Arno Klasen",
-          "car": "Porsche 911 (997 II) GT3 R",
-          "year": 2010
-        }
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-10T06:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-10T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-10",
-      "dateEnd": "2026-10-10"
-    },
-    {
       "id": "nascar-2026-r36",
       "seriesId": "nascar",
       "eventName": "Bank of America 400",
@@ -330,15 +255,11 @@
       },
       "sessions": [
         {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-10T16:05:00Z"
-        },
-        {
           "type": "Race",
           "startTimeUTC": "2026-10-11T19:00:00Z"
         }
       ],
-      "dateStart": "2026-10-10",
+      "dateStart": "2026-10-11",
       "dateEnd": "2026-10-11"
     },
     {
