@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-17T04:15:57Z",
+  "generated": "2026-10-18T04:16:09Z",
   "season": 2026,
-  "eventCount": 32,
+  "eventCount": 28,
   "sources": [
     "dtm",
     "f1",
@@ -104,32 +104,6 @@
         {
           "type": "Race",
           "startTimeUTC": "2026-10-18T14:15:00Z"
-        }
-      ],
-      "dateStart": "2026-10-17",
-      "dateEnd": "2026-10-18"
-    },
-    {
-      "id": "nascar-2026-r37",
-      "seriesId": "nascar",
-      "eventName": "Freeway Insurance 500",
-      "round": 37,
-      "circuit": {
-        "name": "Phoenix Raceway",
-        "city": "Avondale",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.3753,
-        "lng": -112.3108
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-17T21:35:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-18T19:00:00Z"
         }
       ],
       "dateStart": "2026-10-17",
@@ -354,32 +328,6 @@
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/United States%20carbon.png"
     },
     {
-      "id": "nascar-2026-r38",
-      "seriesId": "nascar",
-      "eventName": "YellaWood 500",
-      "round": 38,
-      "circuit": {
-        "name": "Talladega Superspeedway",
-        "city": "Lincoln",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.5669,
-        "lng": -86.0642
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-24T17:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-25T18:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-24",
-      "dateEnd": "2026-10-25"
-    },
-    {
       "id": "moto3-2026-r19",
       "seriesId": "moto3",
       "eventName": "Moto3 Grand Prix Of Malaysia",
@@ -551,32 +499,6 @@
       "dateStart": "2026-10-30",
       "dateEnd": "2026-11-01",
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Mexico%20carbon.png"
-    },
-    {
-      "id": "nascar-2026-r39",
-      "seriesId": "nascar",
-      "eventName": "Xfinity 500",
-      "round": 39,
-      "circuit": {
-        "name": "Martinsville Speedway",
-        "city": "Ridgeway",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 36.6342,
-        "lng": -79.8517
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-31T18:05:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-01T19:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-31",
-      "dateEnd": "2026-11-01"
     },
     {
       "id": "moto3-2026-r20",
@@ -795,32 +717,6 @@
       "dateStart": "2026-11-06",
       "dateEnd": "2026-11-08",
       "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Brazil%20carbon.png"
-    },
-    {
-      "id": "nascar-2026-r40",
-      "seriesId": "nascar",
-      "eventName": "NASCAR Championship Race",
-      "round": 40,
-      "circuit": {
-        "name": "Homestead-Miami Speedway",
-        "city": "Homestead",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 25.4517,
-        "lng": -80.4083
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-07T19:30:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-08T20:00:00Z"
-        }
-      ],
-      "dateStart": "2026-11-07",
-      "dateEnd": "2026-11-08"
     },
     {
       "id": "moto3-2026-r21",
