@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-25T04:16:31Z",
+  "generated": "2026-10-26T04:19:12Z",
   "season": 2026,
-  "eventCount": 25,
+  "eventCount": 23,
   "sources": [
     "dtm",
     "f1",
@@ -22,71 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "f1-2026-r18",
-      "seriesId": "f1",
-      "eventName": "United States Grand Prix",
-      "round": 18,
-      "circuit": {
-        "name": "Circuit of the Americas",
-        "city": "Austin",
-        "country": "USA",
-        "countryCode": "US",
-        "lat": 30.1328,
-        "lng": -97.6411
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-10-23T17:30:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-10-23T21:00:00Z"
-        },
-        {
-          "type": "FP3",
-          "startTimeUTC": "2026-10-24T17:30:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-24T21:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-25T20:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-23",
-      "dateEnd": "2026-10-25",
-      "circuitImage": "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/United States%20carbon.png"
-    },
-    {
-      "id": "nascar-2026-r38",
-      "seriesId": "nascar",
-      "eventName": "YellaWood 500",
-      "round": 38,
-      "circuit": {
-        "name": "Talladega Superspeedway",
-        "city": "Lincoln",
-        "country": "United States",
-        "countryCode": "US",
-        "lat": 33.5669,
-        "lng": -86.0642
-      },
-      "sessions": [
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-10-24T17:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-10-25T18:00:00Z"
-        }
-      ],
-      "dateStart": "2026-10-24",
-      "dateEnd": "2026-10-25"
-    },
     {
       "id": "moto3-2026-r19",
       "seriesId": "moto3",
