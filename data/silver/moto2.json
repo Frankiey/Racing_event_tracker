@@ -817,31 +817,31 @@
     "sessions": [
       {
         "type": "FP1",
-        "startTimeUTC": "2026-11-04T11:50:00Z"
+        "startTimeUTC": "2026-11-06T10:50:00Z"
       },
       {
         "type": "Practice",
-        "startTimeUTC": "2026-11-04T16:05:00Z"
+        "startTimeUTC": "2026-11-06T15:05:00Z"
       },
       {
         "type": "FP2",
-        "startTimeUTC": "2026-11-05T11:15:00Z"
+        "startTimeUTC": "2026-11-07T10:15:00Z"
       },
       {
         "type": "Q1",
-        "startTimeUTC": "2026-11-05T15:40:00Z"
+        "startTimeUTC": "2026-11-07T14:45:00Z"
       },
       {
         "type": "Q2",
-        "startTimeUTC": "2026-11-05T16:05:00Z"
+        "startTimeUTC": "2026-11-07T15:10:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-11-06T15:15:00Z"
+        "startTimeUTC": "2026-11-08T14:15:00Z"
       }
     ],
-    "dateStart": "2026-11-04",
-    "dateEnd": "2026-11-06"
+    "dateStart": "2026-11-06",
+    "dateEnd": "2026-11-08"
   },
   {
     "id": "moto2-2026-r21",

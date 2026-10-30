@@ -774,6 +774,10 @@
     },
     "sessions": [
       {
+        "type": "Race",
+        "startTimeUTC": "2026-10-29T07:30:00Z"
+      },
+      {
         "type": "FP1",
         "startTimeUTC": "2026-10-30T01:00:00Z"
       },
@@ -792,14 +796,10 @@
       {
         "type": "Q2",
         "startTimeUTC": "2026-10-31T05:10:00Z"
-      },
-      {
-        "type": "Race",
-        "startTimeUTC": "2026-11-01T03:00:00Z"
       }
     ],
-    "dateStart": "2026-10-30",
-    "dateEnd": "2026-11-01"
+    "dateStart": "2026-10-29",
+    "dateEnd": "2026-10-31"
   },
   {
     "id": "moto3-2026-r20",
@@ -817,31 +817,31 @@
     "sessions": [
       {
         "type": "FP1",
-        "startTimeUTC": "2026-11-04T11:00:00Z"
+        "startTimeUTC": "2026-11-06T10:00:00Z"
       },
       {
         "type": "Practice",
-        "startTimeUTC": "2026-11-04T15:15:00Z"
+        "startTimeUTC": "2026-11-06T14:15:00Z"
       },
       {
         "type": "FP2",
-        "startTimeUTC": "2026-11-05T10:30:00Z"
+        "startTimeUTC": "2026-11-07T09:30:00Z"
       },
       {
         "type": "Q1",
-        "startTimeUTC": "2026-11-05T14:45:00Z"
+        "startTimeUTC": "2026-11-07T13:50:00Z"
       },
       {
         "type": "Q2",
-        "startTimeUTC": "2026-11-05T15:10:00Z"
+        "startTimeUTC": "2026-11-07T14:15:00Z"
       },
       {
         "type": "Race",
-        "startTimeUTC": "2026-11-06T14:00:00Z"
+        "startTimeUTC": "2026-11-08T13:00:00Z"
       }
     ],
-    "dateStart": "2026-11-04",
-    "dateEnd": "2026-11-06"
+    "dateStart": "2026-11-06",
+    "dateEnd": "2026-11-08"
   },
   {
     "id": "moto3-2026-r21",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T04:13:12Z",
+  "generated": "2026-10-30T04:12:34Z",
   "season": 2026,
   "eventCount": 23,
   "sources": [
@@ -37,6 +37,10 @@
       },
       "sessions": [
         {
+          "type": "Race",
+          "startTimeUTC": "2026-10-29T07:30:00Z"
+        },
+        {
           "type": "FP1",
           "startTimeUTC": "2026-10-30T01:00:00Z"
         },
@@ -55,14 +59,10 @@
         {
           "type": "Q2",
           "startTimeUTC": "2026-10-31T05:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-01T03:00:00Z"
         }
       ],
-      "dateStart": "2026-10-30",
-      "dateEnd": "2026-11-01"
+      "dateStart": "2026-10-29",
+      "dateEnd": "2026-10-31"
     },
     {
       "id": "moto2-2026-r19",
@@ -222,90 +222,6 @@
       "dateEnd": "2026-11-01"
     },
     {
-      "id": "moto3-2026-r20",
-      "seriesId": "moto3",
-      "eventName": "Moto3 Grand Prix Of Qatar",
-      "round": 20,
-      "circuit": {
-        "name": "Lusail International Circuit",
-        "city": "Doha",
-        "country": "QAT",
-        "countryCode": "QA",
-        "lat": 25.49,
-        "lng": 51.4542
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-11-04T11:00:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-11-04T15:15:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-11-05T10:30:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-11-05T14:45:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-11-05T15:10:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-06T14:00:00Z"
-        }
-      ],
-      "dateStart": "2026-11-04",
-      "dateEnd": "2026-11-06"
-    },
-    {
-      "id": "moto2-2026-r20",
-      "seriesId": "moto2",
-      "eventName": "Moto2 Grand Prix Of Qatar",
-      "round": 20,
-      "circuit": {
-        "name": "Lusail International Circuit",
-        "city": "Doha",
-        "country": "QAT",
-        "countryCode": "QA",
-        "lat": 25.49,
-        "lng": 51.4542
-      },
-      "sessions": [
-        {
-          "type": "FP1",
-          "startTimeUTC": "2026-11-04T11:50:00Z"
-        },
-        {
-          "type": "Practice",
-          "startTimeUTC": "2026-11-04T16:05:00Z"
-        },
-        {
-          "type": "FP2",
-          "startTimeUTC": "2026-11-05T11:15:00Z"
-        },
-        {
-          "type": "Q1",
-          "startTimeUTC": "2026-11-05T15:40:00Z"
-        },
-        {
-          "type": "Q2",
-          "startTimeUTC": "2026-11-05T16:05:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-06T15:15:00Z"
-        }
-      ],
-      "dateStart": "2026-11-04",
-      "dateEnd": "2026-11-06"
-    },
-    {
       "id": "wec-2026-r08",
       "seriesId": "wec",
       "eventName": "8 Hours of Bahrain",
@@ -349,6 +265,90 @@
       ],
       "dateStart": "2026-11-05",
       "dateEnd": "2026-11-07"
+    },
+    {
+      "id": "moto3-2026-r20",
+      "seriesId": "moto3",
+      "eventName": "Moto3 Grand Prix Of Qatar",
+      "round": 20,
+      "circuit": {
+        "name": "Lusail International Circuit",
+        "city": "Doha",
+        "country": "QAT",
+        "countryCode": "QA",
+        "lat": 25.49,
+        "lng": 51.4542
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-11-06T10:00:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-06T14:15:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-11-07T09:30:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-11-07T13:50:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-07T14:15:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-08T13:00:00Z"
+        }
+      ],
+      "dateStart": "2026-11-06",
+      "dateEnd": "2026-11-08"
+    },
+    {
+      "id": "moto2-2026-r20",
+      "seriesId": "moto2",
+      "eventName": "Moto2 Grand Prix Of Qatar",
+      "round": 20,
+      "circuit": {
+        "name": "Lusail International Circuit",
+        "city": "Doha",
+        "country": "QAT",
+        "countryCode": "QA",
+        "lat": 25.49,
+        "lng": 51.4542
+      },
+      "sessions": [
+        {
+          "type": "FP1",
+          "startTimeUTC": "2026-11-06T10:50:00Z"
+        },
+        {
+          "type": "Practice",
+          "startTimeUTC": "2026-11-06T15:05:00Z"
+        },
+        {
+          "type": "FP2",
+          "startTimeUTC": "2026-11-07T10:15:00Z"
+        },
+        {
+          "type": "Q1",
+          "startTimeUTC": "2026-11-07T14:45:00Z"
+        },
+        {
+          "type": "Q2",
+          "startTimeUTC": "2026-11-07T15:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-08T14:15:00Z"
+        }
+      ],
+      "dateStart": "2026-11-06",
+      "dateEnd": "2026-11-08"
     },
     {
       "id": "motogp-2026-r20",
