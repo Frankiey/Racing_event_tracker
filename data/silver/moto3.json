@@ -774,10 +774,6 @@
     },
     "sessions": [
       {
-        "type": "Race",
-        "startTimeUTC": "2026-10-29T07:30:00Z"
-      },
-      {
         "type": "FP1",
         "startTimeUTC": "2026-10-30T01:00:00Z"
       },
@@ -796,10 +792,14 @@
       {
         "type": "Q2",
         "startTimeUTC": "2026-10-31T05:10:00Z"
+      },
+      {
+        "type": "Race",
+        "startTimeUTC": "2026-11-01T04:00:00Z"
       }
     ],
-    "dateStart": "2026-10-29",
-    "dateEnd": "2026-10-31"
+    "dateStart": "2026-10-30",
+    "dateEnd": "2026-11-01"
   },
   {
     "id": "moto3-2026-r20",

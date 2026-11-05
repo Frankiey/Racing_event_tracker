@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T04:11:08Z",
+  "generated": "2026-11-05T04:11:27Z",
   "season": 2026,
   "eventCount": 18,
   "sources": [
@@ -243,7 +243,7 @@
     {
       "id": "nascar-2026-r40",
       "seriesId": "nascar",
-      "eventName": "NASCAR Championship Race",
+      "eventName": "NASCAR Cup Series Championship Race",
       "round": 40,
       "circuit": {
         "name": "Homestead-Miami Speedway",

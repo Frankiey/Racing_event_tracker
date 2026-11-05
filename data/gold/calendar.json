@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T04:11:08Z",
+  "generated": "2026-11-05T04:11:27Z",
   "season": 2026,
   "eventCount": 253,
   "sources": [
@@ -9205,10 +9205,6 @@
       },
       "sessions": [
         {
-          "type": "Race",
-          "startTimeUTC": "2026-10-29T07:30:00Z"
-        },
-        {
           "type": "FP1",
           "startTimeUTC": "2026-10-30T01:00:00Z"
         },
@@ -9227,10 +9223,14 @@
         {
           "type": "Q2",
           "startTimeUTC": "2026-10-31T05:10:00Z"
+        },
+        {
+          "type": "Race",
+          "startTimeUTC": "2026-11-01T04:00:00Z"
         }
       ],
-      "dateStart": "2026-10-29",
-      "dateEnd": "2026-10-31"
+      "dateStart": "2026-10-30",
+      "dateEnd": "2026-11-01"
     },
     {
       "id": "moto2-2026-r19",
@@ -9610,7 +9610,7 @@
     {
       "id": "nascar-2026-r40",
       "seriesId": "nascar",
-      "eventName": "NASCAR Championship Race",
+      "eventName": "NASCAR Cup Series Championship Race",
       "round": 40,
       "circuit": {
         "name": "Homestead-Miami Speedway",
