@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-07T04:10:22Z",
+  "generated": "2026-11-08T04:10:34Z",
   "season": 2026,
-  "eventCount": 18,
+  "eventCount": 17,
   "sources": [
     "dtm",
     "f1",
@@ -22,51 +22,6 @@
     "wsbk"
   ],
   "events": [
-    {
-      "id": "wec-2026-r08",
-      "seriesId": "wec",
-      "eventName": "8 Hours of Bahrain",
-      "round": 8,
-      "circuit": {
-        "name": "Bahrain International Circuit",
-        "city": "Sakhir",
-        "country": "Bahrain",
-        "countryCode": "BH",
-        "lat": 26.0325,
-        "lng": 50.5106,
-        "lengthKm": 5.412,
-        "lapRecord": {
-          "time": "1:31.447",
-          "driver": "Pedro de la Rosa",
-          "car": "McLaren MP4-20",
-          "year": 2005
-        }
-      },
-      "sessions": [
-        {
-          "type": "Practice 1",
-          "startTimeUTC": "2026-11-05T08:00:00Z"
-        },
-        {
-          "type": "Practice 2",
-          "startTimeUTC": "2026-11-05T13:30:00Z"
-        },
-        {
-          "type": "Practice 3",
-          "startTimeUTC": "2026-11-06T08:00:00Z"
-        },
-        {
-          "type": "Qualifying",
-          "startTimeUTC": "2026-11-06T11:00:00Z"
-        },
-        {
-          "type": "Race",
-          "startTimeUTC": "2026-11-07T10:00:00Z"
-        }
-      ],
-      "dateStart": "2026-11-05",
-      "dateEnd": "2026-11-07"
-    },
     {
       "id": "moto3-2026-r20",
       "seriesId": "moto3",
