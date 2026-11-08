@@ -10,23 +10,25 @@ from .common import (
     build_single_session,
     convert_sessions_from_local_time,
     derive_event_dates,
+    realign_sessions_to_event_start,
 )
 
 _SESSION_TYPES = get_session_type_map("motogp")
 
+# Qatar times: official motogp.com timetable, local (UTC+3) as of 2026-11-04.
 _CALENDAR_OVERRIDES_2026 = {
     "GRAND PRIX OF QATAR": {
         "date_start": "2026-11-06",
         "date_end": "2026-11-08",
         "sessions": [
-            {"type": "FP1", "startTimeUTC": "2026-11-06T15:45:00Z"},
-            {"type": "Practice", "startTimeUTC": "2026-11-06T20:00:00Z"},
-            {"type": "FP2", "startTimeUTC": "2026-11-07T15:00:00Z"},
-            {"type": "Q1", "startTimeUTC": "2026-11-07T15:40:00Z"},
-            {"type": "Q2", "startTimeUTC": "2026-11-07T16:05:00Z"},
-            {"type": "Sprint", "startTimeUTC": "2026-11-07T20:00:00Z"},
-            {"type": "Warm Up", "startTimeUTC": "2026-11-08T15:40:00Z"},
-            {"type": "Race", "startTimeUTC": "2026-11-08T20:00:00Z"},
+            {"type": "FP1", "startTimeUTC": "2026-11-06T14:45:00Z"},
+            {"type": "Practice", "startTimeUTC": "2026-11-06T19:00:00Z"},
+            {"type": "FP2", "startTimeUTC": "2026-11-07T14:00:00Z"},
+            {"type": "Q1", "startTimeUTC": "2026-11-07T14:40:00Z"},
+            {"type": "Q2", "startTimeUTC": "2026-11-07T15:05:00Z"},
+            {"type": "Sprint", "startTimeUTC": "2026-11-07T19:00:00Z"},
+            {"type": "Warm Up", "startTimeUTC": "2026-11-08T14:40:00Z"},
+            {"type": "Race", "startTimeUTC": "2026-11-08T19:00:00Z"},
         ],
     },
 }
@@ -49,6 +51,8 @@ def transform(bronze_events: list) -> list[dict]:
             # Fallback: single Race session from event dates
             race_time = event.get("date_end") or event.get("date_start")
             sessions = build_single_session(race_time)
+
+        sessions = realign_sessions_to_event_start(sessions, event.get("date_start", ""), country_code, event.get("status"))
 
         circuit = event.get("circuit") or {}
         country = event.get("country") or {}

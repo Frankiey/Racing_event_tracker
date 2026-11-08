@@ -9,6 +9,7 @@ from .common import (
     build_mapped_sessions,
     convert_sessions_from_local_time,
     derive_event_dates,
+    realign_sessions_to_event_start,
 )
 
 
@@ -33,6 +34,8 @@ def transform(bronze_events: list, series_id: str) -> list[dict]:
             _SESSION_TYPES,
             number_repeats=True,
         )
+
+        sessions = realign_sessions_to_event_start(sessions, event.get("date_start", ""), country_code, event.get("status"))
 
         circuit = event.get("circuit") or {}
         country = event.get("country") or {}

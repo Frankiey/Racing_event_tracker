@@ -69,3 +69,12 @@ class DeriveEventDatesTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RealignSessionsTests(unittest.TestCase):
+    def test_shifts_not_started_event_to_date_start(self):
+        from pipeline.transforms.common import realign_sessions_to_event_start as r
+        s = [{"type": "FP1", "startTimeUTC": "2026-11-13T10:45:00Z"}, {"type": "Race", "startTimeUTC": "2026-11-15T13:00:00Z"}]
+        out = r(s, "2026-11-20", "PT", "NOT-STARTED")
+        self.assertEqual([x["startTimeUTC"] for x in out], ["2026-11-20T10:45:00Z", "2026-11-22T13:00:00Z"])
+        self.assertEqual(r(s, "2026-11-20", "PT", "FINISHED"), s)

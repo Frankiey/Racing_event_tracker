@@ -1,7 +1,7 @@
 """Shared helpers for bronze-to-silver transforms."""
 
 from collections.abc import Iterable, Sequence
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from pipeline.utils import to_date, to_iso
@@ -161,6 +161,28 @@ def local_date_from_utc(utc_dt_str: str, country_code: str | None) -> str:
 
     utc_time = datetime.fromisoformat(utc_dt_str.replace("Z", "+00:00")).replace(tzinfo=timezone.utc)
     return utc_time.astimezone(ZoneInfo(timezone_name)).strftime("%Y-%m-%d")
+
+
+def realign_sessions_to_event_start(
+    sessions: list[dict], date_start: str, country_code: str | None, status: str | None
+) -> list[dict]:
+    """Shift sessions of a not-yet-started event so the first lands on the API's date_start.
+
+    Pulselive session dates go stale when a round is rescheduled (event date_start
+    is updated, per-session dates are not). Times of day stay valid.
+    """
+    dated = [s["startTimeUTC"] for s in sessions if s.get("startTimeUTC") and not s["startTimeUTC"].startswith("1900-")]
+    if status != "NOT-STARTED" or not dated or not date_start:
+        return sessions
+    first = local_date_from_utc(min(dated), country_code)
+    delta = (date.fromisoformat(to_date(date_start)) - date.fromisoformat(first)).days
+    if not delta:
+        return sessions
+    return [
+        {**s, "startTimeUTC": (datetime.fromisoformat(s["startTimeUTC"].replace("Z", "+00:00")) + timedelta(days=delta)).strftime("%Y-%m-%dT%H:%M:%SZ")}
+        if s.get("startTimeUTC") and not s["startTimeUTC"].startswith("1900-") else s
+        for s in sessions
+    ]
 
 
 def derive_event_dates(
