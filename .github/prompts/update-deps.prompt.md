@@ -5,7 +5,7 @@ argument-hint: "Optional scope or constraints for the dependency update"
 agent: "racetrack-maintenance"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/update-deps.md](./../../.claude/commands/update-deps.md).
+Follow the full repo workflow in [./../../.agents/skills/update-deps/SKILL.md](./../../.agents/skills/update-deps/SKILL.md).
 
 Report major version bumps and stop if validation fails instead of pushing through blindly.
 

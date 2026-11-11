@@ -1,3 +1,8 @@
+---
+name: seed-audit
+description: "Audit all data/seed/*.json files against the silver schema and flag structural problems. USE FOR: pre-flight check before season updates or bulk seed edits, \"audit seeds\". DO NOT USE FOR: editing seed data (seed-data-schema) or live-API series."
+---
+
 # Audit Seed File Schemas
 
 Validate all seed files in `data/seed/` against the silver schema and flag structural problems before a season update.

@@ -1,3 +1,8 @@
+---
+name: verify-dates
+description: "Cross-check event dates in data/seed and data/gold/calendar.json for plausibility and consistency. USE FOR: \"verify dates\", weekly date sanity check, suspected stale or wrong race dates. DO NOT USE FOR: fetching live data or bulk season refreshes (season-update)."
+---
+
 # Verify Race Dates vs Reality
 
 Cross-check event dates in the seed files and gold data against known reality to catch stale or wrong entries.

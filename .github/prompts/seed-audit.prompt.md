@@ -5,7 +5,7 @@ argument-hint: "Optional series to focus on, otherwise audit all seed files"
 agent: "racetrack-pipeline"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/seed-audit.md](./../../.claude/commands/seed-audit.md).
+Follow the full repo workflow in [./../../.agents/skills/seed-audit/SKILL.md](./../../.agents/skills/seed-audit/SKILL.md).
 
 Run the audit, fix structural issues in scope, and rebuild affected derived data when needed.
 

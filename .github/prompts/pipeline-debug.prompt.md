@@ -5,7 +5,7 @@ argument-hint: "Describe the symptom and affected series"
 agent: "racetrack-pipeline"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/pipeline-debug.md](./../../.claude/commands/pipeline-debug.md).
+Follow the full repo workflow in [./../../.agents/skills/pipeline-debug/SKILL.md](./../../.agents/skills/pipeline-debug/SKILL.md).
 
 Work through the problem from bronze to silver to gold, make the needed fix, and validate it with the narrowest relevant checks.
 

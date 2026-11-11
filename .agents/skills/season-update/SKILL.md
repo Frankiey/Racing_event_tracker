@@ -1,3 +1,8 @@
+---
+name: season-update
+description: "Full season data refresh for all RaceTrack series, API-backed and seed. USE FOR: season rollover, new calendar announced, bulk schedule changes across series. DO NOT USE FOR: single-event fixes (seed-data-schema) or adding a series (add-new-series)."
+---
+
 # Full Season Data Refresh
 
 Refresh all race calendar data for the current season — covers both API-sourced series and manually curated seed files.

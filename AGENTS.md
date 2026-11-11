@@ -78,15 +78,15 @@ src/lib/          — series.ts, client-utils.ts, ics.ts, sessions.ts, time.ts, 
 pipeline/         — Python fetchers (bronze) + transforms (silver/gold), config.py, run.py
 data/             — bronze/ (local cache, not committed), silver/, gold/, seed/ (manual JSON for non-API series)
 public/           — static assets
-.github/skills/   — shared agent skills (auto-discovered; .claude/skills symlinks here)
-.claude/commands/ — Claude slash-command workflows; Copilot mirrors in .github/prompts/, agents in .github/agents/
+.agents/skills/   — shared agent skills (auto-discovered; .claude/skills symlinks here)
+.claude/commands/ — Claude-only slash commands (add-series); workflow skills live in .agents/skills; Copilot mirrors in .github/prompts/, agents in .github/agents/
 ```
 
 When adding a new page, also add it to `Nav.astro` and update the Directory Map above.
 
 ## Domain Knowledge (Skills)
 
-Domain knowledge lives in `.github/skills/` and loads automatically when relevant — do not duplicate it here:
+Domain knowledge lives in `.agents/skills/` and loads automatically when relevant — do not duplicate it here:
 
 - `astro-frontend-conventions` — Tailwind v4 gotchas, vanilla-script pattern, event bus, time rendering
 - `medallion-data-pipeline` — bronze/silver/gold flow, rebuild commands, debugging order

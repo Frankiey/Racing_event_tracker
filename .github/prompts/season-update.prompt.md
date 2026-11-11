@@ -5,7 +5,7 @@ argument-hint: "Season year or scope of the refresh"
 agent: "racetrack-pipeline"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/season-update.md](./../../.claude/commands/season-update.md).
+Follow the full repo workflow in [./../../.agents/skills/season-update/SKILL.md](./../../.agents/skills/season-update/SKILL.md).
 
 Handle the refresh in the prescribed order: audit, update source data, rebuild derived data, run quality gates, and summarize risks or follow-up work.
 

@@ -23,7 +23,7 @@ Your job is to diagnose and fix data issues in the bronze, silver, and gold laye
 
 ## Constraints
 - Start from `bd` tracked work when possible.
-- Follow the **medallion-data-pipeline** skill for layer flow, rebuild commands, and debugging order, and the **seed-data-schema** skill when touching `data/seed/` (both in `.github/skills/`).
+- Follow the **medallion-data-pipeline** skill for layer flow, rebuild commands, and debugging order, and the **seed-data-schema** skill when touching `data/seed/` (both in `.agents/skills/`).
 - Prefer local, schema-preserving fixes over broad refactors; rebuild only the affected series first, then widen validation.
 - Before handoff on file changes, run the relevant quality gates and update the `bd` issue state.
 

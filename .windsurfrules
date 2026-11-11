@@ -40,7 +40,7 @@ pipeline/          — Python fetchers (bronze) + transforms (silver/gold),
 data/              — bronze/ (local cache, never committed), silver/, gold/,
                      seed/ (manual JSON for non-API series)
 public/            — static assets
-.github/skills/    — shared agent skills (auto-discovered by Claude/Copilot)
+.agents/skills/    — shared agent skills (auto-discovered by Claude/Copilot)
 .github/workflows/ — CI: pr-validate, fetch-data, deploy, date-verify, dep-audit
 ```
 

@@ -10,7 +10,7 @@ Your job is to implement UI work in Astro while preserving this repo's static-fi
 
 ## Constraints
 - Start from `bd` tracked work when possible.
-- Follow the **astro-frontend-conventions** skill (`.github/skills/astro-frontend-conventions/`) for all styling, scripting, time-rendering, and event-bus rules.
+- Follow the **astro-frontend-conventions** skill (`.agents/skills/astro-frontend-conventions/`) for all styling, scripting, time-rendering, and event-bus rules.
 - Before handoff on file changes, run the relevant quality gates and update the `bd` issue state.
 
 ## Approach

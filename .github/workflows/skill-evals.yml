@@ -3,7 +3,7 @@ name: Skill Evals
 on:
   pull_request:
     paths:
-      - ".github/skills/**"
+      - ".agents/skills/**"
       - ".github/agents/**"
       - "evals/**"
       - ".github/workflows/skill-evals.yml"
@@ -31,6 +31,9 @@ jobs:
           sudo install /tmp/waza /usr/local/bin/waza
           waza --version
 
+      - name: Lint skills
+        run: tools/lint-skills.sh
+
       - name: Compliance check (fail under Medium-High)
         run: |
           waza check --format json --no-update-check > check.json
@@ -39,7 +42,8 @@ jobs:
           ok_levels = {"Medium-High", "High"}
           data = json.load(open("check.json"))
           failed = [s["name"] for s in data["skills"]
-                    if s["compliance"]["level"] not in ok_levels]
+                    if s["compliance"]["level"] not in ok_levels
+                    and s["name"] != "beads"]  # beads: vendor-managed
           for s in data["skills"]:
               print(f'{s["name"]}: {s["compliance"]["level"]} '
                     f'({s["tokenBudget"]["count"]} tokens)')

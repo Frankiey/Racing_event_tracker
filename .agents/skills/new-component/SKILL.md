@@ -1,3 +1,8 @@
+---
+name: new-component
+description: "Scaffold a new Astro component for RaceTrack. USE FOR: \"new component\", \"scaffold component\", creating a file under src/components. DO NOT USE FOR: editing existing components or pages, data/pipeline work (see astro-frontend-conventions for rules)."
+---
+
 # Scaffold a New Astro Component
 
 Help me create a new Astro component for RaceTrack following project conventions.

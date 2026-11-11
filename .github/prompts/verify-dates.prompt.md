@@ -5,7 +5,7 @@ argument-hint: "Optional series or date range to focus on"
 agent: "racetrack-pipeline"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/verify-dates.md](./../../.claude/commands/verify-dates.md).
+Follow the full repo workflow in [./../../.agents/skills/verify-dates/SKILL.md](./../../.agents/skills/verify-dates/SKILL.md).
 
 Audit the relevant seed and gold data, fix clear issues when appropriate, and summarize findings in priority order.
 

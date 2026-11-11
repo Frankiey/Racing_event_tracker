@@ -7,12 +7,12 @@ RaceTrack supports shared AI workflows for both Claude Code and GitHub Copilot.
 AI configuration is layered from always-loaded to on-demand:
 
 1. **Always-on instructions** — `AGENTS.md` is the single source of truth; `CLAUDE.md` (a one-line `@AGENTS.md` import) and `.github/copilot-instructions.md` (a pointer) only point to it. Short universal rules only: project one-liner, directory map, `bd` workflow, quality-gate commands. No domain knowledge.
-2. **Auto-triggered skills** — `.github/skills/<name>/SKILL.md`. Domain knowledge that loads when the task matches the skill's USE FOR triggers. `.claude/skills` is a symlink to `.github/skills`, so Claude Code and Copilot share one set.
+2. **Auto-triggered skills** — `.agents/skills/<name>/SKILL.md`. Domain knowledge that loads when the task matches the skill's USE FOR triggers. `.claude/skills` is a symlink to `.agents/skills`, so Claude Code, Copilot and Codex share one set.
 3. **User-invoked commands** — `.claude/commands/` (Claude slash commands) and `.github/prompts/` (Copilot prompts). Workflow orchestration: ordered steps, commands to run, `bd` bookkeeping. They reference skills instead of restating knowledge.
 4. **Agent personas** — `.github/agents/*.agent.md`. Lean role + tool constraints; they rely on skills for domain knowledge.
 5. **Skill evals** — `evals/<skill-or-agent>/` ([waza](https://github.com/microsoft/waza), pinned 0.38.0). Measures the layers above: `waza check` scores skill frontmatter (all four at **High**, ≤500 tokens), `waza run` executes trap-based eval suites (mock executor in CI via `.github/workflows/skill-evals.yml`, real models via copilot-sdk locally), and the workflow-router agent eval enforces its `tools:` constraint with a `tool_constraint` grader. Results in `docs/waza-results/`.
 
-> **Warning:** never place a `SKILL.md` in the same directory as an `.agent.md` — the `SKILL.md` takes priority and tooling (e.g. waza) ignores the agent. Skills live in their own folders under `.github/skills/`.
+> **Warning:** never place a `SKILL.md` in the same directory as an `.agent.md` — the `SKILL.md` takes priority and tooling (e.g. waza) ignores the agent. Skills live in their own folders under `.agents/skills/`.
 
 ## Skills
 
@@ -44,12 +44,12 @@ AI configuration is layered from always-loaded to on-demand:
 | Command | Claude source | Copilot prompt | Purpose |
 |---------|---------------|----------------|---------|
 | `/add-series` | `.claude/commands/add-series.md` | `.github/prompts/add-series.prompt.md` | Add a new series end-to-end |
-| `/new-component` | `.claude/commands/new-component.md` | `.github/prompts/new-component.prompt.md` | Create a new Astro component |
-| `/pipeline-debug` | `.claude/commands/pipeline-debug.md` | `.github/prompts/pipeline-debug.prompt.md` | Diagnose and fix pipeline issues |
-| `/seed-audit` | `.claude/commands/seed-audit.md` | `.github/prompts/seed-audit.prompt.md` | Audit seed data structure |
-| `/season-update` | `.claude/commands/season-update.md` | `.github/prompts/season-update.prompt.md` | Refresh season data |
-| `/update-deps` | `.claude/commands/update-deps.md` | `.github/prompts/update-deps.prompt.md` | Upgrade npm and Python dependencies |
-| `/verify-dates` | `.claude/commands/verify-dates.md` | `.github/prompts/verify-dates.prompt.md` | Cross-check race dates |
+| `/new-component` | `.agents/skills/new-component/SKILL.md` | `.github/prompts/new-component.prompt.md` | Create a new Astro component |
+| `/pipeline-debug` | `.agents/skills/pipeline-debug/SKILL.md` | `.github/prompts/pipeline-debug.prompt.md` | Diagnose and fix pipeline issues |
+| `/seed-audit` | `.agents/skills/seed-audit/SKILL.md` | `.github/prompts/seed-audit.prompt.md` | Audit seed data structure |
+| `/season-update` | `.agents/skills/season-update/SKILL.md` | `.github/prompts/season-update.prompt.md` | Refresh season data |
+| `/update-deps` | `.agents/skills/update-deps/SKILL.md` | `.github/prompts/update-deps.prompt.md` | Upgrade npm and Python dependencies |
+| `/verify-dates` | `.agents/skills/verify-dates/SKILL.md` | `.github/prompts/verify-dates.prompt.md` | Cross-check race dates |
 | `/ai-workflows` | n/a | `.github/prompts/ai-workflows.prompt.md` | Explain and route to the right workflow |
 
 ## Copilot Specialists

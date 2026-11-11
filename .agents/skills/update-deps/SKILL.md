@@ -1,3 +1,8 @@
+---
+name: update-deps
+description: "Upgrade npm and Python (uv) dependencies for RaceTrack and verify nothing breaks. USE FOR: \"update deps\", monthly dependency refresh, outdated packages. DO NOT USE FOR: feature work or pipeline data changes."
+---
+
 # Upgrade npm + Python Dependencies
 
 Update all npm and Python dependencies for RaceTrack to their latest compatible versions.

@@ -193,7 +193,7 @@ See [docs/architecture.md](docs/architecture.md) for the full picture.
 
 ## AI-Assisted Development
 
-This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes short always-on instructions ([AGENTS.md](AGENTS.md) as the single source of truth, with `CLAUDE.md` and `.github/copilot-instructions.md` pointing to it), auto-discovered **agent skills** (`.github/skills/`, shared with Claude Code via the `.claude/skills` symlink), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
+This project is developed with [Claude Code](https://claude.ai/code) and GitHub Copilot as first-class collaborators. The codebase includes short always-on instructions ([AGENTS.md](AGENTS.md) as the single source of truth, with `CLAUDE.md` and `.github/copilot-instructions.md` pointing to it), auto-discovered **agent skills** (`.agents/skills/`, read directly by Copilot and Codex; Claude Code via the `.claude/skills` symlink), Claude workflow files (`.claude/commands/`), matching Copilot workspace prompts (`.github/prompts/`), focused Copilot custom agents (`.github/agents/`), and lightweight Copilot hook scripts (`.github/hooks/`).
 
 **If you use Claude Code**, just open the repo and it already knows:
 - The data architecture and series identifiers
@@ -201,7 +201,7 @@ This project is developed with [Claude Code](https://claude.ai/code) and GitHub 
 - How to add a new series end-to-end (via the `add-new-series` skill)
 - The issue tracking workflow (`bd`)
 
-Domain knowledge lives in `.github/skills/` and loads automatically when a task matches a skill's triggers — see [docs/ai-workflows.md](docs/ai-workflows.md) for the layer model.
+Domain knowledge lives in `.agents/skills/` and loads automatically when a task matches a skill's triggers — see [docs/ai-workflows.md](docs/ai-workflows.md) for the layer model.
 
 Skill quality is **measured, not assumed**: every skill (and the workflow-router agent) has a [waza](https://github.com/microsoft/waza) eval suite in `evals/`, gated in CI by [`skill-evals.yml`](.github/workflows/skill-evals.yml) — frontmatter compliance scoring plus trap-based eval tasks built from real repo bugs. Results and the cross-model comparison live in [docs/waza-results/](docs/waza-results/).
 

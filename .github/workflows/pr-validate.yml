@@ -25,6 +25,7 @@ jobs:
         with:
           version: "0.11.x"
           enable-cache: true
+      - run: tools/lint-skills.sh
       - run: npm test
       - run: npm run validate:data
       - run: npm run build

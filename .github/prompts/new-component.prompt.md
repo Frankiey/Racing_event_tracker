@@ -5,7 +5,7 @@ argument-hint: "Describe the component and where it should be used"
 agent: "racetrack-frontend"
 ---
 
-Follow the full repo workflow in [./../../.claude/commands/new-component.md](./../../.claude/commands/new-component.md).
+Follow the full repo workflow in [./../../.agents/skills/new-component/SKILL.md](./../../.agents/skills/new-component/SKILL.md).
 
 Create the component requested by the user and wire it into the appropriate page or layout.
 

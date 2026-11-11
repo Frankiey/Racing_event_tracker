@@ -1,3 +1,8 @@
+---
+name: pipeline-debug
+description: "Debug the RaceTrack data pipeline bottom-up (bronze → silver → gold). USE FOR: missing events, wrong times, empty series, stale data, pipeline or build errors. DO NOT USE FOR: routine seed edits (seed-data-schema) or frontend bugs."
+---
+
 # Debug the Data Pipeline
 
 Help me diagnose and fix a data pipeline issue in RaceTrack.
