@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 env:
-  WAZA_VERSION: 0.38.0
+  WAZA_VERSION: 0.40.1
 
 jobs:
   evals:
