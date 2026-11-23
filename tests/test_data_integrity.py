@@ -6,7 +6,6 @@ data/gold/calendar.json directly. See docs/test-strategy.md Layer 3.
 
 import json
 import unittest
-from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -32,21 +31,30 @@ class UpcomingIntegrityTests(unittest.TestCase):
         self.assertEqual(dates, sorted(dates), "Events are not sorted by dateStart")
 
     def test_no_event_has_date_end_before_today(self):
-        """No event in upcoming.json should have dateEnd before today."""
-        today = date.today().isoformat()
+        """No event in upcoming.json should have dateEnd before the snapshot's generation date."""
+        # ponytail: compare to the snapshot date, not the wall clock — the file is
+        # only refreshed by the scheduled pipeline run, so wall-clock checks rot between runs.
+        generated = self.data["generated"][:10]
         stale = [
-            ev["id"] for ev in self.events if ev.get("dateEnd", "") < today
+            ev["id"] for ev in self.events if ev.get("dateEnd", "") < generated
         ]
         self.assertEqual(
             stale,
             [],
-            f"Events with dateEnd before today ({today}): {stale}",
+            f"Events with dateEnd before generation date ({generated}): {stale}",
         )
 
     def test_major_series_represented(self):
-        """At least one event per major series (f1, motogp, nascar) must be present."""
+        """Each major series (f1, motogp, nascar) with a future calendar event must appear in upcoming."""
+        generated = self.data["generated"][:10]
+        calendar = load_gold("calendar.json")["events"]
         series_ids = {ev["seriesId"] for ev in self.events}
         for series in ("f1", "motogp", "nascar"):
+            if not any(
+                ev["seriesId"] == series and ev["dateEnd"] >= generated
+                for ev in calendar
+            ):
+                continue  # off-season: nothing left to show
             self.assertIn(
                 series,
                 series_ids,
